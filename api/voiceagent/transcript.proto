@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// TranscriptEntry (对话内容): 对话过程中的最小信息单元。
+// [参考文档]: Architecture -> Proprietary turn-taking model (/docs/agents-platform/overview#architecture)
+message TranscriptEntry {
+  // _id: 消息唯一标识。
+  string _id = 1 [json_name = "_id"];
+  
+  // userId: 所属用户 ID。
+  string userId = 2;
+
+  // conversationId: 所属会话 ID。
+  string conversationId = 3;
+  
+  // message: AI 或用户输入的文本内容。
+  string message = 4;
+  
+  // audioUrl: ElevenLabs 生成的音频切片 URL。
+  // [必要性]: 语音交互核心输出。对于非流式响应，由后端上传 OSS 后返回。
+  // [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview#architecture)
+  string audioUrl = 5;
+  
+  // role: 角色 (user: 用户, agent: AI)。
+  // [必要性]: 必须。区分消息来源，用于构建上下文。
+  // [参考文档]: Turn-taking model (/docs/agents-platform/overview#architecture)
+  string role = 6;
+  
+  int64 createdAt = 7;
+
+  // messageId: ElevenLabs 端的消息 ID。
+  string messageId = 8;
+}

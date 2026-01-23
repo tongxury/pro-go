@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+
+option go_package = "store/api/dex;dexpb";
+
+message Amount {
+  string _id = 1 [json_name = '_id'];
+  double value = 3;
+  double nativeValue = 4;
+  double usdtValue = 5;
+  double changeDaily = 6;
+  string valueUnit = 8;
+  string nativeValueUnit = 9;
+  Amount diffBetween = 7;
+}
+
+
+message Chain {
+  string _id = 1;
+  //  api.dex.Token nativeToken = 2;
+}
+
+message Scene {
+  string value = 1;
+}
+
+
+message Dex {
+  string name = 1;
+  string family = 2;
+}
+
+
+message CommonParams {
+  string userId = 1;
+  string wallet = 2;
+}
+
+
+message Category {
+  string name = 1;
+}
+
+message TimeRange {
+  int64 gt = 1;
+  int64 lte = 2;
+  string key = 10;
+}
+
+
+message Status {
+  string name = 1;
+}
+
+message Transaction {
+  string hash = 1;
+  string time = 2;
+  int64 block = 3;
+  int64 block_index = 4;
+  bool success = 5;
+}

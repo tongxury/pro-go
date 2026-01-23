@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+message Token {
+
+  message Metadata {
+    string name = 1;
+    string symbol = 2;
+    string description = 3;
+    string image = 4;
+    string createdOn = 5;
+    string twitter = 6;
+    string website = 7;
+    string uri = 8;
+    string _id = 9;
+    int64 decimals = 10;
+  }
+
+  message State {
+    bool following = 1;
+  }
+
+  string  _id = 1 [json_name = '_id'];
+  Metadata metadata = 2;
+//  string symbol = 3;
+//  int64 decimals = 4;
+  int64 createdAt = 6;
+  State state = 8;
+  api.dex.Amount price = 11;
+  api.dex.Amount supply = 14;
+
+  Token quoteToken = 15;
+  //  api.dex.Amount circSupply = 16;
+  //  api.dex.Amount fdv = 17;
+  //  api.dex.Amount liquidity = 18;
+  //  api.dex.Amount marketCap = 19;
+
+
+  //  MarketState marketState = 22;
+
+  map<string, OHLCState> ohlcStates = 20;
+  map<string, TradeState> tradeStates = 21;
+
+}
+
+message OHLCState {
+  double open = 1;
+  double close = 2;
+  double low = 3;
+  double high = 4;
+  double changeRate = 5;
+}
+
+message TradeState {
+  api.dex.Amount buyVolume = 2;
+  api.dex.Amount sellVolume = 3;
+  int64 buyCount = 4;
+  int64 sellCount = 5;
+  int64 tradeCount = 6;
+  int64 traderCount = 7;
+  int64 buyerCount = 8;
+  int64 sellerCount = 9;
+}
+
+
+
+message TokenList {
+  repeated api.dex.Token list = 1;
+}
+
+
+//message Pool {
+//  string  _id = 1 [json_name = '_id'];
+//  api.dex.Chain chain = 2;
+//  api.dex.Dex dex = 3;
+//  api.dex.Token token = 4;
+//  api.dex.Token  quoteToken = 5;
+//  api.dex.Amount liquidity = 6;
+//  int64 createdAt = 7;
+//}
+
+//message MarketState {
+//
+//  message StatSet {
+//    double priceChange = 1;
+//    api.dex.Amount buyVolume = 2;
+//    api.dex.Amount sellVolume = 3;
+//    int64 buyCount = 4;
+//    int64 sellCount = 5;
+//    int64 tradeCount = 6;
+//    int64 traderCount = 7;
+//    int64 buyerCount = 8;
+//    int64 sellerCount = 9;
+//
+//    double open = 10;
+//    double close = 11;
+//    double low = 12;
+//    double high = 13;
+//  }
+//
+//  int64 createdAt = 7;
+//
+//  map<string, StatSet> states = 8;
+//
+//}
+
+

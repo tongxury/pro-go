@@ -1,0 +1,52 @@
+package sms_template_delete_request
+
+import (
+	"encoding/json"
+	"store/pkg/sdk/third/bytedance/dou/sdk-golang/api/sms_template_delete/response"
+	"store/pkg/sdk/third/bytedance/dou/sdk-golang/core"
+)
+
+type SmsTemplateDeleteRequest struct {
+	doudian_sdk.BaseDoudianOpApiRequest
+	Param *SmsTemplateDeleteParam
+}
+
+func (c *SmsTemplateDeleteRequest) GetUrlPath() string {
+	return "/sms/template/delete"
+}
+
+func New() *SmsTemplateDeleteRequest {
+	request := &SmsTemplateDeleteRequest{
+		Param: &SmsTemplateDeleteParam{},
+	}
+	request.SetConfig(doudian_sdk.GlobalConfig)
+	request.SetClient(doudian_sdk.DefaultDoudianOpApiClient)
+	return request
+
+}
+
+func (c *SmsTemplateDeleteRequest) Execute(accessToken *doudian_sdk.AccessToken) (*sms_template_delete_response.SmsTemplateDeleteResponse, error) {
+	responseJson, err := c.GetClient().Request(c, accessToken)
+	if err != nil {
+		return nil, err
+	}
+	response := &sms_template_delete_response.SmsTemplateDeleteResponse{}
+	_ = json.Unmarshal([]byte(responseJson), response)
+	return response, nil
+
+}
+
+func (c *SmsTemplateDeleteRequest) GetParamObject() interface{} {
+	return c.Param
+}
+
+func (c *SmsTemplateDeleteRequest) GetParams() *SmsTemplateDeleteParam {
+	return c.Param
+}
+
+type SmsTemplateDeleteParam struct {
+	// 短信发送渠道，主要做资源隔离
+	SmsAccount string `json:"sms_account"`
+	// 短信模板id
+	TemplateId string `json:"template_id"`
+}

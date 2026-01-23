@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/commission.proto";
+import "dex/fee.proto";
+import "dex/market.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+
+message Trade {
+
+  message CreatedAt {
+    string date = 1;
+    //    string time = 2;
+    int64 timestamp = 3;
+  }
+
+
+  string _id = 1 [json_name = "_id"];
+  api.dex.Wallet wallet = 2;
+  api.dex.Token token = 3;
+  CreatedAt createdAt = 5;
+  string side = 7;
+  api.dex.Amount price = 8;
+  api.dex.Amount amount = 9;
+  api.dex.Amount quoteAmount = 10;
+  api.dex.Amount quotePrice = 14;
+  api.dex.Token quoteToken = 11;
+  api.dex.Dex dex = 12;
+  api.dex.Transaction transaction = 13;
+}
+
+message TradeList {
+  repeated Trade list = 1;
+}
+
+message TradeSettings {
+
+  message Priority {
+    string value = 1;
+    double max = 2;
+    string label = 3;
+  }
+
+  message Slippage {
+    double value = 1;
+    string label = 2;
+  }
+
+
+  message Metadata {
+    repeated Priority priorityOptions = 1;
+    repeated Slippage slippageOptions = 2;
+  }
+
+  string _id = 1 [json_name = "_id"];
+
+  bool antiMEV = 2;
+  Priority priority = 3;
+  double slippage = 4;
+  bool autoSell = 5;
+
+  Metadata metadata = 20;
+}
+
+
+
+message Order {
+
+  message State {
+    string autoSellOrderId = 1;
+  }
+
+  string _id = 1 [json_name = "_id"];
+
+  api.dex.Wallet wallet = 3;
+
+  api.dex.Token token = 2;
+  api.dex.Token quoteToken = 30;
+
+  api.dex.Amount price = 4;
+  api.dex.Amount amount = 5;
+  api.dex.Amount quoteAmount = 6;
+
+  api.dex.Amount oriAmount = 13;
+  api.dex.Amount oriQuoteAmount = 19;
+  api.dex.Amount oriPrice = 25;
+
+  string status = 7;
+  int64 createdAt = 9;
+  string category = 10;
+  string side = 11;
+  State state = 15;
+  string tx = 14;
+  int64 expiredAt = 20;
+  api.dex.User user = 21;
+  //  api.dex.Commission commission = 22;
+  api.dex.Fee fee = 23;
+  Order following = 24;
+  TradeSettings settings = 26;
+  //  Relations relations = 27;
+  string uniqueKey = 28;
+  string trigger = 29;
+}
+
+
+message OrderList {
+  repeated Order list = 1;
+  int64 total = 2;
+}

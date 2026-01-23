@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package api.monday;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/monday;mondaypb";
+
+message PromptSettings {
+  repeated string brandAdverts = 1;
+  repeated string beginningSegments = 2;
+  repeated string emptySegments = 3;
+}
+
+

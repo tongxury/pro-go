@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/market.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+
+message AppSettings {
+  message Banner {
+    string title = 1;
+    string desc = 2;
+    string image = 3;
+    string landingTitle = 4;
+    string landing = 5;
+    string action = 6;
+  }
+
+  repeated Banner banners = 1;
+  api.dex.Token defaultTradingToken = 2;
+  repeated string followingWallets = 3;
+}
+
+message GetAppSettingsParams {
+}

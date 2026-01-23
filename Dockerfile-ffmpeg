@@ -1,0 +1,18 @@
+FROM golang:1.25.4 AS builder
+
+ARG SRV
+
+WORKDIR /src
+
+COPY . /src/
+ENV GOPROXY=https://goproxy.io,direct
+RUN  make build SRV=${SRV}
+
+FROM --platform=linux/amd64 lscr.io/linuxserver/ffmpeg:latest
+
+ARG SRV
+
+WORKDIR /app
+
+COPY --from=builder /src/bin/${SRV}* /app/
+RUN rm -rf /src

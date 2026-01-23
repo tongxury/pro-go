@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/market.proto";
+import "dex/trade.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+service TgbotService {
+  rpc SendMessage(SendMessageParams) returns (SendMessageResult) {}
+}
+
+
+message SendMessageParams {
+  message Options {
+    string locale = 1;
+    int64 deleteAfterSeconds = 2;
+  }
+
+  enum ParseMode {
+    Markdown = 0;
+    MarkdownV2 = 1;
+    HTML = 2;
+  }
+
+  message Message {
+    string content = 1;
+    ParseMode mode = 2;
+  }
+
+  string userId = 1;
+  Message message = 2;
+  Options options = 20;
+}
+
+message SendMessageResult {
+}

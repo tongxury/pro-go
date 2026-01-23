@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+option go_package = "store/api/proj;projpb";
+
+message RemixOptions {
+  message Flower {
+    //    string downloadUrl = 1;
+    string mediaId = 2;
+    string name = 3;
+    string cover = 4;
+  }
+
+  message Font {
+    //    string downloadUrl = 1;
+    string  mediaId = 2;
+    string name = 3;
+  }
+
+  message Tone {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string downloadUrl = 4;
+  }
+
+  repeated Flower flowers = 1;
+  repeated Font fonts = 2;
+  repeated Tone tones = 3;
+
+  Flower flower = 4;
+  Font font = 5;
+  Tone tone = 6;
+  double timeStart = 7;
+  double timeEnd = 8;
+  double speed = 9;
+}

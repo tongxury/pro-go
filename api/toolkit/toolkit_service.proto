@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package api.toolkit;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/toolkit;toolkitpb";
+
+service ToolkitService {
+  rpc ToolKits (ToolKitRequest) returns (api.public.response.MapResponse) {
+    option (google.api.http) = {
+      post: "/api/tk/toolkits"
+      body: "*"
+    };
+  };
+}
+
+message ToolKitRequest {
+  string method = 1;
+
+  map<string, string> params = 2;
+}

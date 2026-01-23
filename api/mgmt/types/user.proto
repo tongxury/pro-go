@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package api.mgmt.types;
+
+option go_package = "store/api/mgmt/types;mgmttypepb";
+import "user/types/user.proto";
+
+
+message User {
+  api.user.types.User user = 1;
+}
+
+

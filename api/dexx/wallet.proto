@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api.dexx;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dexx/common.proto";
+import "dexx/token.proto";
+
+option go_package = "store/api/dexx;dexxpb";
+
+
+message Wallet {
+  string  id = 1;
+}
+
+message WalletList {
+  repeated Wallet list = 1;
+}
+
+
+message WalletPosition {
+  api.dexx.Wallet wallet = 2;
+  api.dexx.Token token = 3;
+  api.dexx.Amount balance = 4;
+  api.dexx.Amount price = 5;
+  string status = 10;
+}
+
+
+message WalletPositionList {
+  repeated WalletPosition list = 1;
+}

@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  solana-validator:
+    container_name: solana-validator
+    image: solanalabs/solana:v1.18.23
+#    build:
+#      dockerfile: ./Dockerfile
+    restart: always
+#    entrypoint:
+#      - solana-validator
+#      - --identity=/root/validator-keypair.json
+#      - --known-validator=5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on
+#      - --known-validator=7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY
+#      - --known-validator=Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN
+#      - --known-validator=9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv
+#      - --entrypoint=mainnet-beta.solana.com:8001
+#      - --rpc-port=8899
+#      - --no-voting
+#      - --ledger=/root/ledger
+#      - --limit-ledger-size
+#      - --disable-banking-trace
+#      - --enable-extended-tx-metadata-storage
+#      - --enable-rpc-transaction-history
+#      - --full-rpc-api
+#      - --only-known-rpc
+#      - --replay-slots-concurrently
+#      - --rpc-pubsub-enable-block-subscription
+#      - --rpc-scan-and-fix-roots
+#      - --account-index=program-id
+#      - --account-index=spl-token-owner
+#      - --account-index=spl-token-mint
+#      - --bind-address=0.0.0.0
+#      - --log=/root/solana-validator.log
+#      - --no-snapshot-fetch
+#      - --hard-fork=290049901
+    ports:
+      - "8899:8899"
+    volumes:
+      - solana-data:/root
+#      - ./validator-keypair.json:/root/validator-keypair.json
+
+volumes:
+  solana-data:
+

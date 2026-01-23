@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package api.tgbot;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "bi/types/chatrecord.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/tracker;trackerpb";
+
+service Tracker {
+  rpc SaveTrackerEvent (TrackingEventParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/tracking-events"
+      body: "*"
+    };
+  }
+}
+
+message TrackingEvent {
+  string appId = 1;
+  Build build = 2;
+  string clientId = 3;
+  Device device = 4;
+  int64 deviceTs = 5;
+  string eventId = 6;
+  Payload payload = 7;
+  string platform = 8;
+  int64 sendAt = 9;
+  string sessionId = 10;
+  string version = 11;
+}
+message Build {
+  string packageName = 1;
+  string version = 2;
+}
+message Device {
+  string brand = 1;
+  string carrier = 2;
+  string displayLanguage = 3;
+  string idfa = 4;
+  string language = 5;
+  string manufacturer = 6;
+  Memory memory = 7;
+  string model = 8;
+  string network = 9;
+  int64 orientation = 10;
+  string osVersion = 11;
+  Screen screen = 12;
+  int64 sdkVersion = 13;
+  Storage storage = 14;
+  string timezone = 15;
+}
+message Memory {
+  int64 available = 1;
+  bool isLowMemory = 2;
+  int64 total = 3;
+}
+message Screen {
+  double density = 1;
+  Resolution resolution = 2;
+}
+message Resolution {
+  int64 height = 1;
+  int64 width = 2;
+}
+message Storage {
+  int64 available = 1;
+  int64 free = 2;
+  int64 total = 3;
+}
+message Payload {
+  string event = 1;
+
+}
+
+message TrackingEventParams {
+  repeated TrackingEvent data = 2;
+}

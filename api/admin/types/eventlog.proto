@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.admin.types;
+
+option go_package = "store/api/admin/types;typepb";
+
+
+message EventLog {
+
+}
+
+

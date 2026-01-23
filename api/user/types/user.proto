@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package api.user.types;
+
+//import "google/api/annotations.proto";
+//import "validate/validate.proto";
+import "user/types/member.proto";
+
+option go_package = "store/api/user/types;typepb";
+
+
+message User {
+  string id = 1;
+  string username = 2;
+  string user_avatar = 3;
+  // 会员信息
+  api.user.types.Member membership = 4;
+  //  api.user.types.Membership membership = 5;
+  string email = 6;
+  int64 createdAt = 7;
+  int64 lastLoginAt = 8;
+  int64 bonus = 9;
+  string phone = 10;
+  CreditSummary creditSummary = 11;
+  bool isVip = 12;
+}
+
+
+message CreditSummary {
+  int64 total = 1;
+  int64 remaining = 2;
+}

@@ -1,0 +1,55 @@
+syntax = "proto3";
+package api.note;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "note/category.proto";
+import "note/common.proto";
+
+option go_package = "store/api/note;notepb";
+
+message Note {
+  string id = 1;
+  api.note.Category category = 2;
+  google.protobuf.Any content = 3;
+}
+
+message TripNote {
+  Destination destination = 1;
+  Itinerary itinerary = 2;
+}
+
+message Destination {
+  api.note.Location location = 1;
+  repeated api.note.Category categories = 2;
+  string abstract = 3;
+  api.note.Weather weather = 4;
+}
+
+message Itinerary {
+
+  message Plan {
+    TimeRange time = 1;
+  }
+
+  api.note.Location departure = 1;
+  TimeRange time = 2;
+  string activity = 3;
+
+
+}
+
+message Accommodation {
+  api.note.Category category = 1;
+  string name = 2;
+
+  api.note.Location location = 3;
+  api.note.Fee fee = 4;
+  repeated api.note.Tag tags = 5;
+
+}
+
+

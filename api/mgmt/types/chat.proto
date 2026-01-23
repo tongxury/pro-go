@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package api.mgmt.types;
+
+option go_package = "store/api/mgmt/types;mgmttypepb";
+import "chat/types/chat.proto";
+
+
+message ChatRecord {
+  api.chat.types.ChatRecord chatRecord = 1;
+}
+
+

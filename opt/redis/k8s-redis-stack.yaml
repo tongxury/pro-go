@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-stack
+  namespace: prod
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    k8s.kuboard.cn/displayName: redis-stack
+  labels:
+    k8s.kuboard.cn/layer: db
+    k8s.kuboard.cn/name: redis-stack
+  name: redis-stack
+  namespace: prod
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: redis-stack
+  serviceName: redis-stack
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: '2024-12-28T14:52:06+08:00'
+      labels:
+        app: redis-stack
+    spec:
+      containers:
+        - env:
+            - name: REDIS_ARGS
+              value: '--requirepass pro@rEdis'
+          image: 'redis/redis-stack:latest'
+          imagePullPolicy: Always
+          name: redis-stack
+          ports:
+            - containerPort: 6379
+              name: stack
+              protocol: TCP
+            - containerPort: 8001
+              name: insight
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: redis-stack
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    k8s.kuboard.cn/layer: db
+    k8s.kuboard.cn/name: redis-stack
+  name: redis-stack
+  namespace: prod
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: stack
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    - name: insight
+      port: 8001
+      protocol: TCP
+      targetPort: 8001
+  selector:
+    app: redis-stack
+  sessionAffinity: None
+  type: NodePort
+

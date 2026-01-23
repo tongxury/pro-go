@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// Persona (角色模板): 定义了一个 AI 角色的灵魂、背景、语气和行为准则。
+// 它是 Agent 的预设蓝图，用户可以直接从中选择而无需编写复杂的 Prompt。
+// 参考文档: ElevenLabs Agents Platform -> Agent Configuration
+message Persona {
+  // _id: 模板唯一 ID。
+  string _id = 1 [json_name = "_id"];
+
+  // name: 模板内部名称 (例如 "alexis")。
+  string name = 2;
+
+  // displayName: UI 显示名称 (例如 "林小雅")。
+  string displayName = 3;
+
+  // avatar: 推荐头像 URL。
+  string avatar = 4;
+
+  // description: 角色模板的简短介绍。
+  string description = 5;
+
+  // voiceId: 推荐的 ElevenLabs Voice ID。
+  string voiceId = 6;
+
+  // --- 结构化 Prompt 定义 (参考 ElevenLabs Alexis 示例) ---
+
+  // personality: 性格特征 (例如: 友好、主动、高智商)。
+  string personality = 7;
+
+  // background: 背景知识与专业领域 (例如: 世界级工程背景，熟悉 ElevenLabs 所有产品)。
+  string background = 8;
+
+  // tone: 语气与表达风格 (例如: 温暖、幽默、专业但随和)。
+  string tone = 9;
+
+  // ttsFormatting: 针对 TTS 合成的格式化要求 (例如: 使用 "..." 表示停顿，拼写出缩写)。
+  string ttsFormatting = 10;
+
+  // goals: 交互的主要目标。
+  string goals = 11;
+
+  // guardrails: 行为约束与红线 (例如: 禁止提供代码，禁止声明自己是 AI)。
+  string guardrails = 12;
+
+  // welcomeMessage: 角色主动发出的第一句话。
+  string welcomeMessage = 13;
+
+  // category: 角色分类 (例如: "assistant", "teacher", "companion")。
+  string category = 14;
+
+  // isBuiltin: 是否为系统内置模板。
+  bool isBuiltin = 15;
+}

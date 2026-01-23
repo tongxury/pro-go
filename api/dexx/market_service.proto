@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package api.dexx;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "dexx/token.proto";
+import "dexx/trade.proto";
+import "dexx/wallet.proto";
+import "dexx/wallet_relation.proto";
+import "public/page.proto";
+import "public/authorization.proto";
+
+
+option go_package = "store/api/dexx;dexxpb";
+
+service MarketService {
+
+  rpc ListTokens (ListTokensParams) returns (api.dexx.TokenList);
+  rpc GetToken (GetTokenParams) returns (api.dexx.Token);
+  rpc UpdateWalletToken (UpdateWalletTokenParams) returns (google.protobuf.Empty);
+  rpc GetWalletPosition(GetWalletPositionParams) returns (api.dexx.WalletPosition);
+  rpc ListWalletPositions(ListWalletPositionsParams) returns (api.dexx.WalletPositionList);
+
+  //
+  rpc ListFollowingWallets (ListFollowingWalletsParams) returns (api.dexx.WalletsRelationList);
+  rpc AddFollowingWallet (AddFollowingWalletParams) returns (api.dexx.WalletsRelation) ;
+  rpc UpdateFollowingWallet (UpdateFollowingWalletParams) returns (api.dexx.WalletsRelation);
+  //
+  rpc CollectTokens (CollectTokensParams) returns (google.protobuf.Empty) {}
+  rpc CollectTrades(CollectTradesParams)  returns (google.protobuf.Empty) {}
+  rpc RunTask(RunTaskParams) returns (google.protobuf.Empty) {}
+}
+
+message DeleteFollowingWalletParams{
+  string id = 1;
+}
+
+message ListFollowingWalletsParams {
+  api.public.Authorization authorization = 20;
+
+}
+
+message AddFollowingWalletParams {
+  string wallet = 1;
+  string remark = 2;
+
+  api.public.Authorization authorization = 20;
+
+}
+
+
+message UpdateFollowingWalletParams {
+  string id = 1;
+  string action = 2;
+  string value = 3;
+
+  api.public.Authorization authorization = 20;
+
+}
+
+
+message ListWalletPositionsParams {
+  string wallet = 1;
+  bool hideSmallPosition = 2;
+}
+
+message GetWalletPositionParams {
+  string wallet = 1;
+  string token = 2;
+}
+
+message UpdateWalletTokenParams {
+  string action = 1;
+  string token = 2;
+
+  api.public.Authorization authorization = 12;
+}
+
+message RunTaskParams {
+  string task = 1;
+  map<string, string> params = 2;
+}
+
+
+message CollectTokensParams {
+  repeated  api.dexx.Token tokens = 1;
+}
+
+message CollectTradesParams {
+  repeated api.dexx.Trade trades = 1;
+}
+
+
+
+message GetTokenParams {
+  string id = 1;
+
+  api.public.Authorization authorization = 12;
+
+}
+
+message ListTokensParams {
+  string category = 1 ;
+  string keyword = 2;
+  repeated string tokenIds = 3;
+
+  int64 page = 10;
+  int64 size = 11;
+
+  api.public.Authorization authorization = 12;
+}
+
+
+message TokenList {
+  repeated api.dexx.Token list = 1;
+  api.public.Page page = 10;
+}

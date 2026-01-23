@@ -1,0 +1,245 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/market.proto";
+import "dex/trade.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+service WalletService {
+
+  rpc ListFollowingWallets (ListFollowingWalletsParams) returns (WalletList) {};
+  rpc ListUserFollowingWallets (ListUserFollowingWalletsParams) returns (UserWalletRelationList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/following-wallets"
+    };
+  };
+  rpc AddFollowingWallet (AddFollowingWalletParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/tgbot/users/me/following-wallets"
+      body: "*"
+    };
+  };
+  rpc ReplaceFollowingWallet (ReplaceFollowingWalletParams) returns (UserWalletRelation) {
+    option (google.api.http) = {
+      put: "/api/tgbot/users/me/following-wallets"
+      body: "*"
+    };
+  };
+  rpc UpdateFollowingWallet (UpdateFollowingWalletParams) returns (UserWalletRelation) {
+    option (google.api.http) = {
+      patch: "/api/tgbot/users/me/following-wallets/{id}"
+      body: "*"
+    };
+  };
+  rpc DeleteFollowingWallet (DeleteFollowingWalletParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/tgbot/users/me/following-wallets/{id}"
+    };
+  };
+
+  // wallets
+  rpc ListUserWallets (ListUserWalletsParams) returns (WalletList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/wallets"
+    };
+  };
+  rpc TransferOut (TransferOutParams) returns (TransferOutResult) {
+    option (google.api.http) = {
+      patch: "/api/tgbot/users/me/wallets/{id}/transferOut",
+      body: "*"
+    };
+  }
+  rpc ListWalletPositions (ListWalletPositionsParams) returns (WalletPositionList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/wallets/{id}/positions"
+    };
+  }
+
+  rpc GetWalletPosition(GetWalletPositionParams) returns (api.dex.WalletPosition) {
+    option (google.api.http) = {
+      get: "/api/tgbot/wallets/{wallet}/positions/{token}"
+    };
+  }
+
+  rpc GetUserWallet(GetUserWalletParams) returns (api.dex.Wallet) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/wallets/{id}"
+    };
+  }
+  rpc ExportUserWalletPrivateKey(ExportUserWalletPrivateKeyParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/wallets/{id}/pk"
+    };
+  }
+
+
+  rpc UpdateUserTokenRelation (UpdateUserTokenRelationParams) returns (api.dex.Token) {
+    option (google.api.http) = {
+      patch: "/api/tgbot/users/me/tokens/{id}"
+      body:  "*"
+    };
+  }
+
+}
+
+message GetWalletPositionParams {
+  string wallet = 1;
+  string token = 2;
+
+  api.dex.CommonParams common = 20;
+
+}
+
+message ExportUserWalletPrivateKeyParams {
+  string id = 1;
+  string password = 2;
+
+  api.dex.CommonParams common = 20;
+}
+
+message TransferOutParams {
+  string id = 1;
+  string address = 2;
+  double amount = 3;
+
+  api.dex.CommonParams common = 20;
+}
+
+message TransferOutResult {
+  string tx = 1;
+}
+
+
+message DeleteFollowingWalletParams{
+  string id = 1;
+}
+
+message ListUserFollowingWalletsParams {
+
+}
+message ListFollowingWalletsParams {
+
+}
+
+message AddFollowingWalletParams {
+  string wallet = 1;
+  string remark = 2;
+
+  api.dex.CommonParams common = 20;
+
+}
+
+message ReplaceFollowingWalletParams {
+  string id = 1;
+  string wallet = 2;
+  string remark = 3;
+
+  api.dex.CommonParams common = 20;
+
+}
+
+message UpdateFollowingWalletParams {
+  string id = 1;
+  string action = 2;
+  string value = 3;
+}
+
+
+message ListWalletPositionsParams {
+  string id = 1;
+  bool hideSmallPosition = 2;
+
+  api.dex.CommonParams common = 20;
+}
+
+message WalletPositionList {
+  repeated api.dex.WalletPosition list = 1;
+}
+
+//message Withdraw {
+//  string _id = 1 [json_name = "_id"];
+//  api.dex.User user = 2;
+//  api.dex.Token token = 3;
+//  api.dex.Amount amount = 4;
+//  int64 createdAt = 5;
+//  string tx = 6;
+//  api.dex.Wallet receiver = 7;
+//  string status = 8;
+//}
+
+message Relations {
+  api.dex.Order autoSellOrder = 1;
+}
+
+message GetUserWalletParams {
+  string id = 1;
+}
+
+message UpdateUserTokenRelationParams {
+  string id = 1;
+  string relation = 2;
+}
+
+message UserWalletRelationList {
+  repeated UserWalletRelation list = 1;
+  int64 total = 2;
+}
+
+message ListUserWalletsParams {
+  bool default = 1;
+  repeated string chains = 2;
+
+  api.dex.CommonParams common = 20;
+}
+
+message UserTokenRelation {
+  api.dex.User user = 1;
+  api.dex.Token token = 2;
+  Relation relation = 3;
+  int64 createdAt = 6;
+  string status = 4;
+}
+
+message UserWalletRelation {
+  string  _id = 1 [json_name = '_id'];
+  api.dex.User user = 3;
+  api.dex.Wallet wallet = 2;
+  Relation relation = 5;
+  int64 createdAt = 6;
+  string status = 4;
+}
+
+message Relation {
+  string name = 1;
+  repeated string tags = 2;
+}
+
+
+message FollowingToken {
+  string userId = 1;
+  string tokenId = 2;
+  int64 createdAt = 6;
+  string status = 3;
+}
+
+
+message ChatMessage {
+  // @gotags: bson:"_id,omitempty"
+  string id = 1;
+  map<string, string> payload = 2;
+  // @gotags: bson:"userId,omitempty"
+  string userId = 3;
+  string category = 4;
+  // @gotags: bson:"createdAt,omitempty"
+  int64 createdAt = 5;
+}

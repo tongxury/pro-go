@@ -1,0 +1,876 @@
+syntax = "proto3";
+
+package api.aiagent;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "public/page.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/aiagent;aiagentpb";
+
+service AIAgentService {
+
+  rpc GetAliOssSignedUrl(GetAliOssSignedUrlParams) returns (GetAliOssSignedUrlResult) {
+    option (google.api.http) = {
+      get: "/api/ag/oss/signed-url",
+    };
+  }
+
+  rpc GetQiniuUploadToken(GetQiniuUploadTokenParams) returns (GetQiniuUploadTokenResult) {
+    option (google.api.http) = {
+      get: "/api/ag/qiniu/upload-token",
+    };
+  }
+
+  rpc Debug(DebugParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/ag/v2/debug/axnetsue",
+      body: "*"
+    };
+  }
+
+  rpc BindAccount(BindAccountParams) returns (Account){
+    option (google.api.http) = {
+      post: "/api/ag/bind-accounts"
+      body: "*"
+    };
+  }
+
+  rpc AddAccount(AddAccountParams) returns (Account){
+    option (google.api.http) = {
+      post: "/api/ag/accounts"
+      body: "*"
+    };
+  }
+
+  rpc PutAccount(AddAccountParams) returns (Account){
+    option (google.api.http) = {
+      put: "/api/ag/accounts"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAccount(UpdateAccountParams) returns (Account){
+    option (google.api.http) = {
+      patch: "/api/ag/accounts/{id}"
+      body: "*"
+    };
+  }
+
+  rpc ListAccounts(ListAccountsParams) returns (AccountList){
+    option (google.api.http) = {
+      get: "/api/ag/accounts"
+    };
+  }
+
+
+  rpc SubmitSurvey(SubmitSurveyParams) returns (Survey){
+    option (google.api.http) = {
+      post: "/api/ag/v2/surveys"
+      body: "*"
+    };
+  }
+
+  rpc GetSurvey(GetSurveyParams) returns (Survey){
+    option (google.api.http) = {
+      get: "/api/ag/v2/surveys/{id}"
+    };
+  }
+
+  rpc UpdateSurvey(UpdateSurveyParams) returns (google.protobuf.Empty);
+
+  rpc GetPromptSettings(google.protobuf.Empty) returns (PromptSettings);
+
+  rpc ListItems(ListItemsParams) returns (ItemList){
+    option (google.api.http) = {
+      get: "/api/ag/v2/items"
+    };
+  }
+
+  rpc ListItemsV3(ListItemsParams) returns (ItemList){
+    option (google.api.http) = {
+      get: "/api/ag/v3/items"
+    };
+  }
+  rpc FillItemRecord(google.protobuf.Empty) returns (google.protobuf.Empty){}
+
+  rpc AddResourceV2(AddResourceV2Params) returns (ResourceV2){
+    option (google.api.http) = {
+      post: "/api/ag/v2/resources"
+      body: "*"
+    };
+  }
+
+  rpc AddResourceV3(AddResourceParams) returns (ResourceV2){
+    option (google.api.http) = {
+      post: "/api/ag/v3/resources"
+      body: "*"
+    };
+  }
+
+  rpc AddResourceV5(AddResourceV5Params) returns (ResourceV2){
+    option (google.api.http) = {
+      post: "/api/ag/v5/resources"
+      body: "*"
+    };
+  }
+
+  rpc AddResourceByLink(AddResourceByLinkParams) returns (ResourceV2){
+    option (google.api.http) = {
+      post: "/api/ag/v6/resources"
+      body: "*"
+    };
+  }
+
+  rpc ExtractResourceByLink(ExtractResourceByLinkParams) returns (ExtractResourceByLinkResult){
+    option (google.api.http) = {
+      get: "/api/ag/link-resources"
+    };
+  }
+
+
+  rpc AddResourceByLinkV2(AddResourceByLinkV2Params) returns (AddResourceByLinkV2Result){
+    option (google.api.http) = {
+      post: "/api/ag/v7/resources"
+      body: "*"
+    };
+  }
+
+  rpc CreateSession(CreateSessionParams) returns (Session){
+    option (google.api.http) = {
+      post: "/api/ag/v1/sessions"
+      body: "*"
+    };
+  }
+
+  rpc CreateQuickSession(CreateQuickSessionParams) returns (Session){
+    option (google.api.http) = {
+      post: "/api/ag/v1/quick-sessions"
+      body: "*"
+    };
+  }
+
+  rpc CreateSessionV2(CreateSessionV2Params) returns (Session){
+    option (google.api.http) = {
+      post: "/api/ag/v2/sessions"
+      body: "*"
+    };
+  }
+
+  rpc CreateSessionV3(CreateSessionV3Params) returns (Session){
+    option (google.api.http) = {
+      post: "/api/ag/v3/sessions"
+      body: "*"
+    };
+  }
+
+  rpc ListSessions(ListSessionsParams) returns (SessionList) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/sessions"
+    };
+  }
+
+  rpc GetSession(GetSessionParams) returns (Session){
+    option (google.api.http) = {
+      get: "/api/ag/v1/sessions/{id}"
+    };
+  }
+
+  rpc SubmitQuestion(SubmitQuestionParams) returns (Question) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/questions"
+      body: "*"
+    };
+  }
+
+  rpc RetryQuestion(RetryQuestionParams) returns (Question) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/re-questions"
+      body: "*"
+    };
+  }
+
+
+  rpc AppendQuestion(AppendQuestionParams) returns (Question) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/append-questions"
+      body: "*"
+    };
+  }
+
+
+  rpc GenerateAnswerChunks(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc UpdateQuestionStatus(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+  rpc GetAnswerChunks(GetAnswerChunksParams) returns (AnswerChunks) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/questions/{questionId}/answer-chunks"
+    };
+  }
+
+  rpc CreateQuestionV2(CreateQuestionParams) returns (Question) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/questions"
+      body: "*"
+    };
+  }
+
+  rpc GetQuestion(GetQuestionParams) returns (Question) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/questions/{id}"
+    };
+  }
+
+
+  rpc ListQuestions(ListQuestionsParams) returns (QuestionList) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/questions"
+    };
+  }
+
+
+  rpc AddProfile(AddProfileParams) returns (Profile) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/users/me/profiles"
+      body: "*"
+    };
+  }
+
+  rpc DeleteProfile(DeleteProfileParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/ag/v1/users/me/profiles/{id}"
+      body: "*"
+    };
+  }
+
+  rpc GetProfile(GetProfileParams) returns (Profile) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/users/me/profiles/{id}"
+    };
+  }
+
+  rpc ListProfiles(ListProfilesParams) returns (ProfileList) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/users/me/profiles"
+    };
+  }
+
+
+  rpc UploadFileToGenai(UploadFileToGenaiParams) returns(UploadFileToGenaiResult) {
+    option (google.api.http) = {
+      post: "/api/v1/upload-file-to-genai"
+      body: "*"
+    };
+  }
+
+  rpc Detect(DetectParams) returns (DetectResult) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/detections"
+      body: "*"
+    };
+  }
+
+  rpc DetectV2(DetectParams) returns (DetectResult) {
+    option (google.api.http) = {
+      post: "/api/ag/v2/detections"
+      body: "*"
+    };
+  }
+
+  rpc AddRecord(AddRecordParams) returns (Record) {
+    option (google.api.http) = {
+      post: "/api/ag/v1/records"
+      body: "*"
+    };
+  }
+
+  rpc GetRecord(GetRecordParams) returns (Record) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/records/{id}"
+    };
+  }
+
+
+  rpc UpdateRecordFormattedResult(UpdateRecordFormattedResultParams) returns (Record) {
+    option (google.api.http) = {
+      patch: "/api/ag/v1/records/{id}/formatted_result"
+      body: "*"
+    };
+  }
+
+
+  rpc ListRecords(ListRecordsParams) returns (RecordList) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/records"
+    };
+  }
+
+  rpc ListPublicRecords(ListRecordsParams) returns (RecordList) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/pub-records"
+    };
+  }
+
+  rpc GetPublicRecord(GetRecordParams) returns (Record) {
+    option (google.api.http) = {
+      get: "/api/ag/v1/pub-records/{id}"
+    };
+  }
+
+
+  rpc AddResource(AddResourceParams) returns (Resource){
+    option (google.api.http) = {
+      post: "/api/ag/v1/resources"
+      body: "*"
+    };
+  }
+
+  rpc ListResources(ListResourcesParams) returns (ResourceList){
+    option (google.api.http) = {
+      get: "/api/ag/v1/resources"
+    };
+  }
+
+  rpc CollectItems(CollectItemsParams) returns (google.protobuf.Empty);
+
+}
+
+
+message GetAliOssSignedUrlParams {
+  string bucket = 1;
+  string fileKey = 2;
+  string contentType = 3;
+}
+
+message GetQiniuUploadTokenParams {
+  string bucket = 1;
+}
+
+message GetQiniuUploadTokenResult {
+  string token = 1;
+}
+
+message GetAliOssSignedUrlResult {
+  string url = 1;
+}
+
+message Scene {
+  string value = 1;
+  string name = 2;
+  string  icon = 3;
+  bool  isPopular = 4;
+  bool  isNew = 5 ;
+  string description = 6;
+}
+
+message PromptSettings {
+  repeated PromptSetting settings = 1;
+}
+
+message PromptSetting {
+  string promptId = 1;
+  int64 maxFiles = 2;
+  int64 cost = 3;
+  string model = 4;
+}
+
+message GetAnswerChunksStreamParams{
+  string questionId = 1;
+  string lastChunkId = 2;
+}
+
+
+message UpdateSurveyParams {
+  string id = 1;
+}
+
+message GetSurveyParams {
+  string id = 1;
+}
+
+message SubmitSurveyParams {
+  string text = 1;
+}
+
+message Survey {
+  string _id = 3 [json_name = '_id'];
+  string text = 1;
+  string deviceId = 2;
+  string result = 4;
+  string status = 5;
+}
+
+message DebugParams {
+  string action = 1;
+  map<string, string> data = 2;
+}
+
+message ListAccountsParams {
+}
+
+message ListItemsParams {
+  string category = 1;
+  int64 page = 2;
+  string keyword = 3;
+  string cat = 4;
+}
+
+message ItemList {
+  repeated Item list = 1;
+  int64 total = 2;
+  bool hasMore = 3;
+  int64 page = 4;
+}
+
+message AccountList {
+  repeated Account list = 1;
+  int64 total = 2;
+  bool hasMore = 3;
+  int64 page = 4;
+}
+
+message CollectItemsParams {}
+
+message Item {
+
+  message InteractInfo {
+    bool liked = 1;
+    string likedCount = 2;
+    bool collected = 3;
+    string collectedCount = 4;
+    string commentCount = 5;
+    string sharedCount = 6;
+  }
+
+  message Cat {
+    string value = 1;
+    string name = 2;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  string title = 2;
+  Profile profile = 3;
+  InteractInfo interactInfo = 4;
+  string cover = 5;
+  string publishTime = 6;
+  string status = 7;
+  string desc = 8;
+  string category = 9;
+  int64 createdAt = 10;
+  map<string, string> raw = 11;
+  string url = 12;
+  string genaiUri = 13;
+  Cat cat = 14;
+  //  string geminiUrl = 14;
+
+  map<string, string> reports = 22;
+}
+
+
+message PromptConfig {
+
+  message Part {
+    string category = 1;
+    string value = 2;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  repeated Part parts = 2;
+}
+
+message Settings {
+
+
+  string _id = 1 [json_name = '_id'];
+
+  map<string, string> prompt = 2;
+  map<string, string> xhsCookies = 3;
+}
+
+message QuestionList {
+  repeated Question list = 1;
+}
+
+message ListSessionsParams {
+  string scene = 1;
+  int64 startTs = 2;
+  int64 endTs = 3;
+  int64 page = 4;
+  int64 size = 5;
+}
+
+message SessionList {
+  repeated Session list = 1;
+}
+
+
+message ListQuestionsParams {
+  string sessionId = 1;
+  repeated string status = 2;
+  bool ongoing = 3;
+  int64 startTs = 4;
+  string sort = 10;
+}
+
+
+message GetQuestionParams{
+  string id = 1;
+}
+
+message RetryQuestionParams {
+  string questionId = 1;
+}
+
+message AppendQuestionParams {
+  string sessionId = 1;
+  Prompt prompt = 2;
+  Profile profile = 3;
+//  string scene = 4;
+}
+
+message SubmitQuestionParams {
+  string sessionId = 1;
+  Prompt prompt = 2;
+  Profile profile = 3;
+  string scene = 4;
+  string questionId = 5; // retry
+  //  string text = 3;
+}
+
+message GetAnswerChunksParams {
+  string questionId = 1;
+  string startChunkId = 2;
+}
+
+message AnswerChunk {
+  string chunkId = 1;
+  string text = 2;
+}
+
+message AnswerChunks {
+  repeated AnswerChunk chunks = 1;
+  string startChunkId = 2;
+  string endChunkId = 3;
+  bool done = 4;
+}
+
+message CreateQuestionParams {
+  string sessionId = 1;
+  Prompt prompt = 2;
+  Profile profile = 3;
+  string scene = 4;
+  bool retry = 5;
+  //  string text = 3;
+}
+//
+//message Attachment {
+//  Profile profile = 1;
+//}
+
+message Answer {
+  string _id = 1 [json_name = '_id'];
+  Question question = 2;
+  string text = 3;
+  string userId = 4;
+  int64 createdAt = 5;
+}
+
+message Question {
+
+  message State {
+    int64 retryTimes = 1;
+  }
+
+
+  message Extra {
+    string platform = 1;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  Session session = 2;
+  Prompt prompt = 3;
+  string text = 4;
+  repeated Answer answers = 10;
+  Answer answer = 14;
+  string userId = 11;
+  int64 createdAt = 12;
+  Cost cost = 20;
+  string status = 13;
+
+
+  State state = 21;
+  //  string generatingText = 14;
+  Extra extra = 22;
+}
+
+message Cost {
+  string id = 1;
+  int64 amount = 2;
+  int64 remaining = 3;
+}
+
+message Prompt {
+  string id = 1;
+  string content = 2;
+  string systemContent = 3;
+  string locale = 4;
+}
+
+message Session {
+  string _id = 1 [json_name = '_id'];
+  ResourceV2 resource = 2;
+  string userId = 3;
+  int64 createdAt = 4;
+  string scene = 5;
+  string status = 6;
+  repeated ResourceV2 resources = 7;
+  string lookupKey = 8;
+  string version = 10;
+}
+
+message CreateQuickSessionParams {
+  string itemId = 1;
+}
+
+
+message CreateSessionParams {
+  string resourceId = 1;
+  string scene = 2;
+}
+
+message CreateSessionV2Params {
+  string sessionId = 1;
+  string scene = 2;
+  string version = 10;
+}
+
+
+message CreateSessionV3Params {
+  string sessionId = 1;
+  string scene = 2;
+  ResourceV2 resource = 3;
+  string version = 4;
+  repeated ResourceV2 resources = 5;
+}
+
+
+message GetSessionParams {
+  string id = 1;
+}
+
+message ResourceV2 {
+  string _id = 1 [json_name = '_id'];
+  string sessionId = 13;
+  string url = 2;
+  string coverUrl = 19;
+  string category = 3;
+  //  string genaiUri = 4;
+  string name = 5;
+  Profile profile = 6;
+  string platformUrl = 7;
+  string title = 8;
+  string desc = 9;
+  string uploadUserId = 10;
+  int64 createdAt = 11;
+  string mimeType = 12;
+  string content = 15;
+  string userId = 16;
+  map<string, string> meta = 17;
+  string uri = 18;
+}
+
+message GetProfileParams {
+  string id = 1;
+}
+
+message ListProfilesParams {
+  string platform = 1;
+}
+
+message DeleteProfileParams {
+  string id = 1;
+}
+
+message AddProfileParams {
+  string link = 1;
+  string platform = 2;
+  string keyword = 3;
+}
+
+message ProfileList {
+  repeated Profile list = 1;
+}
+
+message Profile {
+  string _id = 21 [json_name = '_id'];
+
+  //  int64 lastUpdatedAt = 1;
+  map<string, string> content = 2;
+  string avatar = 3;
+  string username = 4;
+  string  platformId = 5;
+  string ipAddress = 6;
+  string sign = 7;
+  repeated string  tags = 8;
+  string followingCount = 9;
+  string  followerCount = 10;
+  string likedCount = 11;
+  string  noteCount = 12;
+  //  int64 followers = 13;
+  string platform = 14;
+  string raw = 15;
+
+  string userId = 20;
+
+}
+
+message UpdateRecordFormattedResultParams {
+  string id = 1;
+  string result = 2;
+}
+
+message AddRecordParams {
+  string resourceId = 1;
+  string category = 2;
+}
+
+message GetRecordParams {
+  string id = 1;
+}
+
+message ListRecordsParams {
+
+}
+
+message RecordList {
+  repeated Record list = 1;
+}
+
+message Record {
+  string id = 1;
+  Resource resource = 2;
+  string category = 3;
+  string result = 4;
+  string formatedResult = 5;
+  int64 createdAt = 6;
+}
+
+message ListResourcesParams {
+
+}
+
+message ResourceList {
+  repeated Resource list = 1;
+}
+
+
+message DetectParams {
+  string id = 1;
+  //  string uri = 1;
+  //  string prompt = 2;
+  //  string category = 3;
+}
+
+message DetectResult {
+  string content = 1;
+}
+
+
+message UpdateAccountParams {
+  string id = 1;
+  string action = 2;
+}
+
+message BindAccountParams {
+  string platform = 1;
+  string keyword = 2;
+}
+
+message AddAccountParams {
+  string platform = 1;
+  string nickname = 2;
+  string sign = 3;
+  repeated string domain = 4;
+  string followers = 5;
+  string posts = 6;
+  string interacts = 7;
+  string _id = 10 [json_name = '_id'];
+}
+
+message Account {
+  string _id = 1 [json_name = '_id'];
+
+  string nickname = 2;
+  string sign = 3;
+  repeated string  tags = 4;
+  repeated string domain = 5;
+  string posts = 6;
+  string interacts = 7;
+  string followers = 8;
+
+  string platform = 10;
+
+  string userId = 11;
+  bool isDefault = 12;
+  string avatar = 13;
+
+  int64 lastUpdatedAt = 15;
+
+  map<string, string> extra = 14;
+}
+
+message AddResourceV2Params {
+  string link = 1;
+  string sessionId = 2;
+}
+
+message ExtractResourceByLinkParams {
+  string link = 1;
+}
+
+message ExtractResourceByLinkResult {
+  repeated ResourceV2 resources = 1;
+}
+
+message AddResourceByLinkParams {
+  string link = 1;
+  string sessionId = 2;
+}
+
+message AddResourceByLinkV2Params {
+  string link = 1;
+}
+
+message AddResourceByLinkV2Result {
+  repeated ResourceV2 resources = 1;;
+}
+
+
+message AddResourceParams {
+}
+message AddResourceV5Params {
+  //  string sessionId = 1;
+  //  string mimeType = 2;
+  //  string category = 3;
+}
+
+
+message Resource {
+  string id = 1;
+  string url = 2;
+  string category = 3;
+  string genaiUri = 4;
+  string name = 5;
+  string userId = 6;
+}
+
+message UploadFileToGenaiParams {
+  string base64 = 1;
+}
+
+message UploadFileToGenaiResult {
+  string uri = 1;
+}

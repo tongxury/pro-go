@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+import "voiceagent/agent.proto";
+import "usercenter/user_service.proto";
+
+// User 代表创建者的精简信息。
+message User {
+  string id = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+// MotivationCard 代表一个生成的语音激励卡片。
+// 该模型的设计参考了 ElevenLabs 的 Voices 架构 (https://elevenlabs.io/docs/overview/capabilities/voices):
+// 通过克隆人声 (Cloned Voices) 赋予数字分身独特的灵魂。
+message MotivationCard {
+  // _id: MongoDB 唯一标识。
+  string _id = 1 [json_name = "_id"];
+
+  User user = 2;           // 创建者信息
+  Agent agent = 5;         // 使用的助理信息（快照）
+
+  string text = 7;          // 经过 AI 润色后的最终激励文案
+  string audioUrl = 8;     // 合成后的音频文件链接（OSS/S3），技术说明: 该音频是由 ElevenLabs 高性能合成引擎生成的 44.1kHz 高保真语音。
+  string emotionTag = 9;   // 情感标签 (如: encouraging, comfort, energetic)，参考 ElevenLabs v3 模型的情感丰富度 (Emotionally rich)。
+  int64 createdAt = 10;    // 创建时间戳
+  int32 likeCount = 11;    // 被点赞或收藏的次数
+  bool isPublic = 12;      // 是否开启了公开分享
+
+  // 社交分享增强字段
+  repeated float waveform = 14; // 音频波形数据，用于前端绘制声纹图
+  string posterStyle = 15;     // 海报样式模板 ID
+  string posterUrl = 16;       // 生成并上传后的海报图片 URL
+  string qrCodeUrl = 17;       // 二维码图片 URL
+}

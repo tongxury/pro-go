@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  # 管理平台
+  kuboard:
+    container_name: kuboard
+    image: swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard:v3
+    restart: always
+    ports:
+      - '18060:80'
+      - '10081:10081'
+    volumes:
+      - 'kuboard-data:/data'
+    environment:
+      - KUBOARD_ENDPOINT=http://118.196.63.209
+      - KUBOARD_AGENT_SERVER_TCP_PORT=10081
+      - KUBOARD_ADMIN_DERAULT_PASSWORD=Kuboard123
+
+volumes:
+  kuboard-data:

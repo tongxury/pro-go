@@ -1,0 +1,225 @@
+syntax = "proto3";
+
+package api.user;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "user/types/user.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+
+
+option go_package = "store/api/user;userpb";
+
+service Auth {
+
+  rpc GetWxAuthToken(GetWxAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/wx-auth-tokens"
+    };
+  }
+
+  rpc GetAppleAuthToken(GetAppleAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/apple-auth-tokens"
+    };
+  }
+
+  rpc GetEmailAuthCode(GetEmailAuthCodeParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/v1/email-auth-codes"
+    };
+  }
+  rpc GetEmailAuthToken (GetEmailAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/email-auth-tokens"
+    };
+  };
+  rpc GetPhoneAuthCode(GetPhoneAuthCodeParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/v1/phone-auth-codes"
+    };
+  }
+  rpc GetPhoneAuthToken (GetPhoneAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/phone-auth-tokens"
+    };
+  };
+
+  // 获取授权码
+  rpc GetAuthCode (GetAuthCodeRequest) returns (api.public.response.RedirectResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/google-auth-codes"
+    };
+  };
+  // 获取token
+  rpc GetAuthToken (GetAuthTokenRequest) returns (api.public.response.RedirectResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/google-auth-tokens"
+    };
+  };
+  // google一键登录
+  rpc GetAuthTokenV2 (GetAuthTokenV2Request) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v2/google-auth-tokens"
+    };
+  };
+  rpc AddRegisterUser (AddRegisterUserParams)  returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/v1/auth-users"
+      body: "*"
+    };
+  }
+  rpc GetVerifyCode (GetVerifyCodeParams)  returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/v1/verification-codes"
+    };
+  }
+  rpc SubmitVerifyCode (SubmitVerifyCodeParams)  returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/v1/verification-codes"
+      body: "*"
+    };
+  }
+  rpc GetAuthTokenByEmail(GetAuthTokenByEmailParams) returns (GetAuthTokenByEmailResult) {
+    option (google.api.http) = {
+      get: "/api/v1/auth-tokens"
+    };
+  }
+  rpc ResetAuthPassword(ResetAuthPasswordParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/v1/auth-passwords"
+      body: "*"
+    };
+  }
+  // 获取认证用户摘要信息
+  rpc GetAuthUser (GetAuthUserRequest) returns (api.user.types.User) {
+    option (google.api.http) = {
+      get: "/api/v1/auth-users"
+    };
+  };
+}
+
+message AuthToken {
+  string token = 1;
+  bool isNew = 2;
+  string userId = 3;
+}
+
+message GetPhoneAuthTokenParams {
+  string phone = 1;
+  string code = 2;
+
+  string xhsClickId = 10;
+}
+
+message GetPhoneAuthCodeParams {
+  string phone = 1;
+}
+
+message GetEmailAuthTokenParams {
+  string email = 1;
+  string code = 2;
+
+  string xhsClickId = 10;
+}
+
+message GetWxAuthTokenParams {
+  string code = 1;
+}
+
+message GetAppleAuthTokenParams {
+
+  /*  message FullName {
+      string familyName = 1;
+      string enName = 2;
+      string middleName = 3;
+      string namePrefix = 4;
+      string nameSuffix = 5;
+      string nickname = 6;
+    }*/
+
+  string authorizationCode = 1;
+  string email = 2;
+  string nickname = 3;
+  string identityToken = 4;
+  uint32 realUserStatus = 5;
+  string state = 6;
+  string user = 7;
+}
+
+message GetEmailAuthCodeParams {
+  string email = 1;
+}
+
+
+
+message ResetAuthPasswordParams {
+  string email = 1;
+  string pwd = 2;
+}
+
+message GetAuthTokenByEmailParams {
+  string email = 1;
+  string pwd = 2;
+}
+
+message GetAuthTokenByEmailResult {
+  string token = 1;
+  string redirect = 2;
+}
+
+
+message AddRegisterUserParams {
+  string email = 1;
+  string pwd = 2;
+  string nickname = 3;
+}
+
+message GetVerifyCodeParams {
+  string email = 1;
+  int64 type = 2;
+}
+message SubmitVerifyCodeParams {
+  string email = 1;
+  string code = 2;
+}
+
+
+message GetAuthUserRequest {
+  // oauth平台
+  string authPlatform = 1;
+}
+
+
+message GetAuthTokenV2Request {
+  string credential = 1;
+  string from = 2;
+}
+
+message GetAuthTokenRequest {
+  string state = 1 [(validate.rules).string = {min_len: 1}];
+  string code = 2 [(validate.rules).string = {min_len: 1}];
+  string scope = 3 [(validate.rules).string = {min_len: 1}];
+  string authuser = 4 [(validate.rules).string = {min_len: 1}];
+  string prompt = 5 [(validate.rules).string = {min_len: 1}];
+}
+message GetAuthTokenReply {
+  string token = 1;
+  string redirectTo = 2;
+}
+
+message GetAuthCodeRequest {
+  // 当前登录的平台 web(默认) | member
+  string platform = 1 [(validate.rules).string = {in: ["member", "web", ""]}];
+  // oauth 平台 暂时只有 google
+  string authPlatform = 2 [(validate.rules).string = {in: ["google", ""]}];
+  // duplicated 渠道
+  string channel = 3;
+  // 登录成功后的跳转地址
+  string redirect = 4;
+}
+message GetAuthCodeReply {
+  // 重定向url
+  string url = 1;
+}

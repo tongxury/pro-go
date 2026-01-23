@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api.dexx;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+
+option go_package = "store/api/dexx;dexxpb";
+
+message Amount {
+  double value = 1;
+  double usdtValue = 2;
+  string valueUnit = 3;
+}
+
+
+message Chain {
+  string id = 1;
+}
+
+message Dex {
+  string name = 1;
+  string family = 2;
+}
+
+message Transaction {
+  string id = 1;
+  string time = 2;
+  int64 block = 3;
+  int64 block_index = 4;
+  bool success = 5;
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package api.mgmt;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "mgmt/types/chat.proto";
+
+
+option go_package = "store/api/mgmt;mgmtpb";
+
+service Chat {
+  rpc ListChatRecords (ListChatRecordsParams) returns (ListChatRecordsResult) {
+    option (google.api.http) = {
+      get: "/api/mgmt/chat-records"
+    };
+  };
+}
+
+message ListChatRecordsParams {
+  int64 page = 1;
+  int64 size = 2;
+  string dateRange = 3;
+  string functions = 4;
+}
+
+message ListChatRecordsResult {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.mgmt.types.ChatRecord list = 4;
+}

@@ -1,0 +1,6 @@
+FROM golang:1.25.4
+
+WORKDIR /src
+
+COPY . /src/
+RUN  make build && rm -rf /src/*

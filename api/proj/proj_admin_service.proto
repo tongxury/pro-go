@@ -1,0 +1,324 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/item.proto";
+import "proj/settings.proto";
+import "proj/proj_pro_service.proto";
+import "usercenter/user_service.proto";
+import "proj/feedback.proto";
+import "proj/asset.proto";
+import "credit/credit_service.proto";
+
+
+option go_package = "store/api/proj;projpb";
+
+service ProjAdminService {
+
+  rpc ListAssets_(ListAssetsRequest_) returns (api.proj.AssetList) {
+    option (google.api.http) = {
+      get: "/api/am/v1/assets"
+    };
+  }
+
+  rpc GetAsset_(GetAssetRequest_) returns (api.proj.Asset) {
+    option (google.api.http) = {
+      get: "/api/am/v1/assets/{id}"
+    };
+  }
+
+  rpc ListFeedbacks_(ListFeedbacksRequest_) returns (api.proj.FeedbackList) {
+    option (google.api.http) = {
+      get: "/api/am/v1/feedbacks"
+    };
+  }
+
+  rpc ListUsers_(ListUsersRequest_) returns (api.usercenter.UserList) {
+    option (google.api.http) = {
+      get: "/api/am/v1/users"
+    };
+  }
+  rpc GetUser_(GetUserRequest_) returns (UserInfo) {
+    option (google.api.http) = {
+      get: "/api/am/v1/users/{id}"
+    };
+  }
+
+  rpc UpdateUser_(UpdateUserRequest_) returns (api.usercenter.User) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/users/{id}",
+      body: "*"
+    };
+  }
+
+  rpc ListTemplates_(api.proj.ListTemplatesRequest) returns (api.proj.ResourceList) {
+    option (google.api.http) = {
+      get: "/api/am/v2/templates"
+    };
+  }
+  rpc AddTemplates_(api.proj.AddTemplatesRequest) returns (api.proj.ResourceList) {
+    option (google.api.http) = {
+      post: "/api/am/v1/templates",
+      body: "*"
+    };
+  }
+  rpc GetTemplate_(api.proj.GetTemplateRequest) returns (api.proj.Resource) {
+    option (google.api.http) = {
+      get: "/api/am/v2/templates/{id}"
+    };
+  }
+  rpc UpdateTemplate_(api.proj.UpdateTemplateRequest) returns (api.proj.Resource) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/templates/{id}",
+      body: "*"
+    };
+  }
+
+  rpc GetSettings(GetSettingsRequest) returns (api.proj.AppSettings) {
+    option (google.api.http) = {
+      get: "/api/am/v1/settings/all"
+    };
+  }
+
+  rpc UpdateSettings(UpdateSettingsRequest) returns (api.proj.AppSettings) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/settings/all"
+      body: "*"
+    };
+  }
+
+  rpc ListResourceSegments(ListResourceSegmentsRequest) returns (api.proj.ResourceSegmentList) {
+    option (google.api.http) = {
+      get: "/api/am/v2/resource-segments"
+    };
+  }
+
+  rpc AddResourceSegments(AddResourcesSegmentRequest) returns (api.proj.ResourceSegmentList) {
+    option (google.api.http) = {
+      post: "/api/am/v1/resource-segments"
+      body: "*"
+    };
+  }
+
+  rpc UpdateResourceSegment(UpdateResourceSegmentRequest) returns (api.proj.ResourceSegment) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/resource-segments/{id}",
+      body: "*"
+    };
+  }
+  rpc GetResourceSegment(GetResourceSegmentRequest) returns (api.proj.ResourceSegment) {
+    option (google.api.http) = {
+      get: "/api/am/v2/resource-segments/{id}"
+    };
+  }
+
+  rpc ListItems(ListItemsParams) returns (api.proj.ResourceList) {
+    option (google.api.http) = {
+      get: "/api/am/v1/items"
+    };
+  }
+  rpc AddItems(AddItemParams) returns (api.proj.ResourceList) {
+    option (google.api.http) = {
+      post: "/api/am/v1/items",
+      body: "*"
+    };
+  }
+  rpc GetItem(GetItemParams) returns (api.proj.Resource) {
+    option (google.api.http) = {
+      get: "/api/am/v1/items/{id}"
+    };
+  }
+
+  rpc PutItem(api.proj.Item) returns (api.proj.Item) {
+    option (google.api.http) = {
+      put: "/api/am/v1/items",
+      body: "*"
+    };
+  }
+
+
+  rpc UpdateItem(UpdateItemParams) returns (api.proj.Resource) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/items/{id}",
+      body: "*"
+    };
+  }
+
+  rpc UpdateItemTags(UpdateItemTagParams) returns (api.proj.Item) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/items/{id}/tags",
+      body: "*"
+    };
+  }
+
+  rpc UpdateItemCategory(UpdateItemCategoryParams) returns (api.proj.Item) {
+    option (google.api.http) = {
+      patch: "/api/am/v1/items/{id}/category",
+      body: "*"
+    };
+  }
+
+  rpc SearchItems(SearchMatchedItemsParams) returns (api.proj.ResourceList) {
+    option (google.api.http) = {
+      get: "/api/am/v1/search-items"
+    };
+  }
+
+
+  rpc SearchMatchedItems(SearchMatchedItemsParams) returns (api.proj.ResourceList) {}
+  rpc SearchMatchedItemSegments(SearchMatchedItemSegmentsParams) returns (api.proj.ResourceSegmentList) {}
+  rpc GetTemplate(GetGetTemplateRequest) returns (api.proj.Resource) {}
+
+}
+
+
+
+message GetUserRequest_ {
+  string id = 1;
+}
+
+message UserInfo {
+  api.usercenter.User user = 1;
+  api.credit.CreditState creditState = 2;
+}
+
+message ListUsersRequest_ {
+  string keyword = 1;
+  int64 page = 2;
+  int64 size = 3;
+}
+message UpdateUserRequest_ {
+  string id = 1;
+  string action = 2;
+  map<string, string> params = 3;
+}
+
+message ListFeedbacksRequest_ {
+  string category = 1;
+  int64 page = 2;
+  int64 size = 3;
+  string targetId = 4;
+}
+
+message ListAssetsRequest_ {
+  string category = 1;
+  int64 page = 2;
+  int64 size = 3;
+  string userId = 4;
+  string status = 5;
+  string returnFields = 6;
+  string id = 7;
+  string userPhone = 8;
+}
+
+message GetAssetRequest_ {
+  string id = 1;
+}
+
+message GetResourceSegmentRequest {
+  string id = 1;
+}
+
+message GetGetTemplateRequest {
+  string id = 1;
+}
+
+message GetSettingsRequest {
+  string fields = 2;
+}
+
+message UpdateSettingsRequest {
+//  string id = 1;
+  map<string, api.proj.Prompt> prompts = 2;
+
+  //  oneof data {
+  //    api.proj.Prompt videoTemplate = 2;
+  //    api.proj.Prompt videoHighlight = 3;
+  //    api.proj.Prompt videoScript = 4;
+  //    api.proj.Prompt videoGenerate = 5;
+  //  }
+}
+
+message ListResourceSegmentsRequest {
+  int64 page = 1;
+  string keyword = 2;
+  string searchBy = 6;
+  string category = 3;
+  int64 size = 4;
+  string status = 5;
+  repeated string ids = 7;
+  string returnFields = 8;
+}
+
+message AddResourcesSegmentRequest{
+  message Item {
+    string url = 1;
+    string coverUrl = 3;
+    double timeStart = 4;
+    double timeEnd = 5;
+  }
+
+  repeated Item items = 1;
+}
+
+message SearchMatchedItemsParams {
+  string keyword = 1;
+  int64 limit = 2;
+}
+
+message SearchMatchedItemSegmentsParams {
+  string keyword = 1;
+  string commodityKeyword = 2;
+  string subtitleKeyword = 3;
+
+  int64 limit = 5;
+}
+
+message GetItemParams {
+  string id = 1;
+}
+
+
+message UpdateItemParams {
+  string id = 1;
+  string action = 2;
+}
+
+message UpdateResourceSegmentRequest {
+  string id = 1;
+  string action = 2;
+  string rootId = 3;
+}
+
+message UpdateItemTagParams {
+  string id = 1;
+  repeated string tags = 2;
+}
+message UpdateItemCategoryParams {
+  string id = 1;
+  string category = 2;
+}
+
+message AddItemParams {
+
+  message Item {
+    string url = 1;
+    string coverUrl = 3;
+  }
+
+  repeated Item items = 1;
+}
+
+message ListItemsParams {
+  int64 page = 1;
+  string keyword = 2;
+  string category = 3;
+  int64 size = 4;
+  string searchBy = 5;
+  repeated string ids = 7;
+}

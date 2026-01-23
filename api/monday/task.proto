@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package api.monday;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "monday/commodity.proto";
+
+option go_package = "store/api/monday;mondaypb";
+
+message Task {
+
+  string _id = 1 [json_name = '_id'];
+  // created 处理中
+  // completed 已完成
+  string status = 3;
+  api.monday.Commodity commodity = 4;
+  int64 createdAt = 5;
+  string userId = 7;
+
+  // brandAdvert 生成品牌广告
+  // generateBeginningSegment 生成前贴素材
+  // generateEmptySegment 生成空镜场景
+  // suggestBeginningSegments 推荐前贴素材
+  string category = 9;
+
+  TaskResult result = 10;
+  TaskOptions options = 11;
+
+}
+
+
+message TaskOptions {
+  string videoRadio = 1;
+
+  string sellingPoint = 2;
+  string targetAudience = 3;
+  string prompt = 4;
+}
+
+
+
+message TaskResult {
+  message Video {
+    string url = 1;
+  }
+
+  repeated Video items = 4;
+  // brandAdvert
+  repeated Video brandAdverts = 1;
+  //  generateBeginningSegment
+  //  suggestBeginningSegments
+  repeated Video beginningSegments = 2;
+  //  generateBeginningSegment
+  repeated Video emptySegments = 3;
+
+}
+
+
+//    api.monday.Chance targetChance = 8;
+
+
+message TaskList {
+  repeated Task list = 1;
+  int64 page = 2;
+  int64 size = 3;
+  int64 total = 4;
+}
+

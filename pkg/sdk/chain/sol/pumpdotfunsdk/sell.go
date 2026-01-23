@@ -1,0 +1,170 @@
+package pumpdotfunsdk
+
+import (
+	"fmt"
+	"math/big"
+	"store/pkg/sdk/chain/sol/pumpdotfunsdk/pump"
+	"store/pkg/sdk/chain/sol/solana"
+	associatedtokenaccount "store/pkg/sdk/chain/sol/solana/programs/associated-token-account"
+	"store/pkg/sdk/chain/sol/solana/programs/system"
+	"store/pkg/sdk/chain/sol/solana/programs/token"
+	"store/pkg/sdk/chain/sol/solana/rpc"
+)
+
+func CreateSellInstructions(
+	rpcClient *rpc.Client,
+	user solana.PublicKey,
+	mint solana.PublicKey,
+	sellTokenAmount uint64,
+	slippageBasisPoint uint,
+	priorityFee uint64,
+	// all bool,
+) ([]solana.Instruction, *big.Int, error) {
+
+	instructions := buildComputeUnitInstructions(priorityFee)
+
+	// get sell instructions
+	sellInstructions, toAmount, err := getSellInstructions(
+		rpcClient,
+		user,
+		mint,
+		sellTokenAmount,
+		slippageBasisPoint,
+		//all,
+	)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to get sell instructions: %w", err)
+	}
+	instructions = append(instructions, sellInstructions)
+
+	return instructions, toAmount, nil
+	//// get recent block hash
+	//recent, err := rpcClient.GetLatestBlockhash(context.TODO(), rpc.CommitmentFinalized)
+	//if err != nil {
+	//	return nil, fmt.Errorf("error while getting recent block hash: %w", err)
+	//}
+	//// create new transaction
+	//tx, err := solana.NewTransaction(
+	//	instructions,
+	//	recent.Value.Blockhash,
+	//	solana.TransactionPayer(user.PublicKey()),
+	//)
+	//if err != nil {
+	//	return "", fmt.Errorf("error while creating new transaction: %w", err)
+	//}
+	//_, err = tx.Sign(
+	//	func(key solana.PublicKey) *solana.PrivateKey {
+	//		if user.PublicKey().Equals(key) {
+	//			return &user
+	//		}
+	//		return nil
+	//	},
+	//)
+	//if err != nil {
+	//	return "", fmt.Errorf("can't sign transaction: %w", err)
+	//}
+	//
+	//sig, err := rpcClient.SendTransaction(context.Background(), tx)
+	//
+	////// Send transaction, and wait for confirmation:
+	////sig, err := confirm.SendAndConfirmTransaction(
+	////	context.TODO(),
+	////	rpcClient,
+	////	wsClient,
+	////	tx,
+	////)
+	//if err != nil {
+	//	return "", fmt.Errorf("can't send and confirm new transaction: %w", err)
+	//}
+	//return sig.String(), nil
+}
+
+// getSellInstructions is a function that returns the pump.fun instructions to sell the token
+func getSellInstructions(
+	rpcClient *rpc.Client,
+	user solana.PublicKey,
+	mint solana.PublicKey,
+	sellTokenAmount uint64,
+	slippageBasisPoint uint,
+	// all bool,
+) (*pump.Instruction, *big.Int, error) {
+	ata, _, err := solana.FindAssociatedTokenAddress(
+		user,
+		mint,
+	)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to derive associated token account: %w", err)
+	}
+	//if all {
+	//	tokenAccounts, err := rpcClient.GetTokenAccountBalance(
+	//		context.TODO(),
+	//		ata,
+	//		rpc.CommitmentConfirmed,
+	//	)
+	//	if err != nil {
+	//		return nil, fmt.Errorf("can't get amount of token in balance: %w", err)
+	//	}
+	//	amount, err := strconv.Atoi(tokenAccounts.Value.Amount)
+	//	if err != nil {
+	//		return nil, fmt.Errorf("can't convert token amount to integer: %w", err)
+	//	}
+	//	sellTokenAmount = uint64(amount)
+	//}
+	bondingCurveData, err := getBondingCurveAndAssociatedBondingCurve(mint)
+	if err != nil {
+		return nil, nil, fmt.Errorf("can't get bonding curve data: %w", err)
+	}
+	bondingCurve, err := fetchBondingCurve(rpcClient, bondingCurveData.BondingCurve)
+	if err != nil {
+		return nil, nil, fmt.Errorf("can't fetch bonding curve: %w", err)
+	}
+	percentage := convertSlippageBasisPointsToPercentage(slippageBasisPoint)
+	minSolOutput := calculateSellQuote(sellTokenAmount, bondingCurve, percentage)
+	sellInstr := pump.NewSellInstruction(
+		sellTokenAmount,
+		minSolOutput.Uint64(),
+		globalPumpFunAddress,
+		pumpFunFeeRecipient,
+		mint,
+		bondingCurveData.BondingCurve,
+		bondingCurveData.AssociatedBondingCurve,
+		ata,
+		user,
+		system.ProgramID,
+		associatedtokenaccount.ProgramID,
+		token.ProgramID,
+		pumpFunEventAuthority,
+		pump.ProgramID,
+	)
+	sell, err := sellInstr.ValidateAndBuild()
+	if err != nil {
+		return nil, nil, fmt.Errorf("can't validate and build sell instruction: %w", err)
+	}
+	return sell, minSolOutput, nil
+}
+
+// calculateSellQuote calculates how many SOL should be received for selling a specific amount of tokens, given a specific amount of token, bonding curve data, and percentage.
+// tokenAmount is the amount of token you want to sell
+// bondingCurve is the bonding curve data, that will help to calculate the number of sol to get
+// percentage is the slippage, 0.98 means 2% slippage
+func calculateSellQuote(
+	tokenAmount uint64,
+	bondingCurve *BondingCurveData,
+	percentage float64,
+) *big.Int {
+	amount := big.NewInt(int64(tokenAmount))
+
+	// Clone bonding curve data to avoid mutations
+	virtualSolReserves := new(big.Int).Set(bondingCurve.VirtualSolReserves)
+	virtualTokenReserves := new(big.Int).Set(bondingCurve.VirtualTokenReserves)
+
+	// Compute the new virtual reserves
+	x := new(big.Int).Mul(virtualSolReserves, amount)
+	y := new(big.Int).Add(virtualTokenReserves, amount)
+	a := new(big.Int).Div(x, y)
+	percentageMultiplier := big.NewFloat(percentage)
+	sol := new(big.Float).SetInt(a)
+	number := new(big.Float).Mul(sol, percentageMultiplier)
+	final, _ := number.Int(nil)
+	return final
+}

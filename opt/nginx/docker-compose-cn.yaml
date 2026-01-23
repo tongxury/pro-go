@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: nginx
+#    image: swr.cn-north-4.myhuaweicloud.com/library/nginx:1.25
+    platform: linux/arm64
+    image: docker.m.daocloud.io/library/nginx:1.25-alpine
+    user: '0'
+    volumes:
+      - './conf:/etc/nginx/conf.d/:ro'
+    restart: unless-stopped
+    ports:
+      - "80:80"
+
+# docker.m.daocloud.io/certbot/certbot

@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package api.user.types;
+
+//import "google/api/annotations.proto";
+//import "validate/validate.proto";
+import "public/enums/enums.proto";
+
+
+option go_package = "store/api/user/types;typepb";
+
+message Promotion {
+  string id = 1;
+  int64 limit = 2;
+  int64 used = 3;
+}
+
+
+message Metadata {
+  //  float price = 1;
+  repeated Model models = 2;
+  repeated Function functions = 3;
+  string level = 4;
+  map<string, Price> prices = 5;
+  map<string, Limit> modelLimits = 6;
+  map<string, Limit> functionLimits = 7;
+  string label = 8;
+  bool suggest = 9;
+  bool disabled = 10;
+//  repeated Function otherFunctions = 11;
+}
+
+message Price {
+  float value = 1;
+  float original = 2;
+  string couponId = 3;
+  string save = 4;
+}
+
+message Limit {
+  int64 month = 1;
+  int64 day = 2;
+  int64 total = 3;
+  int64 bonus = 4;
+  string desc = 5;
+}
+
+message Cycle {
+  string name = 1;
+  int64 trialDays = 2;
+  int64 signedUpBefore = 3;
+}
+
+
+message Model {
+  // 模型名称
+  string name = 1;
+  // 额度
+  int64 queries = 2;
+  // 已使用
+  int64 used = 3;
+  // 奖励
+  int64 bonus = 4;
+  string desc = 5;
+  string label = 6;
+}
+
+message Function {
+  // 功能名称
+  string name = 1;
+  // 额度
+  int64 queries = 2;
+  // 已使用
+  int64 used = 3;
+  // 奖励
+  int64 bonus = 4;
+  string desc = 5;
+}
+
+
+message Member {
+  string level = 1;
+  string paymentCycle = 2;
+  Metadata quota = 5;
+  int64 expireAt = 8;
+  string userId = 11;
+  map<string, int64> used = 12;
+  map<string, bool> available = 13;
+  string status = 14;
+  string billingUrl = 15;
+}
+
+message Membership {
+  MemberSubscribe ongoingSubscribe = 1;
+  bool hasSubscribed = 2;
+
+  string level = 3;
+  string paymentCycle = 4;
+  Metadata metadata = 5;
+  int64 expireAt = 6;
+  string userId = 7;
+  map<string, int64> used = 8;
+  map<string, bool> available = 9;
+  string status = 10;
+  string billingUrl = 11;
+}
+
+message MemberSubscribe {
+  string id = 1;
+  string userId = 2;
+  int64 createdAt = 3;
+  api.public.enums.Enum level = 4;
+  api.public.enums.Enum paymentCycle = 5;
+  api.public.enums.Enum status = 6;
+  int64 expireAt = 7;
+  map<string, string> extra = 8;
+  string subscriptionID = 9;
+}

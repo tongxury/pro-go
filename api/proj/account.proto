@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/proj;projpb";
+
+
+message Account {
+  string _id = 1 [json_name = '_id'];
+  string name = 2;
+  string avatar = 3;
+  repeated string tags = 4;
+  string sign = 5;
+  string douyinId = 6;
+  string userId = 7;
+}
+

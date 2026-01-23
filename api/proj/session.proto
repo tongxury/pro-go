@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/commodity.proto";
+import "proj/item.proto";
+import "proj/asset.proto";
+import "proj/workflow.proto";
+
+option go_package = "store/api/proj;projpb";
+
+
+message Session {
+
+  message Extra {
+    map<string, string> context = 1;
+  }
+
+  string _id = 1 [json_name = '_id'];
+
+  api.proj.Commodity commodity = 2;
+  int64 createdAt = 3;
+  string userId = 4;
+  string status = 5;
+  api.proj.Chance targetChance = 8;
+  repeated SessionSegment segments = 9;
+  api.proj.Resource  template = 10;
+  repeated Asset assets = 11;
+  string category = 12;
+
+  string coverUrl = 13;
+  string url = 14;
+
+  //  repeated api.proj.Resource templates = 6;
+
+  //  ScriptMeta script = 7;
+  Extra extra = 20;
+}
+
+message SessionSegment {
+
+  message Extra {
+    map<string, string> context = 1;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  string sessionId = 2;
+
+  string status = 4;
+  api.proj.Session session = 7;
+
+  api.proj.ResourceSegment segment = 8;
+  string subtitle = 9;
+
+  string assetId = 10;
+  api.proj.Asset asset = 11;
+  api.proj.KeyFrames keyFrames = 12;
+
+  Extra extra = 20;
+
+}
+
+
+message SessionList {
+  repeated Session list = 1;
+}
+
+
+
+message ScriptMeta {
+  message Content {
+    string subtitle = 1;
+    string textInVideo = 2;
+  }
+
+  message Reference {
+    string url = 1;
+    string coverUrl = 2;
+    double timeStart = 3;
+    double timeEnd = 4;
+  }
+
+  message Segment {
+    Content content = 1;
+    string shootingStyle = 2;
+    Stage stage = 3;
+    Reference reference = 4;
+    string desc = 5;
+    string subtitle = 6;
+    api.proj.ItemSegment segment = 7;
+    string production = 8;
+
+  }
+
+  message Stage {
+    string name = 1;
+  }
+
+  string style = 1;
+  string contentStyle = 2;
+  string sceneStyle = 3;
+  repeated Segment segments = 4;
+  //  repeated api.proj.ItemSegment itemSegments = 5;
+}

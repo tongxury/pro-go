@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package api.monday;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "monday/task.proto";
+
+
+option go_package = "store/api/monday;mondaypb";
+
+service MondayService {
+  // 提交任务
+  rpc SubmitTask(SubmitTaskRequest) returns (api.monday.Task) {
+    option (google.api.http) = {
+      post: "/api/md/tasks"
+      body: "*"
+    };
+  }
+  // 开启任务
+  rpc StartTask(StartTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/md/tasks/{id}/status"
+      body: "*"
+    };
+  }
+  rpc UpdateTask(UpdateTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/md/tasks/{id}"
+      body: "*"
+    };
+  }
+  // 任务列表
+  rpc ListTasks(ListTasksRequest) returns (api.monday.TaskList) {
+    option (google.api.http) = {
+      get: "/api/md/tasks"
+    };
+  }
+  // 单个任务
+  rpc GetTask(GetTaskRequest) returns (api.monday.Task) {
+    option (google.api.http) = {
+      get: "/api/md/tasks/{id}"
+    };
+  }
+}
+
+message UpdateTaskRequest {
+  string id = 1;
+  string action = 2;
+}
+
+message GetTaskRequest {
+  string id = 1;
+}
+
+message ListTasksRequest {
+  string keyword = 1;
+  int64 page = 2;
+  string category = 3;
+}
+
+message SubmitTaskRequest {
+
+  string url = 1;
+  // brandAdvert 生成品牌广告
+  // generateBeginningSegment 生成前贴素材
+  // generateEmptySegment 生成空镜场景
+  // suggestBeginningSegments 推荐前贴素材
+  string category = 2;
+  repeated string images = 3;
+
+  api.monday.TaskOptions options = 4;
+}
+
+
+message StartTaskRequest {
+
+  string id = 1;
+  api.monday.TaskOptions options = 2;
+}
+
+
+//message TaskOptions {
+//  string videoRadio = 1;
+//
+//  string sellingPoint = 2;
+//  string targetAudience = 3;
+//}
+
+
+message SubmitTaskResponse {
+
+}

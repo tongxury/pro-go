@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/market.proto";
+import "dex/trade.proto";
+import "dex/commission.proto";
+import "dex/user_service.proto";
+import "dex/trade_service.proto";
+import "dex/app_settings.proto";
+
+
+option go_package = "store/api/dex;dexpb";
+
+service AdminService {
+  rpc GetAuthToken(GetAuthTokenParams) returns (GetAuthTokenResult) {
+    option (google.api.http) = {
+      get: "/api/dex/admin/tokens"
+    };
+  }
+
+  rpc ListUsers(api.dex.ListUsersParams) returns (api.dex.UserList) {
+    option (google.api.http) = {
+      get: "/api/dex/admin/users"
+    };
+  }
+
+  rpc ListOrders(api.dex.ListOrdersParams) returns (api.dex.OrderList) {
+    option (google.api.http) = {
+      get: "/api/dex/admin/orders"
+    };
+  }
+
+  rpc ListWithdrawals(api.dex.ListWithdrawalParams) returns (api.dex.WithdrawalList) {
+    option (google.api.http) = {
+      get: "/api/dex/admin/withdrawals",
+    };
+  }
+
+  rpc ApproveWithdrawal(api.dex.ApproveWithdrawalParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/dex/admin/withdrawals",
+      body: "*"
+    };
+  }
+  rpc GetAppSettings (api.dex.GetAppSettingsParams) returns (api.dex.AppSettings) {
+    option (google.api.http) = {
+      get: "/api/dex/admin/app-settings"
+    };
+  }
+  rpc UpdateAppSettings (api.dex.AppSettings) returns (api.dex.AppSettings) {
+    option (google.api.http) = {
+      put: "/api/dex/admin/app-settings",
+      body: "*"
+    };
+  }
+}
+
+message GetAuthTokenParams {
+  string username = 1;
+  string password = 2;
+}
+
+message GetAuthTokenResult {
+  string token = 1;
+}

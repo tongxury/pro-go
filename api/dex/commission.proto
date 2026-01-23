@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/market.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+message Commission {
+  double rate = 1;
+  string toUserId = 2;
+  int64 validInvitedUserCount = 3;
+}
+
+
+
+message Apply {
+  int64 at = 1;
+}
+
+
+message Approve {
+  int64 at = 1;
+  string txHash = 2;
+}
+
+message Reject {
+  int64 at = 1;
+  string reason = 2;
+}
+
+
+message CommissionSettlement {
+
+  message Meta {
+    double orderAmount = 1;
+    double orderFeeAmount = 2;
+    int64 orderCount = 3;
+    int64 userCount = 4;
+    double rate = 5;
+  }
+
+  api.dex.User user = 1;
+  api.dex.TimeRange timeRange = 2;
+  api.dex.Category category = 3;
+  api.dex.Token token = 4;
+  api.dex.Amount amount = 5;
+  Meta meta = 6;
+  api.dex.Status status = 7;
+
+  //  api.dex.Transaction tx = 8;
+  Apply apply = 9;
+  Approve approve = 10;
+}
+
+
+message Withdrawal {
+  api.dex.User user = 2;
+  api.dex.Token token = 3;
+  api.dex.Amount amount = 4;
+  //  int64 applyAt = 5;
+  //  api.dex.Transaction  tx = 6;
+  //  int64 approvedAt = 7;
+
+  Apply apply = 9;
+  Approve approve = 10;
+}
+
+message WithdrawalList {
+  repeated api.dex.Withdrawal  list = 1;
+}

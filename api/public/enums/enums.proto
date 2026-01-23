@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.public.enums;
+option go_package = "store/api/public/enums;enumpb";
+
+
+message Enum {
+  string name = 1;
+  string value = 2;
+  string color = 3;
+  repeated Enum options = 4;
+}

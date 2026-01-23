@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.bi.types;
+
+option go_package = "store/api/bi/types;typepb";
+
+
+message ChatRecord {
+
+}
+
+

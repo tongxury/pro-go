@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package api.public.response;
+option go_package = "store/api/public/response;responsepb";
+import "google/protobuf/any.proto";
+
+
+message MapResponse {
+  map<string, string> data = 1;
+}
+
+// todo
+message IntMapResponse {
+  map<string, int64> data = 1;
+}
+
+message TextResponse {
+  string value = 1;
+  string contentType = 2;
+}
+
+message RedirectResponse {
+  string url = 1;
+  repeated Cookie cookies = 2;
+}
+
+message Cookie {
+  string name = 1;
+  string value = 2;
+  string domain = 3;
+}
+
+message HtmlResponse {
+  string html = 1;
+}
+message FileResponse {
+  string content = 1;
+  string type = 2;
+  string filename = 4;
+}

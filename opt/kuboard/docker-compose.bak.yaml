@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  # 部署k8s集群
+  #  kuboard_spray:
+  #    container_name: kuboard_spray
+  #    image: eipwork/kuboard-spray:v1.2.4-amd64
+  #    ports:
+  #      - '16000:80'
+  #    volumes:
+  #      - 'kuboard-spray-data:/data'
+  #      - '/var/run/docker.sock:/var/run/docker.sock'
+  ##    默认密码 admin Kuboard123
+  #    deploy:
+  #      resources:
+  #        limits:
+  #          memory: 12g
+
+  # 管理平台
+  kuboard:
+    container_name: kuboard
+    image: eipwork/kuboard:v3
+    restart: always
+    ports:
+      - '18060:80'
+      - '10081:10081'
+    volumes:
+      - 'kuboard-data:/data'
+    environment:
+      - KUBOARD_ENDPOINT=http://54.169.253.197
+      - KUBOARD_AGENT_SERVER_TCP_PORT=10081
+#      - KUBOARD_ADMIN_DERAULT_PASSWORD=1qaz@WSXmemeX
+
+
+volumes:
+  kuboard-spray-data:
+  kuboard-data:
+
+
+
+
+#networks:
+#  opt:
+#    name: opt_net
+#    external: true

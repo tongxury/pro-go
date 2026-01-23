@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package api.databank.types;
+
+import "public/enums/enums.proto";
+
+
+option go_package = "store/api/databank/types;typepb";
+
+
+message Asset {
+  string id = 1;
+  File file = 2;
+  string school = 3;
+  string course = 4;
+  string year = 5;
+  api.public.enums.Enum status = 7;
+  int64 createdAt = 8;
+}
+
+message File {
+  bytes body = 1;
+  string name = 2;
+  string key = 3;
+  string url = 4;
+  string md5 = 5;
+}

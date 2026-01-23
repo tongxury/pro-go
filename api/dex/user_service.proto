@@ -1,0 +1,188 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/market.proto";
+import "dex/commission.proto";
+import "dex/app_settings.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+service UserService {
+  // user
+  rpc AddUser(api.dex.User) returns (api.dex.User) {}
+  rpc ListUsers(ListUsersParams) returns (UserList) {}
+
+
+  rpc GetAppSettings (api.dex.GetAppSettingsParams) returns (api.dex.AppSettings) {
+    option (google.api.http) = {
+      get: "/api/tgbot/app-settings"
+    };
+  }
+
+  rpc GetUser(google.protobuf.Empty) returns (api.dex.User) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me"
+    };
+  }
+
+  rpc ListInvitedUsers(ListInviteUsersParams) returns (UserList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/invited-users"
+    };
+  }
+
+  rpc GetCommissionSummary(GetCommissionSummaryParams) returns (CommissionSummary) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/commission-summary"
+    };
+  }
+  rpc SettleCommission(SettleCommissionParams) returns (google.protobuf.Empty) {}
+  // commission-settlement
+  rpc GetCommissionSettlementSummary (GetCommissionSettlementSummaryParams) returns (CommissionSettlementSummary) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/commission-settlement-summary"
+    };
+  }
+
+  rpc CreateWithdrawal(CreateWithdrawalParams) returns (CreateWithdrawalResult) {
+    option (google.api.http) = {
+      post: "/api/tgbot/users/me/withdrawals",
+      body: "*"
+    };
+  }
+  rpc ApproveWithdrawal(ApproveWithdrawalParams) returns (google.protobuf.Empty) {}
+  rpc ListWithdrawals(ListWithdrawalParams) returns (api.dex.WithdrawalList) {}
+  rpc ListUserWithdrawals(ListUserWithdrawalParams) returns (api.dex.WithdrawalList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/users/me/withdrawals",
+    };
+  }
+
+  rpc ResetUserWalletPassword(ResetUserWalletPasswordParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/tgbot/users/me/password",
+      body: "*",
+    };
+  }
+}
+
+message ApproveWithdrawalParams {
+  string userId = 1;
+  string token = 2;
+  string txHash = 3;
+}
+
+message ListUsersParams {
+  string nickname = 1;
+
+  int64 page = 20;
+  int64 size = 21;
+}
+
+
+message ResetUserWalletPasswordParams {
+  string oldPassword = 1;
+  string newPassword = 2;
+
+  api.dex.CommonParams common = 20;
+
+}
+
+
+
+message ListUserWithdrawalParams {
+
+  api.dex.CommonParams common = 20;
+
+}
+
+message ListWithdrawalParams {
+
+  string status = 1;
+
+  int64 page = 20;
+  int64 size = 21;
+
+}
+
+message CreateWithdrawalParams {
+  string token = 1;
+
+  api.dex.CommonParams common = 20;
+}
+
+message CreateWithdrawalResult {
+
+}
+
+message SettleCommissionParams {
+  int64 timeStart = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 timeEnd = 2 [(validate.rules).int64 = {gt: 0}];
+}
+
+
+message ListInviteUsersParams {
+
+}
+
+message UserList {
+  repeated api.dex.User list = 1;
+  int64 total = 2;
+}
+
+
+message GetCommissionSummaryParams {
+
+  api.dex.CommonParams common = 20;
+}
+
+message CommissionSummary {
+  api.dex.Amount totalCommissionAmount = 1;
+  api.dex.Amount totalTransactionAmount = 2;
+  int64 inviteUserCount = 3;
+  int64 validInviteUserCount = 4;
+  double commissionRate = 5;
+  //  Amount mixWithdrawAmount = 6;
+  //  Amount withdrawnAmount = 7;
+  //  Wallet withdrawWallet = 8;
+}
+
+
+
+message GetCommissionSettlementSummaryParams {
+  api.dex.CommonParams common = 20;
+}
+
+
+message CommissionSettlementStats_ByStatus {
+  api.dex.Status status = 1;
+  api.dex.Amount amount = 2;
+}
+
+message CommissionSettlementStats_ByToken {
+  api.dex.Token token = 1;
+  api.dex.Amount total = 2;
+  repeated CommissionSettlementStats_ByStatus stats = 3;
+}
+
+
+message CommissionSettlementSummary {
+  api.dex.Amount total = 1;
+  repeated  CommissionSettlementStats_ByToken tokenStats = 2;
+  WithdrawSettings settings = 3;
+}
+
+
+message WithdrawSettings {
+  api.dex.Amount threshold = 1;
+  api.dex.Wallet wallet = 2;
+}

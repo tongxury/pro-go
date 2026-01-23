@@ -1,0 +1,736 @@
+[
+  {
+    "name": "segmentScriptJob",
+    "status": "completed",
+    "dataBus": {
+      "segmentScript": {
+        "script": "{\n  \"segments\": [\n    {\n      \"timeStart\": 0,\n      \"timeEnd\": 1.4,\n      \"subtitle\": \"你可能还不认识它，这款浪味鳕鱼丝。\",\n      \"intention\": \"开篇吸引注意，通过特写镜头确立产品形象。\",\n      \"coreAction\": \"特写展示一篮装满的鳕鱼丝。\",\n      \"elementTransformation\": \"从静态的一篮零食平滑切入动态展示。\",\n      \"visualChange\": \"焦点由模糊变清晰，突出鳕鱼丝的纹理。\",\n      \"contentStyle\": \"鲜活诱人，突出产品食欲感。\",\n      \"sceneStyle\": \"家庭休闲场景，背景有色彩丰富的零食包装。\",\n      \"description\": \"镜头近距离掠过一篮满满的、色泽金黄的鳕鱼丝，画面充满了诱惑力。\",\n      \"shootingStyle\": \"特写镜头加微距平移。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 0.1,\n          \"desc\": \"满篮的鳕鱼丝特写。\"\n        },\n        \"climax\": {\n          \"timestamp\": 0.7,\n          \"desc\": \"镜头在鳕鱼丝细节上平移。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 1.3,\n          \"desc\": \"画面焦点稳定在鳕鱼丝上。\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 1.4,\n      \"timeEnd\": 2.8,\n      \"subtitle\": \"作为旺旺家族的新宠，它一出现就爆火。\",\n      \"intention\": \"建立品牌信任感，利用品牌效应背书。\",\n      \"coreAction\": \"大量鳕鱼丝包装袋从上方纷纷落下。\",\n      \"elementTransformation\": \"单个产品变为大堆产品的视觉冲击。\",\n      \"visualChange\": \"色彩斑斓的包装袋占满屏幕。\",\n      \"contentStyle\": \"活泼欢快，营造热销氛围。\",\n      \"sceneStyle\": \"整洁干净的桌面背景。\",\n      \"description\": \"多袋不同口味的浪味鳕鱼丝从空中落下，堆叠在桌面上，极具冲击力。\",\n      \"shootingStyle\": \"中景固定镜头，高速摄影捕捉掉落感。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 1.5,\n          \"desc\": \"包装袋开始掉落。\"\n        },\n        \"climax\": {\n          \"timestamp\": 2.1,\n          \"desc\": \"包装袋堆满桌面。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 2.7,\n          \"desc\": \"包装袋静止堆叠在画面中。\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 2.8,\n      \"timeEnd\": 5.4,\n      \"subtitle\": \"深海鱼糜含量高达70%，这口感没谁了。\",\n      \"intention\": \"展示产品核心卖点，突出高品质成分。\",\n      \"coreAction\": \"手拿一袋鳕鱼丝，指着背后的成分表。\",\n      \"elementTransformation\": \"由产品正面包装转向核心卖点信息。\",\n      \"visualChange\": \"特写镜头对焦在“70%鱼糜”字样上。\",\n      \"contentStyle\": \"专业客观且充满自信。\",\n      \"sceneStyle\": \"明亮的演播室或厨房背景。\",\n      \"description\": \"演示者拿起一袋产品，镜头推进展示包装上显著的深海鱼糜含量标识。\",\n      \"shootingStyle\": \"推镜头，特写关键文字。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 3,\n          \"desc\": \"展示产品包装正面。\"\n        },\n        \"climax\": {\n          \"timestamp\": 4.1,\n          \"desc\": \"镜头拉近至包装上的卖点文字。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 5.2,\n          \"desc\": \"卖点清晰展示完毕。\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 5.4,\n      \"timeEnd\": 8.5,\n      \"subtitle\": \"不仅有原味，还有鲜辣味，怎么吃都不腻。\",\n      \"intention\": \"展示口味多样性，满足不同消费者的偏好。\",\n      \"coreAction\": \"快速切换展示不同口味的彩色包装袋。\",\n      \"elementTransformation\": \"不同口味包装的快速交替视觉。\",\n      \"visualChange\": \"颜色在蓝、绿、黄之间快速跳动。\",\n      \"contentStyle\": \"动感十足，色彩明快。\",\n      \"sceneStyle\": \"简洁的纯色背景切换。\",\n      \"description\": \"画面快速切换展示原味、鲜辣等多种口味的包装，营造出丰富的选择感。\",\n      \"shootingStyle\": \"快速剪辑，配合产品翻转动作。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 5.6,\n          \"desc\": \"第一种口味包装展示。\"\n        },\n        \"climax\": {\n          \"timestamp\": 7,\n          \"desc\": \"多款口味快速闪现。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 8.4,\n          \"desc\": \"最后一款口味定格。\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 8.5,\n      \"timeEnd\": 12.6,\n      \"subtitle\": \"追剧或者在办公室嘴馋了，撕开一袋超解压。\",\n      \"intention\": \"关联生活场景，激发购买欲望。\",\n      \"coreAction\": \"演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。\",\n      \"elementTransformation\": \"由封闭包装到诱人实物的过程。\",\n      \"visualChange\": \"撕裂包装的动态和内部鱼丝的质感展示。\",\n      \"contentStyle\": \"轻松愉悦，展现解馋快感。\",\n      \"sceneStyle\": \"办公桌旁或沙发追剧背景。\",\n      \"description\": \"演示者撕开袋子，镜头切入袋内，可以看到Q弹有嚼劲的鱼丝被拉扯出。\",\n      \"shootingStyle\": \"第一人称视角配合近景特写。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 8.8,\n          \"desc\": \"手拿包装袋准备撕开。\"\n        },\n        \"climax\": {\n          \"timestamp\": 10.5,\n          \"desc\": \"展示鱼丝撕开时的纹理。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 12.4,\n          \"desc\": \"拿着鱼丝往嘴里送的动作起点。\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 12.6,\n      \"timeEnd\": 17.37,\n      \"subtitle\": \"9大包只要这个价，下单再多送2包，赶紧抢！\",\n      \"intention\": \"最后利益诱惑，促成下单转化。\",\n      \"coreAction\": \"展示一大堆产品组合和赠品，配合倒计时或购买手势。\",\n      \"elementTransformation\": \"由单品展示变为超值大礼包视觉。\",\n      \"visualChange\": \"画面被堆积如山的包裹填满。\",\n      \"contentStyle\": \"紧迫且极具诱惑力。\",\n      \"sceneStyle\": \"直播间风格或高亮背景。\",\n      \"description\": \"屏幕出现全系列礼包合集，左下角弹出购买链接提示，强调9+2的超值优惠。\",\n      \"shootingStyle\": \"广角镜头展示全家福，最后快速推向镜头。\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 12.8,\n          \"desc\": \"全系列9大包产品集合。\"\n        },\n        \"climax\": {\n          \"timestamp\": 14.5,\n          \"desc\": \"两包赠品落入画面中央。\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 17,\n          \"desc\": \"定格在购买引导界面。\"\n        }\n      }\n    }\n  ]\n}",
+        "segments": [
+          {
+            "coreAction": "特写展示一篮装满的鳕鱼丝。",
+            "elementTransformation": "从静态的一篮零食平滑切入动态展示。",
+            "visualChange": "焦点由模糊变清晰，突出鳕鱼丝的纹理。",
+            "intention": "开篇吸引注意，通过特写镜头确立产品形象。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 0.1,
+                "desc": "满篮的鳕鱼丝特写。"
+              },
+              "climax": {
+                "timestamp": 0.7,
+                "desc": "镜头在鳕鱼丝细节上平移。"
+              },
+              "storyEnding": {
+                "timestamp": 1.3,
+                "desc": "画面焦点稳定在鳕鱼丝上。"
+              }
+            },
+            "contentStyle": "鲜活诱人，突出产品食欲感。",
+            "sceneStyle": "家庭休闲场景，背景有色彩丰富的零食包装。",
+            "description": "镜头近距离掠过一篮满满的、色泽金黄的鳕鱼丝，画面充满了诱惑力。",
+            "shootingStyle": "特写镜头加微距平移。",
+            "timeEnd": 1.4,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9f0ed3e321516fc4329391a8e76475b7.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/034523e37308fbc068ba00f73348d18b.jpg",
+            "subtitle": "你可能还不认识它，这款浪味鳕鱼丝。"
+          },
+          {
+            "coreAction": "大量鳕鱼丝包装袋从上方纷纷落下。",
+            "elementTransformation": "单个产品变为大堆产品的视觉冲击。",
+            "visualChange": "色彩斑斓的包装袋占满屏幕。",
+            "intention": "建立品牌信任感，利用品牌效应背书。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 1.5,
+                "desc": "包装袋开始掉落。"
+              },
+              "climax": {
+                "timestamp": 2.1,
+                "desc": "包装袋堆满桌面。"
+              },
+              "storyEnding": {
+                "timestamp": 2.7,
+                "desc": "包装袋静止堆叠在画面中。"
+              }
+            },
+            "contentStyle": "活泼欢快，营造热销氛围。",
+            "sceneStyle": "整洁干净的桌面背景。",
+            "description": "多袋不同口味的浪味鳕鱼丝从空中落下，堆叠在桌面上，极具冲击力。",
+            "shootingStyle": "中景固定镜头，高速摄影捕捉掉落感。",
+            "timeStart": 1.4,
+            "timeEnd": 2.8,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/ad654354aa4e9e73f5fb2eadb69e76ea.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/90d687d6b8273c4fc205278771fe7520.jpg",
+            "subtitle": "作为旺旺家族的新宠，它一出现就爆火。"
+          },
+          {
+            "coreAction": "手拿一袋鳕鱼丝，指着背后的成分表。",
+            "elementTransformation": "由产品正面包装转向核心卖点信息。",
+            "visualChange": "特写镜头对焦在“70%鱼糜”字样上。",
+            "intention": "展示产品核心卖点，突出高品质成分。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 3,
+                "desc": "展示产品包装正面。"
+              },
+              "climax": {
+                "timestamp": 4.1,
+                "desc": "镜头拉近至包装上的卖点文字。"
+              },
+              "storyEnding": {
+                "timestamp": 5.2,
+                "desc": "卖点清晰展示完毕。"
+              }
+            },
+            "contentStyle": "专业客观且充满自信。",
+            "sceneStyle": "明亮的演播室或厨房背景。",
+            "description": "演示者拿起一袋产品，镜头推进展示包装上显著的深海鱼糜含量标识。",
+            "shootingStyle": "推镜头，特写关键文字。",
+            "timeStart": 2.8,
+            "timeEnd": 5.4,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/bdc8db02c54fae809b707733b93ba7a6.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/713bdf9c798ee9ae5d5833cdbca317f9.jpg",
+            "subtitle": "深海鱼糜含量高达70%，这口感没谁了。"
+          },
+          {
+            "coreAction": "快速切换展示不同口味的彩色包装袋。",
+            "elementTransformation": "不同口味包装的快速交替视觉。",
+            "visualChange": "颜色在蓝、绿、黄之间快速跳动。",
+            "intention": "展示口味多样性，满足不同消费者的偏好。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 5.6,
+                "desc": "第一种口味包装展示。"
+              },
+              "climax": {
+                "timestamp": 7,
+                "desc": "多款口味快速闪现。"
+              },
+              "storyEnding": {
+                "timestamp": 8.4,
+                "desc": "最后一款口味定格。"
+              }
+            },
+            "contentStyle": "动感十足，色彩明快。",
+            "sceneStyle": "简洁的纯色背景切换。",
+            "description": "画面快速切换展示原味、鲜辣等多种口味的包装，营造出丰富的选择感。",
+            "shootingStyle": "快速剪辑，配合产品翻转动作。",
+            "timeStart": 5.4,
+            "timeEnd": 8.5,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/5bc0f06f3073075bd35eed573dca36b3.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/177496261b62378e821a9e8695b59d0d.jpg",
+            "subtitle": "不仅有原味，还有鲜辣味，怎么吃都不腻。"
+          },
+          {
+            "coreAction": "演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。",
+            "elementTransformation": "由封闭包装到诱人实物的过程。",
+            "visualChange": "撕裂包装的动态和内部鱼丝的质感展示。",
+            "intention": "关联生活场景，激发购买欲望。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 8.8,
+                "desc": "手拿包装袋准备撕开。"
+              },
+              "climax": {
+                "timestamp": 10.5,
+                "desc": "展示鱼丝撕开时的纹理。"
+              },
+              "storyEnding": {
+                "timestamp": 12.4,
+                "desc": "拿着鱼丝往嘴里送的动作起点。"
+              }
+            },
+            "contentStyle": "轻松愉悦，展现解馋快感。",
+            "sceneStyle": "办公桌旁或沙发追剧背景。",
+            "description": "演示者撕开袋子，镜头切入袋内，可以看到Q弹有嚼劲的鱼丝被拉扯出。",
+            "shootingStyle": "第一人称视角配合近景特写。",
+            "timeStart": 8.5,
+            "timeEnd": 12.6,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4974c87115e989152cb1b6636bc23faa.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/8034583cdbdf973900a73f9ca5b94362.jpg",
+            "subtitle": "追剧或者在办公室嘴馋了，撕开一袋超解压。"
+          },
+          {
+            "coreAction": "展示一大堆产品组合和赠品，配合倒计时或购买手势。",
+            "elementTransformation": "由单品展示变为超值大礼包视觉。",
+            "visualChange": "画面被堆积如山的包裹填满。",
+            "intention": "最后利益诱惑，促成下单转化。",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 12.8,
+                "desc": "全系列9大包产品集合。"
+              },
+              "climax": {
+                "timestamp": 14.5,
+                "desc": "两包赠品落入画面中央。"
+              },
+              "storyEnding": {
+                "timestamp": 17,
+                "desc": "定格在购买引导界面。"
+              }
+            },
+            "contentStyle": "紧迫且极具诱惑力。",
+            "sceneStyle": "直播间风格或高亮背景。",
+            "description": "屏幕出现全系列礼包合集，左下角弹出购买链接提示，强调9+2的超值优惠。",
+            "shootingStyle": "广角镜头展示全家福，最后快速推向镜头。",
+            "timeStart": 12.6,
+            "timeEnd": 17.37,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3a051a4d9663ab7c303904f03da57f6c.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/21ae78d91b7d83efbe305dcf4aa0627b.jpg",
+            "subtitle": "9大包只要这个价，下单再多送2包，赶紧抢！"
+          }
+        ]
+      }
+    },
+    "completedAt": new
+    NumberLong(
+    "1768897217"
+    )
+  },
+  {
+    "name": "keyFramesGenerationJob",
+    "index": new
+    NumberLong(
+    "1"
+    ),
+    "status": "completed",
+    "startedAt": new
+    NumberLong(
+    "1768897403"
+    ),
+    "dataBus": {
+      "keyFrames": {
+        "frames": [
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/b5dfa889857acd317358bcb51cc45aec.jpg",
+            "status": "completed",
+            "prompt": "开篇吸引注意，通过特写镜头确立产品形象。\n特写展示一篮装满的鳕鱼丝。\n从静态的一篮零食平滑切入动态展示。\n\n焦点由模糊变清晰，突出鳕鱼丝的纹理。\n\n镜头近距离掠过一篮满满的、色泽金黄的鳕鱼丝，画面充满了诱惑力。\n\n家庭休闲场景，背景有十几包鳕鱼丝零食包装。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/9f0ed3e321516fc4329391a8e76475b7.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/4397318e67a01f325959667237745171.jpg",
+            "status": "completed",
+            "prompt": "特写展示一篮装满的鳕鱼丝。\n从静态的一篮零食平滑切入动态展示。\n\n焦点由模糊变清晰，突出鳕鱼丝的纹理。\n\n镜头近距离掠过一篮满满的、色泽金黄的鳕鱼丝，画面充满了诱惑力。\n\n家庭休闲场景，背景有色彩丰富的零食包装。\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/154de3570f1e4ad99ae654cd4278ce82.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/946456be89c387182f7075c72442c77a.jpg",
+            "status": "completed",
+            "prompt": "建立品牌信任感，利用品牌效应背书。\n大量鳕鱼丝包装袋从上方纷纷落下。\n单个产品变为大堆产品的视觉冲击。\n\n色彩斑斓的包装袋占满屏幕。\n\n多袋不同口味的浪味鳕鱼丝从空中落下，堆叠在桌面上，极具冲击力。\n\n整洁干净的桌面背景。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/ad654354aa4e9e73f5fb2eadb69e76ea.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/a916cbf3668fba4f891054c8933bd061.jpg",
+            "status": "completed",
+            "prompt": "大量鳕鱼丝包装袋从上方纷纷落下。\n单个产品变为大堆产品的视觉冲击。\n\n色彩斑斓的包装袋占满屏幕。\n\n多袋不同口味的浪味鳕鱼丝从空中落下，堆叠在桌面上，极具冲击力。\n\n整洁干净的桌面背景。\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/946456be89c387182f7075c72442c77a.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/a9d62ce1cf706a35bb364401303a8349.jpg",
+            "status": "completed",
+            "prompt": "展示产品核心卖点，突出高品质成分。\n手拿一袋鳕鱼丝，指着背后的成分表。\n由产品正面包装转向核心卖点信息。\n\n特写镜头对焦在“70%鱼糜”字样上。\n\n演示者拿起一袋产品，镜头推进展示包装上显著的深海鱼糜含量标识。\n\n明亮的演播室或厨房背景。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/bdc8db02c54fae809b707733b93ba7a6.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/839d5b879d0f5ac928ba5ffe378026f8.jpg",
+            "status": "completed",
+            "prompt": "手拿一袋鳕鱼丝，指着背后的成分表。\n由产品正面包装转向核心卖点信息。\n\n特写镜头对焦在“70%鱼糜”字样上。\n\n演示者拿起一袋产品，镜头推进展示包装上显著的深海鱼糜含量标识。\n\n明亮的演播室或厨房背景。\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/a9d62ce1cf706a35bb364401303a8349.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/3889f2ec853cbd603fafdd60991bde04.jpg",
+            "status": "completed",
+            "prompt": "展示口味多样性，满足不同消费者的偏好。\n快速切换展示不同口味的彩色包装袋。\n不同口味包装的快速交替视觉。\n\n颜色在蓝、绿、黄之间快速跳动。\n\n画面快速切换展示原味、鲜辣等多种口味的包装，营造出丰富的选择感。\n\n简洁的纯色背景切换。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/5bc0f06f3073075bd35eed573dca36b3.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/af6f219effa45d5abf55f0afdaa10271.jpg",
+            "status": "completed",
+            "prompt": "快速切换展示包装袋。\n\n不同的几包快速交替视觉。\n\n简洁的纯色背景切换。\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/3889f2ec853cbd603fafdd60991bde04.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/41f1af3906fc7d53dc0c7f89e625f89a.jpg",
+            "status": "completed",
+            "prompt": "关联生活场景，激发购买欲望。\n演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。\n由封闭包装到诱人实物的过程。\n\n撕裂包装的动态和内部鱼丝的质感展示。\n\n演示者撕开袋子，镜头切入袋内，可以看到Q弹有嚼劲的鱼丝被拉扯出。\n\n办公桌旁或沙发追剧背景。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/4974c87115e989152cb1b6636bc23faa.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/316a597875c8dc6afef18602bac5e7e7.jpg",
+            "status": "completed",
+            "prompt": "演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。\n由封闭包装到诱人实物的过程。\n\n撕裂包装的动态和内部鱼丝的质感展示。\n\n演示者撕开袋子，镜头切入袋内，可以看到Q弹有嚼劲的鱼丝被拉扯出。\n\n办公桌旁或沙发追剧背景。\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/41f1af3906fc7d53dc0c7f89e625f89a.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/2a51e1f29b82ed074fd28f51e1ede1c2.jpg",
+            "status": "completed",
+            "prompt": "最后利益诱惑，促成下单转化。\n展示一大堆产品组合和赠品，配合倒计时或购买手势。\n由单品展示变为超值大礼包视觉。\n\n画面被堆积如山的包裹填满。\n\n屏幕出现全系列礼包合集，左下角弹出购买链接提示，强调9+2的超值优惠。\n\n直播间风格或高亮背景。\n\n\n\n依据以上分镜描述和意图，首先判断分镜中是否有产品植入，人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,调整人物的发型、服装和骨相都要有一定变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】调整人物的发型、服装和骨相， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/3a051a4d9663ab7c303904f03da57f6c.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/cb2b0f0e7b6603ab97a54256bba6aa8b.jpg",
+            "status": "completed",
+            "prompt": "展示一大堆产品组合和赠品，配合倒计时或购买手势。\n由单品展示变为超值大礼包视觉。\n\n画面被堆积如山的包裹填满。\n\n屏幕出现全系列礼包合集，左下角弹出购买链接提示，强调9+2的超值优惠。\n\n直播间风格或高亮背景。\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,推演视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/2a51e1f29b82ed074fd28f51e1ede1c2.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/fad606992ac26233ff7997fbe666f624.png"
+            ],
+            "aspectRatio": "9:16"
+          }
+        ]
+      }
+    },
+    "completedAt": new
+    NumberLong(
+    "1768898608"
+    )
+  },
+  {
+    "name": "videoSegmentsGenerationJob",
+    "index": new
+    NumberLong(
+    "2"
+    ),
+    "status": "completed",
+    "startedAt": new
+    NumberLong(
+    "1768898723"
+    ),
+    "dataBus": {
+      "videoGenerations": [
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b5dfa889857acd317358bcb51cc45aec.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d1bd07c581996deddc7ce55df09471b5.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图鳕鱼丝产品的金黄色泽、丝状外形及橙蓝色调包装袋外观绝对不变，仅允许鳕鱼丝受手部抓取时的自然弯曲形变与阴影位移，运镜自由发挥。”\n2.动作描述：\n“采用【缓慢抓取并微抖】的具象动作，手部从篮中抓起一把鳕鱼丝并缓缓向上提升，展示其干爽分明的质感，动作【持续3秒】，【第2秒提升速度增加30%】以突显鱼丝弹性，尾帧保留1.5秒丝部纹理特写静态。”\n3.轨迹逻辑：\n“手部运动路径需符合【垂直向上的抛物线】物理轨迹，鳕鱼丝末端的摆动幅度误差≤5°，以参考图中的编织篮边缘作为运动基准锚点。”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【轨道推进】镜头，从首帧的中景平滑过渡到鳕鱼丝的局部微距特写，镜头移动速度与手部提升速度保持1:1同步。”\n2.空间定位：\n“设置【左后方橙色包装袋】与【编织篮把手】为恒定参照物，所有透视与比例变化需严格基于此参照系，确保空间深度真实。”\n3.动态衔接：\n“首尾帧过渡使用【焦点由虚转实+光流补帧】技术，重点刻画鳕鱼丝表面的纤维纹理，确保90%以上帧间差异≤0.3px。”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与主体动作同步：当鳕鱼丝被抓起离开篮子时，篮底投射的阴影随动作实时减弱，背景暖色灯光随镜头推进增强10%的明亮度。”\n2.物理模拟：\n“启用【刚体动力学】模拟，鱼丝下垂时需体现轻微的干脆弹性与重力下坠感，多根鱼丝间的摩擦碰撞需符合物理常识，无穿模现象。”\n3.色彩控制：\n“色温锁定在4500K暖黄色调，饱和度随镜头靠近鱼丝核心区域线性提升15%，色彩过渡需符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5）以增强视觉诱惑力。”",
+          "tmpPrompt": "特写展示一篮装满的鳕鱼丝。\n从静态的一篮零食平滑切入动态展示。\n\n焦点由模糊变清晰，突出鳕鱼丝的纹理。\n\n家庭休闲场景，背景有色彩丰富的零食包装。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164828-2mzrl",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/5971334ab00efd0f11b5a3c932b4fb92.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/946456be89c387182f7075c72442c77a.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d3669b21374eee5b4b43b55158aa1955.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图鳕鱼丝包装外形、色彩及Logo图案绝对不变，仅允许【包装袋材质反光/重力碰撞形变】变化，运镜自由发挥。”\n2.动作描述：\n“采用【重力加速下落+空中随机翻转】动词，包装袋从画面上方如雨点般倾泻，【持续3秒】落至桌面形成堆叠，【第2秒加速30%】增加视觉冲击力，尾帧保留1.5秒堆叠落定的静态画面。”\n3.轨迹逻辑：\n“运动路径需符合【垂直下落+触碰反弹】物理轨迹，新落下的包装袋需与已有堆叠产生真实的位移干扰，参考图中的桌面中心点作为落点锚点。”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【平滑后退拉远】（Dolly Back），镜头移动速度与包装堆叠高度增长速度比1:1，以展现从单袋到堆积如山的规模感。”\n2.空间定位：\n“设置【前景木质桌面边缘】与【背景虚化绿植】为恒定参照物，确保视频运动过程中空间轴线不偏移。”\n3.动态衔接：\n“首尾帧过渡使用【光流补帧+运动模糊】技术，确保下落过程中的红蓝橙包装袋边缘锐利，帧间位移差异≤0.5px。”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与下落动作同步：每一个包装袋落地时，需在木质桌面上投射即时的动态阴影，且遮挡处背景光线相应减弱10%。”\n2.物理模拟：\n“启用【刚体动力学】模块，包装袋之间发生物理碰撞需产生轻微的位移反馈，下落速度参数模拟标准地球重力（9.8m/s²）。”\n3.色彩控制：\n“保持高饱和度的红、蓝、橙色彩恒定，色温从首帧到尾帧线性保持在5200K暖白光，亮度曲线平滑，避免闪烁。”",
+          "tmpPrompt": "大量鳕鱼丝包装袋从上方纷纷落下。\n单个产品变为大堆产品的视觉冲击。\n\n色彩斑斓的包装袋占满屏幕。\n\n整洁干净的桌面背景。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164829-7nsnr",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/c1d01601759a6f1233cc27a18248f4c4.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/a9d62ce1cf706a35bb364401303a8349.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/130d45226834b54a23f213c4b5e5d718.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【包装袋塑料反光/指尖轻微压迫产生的局部形变】变化，运镜自由发挥\"\n2.动作描述：\n\"采用【水平轴向翻转结合指尖定点指向】动作，【持续3秒】完成从产品正面到背面的平滑过渡，【第2秒加速50%】进行镜头推进，尾帧在‘70%鱼糜’字样处保留1.5秒绝对静态\"\n3.轨迹逻辑：\n\"包装袋运动路径需符合【半圆周旋转】物理轨迹，指尖移动轨迹为【斜向直线平移】，以参考图中‘70%鱼糜’文字中心为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进结合局部宏观特写】运镜，从包装全景快速收缩至文字局部，镜头运动速度与包装翻转及指尖指向速度比1:1\"\n2.空间定位：\n\"设置【背景白色微波炉旋钮】与【左侧杯塔】为恒定参照物，所有透视与比例变化需基于此背景参照系\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保翻转过程中包装边缘不产生重影，90%以上帧间文字清晰度差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与主体动作同步：包装翻转时，表面高光点随入射角变化产生15%的位移，指尖触碰瞬间包装袋产生细微塑料褶皱阴影\"\n2.物理模拟：\n\"启用【刚体动力学】模拟手持包装的稳定性，指尖压力模拟需符合3N下压感，背景厨房环境光散射频率恒定≤1Hz\"\n3.色彩控制：\n\"色温全程锁定5600K标准演播室灯光，饱和度变化曲线符合贝塞尔曲线（P0=0.5, P1=0.5, P2=0.5），确保‘70%鱼糜’黄色字样在特写时色彩纯度始终一致\"",
+          "tmpPrompt": "手拿一袋鳕鱼丝，指着背后的成分表。\n由产品正面包装转向核心卖点信息。\n\n特写镜头对焦在“70%鱼糜”字样上。\n\n明亮的演播室或厨房背景。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164830-rf82s",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/b8d6a48544a1ab3444c48f51a4afe542.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3889f2ec853cbd603fafdd60991bde04.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3a292a65136c0094864b838c799bc9ef.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图产品外形/包装绝对不变，仅允许【包装印刷色彩/标签图画/局部包装褶皱】变化，运镜自由发挥”\n2.动作描述：\n“包装袋在手中保持稳定，【持续3秒】内以【0.5秒/次】的频率循环闪现切换包装主色（从首帧橘蓝色快速跳变为绿色、黄色、青色，最后回归尾帧色彩），手部抓取动作随镜头拉远同步微调，尾帧保留1.5秒静态”\n3.轨迹逻辑：\n“运动路径需符合【直线后拉】物理轨迹，以包装袋中心点为运动基准锚点，关键帧位置误差≤5°，确保视觉中心始终锁定在产品包装上”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【轨道后拉】运镜，从首帧的中景人像平滑拉远至尾帧的特写构图，镜头后移速度与包装颜色切换频率保持1:1视觉律动”\n2.空间定位：\n“设置【左侧绿植】与【右后方台灯】为首帧恒定参照物，随镜头拉远，背景元素需在第2秒完成向纯色背景的【景深淡化】过渡，所有比例变化基于中心锚点参照系”\n3.动态衔接：\n“首尾帧过渡使用【动态模糊+光流补帧】技术，确保色彩切换瞬间包装边缘对齐，90%以上帧间形状差异≤0.3px”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化与产品切换同步：当包装颜色跳变为绿色时，背景环境光同步增加10%冷色调；当包装变黄时，光影对比度提升15%，营造多口味闪现的动感效果”\n2.物理模拟：\n“启用【刚体动力学】模拟手部持握压力，包装袋因镜头拉远产生的细微震颤需符合物理惯性，袋内鱼丝的堆叠形态随包装移动产生轻微位移”\n3.色彩控制：\n“色温从首帧室内温馨暖光线性过渡到尾帧中性纯色背景，色彩饱和度变化曲线符合贝塞尔曲线，确保口味快速切换时的视觉冲击力符合色彩心理学节奏”",
+          "tmpPrompt": "快速切换展示不同口味的彩色包装袋。\n不同口味包装的快速交替视觉。\n\n颜色在蓝、绿、黄之间快速跳动。\n\n简洁的纯色背景切换。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164831-4465l",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/ffbec4ea6f2e869df0154e2043e1c4c3.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/41f1af3906fc7d53dc0c7f89e625f89a.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/91bd8fdb8f86a8664f7401ea29fc5945.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图中鱼丝包装袋（蓝色鱼形图案及文字）的外形、包装绝对不变，仅允许【包装袋口物理撕裂/塑料材质褶皱】局部形变，内部抽出鱼丝时允许轻微形变，运镜自由发挥\" \n\n2.动作描述：\n\"采用【分段式撕裂与抽取】动态：第0-2秒模拟右手发力撕开包装袋顶端，产生塑料崩开的干脆动态；第2-4秒右手匀速向上抽出数根金黄鱼丝，鱼丝受力呈现【轻微回弹与韧性伸展】；尾帧保留1.5秒静态，展示鱼丝饱满质感\"\n\n3.轨迹逻辑：\n\"撕裂动作沿袋口边缘横向推进，鱼丝抽取路径符合【垂直向上】物理轨迹，手部关键帧位置误差≤5°，参考图中的手部抓握点作为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【微距轨道推进】，镜头中心随手部撕裂动作向袋口聚拢，镜头移动速度与鱼丝抽出速度比1:1，模拟沉浸式开箱视角\"\n\n2.空间定位：\n\"设置【左下角绿色零食袋】与【右下角沙发边缘】为恒定参照物，电视机背景的景深模糊程度保持一致，所有比例变化需基于此参考坐标系\"\n\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保撕裂边缘与鱼丝纤维在90%以上帧间差异≤0.3px，消除跳帧感\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化需与主体动作同步：包装袋撕开时，内部铝箔材质反射环境光增强15%，手指抓握包装袋时产生明显的挤压阴影变化\"\n\n2.物理模拟：\n\"启用【刚体动力学】模拟包装袋材质的清脆质感，鱼丝抽出时的物理摆动需符合空气阻力参数，背景中电视机画面光影需保持恒定的低频闪烁环境光\"\n\n3.色彩控制：\n\"色温保持首帧的暖色调一致性（约3800K），鱼丝金黄色泽饱和度变化曲线符合贝塞尔曲线（P0=0.3, P1=0.8, P2=0.5），以强化诱人实物的视觉冲击力\"",
+          "tmpPrompt": "演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。\n由封闭包装到诱人实物的过程。\n\n撕裂包装的动态和内部鱼丝的质感展示。\n\n办公桌旁或沙发追剧背景。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164833-rgxrb",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/8b79f5fb2f1939ed8694fd830904fd47.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/2a51e1f29b82ed074fd28f51e1ede1c2.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/370fac5bbf5df5707d2df37b7f76222b.jpg",
+          "prompt": "根据您提供的参考图和描述，为您生成用于即梦首尾帧视频生成的提示词：\n\n一、主体运动控制\n1.物理规则：\n保持参考图产品“浪味鳕鱼香丝”外形、橙蓝白配色包装及包装中心鱼类插画绝对不变，仅允许手臂动作位移及包装塑料材质产生细微的光影折射变化，运镜自由发挥。\n2.动作描述：\n采用【平滑展开】动词描述人物动作，从首帧的指向手势通过【2秒匀速移动】变为双臂向两侧大范围张开的展示姿态，第2.5秒双手完全定位，尾帧保留1.5秒静态展示以强调“超值大礼包”的视觉冲击。\n3.轨迹逻辑：\n人物手臂运动路径需符合【扇形弧线】物理轨迹，以画面中心叠加的三包产品为运动基准锚点，确保视觉重心始终锁定在产品组合上，避免随机形变。\n\n二、镜头语言构建\n1.运镜指令：\n使用【轨道后退（Track Out）】运镜，配合微弱的【广角端拉伸】，镜头运动速度与人物手臂张开速度比1:1，模拟出从展示单品到展示堆积如山产品的视觉扩张感。\n2.空间定位：\n设置【中心主叠产品】为恒定参照物，背景堆积的产品包需随着镜头拉远呈现符合物理透视的比例变化，UI倒计时元素平滑消失。\n3.动态衔接：\n首尾帧过渡使用【动态模糊+光流补帧】技术，确保人物发丝和背景堆叠的产品袋在空间位移中不产生闪烁，帧间差异≤0.3px。\n\n三、环境交互系统\n1.因果逻辑：\n环境变化需与主体动作同步：当人物双臂完全展开展示全量赠品时，背景直播间灯光亮度线性增强15%，增加“福利降临”的视觉高光感。\n2.物理模拟：\n启用【刚体动力学】模拟背景中大量包装袋的堆叠稳定性，人物米色毛衣袖口的摆动需符合手臂挥动产生的1.5m/s气流扰动参数，确发布料质感真实。\n3.色彩控制：\n色温保持在5500K标准直播间暖白光，包装袋的橙色饱和度变化曲线符合贝塞尔曲线（P0=0.5, P1=0.8, P2=0.5），确保在视觉扩张过程中色彩始终鲜艳且一致。",
+          "tmpPrompt": "展示一大堆产品组合和赠品，配合倒计时或购买手势。\n由单品展示变为超值大礼包视觉。\n\n画面被堆积如山的包裹填满。\n\n直播间风格或高亮背景。\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260120164834-4xjmt",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/4e42034a997500154db068347fb5ca33.mp4"
+        }
+      ]
+    },
+    "completedAt": new
+    NumberLong(
+    "1768899023"
+    )
+  },
+  {
+    "name": "videoSegmentsRemixJob",
+    "index": new
+    NumberLong(
+    "3"
+    ),
+    "status": "completed",
+    "dataBus": {
+      "remix": {
+        "segments": [
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/5971334ab00efd0f11b5a3c932b4fb92.mp4",
+              "taskId": "cgt-20260120164828-2mzrl",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b5dfa889857acd317358bcb51cc45aec.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d1bd07c581996deddc7ce55df09471b5.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图鳕鱼丝产品的金黄色泽、丝状外形及橙蓝色调包装袋外观绝对不变，仅允许鳕鱼丝受手部抓取时的自然弯曲形变与阴影位移，运镜自由发挥。”\n2.动作描述：\n“采用【缓慢抓取并微抖】的具象动作，手部从篮中抓起一把鳕鱼丝并缓缓向上提升，展示其干爽分明的质感，动作【持续3秒】，【第2秒提升速度增加30%】以突显鱼丝弹性，尾帧保留1.5秒丝部纹理特写静态。”\n3.轨迹逻辑：\n“手部运动路径需符合【垂直向上的抛物线】物理轨迹，鳕鱼丝末端的摆动幅度误差≤5°，以参考图中的编织篮边缘作为运动基准锚点。”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【轨道推进】镜头，从首帧的中景平滑过渡到鳕鱼丝的局部微距特写，镜头移动速度与手部提升速度保持1:1同步。”\n2.空间定位：\n“设置【左后方橙色包装袋】与【编织篮把手】为恒定参照物，所有透视与比例变化需严格基于此参照系，确保空间深度真实。”\n3.动态衔接：\n“首尾帧过渡使用【焦点由虚转实+光流补帧】技术，重点刻画鳕鱼丝表面的纤维纹理，确保90%以上帧间差异≤0.3px。”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与主体动作同步：当鳕鱼丝被抓起离开篮子时，篮底投射的阴影随动作实时减弱，背景暖色灯光随镜头推进增强10%的明亮度。”\n2.物理模拟：\n“启用【刚体动力学】模拟，鱼丝下垂时需体现轻微的干脆弹性与重力下坠感，多根鱼丝间的摩擦碰撞需符合物理常识，无穿模现象。”\n3.色彩控制：\n“色温锁定在4500K暖黄色调，饱和度随镜头靠近鱼丝核心区域线性提升15%，色彩过渡需符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5）以增强视觉诱惑力。”",
+              "tmpPrompt": "特写展示一篮装满的鳕鱼丝。\n从静态的一篮零食平滑切入动态展示。\n\n焦点由模糊变清晰，突出鳕鱼丝的纹理。\n\n家庭休闲场景，背景有色彩丰富的零食包装。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "特写展示一篮装满的鳕鱼丝。",
+              "elementTransformation": "从静态的一篮零食平滑切入动态展示。",
+              "visualChange": "焦点由模糊变清晰，突出鳕鱼丝的纹理。",
+              "intention": "开篇吸引注意，通过特写镜头确立产品形象。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 0.1,
+                  "desc": "满篮的鳕鱼丝特写。"
+                },
+                "climax": {
+                  "timestamp": 0.7,
+                  "desc": "镜头在鳕鱼丝细节上平移。"
+                },
+                "storyEnding": {
+                  "timestamp": 1.3,
+                  "desc": "画面焦点稳定在鳕鱼丝上。"
+                }
+              },
+              "contentStyle": "鲜活诱人，突出产品食欲感。",
+              "sceneStyle": "家庭休闲场景，背景有色彩丰富的零食包装。",
+              "description": "镜头近距离掠过一篮满满的、色泽金黄的鳕鱼丝，画面充满了诱惑力。",
+              "shootingStyle": "特写镜头加微距平移。",
+              "timeEnd": 1.4,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9f0ed3e321516fc4329391a8e76475b7.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/034523e37308fbc068ba00f73348d18b.jpg",
+              "subtitle": "你可能还不认识它，这款浪味鳕鱼丝。"
+            }
+          },
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/c1d01601759a6f1233cc27a18248f4c4.mp4",
+              "taskId": "cgt-20260120164829-7nsnr",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/946456be89c387182f7075c72442c77a.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d3669b21374eee5b4b43b55158aa1955.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图鳕鱼丝包装外形、色彩及Logo图案绝对不变，仅允许【包装袋材质反光/重力碰撞形变】变化，运镜自由发挥。”\n2.动作描述：\n“采用【重力加速下落+空中随机翻转】动词，包装袋从画面上方如雨点般倾泻，【持续3秒】落至桌面形成堆叠，【第2秒加速30%】增加视觉冲击力，尾帧保留1.5秒堆叠落定的静态画面。”\n3.轨迹逻辑：\n“运动路径需符合【垂直下落+触碰反弹】物理轨迹，新落下的包装袋需与已有堆叠产生真实的位移干扰，参考图中的桌面中心点作为落点锚点。”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【平滑后退拉远】（Dolly Back），镜头移动速度与包装堆叠高度增长速度比1:1，以展现从单袋到堆积如山的规模感。”\n2.空间定位：\n“设置【前景木质桌面边缘】与【背景虚化绿植】为恒定参照物，确保视频运动过程中空间轴线不偏移。”\n3.动态衔接：\n“首尾帧过渡使用【光流补帧+运动模糊】技术，确保下落过程中的红蓝橙包装袋边缘锐利，帧间位移差异≤0.5px。”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与下落动作同步：每一个包装袋落地时，需在木质桌面上投射即时的动态阴影，且遮挡处背景光线相应减弱10%。”\n2.物理模拟：\n“启用【刚体动力学】模块，包装袋之间发生物理碰撞需产生轻微的位移反馈，下落速度参数模拟标准地球重力（9.8m/s²）。”\n3.色彩控制：\n“保持高饱和度的红、蓝、橙色彩恒定，色温从首帧到尾帧线性保持在5200K暖白光，亮度曲线平滑，避免闪烁。”",
+              "tmpPrompt": "大量鳕鱼丝包装袋从上方纷纷落下。\n单个产品变为大堆产品的视觉冲击。\n\n色彩斑斓的包装袋占满屏幕。\n\n整洁干净的桌面背景。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "大量鳕鱼丝包装袋从上方纷纷落下。",
+              "elementTransformation": "单个产品变为大堆产品的视觉冲击。",
+              "visualChange": "色彩斑斓的包装袋占满屏幕。",
+              "intention": "建立品牌信任感，利用品牌效应背书。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 1.5,
+                  "desc": "包装袋开始掉落。"
+                },
+                "climax": {
+                  "timestamp": 2.1,
+                  "desc": "包装袋堆满桌面。"
+                },
+                "storyEnding": {
+                  "timestamp": 2.7,
+                  "desc": "包装袋静止堆叠在画面中。"
+                }
+              },
+              "contentStyle": "活泼欢快，营造热销氛围。",
+              "sceneStyle": "整洁干净的桌面背景。",
+              "description": "多袋不同口味的浪味鳕鱼丝从空中落下，堆叠在桌面上，极具冲击力。",
+              "shootingStyle": "中景固定镜头，高速摄影捕捉掉落感。",
+              "timeStart": 1.4,
+              "timeEnd": 2.8,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/ad654354aa4e9e73f5fb2eadb69e76ea.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/90d687d6b8273c4fc205278771fe7520.jpg",
+              "subtitle": "作为旺旺家族的新宠，它一出现就爆火。"
+            }
+          },
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/b8d6a48544a1ab3444c48f51a4afe542.mp4",
+              "taskId": "cgt-20260120164830-rf82s",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/a9d62ce1cf706a35bb364401303a8349.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/130d45226834b54a23f213c4b5e5d718.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【包装袋塑料反光/指尖轻微压迫产生的局部形变】变化，运镜自由发挥\"\n2.动作描述：\n\"采用【水平轴向翻转结合指尖定点指向】动作，【持续3秒】完成从产品正面到背面的平滑过渡，【第2秒加速50%】进行镜头推进，尾帧在‘70%鱼糜’字样处保留1.5秒绝对静态\"\n3.轨迹逻辑：\n\"包装袋运动路径需符合【半圆周旋转】物理轨迹，指尖移动轨迹为【斜向直线平移】，以参考图中‘70%鱼糜’文字中心为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进结合局部宏观特写】运镜，从包装全景快速收缩至文字局部，镜头运动速度与包装翻转及指尖指向速度比1:1\"\n2.空间定位：\n\"设置【背景白色微波炉旋钮】与【左侧杯塔】为恒定参照物，所有透视与比例变化需基于此背景参照系\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保翻转过程中包装边缘不产生重影，90%以上帧间文字清晰度差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与主体动作同步：包装翻转时，表面高光点随入射角变化产生15%的位移，指尖触碰瞬间包装袋产生细微塑料褶皱阴影\"\n2.物理模拟：\n\"启用【刚体动力学】模拟手持包装的稳定性，指尖压力模拟需符合3N下压感，背景厨房环境光散射频率恒定≤1Hz\"\n3.色彩控制：\n\"色温全程锁定5600K标准演播室灯光，饱和度变化曲线符合贝塞尔曲线（P0=0.5, P1=0.5, P2=0.5），确保‘70%鱼糜’黄色字样在特写时色彩纯度始终一致\"",
+              "tmpPrompt": "手拿一袋鳕鱼丝，指着背后的成分表。\n由产品正面包装转向核心卖点信息。\n\n特写镜头对焦在“70%鱼糜”字样上。\n\n明亮的演播室或厨房背景。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "手拿一袋鳕鱼丝，指着背后的成分表。",
+              "elementTransformation": "由产品正面包装转向核心卖点信息。",
+              "visualChange": "特写镜头对焦在“70%鱼糜”字样上。",
+              "intention": "展示产品核心卖点，突出高品质成分。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 3,
+                  "desc": "展示产品包装正面。"
+                },
+                "climax": {
+                  "timestamp": 4.1,
+                  "desc": "镜头拉近至包装上的卖点文字。"
+                },
+                "storyEnding": {
+                  "timestamp": 5.2,
+                  "desc": "卖点清晰展示完毕。"
+                }
+              },
+              "contentStyle": "专业客观且充满自信。",
+              "sceneStyle": "明亮的演播室或厨房背景。",
+              "description": "演示者拿起一袋产品，镜头推进展示包装上显著的深海鱼糜含量标识。",
+              "shootingStyle": "推镜头，特写关键文字。",
+              "timeStart": 2.8,
+              "timeEnd": 5.4,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/bdc8db02c54fae809b707733b93ba7a6.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/713bdf9c798ee9ae5d5833cdbca317f9.jpg",
+              "subtitle": "深海鱼糜含量高达70%，这口感没谁了。"
+            }
+          },
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/ffbec4ea6f2e869df0154e2043e1c4c3.mp4",
+              "taskId": "cgt-20260120164831-4465l",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3889f2ec853cbd603fafdd60991bde04.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3a292a65136c0094864b838c799bc9ef.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n“保持参考图产品外形/包装绝对不变，仅允许【包装印刷色彩/标签图画/局部包装褶皱】变化，运镜自由发挥”\n2.动作描述：\n“包装袋在手中保持稳定，【持续3秒】内以【0.5秒/次】的频率循环闪现切换包装主色（从首帧橘蓝色快速跳变为绿色、黄色、青色，最后回归尾帧色彩），手部抓取动作随镜头拉远同步微调，尾帧保留1.5秒静态”\n3.轨迹逻辑：\n“运动路径需符合【直线后拉】物理轨迹，以包装袋中心点为运动基准锚点，关键帧位置误差≤5°，确保视觉中心始终锁定在产品包装上”\n\n二、镜头语言构建\n1.运镜指令：\n“使用【轨道后拉】运镜，从首帧的中景人像平滑拉远至尾帧的特写构图，镜头后移速度与包装颜色切换频率保持1:1视觉律动”\n2.空间定位：\n“设置【左侧绿植】与【右后方台灯】为首帧恒定参照物，随镜头拉远，背景元素需在第2秒完成向纯色背景的【景深淡化】过渡，所有比例变化基于中心锚点参照系”\n3.动态衔接：\n“首尾帧过渡使用【动态模糊+光流补帧】技术，确保色彩切换瞬间包装边缘对齐，90%以上帧间形状差异≤0.3px”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化与产品切换同步：当包装颜色跳变为绿色时，背景环境光同步增加10%冷色调；当包装变黄时，光影对比度提升15%，营造多口味闪现的动感效果”\n2.物理模拟：\n“启用【刚体动力学】模拟手部持握压力，包装袋因镜头拉远产生的细微震颤需符合物理惯性，袋内鱼丝的堆叠形态随包装移动产生轻微位移”\n3.色彩控制：\n“色温从首帧室内温馨暖光线性过渡到尾帧中性纯色背景，色彩饱和度变化曲线符合贝塞尔曲线，确保口味快速切换时的视觉冲击力符合色彩心理学节奏”",
+              "tmpPrompt": "快速切换展示不同口味的彩色包装袋。\n不同口味包装的快速交替视觉。\n\n颜色在蓝、绿、黄之间快速跳动。\n\n简洁的纯色背景切换。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "快速切换展示不同口味的彩色包装袋。",
+              "elementTransformation": "不同口味包装的快速交替视觉。",
+              "visualChange": "颜色在蓝、绿、黄之间快速跳动。",
+              "intention": "展示口味多样性，满足不同消费者的偏好。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 5.6,
+                  "desc": "第一种口味包装展示。"
+                },
+                "climax": {
+                  "timestamp": 7,
+                  "desc": "多款口味快速闪现。"
+                },
+                "storyEnding": {
+                  "timestamp": 8.4,
+                  "desc": "最后一款口味定格。"
+                }
+              },
+              "contentStyle": "动感十足，色彩明快。",
+              "sceneStyle": "简洁的纯色背景切换。",
+              "description": "画面快速切换展示原味、鲜辣等多种口味的包装，营造出丰富的选择感。",
+              "shootingStyle": "快速剪辑，配合产品翻转动作。",
+              "timeStart": 5.4,
+              "timeEnd": 8.5,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/5bc0f06f3073075bd35eed573dca36b3.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/177496261b62378e821a9e8695b59d0d.jpg",
+              "subtitle": "不仅有原味，还有鲜辣味，怎么吃都不腻。"
+            }
+          },
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/8b79f5fb2f1939ed8694fd830904fd47.mp4",
+              "taskId": "cgt-20260120164833-rgxrb",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/41f1af3906fc7d53dc0c7f89e625f89a.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/91bd8fdb8f86a8664f7401ea29fc5945.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图中鱼丝包装袋（蓝色鱼形图案及文字）的外形、包装绝对不变，仅允许【包装袋口物理撕裂/塑料材质褶皱】局部形变，内部抽出鱼丝时允许轻微形变，运镜自由发挥\" \n\n2.动作描述：\n\"采用【分段式撕裂与抽取】动态：第0-2秒模拟右手发力撕开包装袋顶端，产生塑料崩开的干脆动态；第2-4秒右手匀速向上抽出数根金黄鱼丝，鱼丝受力呈现【轻微回弹与韧性伸展】；尾帧保留1.5秒静态，展示鱼丝饱满质感\"\n\n3.轨迹逻辑：\n\"撕裂动作沿袋口边缘横向推进，鱼丝抽取路径符合【垂直向上】物理轨迹，手部关键帧位置误差≤5°，参考图中的手部抓握点作为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【微距轨道推进】，镜头中心随手部撕裂动作向袋口聚拢，镜头移动速度与鱼丝抽出速度比1:1，模拟沉浸式开箱视角\"\n\n2.空间定位：\n\"设置【左下角绿色零食袋】与【右下角沙发边缘】为恒定参照物，电视机背景的景深模糊程度保持一致，所有比例变化需基于此参考坐标系\"\n\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保撕裂边缘与鱼丝纤维在90%以上帧间差异≤0.3px，消除跳帧感\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化需与主体动作同步：包装袋撕开时，内部铝箔材质反射环境光增强15%，手指抓握包装袋时产生明显的挤压阴影变化\"\n\n2.物理模拟：\n\"启用【刚体动力学】模拟包装袋材质的清脆质感，鱼丝抽出时的物理摆动需符合空气阻力参数，背景中电视机画面光影需保持恒定的低频闪烁环境光\"\n\n3.色彩控制：\n\"色温保持首帧的暖色调一致性（约3800K），鱼丝金黄色泽饱和度变化曲线符合贝塞尔曲线（P0=0.3, P1=0.8, P2=0.5），以强化诱人实物的视觉冲击力\"",
+              "tmpPrompt": "演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。\n由封闭包装到诱人实物的过程。\n\n撕裂包装的动态和内部鱼丝的质感展示。\n\n办公桌旁或沙发追剧背景。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "演示撕开包装袋，取出鲜辣有嚼劲的鱼丝。",
+              "elementTransformation": "由封闭包装到诱人实物的过程。",
+              "visualChange": "撕裂包装的动态和内部鱼丝的质感展示。",
+              "intention": "关联生活场景，激发购买欲望。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 8.8,
+                  "desc": "手拿包装袋准备撕开。"
+                },
+                "climax": {
+                  "timestamp": 10.5,
+                  "desc": "展示鱼丝撕开时的纹理。"
+                },
+                "storyEnding": {
+                  "timestamp": 12.4,
+                  "desc": "拿着鱼丝往嘴里送的动作起点。"
+                }
+              },
+              "contentStyle": "轻松愉悦，展现解馋快感。",
+              "sceneStyle": "办公桌旁或沙发追剧背景。",
+              "description": "演示者撕开袋子，镜头切入袋内，可以看到Q弹有嚼劲的鱼丝被拉扯出。",
+              "shootingStyle": "第一人称视角配合近景特写。",
+              "timeStart": 8.5,
+              "timeEnd": 12.6,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4974c87115e989152cb1b6636bc23faa.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/8034583cdbdf973900a73f9ca5b94362.jpg",
+              "subtitle": "追剧或者在办公室嘴馋了，撕开一袋超解压。"
+            }
+          },
+          {
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/4e42034a997500154db068347fb5ca33.mp4",
+              "taskId": "cgt-20260120164834-4xjmt",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/2a51e1f29b82ed074fd28f51e1ede1c2.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/370fac5bbf5df5707d2df37b7f76222b.jpg",
+              "prompt": "根据您提供的参考图和描述，为您生成用于即梦首尾帧视频生成的提示词：\n\n一、主体运动控制\n1.物理规则：\n保持参考图产品“浪味鳕鱼香丝”外形、橙蓝白配色包装及包装中心鱼类插画绝对不变，仅允许手臂动作位移及包装塑料材质产生细微的光影折射变化，运镜自由发挥。\n2.动作描述：\n采用【平滑展开】动词描述人物动作，从首帧的指向手势通过【2秒匀速移动】变为双臂向两侧大范围张开的展示姿态，第2.5秒双手完全定位，尾帧保留1.5秒静态展示以强调“超值大礼包”的视觉冲击。\n3.轨迹逻辑：\n人物手臂运动路径需符合【扇形弧线】物理轨迹，以画面中心叠加的三包产品为运动基准锚点，确保视觉重心始终锁定在产品组合上，避免随机形变。\n\n二、镜头语言构建\n1.运镜指令：\n使用【轨道后退（Track Out）】运镜，配合微弱的【广角端拉伸】，镜头运动速度与人物手臂张开速度比1:1，模拟出从展示单品到展示堆积如山产品的视觉扩张感。\n2.空间定位：\n设置【中心主叠产品】为恒定参照物，背景堆积的产品包需随着镜头拉远呈现符合物理透视的比例变化，UI倒计时元素平滑消失。\n3.动态衔接：\n首尾帧过渡使用【动态模糊+光流补帧】技术，确保人物发丝和背景堆叠的产品袋在空间位移中不产生闪烁，帧间差异≤0.3px。\n\n三、环境交互系统\n1.因果逻辑：\n环境变化需与主体动作同步：当人物双臂完全展开展示全量赠品时，背景直播间灯光亮度线性增强15%，增加“福利降临”的视觉高光感。\n2.物理模拟：\n启用【刚体动力学】模拟背景中大量包装袋的堆叠稳定性，人物米色毛衣袖口的摆动需符合手臂挥动产生的1.5m/s气流扰动参数，确发布料质感真实。\n3.色彩控制：\n色温保持在5500K标准直播间暖白光，包装袋的橙色饱和度变化曲线符合贝塞尔曲线（P0=0.5, P1=0.8, P2=0.5），确保在视觉扩张过程中色彩始终鲜艳且一致。",
+              "tmpPrompt": "展示一大堆产品组合和赠品，配合倒计时或购买手势。\n由单品展示变为超值大礼包视觉。\n\n画面被堆积如山的包裹填满。\n\n直播间风格或高亮背景。\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "展示一大堆产品组合和赠品，配合倒计时或购买手势。",
+              "elementTransformation": "由单品展示变为超值大礼包视觉。",
+              "visualChange": "画面被堆积如山的包裹填满。",
+              "intention": "最后利益诱惑，促成下单转化。",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 12.8,
+                  "desc": "全系列9大包产品集合。"
+                },
+                "climax": {
+                  "timestamp": 14.5,
+                  "desc": "两包赠品落入画面中央。"
+                },
+                "storyEnding": {
+                  "timestamp": 17,
+                  "desc": "定格在购买引导界面。"
+                }
+              },
+              "contentStyle": "紧迫且极具诱惑力。",
+              "sceneStyle": "直播间风格或高亮背景。",
+              "description": "屏幕出现全系列礼包合集，左下角弹出购买链接提示，强调9+2的超值优惠。",
+              "shootingStyle": "广角镜头展示全家福，最后快速推向镜头。",
+              "timeStart": 12.6,
+              "timeEnd": 17.37,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3a051a4d9663ab7c303904f03da57f6c.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/21ae78d91b7d83efbe305dcf4aa0627b.jpg",
+              "subtitle": "9大包只要这个价，下单再多送2包，赶紧抢！"
+            }
+          }
+        ],
+        "status": "running",
+        "coverUrl": "https://yoozyres.tos-cn-shanghai.volces.com/f417502230091011a62854e340651143.jpg",
+        "url": "https://yoozyres.tos-cn-shanghai.volces.com/1a3e75f49e69c0205ef051b36f264917.mp4"
+      }
+    },
+    "startedAt": new
+    NumberLong(
+    "1768899068"
+    ),
+    "completedAt": new
+    NumberLong(
+    "1768899259"
+    )
+  }
+]

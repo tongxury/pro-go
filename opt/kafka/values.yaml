@@ -1,0 +1,14 @@
+image:
+#  tag: 3.6.1-debian-12-r12
+  tag: 3.3.2-debian-12-r34
+#controller:
+#  replicaCount: 0
+#broker:
+#  replicaCount: 1
+#kraft:
+#  enabled: false
+#zookeeper:
+#  enabled: true
+
+#extraConfigYaml:
+#  autoCreateTopicsEnable: true

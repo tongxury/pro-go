@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+package api.note;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "note/note.proto";
+import "note/common.proto";
+import "user/types/user.proto";
+
+option go_package = "store/api/note;notepb";
+
+service NoteService {
+  rpc Test(google.protobuf.Empty) returns(google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/sitemap.xml"
+    };
+  }
+  rpc AddNote (AddNoteParams) returns (api.note.Note);
+
+  rpc ListExperts(ListExpertsParams) returns (ExpertList) {
+    option (google.api.http) = {
+      get: "/api/ep/v1/experts"
+    };
+  }
+  rpc GetExpert(GetExpertParams) returns (Expert) {
+    option (google.api.http) = {
+      get: "/api/ep/v1/experts/{id}"
+    };
+  }
+  rpc ListComments(ListCommentsParams) returns (CommentList) {
+    option (google.api.http) = {
+      get: "/api/ep/v1/comments"
+    };
+  }
+  rpc AddComment(AddCommentParams) returns (Comment) {
+    option (google.api.http) = {
+      post: "/api/ep/v1/comments"
+      body: "*"
+    };
+  }
+  rpc AddMeeting(AddMeetingParams) returns (Meeting) {
+    option (google.api.http) = {
+      post: "/api/ep/v1/meetings"
+      body: "*"
+    };
+  }
+  rpc GetMeeting(GetMeetingParams) returns (Meeting) {
+    option (google.api.http) = {
+      get: "/api/ep/v1/meetings/{id}"
+    };
+  }
+  rpc UpdateMeetingQuestion(UpdateMeetingQuestionParams) returns (Meeting) {
+    option (google.api.http) = {
+      patch: "/api/ep/v1/meetings/{id}/question"
+      body: "*"
+    };
+  }
+
+
+}
+
+message GetMeetingParams {
+  string id = 1;
+}
+
+message UpdateMeetingQuestionParams {
+  string id = 1;
+  string question = 2;
+}
+
+message AddMeetingParams {
+  string expertId = 1;
+  string topic = 2;
+  string by = 3;
+
+}
+
+message Meeting {
+  string _id = 1 [json_name = '_id'];
+  Expert expert = 2;
+  Topic topic = 3;
+  string by = 4;
+  string question = 5;
+  string status = 6;
+  int64 createdAt = 7;
+
+}
+
+message AddCommentParams {
+  string meetingId = 1;
+  string content = 2;
+  string expertId = 3;
+}
+
+message ListCommentsParams {
+  int64 page = 1;
+  string category = 2;
+  string expertId = 3;
+}
+
+message Comment {
+  string _id = 1 [json_name = '_id'];
+  api.user.types.User user = 2;
+  string content = 3;
+  int64 createdAt = 4;
+  Expert expert = 5;
+  Meeting meeting = 6;
+}
+
+message CommentList {
+  repeated Comment list = 1;
+  int64 total = 2;
+  bool hasMore = 3;
+  int64 page = 4;
+}
+
+
+message GetExpertParams {
+  string id = 1;
+}
+
+message ListExpertsParams{
+  int64 page = 1;
+}
+
+message ExpertList {
+  repeated Expert list = 1;
+  int64 total = 2;
+  bool hasMore = 3;
+  int64 page = 4;
+}
+
+message Expert {
+  string _id = 1 [json_name = '_id'];
+  string name = 2;
+  string cover = 3;
+  repeated Topic topics = 4;
+  repeated api.note.Tag tags = 5;
+  int64 meetingCount = 6;
+  int64 price = 7;
+  double rating = 8;
+  string avatar = 9;
+  string desc = 10;
+  int64 createdAt = 11;
+}
+
+message Topic {
+  string value = 1;
+}
+
+message AddNoteParams {
+  string title = 1;
+}

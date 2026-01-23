@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/commodity.proto";
+import "proj/item.proto";
+import "proj/asset.proto";
+
+
+option go_package = "store/api/proj;projpb";
+
+
+message Settings {
+  string id = 1;
+  map<string, string> prompts = 2;
+}
+
+message Task {
+
+  message StepData {
+    string title = 1;
+    string brand = 2;
+    repeated string images = 3;
+    repeated string sellingPoints = 8;
+    repeated string usageScenarios = 9;
+    repeated string targetAudience = 10;
+    string logic = 11;
+  }
+
+  message Step {
+    //    int64 sort = 1;
+    string title = 2;
+    StepData data = 3;
+    string status = 4;
+  }
+
+  message GeneratedResult {
+    string url = 1;
+    string taskId = 2;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  string status = 3;
+
+  api.proj.Commodity commodity = 4;
+
+  api.proj.Chance targetChance = 8;
+
+  api.proj.Resource template = 14;
+
+  int64 createdAt = 5;
+  Script script = 6;
+  string userId = 7;
+
+  map<string, Step> steps = 10;
+  string production = 11;
+  repeated RelatedItem relatedItems = 12;
+  api.proj.Item relatedItem = 13;
+  string mode = 15;
+
+  repeated TaskSegment segments = 20;
+
+  GeneratedResult generatedResult = 21;
+}
+
+message TaskSegment {
+
+  message Extra {
+    map<string, string> context = 1;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  api.proj.Task task = 7;
+  string status = 4;
+  string taskId = 5;
+
+  api.proj.ResourceSegment segment = 2;
+  string subtitle = 3;
+  api.proj.ResourceSegment newSegment = 6;
+  Frames frames = 9;
+  repeated GeneratedTask generatedTasks = 8;
+
+  map<string, string> prompts = 10;
+
+  string assetId = 11;
+  api.proj.Asset asset = 12;
+
+  Extra extra = 20;
+}
+
+
+message Frames {
+  string firstOrigin = 3;
+  string lastOrigin = 4;
+  repeated Frame first = 1;
+  repeated Frame last = 2;
+}
+
+message Frame {
+  string url = 1;
+  bool selected = 2;
+}
+
+
+message GeneratedTask {
+  string id = 1;
+  map<string, string> extra = 2;
+  string videoUrl = 3;
+  string lastFrameUrl = 4;
+  bool selected = 5;
+}
+
+message RelatedItem {
+  api.proj.Item item = 1;
+  bool selected = 2;
+}
+
+message TaskList {
+  repeated Task list = 1;
+}
+
+message Script {
+  message Content {
+    string subtitle = 1;
+    string textInVideo = 2;
+  }
+
+  message Reference {
+    string url = 1;
+    string coverUrl = 2;
+    double timeStart = 3;
+    double timeEnd = 4;
+  }
+
+  message Segment {
+    Content content = 1;
+    string shootingStyle = 2;
+    Stage stage = 3;
+    Reference reference = 4;
+    string desc = 5;
+    string subtitle = 6;
+    api.proj.ItemSegment segment = 7;
+    string production = 8;
+
+  }
+
+  message Stage {
+    string name = 1;
+  }
+
+  string style = 1;
+  string contentStyle = 2;
+  string sceneStyle = 3;
+  repeated Segment segments = 4;
+  //  repeated api.proj.ItemSegment itemSegments = 5;
+}

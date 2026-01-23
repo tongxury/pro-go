@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package api.public;
+option go_package = "store/api/public;publicpb";
+
+message Authorization {
+  string key = 1;
+}

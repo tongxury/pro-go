@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/proj;projpb";
+
+
+message Commodity {
+
+  message Extra {
+    map<string, string> context = 1;
+  }
+
+  string _id = 22 [json_name = '_id'];
+  string url = 1;
+  string title = 2;
+  repeated string images = 3;
+  repeated Media medias = 5;
+  string brand = 4;
+  string name = 6;
+  string description = 7;
+  repeated string sellingPoints = 8;
+  repeated string usageScenarios = 9;
+  repeated string targetAudience = 10;
+  repeated string tags = 11;
+  string status = 25;
+  repeated Chance chances = 26;
+
+  string userId = 27;
+  int64 createdAt = 12;
+  string character = 28;
+  string packagingAttributes = 29;
+
+  Extra extra = 20;
+}
+
+message CommodityList {
+  repeated Commodity list = 1;
+}
+
+
+message Chance {
+  message SellingPoint {
+    string description = 1;
+    repeated string tags = 2;
+  }
+
+  message TargetAudience {
+    string description = 1;
+    repeated string tags = 2;
+  }
+
+  TargetAudience targetAudience = 1;
+  repeated SellingPoint sellingPoints = 2;
+  int64 index = 3;
+}
+
+
+
+message Media {
+  string mimeType = 1;
+  string url = 2;
+}

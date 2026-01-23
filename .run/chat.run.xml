@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="chat" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="pro-go" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="FILE" />
+    <package value="store" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/app/chat/cmd/chat/main.go|$PROJECT_DIR$/app/chat/cmd/chat/wire_gen.go" />
+    <method v="2" />
+  </configuration>
+  <configuration default="false" name="chat" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="pro-go" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="FILE" />
+    <package value="store" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/app/chat/cmd/chat/main.go|$PROJECT_DIR$/app/chat/cmd/chat/wire_gen.go" />
+    <method v="2" />
+  </configuration>
+</component>

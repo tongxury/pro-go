@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package api.user;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "user/types/member.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/user;userpb";
+
+service Member {
+  rpc GetPromotion(GetPromotionParams) returns (api.user.types.Promotion) {
+    option (google.api.http) = {
+      get: "/api/promotions/{id}",
+    };
+  }
+  // 会员订阅
+  rpc SubscribeMember (SubscribeMemberParams) returns (api.public.response.RedirectResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/user-subscribes",
+    };
+  };
+  rpc UpsertMemberSubscribe(UpsertMemberSubscribeParams) returns (google.protobuf.Empty) {}
+  rpc ListMemberSubscribes(ListMemberSubscribesParams) returns (MemberSubscribeList) {}
+  rpc ClearMemberSubscribe(ClearMemberSubscribeParams) returns (google.protobuf.Empty) {}
+  // 获取会员配置信息
+  rpc GetMemberMetadata (GetMemberMetadataParams) returns (GetMemberMetadataResult) {
+    option (google.api.http) = {
+      get: "/api/v1/member-metadatas",
+    };
+  };
+  // v2版本 计数方式
+  rpc StashUserUsage (StashUserUsageParams) returns (StashUserUsageResult) {
+    option (google.api.http) = {
+      patch: "/internal-api/users/{userId}/usages",
+      body: "*"
+    };
+  };
+  rpc GetMemberUsageState (GetMemberUsageStateParams) returns (GetMemberUsageStateResult) {}
+}
+
+message ListMemberSubscribesParams {
+  int64 page = 1;
+  int64 size = 2;
+  bool expired = 3;
+  repeated int64 userIDs = 4;
+}
+
+message MemberSubscribeList {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.user.types.MemberSubscribe list = 4;
+}
+
+message ClearMemberSubscribeParams {
+  string userID = 1;
+}
+
+message UpsertMemberSubscribeParams {
+  string userID = 1 [(validate.rules).string = {}];
+  string level = 2;
+  string cycle = 3;
+  string subID = 4;
+  int64  expiredAt = 5;
+  string promotionCode = 6;
+  bool manually = 7;
+  string version = 8;
+  //  string status = 9;
+}
+
+message GetPromotionParams {
+  string id = 1;
+}
+
+message GetMemberUsageStateParams {
+  string userId = 1 [(validate.rules).string = {min_len: 1}];
+}
+
+message GetMemberUsageStateResult {
+  api.user.types.Limit modelLimit = 1;
+  api.user.types.Limit functionLimit = 2;
+  map<string, int64> used = 3;
+  int64 available = 4;
+  int64 isBonus = 5;
+}
+
+
+message StashUserUsageParams {
+  string userId = 1 [(validate.rules).string = {min_len: 1}];
+  string function = 2;
+  string model = 3;
+  bool autoCommit = 4;
+}
+
+message StashUserUsageResult {
+  enum State {
+    unavailable = 0;
+    available = 1;
+  }
+  State state = 1;
+}
+
+
+message SubscribeMemberParams {
+  string level = 1 [(validate.rules).string = {in: ["basic", "pro", "pro_plus", ""]}];
+  string cycle = 2 [(validate.rules).string = {}];
+  string promotionCode = 3;
+  string redirect = 4;
+}
+
+
+message GetMemberMetadataParams {
+}
+
+message GetMemberMetadataResult {
+
+  message Banner {
+    string category = 1;
+    string url = 2;
+  }
+
+  message Pre {
+    api.user.types.Cycle cycle = 1;
+    api.user.types.Metadata metadata = 2;
+    string expireAt = 3;
+    api.user.types.Promotion promotion = 4;
+    Banner banner = 5;
+  }
+
+  repeated api.user.types.Cycle cycles = 1;
+  repeated api.user.types.Metadata metadatas = 2;
+  Pre pre = 3;
+}

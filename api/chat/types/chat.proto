@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package api.chat.types;
+
+option go_package = "store/api/chat/types;chattypepb";
+
+
+message ChatRecord {
+  string id = 1;
+  int64 eventTime = 2;
+  string userId = 3;
+  string functionName = 4;
+  string url = 5;
+  string queryFull = 6;
+  string answerFull = 7;
+  string status = 8;
+}
+
+message UserAnswerState {
+  string userId = 2;
+  string answerId = 3;
+  string attitude = 10;
+
+}
+
+message Sequence {
+  int64 value = 1;
+}

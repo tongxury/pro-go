@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/credit.proto";
+
+
+option go_package = "store/api/proj;projpb";
+
+message User {
+  string _id = 1 [json_name = '_id'];
+  string username = 2;
+  string avatar = 3;
+  int64 createdAt = 7;
+  int64 lastLoginAt = 8;
+  string phone = 10;
+
+  api.proj.CreditState creditState = 20;
+}
+

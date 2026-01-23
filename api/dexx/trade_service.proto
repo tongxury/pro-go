@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package api.dexx;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dexx/common.proto";
+import "dexx/wallet.proto";
+import "dexx/trade.proto";
+import "public/authorization.proto";
+
+option go_package = "store/api/dexx;dexxpb";
+
+service TradeService {
+  rpc GetTradeSettings (GetTradeSettingsParams) returns (api.dexx.TradeSettings);
+  rpc UpdateTradeSettings (UpdateTradeSettingsParams) returns (api.dexx.TradeSettings);
+
+  rpc Trade (TradeParams) returns (api.dexx.Trade);
+  rpc ListWalletTrades (ListWalletTradesParams) returns (api.dexx.TradeList);
+  rpc ListTokenTrades (ListTokenTradesParams) returns (api.dexx.TradeList);
+  rpc ListFollowingTrades (ListFollowingTradesParams) returns (api.dexx.TradeList);
+
+  //  // ----------------------------- http -------------------------------
+  //  rpc GetOrderSettings (GetOrderSettingsParams) returns (api.dex.TradeSettings) {
+  //    option (google.api.http) = {
+  //      get: "/api/tgbot/users/me/order-settings"
+  //    };
+  //  }
+  //  rpc UpdateOrderSettings  (api.dex.TradeSettings) returns (api.dex.TradeSettings) {
+  //    option (google.api.http) = {
+  //      put: "/api/tgbot/users/me/order-settings"
+  //      body: "*"
+  //    };
+  //  }
+  //
+  //  rpc CreateLimitOrder (CreateLimitOrderParams) returns (api.dex.Order) {
+  //    option (google.api.http) = {
+  //      post: "/api/tgbot/users/me/limit-orders"
+  //      body:  "*"
+  //    };
+  //  }
+  //  rpc CancelLimitOrder (CancelLimitOrderParams) returns (google.protobuf.Empty) {
+  //    option (google.api.http) = {
+  //      delete: "/api/tgbot/users/me/limit-orders/{id}"
+  //    };
+  //  }
+  //  rpc ListUserOrders (ListUserOrdersParams) returns (api.dex.OrderList) {
+  //    option (google.api.http) = {
+  //      get: "/api/tgbot/users/me/orders"
+  //    };
+  //  }
+  //  rpc GetUserOrderSummary (GetUserOrderSummaryParams) returns (OrderSummary) {
+  //    option (google.api.http) = {
+  //      get: "/api/tgbot/users/me/order-summary"
+  //    };
+  //  }
+  //
+  //  // ----------------------------- grpc -------------------------------
+  //  //  rpc CompleteOrdersByPrice (CompleteOrdersByPriceParams) returns (google.protobuf.Empty) {}
+  //  rpc ListOrders (ListOrdersParams) returns (api.dex.OrderList) {}
+  //  rpc RunTask(RunTradeTaskParams) returns (google.protobuf.Empty) {}
+}
+
+
+message ListFollowingTradesParams {
+  string category = 1;
+
+  api.public.Authorization authorization = 20;
+
+}
+
+
+message ListTokenTradesParams {
+  string token = 1;
+}
+
+message ListWalletTradesParams {
+   string wallet = 1;
+}
+
+message TradeParams {
+  string token = 1;
+  // token amount | token amount rate |  sol amount
+  double amount = 2;
+  string side = 3;
+  string category = 4;
+  api.dexx.TradeSettings settings = 6;
+  string uniqueKey = 7;
+  string trigger = 8;
+  string wallet = 9;
+  string privateKey = 10;
+  Fee fee = 11;
+}
+
+message Fee {
+  double rate = 1;
+  string receiver = 2;
+}
+
+message RunTradeTaskParams {
+  string task = 1;
+  map<string, string> params = 2;
+}
+
+
+message GetTradeSettingsParams {
+  api.public.Authorization authorization = 20;
+}
+
+message UpdateTradeSettingsParams {
+  api.dexx.TradeSettings settings = 1;
+  api.public.Authorization authorization = 20;
+}

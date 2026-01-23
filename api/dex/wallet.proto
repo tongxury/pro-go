@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/market.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+
+message Wallet {
+  string  _id = 1 [json_name = '_id'];
+  string userId = 2;
+  string name = 3;
+  string epk = 4 ;
+  bool default = 5;
+  string status = 6;
+  api.dex.Amount balance = 7;
+  api.dex.Amount valuation = 13;
+  api.dex.Chain chain = 8;
+  string nickname = 9;
+  string remark = 10;
+  string pk = 11;
+  int64 createdAt = 12;
+
+
+}
+
+
+message WalletList {
+  repeated api.dex.Wallet list = 1;
+}
+
+message Profit {
+
+  api.dex.Token token = 8;
+
+  api.dex.Amount buyAmount = 1;
+  api.dex.Amount buyQuoteAmount = 2;
+  api.dex.Amount buyAvgPrice = 3;
+
+  api.dex.Amount sellAmount = 4;
+  api.dex.Amount sellQuoteAmount = 5;
+  api.dex.Amount sellAvgPrice = 6;
+
+  api.dex.Amount balance = 7;
+}
+
+message WalletPosition {
+  string _id = 1 [json_name = "_id"];
+  api.dex.Wallet wallet = 2;
+  api.dex.Token token = 3;
+  api.dex.Amount balance = 4;
+  api.dex.Amount price = 5;
+  api.dex.Amount profit = 6;
+  //  api.dex.Amount currentPrice = 6;
+  string status = 10;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.payment.types;
+
+option go_package = "store/api/payment/types;typepb";
+
+
+message Customer {
+  string userId = 1;
+  string billingUrl = 2;
+}
+

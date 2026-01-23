@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/task.proto";
+import "proj/user.proto";
+import "proj/credit.proto";
+import "proj/account.proto";
+import "proj/session.proto";
+import "proj/workflow.proto";
+
+option go_package = "store/api/proj;projpb";
+
+service WorkflowService {
+
+  rpc UpdateWorkflow(UpdateWorkflowRequest) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      patch: "/api/proj/v1/workflows/{id}"
+      body: "*"
+    };
+  }
+  rpc UpdateWorkflowJob(UpdateWorkflowJobRequest) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      patch: "/api/proj/v1/workflows/{id}/jobs/{index}"
+      body: "*"
+    };
+  }
+  rpc UpdateWorkflowJobData(UpdateWorkflowJobDataRequest) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      patch: "/api/proj/v1/workflows/{id}/job-data/{name}"
+      body: "*"
+    };
+  }
+
+  rpc ReplaceWorkflow(api.proj.Workflow) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      put: "/api/proj/v1/workflows"
+      body: "*"
+    };
+  }
+
+}
+
+message UpdateWorkflowJobRequest {
+  string id = 1;
+  int64 index = 2;
+  string action = 3;
+  map<string, string> params = 4;
+  string dataKey = 5;
+  api.proj.DataBus data = 6;
+  bool runImmediately = 7;
+}
+
+
+message UpdateWorkflowJobDataRequest {
+  string id = 1;
+  string name = 2;
+  api.proj.DataBus data = 3;
+}
+
+
+message UpdateWorkflowRequest {
+  string id = 1;
+  string action = 2;
+  api.proj.DataBus data = 3;
+  //   for debug
+  map<string, string> kv = 4;
+}

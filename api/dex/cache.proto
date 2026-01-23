@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+
+message Cache {
+  string key = 1;
+  google.protobuf.Any value = 3;
+  int64 createdAt = 4;
+  int64 expireAt = 5;
+}

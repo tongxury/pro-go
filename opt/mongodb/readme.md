@@ -1,0 +1,1 @@
+mongodb-sharded 如何安装不成功需要 将pvc 一并删除 成功重新部署

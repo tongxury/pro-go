@@ -1,0 +1,78 @@
+{
+  "author": "Kevin feng <kfeng631@gmail.com>",
+  "description": "This is a sample book created by gitbook",
+  "language": "zh-hans",
+  "extension": null,
+  "generator": "site",
+  "links": {
+    "sharing": {
+      "all": null,
+      "facebook": null,
+      "google": null,
+      "twitter": null,
+      "weibo": null
+    },
+    "sidebar": {
+      "Kevinfeng's Blog": "http://yiailake.github.io"
+    }
+  },
+  "output": null,
+  "pdf": {
+    "fontSize": 12,
+    "footerTemplate": null,
+    "headerTemplate": null,
+    "margin": {
+      "bottom": 36,
+      "left": 62,
+      "right": 62,
+      "top": 36
+    },
+    "pageNumbers": false,
+    "paperSize": "a4"
+  },
+  "plugins": [
+    "multipart",
+    "toggle-chapters",
+    "theme-comscore",
+    "-lunr", "-search", "search-plus",
+    "prism", "-highlight", "prism-themes",
+    "advanced-emoji",
+    "ace",
+    "tbfed-pagefooter",
+    "favicon",
+    "alerts"
+  ],
+  "pluginsConfig": {
+    "favicon": {
+      "shortcut": "assets/images/favicon.ico",
+      "bookmark": "assets/images/favicon.ico",
+      "appleTouch": "assets/images/apple-touch-icon.png",
+      "appleTouchMore": {
+        "120x120": "assets/images/apple-touch-icon-120x120.png",
+        "180x180": "assets/images/apple-touch-icon-180x180.png"
+      }
+    },
+
+    "tbfed-pagefooter": {
+      "copyright":"Copyright &copy zhangjikai.com 2017",
+      "modify_label": "该文件修订时间：",
+      "modify_format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "prism": {
+      "css": [
+        "prism-themes/themes/prism-base16-ateliersulphurpool.light.css"
+      ]
+    }
+  },
+  "title": "Sample GitBook",
+  "variables": {},
+  "styles": {
+    "website": "styles/website.css",
+    "ebook": "styles/ebook.css",
+    "pdf": "styles/pdf.css",
+    "mobi": "styles/mobi.css",
+    "epub": "styles/epub.css"
+  }
+
+}
+

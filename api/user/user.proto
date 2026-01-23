@@ -1,0 +1,286 @@
+syntax = "proto3";
+
+package api.user;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "user/types/user.proto";
+import "user/types/settings.proto";
+import "aiagent/aiagent_service.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/user;userpb";
+
+service User {
+
+  rpc GetServerMeta(google.protobuf.Empty) returns (ServerMeta) {
+    option (google.api.http) = {
+      get: "/api/v1/metadata"
+    };
+  }
+
+  rpc GetAppSettings (GetAppSettingsParams) returns (AppSettings) {
+    option (google.api.http) = {
+      get: "/api/v1/app-settings"
+    };
+  };
+  rpc GetAppVersion (GetAppVersionParams) returns (AppVersion) {
+    option (google.api.http) = {
+      get: "/api/v1/app-version"
+    };
+  };
+  rpc CreatePaymentIntent(CreatePaymentIntentParams) returns (CreatePaymentIntentResult) {
+    option (google.api.http) = {
+      post: "/api/v1/users/me/payment-intents"
+      body: "*",
+
+    };
+  }
+
+  rpc CreateSurveyPayment(CreateSurveyPaymentParams) returns (CreatePaymentResult) {
+    option (google.api.http) = {
+      post: "/api/v1/users/me/survey-payments"
+      body: "*"
+    };
+  }
+
+
+  rpc CreatePayment(CreatePaymentParams) returns (CreatePaymentResult) {
+    option (google.api.http) = {
+      post: "/api/v1/users/me/payments"
+      body: "*"
+    };
+  }
+
+  rpc CallbackPayment(CallbackPaymentParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/v1/users/me/payment-pay10-callback"
+      body: "*"
+      additional_bindings {
+        get: "/api/v1/users/me/payment-pay10-callback",
+      }
+    };
+  }
+
+  rpc CostCredit(CheckCreditParams) returns (CheckCreditResult);
+  rpc IncrCredit(IncrCreditParams) returns (google.protobuf.Empty);
+
+
+  rpc AddFeedback (AddFeedbackParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/v1/feedbacks"
+      body: "*"
+    };
+  };
+  rpc GetChatSettings(GetChatSettingsParams) returns (ChatSettings) {
+    option (google.api.http) = {
+      get: "/api/v1/chat-settings"
+    };
+  }
+  rpc GetSettings (google.protobuf.Empty) returns (api.user.types.Settings) {
+    option (google.api.http) = {
+      get: "/api/v1/configs"
+    };
+  };
+  // 获取用户详细信息
+  rpc GetUser (GetUserParams) returns (api.user.types.User) {
+    option (google.api.http) = {
+      get: "/api/v1/users/myself"
+    };
+  };
+  rpc GetUserV2 (GetUserV2Params) returns (api.user.types.User) {
+    option (google.api.http) = {
+      get: "/api/v1/users/me"
+    };
+  };
+  rpc GetUsersSummary (GetUsersSummaryParams) returns (UserSummary) {};
+  rpc ListUsers (ListUsersParams) returns (ListUsersResult) {};
+  //  rpc FindUsers(FindUsersParams) returns (ListUsersResult) {}
+  rpc DeleteUser(DeleteUserParams) returns (google.protobuf.Empty) {}
+  rpc UpdateUser(UpdateUserParams) returns (google.protobuf.Empty) {}
+  rpc GetUserById(GetUserByIdParams) returns (api.user.types.User) {}
+  rpc GetUserByEmail(GetUserByEmailParams) returns (api.user.types.User) {}
+  rpc GetUserByEmailOrPhone(GetUserByEmailOrPhoneParams) returns (api.user.types.User) {}
+}
+
+message GetUserByIdParams {
+  string id = 1;
+}
+
+message GetUserByEmailParams {
+  string email = 1;
+}
+
+message GetUserByEmailOrPhoneParams {
+  string value = 1;
+}
+
+message GetAppSettingsParams {
+
+}
+
+message GetAppVersionParams {
+
+}
+
+message ServerMeta {
+  string countryCode = 1;
+}
+
+message AppVersion {
+  message DownloadUrl {
+    string ios = 1;
+    string android = 2;
+    string fallbackIos = 3;
+    string fallbackAndroid = 4;
+  }
+
+  string   version = 1 ;
+  bool forceUpdate = 2;
+  string  description = 3;
+  DownloadUrl  downloadUrl = 4;
+}
+
+
+message AppSettings {
+  repeated api.aiagent.Scene scenes = 1;
+  repeated api.aiagent.PromptSetting prompts = 2;
+}
+
+message CreatePaymentIntentParams {
+
+}
+
+message CreatePaymentIntentResult {
+
+}
+
+message CreatePaymentParams {
+  string planId = 1;
+  string payMethod = 2;
+  string returnUrl = 3;
+}
+
+message CreateSurveyPaymentParams {
+  string orderId = 1;
+  string payMethod = 2;
+  string returnUrl = 3;
+}
+
+//pid=1215&trade_no=2025041809413132472&out_trade_no=12345678&type=wxpay&name=product&money=0.5&trade_status=TRADE_SUCCESS&api_trade_no=2025041809415239739&timestamp=1744940539&sign_type=RSA&sign=dT%2B7ldn0PNNatyDoMm8WkMkkiGWbbxaKrrZFNcqrTKm45EYHH1xFw15IfnInhVpSsCnz%2F7qmCfD5huyojCVwfSddMvq1yN910DNsE7mm3BYK%2B4u2ZdpDSJDSqyHBSu%2FjEekO00r3TeZ1GfXY%2FKda0f6lyXL%2FktX0b7v1mNUMgiRsYVPyujLHBfMowoEWiogSUl4WF%2BtT2TfUS1hnhYnadV51fMyoz2d7xiHF7%2FdFNVA99fkk0sWIbuXxeorpzGBVnYUcLhSXnuTF022D7jx00btt2Gm6rFI7XTnq69Psl%2F%2FmYR8ybv9wLyhO3NGO46zLL3H%2FNXFW54kGRf2S%2Fqm8qA%3D%3D
+
+message CallbackPaymentParams {
+  string out_trade_no = 1;
+}
+
+message CreatePaymentResult {
+  string url = 1;
+}
+
+message CheckCreditParams {
+  string userId = 1;
+  int64 cost = 2;
+}
+
+message IncrCreditParams {
+  string userId = 1;
+  string level = 3;
+  int64 expireAt = 4;
+}
+
+message CheckCreditResult{
+  bool ok = 1;
+  string costId = 2;
+  int64 remaining = 3;
+  int64 amount = 4;
+}
+
+
+message AddFeedbackParams {
+  string category = 1;
+  string content = 2;
+}
+
+
+message GetChatSettingsParams {
+
+}
+
+message ChatSettings {
+  message Q {
+    string text = 1;
+  }
+
+  repeated Q questions = 1;
+}
+
+
+message GetUsersSummaryParams {
+
+}
+
+message UserSummary {
+  int64 totalCount = 1;
+  int64 todayCount = 2;
+}
+
+message UpdateUserParams {
+
+  enum Action {
+    addBonus = 0;
+  }
+
+  message Values {
+    int64 amount = 1;
+  }
+
+  string id = 1;
+  Action action = 2;
+  Values values = 3;
+}
+
+//message FindUsersParams {
+//  string keyword = 1;
+//}
+
+
+message DeleteUserParams {
+  string idOrEmail = 1;
+}
+
+message ListUsersParams {
+  int64 page = 1;
+  int64 size = 2;
+  string userID = 3;
+  repeated string emails = 4;
+  string keyword = 5;
+}
+
+message ListUsersResult {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.user.types.User list = 4;
+}
+
+
+//message UserList {
+//  int64 page = 1;
+//  int64 size = 2;
+//  int64 total = 3;
+//  repeated api.user.types.User list = 4;
+//}
+
+
+
+message GetUserParams {
+  string authPlatform = 1;
+  string position = 2;
+}
+
+
+message GetUserV2Params {
+}
+
+

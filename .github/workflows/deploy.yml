@@ -1,0 +1,55 @@
+name: Deploy
+on:
+  push:
+    branches: [ "main", "v2" ]
+  pull_request:
+    branches: [ "main", "v2" ]
+
+#permissions:
+#  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get commit message
+        id: get_commit_message
+        run: echo "message=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_ENV
+
+      - name: Extract variable
+        id: extract_variable
+        run: |
+          MESSAGE=$(echo "${{ env.message }}" | cut -d':' -f1)
+          echo "variable=$MESSAGE" >> $GITHUB_ENV
+
+      - name: Deploy to staging
+        uses:  appleboy/ssh-action@master
+        with:
+          host: ${{ vars.REMOTE_HOST }}
+          username: root
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /root/code/pro-go
+            git stash 
+            
+            git checkout v2
+            git pull
+            go mod tidy
+            make release SRV=${{ env.variable }} VER=5.0.0
+            curl -X PUT \
+                -H "Content-Type: application/yaml" \
+                -H "Cookie: KuboardUsername=admin; KuboardAccessKey=za38kenycbrb.e8dpw8c3wmxcesyrh48wk4fat5kb6may" \
+                -d '{"kind":"deployments","namespace":"prod","name":"${{ env.variable }}"}' \
+                "http://157.90.94.185:18060/kuboard-api/cluster/pro/kind/CICDApi/admin/resource/restartWorkload"
+            curl -X PUT \
+                -H "Content-Type: application/yaml" \
+                -H "Cookie: KuboardUsername=admin; KuboardAccessKey=za38kenycbrb.e8dpw8c3wmxcesyrh48wk4fat5kb6may" \
+                -d '{"kind":"deployments","namespace":"prod","name":"dex-tgbot-subscriber"}' \
+                "http://157.90.94.185:18060/kuboard-api/cluster/pro/kind/CICDApi/admin/resource/restartWorkload"
+            curl -X PUT \
+                -H "Content-Type: application/yaml" \
+                -H "Cookie: KuboardUsername=admin; KuboardAccessKey=za38kenycbrb.e8dpw8c3wmxcesyrh48wk4fat5kb6may" \
+                -d '{"kind":"deployments","namespace":"prod","name":"dex-tgbot-cronjob"}' \
+                "http://157.90.94.185:18060/kuboard-api/cluster/pro/kind/CICDApi/admin/resource/restartWorkload"

@@ -1,0 +1,3 @@
+package coinapi
+
+//9B02A058-B93B-47B8-B912-AD5834BDF434

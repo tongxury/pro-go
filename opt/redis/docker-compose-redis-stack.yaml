@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  redis-stack:
+    image: 'redis/redis-stack:latest'
+    restart: always
+    environment:
+      - REDIS_ARGS="--requirepass pro@rEdis"
+    volumes:
+      - redis-stack-data:/data
+    ports:
+      - '16379:6379'
+      - '18001:8001'
+    deploy:
+      resources:
+        limits:
+          cpus: '1.8'
+          memory: 3000M
+        reservations:
+          cpus: '0.5'
+          memory: 5000M
+
+volumes:
+  redis-stack-data:
+
+# docker volume create redis-stack-dat
+#  docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 -v  redis-stack-data:/data -e REDIS_ARGS="--requirepass pro@rEdis" redis/redis-stack:7.2.0-v12

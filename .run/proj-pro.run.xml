@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="proj-pro" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="pro-go" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="FILE" />
+    <package value="store" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/app/proj-pro/cmd/proj-pro/main.go|$PROJECT_DIR$/app/proj-pro/cmd/proj-pro/wire_gen.go" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api.monday;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "monday/commodity.proto";
+
+option go_package = "store/api/monday;mondaypb";
+
+
+message Resource {
+  string id = 1;
+  string status = 2;
+  string url = 5;
+  string coverUrl = 6;
+  int64 createdAt = 7;
+  string category = 8;
+  string description = 9;
+}
+
+
+message ResourceList {
+  repeated Resource list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}

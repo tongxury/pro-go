@@ -1,0 +1,53 @@
+version: '2.0'
+services:
+  mailserver:
+    image: iredmail/mariadb:stable
+    container_name: mailserver
+    restart: always
+    environment:
+      - HOSTNAME=xtips.ai
+      - FIRST_MAIL_DOMAIN=xtips.ai
+      - FIRST_MAIL_DOMAIN_ADMIN_PASSWORD=1qaz@WSXgpt # postmaster@xtips.ai
+      - MLMMJADMIN_API_TOKEN=sV4HmN/3BuHx3qZzMeP4xqcdzVoqc6HI5p9XgC4DPT8=
+      - ROUNDCUBE_DES_KEY=mWU/UZpLSa8Ubi5ekVj2nheJwrDwDx6y
+      - MAIL_THE_TIP_FILE=NO
+#    管理平台 /iredadmin
+#    邮箱用户Web端（推荐）： https://mail.mydomain.com/mail/
+#    邮箱用户Web端： https://mail.mydomain.con/SOGo/   用户名密码和web端一样
+#    邮件服务器监控： https://mail.mydomain.com/netdata/
+#    邮箱管理员Web端 :https://mail.mydomain.com/iredadmin/
+    volumes:
+      - iredmail_backup-mysql:/var/vmail/backup/mysql
+      - iredmail_mailboxes:/var/vmail/vmail1
+      - iredmail_mlmmj:/var/vmail/mlmmj
+      - iredmail_mlmmj_archive:/var/vmail/mlmmj-archive
+      - iredmail_imapsieve_copy:/var/vmail/imapsieve_copy
+      - iredmail_custom:/opt/iredmail/custom
+      - iredmail_ssl:/opt/iredmail/ssl
+      - iredmail_mysql:/var/lib/mysql
+      - iredmail_clamav:/var/lib/clama
+      - iredmail_sa_rules:/var/lib/spamassassin
+      - iredmail_postfix_queue:/var/spool/postfix
+    ports:
+      - 6080:80
+      - 443:443
+      - 110:110
+      - 995:995
+      - 143:143
+      - 993:993
+      - 25:25
+      - 465:465
+      - 587:587
+
+volumes:
+  iredmail_backup-mysql:
+  iredmail_mailboxes:
+  iredmail_mlmmj:
+  iredmail_mlmmj_archive:
+  iredmail_imapsieve_copy:
+  iredmail_custom:
+  iredmail_ssl:
+  iredmail_mysql:
+  iredmail_clamav:
+  iredmail_sa_rules:
+  iredmail_postfix_queue:

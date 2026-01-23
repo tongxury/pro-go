@@ -1,0 +1,47 @@
+[
+  {
+    "name": "segmentAnalysis",
+    "status": "completed",
+    "startedAt": new
+    NumberLong(
+    "1766460401"
+    ),
+    "output": {
+      "segmentDescription": {
+        "segments": [
+          {
+            "description": "视频中有人拿着杯牛奶喝。",
+            "timeEnd": 1.76
+          },
+          {
+            "description": "视频中是一大碗香喷喷的牛奶。",
+            "timeStart": 1.76,
+            "timeEnd": 3.03
+          },
+          {
+            "description": "视频中勺子从牛奶上刮起了一层奶皮。",
+            "timeStart": 3.03,
+            "timeEnd": 4.41
+          },
+          {
+            "description": "视频中有一整箱的牛奶。",
+            "timeStart": 4.41,
+            "timeEnd": 6
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "replaceProduct",
+    "index": new
+    NumberLong(
+    "1"
+    ),
+    "status": "running",
+    "startedAt": new
+    NumberLong(
+    "1766460475"
+    )
+  }
+]

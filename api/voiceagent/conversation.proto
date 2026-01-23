@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// Conversation (对话会话): 用户与 Agent 交互的运行时实例。
+// [参考文档]: Design and Configure -> Conversation flow (/docs/agents-platform/customization/conversation-flow)
+message Conversation {
+  // _id: 会话唯一标识。
+  string _id = 1 [json_name = "_id"];
+
+  // userId: 所属用户 ID。
+  string userId = 2;
+
+  // agentId: 该会话锁定的角色 ID。
+  string agentId = 3;
+
+  // sceneId: 会话当前激活的场景 ID。
+  string sceneId = 4;
+
+  int64 createdAt = 5;
+
+  // lastMessageAt: 最后一次交互时间。
+  // [用法]: 用于列表排序及清理僵尸会话。
+  int64 lastMessageAt = 6;
+
+  // status: 状态 (active: 通话中, ended: 通话结束)。
+  // [用法]: 管理 WebSocket 连接的生命周期。
+  string status = 7;
+
+  // conversationId: ElevenLabs 端的会话 ID。
+  string conversationId = 8;
+
+  // signedUrl: 预生成的带签名的 WebSocket 连接地址 (有效期短)。
+  string signedUrl = 9;
+
+  // token:
+  //  For private agents, you must pass in a conversationToken obtained from the ElevenLabs API. Generating this token requires an ElevenLabs API key.
+  // The conversationToken is valid for 10 minutes.
+  string token = 10;
+}

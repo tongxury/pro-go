@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package api.usercenter;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "user/types/user.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+
+
+option go_package = "store/api/usercenter;ucpb";
+
+service AuthService {
+
+  rpc SendCode(SendCodeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/usr/auth-codes"
+      body: "*"
+    };
+  }
+  rpc GetToken (GetTokenRequest) returns (Token) {
+    option (google.api.http) = {
+      get: "/api/usr/auth-tokens"
+    };
+  };
+}
+
+message Token {
+  string token = 1;
+  bool isNew = 2;
+  string userId = 3;
+}
+
+message GetTokenRequest {
+  string phone = 1;
+  string code = 2;
+}
+
+message SendCodeRequest {
+  string phone = 1;
+}

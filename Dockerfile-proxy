@@ -1,0 +1,31 @@
+# 使用一个极简的 Alpine 镜像作为最终镜像
+FROM alpine:latest
+
+# 创建一个非 root 用户和组，以增强安全性
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY ./bin/httpproxy /app/httpproxy
+
+# 应用会监听 PORT 环境变量，默认是 8080
+# 暴露端口
+EXPOSE 6060
+
+# 切换到非 root 用户
+USER appuser
+
+# 容器启动时执行的命令
+ENTRYPOINT ["/app/httpproxy"]
+
+# docker run -d -p 6060:6060 usernx/httpproxy
+
+
+#curl -H "Content-Type: application/json" \
+#     -H "x-goog-api-key: AIzaSyDPITNdXEMaQ5oe_r2dZNjeMBMBP5SCbU0" \
+#     -d '{
+#       "contents": [{
+#         "parts": [{
+#           "text": "Hello, test connectivity"
+#         }]
+#       }]
+#     }' \
+#     https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent

@@ -1,0 +1,22 @@
+#FROM registry.eu-central-1.aliyuncs.com/proreg/goenv:v1.0.2 AS builder
+#FROM golang:1.25.4 AS builder
+FROM usernx/goenv:v1.0.0 AS builder
+
+ARG SRV
+
+WORKDIR /src
+
+COPY . /src/
+ENV GOPROXY=https://goproxy.io,direct
+RUN  make build SRV=${SRV}
+
+#RUN GOPROXY=https://goproxy.cn make build
+
+FROM centos:7
+
+ARG SRV
+
+WORKDIR /app
+
+COPY --from=builder /src/bin/${SRV}* /app/
+RUN rm -rf /src

@@ -1,0 +1,285 @@
+syntax = "proto3";
+
+package api.chat;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "chat/types/chat.proto";
+import "google/protobuf/descriptor.proto";
+
+
+option go_package = "store/api/chat;chatpb";
+
+service Chat {
+
+  rpc Homework(HomeworkParams) returns (api.public.response.RedirectResponse) {
+    option (google.api.http) = {
+      get: "/homework/{sessionKey}"
+    };
+  }
+
+  rpc Sitemap(google.protobuf.Empty) returns (api.public.response.TextResponse) {
+    option (google.api.http) = {
+      get: "/sitemap.xml"
+    };
+  }
+
+  rpc SitemapUrlSet(SitemapUrlSetParams) returns (api.public.response.TextResponse) {
+    option (google.api.http) = {
+      get: "/map/{sitemapKey}"
+    };
+  }
+
+
+  rpc Translate(TranslateParams) returns (Translation) {
+    option (google.api.http) = {
+      post: "/api/v2/chat/translations",
+      body: "*"
+    };
+  }
+
+  rpc GetPreQuestions(google.protobuf.Empty) returns (PreQuestions) {
+    option (google.api.http) = {
+      get: "/api/v2/chat/pre-questions"
+    };
+  }
+
+  rpc ChatCompletions(Question) returns (google.protobuf.Empty) {}
+//  rpc ChatCompletionsV3(Question) returns (google.protobuf.Empty) {}
+  rpc AddSession(Session) returns (Session) {
+    option (google.api.http) = {
+      post: "/api/v2/chat/chat-sessions"
+      body: "*"
+    };
+  }
+
+  rpc ListSessions(ListSessionsParams) returns (Sessions) {
+    option (google.api.http) = {
+      get: "/api/v2/chat/chat-sessions"
+    };
+  }
+
+  rpc ListQuestions(ListQuestionsParams) returns (Questions) {
+    option (google.api.http) = {
+      get: "/api/v2/chat/chat-questions"
+    };
+  }
+
+  rpc UpdateAnswerState(UpdateAnswerStateParams) returns (Answer) {
+    option (google.api.http) = {
+      patch: "/api/v2/chat/chat-answers/{answerId}/states"
+      body: "*"
+    };
+  }
+
+  rpc ListQuestionAnswers(ListQuestionAnswersParams) returns (ListQuestionAnswersResult) {
+    option (google.api.http) = {
+      get: "/api/v2/chat/chat-qas"
+    };
+  }
+
+  rpc ListChatRecords (ListChatRecordsParams) returns (ListChatRecordsResult) {
+    option (google.api.http) = {
+      get: "/api/v2/chat/chat-records"
+    };
+  };
+}
+
+message HomeworkParams {
+  string sessionKey = 1;
+}
+
+message SitemapUrlSetParams {
+  string sitemapKey = 1;
+}
+
+message UpdateAnswerStateParams {
+  string answerId = 1;
+  //  api.chat.types.UserAnswerState state = 2;
+  map<string, string> fields = 2;
+}
+
+message ListQuestionsParams  {
+  string sessionId = 1;
+  string similarWith = 2;
+  string scenario = 3;
+  int64 page = 10;
+  int64 size = 11;
+}
+
+message Questions {
+  repeated Question list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+
+message PreQuestions {
+  repeated Question questions = 1;
+}
+
+message TranslateParams {
+  repeated string texts = 1;
+  string targetLang = 2;
+}
+
+message Translation{
+  repeated string originTexts = 1;
+  repeated string texts = 2;
+  string targetLang = 3;
+}
+
+message QuestionAnswer {
+  Question question = 1;
+  repeated Answer answers = 2;
+}
+
+message Summary {
+  Question question = 1;
+  Answer answer = 2;
+}
+
+message ListQuestionAnswersParams {
+  string sessionId = 1;
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message ListQuestionAnswersResult {
+  repeated QuestionAnswer list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+message ListSessionsParams {
+  int64 size = 1;
+}
+
+message Sessions {
+  repeated Session list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+message Session {
+  // @gotags: bson:"_id"
+  string id = 11;
+  // @gotags: bson:"createdAt,omitempty"
+  int64 createdAt = 1;
+  // @gotags: bson:"lastAskAt,omitempty"
+  int64 lastAskAt = 2;
+  string title = 3;
+  // @gotags: bson:"summary,omitempty"
+  //  string session_id = 4 [json_name = "sessionId"];
+  string summary = 5;
+  //  string promptKey = 6;
+  // @gotags: bson:"questions,omitempty"
+  repeated Question questions = 7;
+  string scenario = 8;
+  // @gotags: bson:"userId,omitempty"
+  string userId = 9;
+}
+
+message Question {
+
+  //  message Settings {
+  //    string lang = 1;
+  //  }
+
+  Prompt prompt = 2;
+  //  repeated Prompt prompts = 1;
+  string text = 3;
+  Attachment attachment = 4;
+  // @gotags: bson:"attachments,omitempty"
+  repeated Attachment attachments = 7;
+  // @gotags: bson:"userId,omitempty"
+  string userId = 5;
+  //  string question_id = 6;
+  string location = 8;
+  // @gotags: bson:"sessionId,omitempty"
+  string sessionId = 9;
+  // @gotags: bson:"answers,omitempty"
+  repeated Answer answers = 10;
+  // @gotags: bson:"_id"
+  string id = 11;
+  string scenario = 12;
+  // @gotags: bson:"createdAt,omitempty"
+  int64 createdAt = 13;
+}
+
+message Attachment {
+  string category = 1;
+  string url = 2;
+  string name = 3;
+  string content = 4;
+}
+
+message Answer {
+  // @gotags: bson:"questionId,omitempty"
+  string questionId = 1;
+  string text = 2;
+  // @gotags: bson:"sessionId,omitempty"
+  string sessionId = 3;
+  // @gotags: bson:"userId,omitempty"
+  string userId = 4;
+  // @gotags: bson:"_id"
+  string id = 5;
+  string scenario = 6;
+  //  string answer_id = 7;
+
+  // @gotags: bson:"answerState,omitempty"
+  AnswerState answerState = 11;
+}
+
+message AnswerState {
+  int64 likeCount = 1;
+  bool liked = 2;
+}
+
+//message ChatCompletionsParams {
+//  //  string token = 1;
+//  Prompt prompt = 2;
+//  string text = 3;
+//  string image = 4;
+//  string file = 7;
+//  int64 userID = 5;
+//  string questionId = 6;
+//  string location = 8;
+//  string sessionId = 9;
+//}
+
+message Prompt {
+  string key = 1;
+  string text = 2;
+  map<string, string> params = 3;
+}
+
+//message ChatCompletionsResult {
+//  string text = 1;
+//}
+
+//message ChatCompletionsSummary {
+//  Question params = 1;
+//  ChatCompletionsResult result = 2;
+//}
+//
+
+message ListChatRecordsParams {
+  int64 page = 1;
+  int64 size = 2;
+  int64 fromTs = 3;
+  int64 toTs = 4;
+  repeated string functions = 5;
+}
+
+message ListChatRecordsResult {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.chat.types.ChatRecord list = 4;
+}

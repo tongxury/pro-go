@@ -1,0 +1,271 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+import "voiceagent/persona.proto";
+import "voiceagent/agent.proto";
+import "voiceagent/voice.proto";
+import "voiceagent/scene.proto";
+import "voiceagent/conversation.proto";
+import "voiceagent/transcript.proto";
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// VoiceAgentService 提供了基于 ElevenLabs Agents 架构的极致拟人 AI 对话服务。
+// 该服务整合了 ASR (语音识别), LLM (逻辑大脑), TTS (拟人语音) 和 Turn-taking (对话轮替控制)。
+// 参考文档: https://elevenlabs.io/docs/agents-platform/overview
+service VoiceAgentService {
+
+  // ListPersonas: 获取系统内置或自定义的角色模板。
+  rpc ListPersonas(ListPersonasRequest) returns (PersonaList) {
+    option (google.api.http) = {
+      get: "/api/va/personas"
+    };
+  }
+
+  // GetPersona: 获取特定角色模板详情。
+  rpc GetPersona(GetPersonaRequest) returns (Persona) {
+    option (google.api.http) = {
+      get: "/api/va/personas/{id}"
+    };
+  }
+
+  // CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
+  rpc CreateAgent(CreateAgentRequest) returns (Agent) {
+    option (google.api.http) = {
+      post: "/api/va/agents"
+      body: "*"
+    };
+  }
+  
+  // UpdateAgent: 修改已有角色。
+  rpc UpdateAgent(UpdateAgentRequest) returns (Agent) {
+    option (google.api.http) = {
+      patch: "/api/va/agents/{id}"
+      body: "*"
+    };
+  }
+
+  // DeleteAgent: 删除角色。
+  rpc DeleteAgent(DeleteAgentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/va/agents/{id}"
+    };
+  }
+
+  // GetAgent: 获取特定角色的详细信息。
+  rpc GetAgent(GetAgentRequest) returns (Agent) {
+    option (google.api.http) = {
+      get: "/api/va/agents/{id}"
+    };
+  }
+
+  // ListAgents: 列出所有可用角色。
+  rpc ListAgents(ListAgentsRequest) returns (AgentList) {
+    option (google.api.http) = {
+      get: "/api/va/agents"
+    };
+  }
+
+  // AddVoice: 用户自定义克隆声音或系统预设。
+  rpc AddVoice(AddVoiceRequest) returns (Voice) {
+    option (google.api.http) = {
+      post: "/api/va/voices"
+      body: "*"
+    };
+  }
+
+  // ListVoices: 获取可用声音列表。
+  rpc ListVoices(ListVoicesRequest) returns (VoiceList) {
+    option (google.api.http) = {
+      get: "/api/va/voices"
+    };
+  }
+
+  // ListScenes: 获取系统预设的交互场景。
+  rpc ListScenes(ListScenesRequest) returns (SceneList) {
+    option (google.api.http) = {
+      get: "/api/va/scenes"
+    };
+  }
+
+  // CreateConversation: 启动一个实时交互会话。
+  rpc CreateConversation(CreateConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      post: "/api/va/conversations"
+      body: "*"
+    };
+  }
+
+  // UpdateConversation: 更新会话状态或关联外部 ID。
+  rpc UpdateConversation(UpdateConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      patch: "/api/va/conversations/{id}"
+      body: "*"
+    };
+  }
+
+  // GetConversation: 获取会话详情。
+  rpc GetConversation(GetConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      get: "/api/va/conversations/{id}"
+    };
+  }
+
+  // ListConversations: 分页列出通话记录。
+  rpc ListConversations(ListConversationsRequest) returns (ConversationList) {
+    option (google.api.http) = {
+      get: "/api/va/conversations"
+    };
+  }
+
+  // ListTranscriptEntries: 获取某个会话的所有聊天记录。
+  rpc ListTranscriptEntries(ListTranscriptEntriesRequest) returns (TranscriptEntryList) {
+    option (google.api.http) = {
+      get: "/api/va/conversations/{conversationId}/transcripts"
+    };
+  }
+
+  // RecordTranscriptEntry: 记录实时通话产生的文本片段。
+  rpc RecordTranscriptEntry(RecordTranscriptEntryRequest) returns (TranscriptEntry) {
+    option (google.api.http) = {
+      post: "/api/va/transcripts"
+      body: "*"
+    };
+  }
+
+  // SendMessage: 发送消息并获得 AI 的回复（非流式）。
+  rpc SendMessage(SendMessageRequest) returns (TranscriptEntry) {
+    option (google.api.http) = {
+      post: "/api/va/messages"
+      body: "*"
+    };
+  }
+}
+
+// --- Request/Response Messages ---
+
+message CreateAgentRequest {
+  string name = 1 [(validate.rules).string.min_len = 1];
+  string avatar = 2;
+  string desc = 3;
+  string personaId = 4 [(validate.rules).string.min_len = 1]; // 强制选择模板
+  string voiceId = 5;
+  string defaultSceneId = 6;
+  bool isPublic = 7;
+}
+
+message ListPersonasRequest {
+  string category = 1;
+}
+
+message PersonaList {
+  repeated Persona list = 1;
+}
+
+message GetPersonaRequest {
+  string id = 1;
+}
+
+message UpdateAgentRequest {
+  string id = 1;
+  string name = 2;
+  string avatar = 3;
+  string desc = 4;
+  string personaId = 5; // 切换模板
+  string voiceId = 6;
+  string defaultSceneId = 7;
+  bool isPublic = 8;
+  string status = 9;
+}
+
+message DeleteAgentRequest {
+  string id = 1;
+}
+
+message GetAgentRequest {
+  string id = 1;
+}
+
+message ListAgentsRequest {
+  string category = 1;
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message AgentList {
+  repeated Agent list = 1;
+  int64 total = 2;
+}
+
+message AddVoiceRequest {
+  string name = 1;
+  string type = 2;
+  string sampleUrl = 3;
+  map<string, string> settings = 4;
+}
+
+message VoiceList {
+  repeated Voice list = 1;
+}
+
+message ListVoicesRequest {
+  string owner = 1; // system, custom or ''
+}
+
+message SceneList {
+  repeated Scene list = 1;
+}
+
+message ListScenesRequest {}
+
+message CreateConversationRequest {
+  string agentId = 1 [(validate.rules).string.min_len = 1];
+  string sceneId = 2;
+}
+
+message UpdateConversationRequest {
+  string id = 1;
+  string status = 2;
+  string conversationId = 3;
+}
+
+message GetConversationRequest {
+  string id = 1;
+}
+
+message ListConversationsRequest {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+message ConversationList {
+  repeated Conversation list = 1;
+  int64 total = 2;
+}
+
+message ListTranscriptEntriesRequest {
+  string conversationId = 1;
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message TranscriptEntryList {
+  repeated TranscriptEntry list = 1;
+  int64 total = 2;
+}
+
+message RecordTranscriptEntryRequest {
+  string conversationId = 1;
+  string role = 2; // user or agent
+  string message = 3;
+}
+
+message SendMessageRequest {
+  string conversationId = 1;
+  string message = 2;
+  bool enableVoice = 3;
+}

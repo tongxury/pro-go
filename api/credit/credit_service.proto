@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package api.credit;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/credit;creditpb";
+
+service CreditService {
+  rpc GetCreditState (GetCreditStateRequest) returns (CreditState) {
+    option (google.api.http) = {
+      get: "/api/crd/credit-states"
+    };
+  }
+  rpc _Cost (_CostRequest) returns (CreditState) {}
+  rpc _GetCreditState (_GetCreditStateRequest) returns (CreditState) {}
+  rpc _Recharge(_RechargeRequest) returns (CreditState) {}
+}
+
+message _RechargeRequest {
+  string userId = 1;
+  int64 amount = 2;
+  string key = 3;
+  string category = 4;
+}
+
+message _CostRequest {
+  string userId = 1;
+  int64 amount = 2;
+  string key = 3;
+  string category = 4;
+}
+
+message _GetCreditStateRequest {
+  string userId = 1;
+}
+message GetCreditStateRequest {}
+
+message CreditChange {
+  string _id = 1 [json_name = '_id'];
+  int64 amount = 2;
+  string userId = 3;
+  string rechargeId = 4;
+  int64 createdAt = 5;
+  string uk = 6;
+  string category = 7;
+}
+
+message CreditRecharge {
+  string _id = 1 [json_name = '_id'];
+  int64 amount = 2;
+  int64 inheritedAmount = 10;
+  string userId = 3;
+  int64 createdAt = 5;
+  int64 expireAt = 6;
+  int64 cost = 7;
+  string uk = 8;
+  string category = 9;
+}
+
+message CreditState {
+  string _id = 1 [json_name = '_id'];
+  string userId = 5;
+  int64 total = 2;
+  int64 balance = 3;
+  int64 lastUpdatedAt = 4;
+}

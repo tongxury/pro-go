@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/commodity.proto";
+import "proj/item.proto";
+import "proj/workflow.proto";
+
+option go_package = "store/api/proj;projpb";
+
+
+message AssetGroup {
+  string _id = 1 [json_name = '_id'];
+  api.proj.Commodity commodity = 2;
+  api.proj.Resource template = 3;
+
+  repeated Asset assets = 4;
+  int64 createdAt = 5;
+  string status = 6;
+  string userId = 7;
+}
+
+
+message Asset {
+  message Extra {
+    int64 retryCount = 1;
+
+    map<string, string> context = 2;
+
+    int64 completedAt = 3;
+    int64 promptGeneratedAt = 4;
+    string model = 5;
+  }
+
+  message Group {
+    string id = 1;
+    string refAssetId = 2;
+    string baseAssetId = 3;
+  }
+
+
+  message Attrs {
+    string attitude = 1;
+    bool favorite = 2;
+    int64 feedbackCount = 3;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  api.proj.Commodity commodity = 2;
+  api.proj.ResourceSegment segment = 3;
+  string userId = 7;
+  string status = 4;
+  int64 createdAt = 5;
+
+  string url = 6;
+  string coverUrl = 8;
+  double duration = 9;
+
+  string prompt = 10;
+  string promptAddition = 11;
+  AssetPrompts prompts = 13;
+
+  bool favorite = 12;
+  Attrs attrs = 14;
+
+  Extra extra = 20;
+  Group group = 21;
+  api.proj.Workflow workflow = 22;
+  string title = 23;
+  string category = 24;
+  string remark = 25;
+}
+
+message AssetPrompts {
+  string subtitle = 1;
+  string script = 2;
+  string scriptAdjustment = 3;
+}
+
+message AssetList {
+  repeated Asset list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+  bool hasMore = 5;
+}
+

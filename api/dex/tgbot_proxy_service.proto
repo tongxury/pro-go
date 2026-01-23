@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+service TgbotProxyService {
+  rpc Menu(BotContext) returns (BotResponse) {}
+}
+
+message BotContext {
+  BotUser user = 1;
+  BotMessage message = 2;
+}
+
+message BotMessage {
+  string text = 1;
+  string payload = 2;
+}
+
+message BotUser {
+  string id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string languageCode = 4;
+}
+
+
+message BotResponse {
+
+  message  InlineButton {
+    string unique = 1;
+    string text = 2;
+    string data = 3;
+  }
+
+  message InlineButtons{
+    repeated InlineButton inlineKeyboards = 1;
+  }
+
+  message ReplyMarkup  {
+    bool resizeKeyboard = 1;
+    repeated InlineButtons InlineKeyboards = 2;
+
+  }
+
+  string message = 1;
+  ReplyMarkup replyMarkup = 2;
+}
+
+//    ID int64 `json:"id"`
+//
+//    FirstName           string   `json:"first_name"`
+//    LastName            string   `json:"last_name"`
+//IsForum             bool     `json:"is_forum"`
+//    Username            string   `json:"username"`
+//    LanguageCode        string   `json:"language_code"`
+//    IsBot               bool     `json:"is_bot"`
+//    IsPremium           bool     `json:"is_premium"`
+//    AddedToMenu         bool     `json:"added_to_attachment_menu"`
+//    Usernames           []string `json:"active_usernames"`
+//    StatusCustomEmojiID string   `json:"emoji_status_custom_emoji_id"`
+//
+//// Returns only in getMe
+//    CanJoinGroups        bool `json:"can_join_groups"`
+//    CanReadMessages      bool `json:"can_read_all_group_messages"`
+//    SupportsInline       bool `json:"supports_inline_queries"`
+//    CanConnectToBusiness bool `json:"can_connect_to_business"`
+//    HasMainWebApp        bool `json:"has_main_web_app"`

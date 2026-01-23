@@ -1,0 +1,19 @@
+FROM yoozy-cn-shanghai.cr.volces.com/yoozy/goenv:v3.0.5 AS builder
+
+ARG SRV
+WORKDIR /src
+COPY . /src/
+ENV GOPROXY=https://goproxy.io,direct
+RUN make build SRV=${SRV}
+
+FROM centos:7
+
+ARG SRV
+WORKDIR /app
+
+COPY --from=mwader/static-ffmpeg:6.1.1 /ffmpeg /usr/local/bin/
+COPY --from=mwader/static-ffmpeg:6.1.1 /ffprobe /usr/local/bin/
+
+COPY --from=builder /src/bin/${SRV}* /app/
+
+RUN rm -rf /src

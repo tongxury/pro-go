@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: bitnami/mysql:8.3
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=pro@mySql
+    healthcheck:
+      test: [ 'CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh' ]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+  mongo:
+    image: bitnami/mongodb
+    restart: always
+    platform: linux/amd64
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=pRomonGo
+
+  redis:
+    image: 'bitnami/redis:latest'
+    restart: always
+    environment:
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+      - REDIS_PASSWORD=pro@reDis
+    volumes:
+      - redis-data:/opt/bitnami/redis
+    ports:
+      - '6379:6379'
+
+  redis-stack:
+    image: 'redis/redis-stack:latest'
+    restart: always
+    environment:
+      - REDIS_ARGS="--requirepass pro@rEdis"
+    volumes:
+      - redis-stack-data:/data
+    ports:
+      - '16379:6379'
+      - '18001:8001'
+
+volumes:
+  mysql_data:
+  mongodb_data:
+  redis-data:

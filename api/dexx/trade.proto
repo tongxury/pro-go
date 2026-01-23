@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package api.dexx;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dexx/wallet.proto";
+import "dexx/token.proto";
+import "dexx/common.proto";
+
+option go_package = "store/api/dexx;dexxpb";
+
+
+message Trade {
+
+  message CreatedAt {
+    string date = 1;
+    //    string time = 2;
+    int64 timestamp = 3;
+  }
+
+  string id = 1;
+  api.dexx.Wallet wallet = 2;
+  api.dexx.Token token = 3;
+  CreatedAt createdAt = 5;
+  string side = 7;
+  api.dexx.Amount price = 8;
+  api.dexx.Amount amount = 9;
+  api.dexx.Amount quoteAmount = 10;
+  api.dexx.Amount quotePrice = 14;
+  api.dexx.Token quoteToken = 11;
+  api.dexx.Dex dex = 12;
+  api.dexx.Transaction transaction = 13;
+}
+
+message TradeList {
+  repeated Trade list = 1;
+}
+
+message TradeSettings {
+
+  message Priority {
+    string value = 1;
+    double max = 2;
+    string label = 3;
+  }
+
+  message Slippage {
+    double value = 1;
+    string label = 2;
+  }
+
+  message Metadata {
+    repeated Priority priorityOptions = 1;
+    repeated Slippage slippageOptions = 2;
+  }
+
+  string id = 1;
+
+  bool antiMEV = 2;
+  Priority priority = 3;
+  double slippage = 4;
+  bool autoSell = 5;
+
+  Metadata metadata = 20;
+}

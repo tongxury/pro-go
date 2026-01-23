@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package api.bi;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "bi/types/chatrecord.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/bi;bipb";
+
+service Bi {
+  rpc AddEventLog (AddEventLogParams) returns (api.public.response.RedirectResponse) {
+    option (google.api.http) = {
+      post: "/api/bi/events"
+      body: "*"
+    };
+  };
+  rpc TrackJuGuangEvent(TrackJuGuangEventParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/bi/juguang-events"
+    };
+  }
+
+}
+
+message TrackJuGuangEventParams {
+  string clickId = 1;
+  string caidMd5 = 2;
+  string paid = 3;
+  string caid = 4;
+  string ua = 5;
+  string ua1 = 6;
+  string idfaMd5 = 7;
+  string os = 8;
+  string ip = 9;
+  string ts = 10;
+  string appId = 11;
+  string advertiserId = 12;
+  string unitId = 13;
+  string campaignId = 14;
+  string creativityId = 15;
+  string placement = 16;
+  string androidId = 17;
+  string oaid = 18;
+  string oaidMd5 = 19;
+  string imei = 20;
+}
+
+message AddEventLogParams {
+
+  message CommonParams {
+    string deviceId = 1;
+    string platform = 2;
+    string channel = 3;
+    string idfa = 4;
+    string imei = 5;
+    string oaid = 7;
+  }
+
+  string name = 2;
+  map<string, string> params = 4;
+
+  CommonParams commonParams = 20;
+}
+
+

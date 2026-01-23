@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  chromedp:
+    image: yoozy-cn-shanghai.cr.volces.com/yoozy/proj-pro-chromedp:20260104154701
+    restart: always
+    command:
+      - '/app/proj-chromedp'
+    ports:
+      - '9527:9527'

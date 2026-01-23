@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="monday-admin" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="pro-go" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="FILE" />
+    <package value="store" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/app/monday-admin/cmd/monday-admin/main.go|$PROJECT_DIR$/app/monday-admin/cmd/monday-admin/wire_gen.go" />
+    <method v="2" />
+  </configuration>
+</component>

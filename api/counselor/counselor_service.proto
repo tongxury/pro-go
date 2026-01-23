@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package api.counselor;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/counselor;counselorpb";
+
+service CounselorService {
+
+  rpc ListCounselors(ListCounselorParams) returns (CounselorList) {
+    option (google.api.http) = {
+      get: "/api/cs/v1/counselors"
+    };
+  }
+  rpc GetCounselor(GetCounselorParams) returns (Counselor) {
+    option (google.api.http) = {
+      get: "/api/cs/v1/counselors/{id}"
+    };
+  }
+
+}
+
+message ListCounselorParams {
+
+}
+
+message GetCounselorParams {
+  string id = 1;
+}
+
+message CounselorList {
+  repeated Counselor list = 1;
+  int64 total = 2;
+  bool hasMore = 3;
+  int64 page = 4;
+}
+
+message Counselor {
+
+  message State {
+    int64 persons = 1;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  string name = 2;
+  string cover = 3;
+  repeated Topic topics = 4;
+  repeated Tag tags = 5;
+  string avatar = 9;
+  string desc = 10;
+  int64 createdAt = 11;
+  string location = 12;
+
+  State state = 13;
+}
+
+
+message Topic {
+  string name = 1;
+}
+
+message Tag {
+  string name = 1;
+}

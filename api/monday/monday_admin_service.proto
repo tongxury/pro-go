@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "monday/resource.proto";
+
+
+option go_package = "store/api/monday;mondaypb";
+
+service MondayAdminService {
+
+  rpc ListResources(ListResourceRequest) returns (api.monday.ResourceList) {
+    option (google.api.http) = {
+      get: "/api/ma/resources"
+    };
+  }
+  rpc AddResources(AddResourcesRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/ma/resources",
+      body: "*"
+    };
+  }
+  rpc GetResource(GetResourceRequest) returns (api.monday.Resource) {
+    option (google.api.http) = {
+      get: "/api/ma/resources/{id}"
+    };
+  }
+
+  rpc SearchResource(SearchResourceRequest) returns (api.monday.ResourceList) {
+  }
+}
+
+message SearchResourceRequest {
+  string keyword = 1;
+  int64 size = 2;
+}
+
+message GetResourceRequest {
+  string id = 1;
+}
+
+message AddResourcesRequest {
+  repeated api.monday.Resource items = 1;
+}
+
+message ListResourceRequest {
+  int64 page = 1;
+  string keyword = 2;
+  string category = 3;
+  int64 size = 4;
+}

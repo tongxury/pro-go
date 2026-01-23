@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "dex/user.proto";
+import "dex/common.proto";
+import "dex/wallet.proto";
+import "dex/market.proto";
+import "dex/trade.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+service MarketService {
+
+  rpc ListTokens (ListTokensParams) returns (api.dex.TokenList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/tokens"
+    };
+  }
+  rpc GetToken (GetTokenParams) returns (api.dex.Token) {
+    option (google.api.http) = {
+      get: "/api/tgbot/tokens/{id}"
+    };
+  }
+
+  rpc ListTokenTrades (ListTokenTradesParams) returns (api.dex.TradeList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/tokens/{token}/trades"
+    };
+  };
+  // activities
+  rpc ListFollowingTrades (ListFollowingTradesParams) returns (api.dex.TradeList) {
+    option (google.api.http) = {
+      get: "/api/tgbot/following-trades"
+    };
+  };
+
+  rpc CollectTokens (CollectTokensParams) returns (google.protobuf.Empty) {}
+  rpc CollectTrades(CollectTradesParams)  returns (google.protobuf.Empty) {}
+  rpc RunTask(RunTaskParams) returns (google.protobuf.Empty) {}
+  rpc ListPublicFollowingWallets(ListPublicFollowingWalletsParams) returns (api.dex.WalletList) {}
+  rpc UpdatePublicFollowingWallets(UpdatePublicFollowingWalletsParams) returns (google.protobuf.Empty) {}
+}
+
+message UpdatePublicFollowingWalletsParams {
+  repeated string wallets = 1;
+}
+
+message ListPublicFollowingWalletsParams {
+
+}
+
+message ListFollowingTradesParams {
+  string category = 1;
+
+  api.dex.CommonParams common = 20;
+
+}
+
+message RunTaskParams {
+  string task = 1;
+  map<string, string> params = 2;
+}
+
+
+message CollectTokensParams {
+  repeated  api.dex.Token tokens = 1;
+}
+
+message CollectTradesParams {
+  repeated Trade trades = 1;
+}
+
+message ListTokenTradesParams {
+  string token = 1;
+}
+
+message GetTokenParams {
+  string id = 1;
+  string  ohlcStateDurations = 2;
+  string  tradeStateDurations = 3;
+
+  api.dex.CommonParams common = 20;
+}
+
+
+message ListTokensParams {
+  string category = 1 ;
+  string keyword = 2;
+  repeated string tokenIds = 3;
+  int64 page = 12;
+  int64 size = 13;
+
+  api.dex.CommonParams common = 20;
+}
+

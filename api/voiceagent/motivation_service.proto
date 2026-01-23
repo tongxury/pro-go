@@ -1,0 +1,138 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+import "voiceagent/motivation.proto";
+import "voiceagent/agent.proto";
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// MotivationService 提供了“声音印记 (VoiceMark)”的情感激励与社交分享服务。
+// 该服务深度整合了 ElevenLabs 的核心能力：
+// 1. Text to Speech: 将文本转化为极其自然的语音 (https://elevenlabs.io/docs/overview/capabilities/text-to-speech)
+// 2. Expressive Models: 使用 Eleven v3 (Alpha) 模型确保语音的情感张力和戏剧性表现力 (https://elevenlabs.io/docs/overview/models#eleven-v3-alpha)
+service MotivationService {
+
+  // CreateMotivationCard: 生成一段带情感的语音激励卡片。
+  // 用户输入原始文案草稿，后端会调用 LLM 进行文案润色，并使用指定的数字音色合成高表现力的音频。
+  // 技术实现参考:
+  // - 调用 ElevenLabs TTS API 进行长文本合成。
+  // - 利用 Multilingual v2 或 v3 模型支持多语言激励 (https://elevenlabs.io/docs/overview/models#multilingual-v2)。
+  rpc CreateMotivationCard(CreateMotivationCardRequest) returns (MotivationCardResponse) {
+    option (google.api.http) = {
+      post: "/api/va/motivations"
+      body: "*"
+    };
+  }
+
+  // GetMotivationCard: 获取激励卡片的详细信息。
+  // 主要用于 H5 分享页面展示或 App 内点击历史记录查看。
+  // 参考文档: 结合 ElevenLabs 的资源分发逻辑，支持在外部 H5 页面进行音频流式播放。
+  rpc GetMotivationCard(GetMotivationCardRequest) returns (MotivationCard) {
+    option (google.api.http) = {
+      get: "/api/va/motivations/{id}"
+    };
+  }
+
+  // ListMotivationCards: 分页列出当前用户创建的所有激励卡片。
+  rpc ListMotivationCards(ListMotivationCardsRequest) returns (MotivationCardList) {
+    option (google.api.http) = {
+      get: "/api/va/motivations"
+    };
+  }
+
+  // DeleteMotivationCard: 删除特定的激励卡片。
+  rpc DeleteMotivationCard(DeleteMotivationCardRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/va/motivations/{id}"
+    };
+  }
+
+  // UpdateMotivationPoster: 更新卡片的海报 URL。
+  // 当前端使用 react-native-view-shot 生成海报截图并上传 OSS 后，调用此接口将 URL 绑定到记录中。
+  rpc UpdateMotivationPoster(UpdateMotivationPosterRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/va/motivations/{id}/poster"
+      body: "*"
+    };
+  }
+}
+
+// --- 请求与响应消息定义 ---
+
+message UpdateMotivationPosterRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+  string posterUrl = 2 [(validate.rules).string.min_len = 1];
+}
+
+message CreateMotivationCardRequest {
+  // 选用的音色 ID（通常是用户自己的克隆声音或指定的助理声音）
+  string agentId = 1 [(validate.rules).string.min_len = 1];
+  
+  // 用户输入的激励关键词或灵感草稿内容
+  string originalText = 2 [(validate.rules).string.min_len = 1];
+  
+  // 情感基调标签：例如 encouraging (激励), comfort (安慰), energetic (活力)
+  string emotionTag = 3;
+  
+  // 指定的 TTS 模型 ID。
+  // 建议参考: https://elevenlabs.io/docs/overview/models
+  // - eleven_v3: 情感最丰富，适合激励场景。
+  // - eleven_flash_v2_5: 低延迟，适合快速预览。
+  string modelId = 4;
+  
+  // 背景氛围场景 ID（可选），用于为音频合成叠加特定的背景音乐
+  string sceneId = 5;
+  
+  // 是否生成公开分享链接
+  bool isPublic = 6;
+
+  // 指定海报样式
+  string posterStyle = 7;
+}
+
+message MotivationCardResponse {
+  // 生成后的记录 ID
+  string id = 1;
+  
+  // 合成并存储后的音频 URL
+  string audioUrl = 2;
+  
+  // 专供社交分享的专属 H5 链接
+  string shareUrl = 3;
+  
+  // 经过 AI 优化后的最终润色文案
+  string polishedText = 4;
+  
+  // 额外提供给前端生成海报的信息
+  User user = 5;
+  Agent agent = 7;
+
+  string emotionTag = 9;
+  int64 createdAt = 10;
+  repeated float waveform = 11;
+  string posterStyle = 12;
+  string posterUrl = 13;
+  string qrCodeUrl = 14;
+}
+
+message GetMotivationCardRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListMotivationCardsRequest {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+message MotivationCardList {
+  repeated MotivationCard list = 1;
+  int64 total = 2;
+}
+
+message DeleteMotivationCardRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+}

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: swr.cn-north-4.myhuaweicloud.com/library/mongo:latest # 配置加速后直接使用
+    # 或使用华为云镜像: swr.cn-north-4.myhuaweicloud.com/library/mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: proj@moNgo
+    volumes:
+      - mongodb-data:/data/db
+    command: --auth --bind_ip_all
+
+  redis:
+    image: swr.cn-north-4.myhuaweicloud.com/library/redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redist-data:/data
+    command: redis-server --requirepass proj@reDis
+
+volumes:
+  mongodb-data:
+  redist-data:

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  mysql:
+    platform: linux/amd64
+    image: swr.cn-north-4.myhuaweicloud.com/library/mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/var/lib/mysql'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=pro@mySql
+
+  mongodb:
+    platform: linux/amd64
+    image: swr.cn-north-4.myhuaweicloud.com/library/mongo:latest # 配置加速后直接使用
+    # 或使用华为云镜像: swr.cn-north-4.myhuaweicloud.com/library/mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pro@moNgo
+    volumes:
+      - mongodb-data:/data/db
+    command: --auth --bind_ip_all
+
+  redis:
+    platform: linux/arm64
+    image: docker.m.daocloud.io/library/redis:latest
+
+#    image: swr.cn-north-4.myhuaweicloud.com/library/redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redist-data:/data
+    command: redis-server --requirepass pro@reDis --bind 0.0.0.0
+
+#  redis-stack:
+#    image: 'swr.cn-north-4.myhuaweicloud.com/library/redis-stack:latest'
+#    restart: always
+#    environment:
+#      - REDIS_ARGS="--requirepass pro@rEdis"
+#    volumes:
+#      - redis-stack-data:/data
+#    ports:
+#      - '6379:6379'
+#      - '18001:8001'
+
+volumes:
+  mysql_data:
+  mongodb-data:
+  redist-data:
+  redis-stack-data:

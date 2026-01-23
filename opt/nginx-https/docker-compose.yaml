@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nginx:
+    image: docker.m.daocloud.io/library/nginx:1.25-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/var/www/certbot:/var/www/certbot
+    networks:
+      - web
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    sysctls:
+      - net.core.somaxconn=65536
+      - net.ipv4.tcp_max_syn_backlog=65536
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+#  certbot:
+#    image: docker.m.daocloud.io/certbot/certbot
+#    container_name: certbot
+#    restart: always
+#    volumes:
+#      - ./certbot/etc/letsencrypt:/etc/letsencrypt
+#      - ./certbot/var/lib/letsencrypt:/var/lib/letsencrypt
+#      - ./certbot/var/www/certbot:/var/www/certbot
+#    networks:
+#      - web
+#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+networks:
+  web:
+    driver: bridge

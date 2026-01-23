@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package api.public;
+option go_package = "store/api/public;publicpb";
+
+message Page {
+  int64 size = 1;
+  int64 page = 2;
+  string next = 3;
+  int64 total = 4;
+  map<string, string> extra = 5;
+}
+
+
+message Sort {
+  string field = 1;
+  bool desc = 2;
+}

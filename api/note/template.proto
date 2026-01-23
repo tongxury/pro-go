@@ -1,0 +1,15 @@
+syntax = "proto3";
+package api.note;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/note;notepb";
+
+message Template {
+  string id = 1;
+}
+

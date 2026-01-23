@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.dex;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/dex;dexpb";
+
+message User {
+  string _id = 1 [json_name = '_id'];
+  string nickname = 2;
+  string locale = 3;
+  string inviterUserId = 5;
+  int64 createdAt = 6;
+  string serial = 7;
+  string inviterSerial = 8;
+  bool traded = 9;
+}
+

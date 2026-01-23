@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/commodity.proto";
+
+option go_package = "store/api/proj;projpb";
+
+
+message Resource {
+
+  message Extra {
+    bool Synced = 1;
+    bool polling = 2;
+  }
+
+  string _id = 1 [json_name = '_id'];
+  string status = 2;
+  string url = 5;
+  string coverUrl = 6;
+  int64 createdAt = 7;
+  api.proj.Commodity commodity = 9;
+  repeated ResourceSegment segments = 10;
+  string userId = 11;
+
+  Extra extra = 20;
+}
+
+message ResourceSegment {
+
+  message Extra {
+    bool Synced = 1;
+    bool polling = 2;
+  }
+
+  string _id = 15 [json_name = '_id'];
+  string cameraMovementDesc = 21;
+  string formula = 22;
+  string script = 23;
+  string category = 24;
+  string productionMethod = 25; // 枚举：创意类|写实类
+  string coreAction = 26; // 核心动作
+  string elementTransformation = 27; // 元素转化
+  string visualChange = 28; // 视觉变化
+  string intention = 29; // 意图
+  KeyFrameSeries keyFrames = 30;
+
+  Resource root = 1;
+  string style = 2;
+  string contentStyle = 3;
+  string sceneStyle = 4;
+  string description = 5;
+  string shootingStyle = 10;
+  double timeStart = 11;
+  double timeEnd = 6;
+  string startFrame = 19;
+  string endFrame = 20;
+  string subtitle = 7;
+  TypedTags typedTags = 8;
+  repeated string tags = 9;
+  int64 index = 13;
+  repeated HighlightFrame highlightFrames = 14;
+  string status = 16;
+  int64 createdAt = 17;
+  repeated ResourceSegment segments = 18;
+  Extra extra = 40;
+
+
+}
+
+message HighlightFrame {
+  double timestamp = 1;
+  string desc = 2;
+  string url = 3;
+}
+
+message KeyFrameSeries {
+  KeyFrame storyBeginning = 1;
+  KeyFrame climax = 2;
+  KeyFrame storyEnding = 3;
+}
+
+message KeyFrame {
+  double timestamp = 1;
+  string desc = 2;
+  string url = 3;
+}
+
+message ResourceList {
+  repeated Resource list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+message ResourceSegmentList {
+  repeated ResourceSegment list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+
+message Item {
+  string id = 1;
+  string status = 2;
+  string title = 3;
+  string description = 4;
+  string url = 5;
+  string coverUrl = 6;
+  int64 createdAt = 7;
+  Analysis analysis = 8;
+  Analysis analysis2 = 10;
+  api.proj.Commodity commodity = 9;
+  //  repeated string tags = 10;
+  //  repeated double tagsVector = 11;
+}
+
+
+message ItemSegment {
+  api.proj.Commodity commodity = 1;
+
+  string description = 2;
+
+  string firstFrame = 3;
+  string lastFrame = 4;
+
+  string voiceOverScript = 5;
+  TypedTags typedTags = 6;
+  repeated string tags = 7;
+
+  string url = 8;
+  double timeStart = 9;
+  double timeEnd = 10;
+  string videoId = 11;
+  repeated HighlightFrame highlightFrames = 12;
+
+}
+
+message ItemSegmentList {
+  repeated ItemSegment list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}
+
+message SegmentAnalysis {
+  string category = 1;
+  string description = 2;
+  double timeStart = 5;
+  double timeEnd = 6;
+  string voiceOverScript = 7;
+  TypedTags typedTags = 8;
+  repeated string tags = 9;
+  string shootingStyle = 10;
+}
+
+message Analysis {
+
+  //文案 人物 动作 画面类型 场景 拍摄手法
+  string style = 1;
+  string contentStyle = 2;
+  string sceneStyle = 3;
+  repeated SegmentAnalysis segments = 4;
+  repeated SegmentAnalysis segments2 = 5;
+  //  string highlight = 2;
+}
+
+message TypedTags {
+  repeated string focusOn = 7;
+  repeated string text = 1;
+  repeated string person = 2;
+  repeated string action = 3;
+  repeated string picture = 4;
+  repeated string scene = 5;
+  repeated string shootingStyle = 6;
+  repeated string emotion = 8;
+}
+
+message ItemList {
+  repeated Item list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+}

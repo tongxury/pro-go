@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package api.databank;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "databank/types/asset.proto";
+
+
+option go_package = "store/api/databank;databankpb";
+
+service Databank {
+  rpc AddFiles (AddFilesParams) returns (AddFilesResult) {
+    option (google.api.http) = {
+      post: "/api/databank/files"
+      body: "*"
+    };
+  };
+  rpc AddAssets (AddAssetsParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/databank/assets"
+      body: "*"
+    };
+  };
+  rpc ListAssets (ListAssetsParams) returns (ListAssetsResult) {
+    option (google.api.http) = {
+      get: "/api/databank/assets"
+    };
+  };
+  rpc ListUserAssets (ListUserAssetsParams) returns (ListAssetsResult) {
+    option (google.api.http) = {
+      get: "/api/databank/users/me/assets"
+    };
+  };
+}
+
+message AddFilesParams {
+  bool public = 1;
+  string source = 2;
+}
+
+message ListUserAssetsParams {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+
+message ListAssetsParams {
+  int64 page = 1;
+  int64 size = 2;
+  string status = 3;
+  string userId = 4;
+}
+
+message ListAssetsResult {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.databank.types.Asset assets = 4;
+}
+
+
+//message AddFilesParams {
+//  repeated api.databank.types.File files = 1;
+//}
+
+message AddFilesResult {
+  repeated api.databank.types.File files = 1;
+}
+
+
+message AddAssetsParams {
+  repeated api.databank.types.Asset assets = 1;
+}
+

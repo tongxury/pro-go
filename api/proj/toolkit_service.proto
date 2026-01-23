@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/task.proto";
+import "proj/user.proto";
+import "proj/credit.proto";
+import "proj/account.proto";
+
+option go_package = "store/api/proj;projpb";
+
+service ToolKitService {
+  // 生成文案
+  rpc GenerateText(GenerateTextRequest) returns (GenerateTextResponse) {
+    option (google.api.http) = {
+      post: "/api/tk/texts",
+      body: "*"
+    };
+  }
+  // 解析视频
+  rpc ParseVideo(ParseVideoRequest) returns (ParseVideoResponse) {
+    option (google.api.http) = {
+      post: "/api/tk/videos",
+      body: "*"
+    };
+  }
+
+  // 历史记录
+
+}
+
+
+
+message ParseVideoRequest {
+  string function = 1; // subtitle 文案提取
+  VideoInput input = 2;
+}
+
+message VideoInput {
+  string category = 1;  // douyinShareUrl
+  string value = 2; // 示例 https://v.douyin.com/T1vHO7F1X8s
+}
+
+message TextInput {
+  string value = 1;
+}
+
+message ParseVideoResponse {
+  ParseVideoRequest params = 1;
+  string value = 2;
+}
+
+message GenerateTextRequest {
+  string function = 1;
+  TextInput input = 2;
+}
+
+message GenerateTextResponse {
+  GenerateTextRequest params = 1;
+  string value = 2;
+}

@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+import "proj/item.proto";
+import "proj/commodity.proto";
+import "proj/remixoptions.proto";
+
+
+option go_package = "store/api/proj;projpb";
+
+
+message SegmentScript {
+  string inspiration = 4;
+  string script = 1;
+  repeated string images = 2;
+  repeated api.proj.ResourceSegment segments = 3;
+}
+
+message VideoGeneration {
+  string url = 1;
+  string taskId = 2;
+  string status = 3;
+  string coverUrl = 4;
+
+  string firstFrame = 5;
+  string lastFrame = 6;
+  string prompt = 7;
+  string tmpPrompt = 9;
+  string subtitle = 8;
+  string aspectRatio = 10;
+  int64 duration = 11;
+  string category = 12;
+}
+
+message VideoFramesChange {
+  string firstFrame = 1;
+  string newFirstFrame = 2;
+  string lastFrame = 3;
+  string newLastFrame = 4;
+  string ref = 5;
+}
+
+message Remix {
+
+  message Segment {
+    string mediaId = 1;
+    VideoGeneration videoGeneration = 2;
+    api.proj.RemixOptions remixOptions = 3;
+    api.proj.ResourceSegment scriptSegment = 4;
+  }
+
+  string url = 1;
+  string coverUrl = 4;
+  string taskId = 2;
+  repeated Segment segments = 3;
+  string status = 5;
+}
+
+message KeyFrames {
+  message Frame {
+    string url = 1;
+    string desc = 2;
+    string status = 3;
+    string prompt = 4;
+    repeated string refs = 5;
+    string taskId = 6;
+    string aspectRatio = 7;
+    string error = 8;
+  }
+
+  repeated Frame frames = 1;
+  string taskId = 2;
+}
+
+message DataBus {
+
+  message Settings {
+    string aspectRatio = 1;
+  }
+
+  string userId = 20;
+  api.proj.ResourceSegment segment = 1;
+  api.proj.Commodity commodity = 2;
+
+  Settings settings = 3;
+  //  api.proj.ResourceSegment segment_CommodityReplacement = 3;
+  repeated VideoGeneration videoGenerations = 4;
+  repeated VideoFramesChange videoFramesChanges = 5;
+  Remix remix = 6;
+  SegmentScript segmentScript = 7;
+  KeyFrames keyFrames = 8;
+  //  CommodityReplacementJob commodityReplacementJob = 5;
+  //  VideoSegmentsGenerationJob videoSegmentsGenerationJob = 6;
+}
+
+message Job {
+
+  message Progress {
+    int64 total = 1;
+    int64 current = 2;
+  }
+
+  string name = 1;
+  int64 index = 2;
+  string status = 5;
+  int64 startedAt = 6;
+  int64 completedAt = 7;
+  Progress progress = 8;
+
+  //  map<string, string> context = 20;
+  DataBus dataBus = 9;
+}
+
+message Workflow {
+  string _id = 1 [json_name = '_id'];
+  string name = 2;
+  int64 current = 5;
+  repeated Job jobs = 3;
+  int64 createdAt = 4;
+  string status = 6;
+  int64 completedAt = 7;
+  int64 lastResumedAt = 9;
+  string userId = 8;
+
+  DataBus dataBus = 20;
+}
+
+

@@ -1,0 +1,2 @@
+curl -k 'http://54.227.113.46/kuboard-api/cluster/aaa/kind/KubernetesCluster/aaa/resource/installAgentToKubernetes?token=JERvj7gXBDfKNkP2t0eZRJLizu9cjReN' > kuboard-agent.yaml
+kubectl apply -f ./kuboard-agent.yaml

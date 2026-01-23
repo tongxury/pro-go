@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package api.mgmt;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "mgmt/types/user.proto";
+import "user/member.proto";
+
+
+option go_package = "store/api/mgmt;mgmtpb";
+
+service User {
+  rpc GetUsersSummary (GetUsersSummaryParams) returns (UsersSummary) {
+    option (google.api.http) = {
+      get: "/api/mgmt/user-summary"
+    };
+  };
+  rpc ListUsers(ListUsersParams) returns (ListUsersResult) {
+    option (google.api.http) = {
+      get: "/api/mgmt/users"
+    };
+  };
+  rpc UpdateUser(UpdateUserParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/mgmt/users"
+      body: "*"
+    };
+  }
+  rpc AddUserMemberSubscribe(AddUserMemberSubscribeParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/mgmt/users/{id}/member-subscribes"
+      body: "*"
+    };
+  }
+  rpc GetMemberUsageState (GetMemberUsageStateParams) returns (GetMemberUsageStateResult) {
+    option (google.api.http) = {
+      get: "/api/mgmt/users/{userIdOrEmail}/usage-states",
+    };
+  };
+}
+
+message AddUserMemberSubscribeParams {
+  string id = 1;
+  string level = 2;
+  string cycle = 3;
+}
+
+message UsersSummary {
+  int64 totalCount = 1;
+  int64 todayCount = 2;
+}
+
+message GetUsersSummaryParams {
+
+}
+
+message UpdateUserParams {
+
+  enum Action {
+    clearMember = 0;
+    addBonus = 1;
+    delete = 2;
+  }
+
+  message Values {
+    int64 amount = 1;
+  }
+
+  string id = 1;
+  //  addBonus
+  Action action = 2;
+  Values values = 3;
+}
+
+message GetMemberUsageStateParams {
+  string userIdOrEmail = 1 [(validate.rules).string = {min_len: 1}];
+}
+
+message GetMemberUsageStateResult {
+  api.user.GetMemberUsageStateResult state = 1;
+}
+
+message ListUsersParams {
+  int64 page = 1;
+  int64 size = 2;
+  string status = 3;
+  string keyword = 4;
+}
+
+message ListUsersResult {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  repeated api.mgmt.types.User list = 4;
+}

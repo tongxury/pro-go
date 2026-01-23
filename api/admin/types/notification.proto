@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api.admin.types;
+
+option go_package = "store/api/admin/types;typepb";
+
+
+message Notification {
+  message Content {
+    string type = 1; // text, href
+    string title = 2;
+    string value = 3;
+  }
+
+  string level = 1;
+  string title = 2;
+  repeated Content contents = 3;
+  string id = 4;
+}
+
+

@@ -1,0 +1,22 @@
+FROM yoozy-cn-shanghai.cr.volces.com/yoozy/goenv:v3.0.3 AS builder
+
+ARG SRV
+WORKDIR /src
+COPY . /src/
+ENV GOPROXY=https://goproxy.io,direct
+RUN make build SRV=${SRV}
+
+FROM selenium/standalone-chrome:4.8.0
+
+ARG SRV
+WORKDIR /app
+
+# 安装 ffmpeg
+RUN sudo apt-get update && \
+    sudo apt-get install -y ffmpeg && \
+    sudo apt-get clean && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /src/bin/${SRV}* /app/
+
+RUN rm -rf /src

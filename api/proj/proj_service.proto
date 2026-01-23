@@ -1,0 +1,272 @@
+syntax = "proto3";
+
+package api.proj;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "public/response/response.proto";
+import "validate/validate.proto";
+import "proj/task.proto";
+import "proj/user.proto";
+import "proj/credit.proto";
+import "proj/account.proto";
+
+option go_package = "store/api/proj;projpb";
+
+service ProjService {
+
+  rpc CallbackByDouyin(CallbackByDouyinParams) returns (api.public.response.IntMapResponse) {
+    option (google.api.http) = {
+      get: "/api/pro/douyin/callback"
+    };
+  }
+  rpc WebhookByDouyin(WebhookByDouyinParams) returns (api.public.response.IntMapResponse) {
+    option (google.api.http) = {
+      post: "/api/pro/douyin/webhook"
+      body: "*"
+    };
+  }
+  rpc GetBindingQrcode(GetBindingQrcodeParams) returns (BindingQrcodeResult) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/binding-qrcode"
+    };
+  }
+  rpc AddBindingAccount(AddBindingAccountParams) returns (api.proj.Account) {
+    option (google.api.http) = {
+      post: "/api/pro/v1/accounts"
+      body: "*"
+    };
+  }
+  rpc GetBindingAccount(GetBindingAccountParams) returns (api.proj.Account) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/accounts"
+    };
+  }
+  rpc UpdateBindingAccount(UpdateBindingAccountParams) returns (api.proj.Account) {
+    option (google.api.http) = {
+      patch: "/api/pro/v1/accounts/{id}"
+      body: "*"
+    };
+  }
+  rpc AddTask(AddTaskParams) returns (api.proj.Task) {
+    option (google.api.http) = {
+      post: "/api/pro/v1/tasks"
+      body: "*"
+    };
+  }
+  rpc ListTasks(ListTasksParams) returns (api.proj.TaskList) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/tasks"
+    };
+  }
+  rpc GetTask(GetTaskParams) returns (api.proj.Task) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/tasks/{id}"
+    };
+  }
+  rpc UpdateTask(UpdateTaskParams) returns (api.proj.Task) {
+    option (google.api.http) = {
+      patch: "/api/pro/v1/tasks/{id}"
+      body: "*"
+    };
+  }
+  rpc ExportScript(ExportParams) returns (api.public.response.FileResponse) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/tasks/{id}/script-files"
+    };
+  }
+  rpc GetTaskSummary(GetTaskSummaryParams) returns (TaskSummary) {
+    option (google.api.http) = {
+      get: "/api/pro/v1/task-summary"
+    };
+  }
+
+  rpc GetPhoneAuthCode(GetPhoneAuthCodeParams) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/api/v1/phone-auth-codes"
+    };
+  }
+  rpc GetPhoneAuthToken (GetPhoneAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/phone-auth-tokens"
+    };
+  };
+  rpc GetWxAuthToken(GetWxAuthTokenParams) returns (AuthToken) {
+    option (google.api.http) = {
+      get: "/api/v1/wx-auth-tokens"
+    };
+  }
+  rpc GetUser (GetUserParams) returns (api.proj.User) {
+    option (google.api.http) = {
+      get: "/api/v1/users/me"
+    };
+  };
+  rpc GetCreditState (GetCreditStateParams) returns (api.proj.CreditState) {
+    option (google.api.http) = {
+      get: "/api/v1/users/me/credit-state"
+    };
+  };
+  rpc GetQiniuUploadToken(GetQiniuUploadTokenParams) returns (GetQiniuUploadTokenResult) {
+    option (google.api.http) = {
+      get: "/api/v1/qiniu/upload-token",
+    };
+  }
+
+  rpc GetWxOpenId (GetWxOpenIdParams) returns (api.proj.GetWxOpenIdResult) {
+    option (google.api.http) = {
+      get: "/api/v1/wx-open-id"
+    };
+  };
+
+  rpc CreateWxOrder (CreateWxOrderParams) returns (CreateWxOrderResult) {
+    option (google.api.http) = {
+      post: "/api/v1/wx-orders"
+      body: "*"
+    };
+  };
+  rpc WebhookByWxpay(WebhookByWxpayParams) returns (api.public.response.IntMapResponse) {
+    option (google.api.http) = {
+      post: "/api/pro/wxpay/webhook"
+      body: "*"
+    };
+  }
+}
+
+message CompositeParams {
+  string id = 1;
+}
+
+message ExportParams {
+  string id = 1;
+}
+message ExportResult {
+  string url = 1;
+}
+
+message WebhookByWxpayParams {
+
+}
+
+message CreateWxOrderResult {
+  string timeStamp = 1;
+  string nonceStr = 2;
+  string package = 3;
+  string signType = 4;
+  string paySign = 5;
+}
+
+message CreateWxOrderParams {
+  string planId = 1;
+  string openId = 2;
+}
+
+message GetWxOpenIdParams {
+  string code = 1;
+}
+
+message GetWxOpenIdResult {
+  string openId = 2;
+}
+
+message GetQiniuUploadTokenParams {
+  string bucket = 1;
+}
+
+message GetQiniuUploadTokenResult {
+  string token = 1;
+}
+
+message GetCreditStateParams {
+
+}
+
+message GetUserParams {
+
+}
+
+message UpdateTaskParams {
+  string id = 1;
+  string action = 2;
+  map<string, string> params = 3;
+}
+
+message GetTaskParams {
+  string id = 1;
+}
+
+message UpdateBindingAccountParams {
+  string id = 1;
+  string action = 2;
+}
+
+message GetBindingQrcodeParams {
+
+}
+
+message BindingQrcodeResult {
+  string qrCode = 1;
+}
+
+message GetBindingAccountParams {
+
+}
+message AddBindingAccountParams {
+
+}
+
+
+message CallbackByDouyinParams{
+  string code = 1;
+  string state = 2;
+  string scopes = 3;
+  //  state=&scopes=trial.whitelist
+}
+
+message WebhookByDouyinParams {
+  message Content {
+    int64 challenge = 1;
+  }
+
+  string event = 1;
+  string client_key = 2;
+  Content content = 3;
+}
+
+
+message GetTaskSummaryParams {
+
+}
+
+message TaskSummary {
+  int64 total = 1;
+  int64 monthlyCount = 2;
+  int64 dailyCount = 3;
+}
+
+message ListTasksParams {
+  int64 page = 1;
+  string keyword = 2;
+}
+
+
+message AddTaskParams {
+  string commodityUrl = 1;
+}
+
+message GetWxAuthTokenParams {
+  string code = 1;
+}
+message GetPhoneAuthTokenParams {
+  string phone = 1;
+  string code = 2;
+}
+
+message GetPhoneAuthCodeParams {
+  string phone = 1;
+}
+
+
+message AuthToken {
+  string token = 1;
+}

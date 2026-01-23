@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 python:3.9
+
+WORKDIR /app
+
+#COPY ./scripts/requirements.txt /app/requirements.txt
+COPY ./scripts /app
+
+RUN apt-get update &&  apt-get install libicu-dev libssl-dev
+
+RUN  pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+
+
+#CMD ["python", "/app/pytools.py"]
