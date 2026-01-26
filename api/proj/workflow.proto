@@ -33,6 +33,7 @@ message VideoGeneration {
   string aspectRatio = 10;
   int64 duration = 11;
   string category = 12;
+  string error = 13;
 }
 
 message VideoFramesChange {

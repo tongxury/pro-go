@@ -72,7 +72,7 @@ func (t *JobWrapper) Run() {
 
 		// 2. Check if this specific task is already running (Single-Instance Enforcement).
 		if _, loaded := t.state.LoadOrStore(taskID, struct{}{}); loaded {
-			fmt.Printf("warning: skipping task with already loaded ID: %s\n", taskID)
+			//fmt.Printf("warning: skipping task with already loaded ID: %s\n", taskID)
 			continue
 		}
 

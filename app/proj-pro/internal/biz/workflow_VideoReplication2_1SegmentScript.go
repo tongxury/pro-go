@@ -13,24 +13,24 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 )
 
-type SegmentScriptJob struct {
+type VideoReplication2_SegmentScriptJob struct {
 	data *data.Data
 }
 
-func (t SegmentScriptJob) Initialize(ctx context.Context, options Options) error {
+func (t VideoReplication2_SegmentScriptJob) Initialize(ctx context.Context, options Options) error {
 	return nil
 }
 
-func (t SegmentScriptJob) GetName() string {
+func (t VideoReplication2_SegmentScriptJob) GetName() string {
 	return "segmentScriptJob"
 }
 
-func (t SegmentScriptJob) Execute(ctx context.Context, jobState *projpb.Job, wfState *projpb.Workflow) (status *ExecuteResult, err error) {
+func (t VideoReplication2_SegmentScriptJob) Execute(ctx context.Context, jobState *projpb.Job, wfState *projpb.Workflow) (status *ExecuteResult, err error) {
 
 	dataBus := GetDataBus(wfState)
 
 	logger := log.NewHelper(log.With(log.DefaultLogger,
-		"func", "SegmentScriptJob.Execute",
+		"func", "VideoReplication2_SegmentScriptJob.Execute",
 		"workflowId ", wfState.XId,
 		"jobState.Name ", jobState.Name,
 		"jobState.Index ", jobState.Index,

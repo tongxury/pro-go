@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"iter"
+	"store/pkg/sdk/conv"
 	"store/pkg/sdk/helper"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -175,16 +176,21 @@ func (t *Client) GenerateBlob(ctx context.Context, req GenerateContentRequest) (
 	var loop int
 
 	for {
+
+		fmt.Println("GenerateBlob ing", loop)
+
 		blob, err := t.generateBlob(ctx, req)
 		if err != nil {
 			return nil, err
 		}
 
+		fmt.Println("GenerateBlob done", loop)
+
 		if blob == nil || len(blob.Data) == 0 {
 			loop += 1
-			log.Warnf("GenerateBlob got empty blob:  try %d", loop)
+			fmt.Println("GenerateBlob got empty blob:  try " + conv.Str(loop))
 
-			if loop >= 5 {
+			if loop >= 2 {
 				return nil, errors.New("too many blob upload")
 			}
 

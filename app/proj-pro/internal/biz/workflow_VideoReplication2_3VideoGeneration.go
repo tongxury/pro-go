@@ -19,19 +19,19 @@ import (
 	"github.com/openai/openai-go/v3"
 )
 
-type VideoGenerationJob struct {
+type VideoReplication2_VideoGenerationJob struct {
 	data *data.Data
 }
 
-func (t VideoGenerationJob) Initialize(ctx context.Context, options Options) error {
+func (t VideoReplication2_VideoGenerationJob) Initialize(ctx context.Context, options Options) error {
 	return nil
 }
 
-func (t VideoGenerationJob) GetName() string {
+func (t VideoReplication2_VideoGenerationJob) GetName() string {
 	return "videoGenerationJob"
 }
 
-func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, wfState *projpb.Workflow) (s *ExecuteResult, err error) {
+func (t VideoReplication2_VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, wfState *projpb.Workflow) (s *ExecuteResult, err error) {
 
 	dataBus := GetDataBus(wfState)
 
@@ -46,6 +46,11 @@ func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, w
 		return nil, errors.New("segmentScript not found")
 	}
 
+	keyFrames := dataBus.KeyFrames
+	if keyFrames == nil {
+		return nil, errors.New("keyFrames not found")
+	}
+
 	if len(dataBus.VideoGenerations) == 0 {
 
 		t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
@@ -53,8 +58,9 @@ func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, w
 				fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index),
 				[]*projpb.VideoGeneration{
 					{
-						Status: "running",
-						Prompt: dataBus.SegmentScript.GetScript(),
+						Status:     "running",
+						FirstFrame: keyFrames.Frames[0].Url,
+						Prompt:     dataBus.SegmentScript.GetScript(),
 					},
 				},
 			),
@@ -71,7 +77,7 @@ func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, w
 		}, nil
 	}
 
-	if videoGeneration.TaskId != "" {
+	if videoGeneration.TaskId != "" && videoGeneration.Status == ExecuteStatusRunning {
 
 		v, err := t.data.OpenAI.Videos().Get(ctx, videoGeneration.TaskId)
 		if err != nil {
@@ -83,8 +89,19 @@ func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, w
 
 		// 失败了重新生成视频
 		if v.Status == openai.VideoStatusFailed {
+
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx,
+				wfState.XId,
+				mgz.Op().
+					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), 0, "status", ExecuteStatusFailed).
+					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), 0, "error", v.Error.Message),
+			)
+			if err != nil {
+				log.Errorw("UpdateByIDXX err", err)
+				return nil, err
+			}
 			return &ExecuteResult{
-				Status: ExecuteStatusFailed,
+				Status: ExecuteStatusCompleted,
 			}, nil
 		}
 
@@ -163,7 +180,7 @@ func (t VideoGenerationJob) Execute(ctx context.Context, jobState *projpb.Job, w
 		seconds = "12"
 	}
 
-	imgBytes, err := helper.ReadBytesByUrl(dataBus.Commodity.Medias[0].Url)
+	imgBytes, err := helper.ReadBytesByUrl(videoGeneration.FirstFrame)
 	if err != nil {
 		return nil, err
 	}

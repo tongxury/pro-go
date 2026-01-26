@@ -18,5 +18,7 @@ func NewProjService(data *data.Data, workflow *biz.WorkflowBiz) *ProjService {
 		workflow: workflow,
 	}
 
+	s.Start()
+
 	return s
 }

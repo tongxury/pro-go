@@ -1,0 +1,22 @@
+{
+    "consistent_fashion_ip": {
+        "hair": "vibrant silver wolf-cut hairstyle, edgy and textured",
+        "accessories": "a pair of oversized liquid gold irregular earrings",
+        "tattoo": "a tiny delicate blue butterfly tattoo on the side of the neck",
+        "signature_action": "adjusting her left earring with a slight confident smile",
+        "fixed_environment": "a high-end minimalist French apartment balcony, sun-drenched with soft golden shadows, white marble floor, and elegant wrought iron railings",
+        "ui_layout": "Split-screen layout: Left 70% is the cinematic video, Right 30% is a fixed high-resolution macro shot of the fabric textures. Include a semi-transparent sidebar on the left showing 'Model: 168cm / 48kg / Size S'.",
+        "vibe": "effortless chic, high fashion editorial style",
+        "lighting": "cinematic soft light with a touch of sunset warmth"
+    },
+    "office_elegant": {
+        "hair": "neat dark brown low bun with a silk ribbon",
+        "accessories": "minimalist pearl studs and a classic silver wristwatch",
+        "tattoo": "none",
+        "signature_action": "pushing her sunglasses up to her forehead",
+        "fixed_environment": "a modern floor-to-ceiling glass office overlooking a blurred city skyline, clean minimalist design with dark oak furniture",
+        "ui_layout": "Clean full-screen with a professional info-bar at the bottom showing product specifications.",
+        "vibe": "professional, elegant, minimalist",
+        "lighting": "bright clean studio lighting, natural daylight"
+    }
+}

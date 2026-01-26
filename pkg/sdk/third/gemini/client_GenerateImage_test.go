@@ -4,10 +4,20 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"store/confs"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+//// 1. 读取本地图片：已修复，使用 os.ReadFile 加载字节流
+//imagePath := "WechatIMG30.jpg"
+//imageBytes, err := os.ReadFile(imagePath)
+//if err != nil {
+//t.Fatalf("Failed to read local image %s: %v", imagePath, err)
+//}
+//
+//imagePart := genai.NewPartFromBytes(imageBytes, "image/jpeg")
 
 func TestClient_GenerateImage_WithLocalFile(t *testing.T) {
 	ctx := context.Background()
@@ -16,30 +26,16 @@ func TestClient_GenerateImage_WithLocalFile(t *testing.T) {
 	// 这里参考你之前的测试配置
 	c := NewGenaiFactory(&FactoryConfig{
 		Configs: []*Config{
-			{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: "AQ.Ab8RN6Kj4bK5fzaq8rNj1xHc1vtcWSKgQ4h-F7SwItVNbk8RzQ"},
+			{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.AQKey},
 		},
 	})
 
-	// 读取本地图片文件
-	//imagePath := "截屏2026-01-18 21.46.17.png"
-	imagePath := "截屏2026-01-18 21.47.23.png"
-	imageData, err := os.ReadFile(imagePath)
-	if err != nil {
-		t.Fatalf("failed to read test image: %v", err)
-	}
-
-	imagePath1 := "generated_outputa1.png"
-	imageData1, err := os.ReadFile(imagePath1)
-	if err != nil {
-		t.Fatalf("failed to read test image: %v", err)
-	}
-
 	// 调用生成图片接口
 	resp, err := c.Get().GenerateImage(ctx, GenerateImageRequest{
-		ImageBytes:  [][]byte{imageData, imageData1},
-		Prompt:      "根据【图1】，帮我构想 在ipad 上的截图，输出和【图2】风格类似的图",
+		//ImageBytes:  [][]byte{imageData, imageData1},
+		Prompt:      "请帮我生成一张能够用来做女装带货视频的通用视频背景图，要高级，有冲击力",
 		ImageSize:   "1K",
-		AspectRatio: "4:3",
+		AspectRatio: "9:16",
 	})
 
 	if err != nil {

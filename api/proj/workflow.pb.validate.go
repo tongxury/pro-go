@@ -219,6 +219,8 @@ func (m *VideoGeneration) validate(all bool) error {
 
 	// no validation rules for Category
 
+	// no validation rules for Error
+
 	if len(errors) > 0 {
 		return VideoGenerationMultiError(errors)
 	}

@@ -105,6 +105,7 @@ type VideoGeneration struct {
 	AspectRatio   string                 `protobuf:"bytes,10,opt,name=aspectRatio,proto3" json:"aspectRatio,omitempty"`
 	Duration      int64                  `protobuf:"varint,11,opt,name=duration,proto3" json:"duration,omitempty"`
 	Category      string                 `protobuf:"bytes,12,opt,name=category,proto3" json:"category,omitempty"`
+	Error         string                 `protobuf:"bytes,13,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -219,6 +220,13 @@ func (x *VideoGeneration) GetDuration() int64 {
 func (x *VideoGeneration) GetCategory() string {
 	if x != nil {
 		return x.Category
+	}
+	return ""
+}
+
+func (x *VideoGeneration) GetError() string {
+	if x != nil {
+		return x.Error
 	}
 	return ""
 }
@@ -1018,7 +1026,7 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\vinspiration\x18\x04 \x01(\tR\vinspiration\x12\x16\n" +
 	"\x06script\x18\x01 \x01(\tR\x06script\x12\x16\n" +
 	"\x06images\x18\x02 \x03(\tR\x06images\x125\n" +
-	"\bsegments\x18\x03 \x03(\v2\x19.api.proj.ResourceSegmentR\bsegments\"\xd9\x02\n" +
+	"\bsegments\x18\x03 \x03(\v2\x19.api.proj.ResourceSegmentR\bsegments\"\xef\x02\n" +
 	"\x0fVideoGeneration\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x16\n" +
 	"\x06taskId\x18\x02 \x01(\tR\x06taskId\x12\x16\n" +
@@ -1034,7 +1042,8 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\vaspectRatio\x18\n" +
 	" \x01(\tR\vaspectRatio\x12\x1a\n" +
 	"\bduration\x18\v \x01(\x03R\bduration\x12\x1a\n" +
-	"\bcategory\x18\f \x01(\tR\bcategory\"\xad\x01\n" +
+	"\bcategory\x18\f \x01(\tR\bcategory\x12\x14\n" +
+	"\x05error\x18\r \x01(\tR\x05error\"\xad\x01\n" +
 	"\x11VideoFramesChange\x12\x1e\n" +
 	"\n" +
 	"firstFrame\x18\x01 \x01(\tR\n" +
