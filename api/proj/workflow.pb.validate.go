@@ -1597,6 +1597,8 @@ func (m *KeyFrames_Frame) validate(all bool) error {
 
 	// no validation rules for Error
 
+	// no validation rules for Category
+
 	if len(errors) > 0 {
 		return KeyFrames_FrameMultiError(errors)
 	}

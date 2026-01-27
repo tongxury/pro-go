@@ -831,6 +831,7 @@ type KeyFrames_Frame struct {
 	TaskId        string                 `protobuf:"bytes,6,opt,name=taskId,proto3" json:"taskId,omitempty"`
 	AspectRatio   string                 `protobuf:"bytes,7,opt,name=aspectRatio,proto3" json:"aspectRatio,omitempty"`
 	Error         string                 `protobuf:"bytes,8,opt,name=error,proto3" json:"error,omitempty"`
+	Category      string                 `protobuf:"bytes,9,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -917,6 +918,13 @@ func (x *KeyFrames_Frame) GetAspectRatio() string {
 func (x *KeyFrames_Frame) GetError() string {
 	if x != nil {
 		return x.Error
+	}
+	return ""
+}
+
+func (x *KeyFrames_Frame) GetCategory() string {
+	if x != nil {
+		return x.Category
 	}
 	return ""
 }
@@ -1062,10 +1070,10 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\amediaId\x18\x01 \x01(\tR\amediaId\x12C\n" +
 	"\x0fvideoGeneration\x18\x02 \x01(\v2\x19.api.proj.VideoGenerationR\x0fvideoGeneration\x12:\n" +
 	"\fremixOptions\x18\x03 \x01(\v2\x16.api.proj.RemixOptionsR\fremixOptions\x12?\n" +
-	"\rscriptSegment\x18\x04 \x01(\v2\x19.api.proj.ResourceSegmentR\rscriptSegment\"\x9a\x02\n" +
+	"\rscriptSegment\x18\x04 \x01(\v2\x19.api.proj.ResourceSegmentR\rscriptSegment\"\xb6\x02\n" +
 	"\tKeyFrames\x121\n" +
 	"\x06frames\x18\x01 \x03(\v2\x19.api.proj.KeyFrames.FrameR\x06frames\x12\x16\n" +
-	"\x06taskId\x18\x02 \x01(\tR\x06taskId\x1a\xc1\x01\n" +
+	"\x06taskId\x18\x02 \x01(\tR\x06taskId\x1a\xdd\x01\n" +
 	"\x05Frame\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12\x16\n" +
@@ -1074,7 +1082,8 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x04refs\x18\x05 \x03(\tR\x04refs\x12\x16\n" +
 	"\x06taskId\x18\x06 \x01(\tR\x06taskId\x12 \n" +
 	"\vaspectRatio\x18\a \x01(\tR\vaspectRatio\x12\x14\n" +
-	"\x05error\x18\b \x01(\tR\x05error\"\x9c\x04\n" +
+	"\x05error\x18\b \x01(\tR\x05error\x12\x1a\n" +
+	"\bcategory\x18\t \x01(\tR\bcategory\"\x9c\x04\n" +
 	"\aDataBus\x12\x16\n" +
 	"\x06userId\x18\x14 \x01(\tR\x06userId\x123\n" +
 	"\asegment\x18\x01 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x121\n" +

@@ -37,6 +37,22 @@ func NewTextPart(text string) *genai.Part {
 	}
 }
 
+func NewImageParts(images []string) ([]*genai.Part, error) {
+
+	var parts []*genai.Part
+
+	for i := range images {
+		p, err := NewImagePart(images[i])
+		if err != nil {
+			return nil, err
+		}
+
+		parts = append(parts, p)
+	}
+
+	return parts, nil
+}
+
 func NewMediaPart(url, mimeType string) (*genai.Part, error) {
 	v, err := http.Get(url)
 	if err != nil {

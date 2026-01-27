@@ -112,6 +112,7 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 					//	"依据以上分镜描述， 结合【图1的整体风格和场景】+【图2中的商品】,生成一张视频尾帧图片",
 					//),
 				),
+				Category: "first_frame",
 			}
 
 		} else {
@@ -240,13 +241,16 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 			return nil
 		}
 
+		refParts, err := gemini.NewImageParts(x.Refs)
+		if err != nil {
+			return err
+		}
+
 		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
 		blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
-			Images: x.Refs,
-			//Videos: [][]byte{seg.Content},
+			Parts:       refParts,
 			Prompt:      x.Prompt,
 			AspectRatio: aspectRatio,
-			//Count: 8,
 		})
 		if err != nil {
 			logger.Errorw("GenerateImage err", err)
@@ -279,6 +283,44 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 		if err != nil {
 			return err
 		}
+
+		//// 审计
+		//promptKey := "segment_first_frame_audit"
+		//if x.Category != "first_frame" {
+		//	promptKey = "segment_last_frame_audit"
+		//}
+		//
+		//prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
+		//if err != nil {
+		//	return err
+		//}
+		//
+		//refParts = append(refParts,
+		//	genai.NewPartFromBytes(blob, "image/jpeg"),
+		//	gemini.NewTextPart(prompt.Content),
+		//)
+		//
+		//auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
+		//	Config: &genai.GenerateContentConfig{
+		//		ResponseMIMEType: "application/json",
+		//		ResponseSchema: &genai.Schema{
+		//			Required: []string{"pass", "reason"},
+		//			Properties: map[string]*genai.Schema{
+		//				"pass":   {Type: genai.TypeBoolean, Description: "是否符合要求"},
+		//				"reason": {Type: genai.TypeString, Description: "原因"},
+		//			},
+		//		},
+		//	},
+		//	Parts: refParts,
+		//})
+		//
+		//fmt.Println("audit res", auditResJson)
+		//
+		//var auditRes map[string]interface{}
+		//err = json.Unmarshal([]byte(auditResJson), &auditRes)
+		//if auditRes["pass"] == false {
+		//
+		//}
 
 		return nil
 	})

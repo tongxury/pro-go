@@ -9084,6 +9084,8 @@ components:
                     type: string
                 error:
                     type: string
+                category:
+                    type: string
         api.proj.Media:
             type: object
             properties:
