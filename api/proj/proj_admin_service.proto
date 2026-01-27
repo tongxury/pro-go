@@ -235,13 +235,7 @@ message GetSettingsRequest {
 message UpdateSettingsRequest {
 //  string id = 1;
   map<string, api.proj.Prompt> prompts = 2;
-
-  //  oneof data {
-  //    api.proj.Prompt videoTemplate = 2;
-  //    api.proj.Prompt videoHighlight = 3;
-  //    api.proj.Prompt videoScript = 4;
-  //    api.proj.Prompt videoGenerate = 5;
-  //  }
+  repeated string deletePrompts = 3;
 }
 
 message ListResourceSegmentsRequest {

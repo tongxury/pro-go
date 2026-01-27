@@ -592,6 +592,7 @@ type UpdateSettingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// string id = 1;
 	Prompts       map[string]*Prompt `protobuf:"bytes,2,rep,name=prompts,proto3" json:"prompts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DeletePrompts []string           `protobuf:"bytes,3,rep,name=deletePrompts,proto3" json:"deletePrompts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -629,6 +630,13 @@ func (*UpdateSettingsRequest) Descriptor() ([]byte, []int) {
 func (x *UpdateSettingsRequest) GetPrompts() map[string]*Prompt {
 	if x != nil {
 		return x.Prompts
+	}
+	return nil
+}
+
+func (x *UpdateSettingsRequest) GetDeletePrompts() []string {
+	if x != nil {
+		return x.DeletePrompts
 	}
 	return nil
 }
@@ -1447,9 +1455,10 @@ const file_proj_proj_admin_service_proto_rawDesc = "" +
 	"\x15GetGetTemplateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\",\n" +
 	"\x12GetSettingsRequest\x12\x16\n" +
-	"\x06fields\x18\x02 \x01(\tR\x06fields\"\xad\x01\n" +
+	"\x06fields\x18\x02 \x01(\tR\x06fields\"\xd3\x01\n" +
 	"\x15UpdateSettingsRequest\x12F\n" +
-	"\aprompts\x18\x02 \x03(\v2,.api.proj.UpdateSettingsRequest.PromptsEntryR\aprompts\x1aL\n" +
+	"\aprompts\x18\x02 \x03(\v2,.api.proj.UpdateSettingsRequest.PromptsEntryR\aprompts\x12$\n" +
+	"\rdeletePrompts\x18\x03 \x03(\tR\rdeletePrompts\x1aL\n" +
 	"\fPromptsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12&\n" +
 	"\x05value\x18\x02 \x01(\v2\x10.api.proj.PromptR\x05value:\x028\x01\"\xe5\x01\n" +

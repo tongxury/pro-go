@@ -9791,6 +9791,10 @@ components:
                     additionalProperties:
                         $ref: '#/components/schemas/api.proj.Prompt'
                     description: string id = 1;
+                deletePrompts:
+                    type: array
+                    items:
+                        type: string
         api.proj.UpdateTaskParams:
             type: object
             properties:

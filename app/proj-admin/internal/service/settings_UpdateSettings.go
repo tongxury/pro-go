@@ -17,6 +17,10 @@ func (t ProjAdminService) UpdateSettings(ctx context.Context, req *projpb.Update
 		op = op.Set("prompts."+k, v)
 	}
 
+	for _, k := range req.DeletePrompts {
+		op = op.Unset("prompts." + k)
+	}
+
 	//if request.GetVideoHighlight() != nil {
 	//	request.GetVideoHighlight().UpdatedAt = time.Now().Unix()
 	//	op = op.Set("videoHighlight", request.GetVideoHighlight())
