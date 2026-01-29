@@ -3379,7 +3379,41 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.proj.Workflow'
+        post:
+            tags:
+                - WorkflowService
+            operationId: WorkflowService_CreateWorkflow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.proj.CreateWorkflowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.Workflow'
     /api/proj/v1/workflows/{id}:
+        get:
+            tags:
+                - WorkflowService
+            operationId: WorkflowService_GetWorkflow
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.Workflow'
         patch:
             tags:
                 - WorkflowService
@@ -8762,6 +8796,13 @@ components:
                     type: string
                 assetId:
                     type: string
+        api.proj.CreateWorkflowRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                commodity:
+                    $ref: '#/components/schemas/api.proj.Commodity'
         api.proj.CreateWxOrderParams:
             type: object
             properties:
@@ -10028,6 +10069,8 @@ components:
                 auto:
                     type: boolean
                 dataBus:
+                    $ref: '#/components/schemas/api.proj.DataBus'
+                data:
                     $ref: '#/components/schemas/api.proj.DataBus'
         api.public.enums.Enum:
             type: object

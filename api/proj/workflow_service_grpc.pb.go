@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	WorkflowService_CreateWorkflow_FullMethodName        = "/api.proj.WorkflowService/CreateWorkflow"
+	WorkflowService_GetWorkflow_FullMethodName           = "/api.proj.WorkflowService/GetWorkflow"
 	WorkflowService_UpdateWorkflow_FullMethodName        = "/api.proj.WorkflowService/UpdateWorkflow"
 	WorkflowService_UpdateWorkflowJob_FullMethodName     = "/api.proj.WorkflowService/UpdateWorkflowJob"
 	WorkflowService_UpdateWorkflowJobData_FullMethodName = "/api.proj.WorkflowService/UpdateWorkflowJobData"
@@ -29,6 +31,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkflowServiceClient interface {
+	CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
+	GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
 	UpdateWorkflowJob(ctx context.Context, in *UpdateWorkflowJobRequest, opts ...grpc.CallOption) (*Workflow, error)
 	UpdateWorkflowJobData(ctx context.Context, in *UpdateWorkflowJobDataRequest, opts ...grpc.CallOption) (*Workflow, error)
@@ -41,6 +45,26 @@ type workflowServiceClient struct {
 
 func NewWorkflowServiceClient(cc grpc.ClientConnInterface) WorkflowServiceClient {
 	return &workflowServiceClient{cc}
+}
+
+func (c *workflowServiceClient) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Workflow)
+	err := c.cc.Invoke(ctx, WorkflowService_CreateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowServiceClient) GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Workflow)
+	err := c.cc.Invoke(ctx, WorkflowService_GetWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *workflowServiceClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error) {
@@ -87,6 +111,8 @@ func (c *workflowServiceClient) ReplaceWorkflow(ctx context.Context, in *Workflo
 // All implementations must embed UnimplementedWorkflowServiceServer
 // for forward compatibility.
 type WorkflowServiceServer interface {
+	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error)
+	GetWorkflow(context.Context, *GetWorkflowRequest) (*Workflow, error)
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*Workflow, error)
 	UpdateWorkflowJob(context.Context, *UpdateWorkflowJobRequest) (*Workflow, error)
 	UpdateWorkflowJobData(context.Context, *UpdateWorkflowJobDataRequest) (*Workflow, error)
@@ -101,6 +127,12 @@ type WorkflowServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWorkflowServiceServer struct{}
 
+func (UnimplementedWorkflowServiceServer) CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateWorkflow not implemented")
+}
+func (UnimplementedWorkflowServiceServer) GetWorkflow(context.Context, *GetWorkflowRequest) (*Workflow, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWorkflow not implemented")
+}
 func (UnimplementedWorkflowServiceServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*Workflow, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateWorkflow not implemented")
 }
@@ -132,6 +164,42 @@ func RegisterWorkflowServiceServer(s grpc.ServiceRegistrar, srv WorkflowServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&WorkflowService_ServiceDesc, srv)
+}
+
+func _WorkflowService_CreateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowServiceServer).CreateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowService_CreateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowServiceServer).CreateWorkflow(ctx, req.(*CreateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowService_GetWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowServiceServer).GetWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowService_GetWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowServiceServer).GetWorkflow(ctx, req.(*GetWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _WorkflowService_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -213,6 +281,14 @@ var WorkflowService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.proj.WorkflowService",
 	HandlerType: (*WorkflowServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateWorkflow",
+			Handler:    _WorkflowService_CreateWorkflow_Handler,
+		},
+		{
+			MethodName: "GetWorkflow",
+			Handler:    _WorkflowService_GetWorkflow_Handler,
+		},
 		{
 			MethodName: "UpdateWorkflow",
 			Handler:    _WorkflowService_UpdateWorkflow_Handler,

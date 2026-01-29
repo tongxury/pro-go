@@ -139,6 +139,7 @@ message Workflow {
   bool auto = 10;
 
   DataBus dataBus = 20;
+  DataBus data = 21;
 }
 
 

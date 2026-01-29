@@ -697,42 +697,6 @@ func (x *Job) GetSubJobs() []*Job {
 	return nil
 }
 
-type WorkflowV2 struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *WorkflowV2) Reset() {
-	*x = WorkflowV2{}
-	mi := &file_proj_workflow_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *WorkflowV2) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkflowV2) ProtoMessage() {}
-
-func (x *WorkflowV2) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkflowV2.ProtoReflect.Descriptor instead.
-func (*WorkflowV2) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_proto_rawDescGZIP(), []int{8}
-}
-
 type Workflow struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	XId           string                 `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
@@ -746,13 +710,14 @@ type Workflow struct {
 	UserId        string                 `protobuf:"bytes,8,opt,name=userId,proto3" json:"userId,omitempty"`
 	Auto          bool                   `protobuf:"varint,10,opt,name=auto,proto3" json:"auto,omitempty"`
 	DataBus       *DataBus               `protobuf:"bytes,20,opt,name=dataBus,proto3" json:"dataBus,omitempty"`
+	Data          *DataBus               `protobuf:"bytes,21,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Workflow) Reset() {
 	*x = Workflow{}
-	mi := &file_proj_workflow_proto_msgTypes[9]
+	mi := &file_proj_workflow_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -764,7 +729,7 @@ func (x *Workflow) String() string {
 func (*Workflow) ProtoMessage() {}
 
 func (x *Workflow) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[9]
+	mi := &file_proj_workflow_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -777,7 +742,7 @@ func (x *Workflow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Workflow.ProtoReflect.Descriptor instead.
 func (*Workflow) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_proto_rawDescGZIP(), []int{9}
+	return file_proj_workflow_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Workflow) GetXId() string {
@@ -857,6 +822,13 @@ func (x *Workflow) GetDataBus() *DataBus {
 	return nil
 }
 
+func (x *Workflow) GetData() *DataBus {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type Remix_Segment struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	MediaId         string                 `protobuf:"bytes,1,opt,name=mediaId,proto3" json:"mediaId,omitempty"`
@@ -869,7 +841,7 @@ type Remix_Segment struct {
 
 func (x *Remix_Segment) Reset() {
 	*x = Remix_Segment{}
-	mi := &file_proj_workflow_proto_msgTypes[10]
+	mi := &file_proj_workflow_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -881,7 +853,7 @@ func (x *Remix_Segment) String() string {
 func (*Remix_Segment) ProtoMessage() {}
 
 func (x *Remix_Segment) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[10]
+	mi := &file_proj_workflow_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -943,7 +915,7 @@ type KeyFrames_Frame struct {
 
 func (x *KeyFrames_Frame) Reset() {
 	*x = KeyFrames_Frame{}
-	mi := &file_proj_workflow_proto_msgTypes[11]
+	mi := &file_proj_workflow_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -955,7 +927,7 @@ func (x *KeyFrames_Frame) String() string {
 func (*KeyFrames_Frame) ProtoMessage() {}
 
 func (x *KeyFrames_Frame) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[11]
+	mi := &file_proj_workflow_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1050,7 +1022,7 @@ type DataBus_Settings struct {
 
 func (x *DataBus_Settings) Reset() {
 	*x = DataBus_Settings{}
-	mi := &file_proj_workflow_proto_msgTypes[12]
+	mi := &file_proj_workflow_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1062,7 +1034,7 @@ func (x *DataBus_Settings) String() string {
 func (*DataBus_Settings) ProtoMessage() {}
 
 func (x *DataBus_Settings) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[12]
+	mi := &file_proj_workflow_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1095,7 +1067,7 @@ type Job_Progress struct {
 
 func (x *Job_Progress) Reset() {
 	*x = Job_Progress{}
-	mi := &file_proj_workflow_proto_msgTypes[13]
+	mi := &file_proj_workflow_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1107,7 +1079,7 @@ func (x *Job_Progress) String() string {
 func (*Job_Progress) ProtoMessage() {}
 
 func (x *Job_Progress) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_proto_msgTypes[13]
+	mi := &file_proj_workflow_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1225,9 +1197,7 @@ const file_proj_workflow_proto_rawDesc = "" +
 	" \x03(\v2\r.api.proj.JobR\asubJobs\x1a:\n" +
 	"\bProgress\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12\x18\n" +
-	"\acurrent\x18\x02 \x01(\x03R\acurrent\"\f\n" +
-	"\n" +
-	"WorkflowV2\"\xc4\x02\n" +
+	"\acurrent\x18\x02 \x01(\x03R\acurrent\"\xeb\x02\n" +
 	"\bWorkflow\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
@@ -1240,7 +1210,8 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x06userId\x18\b \x01(\tR\x06userId\x12\x12\n" +
 	"\x04auto\x18\n" +
 	" \x01(\bR\x04auto\x12+\n" +
-	"\adataBus\x18\x14 \x01(\v2\x11.api.proj.DataBusR\adataBusB\x17Z\x15store/api/proj;projpbb\x06proto3"
+	"\adataBus\x18\x14 \x01(\v2\x11.api.proj.DataBusR\adataBus\x12%\n" +
+	"\x04data\x18\x15 \x01(\v2\x11.api.proj.DataBusR\x04dataB\x17Z\x15store/api/proj;projpbb\x06proto3"
 
 var (
 	file_proj_workflow_proto_rawDescOnce sync.Once
@@ -1254,7 +1225,7 @@ func file_proj_workflow_proto_rawDescGZIP() []byte {
 	return file_proj_workflow_proto_rawDescData
 }
 
-var file_proj_workflow_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_proj_workflow_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_proj_workflow_proto_goTypes = []any{
 	(*SegmentScript)(nil),     // 0: api.proj.SegmentScript
 	(*VideoGeneration)(nil),   // 1: api.proj.VideoGeneration
@@ -1264,42 +1235,42 @@ var file_proj_workflow_proto_goTypes = []any{
 	(*KeyFrames)(nil),         // 5: api.proj.KeyFrames
 	(*DataBus)(nil),           // 6: api.proj.DataBus
 	(*Job)(nil),               // 7: api.proj.Job
-	(*WorkflowV2)(nil),        // 8: api.proj.WorkflowV2
-	(*Workflow)(nil),          // 9: api.proj.Workflow
-	(*Remix_Segment)(nil),     // 10: api.proj.Remix.Segment
-	(*KeyFrames_Frame)(nil),   // 11: api.proj.KeyFrames.Frame
-	(*DataBus_Settings)(nil),  // 12: api.proj.DataBus.Settings
-	(*Job_Progress)(nil),      // 13: api.proj.Job.Progress
-	(*ResourceSegment)(nil),   // 14: api.proj.ResourceSegment
-	(*Commodity)(nil),         // 15: api.proj.Commodity
-	(*RemixOptions)(nil),      // 16: api.proj.RemixOptions
+	(*Workflow)(nil),          // 8: api.proj.Workflow
+	(*Remix_Segment)(nil),     // 9: api.proj.Remix.Segment
+	(*KeyFrames_Frame)(nil),   // 10: api.proj.KeyFrames.Frame
+	(*DataBus_Settings)(nil),  // 11: api.proj.DataBus.Settings
+	(*Job_Progress)(nil),      // 12: api.proj.Job.Progress
+	(*ResourceSegment)(nil),   // 13: api.proj.ResourceSegment
+	(*Commodity)(nil),         // 14: api.proj.Commodity
+	(*RemixOptions)(nil),      // 15: api.proj.RemixOptions
 }
 var file_proj_workflow_proto_depIdxs = []int32{
-	14, // 0: api.proj.SegmentScript.segments:type_name -> api.proj.ResourceSegment
-	10, // 1: api.proj.Remix.segments:type_name -> api.proj.Remix.Segment
-	11, // 2: api.proj.KeyFrames.frames:type_name -> api.proj.KeyFrames.Frame
-	14, // 3: api.proj.DataBus.segment:type_name -> api.proj.ResourceSegment
-	15, // 4: api.proj.DataBus.commodity:type_name -> api.proj.Commodity
-	12, // 5: api.proj.DataBus.settings:type_name -> api.proj.DataBus.Settings
+	13, // 0: api.proj.SegmentScript.segments:type_name -> api.proj.ResourceSegment
+	9,  // 1: api.proj.Remix.segments:type_name -> api.proj.Remix.Segment
+	10, // 2: api.proj.KeyFrames.frames:type_name -> api.proj.KeyFrames.Frame
+	13, // 3: api.proj.DataBus.segment:type_name -> api.proj.ResourceSegment
+	14, // 4: api.proj.DataBus.commodity:type_name -> api.proj.Commodity
+	11, // 5: api.proj.DataBus.settings:type_name -> api.proj.DataBus.Settings
 	1,  // 6: api.proj.DataBus.videoGenerations:type_name -> api.proj.VideoGeneration
 	2,  // 7: api.proj.DataBus.videoFramesChanges:type_name -> api.proj.VideoFramesChange
 	3,  // 8: api.proj.DataBus.remix:type_name -> api.proj.Remix
 	0,  // 9: api.proj.DataBus.segmentScript:type_name -> api.proj.SegmentScript
 	5,  // 10: api.proj.DataBus.keyFrames:type_name -> api.proj.KeyFrames
-	13, // 11: api.proj.Job.progress:type_name -> api.proj.Job.Progress
+	12, // 11: api.proj.Job.progress:type_name -> api.proj.Job.Progress
 	6,  // 12: api.proj.Job.dataBus:type_name -> api.proj.DataBus
 	7,  // 13: api.proj.Job.subJobs:type_name -> api.proj.Job
 	7,  // 14: api.proj.Workflow.jobs:type_name -> api.proj.Job
 	6,  // 15: api.proj.Workflow.dataBus:type_name -> api.proj.DataBus
-	1,  // 16: api.proj.Remix.Segment.videoGeneration:type_name -> api.proj.VideoGeneration
-	16, // 17: api.proj.Remix.Segment.remixOptions:type_name -> api.proj.RemixOptions
-	14, // 18: api.proj.Remix.Segment.scriptSegment:type_name -> api.proj.ResourceSegment
-	4,  // 19: api.proj.KeyFrames.Frame.review:type_name -> api.proj.Review
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	6,  // 16: api.proj.Workflow.data:type_name -> api.proj.DataBus
+	1,  // 17: api.proj.Remix.Segment.videoGeneration:type_name -> api.proj.VideoGeneration
+	15, // 18: api.proj.Remix.Segment.remixOptions:type_name -> api.proj.RemixOptions
+	13, // 19: api.proj.Remix.Segment.scriptSegment:type_name -> api.proj.ResourceSegment
+	4,  // 20: api.proj.KeyFrames.Frame.review:type_name -> api.proj.Review
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_proj_workflow_proto_init() }
@@ -1316,7 +1287,7 @@ func file_proj_workflow_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_workflow_proto_rawDesc), len(file_proj_workflow_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
