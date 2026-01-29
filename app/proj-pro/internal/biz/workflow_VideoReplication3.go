@@ -39,6 +39,9 @@ func NewVideoReplication3(data *data.Data) *VideoReplication3 {
 	return &VideoReplication3{
 		data: data,
 		Jobs: []IJob{
+			&VideoReplication3_CommodityAnalysisJob{
+				data: data,
+			},
 			&VideoReplication3_SegmentScriptJob{
 				data: data,
 			},
