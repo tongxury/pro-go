@@ -551,6 +551,108 @@ var _ interface {
 	ErrorName() string
 } = RemixValidationError{}
 
+// Validate checks the field values on Review with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Review) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Review with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ReviewMultiError, or nil if none found.
+func (m *Review) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Review) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Pass
+
+	// no validation rules for Desc
+
+	if len(errors) > 0 {
+		return ReviewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReviewMultiError is an error wrapping multiple validation errors returned by
+// Review.ValidateAll() if the designated constraints aren't met.
+type ReviewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReviewMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReviewMultiError) AllErrors() []error { return m }
+
+// ReviewValidationError is the validation error returned by Review.Validate if
+// the designated constraints aren't met.
+type ReviewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReviewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReviewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReviewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReviewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReviewValidationError) ErrorName() string { return "ReviewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReviewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReview.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReviewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReviewValidationError{}
+
 // Validate checks the field values on KeyFrames with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -1117,6 +1219,40 @@ func (m *Job) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetSubJobs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, JobValidationError{
+						field:  fmt.Sprintf("SubJobs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, JobValidationError{
+						field:  fmt.Sprintf("SubJobs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return JobValidationError{
+					field:  fmt.Sprintf("SubJobs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return JobMultiError(errors)
 	}
@@ -1194,6 +1330,105 @@ var _ interface {
 	ErrorName() string
 } = JobValidationError{}
 
+// Validate checks the field values on WorkflowV2 with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *WorkflowV2) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WorkflowV2 with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in WorkflowV2MultiError, or
+// nil if none found.
+func (m *WorkflowV2) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WorkflowV2) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return WorkflowV2MultiError(errors)
+	}
+
+	return nil
+}
+
+// WorkflowV2MultiError is an error wrapping multiple validation errors
+// returned by WorkflowV2.ValidateAll() if the designated constraints aren't met.
+type WorkflowV2MultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WorkflowV2MultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WorkflowV2MultiError) AllErrors() []error { return m }
+
+// WorkflowV2ValidationError is the validation error returned by
+// WorkflowV2.Validate if the designated constraints aren't met.
+type WorkflowV2ValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WorkflowV2ValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WorkflowV2ValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WorkflowV2ValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WorkflowV2ValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WorkflowV2ValidationError) ErrorName() string { return "WorkflowV2ValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WorkflowV2ValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWorkflowV2.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WorkflowV2ValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WorkflowV2ValidationError{}
+
 // Validate checks the field values on Workflow with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -1265,6 +1500,8 @@ func (m *Workflow) validate(all bool) error {
 	// no validation rules for LastResumedAt
 
 	// no validation rules for UserId
+
+	// no validation rules for Auto
 
 	if all {
 		switch v := interface{}(m.GetDataBus()).(type) {
@@ -1598,6 +1835,35 @@ func (m *KeyFrames_Frame) validate(all bool) error {
 	// no validation rules for Error
 
 	// no validation rules for Category
+
+	if all {
+		switch v := interface{}(m.GetReview()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, KeyFrames_FrameValidationError{
+					field:  "Review",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, KeyFrames_FrameValidationError{
+					field:  "Review",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetReview()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return KeyFrames_FrameValidationError{
+				field:  "Review",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return KeyFrames_FrameMultiError(errors)

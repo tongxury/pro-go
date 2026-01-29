@@ -40,7 +40,21 @@ func NewWorkflowBiz(data *data.Data) *WorkflowBiz {
 	return t
 }
 
-func (t *WorkflowBiz) createWorkflow(ctx context.Context, workflowName string, dataBus *projpb.DataBus) (*projpb.Workflow, error) {
+type CreatWorkFlowOptions struct {
+	Auto bool
+}
+
+type Ops []CreatWorkFlowOptions
+
+func (t Ops) GetAuto() bool {
+	if len(t) == 0 {
+		return false
+	}
+
+	return t[0].Auto
+}
+
+func (t *WorkflowBiz) createWorkflow(ctx context.Context, workflowName string, dataBus *projpb.DataBus, options ...CreatWorkFlowOptions) (*projpb.Workflow, error) {
 	wfDef, ok := t.registry[workflowName]
 	if !ok {
 		return nil, fmt.Errorf("workflow %s not found", workflowName)
@@ -78,6 +92,7 @@ func (t *WorkflowBiz) createWorkflow(ctx context.Context, workflowName string, d
 		UserId:        dataBus.UserId,
 		CreatedAt:     time.Now().Unix(),
 		LastResumedAt: time.Now().Unix(),
+		Auto:          Ops(options).GetAuto(),
 	}
 
 	insert, err := t.data.Mongo.Workflow.Insert(ctx, state)
@@ -321,10 +336,10 @@ func (t *WorkflowBiz) boost(ctx context.Context, wfState *projpb.Workflow) error
 
 	currentJobDef := jobDefs[wfState.Current]
 	currentJobState := wfState.Jobs[wfState.Current]
-	// Execution Logic
-	if currentJobState.Status != JobStatusConfirming {
-		//logger.Debugw("checking job", "", "index", wfState.Current, "job", currentJobDef.GetName(), "status", currentJobState.Status)
-	}
+	//// Execution Logic
+	//if currentJobState.Status != JobStatusConfirming {
+	//	//logger.Debugw("checking job", "", "index", wfState.Current, "job", currentJobDef.GetName(), "status", currentJobState.Status)
+	//}
 
 	// 1. Handle Failed Job
 	if currentJobState.Status == JobStatusFailed {
@@ -437,7 +452,7 @@ func (t *WorkflowBiz) boost(ctx context.Context, wfState *projpb.Workflow) error
 			//currentJobState.Status = JobStatusCompleted
 			//currentJobState.CompletedAt = time.Now().Unix()
 
-			st := helper.Select(es.SkipConfirm, JobStatusCompleted, JobStatusConfirming)
+			st := helper.Select(es.SkipConfirm || wfState.Auto, JobStatusCompleted, JobStatusConfirming)
 
 			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 				mgz.Op().

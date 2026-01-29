@@ -12,7 +12,6 @@ import (
 	"store/pkg/sdk/third/gemini"
 	"time"
 	"unicode"
-	"unicode/utf8"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
@@ -525,31 +524,31 @@ func (t ProjService) verifySegment(x *projpb.ResourceSegment, metadata *videoz.M
 		return false
 	}
 
-	if x.TimeEnd-x.TimeStart < 5 {
-		return false
-	}
+	//if x.TimeEnd-x.TimeStart < 5 {
+	//	return false
+	//}
 
-	if x.TimeEnd-x.TimeStart > 8 {
-		return false
-	}
+	//if x.TimeEnd-x.TimeStart > 8 {
+	//	return false
+	//}
 
 	if x.TimeEnd < 1 {
 		return false
 	}
 
-	for _, xx := range x.TypedTags.Text {
-		if utf8.RuneCountInString(xx) > 8 {
-			return false
-		}
-	}
+	//for _, xx := range x.TypedTags.Text {
+	//	if utf8.RuneCountInString(xx) > 8 {
+	//		return false
+	//	}
+	//}
 
-	if t.englishRatioOver(x.Description, 0.5) {
-		return false
-	}
-
-	if t.englishRatioOver(x.Root.GetCommodity().GetName(), 0.5) {
-		return false
-	}
+	//if t.englishRatioOver(x.Description, 0.5) {
+	//	return false
+	//}
+	//
+	//if t.englishRatioOver(x.Root.GetCommodity().GetName(), 0.5) {
+	//	return false
+	//}
 
 	return true
 }

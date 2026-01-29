@@ -63,7 +63,7 @@ func (t VideoSegmentsRemixJob) Initialize(ctx context.Context, options Options) 
 			remixSegments = append(remixSegments, &projpb.Remix_Segment{
 				VideoGeneration: x,
 				ScriptSegment:   ss,
-				RemixOptions:    &projpb.RemixOptions{
+				RemixOptions: &projpb.RemixOptions{
 					//Flower: &projpb.RemixOptions_Flower{
 					//	//DownloadUrl: "https://museapaas.aigc-cloud.com/api/storage/objects/media/7259353437698031675_origin.zip?infer_mime=ext&x-muse-token=ChYIARABGNzmh8sGINyJjcsGKgQ2ODUxEqYBCg4IroCBxrvFkNVoEKjFDxINCgt2b2xjX2VuZ2luZRoCGAIiCAoCaGwSAmNuKgYI2jQQhgMyKQoneyJiaXpfaWQiOiIxMDAwMDAwMDEiLCJkZXJpdmVkX3VpZCI6IiJ9QhQKEmljYXJjaC5pYW0uYXV0aHJwY0ouL2FwaS9zdG9yYWdlL29iamVjdHMvbWVkaWEvNzI1OTM1MzQzNzY5ODAzMTY3NRrYAnJ4cTZWMVA2Y3d5OFZyT1JEZHJNWURzTU5nQ21LSk10OXFDWlk4L3Y1cXl1V3FEeDNrM3hoNEtuVkczWmNlY0xoa1NvNzhGemI4TE9JUXVEaGlEekZQS3U3NkNtMkYweWR5aVdmSUZnNnUxcm5VaW5GcVpSTDYvZ0RyeTZyZnQwOEppREdFc0pqalB0QzJSMm8zK1dyNEg0NHhJQ2JmcW03b2UxWnJSdmZMaUkyWEo2QlFGNkZYOFZJeWRLNTRFMVR0Z1p2Q3BVaVNEa3pxREpVSHRiNEdMUEFLd1ArK2tUQ1pIa0VsbkhXZXhEUGM1aU9RYzZmM3g4b2RBYVFjZkhzM0Fzbjh0TEI1aFlaWDVELzVQVVQ1UjBrN29HbXE2bmlVdkQ3aUtZNGlCS2hMbFo1Yko5OEpxVFJIL0hUL09oeVFsakVVNFdTd1owV0VkSS9lYjQzQT09",
 					//	MediaId: remixOptions.Flowers[0].MediaId,
@@ -232,8 +232,9 @@ func (t VideoSegmentsRemixJob) Execute(ctx context.Context, jobState *projpb.Job
 	if segmentsRemix == nil {
 
 		err = t.Initialize(ctx, Options{
-			JobState:      jobState,
-			WorkflowState: wfState,
+			JobState:       jobState,
+			WorkflowState:  wfState,
+			RunImmediately: wfState.Auto,
 		})
 		if err != nil {
 			return nil, err
@@ -399,10 +400,10 @@ func (t VideoSegmentsRemixJob) Execute(ctx context.Context, jobState *projpb.Job
 
 		//time.Sleep(10 * time.Second)
 		params := volcengine.CreateMixCutTaskAsyncParams{
-			Name:             "混剪",
-			Group:            groups,
-			Height:           1920,
-			Width:            1080,
+			Name:   "混剪",
+			Group:  groups,
+			Height: 1920,
+			Width:  1080,
 			TransitionConfig: &volcengine.TransitionConfig{
 				//Type: 1,
 			},

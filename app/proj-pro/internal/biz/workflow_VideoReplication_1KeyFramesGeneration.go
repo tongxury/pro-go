@@ -284,44 +284,53 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 			return err
 		}
 
-		//// 审计
-		//promptKey := "segment_first_frame_audit"
-		//if x.Category != "first_frame" {
-		//	promptKey = "segment_last_frame_audit"
-		//}
+		//go func() {
+		//	defer helper.DeferFunc()
 		//
-		//prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
-		//if err != nil {
-		//	return err
-		//}
+		//	// 审计
+		//	promptKey := "segment_first_frame_audit"
+		//	if x.Category != "first_frame" {
+		//		promptKey = "segment_last_frame_audit"
+		//	}
 		//
-		//refParts = append(refParts,
-		//	genai.NewPartFromBytes(blob, "image/jpeg"),
-		//	gemini.NewTextPart(prompt.Content),
-		//)
+		//	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
+		//	if err != nil {
+		//		fmt.Println("GetPrompt err", err)
+		//		return
+		//	}
 		//
-		//auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
-		//	Config: &genai.GenerateContentConfig{
-		//		ResponseMIMEType: "application/json",
-		//		ResponseSchema: &genai.Schema{
-		//			Required: []string{"pass", "reason"},
-		//			Properties: map[string]*genai.Schema{
-		//				"pass":   {Type: genai.TypeBoolean, Description: "是否符合要求"},
-		//				"reason": {Type: genai.TypeString, Description: "原因"},
+		//	refParts = append(refParts,
+		//		genai.NewPartFromBytes(blob, "image/jpeg"),
+		//		gemini.NewTextPart(prompt.Content),
+		//	)
+		//
+		//	auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
+		//		Config: &genai.GenerateContentConfig{
+		//			ResponseMIMEType: "application/json",
+		//			ResponseSchema: &genai.Schema{
+		//				Required: []string{"pass", "reason"},
+		//				Type:     genai.TypeObject,
+		//				Properties: map[string]*genai.Schema{
+		//					"pass": {Type: genai.TypeBoolean, Description: "是否符合要求"},
+		//					"desc": {Type: genai.TypeString, Description: "审计结果概述"},
+		//				},
 		//			},
 		//		},
-		//	},
-		//	Parts: refParts,
-		//})
+		//		Parts: refParts,
+		//	})
 		//
-		//fmt.Println("audit res", auditResJson)
+		//	fmt.Println("audit res", auditResJson)
 		//
-		//var auditRes map[string]interface{}
-		//err = json.Unmarshal([]byte(auditResJson), &auditRes)
-		//if auditRes["pass"] == false {
-		//
-		//}
-
+		//	var auditRes projpb.Review
+		//	err = json.Unmarshal([]byte(auditResJson), &auditRes)
+		//	//if auditRes["pass"] == false {
+		//	//
+		//	//}
+		//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+		//		mgz.Op().
+		//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d.review", jobState.Index, index), &auditRes),
+		//	)
+		//}()
 		return nil
 	})
 

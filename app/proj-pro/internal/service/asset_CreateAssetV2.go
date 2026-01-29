@@ -54,7 +54,7 @@ func (t ProjService) CreateAssetV2(ctx context.Context, req *projpb.CreateAssetV
 	}
 
 	//
-	workflow, err := t.workflow.CreateVideoReplicationWorkflow(ctx, userId, req.WorkflowName, segment, commodity, req.InitialData)
+	workflow, err := t.workflow.CreateVideoReplicationWorkflow(ctx, userId, req.WorkflowName, segment, commodity, req.InitialData, req.Auto)
 	if err != nil {
 		return nil, err
 	}

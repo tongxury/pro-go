@@ -8419,12 +8419,15 @@ components:
                     type: string
                 status:
                     type: string
+                    description: created  completed 两个值
                 createdAt:
                     type: string
                 url:
                     type: string
+                    description: 最终视频
                 coverUrl:
                     type: string
+                    description: 封面
                 duration:
                     type: number
                     format: double
@@ -8704,6 +8707,8 @@ components:
                     type: string
                 initialData:
                     $ref: '#/components/schemas/api.proj.DataBus'
+                auto:
+                    type: boolean
         api.proj.CreateAssetV3Request:
             type: object
             properties:
@@ -9028,6 +9033,10 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.proj.DataBus'
                     description: map<string, string> context = 20;
+                subJobs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.proj.Job'
         api.proj.Job_Progress:
             type: object
             properties:
@@ -9086,6 +9095,8 @@ components:
                     type: string
                 category:
                     type: string
+                review:
+                    $ref: '#/components/schemas/api.proj.Review'
         api.proj.Media:
             type: object
             properties:
@@ -9353,6 +9364,13 @@ components:
                     type: boolean
                 polling:
                     type: boolean
+        api.proj.Review:
+            type: object
+            properties:
+                pass:
+                    type: boolean
+                desc:
+                    type: string
         api.proj.Script:
             type: object
             properties:
@@ -10007,6 +10025,8 @@ components:
                     type: string
                 userId:
                     type: string
+                auto:
+                    type: boolean
                 dataBus:
                     $ref: '#/components/schemas/api.proj.DataBus'
         api.public.enums.Enum:

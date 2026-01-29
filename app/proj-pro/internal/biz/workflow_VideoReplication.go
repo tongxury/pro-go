@@ -28,7 +28,7 @@ func (t *VideoReplication) OnComplete(ctx context.Context, wfState *projpb.Workf
 	return nil
 }
 
-func (t *WorkflowBiz) CreateVideoReplicationWorkflow(ctx context.Context, userId string, name string, segment *projpb.ResourceSegment, commodity *projpb.Commodity, initialData *projpb.DataBus) (*projpb.Workflow, error) {
+func (t *WorkflowBiz) CreateVideoReplicationWorkflow(ctx context.Context, userId string, name string, segment *projpb.ResourceSegment, commodity *projpb.Commodity, initialData *projpb.DataBus, auto bool) (*projpb.Workflow, error) {
 
 	if name == "" {
 		name = "VideoReplication"
@@ -43,7 +43,7 @@ func (t *WorkflowBiz) CreateVideoReplicationWorkflow(ctx context.Context, userId
 	dataBus.Commodity = commodity
 	dataBus.UserId = userId
 
-	return t.createWorkflow(ctx, name, dataBus)
+	return t.createWorkflow(ctx, name, dataBus, CreatWorkFlowOptions{Auto: auto})
 }
 
 func NewVideoReplication(data *data.Data) *VideoReplication {

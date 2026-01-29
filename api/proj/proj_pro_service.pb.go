@@ -1934,6 +1934,7 @@ type CreateAssetV2Request struct {
 	Segment       *ResourceSegment       `protobuf:"bytes,3,opt,name=segment,proto3" json:"segment,omitempty"`
 	WorkflowName  string                 `protobuf:"bytes,4,opt,name=workflowName,proto3" json:"workflowName,omitempty"`
 	InitialData   *DataBus               `protobuf:"bytes,5,opt,name=initialData,proto3" json:"initialData,omitempty"`
+	Auto          bool                   `protobuf:"varint,6,opt,name=auto,proto3" json:"auto,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2001,6 +2002,13 @@ func (x *CreateAssetV2Request) GetInitialData() *DataBus {
 		return x.InitialData
 	}
 	return nil
+}
+
+func (x *CreateAssetV2Request) GetAuto() bool {
+	if x != nil {
+		return x.Auto
+	}
+	return false
 }
 
 type CreateAssetV3Request struct {
@@ -2840,13 +2848,14 @@ const file_proj_proj_pro_service_proto_rawDesc = "" +
 	"\asegment\x18\x05 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x12&\n" +
 	"\x0epromptAddition\x18\x03 \x01(\tR\x0epromptAddition\x12 \n" +
 	"\vbaseAssetId\x18\x04 \x01(\tR\vbaseAssetId\x120\n" +
-	"\aprompts\x18\x06 \x01(\v2\x16.api.proj.AssetPromptsR\aprompts\"\xe4\x01\n" +
+	"\aprompts\x18\x06 \x01(\v2\x16.api.proj.AssetPromptsR\aprompts\"\xf8\x01\n" +
 	"\x14CreateAssetV2Request\x12 \n" +
 	"\vcommodityId\x18\x01 \x01(\tR\vcommodityId\x12\x1c\n" +
 	"\tsegmentId\x18\x02 \x01(\tR\tsegmentId\x123\n" +
 	"\asegment\x18\x03 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x12\"\n" +
 	"\fworkflowName\x18\x04 \x01(\tR\fworkflowName\x123\n" +
-	"\vinitialData\x18\x05 \x01(\v2\x11.api.proj.DataBusR\vinitialData\"F\n" +
+	"\vinitialData\x18\x05 \x01(\v2\x11.api.proj.DataBusR\vinitialData\x12\x12\n" +
+	"\x04auto\x18\x06 \x01(\bR\x04auto\"F\n" +
 	"\x14CreateAssetV3Request\x12\x16\n" +
 	"\x06prompt\x18\x01 \x01(\tR\x06prompt\x12\x16\n" +
 	"\x06images\x18\x02 \x03(\tR\x06images\"D\n" +

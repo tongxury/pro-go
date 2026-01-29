@@ -3501,6 +3501,8 @@ func (m *CreateAssetV2Request) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Auto
+
 	if len(errors) > 0 {
 		return CreateAssetV2RequestMultiError(errors)
 	}

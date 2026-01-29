@@ -193,7 +193,7 @@ func (t VideoReplication2_VideoGenerationJob) Execute(ctx context.Context, jobSt
 	logger.Debugw("prompt", dataBus.SegmentScript.GetScript())
 
 	video, err := t.data.OpenAI.Videos().New(ctx, openai.VideoNewParams{
-		Model:          openai.VideoModelSora2,
+		Model:          openai.VideoModelSora2Pro,
 		Prompt:         videoGeneration.Prompt,
 		InputReference: openai.File(bytes.NewReader(resizedImage), helper.CreateUUID(), "image/jpeg"),
 		Seconds:        openai.VideoSeconds(seconds),

@@ -14,7 +14,6 @@ import "proj/workflow.proto";
 
 option go_package = "store/api/proj;projpb";
 
-
 message AssetGroup {
   string _id = 1 [json_name = '_id'];
   api.proj.Commodity commodity = 2;
@@ -55,10 +54,14 @@ message Asset {
   api.proj.Commodity commodity = 2;
   api.proj.ResourceSegment segment = 3;
   string userId = 7;
+
+  //  created  completed 两个值
   string status = 4;
   int64 createdAt = 5;
 
+  // 最终视频
   string url = 6;
+  // 封面
   string coverUrl = 8;
   double duration = 9;
 
