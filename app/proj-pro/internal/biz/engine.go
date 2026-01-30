@@ -24,12 +24,14 @@ func NewWorkflowBiz(data *data.Data) *WorkflowBiz {
 
 	videoReplication := NewVideoReplication(data)
 	videoReplication2 := NewVideoReplication2(data)
+	videoReplication3 := NewVideoReplication3(data)
 	videoGeneration := NewVideoGeneration(data)
 
 	t := &WorkflowBiz{
 		registry: map[string]IWorkflow{
 			videoReplication.GetName():  videoReplication,
 			videoReplication2.GetName(): videoReplication2,
+			videoReplication3.GetName(): videoReplication3,
 			videoGeneration.GetName():   videoGeneration,
 		},
 		data: data,

@@ -106,6 +106,17 @@ message ResourceSegmentList {
 }
 
 
+message ListResourceSegmentsRequest {
+  int64 page = 1;
+  string keyword = 2;
+  string searchBy = 6;
+  string category = 3;
+  int64 size = 4;
+  string status = 5;
+  repeated string ids = 7;
+  string returnFields = 8;
+}
+
 message Item {
   string id = 1;
   string status = 2;

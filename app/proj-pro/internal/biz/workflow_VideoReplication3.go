@@ -15,22 +15,15 @@ func (t *VideoReplication3) OnComplete(ctx context.Context, wfState *projpb.Work
 	return nil
 }
 
-func (t *WorkflowBiz) CreateVideoReplication3Workflow(ctx context.Context, userId string, name string, segment *projpb.ResourceSegment, commodity *projpb.Commodity, initialData *projpb.DataBus, auto bool) (*projpb.Workflow, error) {
-
-	if name == "" {
-		name = "VideoReplication"
-	}
+func (t *WorkflowBiz) CreateVideoReplication3Workflow(ctx context.Context, userId string, initialData *projpb.DataBus) (*projpb.Workflow, error) {
 
 	dataBus := initialData
 	if dataBus == nil {
 		dataBus = &projpb.DataBus{}
 	}
 
-	dataBus.Segment = segment
-	dataBus.Commodity = commodity
 	dataBus.UserId = userId
-
-	return t.createWorkflow(ctx, name, dataBus, CreatWorkFlowOptions{Auto: auto})
+	return t.createWorkflow(ctx, "VideoReplication3", dataBus, CreatWorkFlowOptions{Auto: true})
 }
 
 func NewVideoReplication3(data *data.Data) *VideoReplication3 {

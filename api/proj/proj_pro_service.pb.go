@@ -2896,7 +2896,7 @@ const file_proj_proj_pro_service_proto_rawDesc = "" +
 	"\x06params\x18\x03 \x03(\v2..api.proj.UpdateTaskSegmentRequest.ParamsEntryR\x06params\x1a9\n" +
 	"\vParamsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xc2\x1d\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xc9\x1e\n" +
 	"\x0eProjProService\x12q\n" +
 	"\x10ListRemixOptions\x12!.api.proj.ListRemixOptionsRequest\x1a\x16.api.proj.RemixOptions\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/proj/v1/remix-options\x12q\n" +
 	"\x11ListOngoingIssues\x12\".api.proj.ListOngoingIssuesRequest\x1a\x13.api.proj.IssueList\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/proj/v1/ongoing-issues\x12g\n" +
@@ -2912,7 +2912,8 @@ const file_proj_proj_pro_service_proto_rawDesc = "" +
 	"\r_AddTemplates\x12\x1d.api.proj.AddTemplatesRequest\x1a\x16.api.proj.ResourceList\"\x00\x12B\n" +
 	"\f_GetTemplate\x12\x1c.api.proj.GetTemplateRequest\x1a\x12.api.proj.Resource\"\x00\x12H\n" +
 	"\x0f_UpdateTemplate\x12\x1f.api.proj.UpdateTemplateRequest\x1a\x12.api.proj.Resource\"\x00\x12h\n" +
-	"\x0eCreateTemplate\x12\x1f.api.proj.CreateTemplateRequest\x1a\x12.api.proj.Resource\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/proj/v1/templates\x12g\n" +
+	"\x0eCreateTemplate\x12\x1f.api.proj.CreateTemplateRequest\x1a\x12.api.proj.Resource\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/proj/v1/templates\x12\x84\x01\n" +
+	"\x14ListTemplateSegments\x12%.api.proj.ListResourceSegmentsRequest\x1a\x1d.api.proj.ResourceSegmentList\"&\x82\xd3\xe4\x93\x02 \x12\x1e/api/proj/v2/template-segments\x12g\n" +
 	"\x0fGetAssetSummary\x12\x16.google.protobuf.Empty\x1a\x16.api.proj.AssetSummary\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/proj/v1/asset-summaries\x12q\n" +
 	"\x11ListQualityAssets\x12\".api.proj.ListQualityAssetsRequest\x1a\x13.api.proj.AssetList\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/proj/v2/quality-assets\x12c\n" +
 	"\rReCreateAsset\x12\x1e.api.proj.ReCreateAssetRequest\x1a\x0f.api.proj.Asset\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/proj/v1/re-assets\x12\\\n" +
@@ -3005,17 +3006,19 @@ var file_proj_proj_pro_service_proto_goTypes = []any{
 	(*ResourceSegment)(nil),                    // 48: api.proj.ResourceSegment
 	(*AssetPrompts)(nil),                       // 49: api.proj.AssetPrompts
 	(*DataBus)(nil),                            // 50: api.proj.DataBus
-	(*emptypb.Empty)(nil),                      // 51: google.protobuf.Empty
-	(*RemixOptions)(nil),                       // 52: api.proj.RemixOptions
-	(*FeedbackList)(nil),                       // 53: api.proj.FeedbackList
-	(*ResourceList)(nil),                       // 54: api.proj.ResourceList
-	(*Resource)(nil),                           // 55: api.proj.Resource
-	(*AssetList)(nil),                          // 56: api.proj.AssetList
-	(*Asset)(nil),                              // 57: api.proj.Asset
-	(*ItemList)(nil),                           // 58: api.proj.ItemList
-	(*CommodityList)(nil),                      // 59: api.proj.CommodityList
-	(*Task)(nil),                               // 60: api.proj.Task
-	(*TaskList)(nil),                           // 61: api.proj.TaskList
+	(*ListResourceSegmentsRequest)(nil),        // 51: api.proj.ListResourceSegmentsRequest
+	(*emptypb.Empty)(nil),                      // 52: google.protobuf.Empty
+	(*RemixOptions)(nil),                       // 53: api.proj.RemixOptions
+	(*FeedbackList)(nil),                       // 54: api.proj.FeedbackList
+	(*ResourceList)(nil),                       // 55: api.proj.ResourceList
+	(*Resource)(nil),                           // 56: api.proj.Resource
+	(*ResourceSegmentList)(nil),                // 57: api.proj.ResourceSegmentList
+	(*AssetList)(nil),                          // 58: api.proj.AssetList
+	(*Asset)(nil),                              // 59: api.proj.Asset
+	(*ItemList)(nil),                           // 60: api.proj.ItemList
+	(*CommodityList)(nil),                      // 61: api.proj.CommodityList
+	(*Task)(nil),                               // 62: api.proj.Task
+	(*TaskList)(nil),                           // 63: api.proj.TaskList
 }
 var file_proj_proj_pro_service_proto_depIdxs = []int32{
 	39, // 0: api.proj.AddFeedbackRequest.content:type_name -> api.proj.AddFeedbackRequest.ContentEntry
@@ -3047,69 +3050,71 @@ var file_proj_proj_pro_service_proto_depIdxs = []int32{
 	4,  // 26: api.proj.ProjProService._GetTemplate:input_type -> api.proj.GetTemplateRequest
 	3,  // 27: api.proj.ProjProService._UpdateTemplate:input_type -> api.proj.UpdateTemplateRequest
 	32, // 28: api.proj.ProjProService.CreateTemplate:input_type -> api.proj.CreateTemplateRequest
-	51, // 29: api.proj.ProjProService.GetAssetSummary:input_type -> google.protobuf.Empty
-	21, // 30: api.proj.ProjProService.ListQualityAssets:input_type -> api.proj.ListQualityAssetsRequest
-	33, // 31: api.proj.ProjProService.ReCreateAsset:input_type -> api.proj.ReCreateAssetRequest
-	28, // 32: api.proj.ProjProService.CreateAsset:input_type -> api.proj.CreateAssetRequest
-	29, // 33: api.proj.ProjProService.CreateAssetV2:input_type -> api.proj.CreateAssetV2Request
-	30, // 34: api.proj.ProjProService.CreateAssetV3:input_type -> api.proj.CreateAssetV3Request
-	31, // 35: api.proj.ProjProService.CreateAssetV5:input_type -> api.proj.CreateAssetV5Request
-	19, // 36: api.proj.ProjProService.ListAssets:input_type -> api.proj.ListAssetsRequest
-	20, // 37: api.proj.ProjProService._ListAssets:input_type -> api.proj._ListAssetsRequest
-	27, // 38: api.proj.ProjProService.UpdateAsset:input_type -> api.proj.UpdateAssetRequest
-	22, // 39: api.proj.ProjProService.GetAsset:input_type -> api.proj.GetAssetRequest
-	23, // 40: api.proj.ProjProService._GetAsset:input_type -> api.proj._GetAssetRequest
-	14, // 41: api.proj.ProjProService.CallbackByVolcengine:input_type -> api.proj.CallbackByVolcengineParams
-	15, // 42: api.proj.ProjProService.ListRelatedItems:input_type -> api.proj.ListRelatedItemsRequest
-	16, // 43: api.proj.ProjProService.CreateCommodity:input_type -> api.proj.CreateCommodityRequest
-	24, // 44: api.proj.ProjProService.ListCommodities:input_type -> api.proj.ListCommodityRequest
-	25, // 45: api.proj.ProjProService.GetCommodity:input_type -> api.proj.GetCommodityRequest
-	26, // 46: api.proj.ProjProService.UpdateCommodity:input_type -> api.proj.UpdateCommodityRequest
-	34, // 47: api.proj.ProjProService.CreateTask:input_type -> api.proj.CreateTaskTaskRequest
-	35, // 48: api.proj.ProjProService.ListTasks:input_type -> api.proj.ListTaskRequest
-	36, // 49: api.proj.ProjProService.GetTask:input_type -> api.proj.GetTaskRequest
-	37, // 50: api.proj.ProjProService.UpdateTask:input_type -> api.proj.UpdateTaskRequest
-	38, // 51: api.proj.ProjProService.UpdateTaskSegment:input_type -> api.proj.UpdateTaskSegmentRequest
-	52, // 52: api.proj.ProjProService.ListRemixOptions:output_type -> api.proj.RemixOptions
-	8,  // 53: api.proj.ProjProService.ListOngoingIssues:output_type -> api.proj.IssueList
-	53, // 54: api.proj.ProjProService.ListFeedbacks:output_type -> api.proj.FeedbackList
-	53, // 55: api.proj.ProjProService._ListFeedbacks:output_type -> api.proj.FeedbackList
-	51, // 56: api.proj.ProjProService.AddFeedback:output_type -> google.protobuf.Empty
-	54, // 57: api.proj.ProjProService.ListTemplates:output_type -> api.proj.ResourceList
-	54, // 58: api.proj.ProjProService.ListPublicTemplates:output_type -> api.proj.ResourceList
-	54, // 59: api.proj.ProjProService.AddTemplates:output_type -> api.proj.ResourceList
-	55, // 60: api.proj.ProjProService.GetTemplate:output_type -> api.proj.Resource
-	55, // 61: api.proj.ProjProService.UpdateTemplate:output_type -> api.proj.Resource
-	54, // 62: api.proj.ProjProService._ListTemplates:output_type -> api.proj.ResourceList
-	54, // 63: api.proj.ProjProService._AddTemplates:output_type -> api.proj.ResourceList
-	55, // 64: api.proj.ProjProService._GetTemplate:output_type -> api.proj.Resource
-	55, // 65: api.proj.ProjProService._UpdateTemplate:output_type -> api.proj.Resource
-	55, // 66: api.proj.ProjProService.CreateTemplate:output_type -> api.proj.Resource
-	2,  // 67: api.proj.ProjProService.GetAssetSummary:output_type -> api.proj.AssetSummary
-	56, // 68: api.proj.ProjProService.ListQualityAssets:output_type -> api.proj.AssetList
-	57, // 69: api.proj.ProjProService.ReCreateAsset:output_type -> api.proj.Asset
-	57, // 70: api.proj.ProjProService.CreateAsset:output_type -> api.proj.Asset
-	57, // 71: api.proj.ProjProService.CreateAssetV2:output_type -> api.proj.Asset
-	57, // 72: api.proj.ProjProService.CreateAssetV3:output_type -> api.proj.Asset
-	57, // 73: api.proj.ProjProService.CreateAssetV5:output_type -> api.proj.Asset
-	56, // 74: api.proj.ProjProService.ListAssets:output_type -> api.proj.AssetList
-	56, // 75: api.proj.ProjProService._ListAssets:output_type -> api.proj.AssetList
-	57, // 76: api.proj.ProjProService.UpdateAsset:output_type -> api.proj.Asset
-	57, // 77: api.proj.ProjProService.GetAsset:output_type -> api.proj.Asset
-	57, // 78: api.proj.ProjProService._GetAsset:output_type -> api.proj.Asset
-	51, // 79: api.proj.ProjProService.CallbackByVolcengine:output_type -> google.protobuf.Empty
-	58, // 80: api.proj.ProjProService.ListRelatedItems:output_type -> api.proj.ItemList
-	47, // 81: api.proj.ProjProService.CreateCommodity:output_type -> api.proj.Commodity
-	59, // 82: api.proj.ProjProService.ListCommodities:output_type -> api.proj.CommodityList
-	47, // 83: api.proj.ProjProService.GetCommodity:output_type -> api.proj.Commodity
-	51, // 84: api.proj.ProjProService.UpdateCommodity:output_type -> google.protobuf.Empty
-	60, // 85: api.proj.ProjProService.CreateTask:output_type -> api.proj.Task
-	61, // 86: api.proj.ProjProService.ListTasks:output_type -> api.proj.TaskList
-	60, // 87: api.proj.ProjProService.GetTask:output_type -> api.proj.Task
-	60, // 88: api.proj.ProjProService.UpdateTask:output_type -> api.proj.Task
-	51, // 89: api.proj.ProjProService.UpdateTaskSegment:output_type -> google.protobuf.Empty
-	52, // [52:90] is the sub-list for method output_type
-	14, // [14:52] is the sub-list for method input_type
+	51, // 29: api.proj.ProjProService.ListTemplateSegments:input_type -> api.proj.ListResourceSegmentsRequest
+	52, // 30: api.proj.ProjProService.GetAssetSummary:input_type -> google.protobuf.Empty
+	21, // 31: api.proj.ProjProService.ListQualityAssets:input_type -> api.proj.ListQualityAssetsRequest
+	33, // 32: api.proj.ProjProService.ReCreateAsset:input_type -> api.proj.ReCreateAssetRequest
+	28, // 33: api.proj.ProjProService.CreateAsset:input_type -> api.proj.CreateAssetRequest
+	29, // 34: api.proj.ProjProService.CreateAssetV2:input_type -> api.proj.CreateAssetV2Request
+	30, // 35: api.proj.ProjProService.CreateAssetV3:input_type -> api.proj.CreateAssetV3Request
+	31, // 36: api.proj.ProjProService.CreateAssetV5:input_type -> api.proj.CreateAssetV5Request
+	19, // 37: api.proj.ProjProService.ListAssets:input_type -> api.proj.ListAssetsRequest
+	20, // 38: api.proj.ProjProService._ListAssets:input_type -> api.proj._ListAssetsRequest
+	27, // 39: api.proj.ProjProService.UpdateAsset:input_type -> api.proj.UpdateAssetRequest
+	22, // 40: api.proj.ProjProService.GetAsset:input_type -> api.proj.GetAssetRequest
+	23, // 41: api.proj.ProjProService._GetAsset:input_type -> api.proj._GetAssetRequest
+	14, // 42: api.proj.ProjProService.CallbackByVolcengine:input_type -> api.proj.CallbackByVolcengineParams
+	15, // 43: api.proj.ProjProService.ListRelatedItems:input_type -> api.proj.ListRelatedItemsRequest
+	16, // 44: api.proj.ProjProService.CreateCommodity:input_type -> api.proj.CreateCommodityRequest
+	24, // 45: api.proj.ProjProService.ListCommodities:input_type -> api.proj.ListCommodityRequest
+	25, // 46: api.proj.ProjProService.GetCommodity:input_type -> api.proj.GetCommodityRequest
+	26, // 47: api.proj.ProjProService.UpdateCommodity:input_type -> api.proj.UpdateCommodityRequest
+	34, // 48: api.proj.ProjProService.CreateTask:input_type -> api.proj.CreateTaskTaskRequest
+	35, // 49: api.proj.ProjProService.ListTasks:input_type -> api.proj.ListTaskRequest
+	36, // 50: api.proj.ProjProService.GetTask:input_type -> api.proj.GetTaskRequest
+	37, // 51: api.proj.ProjProService.UpdateTask:input_type -> api.proj.UpdateTaskRequest
+	38, // 52: api.proj.ProjProService.UpdateTaskSegment:input_type -> api.proj.UpdateTaskSegmentRequest
+	53, // 53: api.proj.ProjProService.ListRemixOptions:output_type -> api.proj.RemixOptions
+	8,  // 54: api.proj.ProjProService.ListOngoingIssues:output_type -> api.proj.IssueList
+	54, // 55: api.proj.ProjProService.ListFeedbacks:output_type -> api.proj.FeedbackList
+	54, // 56: api.proj.ProjProService._ListFeedbacks:output_type -> api.proj.FeedbackList
+	52, // 57: api.proj.ProjProService.AddFeedback:output_type -> google.protobuf.Empty
+	55, // 58: api.proj.ProjProService.ListTemplates:output_type -> api.proj.ResourceList
+	55, // 59: api.proj.ProjProService.ListPublicTemplates:output_type -> api.proj.ResourceList
+	55, // 60: api.proj.ProjProService.AddTemplates:output_type -> api.proj.ResourceList
+	56, // 61: api.proj.ProjProService.GetTemplate:output_type -> api.proj.Resource
+	56, // 62: api.proj.ProjProService.UpdateTemplate:output_type -> api.proj.Resource
+	55, // 63: api.proj.ProjProService._ListTemplates:output_type -> api.proj.ResourceList
+	55, // 64: api.proj.ProjProService._AddTemplates:output_type -> api.proj.ResourceList
+	56, // 65: api.proj.ProjProService._GetTemplate:output_type -> api.proj.Resource
+	56, // 66: api.proj.ProjProService._UpdateTemplate:output_type -> api.proj.Resource
+	56, // 67: api.proj.ProjProService.CreateTemplate:output_type -> api.proj.Resource
+	57, // 68: api.proj.ProjProService.ListTemplateSegments:output_type -> api.proj.ResourceSegmentList
+	2,  // 69: api.proj.ProjProService.GetAssetSummary:output_type -> api.proj.AssetSummary
+	58, // 70: api.proj.ProjProService.ListQualityAssets:output_type -> api.proj.AssetList
+	59, // 71: api.proj.ProjProService.ReCreateAsset:output_type -> api.proj.Asset
+	59, // 72: api.proj.ProjProService.CreateAsset:output_type -> api.proj.Asset
+	59, // 73: api.proj.ProjProService.CreateAssetV2:output_type -> api.proj.Asset
+	59, // 74: api.proj.ProjProService.CreateAssetV3:output_type -> api.proj.Asset
+	59, // 75: api.proj.ProjProService.CreateAssetV5:output_type -> api.proj.Asset
+	58, // 76: api.proj.ProjProService.ListAssets:output_type -> api.proj.AssetList
+	58, // 77: api.proj.ProjProService._ListAssets:output_type -> api.proj.AssetList
+	59, // 78: api.proj.ProjProService.UpdateAsset:output_type -> api.proj.Asset
+	59, // 79: api.proj.ProjProService.GetAsset:output_type -> api.proj.Asset
+	59, // 80: api.proj.ProjProService._GetAsset:output_type -> api.proj.Asset
+	52, // 81: api.proj.ProjProService.CallbackByVolcengine:output_type -> google.protobuf.Empty
+	60, // 82: api.proj.ProjProService.ListRelatedItems:output_type -> api.proj.ItemList
+	47, // 83: api.proj.ProjProService.CreateCommodity:output_type -> api.proj.Commodity
+	61, // 84: api.proj.ProjProService.ListCommodities:output_type -> api.proj.CommodityList
+	47, // 85: api.proj.ProjProService.GetCommodity:output_type -> api.proj.Commodity
+	52, // 86: api.proj.ProjProService.UpdateCommodity:output_type -> google.protobuf.Empty
+	62, // 87: api.proj.ProjProService.CreateTask:output_type -> api.proj.Task
+	63, // 88: api.proj.ProjProService.ListTasks:output_type -> api.proj.TaskList
+	62, // 89: api.proj.ProjProService.GetTask:output_type -> api.proj.Task
+	62, // 90: api.proj.ProjProService.UpdateTask:output_type -> api.proj.Task
+	52, // 91: api.proj.ProjProService.UpdateTaskSegment:output_type -> google.protobuf.Empty
+	53, // [53:92] is the sub-list for method output_type
+	14, // [14:53] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name

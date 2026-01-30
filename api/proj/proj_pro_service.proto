@@ -89,6 +89,12 @@ service ProjProService {
       body: "*"
     };
   }
+
+  rpc ListTemplateSegments(ListResourceSegmentsRequest) returns (api.proj.ResourceSegmentList) {
+    option (google.api.http) = {
+      get: "/api/proj/v2/template-segments"
+    };
+  }
   // ---------------
   rpc GetAssetSummary(google.protobuf.Empty) returns (AssetSummary) {
     option (google.api.http) = {

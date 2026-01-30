@@ -5,12 +5,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sort"
 	projpb "store/api/proj"
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
+	"store/pkg/sdk/helper"
+	"store/pkg/sdk/third/bytedance/vikingdb"
 	"store/pkg/sdk/third/gemini"
+	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/genai"
 )
 
@@ -65,6 +70,13 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 	commodity.PackagingAttributes = analyzeResult.PackagingAttributes
 	commodity.Chances = analyzeResult.Chances
 
+	for _, x := range commodity.Images {
+		commodity.Medias = append(commodity.Medias, &projpb.Media{
+			MimeType: "image/jpeg",
+			Url:      x,
+		})
+	}
+
 	_, err = t.data.Mongo.Commodity.UpdateByIDIfExists(ctx, commodity.XId,
 		mgz.Op().
 			Set("name", analyzeResult.Name).
@@ -81,11 +93,21 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		return nil, err
 	}
 
+	segments, err := t.searchTemplateSegments(ctx, strings.Join(analyzeResult.Tags, ","), "", 1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(segments) == 0 {
+		logger.Errorw("searchTemplateSegments err", "no segment found")
+		return nil, errors.New("no segment template found")
+	}
+
 	// 更新 workflow 中的 dataBus
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-		Set(fmt.Sprintf("jobs.%d.dataBus.commodity", jobState.Index), commodity))
+		Set(fmt.Sprintf("jobs.%d.dataBus.segment", jobState.Index), segments[0]))
 	if err != nil {
-		logger.Errorw("update workflow commodity fail", "err", err)
+		logger.Errorw("update workflow segment fail", "err", err)
 		return nil, err
 	}
 
@@ -109,10 +131,17 @@ func (t VideoReplication3_CommodityAnalysisJob) doAnalyzeChances(ctx context.Con
 	genaiClient := t.data.GenaiFactory.Get()
 
 	var parts []*genai.Part
-	for i, x := range commodity.Images {
+
+	images := helper.Filter(commodity.Images, func(param string) bool {
+		return !strings.HasSuffix(param, ".webp")
+	})
+
+	for i, x := range images {
+
 		if i > 10 {
 			break
 		}
+
 		part, err := gemini.NewImagePart(x)
 		if err != nil {
 			return nil, err
@@ -126,6 +155,10 @@ func (t VideoReplication3_CommodityAnalysisJob) doAnalyzeChances(ctx context.Con
 			return nil, err
 		}
 		parts = append(parts, part)
+	}
+
+	if commodity.Description != "" {
+		parts = append(parts, gemini.NewTextPart(commodity.Description))
 	}
 
 	generationConfig := &genai.GenerateContentConfig{
@@ -242,4 +275,68 @@ func (t VideoReplication3_CommodityAnalysisJob) doAnalyzeChances(ctx context.Con
 	}
 
 	return &result, nil
+}
+
+func (t VideoReplication3_CommodityAnalysisJob) searchTemplateSegments(ctx context.Context, keyword, by string, size int) ([]*projpb.ResourceSegment, error) {
+
+	size = helper.Select(size > 0, size, 24)
+
+	var err error
+	var items *vikingdb.SearchResponse
+
+	if by == "video" {
+		items, err = t.data.VikingDB.SearchByKeywords(ctx, vikingdb.SearchByKeywordsRequest{
+			SearchRequest: vikingdb.SearchRequest{
+				CollectionName: "segment_video_coll",
+				IndexName:      "segment_video_idx",
+				Limit:          int(size),
+			},
+			Keywords: []string{keyword},
+		})
+	} else {
+		items, err = t.data.VikingDB.SearchByKeywords(ctx, vikingdb.SearchByKeywordsRequest{
+			SearchRequest: vikingdb.SearchRequest{
+				CollectionName: "segment_commodity_coll",
+				IndexName:      "segment_commodity_idx",
+				Limit:          int(size),
+			},
+			Keywords: []string{keyword},
+		})
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	if len(items.Data) == 0 {
+		return nil, nil
+	}
+
+	var ids []string
+	idSort := map[string]int{}
+	for i, item := range items.Data {
+
+		if helper.InSlice(item.Id, ids) {
+			continue
+		}
+
+		ids = append(ids, item.Id)
+		idSort[item.Id] = i
+	}
+
+	list, _, err := t.data.Mongo.TemplateSegment.ListAndCount(ctx,
+		bson.M{"_id": bson.M{"$in": mgz.ObjectIds(ids)}},
+		mgz.Find().
+			Paging(0, 10).
+			B(),
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	sort.Slice(list, func(i, j int) bool {
+		return idSort[list[i].XId] < idSort[list[j].XId]
+	})
+
+	return list, nil
 }
