@@ -8,7 +8,7 @@ import (
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
 	"store/pkg/sdk/helper/wg"
-	"store/pkg/sdk/third/gemini"
+	"store/pkg/sdk/third/wavespeed"
 	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -92,10 +92,7 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 				Refs: []string{
 					segment.StartFrame,
 					helper.SliceElement[string](
-						helper.Mapping(dataBus.Commodity.GetMedias(),
-							func(x *projpb.Media) string {
-								return x.Url
-							}),
+						dataBus.Commodity.GetRefs(),
 						0, false),
 				},
 				Prompt: fmt.Sprintf("%s\n%s\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s",
@@ -123,10 +120,7 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 					Refs: []string{
 						lastFrame.Url,
 						helper.SliceElement[string](
-							helper.Mapping(dataBus.Commodity.GetMedias(),
-								func(x *projpb.Media) string {
-									return x.Url
-								}),
+							dataBus.Commodity.GetRefs(),
 							0, false),
 					},
 					Prompt: fmt.Sprintf("%s\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s",
@@ -157,182 +151,182 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 		return nil, err
 	}
 
-	// Waved AI 版
-	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
-	//	if x.Status != ExecuteStatusRunning {
-	//		return nil
-	//	}
-	//
-	//	if x.TaskId != "" {
-	//		result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
-	//		if err != nil {
-	//			return err
-	//		}
-	//
-	//		logger.Debugw("keyFrames generation job task check result", result)
-	//
-	//		if len(result.Data.Outputs) > 0 {
-	//
-	//			x.Url = result.Data.Outputs[0]
-	//			x.Status = ExecuteStatusCompleted
-	//
-	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//			if err != nil {
-	//				return err
-	//			}
-	//
-	//			return nil
-	//		}
-	//
-	//		if result.Data.Status == "failed" {
-	//			x.Url = ""
-	//			x.Status = ExecuteStatusRunning
-	//			x.TaskId = ""
-	//
-	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//			if err != nil {
-	//				return err
-	//			}
-	//
-	//			return nil
-	//		}
-	//
-	//		return nil
-	//	}
-	//
-	//	res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
-	//		Prompt:       x.Prompt,
-	//		Images:       x.Refs,
-	//		AspectRatio:  "9:16",
-	//		Resolution:   "1k",
-	//		OutputFormat: "",
-	//		//EnableSyncMode: true,
-	//		//EnableBase64Output: false,
-	//	})
-	//	if err != nil {
-	//		logger.Errorw("Gemini3ProImage err", err)
-	//		return err
-	//	}
-	//
-	//	logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
-	//
-	//	x.TaskId = res.Data.Id
-	//	x.Status = ExecuteStatusRunning
-	//
-	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-	//		mgz.Op().
-	//			Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//	if err != nil {
-	//		return err
-	//	}
-	//
-	//	return nil
-	//})
-
 	logger.Debugw("settings", wfState.DataBus.GetSettings())
 
+	// Waved AI 版
 	wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
 		if x.Status != ExecuteStatusRunning {
 			return nil
 		}
 
-		refParts, err := gemini.NewImageParts(x.Refs)
-		if err != nil {
-			return err
-		}
+		if x.TaskId != "" {
+			result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
+			if err != nil {
+				return err
+			}
 
+			logger.Debugw("keyFrames generation job task check result", result)
+
+			if len(result.Data.Outputs) > 0 {
+
+				x.Url = result.Data.Outputs[0]
+				x.Status = ExecuteStatusCompleted
+
+				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+
+				if err != nil {
+					return err
+				}
+
+				return nil
+			}
+
+			if result.Data.Status == "failed" {
+				x.Url = ""
+				x.Status = ExecuteStatusRunning
+				x.TaskId = ""
+
+				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+
+				if err != nil {
+					return err
+				}
+
+				return nil
+			}
+
+			return nil
+		}
 		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
-		blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
-			Parts:       refParts,
+		res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
 			Prompt:      x.Prompt,
+			Images:      x.Refs,
 			AspectRatio: aspectRatio,
+			Resolution:  "1k",
+			//OutputFormat: "",
+			//EnableSyncMode: true,
+			//EnableBase64Output: false,
 		})
 		if err != nil {
-			logger.Errorw("GenerateImage err", err)
-
-			x.Error = err.Error()
-			x.Status = ExecuteStatusFailed
-
-			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-				mgz.Op().
-					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
-			)
-
+			logger.Errorw("Gemini3ProImage err", err)
 			return err
 		}
 
-		tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
-		if err != nil {
-			return err
-		}
+		logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
 
-		x.Url = tmpUrl
-		x.Status = ExecuteStatusCompleted
-		x.AspectRatio = aspectRatio
+		x.TaskId = res.Data.Id
+		x.Status = ExecuteStatusRunning
 
 		_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 			mgz.Op().
-				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
-		)
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
 
 		if err != nil {
 			return err
 		}
 
-		//go func() {
-		//	defer helper.DeferFunc()
-		//
-		//	// 审计
-		//	promptKey := "segment_first_frame_audit"
-		//	if x.Category != "first_frame" {
-		//		promptKey = "segment_last_frame_audit"
-		//	}
-		//
-		//	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
-		//	if err != nil {
-		//		fmt.Println("GetPrompt err", err)
-		//		return
-		//	}
-		//
-		//	refParts = append(refParts,
-		//		genai.NewPartFromBytes(blob, "image/jpeg"),
-		//		gemini.NewTextPart(prompt.Content),
-		//	)
-		//
-		//	auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
-		//		Config: &genai.GenerateContentConfig{
-		//			ResponseMIMEType: "application/json",
-		//			ResponseSchema: &genai.Schema{
-		//				Required: []string{"pass", "reason"},
-		//				Type:     genai.TypeObject,
-		//				Properties: map[string]*genai.Schema{
-		//					"pass": {Type: genai.TypeBoolean, Description: "是否符合要求"},
-		//					"desc": {Type: genai.TypeString, Description: "审计结果概述"},
-		//				},
-		//			},
-		//		},
-		//		Parts: refParts,
-		//	})
-		//
-		//	fmt.Println("audit res", auditResJson)
-		//
-		//	var auditRes projpb.Review
-		//	err = json.Unmarshal([]byte(auditResJson), &auditRes)
-		//	//if auditRes["pass"] == false {
-		//	//
-		//	//}
-		//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-		//		mgz.Op().
-		//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d.review", jobState.Index, index), &auditRes),
-		//	)
-		//}()
 		return nil
 	})
+
+	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
+	//	if x.Status != ExecuteStatusRunning {
+	//		return nil
+	//	}
+	//
+	//	refParts, err := gemini.NewImageParts(x.Refs)
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
+	//	blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
+	//		Parts:       refParts,
+	//		Prompt:      x.Prompt,
+	//		AspectRatio: aspectRatio,
+	//	})
+	//	if err != nil {
+	//		logger.Errorw("GenerateImage err", err)
+	//
+	//		x.Error = err.Error()
+	//		x.Status = ExecuteStatusFailed
+	//
+	//		_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//			mgz.Op().
+	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
+	//		)
+	//
+	//		return err
+	//	}
+	//
+	//	tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	x.Url = tmpUrl
+	//	x.Status = ExecuteStatusCompleted
+	//	x.AspectRatio = aspectRatio
+	//
+	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//		mgz.Op().
+	//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
+	//	)
+	//
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	//go func() {
+	//	//	defer helper.DeferFunc()
+	//	//
+	//	//	// 审计
+	//	//	promptKey := "segment_first_frame_audit"
+	//	//	if x.Category != "first_frame" {
+	//	//		promptKey = "segment_last_frame_audit"
+	//	//	}
+	//	//
+	//	//	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
+	//	//	if err != nil {
+	//	//		fmt.Println("GetPrompt err", err)
+	//	//		return
+	//	//	}
+	//	//
+	//	//	refParts = append(refParts,
+	//	//		genai.NewPartFromBytes(blob, "image/jpeg"),
+	//	//		gemini.NewTextPart(prompt.Content),
+	//	//	)
+	//	//
+	//	//	auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
+	//	//		Config: &genai.GenerateContentConfig{
+	//	//			ResponseMIMEType: "application/json",
+	//	//			ResponseSchema: &genai.Schema{
+	//	//				Required: []string{"pass", "reason"},
+	//	//				Type:     genai.TypeObject,
+	//	//				Properties: map[string]*genai.Schema{
+	//	//					"pass": {Type: genai.TypeBoolean, Description: "是否符合要求"},
+	//	//					"desc": {Type: genai.TypeString, Description: "审计结果概述"},
+	//	//				},
+	//	//			},
+	//	//		},
+	//	//		Parts: refParts,
+	//	//	})
+	//	//
+	//	//	fmt.Println("audit res", auditResJson)
+	//	//
+	//	//	var auditRes projpb.Review
+	//	//	err = json.Unmarshal([]byte(auditResJson), &auditRes)
+	//	//	//if auditRes["pass"] == false {
+	//	//	//
+	//	//	//}
+	//	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//	//		mgz.Op().
+	//	//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d.review", jobState.Index, index), &auditRes),
+	//	//	)
+	//	//}()
+	//	return nil
+	//})
 
 	return nil, nil
 }

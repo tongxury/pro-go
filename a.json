@@ -1,88 +1,119 @@
-[
-  {
-    "name": "segmentScriptJob",
-    "status": "completed",
-    "completedAt": new
-    NumberLong(
-    "1769620180"
-    ),
-    "dataBus": {
-      "segmentScript": {
-        "script": "{\n  \"segments\": [\n    {\n      \"timeStart\": 0,\n      \"timeEnd\": 3,\n      \"subtitle\": \"敏感肌洗脸总是又干又紧？你需要这种‘呼吸感’。\",\n      \"intention\": \"营造清冷氛围感，吸引敏感肌受众注意力。\",\n      \"coreAction\": \"特写镜头下，清澈水面波光粼粼，数朵洁白的山茶花与溪木源洁面泡沫瓶身一同漂浮在水面上，光影如碎钻般闪烁。\",\n      \"elementTransformation\": \"画面从水面微距波动平滑过渡到产品在水中的倒影。\",\n      \"visualChange\": \"极近景特写，采用大光圈f/1.8，逆光营造梦幻虚化感。\",\n      \"contentStyle\": \"唯美清新，如同山泉水般清透的电影感视觉。\",\n      \"sceneStyle\": \"清澈见底的浅水池，撒满新鲜白色山茶花瓣，自然侧逆光。\"\n    },\n    {\n      \"timeStart\": 3,\n      \"timeEnd\": 7,\n      \"subtitle\": \"（旁白）溪木源山茶花洁面，专为敏感肌研制，温和守护屏障。\",\n      \"intention\": \"植入品牌形象，展示产品核心卖点。\",\n      \"coreAction\": \"模特（白开水妆容，空灵神态）如原视频般漂浮在水中，身穿纯白蕾丝裙，她手中握着溪木源洁面瓶，镜头由面部俯拍拉远至全身。\",\n      \"elementTransformation\": \"模特在水中缓慢展开双臂，洁白的长裙如山茶花般绽放。\",\n      \"visualChange\": \"垂直俯拍拉镜头，保持高帧率慢动作，色彩调教偏冷蓝色调。\",\n      \"contentStyle\": \"静谧且富有生命力，突出‘舒缓’与‘纯净’的品牌调性。\",\n      \"sceneStyle\": \"水光粼粼的环境，模特肤质通透，耳畔的山茶花装饰随水流晃动。\"\n    },\n    {\n      \"timeStart\": 7,\n      \"timeEnd\": 11,\n      \"subtitle\": \"（旁白）3:4:1科学配比，云朵般绵密泡沫，带走油脂不带走水分。\",\n      \"intention\": \"视觉化呈现产品质地，强化清洁而不紧绷的卖点。\",\n      \"coreAction\": \"模特按压泵头，洁白细腻的泡沫即刻喷涌而出，镜头特写泡沫的绵密质感，随后特写模特在水中轻柔洗脸的神态。\",\n      \"elementTransformation\": \"泡沫与清澈的水流交融，呈现出丝滑的触感视觉。\",\n      \"visualChange\": \"极近景微距，对焦在泡沫的纹理和模特的指尖。\",\n      \"contentStyle\": \"高节奏剪辑，动作迅速干脆，展示起泡的即时感。\",\n      \"sceneStyle\": \"产品包装清晰可见：白色泵瓶，淡雅山茶花Logo，文字清晰标有‘氨基酸洁面’。\"\n    },\n    {\n      \"timeStart\": 11,\n      \"timeEnd\": 15,\n      \"subtitle\": \"（旁白）10大无添加，洗出水润透亮肌。溪木源，给肌肤温柔告白。\",\n      \"intention\": \"安全背书，情感升华，引导下单。\",\n      \"coreAction\": \"模特从水中抬起脸，皮肤水润发光，对着镜头自信微笑；右下角出现产品与补换装袋的组合展示。\",\n      \"elementTransformation\": \"画面从模特笑脸快速切向商品全家桶展示。\",\n      \"visualChange\": \"明亮且通透的高调照明，画面中心构图。\",\n      \"contentStyle\": \"快节奏转场，阳光感十足，符合抖音爆款带货节奏。\",\n      \"sceneStyle\": \"清新自然的居家水池背景，光线明亮柔和。\"\n    }\n  ]\n}",
-        "segments": [
-          {
-            "coreAction": "特写镜头下，清澈水面波光粼粼，数朵洁白的山茶花与溪木源洁面泡沫瓶身一同漂浮在水面上，光影如碎钻般闪烁。",
-            "elementTransformation": "画面从水面微距波动平滑过渡到产品在水中的倒影。",
-            "visualChange": "极近景特写，采用大光圈f/1.8，逆光营造梦幻虚化感。",
-            "intention": "营造清冷氛围感，吸引敏感肌受众注意力。",
-            "contentStyle": "唯美清新，如同山泉水般清透的电影感视觉。",
-            "sceneStyle": "清澈见底的浅水池，撒满新鲜白色山茶花瓣，自然侧逆光。",
-            "timeEnd": 3,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4fd80c1acfb8c4149f95cd00a7f32ddb.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/014d8782f0a217f0436f8fdb09936134.jpg",
-            "subtitle": "敏感肌洗脸总是又干又紧？你需要这种‘呼吸感’。"
-          },
-          {
-            "coreAction": "模特（白开水妆容，空灵神态）如原视频般漂浮在水中，身穿纯白蕾丝裙，她手中握着溪木源洁面瓶，镜头由面部俯拍拉远至全身。",
-            "elementTransformation": "模特在水中缓慢展开双臂，洁白的长裙如山茶花般绽放。",
-            "visualChange": "垂直俯拍拉镜头，保持高帧率慢动作，色彩调教偏冷蓝色调。",
-            "intention": "植入品牌形象，展示产品核心卖点。",
-            "contentStyle": "静谧且富有生命力，突出‘舒缓’与‘纯净’的品牌调性。",
-            "sceneStyle": "水光粼粼的环境，模特肤质通透，耳畔的山茶花装饰随水流晃动。",
-            "timeStart": 3,
-            "timeEnd": 7,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4a5acee881aa0b17bf10681e3f6c4c7a.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c08be9d78062e6f0bc01e6a499e55b66.jpg",
-            "subtitle": "（旁白）溪木源山茶花洁面，专为敏感肌研制，温和守护屏障。"
-          },
-          {
-            "coreAction": "模特按压泵头，洁白细腻的泡沫即刻喷涌而出，镜头特写泡沫的绵密质感，随后特写模特在水中轻柔洗脸的神态。",
-            "elementTransformation": "泡沫与清澈的水流交融，呈现出丝滑的触感视觉。",
-            "visualChange": "极近景微距，对焦在泡沫的纹理和模特的指尖。",
-            "intention": "视觉化呈现产品质地，强化清洁而不紧绷的卖点。",
-            "contentStyle": "高节奏剪辑，动作迅速干脆，展示起泡的即时感。",
-            "sceneStyle": "产品包装清晰可见：白色泵瓶，淡雅山茶花Logo，文字清晰标有‘氨基酸洁面’。",
-            "timeStart": 7,
-            "timeEnd": 11,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c08be9d78062e6f0bc01e6a499e55b66.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c08be9d78062e6f0bc01e6a499e55b66.jpg",
-            "subtitle": "（旁白）3:4:1科学配比，云朵般绵密泡沫，带走油脂不带走水分。"
-          },
-          {
-            "coreAction": "模特从水中抬起脸，皮肤水润发光，对着镜头自信微笑；右下角出现产品与补换装袋的组合展示。",
-            "elementTransformation": "画面从模特笑脸快速切向商品全家桶展示。",
-            "visualChange": "明亮且通透的高调照明，画面中心构图。",
-            "intention": "安全背书，情感升华，引导下单。",
-            "contentStyle": "快节奏转场，阳光感十足，符合抖音爆款带货节奏。",
-            "sceneStyle": "清新自然的居家水池背景，光线明亮柔和。",
-            "timeStart": 11,
-            "timeEnd": 15,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c08be9d78062e6f0bc01e6a499e55b66.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c08be9d78062e6f0bc01e6a499e55b66.jpg",
-            "subtitle": "（旁白）10大无添加，洗出水润透亮肌。溪木源，给肌肤温柔告白。"
-          }
+{
+  "segment": {
+    "_id": "695e78d3e3c22874b959fed2",
+    "formula": "可爱治愈IP + 现实场景反差 + 强节奏卡点音乐 + 新年情感寄托 = 爆款预定",
+    "script": "【00:00-00:03】画面中心构图，低角度仰拍。在空旷明亮的地铁车厢中，一只棕色小马玩偶端坐在地板中央，上方黄色艺术字标注“一起迈向2026”。镜头随着音乐重低音瞬间拉近。小马保持微笑，眼神灵动。【00:03-00:12】进入高频卡点剪辑。小马在车厢内开始“舞蹈”，通过定格动画般的剪辑，展示其挥手、踢腿动作。光影在车窗外快速流转。画面下方出现红色“福气满满”字样，并带有动态缩放特效。镜头在特写（强调材质）与中景（强调动作）间高频切换。【00:12-00:16】全景拍摄，车厢内乘客增多。镜头平移对准地铁拉环，小马玩偶淘气地倒挂在拉环上，背景是模糊的乘客群，突出小马的灵动感。【00:16-00:22】转场至户外。第一人称视角或跟拍视角，展示小马作为挂件挂在白色帆布包侧面。随着行人的步伐，小马在光影斑驳的街道上摇晃。画面加入粒子特效，模拟阳光洒落的感觉。【00:22-00:29】最终画面定格在小马背影，随后快速转向正面。背景文字变为“马到成功”，并伴有大量的“福”字动画雨，营造浓厚的新年喜庆感。",
+    "root": {
+      "url": "https://yoozyres.tos-cn-shanghai.volces.com/5937a4b3204543bf2be1bfd676d5d272.mp4",
+      "coverUrl": "https://yoozyres.tos-cn-shanghai.volces.com/dc5b7a6cc25b224d8d0db32d281d8d8c.jpg",
+      "commodity": {
+        "name": "2026马年限定治愈系小马毛绒挂件，软糯亲肤质感搭配超萌跳舞设计，是职场人包包的福气点缀与新年礼选。",
+        "tags": [
+          "马年周边",
+          "毛绒玩偶挂件",
+          "治愈系公仔",
+          "2026新年礼",
+          "解压解闷神器",
+          "包包配饰"
         ]
       }
-    }
-  },
-  {
-    "name": "keyFramesGenerationJob",
-    "index": new
-    NumberLong(
-    "1"
-    ),
-    "status": "running"
-  },
-  {
-    "name": "videoGenerationJob",
-    "index": new
-    NumberLong(
-    "2"
-    ),
-    "status": "running",
-    "startedAt": new
-    NumberLong(
-    "1769621519"
-    )
+    },
+    "style": "动感节奏卡点拍摄脚本",
+    "contentStyle": "活泼治愈且充满新年氛围的内容风格",
+    "sceneStyle": "极简现代感的地铁车厢与写字楼户外街道场景",
+    "description": "视频以一个可爱的棕白色小马毛绒玩偶为主角。在空旷的地铁车厢内，小马随着动感的音乐节奏扭动身体、跳舞。画面通过快速的变焦、推拉镜头切换，展示了小马灵动的眼神和毛茸茸的质感。随后场景切换到小马作为挂件被挂在路人的帆布包上，在阳光下的街道穿梭，最后定格在带有“马到成功”祝福语的画面。全片剪辑节奏紧凑，色彩明亮，营造出一种迎接新年的欢快氛围。",
+    "shootingStyle": "采用快节奏的卡点剪辑，结合大量推拉镜头和动态特写，增加画面趣味性。",
+    "timeEnd": 29.489002,
+    "subtitle": "下一站，是本次列车的终点站：家和万事兴。一起迈向2026，福气满满，马到成功！",
+    "typedTags": {
+      "focusOn": [
+        "外观样式",
+        "情感价值",
+        "适用场景"
+      ],
+      "text": [
+        "场景需求",
+        "情绪价值",
+        "产品引入",
+        "产品外观"
+      ],
+      "person": [
+        "治愈系玩偶角色"
+      ],
+      "action": [
+        "跳舞扭动",
+        "悬挂展示",
+        "走路摇摆"
+      ],
+      "picture": [
+        "产品特写+动态细节画面",
+        "场景化使用演示",
+        "情感共鸣"
+      ],
+      "scene": [
+        "真实生活场景",
+        "地铁/公共交通",
+        "街道/户外"
+      ],
+      "shootingStyle": [
+        "推镜头",
+        "拉镜头",
+        "低角度平移/跟拍",
+        "变焦镜头"
+      ],
+      "emotion": [
+        "开心",
+        "治愈",
+        "俏皮",
+        "期待"
+      ]
+    },
+    "tags": [
+      "外观样式",
+      "情感价值",
+      "适用场景",
+      "场景需求",
+      "情绪价值",
+      "产品引入",
+      "产品外观",
+      "治愈系玩偶角色",
+      "产品特写+动态细节画面",
+      "场景化使用演示",
+      "情感共鸣",
+      "真实生活场景",
+      "地铁/公共交通",
+      "街道/户外",
+      "推镜头",
+      "拉镜头",
+      "低角度平移/跟拍",
+      "变焦镜头",
+      "开心",
+      "治愈",
+      "俏皮",
+      "期待"
+    ],
+    "highlightFrames": [
+      {
+        "desc": "小马玩偶在空旷地铁车厢中心，上方浮现‘一起迈向2026’文字。",
+        "url": "https://yoozyres.tos-cn-shanghai.volces.com/bba2d7b3a48280d54064e64823b921e2.jpg"
+      },
+      {
+        "timestamp": 0.088,
+        "desc": "小马近景特写，配合音乐节奏做出帅气的舞蹈动作，画面中央出现‘福气满满’。",
+        "url": "https://yoozyres.tos-cn-shanghai.volces.com/c878638051bb38605e70a20a8890f077.jpg"
+      },
+      {
+        "timestamp": 0.147,
+        "desc": "视角切换至地铁拉环，小马玩偶倒挂在拉环上随风摇摆。",
+        "url": "https://yoozyres.tos-cn-shanghai.volces.com/a4746412b36d95e895b0fc3b6a360e63.jpg"
+      },
+      {
+        "timestamp": 0.23,
+        "desc": "特写镜头下小马挂在帆布包上，在街道移动，周围散落金色的‘福’字特效。",
+        "url": "https://yoozyres.tos-cn-shanghai.volces.com/abc51f595696bf961ac2553d270fb4d4.jpg"
+      }
+    ],
+    "status": "completed",
+    "createdAt": 1767799039,
+    "extra": {}
   }
-]

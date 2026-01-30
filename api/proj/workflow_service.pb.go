@@ -26,6 +26,142 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ListWorkflowsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWorkflowsRequest) Reset() {
+	*x = ListWorkflowsRequest{}
+	mi := &file_proj_workflow_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWorkflowsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWorkflowsRequest) ProtoMessage() {}
+
+func (x *ListWorkflowsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_workflow_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWorkflowsRequest.ProtoReflect.Descriptor instead.
+func (*ListWorkflowsRequest) Descriptor() ([]byte, []int) {
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ListWorkflowsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListWorkflowsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListWorkflowsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type WorkflowList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*Workflow            `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	HasMore       bool                   `protobuf:"varint,5,opt,name=hasMore,proto3" json:"hasMore,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkflowList) Reset() {
+	*x = WorkflowList{}
+	mi := &file_proj_workflow_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkflowList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkflowList) ProtoMessage() {}
+
+func (x *WorkflowList) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_workflow_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkflowList.ProtoReflect.Descriptor instead.
+func (*WorkflowList) Descriptor() ([]byte, []int) {
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *WorkflowList) GetList() []*Workflow {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *WorkflowList) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *WorkflowList) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *WorkflowList) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *WorkflowList) GetHasMore() bool {
+	if x != nil {
+		return x.HasMore
+	}
+	return false
+}
+
 type CreateWorkflowRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -36,7 +172,7 @@ type CreateWorkflowRequest struct {
 
 func (x *CreateWorkflowRequest) Reset() {
 	*x = CreateWorkflowRequest{}
-	mi := &file_proj_workflow_service_proto_msgTypes[0]
+	mi := &file_proj_workflow_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48,7 +184,7 @@ func (x *CreateWorkflowRequest) String() string {
 func (*CreateWorkflowRequest) ProtoMessage() {}
 
 func (x *CreateWorkflowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_service_proto_msgTypes[0]
+	mi := &file_proj_workflow_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +197,7 @@ func (x *CreateWorkflowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWorkflowRequest.ProtoReflect.Descriptor instead.
 func (*CreateWorkflowRequest) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_service_proto_rawDescGZIP(), []int{0}
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateWorkflowRequest) GetName() string {
@@ -87,7 +223,7 @@ type GetWorkflowRequest struct {
 
 func (x *GetWorkflowRequest) Reset() {
 	*x = GetWorkflowRequest{}
-	mi := &file_proj_workflow_service_proto_msgTypes[1]
+	mi := &file_proj_workflow_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -99,7 +235,7 @@ func (x *GetWorkflowRequest) String() string {
 func (*GetWorkflowRequest) ProtoMessage() {}
 
 func (x *GetWorkflowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_service_proto_msgTypes[1]
+	mi := &file_proj_workflow_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +248,7 @@ func (x *GetWorkflowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWorkflowRequest.ProtoReflect.Descriptor instead.
 func (*GetWorkflowRequest) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_service_proto_rawDescGZIP(), []int{1}
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetWorkflowRequest) GetId() string {
@@ -137,7 +273,7 @@ type UpdateWorkflowJobRequest struct {
 
 func (x *UpdateWorkflowJobRequest) Reset() {
 	*x = UpdateWorkflowJobRequest{}
-	mi := &file_proj_workflow_service_proto_msgTypes[2]
+	mi := &file_proj_workflow_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +285,7 @@ func (x *UpdateWorkflowJobRequest) String() string {
 func (*UpdateWorkflowJobRequest) ProtoMessage() {}
 
 func (x *UpdateWorkflowJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_service_proto_msgTypes[2]
+	mi := &file_proj_workflow_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +298,7 @@ func (x *UpdateWorkflowJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWorkflowJobRequest.ProtoReflect.Descriptor instead.
 func (*UpdateWorkflowJobRequest) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_service_proto_rawDescGZIP(), []int{2}
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateWorkflowJobRequest) GetId() string {
@@ -225,7 +361,7 @@ type UpdateWorkflowJobDataRequest struct {
 
 func (x *UpdateWorkflowJobDataRequest) Reset() {
 	*x = UpdateWorkflowJobDataRequest{}
-	mi := &file_proj_workflow_service_proto_msgTypes[3]
+	mi := &file_proj_workflow_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -237,7 +373,7 @@ func (x *UpdateWorkflowJobDataRequest) String() string {
 func (*UpdateWorkflowJobDataRequest) ProtoMessage() {}
 
 func (x *UpdateWorkflowJobDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_service_proto_msgTypes[3]
+	mi := &file_proj_workflow_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -250,7 +386,7 @@ func (x *UpdateWorkflowJobDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWorkflowJobDataRequest.ProtoReflect.Descriptor instead.
 func (*UpdateWorkflowJobDataRequest) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_service_proto_rawDescGZIP(), []int{3}
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateWorkflowJobDataRequest) GetId() string {
@@ -287,7 +423,7 @@ type UpdateWorkflowRequest struct {
 
 func (x *UpdateWorkflowRequest) Reset() {
 	*x = UpdateWorkflowRequest{}
-	mi := &file_proj_workflow_service_proto_msgTypes[4]
+	mi := &file_proj_workflow_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -299,7 +435,7 @@ func (x *UpdateWorkflowRequest) String() string {
 func (*UpdateWorkflowRequest) ProtoMessage() {}
 
 func (x *UpdateWorkflowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_workflow_service_proto_msgTypes[4]
+	mi := &file_proj_workflow_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +448,7 @@ func (x *UpdateWorkflowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWorkflowRequest.ProtoReflect.Descriptor instead.
 func (*UpdateWorkflowRequest) Descriptor() ([]byte, []int) {
-	return file_proj_workflow_service_proto_rawDescGZIP(), []int{4}
+	return file_proj_workflow_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateWorkflowRequest) GetId() string {
@@ -347,7 +483,17 @@ var File_proj_workflow_service_proto protoreflect.FileDescriptor
 
 const file_proj_workflow_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproj/workflow_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/task.proto\x1a\x0fproj/user.proto\x1a\x11proj/credit.proto\x1a\x12proj/account.proto\x1a\x12proj/session.proto\x1a\x13proj/workflow.proto\x1a\x14proj/commodity.proto\"^\n" +
+	"\x1bproj/workflow_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/task.proto\x1a\x0fproj/user.proto\x1a\x11proj/credit.proto\x1a\x12proj/account.proto\x1a\x12proj/session.proto\x1a\x13proj/workflow.proto\x1a\x14proj/commodity.proto\"V\n" +
+	"\x14ListWorkflowsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\"\x8e\x01\n" +
+	"\fWorkflowList\x12&\n" +
+	"\x04list\x18\x01 \x03(\v2\x12.api.proj.WorkflowR\x04list\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x18\n" +
+	"\ahasMore\x18\x05 \x01(\bR\ahasMore\"^\n" +
 	"\x15CreateWorkflowRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x121\n" +
 	"\tcommodity\x18\x02 \x01(\v2\x13.api.proj.CommodityR\tcommodity\"$\n" +
@@ -375,14 +521,15 @@ const file_proj_workflow_service_proto_rawDesc = "" +
 	"\x02kv\x18\x04 \x03(\v2'.api.proj.UpdateWorkflowRequest.KvEntryR\x02kv\x1a5\n" +
 	"\aKvEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xbf\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xa8\x06\n" +
 	"\x0fWorkflowService\x12h\n" +
 	"\x0eCreateWorkflow\x12\x1f.api.proj.CreateWorkflowRequest\x1a\x12.api.proj.Workflow\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/proj/v1/workflows\x12d\n" +
 	"\vGetWorkflow\x12\x1c.api.proj.GetWorkflowRequest\x1a\x12.api.proj.Workflow\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/proj/v1/workflows/{id}\x12m\n" +
 	"\x0eUpdateWorkflow\x12\x1f.api.proj.UpdateWorkflowRequest\x1a\x12.api.proj.Workflow\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/api/proj/v1/workflows/{id}\x12\x80\x01\n" +
 	"\x11UpdateWorkflowJob\x12\".api.proj.UpdateWorkflowJobRequest\x1a\x12.api.proj.Workflow\"3\x82\xd3\xe4\x93\x02-:\x01*2(/api/proj/v1/workflows/{id}/jobs/{index}\x12\x8b\x01\n" +
 	"\x15UpdateWorkflowJobData\x12&.api.proj.UpdateWorkflowJobDataRequest\x1a\x12.api.proj.Workflow\"6\x82\xd3\xe4\x93\x020:\x01*2+/api/proj/v1/workflows/{id}/job-data/{name}\x12\\\n" +
-	"\x0fReplaceWorkflow\x12\x12.api.proj.Workflow\x1a\x12.api.proj.Workflow\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/api/proj/v1/workflowsB\x17Z\x15store/api/proj;projpbb\x06proto3"
+	"\x0fReplaceWorkflow\x12\x12.api.proj.Workflow\x1a\x12.api.proj.Workflow\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/api/proj/v1/workflows\x12g\n" +
+	"\rListWorkflows\x12\x1e.api.proj.ListWorkflowsRequest\x1a\x16.api.proj.WorkflowList\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/proj/v1/workflowsB\x17Z\x15store/api/proj;projpbb\x06proto3"
 
 var (
 	file_proj_workflow_service_proto_rawDescOnce sync.Once
@@ -396,43 +543,48 @@ func file_proj_workflow_service_proto_rawDescGZIP() []byte {
 	return file_proj_workflow_service_proto_rawDescData
 }
 
-var file_proj_workflow_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_proj_workflow_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_proj_workflow_service_proto_goTypes = []any{
-	(*CreateWorkflowRequest)(nil),        // 0: api.proj.CreateWorkflowRequest
-	(*GetWorkflowRequest)(nil),           // 1: api.proj.GetWorkflowRequest
-	(*UpdateWorkflowJobRequest)(nil),     // 2: api.proj.UpdateWorkflowJobRequest
-	(*UpdateWorkflowJobDataRequest)(nil), // 3: api.proj.UpdateWorkflowJobDataRequest
-	(*UpdateWorkflowRequest)(nil),        // 4: api.proj.UpdateWorkflowRequest
-	nil,                                  // 5: api.proj.UpdateWorkflowJobRequest.ParamsEntry
-	nil,                                  // 6: api.proj.UpdateWorkflowRequest.KvEntry
-	(*Commodity)(nil),                    // 7: api.proj.Commodity
-	(*DataBus)(nil),                      // 8: api.proj.DataBus
+	(*ListWorkflowsRequest)(nil),         // 0: api.proj.ListWorkflowsRequest
+	(*WorkflowList)(nil),                 // 1: api.proj.WorkflowList
+	(*CreateWorkflowRequest)(nil),        // 2: api.proj.CreateWorkflowRequest
+	(*GetWorkflowRequest)(nil),           // 3: api.proj.GetWorkflowRequest
+	(*UpdateWorkflowJobRequest)(nil),     // 4: api.proj.UpdateWorkflowJobRequest
+	(*UpdateWorkflowJobDataRequest)(nil), // 5: api.proj.UpdateWorkflowJobDataRequest
+	(*UpdateWorkflowRequest)(nil),        // 6: api.proj.UpdateWorkflowRequest
+	nil,                                  // 7: api.proj.UpdateWorkflowJobRequest.ParamsEntry
+	nil,                                  // 8: api.proj.UpdateWorkflowRequest.KvEntry
 	(*Workflow)(nil),                     // 9: api.proj.Workflow
+	(*Commodity)(nil),                    // 10: api.proj.Commodity
+	(*DataBus)(nil),                      // 11: api.proj.DataBus
 }
 var file_proj_workflow_service_proto_depIdxs = []int32{
-	7,  // 0: api.proj.CreateWorkflowRequest.commodity:type_name -> api.proj.Commodity
-	5,  // 1: api.proj.UpdateWorkflowJobRequest.params:type_name -> api.proj.UpdateWorkflowJobRequest.ParamsEntry
-	8,  // 2: api.proj.UpdateWorkflowJobRequest.data:type_name -> api.proj.DataBus
-	8,  // 3: api.proj.UpdateWorkflowJobDataRequest.data:type_name -> api.proj.DataBus
-	8,  // 4: api.proj.UpdateWorkflowRequest.data:type_name -> api.proj.DataBus
-	6,  // 5: api.proj.UpdateWorkflowRequest.kv:type_name -> api.proj.UpdateWorkflowRequest.KvEntry
-	0,  // 6: api.proj.WorkflowService.CreateWorkflow:input_type -> api.proj.CreateWorkflowRequest
-	1,  // 7: api.proj.WorkflowService.GetWorkflow:input_type -> api.proj.GetWorkflowRequest
-	4,  // 8: api.proj.WorkflowService.UpdateWorkflow:input_type -> api.proj.UpdateWorkflowRequest
-	2,  // 9: api.proj.WorkflowService.UpdateWorkflowJob:input_type -> api.proj.UpdateWorkflowJobRequest
-	3,  // 10: api.proj.WorkflowService.UpdateWorkflowJobData:input_type -> api.proj.UpdateWorkflowJobDataRequest
-	9,  // 11: api.proj.WorkflowService.ReplaceWorkflow:input_type -> api.proj.Workflow
-	9,  // 12: api.proj.WorkflowService.CreateWorkflow:output_type -> api.proj.Workflow
-	9,  // 13: api.proj.WorkflowService.GetWorkflow:output_type -> api.proj.Workflow
-	9,  // 14: api.proj.WorkflowService.UpdateWorkflow:output_type -> api.proj.Workflow
-	9,  // 15: api.proj.WorkflowService.UpdateWorkflowJob:output_type -> api.proj.Workflow
-	9,  // 16: api.proj.WorkflowService.UpdateWorkflowJobData:output_type -> api.proj.Workflow
-	9,  // 17: api.proj.WorkflowService.ReplaceWorkflow:output_type -> api.proj.Workflow
-	12, // [12:18] is the sub-list for method output_type
-	6,  // [6:12] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	9,  // 0: api.proj.WorkflowList.list:type_name -> api.proj.Workflow
+	10, // 1: api.proj.CreateWorkflowRequest.commodity:type_name -> api.proj.Commodity
+	7,  // 2: api.proj.UpdateWorkflowJobRequest.params:type_name -> api.proj.UpdateWorkflowJobRequest.ParamsEntry
+	11, // 3: api.proj.UpdateWorkflowJobRequest.data:type_name -> api.proj.DataBus
+	11, // 4: api.proj.UpdateWorkflowJobDataRequest.data:type_name -> api.proj.DataBus
+	11, // 5: api.proj.UpdateWorkflowRequest.data:type_name -> api.proj.DataBus
+	8,  // 6: api.proj.UpdateWorkflowRequest.kv:type_name -> api.proj.UpdateWorkflowRequest.KvEntry
+	2,  // 7: api.proj.WorkflowService.CreateWorkflow:input_type -> api.proj.CreateWorkflowRequest
+	3,  // 8: api.proj.WorkflowService.GetWorkflow:input_type -> api.proj.GetWorkflowRequest
+	6,  // 9: api.proj.WorkflowService.UpdateWorkflow:input_type -> api.proj.UpdateWorkflowRequest
+	4,  // 10: api.proj.WorkflowService.UpdateWorkflowJob:input_type -> api.proj.UpdateWorkflowJobRequest
+	5,  // 11: api.proj.WorkflowService.UpdateWorkflowJobData:input_type -> api.proj.UpdateWorkflowJobDataRequest
+	9,  // 12: api.proj.WorkflowService.ReplaceWorkflow:input_type -> api.proj.Workflow
+	0,  // 13: api.proj.WorkflowService.ListWorkflows:input_type -> api.proj.ListWorkflowsRequest
+	9,  // 14: api.proj.WorkflowService.CreateWorkflow:output_type -> api.proj.Workflow
+	9,  // 15: api.proj.WorkflowService.GetWorkflow:output_type -> api.proj.Workflow
+	9,  // 16: api.proj.WorkflowService.UpdateWorkflow:output_type -> api.proj.Workflow
+	9,  // 17: api.proj.WorkflowService.UpdateWorkflowJob:output_type -> api.proj.Workflow
+	9,  // 18: api.proj.WorkflowService.UpdateWorkflowJobData:output_type -> api.proj.Workflow
+	9,  // 19: api.proj.WorkflowService.ReplaceWorkflow:output_type -> api.proj.Workflow
+	1,  // 20: api.proj.WorkflowService.ListWorkflows:output_type -> api.proj.WorkflowList
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_proj_workflow_service_proto_init() }
@@ -453,7 +605,7 @@ func file_proj_workflow_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_workflow_service_proto_rawDesc), len(file_proj_workflow_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

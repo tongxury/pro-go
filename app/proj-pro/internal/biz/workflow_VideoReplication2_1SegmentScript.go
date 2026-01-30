@@ -174,7 +174,7 @@ func (t VideoReplication2_SegmentScriptJob) Execute(ctx context.Context, jobStat
 
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
 		Set(fmt.Sprintf("jobs.%d.dataBus.segmentScript", jobState.Index), &projpb.SegmentScript{
-			Script:   text,
+			//Script:   text,
 			Segments: scriptData.Segments,
 		}))
 	if err != nil {

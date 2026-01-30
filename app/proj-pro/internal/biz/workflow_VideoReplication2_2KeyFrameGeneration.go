@@ -47,8 +47,8 @@ func (t VideoReplication2_KeyFrameGenerationJob) Execute(ctx context.Context, jo
 		return nil, errors.New("commodity not found")
 	}
 
-	script := dataBus.GetSegmentScript().GetScript()
-	if script == "" {
+	script := dataBus.GetSegmentScript().GetSegments()
+	if len(script) == 0 {
 		return nil, errors.New("script not found")
 	}
 
@@ -81,7 +81,7 @@ func (t VideoReplication2_KeyFrameGenerationJob) Execute(ctx context.Context, jo
 			Prompt: fmt.Sprintf(`
 	%s
 ===
-我提供给你的脚本: %s
+我提供给你的脚本: %v
 `, prompt.Content,
 				script,
 			),

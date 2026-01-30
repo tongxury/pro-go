@@ -35,6 +35,255 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ListWorkflowsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWorkflowsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListWorkflowsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListWorkflowsRequestMultiError, or nil if none found.
+func (m *ListWorkflowsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWorkflowsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for Size
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return ListWorkflowsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWorkflowsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListWorkflowsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListWorkflowsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWorkflowsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWorkflowsRequestMultiError) AllErrors() []error { return m }
+
+// ListWorkflowsRequestValidationError is the validation error returned by
+// ListWorkflowsRequest.Validate if the designated constraints aren't met.
+type ListWorkflowsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWorkflowsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWorkflowsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWorkflowsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWorkflowsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWorkflowsRequestValidationError) ErrorName() string {
+	return "ListWorkflowsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWorkflowsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWorkflowsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWorkflowsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWorkflowsRequestValidationError{}
+
+// Validate checks the field values on WorkflowList with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *WorkflowList) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WorkflowList with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in WorkflowListMultiError, or
+// nil if none found.
+func (m *WorkflowList) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WorkflowList) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, WorkflowListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, WorkflowListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WorkflowListValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for Size
+
+	// no validation rules for HasMore
+
+	if len(errors) > 0 {
+		return WorkflowListMultiError(errors)
+	}
+
+	return nil
+}
+
+// WorkflowListMultiError is an error wrapping multiple validation errors
+// returned by WorkflowList.ValidateAll() if the designated constraints aren't met.
+type WorkflowListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WorkflowListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WorkflowListMultiError) AllErrors() []error { return m }
+
+// WorkflowListValidationError is the validation error returned by
+// WorkflowList.Validate if the designated constraints aren't met.
+type WorkflowListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WorkflowListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WorkflowListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WorkflowListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WorkflowListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WorkflowListValidationError) ErrorName() string { return "WorkflowListValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WorkflowListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWorkflowList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WorkflowListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WorkflowListValidationError{}
+
 // Validate checks the field values on CreateWorkflowRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
