@@ -7,12 +7,13 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
+	"store/pkg/sdk/helper/bytez"
 	"store/pkg/sdk/helper/wg"
 	"store/pkg/sdk/third/gemini"
-	"store/pkg/sdk/third/wavespeed"
 	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"google.golang.org/genai"
 )
 
 type KeyFramesGenerationJob struct {
@@ -160,106 +161,129 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 
 	logger.Debugw("settings", wfState.DataBus.GetSettings())
 
-	// Waved AI 版
+	//// Waved AI 版
+	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
+	//	if x.Status != ExecuteStatusRunning {
+	//		return nil
+	//	}
+	//
+	//	if x.TaskId != "" {
+	//		result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
+	//		if err != nil {
+	//			return err
+	//		}
+	//
+	//		logger.Debugw("keyFrames generation job task check result", result)
+	//
+	//		if len(result.Data.Outputs) > 0 {
+	//
+	//			x.Url = result.Data.Outputs[0]
+	//			x.Status = ExecuteStatusCompleted
+	//
+	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//
+	//			if err != nil {
+	//				return err
+	//			}
+	//
+	//			return nil
+	//		}
+	//
+	//		if result.Data.Status == "failed" {
+	//			x.Url = ""
+	//			x.Status = ExecuteStatusRunning
+	//			x.TaskId = ""
+	//
+	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//
+	//			if err != nil {
+	//				return err
+	//			}
+	//
+	//			return nil
+	//		}
+	//
+	//		return nil
+	//	}
+	//
+	//	res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
+	//		Prompt:       x.Prompt,
+	//		Images:       x.Refs,
+	//		AspectRatio:  "9:16",
+	//		Resolution:   "1k",
+	//		OutputFormat: "",
+	//		//EnableSyncMode: true,
+	//		//EnableBase64Output: false,
+	//	})
+	//	if err != nil {
+	//		logger.Errorw("Gemini3ProImage err", err)
+	//		return err
+	//	}
+	//
+	//	logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
+	//
+	//	x.TaskId = res.Data.Id
+	//	x.Status = ExecuteStatusRunning
+	//
+	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//		mgz.Op().
+	//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	return nil
+	//})
+
 	wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
 		if x.Status != ExecuteStatusRunning {
 			return nil
 		}
 
-		if x.TaskId != "" {
-			result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
+		// 将整体实现改成 用下面的方法
+		// t.data.GenaiFactory.Get().C().Models.EditImage(ctx)
+
+		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
+
+		client := t.data.GenaiFactory.Get().C()
+		model := gemini.ModelImagen3Capability001
+
+		var refImages []genai.ReferenceImage
+		// Multi-Raw Test: use all images but as NewRawReferenceImage to check slice handling
+		for i, ref := range x.Refs {
+			imgBytes, err := bytez.ReadFileBytes(ref)
 			if err != nil {
 				return err
 			}
 
-			logger.Debugw("keyFrames generation job task check result", result)
-
-			if len(result.Data.Outputs) > 0 {
-
-				x.Url = result.Data.Outputs[0]
-				x.Status = ExecuteStatusCompleted
-
-				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
-
-				if err != nil {
-					return err
-				}
-
-				return nil
+			if len(imgBytes) == 0 {
+				return fmt.Errorf("reference image %d (%s) is empty", i, ref)
 			}
 
-			if result.Data.Status == "failed" {
-				x.Url = ""
-				x.Status = ExecuteStatusRunning
-				x.TaskId = ""
+			logger.Debugw("GenAI Multi-Raw Test", "index", i, "url", ref, "size", len(imgBytes), "mime", "image/png")
 
-				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
-
-				if err != nil {
-					return err
-				}
-
-				return nil
+			img := &genai.Image{
+				ImageBytes: imgBytes,
+				MIMEType:   "image/png",
 			}
 
-			return nil
+			// Using RawReferenceImage for all images for this test phase
+			refImages = append(refImages, genai.NewRawReferenceImage(img, int32(i+1)))
 		}
 
-		res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
-			Prompt:       x.Prompt,
-			Images:       x.Refs,
-			AspectRatio:  "9:16",
-			Resolution:   "1k",
-			OutputFormat: "",
-			//EnableSyncMode: true,
-			//EnableBase64Output: false,
-		})
-		if err != nil {
-			logger.Errorw("Gemini3ProImage err", err)
-			return err
-		}
-
-		logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
-
-		x.TaskId = res.Data.Id
-		x.Status = ExecuteStatusRunning
-
-		_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-			mgz.Op().
-				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+		// Use an empty config instead of nil to be safe with SDK internal converters.
+		resp, err := client.Models.EditImage(ctx, model, x.Prompt, refImages, &genai.EditImageConfig{})
 
 		if err != nil {
-			return err
-		}
-
-		return nil
-	})
-
-	wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
-		if x.Status != ExecuteStatusRunning {
-			return nil
-		}
-
-		refParts, err := gemini.NewImageParts(x.Refs)
-		if err != nil {
-			return err
-		}
-
-		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
-		blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
-			Parts:       refParts,
-			Prompt:      x.Prompt,
-			AspectRatio: aspectRatio,
-		})
-		if err != nil {
-			logger.Errorw("GenerateImage err", err)
+			logger.Errorw("EditImage err", err)
 
 			x.Error = err.Error()
 			x.Status = ExecuteStatusFailed
 
-			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+			_, _ = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 				mgz.Op().
 					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
 			)
@@ -267,8 +291,16 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 			return err
 		}
 
+		if len(resp.GeneratedImages) == 0 {
+			logger.Errorw("no image generated")
+			return fmt.Errorf("no image generated")
+		}
+
+		blob := resp.GeneratedImages[0].Image.ImageBytes
+
 		tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
 		if err != nil {
+			logger.Errorw("PutImage err", err)
 			return err
 		}
 
@@ -285,53 +317,6 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 			return err
 		}
 
-		//go func() {
-		//	defer helper.DeferFunc()
-		//
-		//	// 审计
-		//	promptKey := "segment_first_frame_audit"
-		//	if x.Category != "first_frame" {
-		//		promptKey = "segment_last_frame_audit"
-		//	}
-		//
-		//	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, promptKey)
-		//	if err != nil {
-		//		fmt.Println("GetPrompt err", err)
-		//		return
-		//	}
-		//
-		//	refParts = append(refParts,
-		//		genai.NewPartFromBytes(blob, "image/jpeg"),
-		//		gemini.NewTextPart(prompt.Content),
-		//	)
-		//
-		//	auditResJson, err := t.data.GenaiFactory.Get().GenerateContent(ctx, gemini.GenerateContentRequest{
-		//		Config: &genai.GenerateContentConfig{
-		//			ResponseMIMEType: "application/json",
-		//			ResponseSchema: &genai.Schema{
-		//				Required: []string{"pass", "reason"},
-		//				Type:     genai.TypeObject,
-		//				Properties: map[string]*genai.Schema{
-		//					"pass": {Type: genai.TypeBoolean, Description: "是否符合要求"},
-		//					"desc": {Type: genai.TypeString, Description: "审计结果概述"},
-		//				},
-		//			},
-		//		},
-		//		Parts: refParts,
-		//	})
-		//
-		//	fmt.Println("audit res", auditResJson)
-		//
-		//	var auditRes projpb.Review
-		//	err = json.Unmarshal([]byte(auditResJson), &auditRes)
-		//	//if auditRes["pass"] == false {
-		//	//
-		//	//}
-		//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-		//		mgz.Op().
-		//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d.review", jobState.Index, index), &auditRes),
-		//	)
-		//}()
 		return nil
 	})
 
