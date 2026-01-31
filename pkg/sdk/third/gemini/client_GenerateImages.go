@@ -128,6 +128,8 @@ func (t *Client) EditImage(ctx context.Context, req EditImageRequest) (*genai.Ed
 		refID := int32(i + 1)
 
 		switch ref.Type {
+		case ReferenceImageTypeRaw:
+			refImg = genai.NewRawReferenceImage(img, refID)
 		case ReferenceImageTypeStyle:
 			refImg = genai.NewStyleReferenceImage(img, refID, nil)
 		case ReferenceImageTypeSubject:
@@ -135,6 +137,7 @@ func (t *Client) EditImage(ctx context.Context, req EditImageRequest) (*genai.Ed
 		case ReferenceImageTypeContent:
 			refImg = genai.NewContentReferenceImage(img, refID)
 		default:
+			// Default to raw for first image, subject for others
 			if i == 0 {
 				refImg = genai.NewRawReferenceImage(img, refID)
 			} else {
