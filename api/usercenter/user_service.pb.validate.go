@@ -317,6 +317,8 @@ func (m *User) validate(all bool) error {
 
 	// no validation rules for Nickname
 
+	// no validation rules for Email
+
 	// no validation rules for Extra
 
 	if len(errors) > 0 {

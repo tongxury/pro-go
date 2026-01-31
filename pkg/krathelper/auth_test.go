@@ -11,10 +11,9 @@ func TestName(t *testing.T) {
 	//fmt.Println(GenerateToken(1684137060545933313))
 	//fmt.Println(GenerateTokenV2("690d6a669e5c05462c0e4165"))
 	//fmt.Println(GenerateTokenV2("10002232"))
-	//fmt.Println(GenerateTokenV2("69362f973aa0830f527772f2"))
+	fmt.Println(GenerateTokenV2("69362f973aa0830f527772f2"))
 
-	fmt.Println(GenerateTokenV2("693b91f82b271bf02ac1e624"))
-	//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cyI6MTc2OTczNzA2MywidXNlcl9pZCI6IjY5M2I5MWY4MmIyNzFiZjAyYWMxZTYyNCJ9.derFBwhaOVt1EMx9hC_EQ8Js_doYfWeHtmQQ_wB0Rjo
+	//fmt.Println(GenerateTokenV2("693b91f82b271bf02ac1e624"))
 
 	fmt.Println(GenerateTokenV2("690d6a669e5c05462c0e4165"))
 

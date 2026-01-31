@@ -20,10 +20,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationAuthServiceGetAppleAuthToken = "/api.usercenter.AuthService/GetAppleAuthToken"
 const OperationAuthServiceGetToken = "/api.usercenter.AuthService/GetToken"
 const OperationAuthServiceSendCode = "/api.usercenter.AuthService/SendCode"
 
 type AuthServiceHTTPServer interface {
+	GetAppleAuthToken(context.Context, *GetAppleAuthTokenParams) (*Token, error)
 	GetToken(context.Context, *GetTokenRequest) (*Token, error)
 	SendCode(context.Context, *SendCodeRequest) (*emptypb.Empty, error)
 }
@@ -32,6 +34,7 @@ func RegisterAuthServiceHTTPServer(s *http.Server, srv AuthServiceHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/usr/auth-codes", _AuthService_SendCode0_HTTP_Handler(srv))
 	r.GET("/api/usr/auth-tokens", _AuthService_GetToken0_HTTP_Handler(srv))
+	r.GET("/api/usr/apple-auth-tokens", _AuthService_GetAppleAuthToken0_HTTP_Handler(srv))
 }
 
 func _AuthService_SendCode0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx http.Context) error {
@@ -75,7 +78,27 @@ func _AuthService_GetToken0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx htt
 	}
 }
 
+func _AuthService_GetAppleAuthToken0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAppleAuthTokenParams
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAuthServiceGetAppleAuthToken)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAppleAuthToken(ctx, req.(*GetAppleAuthTokenParams))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*Token)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AuthServiceHTTPClient interface {
+	GetAppleAuthToken(ctx context.Context, req *GetAppleAuthTokenParams, opts ...http.CallOption) (rsp *Token, err error)
 	GetToken(ctx context.Context, req *GetTokenRequest, opts ...http.CallOption) (rsp *Token, err error)
 	SendCode(ctx context.Context, req *SendCodeRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 }
@@ -86,6 +109,19 @@ type AuthServiceHTTPClientImpl struct {
 
 func NewAuthServiceHTTPClient(client *http.Client) AuthServiceHTTPClient {
 	return &AuthServiceHTTPClientImpl{client}
+}
+
+func (c *AuthServiceHTTPClientImpl) GetAppleAuthToken(ctx context.Context, in *GetAppleAuthTokenParams, opts ...http.CallOption) (*Token, error) {
+	var out Token
+	pattern := "/api/usr/apple-auth-tokens"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAuthServiceGetAppleAuthToken))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *AuthServiceHTTPClientImpl) GetToken(ctx context.Context, in *GetTokenRequest, opts ...http.CallOption) (*Token, error) {

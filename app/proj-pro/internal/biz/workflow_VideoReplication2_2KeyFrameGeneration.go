@@ -8,7 +8,7 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
-	"store/pkg/sdk/third/gemini"
+	"store/pkg/sdk/third/wavespeed"
 
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -100,45 +100,69 @@ func (t VideoReplication2_KeyFrameGenerationJob) Execute(ctx context.Context, jo
 		keyFrame = dataBus.KeyFrames.GetFrames()[0]
 	}
 
-	log.Debug("start 1")
+	if keyFrame.Url != "" {
+		return &ExecuteResult{
+			Status: ExecuteStatusCompleted,
+		}, nil
+	}
+
+	if keyFrame.TaskId != "" {
+		result, err := t.data.Wavespeed.GetResult(ctx, keyFrame.TaskId)
+		if err != nil {
+			logger.Errorw("wavespeed.GetResult fail", "err", err)
+			return nil, err
+		}
+
+		if len(result.Data.Outputs) > 0 {
+			keyFrame.Url = result.Data.Outputs[0]
+			keyFrame.Status = ExecuteStatusReviewing
+
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
+			if err != nil {
+				logger.Errorw("update keyframe fail", "err", err)
+				return nil, err
+			}
+
+			return &ExecuteResult{
+				Status: ExecuteStatusCompleted,
+			}, nil
+		}
+
+		if result.Data.Status == "failed" {
+			keyFrame.TaskId = ""
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
+			if err != nil {
+				logger.Errorw("update keyframe fail", "err", err)
+				return nil, err
+			}
+			return nil, nil
+		}
+
+		return nil, nil // Running
+	}
 
 	aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
-	blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
-		Images: keyFrame.Refs,
-		//Videos: [][]byte{seg.Content},
+	res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
 		Prompt:      keyFrame.Prompt,
+		Images:      keyFrame.Refs,
 		AspectRatio: aspectRatio,
-		ImageSize:   "2K",
-		//Count: 8,
+		Resolution:  "2k",
 	})
 
-	log.Debug("start 2")
-
 	if err != nil {
-		logger.Errorw("create image fail err", err)
+		logger.Errorw("wavespeed.Gemini3ProImage fail", "err", err)
 		return nil, err
 	}
 
-	imageUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
-	if err != nil {
-		logger.Errorw("put image bytes error", err)
-		return nil, err
-	}
-	log.Debug("start 3")
-
-	keyFrame.Url = imageUrl
-	keyFrame.Status = ExecuteStatusReviewing
-
+	keyFrame.TaskId = res.Data.Id
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-		Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames", jobState.Index), &projpb.KeyFrames{
-			Frames: []*projpb.KeyFrames_Frame{keyFrame},
-		}))
+		Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
 	if err != nil {
-		logger.Errorw("update segment keyframe fail", "err", err)
+		logger.Errorw("update keyframe taskId fail", "err", err)
 		return nil, err
 	}
 
-	return &ExecuteResult{
-		Status: ExecuteStatusCompleted,
-	}, nil
+	return nil, nil
 }

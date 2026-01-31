@@ -23,11 +23,13 @@ func (t AuthService) SendCode(ctx context.Context, request *ucpb.SendCodeRequest
 	if t.data.VolcSmsClient != nil {
 		err := t.data.VolcSmsClient.SendSmsCode(ctx, request.Phone, conv.Str(code))
 		if err != nil {
+			log.Errorw("VolcSmsClient.SendSmsCode err", err, "phone", request.Phone, "code", code)
 			return nil, err
 		}
 	} else if t.data.Alisms != nil {
 		_, err := t.data.Alisms.Send(ctx, []string{request.Phone}, conv.Str(code))
 		if err != nil {
+			log.Errorw("Alisms.SendSmsCode err", err, "phone", request.Phone, "code", code)
 			return nil, err
 		}
 	}

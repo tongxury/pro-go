@@ -164,6 +164,7 @@ type User struct {
 	Phone         string                 `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	Nickname      string                 `protobuf:"bytes,7,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	Email         string                 `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
 	Extra         map[string]string      `protobuf:"bytes,20,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -244,6 +245,13 @@ func (x *User) GetCreatedAt() int64 {
 func (x *User) GetNickname() string {
 	if x != nil {
 		return x.Nickname
+	}
+	return ""
+}
+
+func (x *User) GetEmail() string {
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
@@ -444,7 +452,7 @@ const file_usercenter_user_service_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x14.api.usercenter.UserR\x04list\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04size\"\x97\x02\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\"\xad\x02\n" +
 	"\x04User\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
@@ -452,7 +460,8 @@ const file_usercenter_user_service_proto_rawDesc = "" +
 	"\x03key\x18\x04 \x01(\tR\x03key\x12\x14\n" +
 	"\x05phone\x18\x05 \x01(\tR\x05phone\x12\x1c\n" +
 	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\x12\x1a\n" +
-	"\bnickname\x18\a \x01(\tR\bnickname\x125\n" +
+	"\bnickname\x18\a \x01(\tR\bnickname\x12\x14\n" +
+	"\x05email\x18\b \x01(\tR\x05email\x125\n" +
 	"\x05extra\x18\x14 \x03(\v2\x1f.api.usercenter.User.ExtraEntryR\x05extra\x1a8\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +

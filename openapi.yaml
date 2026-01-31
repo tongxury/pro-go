@@ -4575,6 +4575,48 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.proj.ParseVideoResponse'
+    /api/usr/apple-auth-tokens:
+        get:
+            tags:
+                - AuthService
+            operationId: AuthService_GetAppleAuthToken
+            parameters:
+                - name: authorizationCode
+                  in: query
+                  schema:
+                    type: string
+                - name: email
+                  in: query
+                  schema:
+                    type: string
+                - name: nickname
+                  in: query
+                  schema:
+                    type: string
+                - name: identityToken
+                  in: query
+                  schema:
+                    type: string
+                - name: realUserStatus
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: state
+                  in: query
+                  schema:
+                    type: string
+                - name: user
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.usercenter.Token'
     /api/usr/auth-codes:
         post:
             tags:
@@ -10777,6 +10819,8 @@ components:
                 createdAt:
                     type: string
                 nickname:
+                    type: string
+                email:
                     type: string
                 extra:
                     type: object

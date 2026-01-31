@@ -26,6 +26,98 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetAppleAuthTokenParams struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	AuthorizationCode string                 `protobuf:"bytes,1,opt,name=authorizationCode,proto3" json:"authorizationCode,omitempty"`
+	Email             string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Nickname          string                 `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	IdentityToken     string                 `protobuf:"bytes,4,opt,name=identityToken,proto3" json:"identityToken,omitempty"`
+	RealUserStatus    uint32                 `protobuf:"varint,5,opt,name=realUserStatus,proto3" json:"realUserStatus,omitempty"`
+	State             string                 `protobuf:"bytes,6,opt,name=state,proto3" json:"state,omitempty"`
+	User              string                 `protobuf:"bytes,7,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetAppleAuthTokenParams) Reset() {
+	*x = GetAppleAuthTokenParams{}
+	mi := &file_usercenter_auth_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppleAuthTokenParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppleAuthTokenParams) ProtoMessage() {}
+
+func (x *GetAppleAuthTokenParams) ProtoReflect() protoreflect.Message {
+	mi := &file_usercenter_auth_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppleAuthTokenParams.ProtoReflect.Descriptor instead.
+func (*GetAppleAuthTokenParams) Descriptor() ([]byte, []int) {
+	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetAppleAuthTokenParams) GetAuthorizationCode() string {
+	if x != nil {
+		return x.AuthorizationCode
+	}
+	return ""
+}
+
+func (x *GetAppleAuthTokenParams) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetAppleAuthTokenParams) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *GetAppleAuthTokenParams) GetIdentityToken() string {
+	if x != nil {
+		return x.IdentityToken
+	}
+	return ""
+}
+
+func (x *GetAppleAuthTokenParams) GetRealUserStatus() uint32 {
+	if x != nil {
+		return x.RealUserStatus
+	}
+	return 0
+}
+
+func (x *GetAppleAuthTokenParams) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *GetAppleAuthTokenParams) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
 type Token struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
@@ -37,7 +129,7 @@ type Token struct {
 
 func (x *Token) Reset() {
 	*x = Token{}
-	mi := &file_usercenter_auth_service_proto_msgTypes[0]
+	mi := &file_usercenter_auth_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49,7 +141,7 @@ func (x *Token) String() string {
 func (*Token) ProtoMessage() {}
 
 func (x *Token) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_auth_service_proto_msgTypes[0]
+	mi := &file_usercenter_auth_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +154,7 @@ func (x *Token) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Token.ProtoReflect.Descriptor instead.
 func (*Token) Descriptor() ([]byte, []int) {
-	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{0}
+	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Token) GetToken() string {
@@ -96,7 +188,7 @@ type GetTokenRequest struct {
 
 func (x *GetTokenRequest) Reset() {
 	*x = GetTokenRequest{}
-	mi := &file_usercenter_auth_service_proto_msgTypes[1]
+	mi := &file_usercenter_auth_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -108,7 +200,7 @@ func (x *GetTokenRequest) String() string {
 func (*GetTokenRequest) ProtoMessage() {}
 
 func (x *GetTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_auth_service_proto_msgTypes[1]
+	mi := &file_usercenter_auth_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -121,7 +213,7 @@ func (x *GetTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTokenRequest.ProtoReflect.Descriptor instead.
 func (*GetTokenRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{1}
+	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetTokenRequest) GetPhone() string {
@@ -147,7 +239,7 @@ type SendCodeRequest struct {
 
 func (x *SendCodeRequest) Reset() {
 	*x = SendCodeRequest{}
-	mi := &file_usercenter_auth_service_proto_msgTypes[2]
+	mi := &file_usercenter_auth_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -159,7 +251,7 @@ func (x *SendCodeRequest) String() string {
 func (*SendCodeRequest) ProtoMessage() {}
 
 func (x *SendCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_auth_service_proto_msgTypes[2]
+	mi := &file_usercenter_auth_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -172,7 +264,7 @@ func (x *SendCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendCodeRequest.ProtoReflect.Descriptor instead.
 func (*SendCodeRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{2}
+	return file_usercenter_auth_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SendCodeRequest) GetPhone() string {
@@ -186,7 +278,15 @@ var File_usercenter_auth_service_proto protoreflect.FileDescriptor
 
 const file_usercenter_auth_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dusercenter/auth_service.proto\x12\x0eapi.usercenter\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x15user/types/user.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1epublic/response/response.proto\"K\n" +
+	"\x1dusercenter/auth_service.proto\x12\x0eapi.usercenter\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x15user/types/user.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1epublic/response/response.proto\"\xf1\x01\n" +
+	"\x17GetAppleAuthTokenParams\x12,\n" +
+	"\x11authorizationCode\x18\x01 \x01(\tR\x11authorizationCode\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
+	"\bnickname\x18\x03 \x01(\tR\bnickname\x12$\n" +
+	"\ridentityToken\x18\x04 \x01(\tR\ridentityToken\x12&\n" +
+	"\x0erealUserStatus\x18\x05 \x01(\rR\x0erealUserStatus\x12\x14\n" +
+	"\x05state\x18\x06 \x01(\tR\x05state\x12\x12\n" +
+	"\x04user\x18\a \x01(\tR\x04user\"K\n" +
 	"\x05Token\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x14\n" +
 	"\x05isNew\x18\x02 \x01(\bR\x05isNew\x12\x16\n" +
@@ -195,10 +295,11 @@ const file_usercenter_auth_service_proto_rawDesc = "" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\"'\n" +
 	"\x0fSendCodeRequest\x12\x14\n" +
-	"\x05phone\x18\x01 \x01(\tR\x05phone2\xd4\x01\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone2\xcd\x02\n" +
 	"\vAuthService\x12c\n" +
 	"\bSendCode\x12\x1f.api.usercenter.SendCodeRequest\x1a\x16.google.protobuf.Empty\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/usr/auth-codes\x12`\n" +
-	"\bGetToken\x12\x1f.api.usercenter.GetTokenRequest\x1a\x15.api.usercenter.Token\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/usr/auth-tokensB\x1bZ\x19store/api/usercenter;ucpbb\x06proto3"
+	"\bGetToken\x12\x1f.api.usercenter.GetTokenRequest\x1a\x15.api.usercenter.Token\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/usr/auth-tokens\x12w\n" +
+	"\x11GetAppleAuthToken\x12'.api.usercenter.GetAppleAuthTokenParams\x1a\x15.api.usercenter.Token\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/usr/apple-auth-tokensB\x1bZ\x19store/api/usercenter;ucpbb\x06proto3"
 
 var (
 	file_usercenter_auth_service_proto_rawDescOnce sync.Once
@@ -212,20 +313,23 @@ func file_usercenter_auth_service_proto_rawDescGZIP() []byte {
 	return file_usercenter_auth_service_proto_rawDescData
 }
 
-var file_usercenter_auth_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_usercenter_auth_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_usercenter_auth_service_proto_goTypes = []any{
-	(*Token)(nil),           // 0: api.usercenter.Token
-	(*GetTokenRequest)(nil), // 1: api.usercenter.GetTokenRequest
-	(*SendCodeRequest)(nil), // 2: api.usercenter.SendCodeRequest
-	(*emptypb.Empty)(nil),   // 3: google.protobuf.Empty
+	(*GetAppleAuthTokenParams)(nil), // 0: api.usercenter.GetAppleAuthTokenParams
+	(*Token)(nil),                   // 1: api.usercenter.Token
+	(*GetTokenRequest)(nil),         // 2: api.usercenter.GetTokenRequest
+	(*SendCodeRequest)(nil),         // 3: api.usercenter.SendCodeRequest
+	(*emptypb.Empty)(nil),           // 4: google.protobuf.Empty
 }
 var file_usercenter_auth_service_proto_depIdxs = []int32{
-	2, // 0: api.usercenter.AuthService.SendCode:input_type -> api.usercenter.SendCodeRequest
-	1, // 1: api.usercenter.AuthService.GetToken:input_type -> api.usercenter.GetTokenRequest
-	3, // 2: api.usercenter.AuthService.SendCode:output_type -> google.protobuf.Empty
-	0, // 3: api.usercenter.AuthService.GetToken:output_type -> api.usercenter.Token
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	3, // 0: api.usercenter.AuthService.SendCode:input_type -> api.usercenter.SendCodeRequest
+	2, // 1: api.usercenter.AuthService.GetToken:input_type -> api.usercenter.GetTokenRequest
+	0, // 2: api.usercenter.AuthService.GetAppleAuthToken:input_type -> api.usercenter.GetAppleAuthTokenParams
+	4, // 3: api.usercenter.AuthService.SendCode:output_type -> google.protobuf.Empty
+	1, // 4: api.usercenter.AuthService.GetToken:output_type -> api.usercenter.Token
+	1, // 5: api.usercenter.AuthService.GetAppleAuthToken:output_type -> api.usercenter.Token
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -242,7 +346,7 @@ func file_usercenter_auth_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_usercenter_auth_service_proto_rawDesc), len(file_usercenter_auth_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

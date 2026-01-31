@@ -9,6 +9,7 @@ import (
 	projpb "store/api/proj"
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
+	"store/pkg/sdk/conv"
 	"store/pkg/sdk/helper"
 	"store/pkg/sdk/helper/imagez"
 	"store/pkg/sdk/helper/videoz"
@@ -60,7 +61,7 @@ func (t VideoReplication2_VideoGenerationJob) Execute(ctx context.Context, jobSt
 					{
 						Status:     "running",
 						FirstFrame: keyFrames.Frames[0].Url,
-						Prompt:     dataBus.SegmentScript.GetScript(),
+						Prompt:     fmt.Sprintf("%v", dataBus.SegmentScript.GetSegments()),
 					},
 				},
 			),
@@ -194,7 +195,7 @@ func (t VideoReplication2_VideoGenerationJob) Execute(ctx context.Context, jobSt
 
 	video, err := t.data.OpenAI.Videos().New(ctx, openai.VideoNewParams{
 		Model:          openai.VideoModelSora2Pro,
-		Prompt:         videoGeneration.Prompt,
+		Prompt:         helper.OrString(videoGeneration.Prompt, conv.S2J(dataBus.SegmentScript.GetSegments()), dataBus.SegmentScript.GetScript()),
 		InputReference: openai.File(bytes.NewReader(resizedImage), helper.CreateUUID(), "image/jpeg"),
 		Seconds:        openai.VideoSeconds(seconds),
 	})

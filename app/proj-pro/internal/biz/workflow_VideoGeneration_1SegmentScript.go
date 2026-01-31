@@ -63,7 +63,7 @@ func (t VideoGeneration_SegmentScriptJob) Execute(ctx context.Context, jobState 
 	}
 
 	return &ExecuteResult{
-		Status:      ExecuteStatusCompleted,
-		SkipConfirm: true,
+		Status: ExecuteStatusCompleted,
+		//SkipConfirm: true,
 	}, nil
 }
