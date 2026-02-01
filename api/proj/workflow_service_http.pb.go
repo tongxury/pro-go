@@ -19,18 +19,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationWorkflowServiceCreateWorkflow = "/api.proj.WorkflowService/CreateWorkflow"
-const OperationWorkflowServiceGetWorkflow = "/api.proj.WorkflowService/GetWorkflow"
-const OperationWorkflowServiceListWorkflows = "/api.proj.WorkflowService/ListWorkflows"
 const OperationWorkflowServiceReplaceWorkflow = "/api.proj.WorkflowService/ReplaceWorkflow"
 const OperationWorkflowServiceUpdateWorkflow = "/api.proj.WorkflowService/UpdateWorkflow"
 const OperationWorkflowServiceUpdateWorkflowJob = "/api.proj.WorkflowService/UpdateWorkflowJob"
 const OperationWorkflowServiceUpdateWorkflowJobData = "/api.proj.WorkflowService/UpdateWorkflowJobData"
 
 type WorkflowServiceHTTPServer interface {
-	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error)
-	GetWorkflow(context.Context, *GetWorkflowRequest) (*Workflow, error)
-	ListWorkflows(context.Context, *ListWorkflowsRequest) (*WorkflowList, error)
 	ReplaceWorkflow(context.Context, *Workflow) (*Workflow, error)
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*Workflow, error)
 	UpdateWorkflowJob(context.Context, *UpdateWorkflowJobRequest) (*Workflow, error)
@@ -39,57 +33,10 @@ type WorkflowServiceHTTPServer interface {
 
 func RegisterWorkflowServiceHTTPServer(s *http.Server, srv WorkflowServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/proj/v1/workflows", _WorkflowService_CreateWorkflow0_HTTP_Handler(srv))
-	r.GET("/api/proj/v1/workflows/{id}", _WorkflowService_GetWorkflow0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/workflows/{id}", _WorkflowService_UpdateWorkflow0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/workflows/{id}/jobs/{index}", _WorkflowService_UpdateWorkflowJob0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/workflows/{id}/job-data/{name}", _WorkflowService_UpdateWorkflowJobData0_HTTP_Handler(srv))
 	r.PUT("/api/proj/v1/workflows", _WorkflowService_ReplaceWorkflow0_HTTP_Handler(srv))
-	r.GET("/api/proj/v1/workflows", _WorkflowService_ListWorkflows0_HTTP_Handler(srv))
-}
-
-func _WorkflowService_CreateWorkflow0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CreateWorkflowRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationWorkflowServiceCreateWorkflow)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateWorkflow(ctx, req.(*CreateWorkflowRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*Workflow)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _WorkflowService_GetWorkflow0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetWorkflowRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationWorkflowServiceGetWorkflow)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetWorkflow(ctx, req.(*GetWorkflowRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*Workflow)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _WorkflowService_UpdateWorkflow0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
@@ -189,29 +136,7 @@ func _WorkflowService_ReplaceWorkflow0_HTTP_Handler(srv WorkflowServiceHTTPServe
 	}
 }
 
-func _WorkflowService_ListWorkflows0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListWorkflowsRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationWorkflowServiceListWorkflows)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListWorkflows(ctx, req.(*ListWorkflowsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*WorkflowList)
-		return ctx.Result(200, reply)
-	}
-}
-
 type WorkflowServiceHTTPClient interface {
-	CreateWorkflow(ctx context.Context, req *CreateWorkflowRequest, opts ...http.CallOption) (rsp *Workflow, err error)
-	GetWorkflow(ctx context.Context, req *GetWorkflowRequest, opts ...http.CallOption) (rsp *Workflow, err error)
-	ListWorkflows(ctx context.Context, req *ListWorkflowsRequest, opts ...http.CallOption) (rsp *WorkflowList, err error)
 	ReplaceWorkflow(ctx context.Context, req *Workflow, opts ...http.CallOption) (rsp *Workflow, err error)
 	UpdateWorkflow(ctx context.Context, req *UpdateWorkflowRequest, opts ...http.CallOption) (rsp *Workflow, err error)
 	UpdateWorkflowJob(ctx context.Context, req *UpdateWorkflowJobRequest, opts ...http.CallOption) (rsp *Workflow, err error)
@@ -224,45 +149,6 @@ type WorkflowServiceHTTPClientImpl struct {
 
 func NewWorkflowServiceHTTPClient(client *http.Client) WorkflowServiceHTTPClient {
 	return &WorkflowServiceHTTPClientImpl{client}
-}
-
-func (c *WorkflowServiceHTTPClientImpl) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...http.CallOption) (*Workflow, error) {
-	var out Workflow
-	pattern := "/api/proj/v1/workflows"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationWorkflowServiceCreateWorkflow))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *WorkflowServiceHTTPClientImpl) GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...http.CallOption) (*Workflow, error) {
-	var out Workflow
-	pattern := "/api/proj/v1/workflows/{id}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationWorkflowServiceGetWorkflow))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *WorkflowServiceHTTPClientImpl) ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...http.CallOption) (*WorkflowList, error) {
-	var out WorkflowList
-	pattern := "/api/proj/v1/workflows"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationWorkflowServiceListWorkflows))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 func (c *WorkflowServiceHTTPClientImpl) ReplaceWorkflow(ctx context.Context, in *Workflow, opts ...http.CallOption) (*Workflow, error) {

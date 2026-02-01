@@ -63,7 +63,7 @@ type AuthHTTPServer interface {
 func RegisterAuthHTTPServer(s *http.Server, srv AuthHTTPServer) {
 	r := s.Route("/")
 	r.GET("/api/v1/wx-auth-tokens", _Auth_GetWxAuthToken1_HTTP_Handler(srv))
-	r.GET("/api/v1/apple-auth-tokens", _Auth_GetAppleAuthToken1_HTTP_Handler(srv))
+	r.GET("/api/v1/apple-auth-tokens", _Auth_GetAppleAuthToken0_HTTP_Handler(srv))
 	r.GET("/api/v1/email-auth-codes", _Auth_GetEmailAuthCode0_HTTP_Handler(srv))
 	r.GET("/api/v1/email-auth-tokens", _Auth_GetEmailAuthToken0_HTTP_Handler(srv))
 	r.GET("/api/v1/phone-auth-codes", _Auth_GetPhoneAuthCode1_HTTP_Handler(srv))
@@ -98,7 +98,7 @@ func _Auth_GetWxAuthToken1_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Contex
 	}
 }
 
-func _Auth_GetAppleAuthToken1_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
+func _Auth_GetAppleAuthToken0_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetAppleAuthTokenParams
 		if err := ctx.BindQuery(&in); err != nil {

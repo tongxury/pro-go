@@ -119,30 +119,27 @@ func (x *AssetGroup) GetUserId() string {
 }
 
 type Asset struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	XId       string                 `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	Commodity *Commodity             `protobuf:"bytes,2,opt,name=commodity,proto3" json:"commodity,omitempty"`
-	Segment   *ResourceSegment       `protobuf:"bytes,3,opt,name=segment,proto3" json:"segment,omitempty"`
-	UserId    string                 `protobuf:"bytes,7,opt,name=userId,proto3" json:"userId,omitempty"`
-	// created  completed 两个值
-	Status    string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt int64  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	// 最终视频
-	Url string `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
-	// 封面
-	CoverUrl       string        `protobuf:"bytes,8,opt,name=coverUrl,proto3" json:"coverUrl,omitempty"`
-	Duration       float64       `protobuf:"fixed64,9,opt,name=duration,proto3" json:"duration,omitempty"`
-	Prompt         string        `protobuf:"bytes,10,opt,name=prompt,proto3" json:"prompt,omitempty"`
-	PromptAddition string        `protobuf:"bytes,11,opt,name=promptAddition,proto3" json:"promptAddition,omitempty"`
-	Prompts        *AssetPrompts `protobuf:"bytes,13,opt,name=prompts,proto3" json:"prompts,omitempty"`
-	Favorite       bool          `protobuf:"varint,12,opt,name=favorite,proto3" json:"favorite,omitempty"`
-	Attrs          *Asset_Attrs  `protobuf:"bytes,14,opt,name=attrs,proto3" json:"attrs,omitempty"`
-	Extra          *Asset_Extra  `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
-	Group          *Asset_Group  `protobuf:"bytes,21,opt,name=group,proto3" json:"group,omitempty"`
-	Workflow       *Workflow     `protobuf:"bytes,22,opt,name=workflow,proto3" json:"workflow,omitempty"`
-	Title          string        `protobuf:"bytes,23,opt,name=title,proto3" json:"title,omitempty"`
-	Category       string        `protobuf:"bytes,24,opt,name=category,proto3" json:"category,omitempty"`
-	Remark         string        `protobuf:"bytes,25,opt,name=remark,proto3" json:"remark,omitempty"`
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	XId            string                 `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
+	Commodity      *Commodity             `protobuf:"bytes,2,opt,name=commodity,proto3" json:"commodity,omitempty"`
+	Segment        *ResourceSegment       `protobuf:"bytes,3,opt,name=segment,proto3" json:"segment,omitempty"`
+	UserId         string                 `protobuf:"bytes,7,opt,name=userId,proto3" json:"userId,omitempty"`
+	Status         string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	Url            string                 `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
+	CoverUrl       string                 `protobuf:"bytes,8,opt,name=coverUrl,proto3" json:"coverUrl,omitempty"`
+	Duration       float64                `protobuf:"fixed64,9,opt,name=duration,proto3" json:"duration,omitempty"`
+	Prompt         string                 `protobuf:"bytes,10,opt,name=prompt,proto3" json:"prompt,omitempty"`
+	PromptAddition string                 `protobuf:"bytes,11,opt,name=promptAddition,proto3" json:"promptAddition,omitempty"`
+	Prompts        *AssetPrompts          `protobuf:"bytes,13,opt,name=prompts,proto3" json:"prompts,omitempty"`
+	Favorite       bool                   `protobuf:"varint,12,opt,name=favorite,proto3" json:"favorite,omitempty"`
+	Attrs          *Asset_Attrs           `protobuf:"bytes,14,opt,name=attrs,proto3" json:"attrs,omitempty"`
+	Extra          *Asset_Extra           `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
+	Group          *Asset_Group           `protobuf:"bytes,21,opt,name=group,proto3" json:"group,omitempty"`
+	Workflow       *Workflow              `protobuf:"bytes,22,opt,name=workflow,proto3" json:"workflow,omitempty"`
+	Title          string                 `protobuf:"bytes,23,opt,name=title,proto3" json:"title,omitempty"`
+	Category       string                 `protobuf:"bytes,24,opt,name=category,proto3" json:"category,omitempty"`
+	Remark         string                 `protobuf:"bytes,25,opt,name=remark,proto3" json:"remark,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }

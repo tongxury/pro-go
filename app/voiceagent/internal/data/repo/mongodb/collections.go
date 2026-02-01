@@ -5,13 +5,17 @@ import (
 )
 
 type Collections struct {
-	Persona      *PersonaCollection
-	Agent        *AgentCollection
-	Voice        *VoiceCollection
-	Scene        *SceneCollection
-	Conversation *ConversationCollection
-	Transcript   *TranscriptCollection
-	Motivation   *MotivationCollection
+	Persona        *PersonaCollection
+	Agent          *AgentCollection
+	Voice          *VoiceCollection
+	Scene          *SceneCollection
+	Conversation   *ConversationCollection
+	Transcript     *TranscriptCollection
+	Motivation     *MotivationCollection
+	Memory         *MemoryCollection
+	UserProfile    *UserProfileCollection
+	EmotionLog     *EmotionLogCollection
+	ImportantEvent *ImportantEventCollection
 }
 
 func NewCollections(config mgz.Config) *Collections {
@@ -21,12 +25,16 @@ func NewCollections(config mgz.Config) *Collections {
 	}
 
 	return &Collections{
-		Persona:      NewPersonaCollection(database),
-		Agent:        NewAgentCollection(database),
-		Voice:        NewVoiceCollection(database),
-		Scene:        NewSceneCollection(database),
-		Conversation: NewConversationCollection(database),
-		Transcript:   NewTranscriptCollection(database),
-		Motivation:   NewMotivationCollection(database),
+		Persona:        NewPersonaCollection(database),
+		Agent:          NewAgentCollection(database),
+		Voice:          NewVoiceCollection(database),
+		Scene:          NewSceneCollection(database),
+		Conversation:   NewConversationCollection(database),
+		Transcript:     NewTranscriptCollection(database),
+		Motivation:     NewMotivationCollection(database),
+		Memory:         NewMemoryCollection(database),
+		UserProfile:    NewUserProfileCollection(database),
+		EmotionLog:     NewEmotionLogCollection(database),
+		ImportantEvent: NewImportantEventCollection(database),
 	}
 }

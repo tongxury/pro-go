@@ -25,6 +25,55 @@ type BizConfig struct {
 }
 
 var configs = map[string]*confcenter.Config[BizConfig]{
+	"prod_qiniu": {
+		Meta: confcenter.Meta{
+			Namespace: "prod",
+		},
+		Server: confcenter.Server{
+			Http: &confcenter.ServerConfig{
+				Addr:    "0.0.0.0:8080",
+				Timeout: 300 * time.Second,
+			},
+			Grpc: &confcenter.ServerConfig{
+				Addr:    "0.0.0.0:8090",
+				Timeout: 300 * time.Second,
+			},
+		},
+		Logger: log.DefaultLogger,
+		Database: confcenter.Database{
+			Mongo: mgz.Config{
+				Uri:      fmt.Sprintf("mongodb://%s:27017/pro?retryWrites=true&w=majority", "101.132.192.41"),
+				Username: "root",
+				Password: confs.MongoPassword,
+				Database: "pro",
+			},
+			Rediz: rediz.Config{
+				Addrs:    []string{"101.132.192.41:6379"},
+				Password: confs.RedisPassword,
+			},
+			Tos: tos.Config{
+				AccessKeyID:     confs.BytedanceAccessKeyID,
+				AccessKeySecret: confs.BytedanceSecretAccessKey,
+				Endpoint:        "tos-cn-shanghai.volces.com",
+				DefaultBucket:   "veres",
+				Region:          "cn-shanghai",
+			},
+		},
+		Component: confcenter.Component{
+			Grpc: grpcz.Configs{
+				UserCenter: &grpcz.Config{
+					Endpoint: "usercenter.prod.svc.cluster.local:8090",
+				},
+			},
+			Genai: gemini.FactoryConfig{
+				Configs: []*gemini.Config{
+					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.GeminiKeys[23]},
+					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.GeminiKeys[18]},
+				},
+			},
+		},
+		Biz: BizConfig{},
+	},
 	"prod-cn": {
 		Meta: confcenter.Meta{
 			Namespace: "prod",
@@ -47,6 +96,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				//Password: "z4XNmlaOjo",
 				Uri:      fmt.Sprintf("mongodb://%s:27017/pro?retryWrites=true&w=majority", "101.132.192.41"),
 				Username: "root",
+				Password: confs.MongoPassword,
 				Database: "pro",
 			},
 			Rediz: rediz.Config{
@@ -255,7 +305,7 @@ func GetConfig() (*confcenter.Config[BizConfig], error) {
 
 	cc, ok := configs[env]
 	if !ok {
-		return nil, fmt.Errorf("env %s not found", env)
+		return configs["dev"], nil
 	}
 
 	return cc, nil

@@ -11,6 +11,10 @@ import "voiceagent/voice.proto";
 import "voiceagent/scene.proto";
 import "voiceagent/conversation.proto";
 import "voiceagent/transcript.proto";
+import "voiceagent/memory.proto";
+import "voiceagent/user_profile.proto";
+import "voiceagent/emotion_log.proto";
+import "voiceagent/important_event.proto";
 
 option go_package = "store/api/voiceagent;voiceagent";
 
@@ -144,6 +148,111 @@ service VoiceAgentService {
       body: "*"
     };
   }
+
+  // ==================== Memory APIs ====================
+  
+  // ListMemories: 获取用户的长期记忆列表。
+  rpc ListMemories(ListMemoriesRequest) returns (MemoryList) {
+    option (google.api.http) = {
+      get: "/api/va/memories"
+    };
+  }
+
+  // CreateMemory: 手动添加一条记忆。
+  rpc CreateMemory(CreateMemoryRequest) returns (Memory) {
+    option (google.api.http) = {
+      post: "/api/va/memories"
+      body: "*"
+    };
+  }
+
+  // DeleteMemory: 删除一条记忆。
+  rpc DeleteMemory(DeleteMemoryRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/va/memories/{id}"
+    };
+  }
+
+  // ==================== Profile APIs ====================
+
+  // GetUserProfile: 获取用户档案。
+  rpc GetUserProfile(GetUserProfileRequest) returns (UserProfile) {
+    option (google.api.http) = {
+      get: "/api/va/profile"
+    };
+  }
+
+  // UpdateUserProfile: 更新用户档案。
+  rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UserProfile) {
+    option (google.api.http) = {
+      patch: "/api/va/profile"
+      body: "*"
+    };
+  }
+
+  // ==================== Emotion APIs ====================
+
+  // ListEmotionLogs: 获取情绪记录列表。
+  rpc ListEmotionLogs(ListEmotionLogsRequest) returns (EmotionLogList) {
+    option (google.api.http) = {
+      get: "/api/va/emotions"
+    };
+  }
+
+  // GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+  rpc GetEmotionStats(GetEmotionStatsRequest) returns (EmotionStats) {
+    option (google.api.http) = {
+      get: "/api/va/emotions/stats"
+    };
+  }
+
+  // ==================== Event APIs ====================
+
+  // ListEvents: 获取重要事件列表。
+  rpc ListEvents(ListEventsRequest) returns (EventList) {
+    option (google.api.http) = {
+      get: "/api/va/events"
+    };
+  }
+
+  // CreateEvent: 创建重要事件。
+  rpc CreateEvent(CreateEventRequest) returns (ImportantEvent) {
+    option (google.api.http) = {
+      post: "/api/va/events"
+      body: "*"
+    };
+  }
+
+  // UpdateEvent: 更新重要事件。
+  rpc UpdateEvent(UpdateEventRequest) returns (ImportantEvent) {
+    option (google.api.http) = {
+      patch: "/api/va/events/{id}"
+      body: "*"
+    };
+  }
+
+  // DeleteEvent: 删除重要事件。
+  rpc DeleteEvent(DeleteEventRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/va/events/{id}"
+    };
+  }
+
+  // GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+  rpc GetUpcomingEvents(GetUpcomingEventsRequest) returns (EventList) {
+    option (google.api.http) = {
+      get: "/api/va/events/upcoming"
+    };
+  }
+
+  // ==================== Growth Report APIs ====================
+
+  // GetGrowthReport: 获取成长报告。
+  rpc GetGrowthReport(GetGrowthReportRequest) returns (GrowthReport) {
+    option (google.api.http) = {
+      get: "/api/va/growth-report"
+    };
+  }
 }
 
 // --- Request/Response Messages ---
@@ -268,4 +377,140 @@ message SendMessageRequest {
   string conversationId = 1;
   string message = 2;
   bool enableVoice = 3;
+}
+
+// ==================== Memory Request/Response ====================
+
+message ListMemoriesRequest {
+  string type = 1;     // 可选，按类型筛选
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message MemoryList {
+  repeated Memory list = 1;
+  int64 total = 2;
+}
+
+message CreateMemoryRequest {
+  string type = 1 [(validate.rules).string.min_len = 1];
+  string content = 2 [(validate.rules).string.min_len = 1];
+  int32 importance = 3;
+  repeated string tags = 4;
+}
+
+message DeleteMemoryRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+// ==================== Profile Request/Response ====================
+
+message GetUserProfileRequest {}
+
+message UpdateUserProfileRequest {
+  string nickname = 1;
+  string birthday = 2;
+  repeated string interests = 3;
+  repeated string goals = 4;
+  string bio = 5;
+  string timezone = 6;
+}
+
+// ==================== Emotion Request/Response ====================
+
+message ListEmotionLogsRequest {
+  int64 page = 1;
+  int64 size = 2;
+  int64 startTime = 3;  // 可选，起始时间戳
+  int64 endTime = 4;    // 可选，结束时间戳
+}
+
+message EmotionLogList {
+  repeated EmotionLog list = 1;
+  int64 total = 2;
+}
+
+message GetEmotionStatsRequest {
+  int32 days = 1;  // 统计最近多少天，默认30天
+}
+
+// ==================== Event Request/Response ====================
+
+message ListEventsRequest {
+  string type = 1;   // 可选，按类型筛选
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message EventList {
+  repeated ImportantEvent list = 1;
+  int64 total = 2;
+}
+
+message CreateEventRequest {
+  string title = 1 [(validate.rules).string.min_len = 1];
+  string type = 2 [(validate.rules).string.min_len = 1];
+  string date = 3 [(validate.rules).string.min_len = 1];
+  bool isRecurring = 4;
+  string note = 5;
+  string relatedPerson = 6;
+  int32 reminderDays = 7;
+}
+
+message UpdateEventRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+  string title = 2;
+  string type = 3;
+  string date = 4;
+  bool isRecurring = 5;
+  string note = 6;
+  string relatedPerson = 7;
+  int32 reminderDays = 8;
+}
+
+message DeleteEventRequest {
+  string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetUpcomingEventsRequest {
+  int32 days = 1;  // 获取未来多少天内的事件，默认7天
+}
+
+// ==================== Growth Report Request/Response ====================
+
+message GetGrowthReportRequest {
+  string period = 1;  // week, month, year
+}
+
+// GrowthReport (成长报告): 周期性的成长回顾总结。
+message GrowthReport {
+  // period: 报告周期 (week, month, year)。
+  string period = 1;
+
+  // startDate: 报告起始日期时间戳。
+  int64 startDate = 2;
+
+  // endDate: 报告结束日期时间戳。
+  int64 endDate = 3;
+
+  // conversationCount: 该周期内对话次数。
+  int32 conversationCount = 4;
+
+  // totalDuration: 总对话时长（秒）。
+  int32 totalDuration = 5;
+
+  // newMemories: 该周期内新增的记忆。
+  repeated Memory newMemories = 6;
+
+  // emotionSummary: 情绪统计摘要。
+  EmotionStats emotionSummary = 7;
+
+  // highlights: AI 生成的成长亮点列表。
+  repeated string highlights = 8;
+
+  // suggestions: AI 生成的建议列表。
+  repeated string suggestions = 9;
+
+  // upcomingEvents: 即将到来的重要事件。
+  repeated ImportantEvent upcomingEvents = 10;
 }

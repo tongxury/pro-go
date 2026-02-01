@@ -5,6 +5,7 @@ import (
 	"fmt"
 	ucpb "store/api/usercenter"
 	"store/pkg/sdk/conv"
+	"store/pkg/sdk/helper/mathz"
 	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -15,26 +16,21 @@ func (t AuthService) SendCode(ctx context.Context, request *ucpb.SendCodeRequest
 
 	redisKey := fmt.Sprintf("authCode:%s", request.Phone)
 
-	//code := mathz.RandNumber(100000, 999999)
-	code := 100000
+	code := mathz.RandNumber(100000, 999999)
 
-	log.Debugw("验证码", "sending", "phone", request.Phone, "code", code)
+	log.Debugw("验证码", "", "phone", request.Phone, "code", code)
 
 	if t.data.VolcSmsClient != nil {
 		err := t.data.VolcSmsClient.SendSmsCode(ctx, request.Phone, conv.Str(code))
 		if err != nil {
-			log.Errorw("VolcSmsClient.SendSmsCode err", err, "phone", request.Phone, "code", code)
 			return nil, err
 		}
 	} else if t.data.Alisms != nil {
 		_, err := t.data.Alisms.Send(ctx, []string{request.Phone}, conv.Str(code))
 		if err != nil {
-			log.Errorw("Alisms.SendSmsCode err", err, "phone", request.Phone, "code", code)
 			return nil, err
 		}
 	}
-
-	log.Debugw("验证码", "sent", "phone", request.Phone, "code", code)
 
 	err := t.data.Redis.Set(ctx, redisKey, code, 5*time.Minute).Err()
 	if err != nil {

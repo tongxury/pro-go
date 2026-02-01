@@ -18,10 +18,7 @@ func (t ProjService) XGetAsset(ctx context.Context, request *projpb.XGetAssetReq
 
 	asset, err := t.data.Mongo.Asset.FindByID(ctx, request.Id, mgz.Find().SetFields(request.GetReturnFields()).B())
 	if err != nil {
-		asset, err = t.data.Mongo.Asset.FindOne(ctx, mgz.Filter().EQ("workflow._id", request.Id).B(), mgz.Find().SetFields(request.GetReturnFields()).B())
-		if err != nil {
-			return nil, err
-		}
+		return nil, err
 	}
 
 	if asset.GetWorkflow().GetID() != "" {

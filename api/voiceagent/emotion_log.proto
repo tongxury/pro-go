@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// EmotionLog (情绪记录): 追踪每次对话的情绪状态。
+// 用于生成情绪曲线和分析用户情绪变化趋势。
+message EmotionLog {
+  // _id: 记录唯一标识。
+  string _id = 1 [json_name = "_id"];
+
+  // userId: 所属用户 ID。
+  string userId = 2;
+
+  // conversationId: 关联的会话 ID。
+  string conversationId = 3;
+
+  // emotion: 情绪类型 (happy, sad, anxious, calm, angry, excited, neutral)。
+  string emotion = 4;
+
+  // intensity: 情绪强度 (1-10)。
+  int32 intensity = 5;
+
+  // summary: 对话摘要或触发原因。
+  string summary = 6;
+
+  // triggers: 情绪触发因素列表。
+  repeated string triggers = 7;
+
+  int64 createdAt = 8;
+}
+
+// EmotionStats (情绪统计): 用于情绪曲线可视化。
+message EmotionStats {
+  // dateRange: 统计时间范围。
+  string dateRange = 1;
+
+  // dominantEmotion: 主要情绪。
+  string dominantEmotion = 2;
+
+  // averageIntensity: 平均情绪强度。
+  float averageIntensity = 3;
+
+  // emotionCounts: 各情绪出现次数。
+  map<string, int32> emotionCounts = 4;
+
+  // timeline: 按时间排列的情绪数据点。
+  repeated EmotionDataPoint timeline = 5;
+}
+
+// EmotionDataPoint (情绪数据点): 时间线上的单个数据点。
+message EmotionDataPoint {
+  string date = 1;
+  string emotion = 2;
+  int32 intensity = 3;
+}

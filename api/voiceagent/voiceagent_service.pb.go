@@ -1284,11 +1284,1082 @@ func (x *SendMessageRequest) GetEnableVoice() bool {
 	return false
 }
 
+type ListMemoriesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"` // 可选，按类型筛选
+	Page          int64                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMemoriesRequest) Reset() {
+	*x = ListMemoriesRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMemoriesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMemoriesRequest) ProtoMessage() {}
+
+func (x *ListMemoriesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMemoriesRequest.ProtoReflect.Descriptor instead.
+func (*ListMemoriesRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListMemoriesRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ListMemoriesRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListMemoriesRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+type MemoryList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*Memory              `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MemoryList) Reset() {
+	*x = MemoryList{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MemoryList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemoryList) ProtoMessage() {}
+
+func (x *MemoryList) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemoryList.ProtoReflect.Descriptor instead.
+func (*MemoryList) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *MemoryList) GetList() []*Memory {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *MemoryList) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type CreateMemoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	Importance    int32                  `protobuf:"varint,3,opt,name=importance,proto3" json:"importance,omitempty"`
+	Tags          []string               `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateMemoryRequest) Reset() {
+	*x = CreateMemoryRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateMemoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateMemoryRequest) ProtoMessage() {}
+
+func (x *CreateMemoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateMemoryRequest.ProtoReflect.Descriptor instead.
+func (*CreateMemoryRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *CreateMemoryRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *CreateMemoryRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *CreateMemoryRequest) GetImportance() int32 {
+	if x != nil {
+		return x.Importance
+	}
+	return 0
+}
+
+func (x *CreateMemoryRequest) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+type DeleteMemoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteMemoryRequest) Reset() {
+	*x = DeleteMemoryRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteMemoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteMemoryRequest) ProtoMessage() {}
+
+func (x *DeleteMemoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteMemoryRequest.ProtoReflect.Descriptor instead.
+func (*DeleteMemoryRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *DeleteMemoryRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetUserProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileRequest) Reset() {
+	*x = GetUserProfileRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileRequest) ProtoMessage() {}
+
+func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{27}
+}
+
+type UpdateUserProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Nickname      string                 `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	Birthday      string                 `protobuf:"bytes,2,opt,name=birthday,proto3" json:"birthday,omitempty"`
+	Interests     []string               `protobuf:"bytes,3,rep,name=interests,proto3" json:"interests,omitempty"`
+	Goals         []string               `protobuf:"bytes,4,rep,name=goals,proto3" json:"goals,omitempty"`
+	Bio           string                 `protobuf:"bytes,5,opt,name=bio,proto3" json:"bio,omitempty"`
+	Timezone      string                 `protobuf:"bytes,6,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserProfileRequest) Reset() {
+	*x = UpdateUserProfileRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserProfileRequest) ProtoMessage() {}
+
+func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserProfileRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UpdateUserProfileRequest) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *UpdateUserProfileRequest) GetBirthday() string {
+	if x != nil {
+		return x.Birthday
+	}
+	return ""
+}
+
+func (x *UpdateUserProfileRequest) GetInterests() []string {
+	if x != nil {
+		return x.Interests
+	}
+	return nil
+}
+
+func (x *UpdateUserProfileRequest) GetGoals() []string {
+	if x != nil {
+		return x.Goals
+	}
+	return nil
+}
+
+func (x *UpdateUserProfileRequest) GetBio() string {
+	if x != nil {
+		return x.Bio
+	}
+	return ""
+}
+
+func (x *UpdateUserProfileRequest) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
+type ListEmotionLogsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	StartTime     int64                  `protobuf:"varint,3,opt,name=startTime,proto3" json:"startTime,omitempty"` // 可选，起始时间戳
+	EndTime       int64                  `protobuf:"varint,4,opt,name=endTime,proto3" json:"endTime,omitempty"`     // 可选，结束时间戳
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListEmotionLogsRequest) Reset() {
+	*x = ListEmotionLogsRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListEmotionLogsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListEmotionLogsRequest) ProtoMessage() {}
+
+func (x *ListEmotionLogsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListEmotionLogsRequest.ProtoReflect.Descriptor instead.
+func (*ListEmotionLogsRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListEmotionLogsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListEmotionLogsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListEmotionLogsRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListEmotionLogsRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+type EmotionLogList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*EmotionLog          `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmotionLogList) Reset() {
+	*x = EmotionLogList{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmotionLogList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmotionLogList) ProtoMessage() {}
+
+func (x *EmotionLogList) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmotionLogList.ProtoReflect.Descriptor instead.
+func (*EmotionLogList) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *EmotionLogList) GetList() []*EmotionLog {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *EmotionLogList) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type GetEmotionStatsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Days          int32                  `protobuf:"varint,1,opt,name=days,proto3" json:"days,omitempty"` // 统计最近多少天，默认30天
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetEmotionStatsRequest) Reset() {
+	*x = GetEmotionStatsRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetEmotionStatsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetEmotionStatsRequest) ProtoMessage() {}
+
+func (x *GetEmotionStatsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetEmotionStatsRequest.ProtoReflect.Descriptor instead.
+func (*GetEmotionStatsRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetEmotionStatsRequest) GetDays() int32 {
+	if x != nil {
+		return x.Days
+	}
+	return 0
+}
+
+type ListEventsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"` // 可选，按类型筛选
+	Page          int64                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListEventsRequest) Reset() {
+	*x = ListEventsRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListEventsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListEventsRequest) ProtoMessage() {}
+
+func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListEventsRequest.ProtoReflect.Descriptor instead.
+func (*ListEventsRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ListEventsRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ListEventsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListEventsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+type EventList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*ImportantEvent      `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventList) Reset() {
+	*x = EventList{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventList) ProtoMessage() {}
+
+func (x *EventList) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventList.ProtoReflect.Descriptor instead.
+func (*EventList) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *EventList) GetList() []*ImportantEvent {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *EventList) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type CreateEventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Date          string                 `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	IsRecurring   bool                   `protobuf:"varint,4,opt,name=isRecurring,proto3" json:"isRecurring,omitempty"`
+	Note          string                 `protobuf:"bytes,5,opt,name=note,proto3" json:"note,omitempty"`
+	RelatedPerson string                 `protobuf:"bytes,6,opt,name=relatedPerson,proto3" json:"relatedPerson,omitempty"`
+	ReminderDays  int32                  `protobuf:"varint,7,opt,name=reminderDays,proto3" json:"reminderDays,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateEventRequest) Reset() {
+	*x = CreateEventRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateEventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateEventRequest) ProtoMessage() {}
+
+func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateEventRequest.ProtoReflect.Descriptor instead.
+func (*CreateEventRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *CreateEventRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CreateEventRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *CreateEventRequest) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *CreateEventRequest) GetIsRecurring() bool {
+	if x != nil {
+		return x.IsRecurring
+	}
+	return false
+}
+
+func (x *CreateEventRequest) GetNote() string {
+	if x != nil {
+		return x.Note
+	}
+	return ""
+}
+
+func (x *CreateEventRequest) GetRelatedPerson() string {
+	if x != nil {
+		return x.RelatedPerson
+	}
+	return ""
+}
+
+func (x *CreateEventRequest) GetReminderDays() int32 {
+	if x != nil {
+		return x.ReminderDays
+	}
+	return 0
+}
+
+type UpdateEventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Date          string                 `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
+	IsRecurring   bool                   `protobuf:"varint,5,opt,name=isRecurring,proto3" json:"isRecurring,omitempty"`
+	Note          string                 `protobuf:"bytes,6,opt,name=note,proto3" json:"note,omitempty"`
+	RelatedPerson string                 `protobuf:"bytes,7,opt,name=relatedPerson,proto3" json:"relatedPerson,omitempty"`
+	ReminderDays  int32                  `protobuf:"varint,8,opt,name=reminderDays,proto3" json:"reminderDays,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateEventRequest) Reset() {
+	*x = UpdateEventRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateEventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateEventRequest) ProtoMessage() {}
+
+func (x *UpdateEventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateEventRequest.ProtoReflect.Descriptor instead.
+func (*UpdateEventRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *UpdateEventRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetIsRecurring() bool {
+	if x != nil {
+		return x.IsRecurring
+	}
+	return false
+}
+
+func (x *UpdateEventRequest) GetNote() string {
+	if x != nil {
+		return x.Note
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetRelatedPerson() string {
+	if x != nil {
+		return x.RelatedPerson
+	}
+	return ""
+}
+
+func (x *UpdateEventRequest) GetReminderDays() int32 {
+	if x != nil {
+		return x.ReminderDays
+	}
+	return 0
+}
+
+type DeleteEventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteEventRequest) Reset() {
+	*x = DeleteEventRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteEventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteEventRequest) ProtoMessage() {}
+
+func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteEventRequest.ProtoReflect.Descriptor instead.
+func (*DeleteEventRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *DeleteEventRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetUpcomingEventsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Days          int32                  `protobuf:"varint,1,opt,name=days,proto3" json:"days,omitempty"` // 获取未来多少天内的事件，默认7天
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUpcomingEventsRequest) Reset() {
+	*x = GetUpcomingEventsRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUpcomingEventsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUpcomingEventsRequest) ProtoMessage() {}
+
+func (x *GetUpcomingEventsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUpcomingEventsRequest.ProtoReflect.Descriptor instead.
+func (*GetUpcomingEventsRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetUpcomingEventsRequest) GetDays() int32 {
+	if x != nil {
+		return x.Days
+	}
+	return 0
+}
+
+type GetGrowthReportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Period        string                 `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // week, month, year
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGrowthReportRequest) Reset() {
+	*x = GetGrowthReportRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGrowthReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGrowthReportRequest) ProtoMessage() {}
+
+func (x *GetGrowthReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGrowthReportRequest.ProtoReflect.Descriptor instead.
+func (*GetGrowthReportRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *GetGrowthReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+// GrowthReport (成长报告): 周期性的成长回顾总结。
+type GrowthReport struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// period: 报告周期 (week, month, year)。
+	Period string `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"`
+	// startDate: 报告起始日期时间戳。
+	StartDate int64 `protobuf:"varint,2,opt,name=startDate,proto3" json:"startDate,omitempty"`
+	// endDate: 报告结束日期时间戳。
+	EndDate int64 `protobuf:"varint,3,opt,name=endDate,proto3" json:"endDate,omitempty"`
+	// conversationCount: 该周期内对话次数。
+	ConversationCount int32 `protobuf:"varint,4,opt,name=conversationCount,proto3" json:"conversationCount,omitempty"`
+	// totalDuration: 总对话时长（秒）。
+	TotalDuration int32 `protobuf:"varint,5,opt,name=totalDuration,proto3" json:"totalDuration,omitempty"`
+	// newMemories: 该周期内新增的记忆。
+	NewMemories []*Memory `protobuf:"bytes,6,rep,name=newMemories,proto3" json:"newMemories,omitempty"`
+	// emotionSummary: 情绪统计摘要。
+	EmotionSummary *EmotionStats `protobuf:"bytes,7,opt,name=emotionSummary,proto3" json:"emotionSummary,omitempty"`
+	// highlights: AI 生成的成长亮点列表。
+	Highlights []string `protobuf:"bytes,8,rep,name=highlights,proto3" json:"highlights,omitempty"`
+	// suggestions: AI 生成的建议列表。
+	Suggestions []string `protobuf:"bytes,9,rep,name=suggestions,proto3" json:"suggestions,omitempty"`
+	// upcomingEvents: 即将到来的重要事件。
+	UpcomingEvents []*ImportantEvent `protobuf:"bytes,10,rep,name=upcomingEvents,proto3" json:"upcomingEvents,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GrowthReport) Reset() {
+	*x = GrowthReport{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GrowthReport) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GrowthReport) ProtoMessage() {}
+
+func (x *GrowthReport) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GrowthReport.ProtoReflect.Descriptor instead.
+func (*GrowthReport) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GrowthReport) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *GrowthReport) GetStartDate() int64 {
+	if x != nil {
+		return x.StartDate
+	}
+	return 0
+}
+
+func (x *GrowthReport) GetEndDate() int64 {
+	if x != nil {
+		return x.EndDate
+	}
+	return 0
+}
+
+func (x *GrowthReport) GetConversationCount() int32 {
+	if x != nil {
+		return x.ConversationCount
+	}
+	return 0
+}
+
+func (x *GrowthReport) GetTotalDuration() int32 {
+	if x != nil {
+		return x.TotalDuration
+	}
+	return 0
+}
+
+func (x *GrowthReport) GetNewMemories() []*Memory {
+	if x != nil {
+		return x.NewMemories
+	}
+	return nil
+}
+
+func (x *GrowthReport) GetEmotionSummary() *EmotionStats {
+	if x != nil {
+		return x.EmotionSummary
+	}
+	return nil
+}
+
+func (x *GrowthReport) GetHighlights() []string {
+	if x != nil {
+		return x.Highlights
+	}
+	return nil
+}
+
+func (x *GrowthReport) GetSuggestions() []string {
+	if x != nil {
+		return x.Suggestions
+	}
+	return nil
+}
+
+func (x *GrowthReport) GetUpcomingEvents() []*ImportantEvent {
+	if x != nil {
+		return x.UpcomingEvents
+	}
+	return nil
+}
+
 var File_voiceagent_voiceagent_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\n" +
-	"#voiceagent/voiceagent_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x18voiceagent/persona.proto\x1a\x16voiceagent/agent.proto\x1a\x16voiceagent/voice.proto\x1a\x16voiceagent/scene.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\"\xe2\x01\n" +
+	"#voiceagent/voiceagent_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x18voiceagent/persona.proto\x1a\x16voiceagent/agent.proto\x1a\x16voiceagent/voice.proto\x1a\x16voiceagent/scene.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\x1a\x17voiceagent/memory.proto\x1a\x1dvoiceagent/user_profile.proto\x1a\x1cvoiceagent/emotion_log.proto\x1a voiceagent/important_event.proto\"\xe2\x01\n" +
 	"\x12CreateAgentRequest\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x12\x16\n" +
 	"\x06avatar\x18\x02 \x01(\tR\x06avatar\x12\x12\n" +
@@ -1368,7 +2439,86 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\x12SendMessageRequest\x12&\n" +
 	"\x0econversationId\x18\x01 \x01(\tR\x0econversationId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12 \n" +
-	"\venableVoice\x18\x03 \x01(\bR\venableVoice2\xb3\x0f\n" +
+	"\venableVoice\x18\x03 \x01(\bR\venableVoice\"Q\n" +
+	"\x13ListMemoriesRequest\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\"N\n" +
+	"\n" +
+	"MemoryList\x12*\n" +
+	"\x04list\x18\x01 \x03(\v2\x16.api.voiceagent.MemoryR\x04list\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\x89\x01\n" +
+	"\x13CreateMemoryRequest\x12\x1b\n" +
+	"\x04type\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04type\x12!\n" +
+	"\acontent\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\acontent\x12\x1e\n" +
+	"\n" +
+	"importance\x18\x03 \x01(\x05R\n" +
+	"importance\x12\x12\n" +
+	"\x04tags\x18\x04 \x03(\tR\x04tags\".\n" +
+	"\x13DeleteMemoryRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\"\x17\n" +
+	"\x15GetUserProfileRequest\"\xb4\x01\n" +
+	"\x18UpdateUserProfileRequest\x12\x1a\n" +
+	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x1a\n" +
+	"\bbirthday\x18\x02 \x01(\tR\bbirthday\x12\x1c\n" +
+	"\tinterests\x18\x03 \x03(\tR\tinterests\x12\x14\n" +
+	"\x05goals\x18\x04 \x03(\tR\x05goals\x12\x10\n" +
+	"\x03bio\x18\x05 \x01(\tR\x03bio\x12\x1a\n" +
+	"\btimezone\x18\x06 \x01(\tR\btimezone\"x\n" +
+	"\x16ListEmotionLogsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x1c\n" +
+	"\tstartTime\x18\x03 \x01(\x03R\tstartTime\x12\x18\n" +
+	"\aendTime\x18\x04 \x01(\x03R\aendTime\"V\n" +
+	"\x0eEmotionLogList\x12.\n" +
+	"\x04list\x18\x01 \x03(\v2\x1a.api.voiceagent.EmotionLogR\x04list\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\",\n" +
+	"\x16GetEmotionStatsRequest\x12\x12\n" +
+	"\x04days\x18\x01 \x01(\x05R\x04days\"O\n" +
+	"\x11ListEventsRequest\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\"U\n" +
+	"\tEventList\x122\n" +
+	"\x04list\x18\x01 \x03(\v2\x1e.api.voiceagent.ImportantEventR\x04list\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\xed\x01\n" +
+	"\x12CreateEventRequest\x12\x1d\n" +
+	"\x05title\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
+	"\x04type\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04type\x12\x1b\n" +
+	"\x04date\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04date\x12 \n" +
+	"\visRecurring\x18\x04 \x01(\bR\visRecurring\x12\x12\n" +
+	"\x04note\x18\x05 \x01(\tR\x04note\x12$\n" +
+	"\rrelatedPerson\x18\x06 \x01(\tR\rrelatedPerson\x12\"\n" +
+	"\freminderDays\x18\a \x01(\x05R\freminderDays\"\xeb\x01\n" +
+	"\x12UpdateEventRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x12\n" +
+	"\x04date\x18\x04 \x01(\tR\x04date\x12 \n" +
+	"\visRecurring\x18\x05 \x01(\bR\visRecurring\x12\x12\n" +
+	"\x04note\x18\x06 \x01(\tR\x04note\x12$\n" +
+	"\rrelatedPerson\x18\a \x01(\tR\rrelatedPerson\x12\"\n" +
+	"\freminderDays\x18\b \x01(\x05R\freminderDays\"-\n" +
+	"\x12DeleteEventRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\".\n" +
+	"\x18GetUpcomingEventsRequest\x12\x12\n" +
+	"\x04days\x18\x01 \x01(\x05R\x04days\"0\n" +
+	"\x16GetGrowthReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\"\xbc\x03\n" +
+	"\fGrowthReport\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\x1c\n" +
+	"\tstartDate\x18\x02 \x01(\x03R\tstartDate\x12\x18\n" +
+	"\aendDate\x18\x03 \x01(\x03R\aendDate\x12,\n" +
+	"\x11conversationCount\x18\x04 \x01(\x05R\x11conversationCount\x12$\n" +
+	"\rtotalDuration\x18\x05 \x01(\x05R\rtotalDuration\x128\n" +
+	"\vnewMemories\x18\x06 \x03(\v2\x16.api.voiceagent.MemoryR\vnewMemories\x12D\n" +
+	"\x0eemotionSummary\x18\a \x01(\v2\x1c.api.voiceagent.EmotionStatsR\x0eemotionSummary\x12\x1e\n" +
+	"\n" +
+	"highlights\x18\b \x03(\tR\n" +
+	"highlights\x12 \n" +
+	"\vsuggestions\x18\t \x03(\tR\vsuggestions\x12F\n" +
+	"\x0eupcomingEvents\x18\n" +
+	" \x03(\v2\x1e.api.voiceagent.ImportantEventR\x0eupcomingEvents2\xe9\x1a\n" +
 	"\x11VoiceAgentService\x12j\n" +
 	"\fListPersonas\x12#.api.voiceagent.ListPersonasRequest\x1a\x1b.api.voiceagent.PersonaList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/personas\x12g\n" +
 	"\n" +
@@ -1390,7 +2540,21 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\x11ListConversations\x12(.api.voiceagent.ListConversationsRequest\x1a .api.voiceagent.ConversationList\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/va/conversations\x12\xa6\x01\n" +
 	"\x15ListTranscriptEntries\x12,.api.voiceagent.ListTranscriptEntriesRequest\x1a#.api.voiceagent.TranscriptEntryList\":\x82\xd3\xe4\x93\x024\x122/api/va/conversations/{conversationId}/transcripts\x12\x86\x01\n" +
 	"\x15RecordTranscriptEntry\x12,.api.voiceagent.RecordTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12o\n" +
-	"\vSendMessage\x12\".api.voiceagent.SendMessageRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/messagesB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\vSendMessage\x12\".api.voiceagent.SendMessageRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/messages\x12i\n" +
+	"\fListMemories\x12#.api.voiceagent.ListMemoriesRequest\x1a\x1a.api.voiceagent.MemoryList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/memories\x12h\n" +
+	"\fCreateMemory\x12#.api.voiceagent.CreateMemoryRequest\x1a\x16.api.voiceagent.Memory\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/memories\x12j\n" +
+	"\fDeleteMemory\x12#.api.voiceagent.DeleteMemoryRequest\x1a\x16.google.protobuf.Empty\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/va/memories/{id}\x12m\n" +
+	"\x0eGetUserProfile\x12%.api.voiceagent.GetUserProfileRequest\x1a\x1b.api.voiceagent.UserProfile\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/api/va/profile\x12v\n" +
+	"\x11UpdateUserProfile\x12(.api.voiceagent.UpdateUserProfileRequest\x1a\x1b.api.voiceagent.UserProfile\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*2\x0f/api/va/profile\x12s\n" +
+	"\x0fListEmotionLogs\x12&.api.voiceagent.ListEmotionLogsRequest\x1a\x1e.api.voiceagent.EmotionLogList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/emotions\x12w\n" +
+	"\x0fGetEmotionStats\x12&.api.voiceagent.GetEmotionStatsRequest\x1a\x1c.api.voiceagent.EmotionStats\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/va/emotions/stats\x12b\n" +
+	"\n" +
+	"ListEvents\x12!.api.voiceagent.ListEventsRequest\x1a\x19.api.voiceagent.EventList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/events\x12l\n" +
+	"\vCreateEvent\x12\".api.voiceagent.CreateEventRequest\x1a\x1e.api.voiceagent.ImportantEvent\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/va/events\x12q\n" +
+	"\vUpdateEvent\x12\".api.voiceagent.UpdateEventRequest\x1a\x1e.api.voiceagent.ImportantEvent\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*2\x13/api/va/events/{id}\x12f\n" +
+	"\vDeleteEvent\x12\".api.voiceagent.DeleteEventRequest\x1a\x16.google.protobuf.Empty\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/va/events/{id}\x12y\n" +
+	"\x11GetUpcomingEvents\x12(.api.voiceagent.GetUpcomingEventsRequest\x1a\x19.api.voiceagent.EventList\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/va/events/upcoming\x12v\n" +
+	"\x0fGetGrowthReport\x12&.api.voiceagent.GetGrowthReportRequest\x1a\x1c.api.voiceagent.GrowthReport\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/va/growth-reportB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_voiceagent_service_proto_rawDescOnce sync.Once
@@ -1404,7 +2568,7 @@ func file_voiceagent_voiceagent_service_proto_rawDescGZIP() []byte {
 	return file_voiceagent_voiceagent_service_proto_rawDescData
 }
 
-var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*CreateAgentRequest)(nil),           // 0: api.voiceagent.CreateAgentRequest
 	(*ListPersonasRequest)(nil),          // 1: api.voiceagent.ListPersonasRequest
@@ -1429,62 +2593,116 @@ var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*TranscriptEntryList)(nil),          // 20: api.voiceagent.TranscriptEntryList
 	(*RecordTranscriptEntryRequest)(nil), // 21: api.voiceagent.RecordTranscriptEntryRequest
 	(*SendMessageRequest)(nil),           // 22: api.voiceagent.SendMessageRequest
-	nil,                                  // 23: api.voiceagent.AddVoiceRequest.SettingsEntry
-	(*Persona)(nil),                      // 24: api.voiceagent.Persona
-	(*Agent)(nil),                        // 25: api.voiceagent.Agent
-	(*Voice)(nil),                        // 26: api.voiceagent.Voice
-	(*Scene)(nil),                        // 27: api.voiceagent.Scene
-	(*Conversation)(nil),                 // 28: api.voiceagent.Conversation
-	(*TranscriptEntry)(nil),              // 29: api.voiceagent.TranscriptEntry
-	(*emptypb.Empty)(nil),                // 30: google.protobuf.Empty
+	(*ListMemoriesRequest)(nil),          // 23: api.voiceagent.ListMemoriesRequest
+	(*MemoryList)(nil),                   // 24: api.voiceagent.MemoryList
+	(*CreateMemoryRequest)(nil),          // 25: api.voiceagent.CreateMemoryRequest
+	(*DeleteMemoryRequest)(nil),          // 26: api.voiceagent.DeleteMemoryRequest
+	(*GetUserProfileRequest)(nil),        // 27: api.voiceagent.GetUserProfileRequest
+	(*UpdateUserProfileRequest)(nil),     // 28: api.voiceagent.UpdateUserProfileRequest
+	(*ListEmotionLogsRequest)(nil),       // 29: api.voiceagent.ListEmotionLogsRequest
+	(*EmotionLogList)(nil),               // 30: api.voiceagent.EmotionLogList
+	(*GetEmotionStatsRequest)(nil),       // 31: api.voiceagent.GetEmotionStatsRequest
+	(*ListEventsRequest)(nil),            // 32: api.voiceagent.ListEventsRequest
+	(*EventList)(nil),                    // 33: api.voiceagent.EventList
+	(*CreateEventRequest)(nil),           // 34: api.voiceagent.CreateEventRequest
+	(*UpdateEventRequest)(nil),           // 35: api.voiceagent.UpdateEventRequest
+	(*DeleteEventRequest)(nil),           // 36: api.voiceagent.DeleteEventRequest
+	(*GetUpcomingEventsRequest)(nil),     // 37: api.voiceagent.GetUpcomingEventsRequest
+	(*GetGrowthReportRequest)(nil),       // 38: api.voiceagent.GetGrowthReportRequest
+	(*GrowthReport)(nil),                 // 39: api.voiceagent.GrowthReport
+	nil,                                  // 40: api.voiceagent.AddVoiceRequest.SettingsEntry
+	(*Persona)(nil),                      // 41: api.voiceagent.Persona
+	(*Agent)(nil),                        // 42: api.voiceagent.Agent
+	(*Voice)(nil),                        // 43: api.voiceagent.Voice
+	(*Scene)(nil),                        // 44: api.voiceagent.Scene
+	(*Conversation)(nil),                 // 45: api.voiceagent.Conversation
+	(*TranscriptEntry)(nil),              // 46: api.voiceagent.TranscriptEntry
+	(*Memory)(nil),                       // 47: api.voiceagent.Memory
+	(*EmotionLog)(nil),                   // 48: api.voiceagent.EmotionLog
+	(*ImportantEvent)(nil),               // 49: api.voiceagent.ImportantEvent
+	(*EmotionStats)(nil),                 // 50: api.voiceagent.EmotionStats
+	(*emptypb.Empty)(nil),                // 51: google.protobuf.Empty
+	(*UserProfile)(nil),                  // 52: api.voiceagent.UserProfile
 }
 var file_voiceagent_voiceagent_service_proto_depIdxs = []int32{
-	24, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
-	25, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
-	23, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
-	26, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
-	27, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
-	28, // 5: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
-	29, // 6: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
-	1,  // 7: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
-	3,  // 8: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
-	0,  // 9: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
-	4,  // 10: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
-	5,  // 11: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
-	6,  // 12: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
-	7,  // 13: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
-	9,  // 14: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
-	11, // 15: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
-	13, // 16: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
-	14, // 17: api.voiceagent.VoiceAgentService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
-	15, // 18: api.voiceagent.VoiceAgentService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
-	16, // 19: api.voiceagent.VoiceAgentService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
-	17, // 20: api.voiceagent.VoiceAgentService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
-	19, // 21: api.voiceagent.VoiceAgentService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
-	21, // 22: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:input_type -> api.voiceagent.RecordTranscriptEntryRequest
-	22, // 23: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
-	2,  // 24: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
-	24, // 25: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
-	25, // 26: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
-	25, // 27: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
-	30, // 28: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
-	25, // 29: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
-	8,  // 30: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
-	26, // 31: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
-	10, // 32: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
-	12, // 33: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
-	28, // 34: api.voiceagent.VoiceAgentService.CreateConversation:output_type -> api.voiceagent.Conversation
-	28, // 35: api.voiceagent.VoiceAgentService.UpdateConversation:output_type -> api.voiceagent.Conversation
-	28, // 36: api.voiceagent.VoiceAgentService.GetConversation:output_type -> api.voiceagent.Conversation
-	18, // 37: api.voiceagent.VoiceAgentService.ListConversations:output_type -> api.voiceagent.ConversationList
-	20, // 38: api.voiceagent.VoiceAgentService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
-	29, // 39: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
-	29, // 40: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
-	24, // [24:41] is the sub-list for method output_type
-	7,  // [7:24] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	41, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
+	42, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
+	40, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
+	43, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
+	44, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
+	45, // 5: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
+	46, // 6: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
+	47, // 7: api.voiceagent.MemoryList.list:type_name -> api.voiceagent.Memory
+	48, // 8: api.voiceagent.EmotionLogList.list:type_name -> api.voiceagent.EmotionLog
+	49, // 9: api.voiceagent.EventList.list:type_name -> api.voiceagent.ImportantEvent
+	47, // 10: api.voiceagent.GrowthReport.newMemories:type_name -> api.voiceagent.Memory
+	50, // 11: api.voiceagent.GrowthReport.emotionSummary:type_name -> api.voiceagent.EmotionStats
+	49, // 12: api.voiceagent.GrowthReport.upcomingEvents:type_name -> api.voiceagent.ImportantEvent
+	1,  // 13: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
+	3,  // 14: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
+	0,  // 15: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
+	4,  // 16: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
+	5,  // 17: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
+	6,  // 18: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
+	7,  // 19: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
+	9,  // 20: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
+	11, // 21: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
+	13, // 22: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
+	14, // 23: api.voiceagent.VoiceAgentService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
+	15, // 24: api.voiceagent.VoiceAgentService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
+	16, // 25: api.voiceagent.VoiceAgentService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
+	17, // 26: api.voiceagent.VoiceAgentService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
+	19, // 27: api.voiceagent.VoiceAgentService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
+	21, // 28: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:input_type -> api.voiceagent.RecordTranscriptEntryRequest
+	22, // 29: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
+	23, // 30: api.voiceagent.VoiceAgentService.ListMemories:input_type -> api.voiceagent.ListMemoriesRequest
+	25, // 31: api.voiceagent.VoiceAgentService.CreateMemory:input_type -> api.voiceagent.CreateMemoryRequest
+	26, // 32: api.voiceagent.VoiceAgentService.DeleteMemory:input_type -> api.voiceagent.DeleteMemoryRequest
+	27, // 33: api.voiceagent.VoiceAgentService.GetUserProfile:input_type -> api.voiceagent.GetUserProfileRequest
+	28, // 34: api.voiceagent.VoiceAgentService.UpdateUserProfile:input_type -> api.voiceagent.UpdateUserProfileRequest
+	29, // 35: api.voiceagent.VoiceAgentService.ListEmotionLogs:input_type -> api.voiceagent.ListEmotionLogsRequest
+	31, // 36: api.voiceagent.VoiceAgentService.GetEmotionStats:input_type -> api.voiceagent.GetEmotionStatsRequest
+	32, // 37: api.voiceagent.VoiceAgentService.ListEvents:input_type -> api.voiceagent.ListEventsRequest
+	34, // 38: api.voiceagent.VoiceAgentService.CreateEvent:input_type -> api.voiceagent.CreateEventRequest
+	35, // 39: api.voiceagent.VoiceAgentService.UpdateEvent:input_type -> api.voiceagent.UpdateEventRequest
+	36, // 40: api.voiceagent.VoiceAgentService.DeleteEvent:input_type -> api.voiceagent.DeleteEventRequest
+	37, // 41: api.voiceagent.VoiceAgentService.GetUpcomingEvents:input_type -> api.voiceagent.GetUpcomingEventsRequest
+	38, // 42: api.voiceagent.VoiceAgentService.GetGrowthReport:input_type -> api.voiceagent.GetGrowthReportRequest
+	2,  // 43: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
+	41, // 44: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
+	42, // 45: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
+	42, // 46: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
+	51, // 47: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
+	42, // 48: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
+	8,  // 49: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
+	43, // 50: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
+	10, // 51: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
+	12, // 52: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
+	45, // 53: api.voiceagent.VoiceAgentService.CreateConversation:output_type -> api.voiceagent.Conversation
+	45, // 54: api.voiceagent.VoiceAgentService.UpdateConversation:output_type -> api.voiceagent.Conversation
+	45, // 55: api.voiceagent.VoiceAgentService.GetConversation:output_type -> api.voiceagent.Conversation
+	18, // 56: api.voiceagent.VoiceAgentService.ListConversations:output_type -> api.voiceagent.ConversationList
+	20, // 57: api.voiceagent.VoiceAgentService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
+	46, // 58: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	46, // 59: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
+	24, // 60: api.voiceagent.VoiceAgentService.ListMemories:output_type -> api.voiceagent.MemoryList
+	47, // 61: api.voiceagent.VoiceAgentService.CreateMemory:output_type -> api.voiceagent.Memory
+	51, // 62: api.voiceagent.VoiceAgentService.DeleteMemory:output_type -> google.protobuf.Empty
+	52, // 63: api.voiceagent.VoiceAgentService.GetUserProfile:output_type -> api.voiceagent.UserProfile
+	52, // 64: api.voiceagent.VoiceAgentService.UpdateUserProfile:output_type -> api.voiceagent.UserProfile
+	30, // 65: api.voiceagent.VoiceAgentService.ListEmotionLogs:output_type -> api.voiceagent.EmotionLogList
+	50, // 66: api.voiceagent.VoiceAgentService.GetEmotionStats:output_type -> api.voiceagent.EmotionStats
+	33, // 67: api.voiceagent.VoiceAgentService.ListEvents:output_type -> api.voiceagent.EventList
+	49, // 68: api.voiceagent.VoiceAgentService.CreateEvent:output_type -> api.voiceagent.ImportantEvent
+	49, // 69: api.voiceagent.VoiceAgentService.UpdateEvent:output_type -> api.voiceagent.ImportantEvent
+	51, // 70: api.voiceagent.VoiceAgentService.DeleteEvent:output_type -> google.protobuf.Empty
+	33, // 71: api.voiceagent.VoiceAgentService.GetUpcomingEvents:output_type -> api.voiceagent.EventList
+	39, // 72: api.voiceagent.VoiceAgentService.GetGrowthReport:output_type -> api.voiceagent.GrowthReport
+	43, // [43:73] is the sub-list for method output_type
+	13, // [13:43] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_voiceagent_service_proto_init() }
@@ -1498,13 +2716,17 @@ func file_voiceagent_voiceagent_service_proto_init() {
 	file_voiceagent_scene_proto_init()
 	file_voiceagent_conversation_proto_init()
 	file_voiceagent_transcript_proto_init()
+	file_voiceagent_memory_proto_init()
+	file_voiceagent_user_profile_proto_init()
+	file_voiceagent_emotion_log_proto_init()
+	file_voiceagent_important_event_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_voiceagent_service_proto_rawDesc), len(file_voiceagent_voiceagent_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

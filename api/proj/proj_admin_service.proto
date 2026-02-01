@@ -11,7 +11,6 @@ import "proj/item.proto";
 import "proj/settings.proto";
 import "proj/proj_pro_service.proto";
 import "usercenter/user_service.proto";
-import "usercenter/user.proto";
 import "proj/feedback.proto";
 import "proj/asset.proto";
 import "credit/credit_service.proto";
@@ -239,7 +238,16 @@ message UpdateSettingsRequest {
   repeated string deletePrompts = 3;
 }
 
-
+message ListResourceSegmentsRequest {
+  int64 page = 1;
+  string keyword = 2;
+  string searchBy = 6;
+  string category = 3;
+  int64 size = 4;
+  string status = 5;
+  repeated string ids = 7;
+  string returnFields = 8;
+}
 
 message AddResourcesSegmentRequest{
   message Item {

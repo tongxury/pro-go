@@ -726,106 +726,6 @@ func (x *ResourceSegmentList) GetSize() int64 {
 	return 0
 }
 
-type ListResourceSegmentsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	SearchBy      string                 `protobuf:"bytes,6,opt,name=searchBy,proto3" json:"searchBy,omitempty"`
-	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
-	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
-	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Ids           []string               `protobuf:"bytes,7,rep,name=ids,proto3" json:"ids,omitempty"`
-	ReturnFields  string                 `protobuf:"bytes,8,opt,name=returnFields,proto3" json:"returnFields,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListResourceSegmentsRequest) Reset() {
-	*x = ListResourceSegmentsRequest{}
-	mi := &file_proj_item_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListResourceSegmentsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListResourceSegmentsRequest) ProtoMessage() {}
-
-func (x *ListResourceSegmentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListResourceSegmentsRequest.ProtoReflect.Descriptor instead.
-func (*ListResourceSegmentsRequest) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ListResourceSegmentsRequest) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *ListResourceSegmentsRequest) GetKeyword() string {
-	if x != nil {
-		return x.Keyword
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetSearchBy() string {
-	if x != nil {
-		return x.SearchBy
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetCategory() string {
-	if x != nil {
-		return x.Category
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetSize() int64 {
-	if x != nil {
-		return x.Size
-	}
-	return 0
-}
-
-func (x *ListResourceSegmentsRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetIds() []string {
-	if x != nil {
-		return x.Ids
-	}
-	return nil
-}
-
-func (x *ListResourceSegmentsRequest) GetReturnFields() string {
-	if x != nil {
-		return x.ReturnFields
-	}
-	return ""
-}
-
 type Item struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -844,7 +744,7 @@ type Item struct {
 
 func (x *Item) Reset() {
 	*x = Item{}
-	mi := &file_proj_item_proto_msgTypes[8]
+	mi := &file_proj_item_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -856,7 +756,7 @@ func (x *Item) String() string {
 func (*Item) ProtoMessage() {}
 
 func (x *Item) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[8]
+	mi := &file_proj_item_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -869,7 +769,7 @@ func (x *Item) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Item.ProtoReflect.Descriptor instead.
 func (*Item) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{8}
+	return file_proj_item_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Item) GetId() string {
@@ -962,7 +862,7 @@ type ItemSegment struct {
 
 func (x *ItemSegment) Reset() {
 	*x = ItemSegment{}
-	mi := &file_proj_item_proto_msgTypes[9]
+	mi := &file_proj_item_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -974,7 +874,7 @@ func (x *ItemSegment) String() string {
 func (*ItemSegment) ProtoMessage() {}
 
 func (x *ItemSegment) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[9]
+	mi := &file_proj_item_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -987,7 +887,7 @@ func (x *ItemSegment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSegment.ProtoReflect.Descriptor instead.
 func (*ItemSegment) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{9}
+	return file_proj_item_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ItemSegment) GetCommodity() *Commodity {
@@ -1086,7 +986,7 @@ type ItemSegmentList struct {
 
 func (x *ItemSegmentList) Reset() {
 	*x = ItemSegmentList{}
-	mi := &file_proj_item_proto_msgTypes[10]
+	mi := &file_proj_item_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1098,7 +998,7 @@ func (x *ItemSegmentList) String() string {
 func (*ItemSegmentList) ProtoMessage() {}
 
 func (x *ItemSegmentList) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[10]
+	mi := &file_proj_item_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1111,7 +1011,7 @@ func (x *ItemSegmentList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemSegmentList.ProtoReflect.Descriptor instead.
 func (*ItemSegmentList) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{10}
+	return file_proj_item_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ItemSegmentList) GetList() []*ItemSegment {
@@ -1158,7 +1058,7 @@ type SegmentAnalysis struct {
 
 func (x *SegmentAnalysis) Reset() {
 	*x = SegmentAnalysis{}
-	mi := &file_proj_item_proto_msgTypes[11]
+	mi := &file_proj_item_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1170,7 +1070,7 @@ func (x *SegmentAnalysis) String() string {
 func (*SegmentAnalysis) ProtoMessage() {}
 
 func (x *SegmentAnalysis) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[11]
+	mi := &file_proj_item_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,7 +1083,7 @@ func (x *SegmentAnalysis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SegmentAnalysis.ProtoReflect.Descriptor instead.
 func (*SegmentAnalysis) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{11}
+	return file_proj_item_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SegmentAnalysis) GetCategory() string {
@@ -1256,7 +1156,7 @@ type Analysis struct {
 
 func (x *Analysis) Reset() {
 	*x = Analysis{}
-	mi := &file_proj_item_proto_msgTypes[12]
+	mi := &file_proj_item_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1268,7 +1168,7 @@ func (x *Analysis) String() string {
 func (*Analysis) ProtoMessage() {}
 
 func (x *Analysis) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[12]
+	mi := &file_proj_item_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1281,7 +1181,7 @@ func (x *Analysis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Analysis.ProtoReflect.Descriptor instead.
 func (*Analysis) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{12}
+	return file_proj_item_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Analysis) GetStyle() string {
@@ -1335,7 +1235,7 @@ type TypedTags struct {
 
 func (x *TypedTags) Reset() {
 	*x = TypedTags{}
-	mi := &file_proj_item_proto_msgTypes[13]
+	mi := &file_proj_item_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1347,7 +1247,7 @@ func (x *TypedTags) String() string {
 func (*TypedTags) ProtoMessage() {}
 
 func (x *TypedTags) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[13]
+	mi := &file_proj_item_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1360,7 +1260,7 @@ func (x *TypedTags) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TypedTags.ProtoReflect.Descriptor instead.
 func (*TypedTags) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{13}
+	return file_proj_item_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TypedTags) GetFocusOn() []string {
@@ -1431,7 +1331,7 @@ type ItemList struct {
 
 func (x *ItemList) Reset() {
 	*x = ItemList{}
-	mi := &file_proj_item_proto_msgTypes[14]
+	mi := &file_proj_item_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1443,7 +1343,7 @@ func (x *ItemList) String() string {
 func (*ItemList) ProtoMessage() {}
 
 func (x *ItemList) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[14]
+	mi := &file_proj_item_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1456,7 +1356,7 @@ func (x *ItemList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemList.ProtoReflect.Descriptor instead.
 func (*ItemList) Descriptor() ([]byte, []int) {
-	return file_proj_item_proto_rawDescGZIP(), []int{14}
+	return file_proj_item_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ItemList) GetList() []*Item {
@@ -1497,7 +1397,7 @@ type Resource_Extra struct {
 
 func (x *Resource_Extra) Reset() {
 	*x = Resource_Extra{}
-	mi := &file_proj_item_proto_msgTypes[15]
+	mi := &file_proj_item_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1509,7 +1409,7 @@ func (x *Resource_Extra) String() string {
 func (*Resource_Extra) ProtoMessage() {}
 
 func (x *Resource_Extra) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[15]
+	mi := &file_proj_item_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1549,7 +1449,7 @@ type ResourceSegment_Extra struct {
 
 func (x *ResourceSegment_Extra) Reset() {
 	*x = ResourceSegment_Extra{}
-	mi := &file_proj_item_proto_msgTypes[16]
+	mi := &file_proj_item_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1561,7 +1461,7 @@ func (x *ResourceSegment_Extra) String() string {
 func (*ResourceSegment_Extra) ProtoMessage() {}
 
 func (x *ResourceSegment_Extra) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[16]
+	mi := &file_proj_item_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1672,16 +1572,7 @@ const file_proj_item_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x19.api.proj.ResourceSegmentR\x04list\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04size\"\xe5\x01\n" +
-	"\x1bListResourceSegmentsRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x18\n" +
-	"\akeyword\x18\x02 \x01(\tR\akeyword\x12\x1a\n" +
-	"\bsearchBy\x18\x06 \x01(\tR\bsearchBy\x12\x1a\n" +
-	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\tR\x06status\x12\x10\n" +
-	"\x03ids\x18\a \x03(\tR\x03ids\x12\"\n" +
-	"\freturnFields\x18\b \x01(\tR\freturnFields\"\xc7\x02\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\"\xc7\x02\n" +
 	"\x04Item\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x14\n" +
@@ -1760,53 +1651,52 @@ func file_proj_item_proto_rawDescGZIP() []byte {
 	return file_proj_item_proto_rawDescData
 }
 
-var file_proj_item_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_proj_item_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_proj_item_proto_goTypes = []any{
-	(*Resource)(nil),                    // 0: api.proj.Resource
-	(*ResourceSegment)(nil),             // 1: api.proj.ResourceSegment
-	(*HighlightFrame)(nil),              // 2: api.proj.HighlightFrame
-	(*KeyFrameSeries)(nil),              // 3: api.proj.KeyFrameSeries
-	(*KeyFrame)(nil),                    // 4: api.proj.KeyFrame
-	(*ResourceList)(nil),                // 5: api.proj.ResourceList
-	(*ResourceSegmentList)(nil),         // 6: api.proj.ResourceSegmentList
-	(*ListResourceSegmentsRequest)(nil), // 7: api.proj.ListResourceSegmentsRequest
-	(*Item)(nil),                        // 8: api.proj.Item
-	(*ItemSegment)(nil),                 // 9: api.proj.ItemSegment
-	(*ItemSegmentList)(nil),             // 10: api.proj.ItemSegmentList
-	(*SegmentAnalysis)(nil),             // 11: api.proj.SegmentAnalysis
-	(*Analysis)(nil),                    // 12: api.proj.Analysis
-	(*TypedTags)(nil),                   // 13: api.proj.TypedTags
-	(*ItemList)(nil),                    // 14: api.proj.ItemList
-	(*Resource_Extra)(nil),              // 15: api.proj.Resource.Extra
-	(*ResourceSegment_Extra)(nil),       // 16: api.proj.ResourceSegment.Extra
-	(*Commodity)(nil),                   // 17: api.proj.Commodity
+	(*Resource)(nil),              // 0: api.proj.Resource
+	(*ResourceSegment)(nil),       // 1: api.proj.ResourceSegment
+	(*HighlightFrame)(nil),        // 2: api.proj.HighlightFrame
+	(*KeyFrameSeries)(nil),        // 3: api.proj.KeyFrameSeries
+	(*KeyFrame)(nil),              // 4: api.proj.KeyFrame
+	(*ResourceList)(nil),          // 5: api.proj.ResourceList
+	(*ResourceSegmentList)(nil),   // 6: api.proj.ResourceSegmentList
+	(*Item)(nil),                  // 7: api.proj.Item
+	(*ItemSegment)(nil),           // 8: api.proj.ItemSegment
+	(*ItemSegmentList)(nil),       // 9: api.proj.ItemSegmentList
+	(*SegmentAnalysis)(nil),       // 10: api.proj.SegmentAnalysis
+	(*Analysis)(nil),              // 11: api.proj.Analysis
+	(*TypedTags)(nil),             // 12: api.proj.TypedTags
+	(*ItemList)(nil),              // 13: api.proj.ItemList
+	(*Resource_Extra)(nil),        // 14: api.proj.Resource.Extra
+	(*ResourceSegment_Extra)(nil), // 15: api.proj.ResourceSegment.Extra
+	(*Commodity)(nil),             // 16: api.proj.Commodity
 }
 var file_proj_item_proto_depIdxs = []int32{
-	17, // 0: api.proj.Resource.commodity:type_name -> api.proj.Commodity
+	16, // 0: api.proj.Resource.commodity:type_name -> api.proj.Commodity
 	1,  // 1: api.proj.Resource.segments:type_name -> api.proj.ResourceSegment
-	15, // 2: api.proj.Resource.extra:type_name -> api.proj.Resource.Extra
+	14, // 2: api.proj.Resource.extra:type_name -> api.proj.Resource.Extra
 	3,  // 3: api.proj.ResourceSegment.keyFrames:type_name -> api.proj.KeyFrameSeries
 	0,  // 4: api.proj.ResourceSegment.root:type_name -> api.proj.Resource
-	13, // 5: api.proj.ResourceSegment.typedTags:type_name -> api.proj.TypedTags
+	12, // 5: api.proj.ResourceSegment.typedTags:type_name -> api.proj.TypedTags
 	2,  // 6: api.proj.ResourceSegment.highlightFrames:type_name -> api.proj.HighlightFrame
 	1,  // 7: api.proj.ResourceSegment.segments:type_name -> api.proj.ResourceSegment
-	16, // 8: api.proj.ResourceSegment.extra:type_name -> api.proj.ResourceSegment.Extra
+	15, // 8: api.proj.ResourceSegment.extra:type_name -> api.proj.ResourceSegment.Extra
 	4,  // 9: api.proj.KeyFrameSeries.storyBeginning:type_name -> api.proj.KeyFrame
 	4,  // 10: api.proj.KeyFrameSeries.climax:type_name -> api.proj.KeyFrame
 	4,  // 11: api.proj.KeyFrameSeries.storyEnding:type_name -> api.proj.KeyFrame
 	0,  // 12: api.proj.ResourceList.list:type_name -> api.proj.Resource
 	1,  // 13: api.proj.ResourceSegmentList.list:type_name -> api.proj.ResourceSegment
-	12, // 14: api.proj.Item.analysis:type_name -> api.proj.Analysis
-	12, // 15: api.proj.Item.analysis2:type_name -> api.proj.Analysis
-	17, // 16: api.proj.Item.commodity:type_name -> api.proj.Commodity
-	17, // 17: api.proj.ItemSegment.commodity:type_name -> api.proj.Commodity
-	13, // 18: api.proj.ItemSegment.typedTags:type_name -> api.proj.TypedTags
+	11, // 14: api.proj.Item.analysis:type_name -> api.proj.Analysis
+	11, // 15: api.proj.Item.analysis2:type_name -> api.proj.Analysis
+	16, // 16: api.proj.Item.commodity:type_name -> api.proj.Commodity
+	16, // 17: api.proj.ItemSegment.commodity:type_name -> api.proj.Commodity
+	12, // 18: api.proj.ItemSegment.typedTags:type_name -> api.proj.TypedTags
 	2,  // 19: api.proj.ItemSegment.highlightFrames:type_name -> api.proj.HighlightFrame
-	9,  // 20: api.proj.ItemSegmentList.list:type_name -> api.proj.ItemSegment
-	13, // 21: api.proj.SegmentAnalysis.typedTags:type_name -> api.proj.TypedTags
-	11, // 22: api.proj.Analysis.segments:type_name -> api.proj.SegmentAnalysis
-	11, // 23: api.proj.Analysis.segments2:type_name -> api.proj.SegmentAnalysis
-	8,  // 24: api.proj.ItemList.list:type_name -> api.proj.Item
+	8,  // 20: api.proj.ItemSegmentList.list:type_name -> api.proj.ItemSegment
+	12, // 21: api.proj.SegmentAnalysis.typedTags:type_name -> api.proj.TypedTags
+	10, // 22: api.proj.Analysis.segments:type_name -> api.proj.SegmentAnalysis
+	10, // 23: api.proj.Analysis.segments2:type_name -> api.proj.SegmentAnalysis
+	7,  // 24: api.proj.ItemList.list:type_name -> api.proj.Item
 	25, // [25:25] is the sub-list for method output_type
 	25, // [25:25] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
@@ -1826,7 +1716,7 @@ func file_proj_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_item_proto_rawDesc), len(file_proj_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

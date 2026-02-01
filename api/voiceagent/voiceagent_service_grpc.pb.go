@@ -37,6 +37,19 @@ const (
 	VoiceAgentService_ListTranscriptEntries_FullMethodName = "/api.voiceagent.VoiceAgentService/ListTranscriptEntries"
 	VoiceAgentService_RecordTranscriptEntry_FullMethodName = "/api.voiceagent.VoiceAgentService/RecordTranscriptEntry"
 	VoiceAgentService_SendMessage_FullMethodName           = "/api.voiceagent.VoiceAgentService/SendMessage"
+	VoiceAgentService_ListMemories_FullMethodName          = "/api.voiceagent.VoiceAgentService/ListMemories"
+	VoiceAgentService_CreateMemory_FullMethodName          = "/api.voiceagent.VoiceAgentService/CreateMemory"
+	VoiceAgentService_DeleteMemory_FullMethodName          = "/api.voiceagent.VoiceAgentService/DeleteMemory"
+	VoiceAgentService_GetUserProfile_FullMethodName        = "/api.voiceagent.VoiceAgentService/GetUserProfile"
+	VoiceAgentService_UpdateUserProfile_FullMethodName     = "/api.voiceagent.VoiceAgentService/UpdateUserProfile"
+	VoiceAgentService_ListEmotionLogs_FullMethodName       = "/api.voiceagent.VoiceAgentService/ListEmotionLogs"
+	VoiceAgentService_GetEmotionStats_FullMethodName       = "/api.voiceagent.VoiceAgentService/GetEmotionStats"
+	VoiceAgentService_ListEvents_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListEvents"
+	VoiceAgentService_CreateEvent_FullMethodName           = "/api.voiceagent.VoiceAgentService/CreateEvent"
+	VoiceAgentService_UpdateEvent_FullMethodName           = "/api.voiceagent.VoiceAgentService/UpdateEvent"
+	VoiceAgentService_DeleteEvent_FullMethodName           = "/api.voiceagent.VoiceAgentService/DeleteEvent"
+	VoiceAgentService_GetUpcomingEvents_FullMethodName     = "/api.voiceagent.VoiceAgentService/GetUpcomingEvents"
+	VoiceAgentService_GetGrowthReport_FullMethodName       = "/api.voiceagent.VoiceAgentService/GetGrowthReport"
 )
 
 // VoiceAgentServiceClient is the client API for VoiceAgentService service.
@@ -81,6 +94,32 @@ type VoiceAgentServiceClient interface {
 	RecordTranscriptEntry(ctx context.Context, in *RecordTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
 	// SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
+	// ListMemories: 获取用户的长期记忆列表。
+	ListMemories(ctx context.Context, in *ListMemoriesRequest, opts ...grpc.CallOption) (*MemoryList, error)
+	// CreateMemory: 手动添加一条记忆。
+	CreateMemory(ctx context.Context, in *CreateMemoryRequest, opts ...grpc.CallOption) (*Memory, error)
+	// DeleteMemory: 删除一条记忆。
+	DeleteMemory(ctx context.Context, in *DeleteMemoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// GetUserProfile: 获取用户档案。
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*UserProfile, error)
+	// UpdateUserProfile: 更新用户档案。
+	UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UserProfile, error)
+	// ListEmotionLogs: 获取情绪记录列表。
+	ListEmotionLogs(ctx context.Context, in *ListEmotionLogsRequest, opts ...grpc.CallOption) (*EmotionLogList, error)
+	// GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+	GetEmotionStats(ctx context.Context, in *GetEmotionStatsRequest, opts ...grpc.CallOption) (*EmotionStats, error)
+	// ListEvents: 获取重要事件列表。
+	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*EventList, error)
+	// CreateEvent: 创建重要事件。
+	CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...grpc.CallOption) (*ImportantEvent, error)
+	// UpdateEvent: 更新重要事件。
+	UpdateEvent(ctx context.Context, in *UpdateEventRequest, opts ...grpc.CallOption) (*ImportantEvent, error)
+	// DeleteEvent: 删除重要事件。
+	DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+	GetUpcomingEvents(ctx context.Context, in *GetUpcomingEventsRequest, opts ...grpc.CallOption) (*EventList, error)
+	// GetGrowthReport: 获取成长报告。
+	GetGrowthReport(ctx context.Context, in *GetGrowthReportRequest, opts ...grpc.CallOption) (*GrowthReport, error)
 }
 
 type voiceAgentServiceClient struct {
@@ -261,6 +300,136 @@ func (c *voiceAgentServiceClient) SendMessage(ctx context.Context, in *SendMessa
 	return out, nil
 }
 
+func (c *voiceAgentServiceClient) ListMemories(ctx context.Context, in *ListMemoriesRequest, opts ...grpc.CallOption) (*MemoryList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MemoryList)
+	err := c.cc.Invoke(ctx, VoiceAgentService_ListMemories_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) CreateMemory(ctx context.Context, in *CreateMemoryRequest, opts ...grpc.CallOption) (*Memory, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Memory)
+	err := c.cc.Invoke(ctx, VoiceAgentService_CreateMemory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) DeleteMemory(ctx context.Context, in *DeleteMemoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, VoiceAgentService_DeleteMemory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*UserProfile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserProfile)
+	err := c.cc.Invoke(ctx, VoiceAgentService_GetUserProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UserProfile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserProfile)
+	err := c.cc.Invoke(ctx, VoiceAgentService_UpdateUserProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) ListEmotionLogs(ctx context.Context, in *ListEmotionLogsRequest, opts ...grpc.CallOption) (*EmotionLogList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EmotionLogList)
+	err := c.cc.Invoke(ctx, VoiceAgentService_ListEmotionLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) GetEmotionStats(ctx context.Context, in *GetEmotionStatsRequest, opts ...grpc.CallOption) (*EmotionStats, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EmotionStats)
+	err := c.cc.Invoke(ctx, VoiceAgentService_GetEmotionStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*EventList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventList)
+	err := c.cc.Invoke(ctx, VoiceAgentService_ListEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...grpc.CallOption) (*ImportantEvent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ImportantEvent)
+	err := c.cc.Invoke(ctx, VoiceAgentService_CreateEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) UpdateEvent(ctx context.Context, in *UpdateEventRequest, opts ...grpc.CallOption) (*ImportantEvent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ImportantEvent)
+	err := c.cc.Invoke(ctx, VoiceAgentService_UpdateEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, VoiceAgentService_DeleteEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) GetUpcomingEvents(ctx context.Context, in *GetUpcomingEventsRequest, opts ...grpc.CallOption) (*EventList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventList)
+	err := c.cc.Invoke(ctx, VoiceAgentService_GetUpcomingEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) GetGrowthReport(ctx context.Context, in *GetGrowthReportRequest, opts ...grpc.CallOption) (*GrowthReport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GrowthReport)
+	err := c.cc.Invoke(ctx, VoiceAgentService_GetGrowthReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VoiceAgentServiceServer is the server API for VoiceAgentService service.
 // All implementations must embed UnimplementedVoiceAgentServiceServer
 // for forward compatibility.
@@ -303,6 +472,32 @@ type VoiceAgentServiceServer interface {
 	RecordTranscriptEntry(context.Context, *RecordTranscriptEntryRequest) (*TranscriptEntry, error)
 	// SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error)
+	// ListMemories: 获取用户的长期记忆列表。
+	ListMemories(context.Context, *ListMemoriesRequest) (*MemoryList, error)
+	// CreateMemory: 手动添加一条记忆。
+	CreateMemory(context.Context, *CreateMemoryRequest) (*Memory, error)
+	// DeleteMemory: 删除一条记忆。
+	DeleteMemory(context.Context, *DeleteMemoryRequest) (*emptypb.Empty, error)
+	// GetUserProfile: 获取用户档案。
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*UserProfile, error)
+	// UpdateUserProfile: 更新用户档案。
+	UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UserProfile, error)
+	// ListEmotionLogs: 获取情绪记录列表。
+	ListEmotionLogs(context.Context, *ListEmotionLogsRequest) (*EmotionLogList, error)
+	// GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+	GetEmotionStats(context.Context, *GetEmotionStatsRequest) (*EmotionStats, error)
+	// ListEvents: 获取重要事件列表。
+	ListEvents(context.Context, *ListEventsRequest) (*EventList, error)
+	// CreateEvent: 创建重要事件。
+	CreateEvent(context.Context, *CreateEventRequest) (*ImportantEvent, error)
+	// UpdateEvent: 更新重要事件。
+	UpdateEvent(context.Context, *UpdateEventRequest) (*ImportantEvent, error)
+	// DeleteEvent: 删除重要事件。
+	DeleteEvent(context.Context, *DeleteEventRequest) (*emptypb.Empty, error)
+	// GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+	GetUpcomingEvents(context.Context, *GetUpcomingEventsRequest) (*EventList, error)
+	// GetGrowthReport: 获取成长报告。
+	GetGrowthReport(context.Context, *GetGrowthReportRequest) (*GrowthReport, error)
 	mustEmbedUnimplementedVoiceAgentServiceServer()
 }
 
@@ -363,6 +558,45 @@ func (UnimplementedVoiceAgentServiceServer) RecordTranscriptEntry(context.Contex
 }
 func (UnimplementedVoiceAgentServiceServer) SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) ListMemories(context.Context, *ListMemoriesRequest) (*MemoryList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListMemories not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) CreateMemory(context.Context, *CreateMemoryRequest) (*Memory, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateMemory not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) DeleteMemory(context.Context, *DeleteMemoryRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteMemory not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*UserProfile, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UserProfile, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateUserProfile not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) ListEmotionLogs(context.Context, *ListEmotionLogsRequest) (*EmotionLogList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListEmotionLogs not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) GetEmotionStats(context.Context, *GetEmotionStatsRequest) (*EmotionStats, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetEmotionStats not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) ListEvents(context.Context, *ListEventsRequest) (*EventList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListEvents not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) CreateEvent(context.Context, *CreateEventRequest) (*ImportantEvent, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateEvent not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) UpdateEvent(context.Context, *UpdateEventRequest) (*ImportantEvent, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateEvent not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) DeleteEvent(context.Context, *DeleteEventRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteEvent not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) GetUpcomingEvents(context.Context, *GetUpcomingEventsRequest) (*EventList, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUpcomingEvents not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) GetGrowthReport(context.Context, *GetGrowthReportRequest) (*GrowthReport, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGrowthReport not implemented")
 }
 func (UnimplementedVoiceAgentServiceServer) mustEmbedUnimplementedVoiceAgentServiceServer() {}
 func (UnimplementedVoiceAgentServiceServer) testEmbeddedByValue()                           {}
@@ -691,6 +925,240 @@ func _VoiceAgentService_SendMessage_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VoiceAgentService_ListMemories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMemoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).ListMemories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_ListMemories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).ListMemories(ctx, req.(*ListMemoriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_CreateMemory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMemoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).CreateMemory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_CreateMemory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).CreateMemory(ctx, req.(*CreateMemoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_DeleteMemory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).DeleteMemory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_DeleteMemory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).DeleteMemory(ctx, req.(*DeleteMemoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).GetUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_GetUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_UpdateUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).UpdateUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_UpdateUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).UpdateUserProfile(ctx, req.(*UpdateUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_ListEmotionLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEmotionLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).ListEmotionLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_ListEmotionLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).ListEmotionLogs(ctx, req.(*ListEmotionLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_GetEmotionStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEmotionStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).GetEmotionStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_GetEmotionStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).GetEmotionStats(ctx, req.(*GetEmotionStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).ListEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_ListEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).ListEvents(ctx, req.(*ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).CreateEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_CreateEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).CreateEvent(ctx, req.(*CreateEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_UpdateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).UpdateEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_UpdateEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).UpdateEvent(ctx, req.(*UpdateEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_DeleteEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).DeleteEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_DeleteEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).DeleteEvent(ctx, req.(*DeleteEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_GetUpcomingEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUpcomingEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).GetUpcomingEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_GetUpcomingEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).GetUpcomingEvents(ctx, req.(*GetUpcomingEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_GetGrowthReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGrowthReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).GetGrowthReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_GetGrowthReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).GetGrowthReport(ctx, req.(*GetGrowthReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VoiceAgentService_ServiceDesc is the grpc.ServiceDesc for VoiceAgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -765,6 +1233,58 @@ var VoiceAgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendMessage",
 			Handler:    _VoiceAgentService_SendMessage_Handler,
+		},
+		{
+			MethodName: "ListMemories",
+			Handler:    _VoiceAgentService_ListMemories_Handler,
+		},
+		{
+			MethodName: "CreateMemory",
+			Handler:    _VoiceAgentService_CreateMemory_Handler,
+		},
+		{
+			MethodName: "DeleteMemory",
+			Handler:    _VoiceAgentService_DeleteMemory_Handler,
+		},
+		{
+			MethodName: "GetUserProfile",
+			Handler:    _VoiceAgentService_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "UpdateUserProfile",
+			Handler:    _VoiceAgentService_UpdateUserProfile_Handler,
+		},
+		{
+			MethodName: "ListEmotionLogs",
+			Handler:    _VoiceAgentService_ListEmotionLogs_Handler,
+		},
+		{
+			MethodName: "GetEmotionStats",
+			Handler:    _VoiceAgentService_GetEmotionStats_Handler,
+		},
+		{
+			MethodName: "ListEvents",
+			Handler:    _VoiceAgentService_ListEvents_Handler,
+		},
+		{
+			MethodName: "CreateEvent",
+			Handler:    _VoiceAgentService_CreateEvent_Handler,
+		},
+		{
+			MethodName: "UpdateEvent",
+			Handler:    _VoiceAgentService_UpdateEvent_Handler,
+		},
+		{
+			MethodName: "DeleteEvent",
+			Handler:    _VoiceAgentService_DeleteEvent_Handler,
+		},
+		{
+			MethodName: "GetUpcomingEvents",
+			Handler:    _VoiceAgentService_GetUpcomingEvents_Handler,
+		},
+		{
+			MethodName: "GetGrowthReport",
+			Handler:    _VoiceAgentService_GetGrowthReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

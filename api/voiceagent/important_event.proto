@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// ImportantEvent (重要事件): 用户的生日、纪念日等重要日期。
+// 支持 AI 在适当时机发出提醒和祝福。
+message ImportantEvent {
+  // _id: 事件唯一标识。
+  string _id = 1 [json_name = "_id"];
+
+  // userId: 所属用户 ID。
+  string userId = 2;
+
+  // title: 事件名称。
+  string title = 3;
+
+  // type: 事件类型 (birthday, anniversary, reminder, goal, custom)。
+  string type = 4;
+
+  // date: 日期 (格式: YYYY-MM-DD 或 MM-DD 用于年度循环)。
+  string date = 5;
+
+  // isRecurring: 是否每年重复。
+  bool isRecurring = 6;
+
+  // note: 备注信息。
+  string note = 7;
+
+  // relatedPerson: 关联的人 (例如: 妈妈的生日)。
+  string relatedPerson = 8;
+
+  // reminderDays: 提前几天提醒。
+  int32 reminderDays = 9;
+
+  int64 createdAt = 10;
+  int64 updatedAt = 11;
+}

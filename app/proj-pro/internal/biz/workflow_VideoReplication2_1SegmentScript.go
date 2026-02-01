@@ -8,12 +8,9 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/conv"
-	"store/pkg/sdk/helper/videoz"
 	"store/pkg/sdk/third/gemini"
 
 	"github.com/go-kratos/kratos/v2/log"
-	"google.golang.org/genai"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 type VideoReplication2_SegmentScriptJob struct {
@@ -56,85 +53,21 @@ func (t VideoReplication2_SegmentScriptJob) Execute(ctx context.Context, jobStat
 		}, nil
 	}
 
-	promptObj, err := t.data.Mongo.Settings.GetPrompt(ctx, "sora2_video_prompt_generation")
-	if err != nil {
-		return nil, err
-	}
-	prompt := promptObj.GetContent()
+	//settings, err := t.data.Mongo.Settings.FindOne(ctx, bson.M{})
+	//if err != nil {
+	//	logger.Errorw("Settings.FindOne err", err)
+	//	return
+	//}
+	//
+	//prompt := settings.VideoScript.GetContent()
 
-	config := &genai.GenerateContentConfig{
-		ResponseMIMEType: "application/json",
-		ResponseSchema: &genai.Schema{
-			Type:     genai.TypeObject,
-			Required: []string{"segments"},
-			Properties: map[string]*genai.Schema{
-				"segments": {
-					Type: genai.TypeArray,
-					Items: &genai.Schema{
-						Type:        genai.TypeObject,
-						Description: "分镜结果",
-						Required: []string{
-							"timeStart",
-							"timeEnd",
-							"subtitle",
-							"intention",
-							"coreAction",
-							"elementTransformation",
-							"visualChange",
-							"contentStyle",
-							"sceneStyle",
-						},
-						Properties: map[string]*genai.Schema{
-							"timeStart": {
-								Type:        genai.TypeNumber,
-								Description: "当前分镜脚本的开始时间戳(秒, 示例：1.22)",
-							},
-							"timeEnd": {
-								Type:        genai.TypeNumber,
-								Description: "当前分镜脚本的结束时间戳(秒, 示例：1.23)",
-							},
-							"subtitle": {
-								Type:        genai.TypeString,
-								Description: "文案",
-							},
-							"intention": {
-								Type:        genai.TypeString,
-								Description: "意图",
-							},
-							"coreAction": {
-								Type:        genai.TypeString,
-								Description: "核心动作",
-							},
-							"elementTransformation": {
-								Type:        genai.TypeString,
-								Description: "元素変化",
-							},
-							"visualChange": {
-								Type:        genai.TypeString,
-								Description: "视觉変化",
-							},
-							"contentStyle": {
-								Type:        genai.TypeString,
-								Description: "当前分段的内容风格描述",
-							},
-							"sceneStyle": {
-								Type:        genai.TypeString,
-								Description: "当前分段的场景设计描述",
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-
-	seg, err := videoz.GetSegmentByUrl(ctx, segment.Root.GetUrl(), segment.TimeStart, segment.TimeEnd)
+	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, "sora2_video_prompt_generation")
 	if err != nil {
 		return nil, err
 	}
 
-	text, err := t.data.GenaiFactory.Get().AnalyzeVideo(ctx, gemini.AnalyzeVideoRequest{
-		VideoBytes: seg.Content,
+	text, err := t.data.GenaiFactory.Get().GenerateContentV2(ctx, gemini.GenerateContentRequestV2{
+		//ImageUrls: []string{dataBus.GetCommodity().GetMedias()[0].Url},
 		Prompt: fmt.Sprintf(`
 %s
 ===
@@ -145,42 +78,55 @@ func (t VideoReplication2_SegmentScriptJob) Execute(ctx context.Context, jobStat
 			dataBus.GetSegment().GetScript(),
 			conv.S2J(dataBus.GetCommodity()),
 		),
-		Config: config,
 	})
 	if err != nil {
 		logger.Errorw("gen content error", err)
 		return nil, err
 	}
 
-	var scriptData projpb.Resource
-	err = protojson.Unmarshal([]byte(text), &scriptData)
-	if err != nil {
-		logger.Errorw("unmarshal error", err, "text", text)
-		return nil, err
-	}
-
-	// 补充图片
-	for i := range scriptData.Segments {
-		frame, err := videoz.GetFrame(seg.Content, scriptData.Segments[i].TimeStart+0.1)
-		if err == nil {
-			scriptData.Segments[i].StartFrame, _ = t.data.TOS.PutImageBytes(ctx, frame)
-		}
-
-		endFrameBytes, err := videoz.GetFrame(seg.Content, scriptData.Segments[i].TimeEnd-0.1)
-		if err == nil {
-			scriptData.Segments[i].EndFrame, _ = t.data.TOS.PutImageBytes(ctx, endFrameBytes)
-		}
-	}
+	//seg, err := videoz.GetSegmentByUrl(ctx, segment.Root.GetUrl(), segment.TimeStart, segment.TimeEnd)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//settings, err := t.data.Mongo.Settings.FindOne(ctx, bson.M{})
+	//if err != nil {
+	//	logger.Errorw("Settings.FindOne err", err)
+	//	return
+	//}
+	//
+	//prompt := settings.VideoScript.GetContent()
+	//
+	//video, err := t.data.GenaiFactory.Get().AnalyzeVideo(ctx, gemini.AnalyzeVideoRequest{
+	//	VideoBytes: seg.Content,
+	//	Prompt:     prompt,
+	//})
+	//if err != nil {
+	//	logger.Errorw("t.data.GenaiFactory.AnalyzeVideo err", err)
+	//	return nil, err
+	//}
+	//
+	//if video == "" {
+	//	return nil, nil
+	//}
 
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
 		Set(fmt.Sprintf("jobs.%d.dataBus.segmentScript", jobState.Index), &projpb.SegmentScript{
-			//Script:   text,
-			Segments: scriptData.Segments,
+			Script: text,
+			//Segments: segments.Segments,
 		}))
 	if err != nil {
 		logger.Errorw("update segment script fail", "err", err)
 		return nil, err
 	}
+
+	//_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+	//	Set("dataBus.segmentScript", &projpb.SegmentScript{
+	//		Script: text,
+	//	}))
+	//if err != nil {
+	//	return nil, err
+	//}
 
 	return &ExecuteResult{
 		Status: ExecuteStatusCompleted,

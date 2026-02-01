@@ -324,3 +324,40 @@ func (t *Core[T]) C() *mongo.Collection {
 func (t *Core[T]) D() *mongo.Database {
 	return t.db
 }
+
+// ListWithFilterAndSort returns items matching the filter with sorting and pagination
+func (t *Core[T]) ListWithFilterAndSort(ctx context.Context, filter bson.M, sort bson.M, page, size int64) ([]T, int64, error) {
+	if page <= 0 {
+		page = 1
+	}
+	if size <= 0 {
+		size = 20
+	}
+
+	filter["deletedAt"] = bson.M{"$exists": false}
+
+	// Count total
+	total, err := t.c.CountDocuments(ctx, filter)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	// Build find options
+	findOpts := options.Find().
+		SetSort(sort).
+		SetSkip((page - 1) * size).
+		SetLimit(size)
+
+	cursor, err := t.c.Find(ctx, filter, findOpts)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	var items []T
+	err = cursor.All(ctx, &items)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return items, total, nil
+}

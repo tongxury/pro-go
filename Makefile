@@ -159,6 +159,15 @@ release_aiagent:
          -d '{"kind":"deployments","namespace":"prod","name":"aiagent","images":{"yoozy-cn-shanghai.cr.volces.com/ve/aiagent":"yoozy-cn-shanghai.cr.volces.com/ve/aiagent:${VERSION}"}}' \
          "http://118.196.63.209:18060/kuboard-api/cluster/qiniu/kind/CICDApi/admin/resource/updateImageTag"
 
+
+usercenter_my_release:
+	@docker buildx build  -t usernx/usercenter:${VERSION} --build-arg SRV=usercenter -f Dockerfile-arm64 . --push
+	@curl -X PUT \
+    -H "content-type: application/json" \
+    -H "Cookie: KuboardUsername=admin; KuboardAccessKey=4342pex2bf55.kkx8hf6z665b85fsf38ichrnfrc238kz" \
+    -d '{"kind":"deployments","namespace":"prod","name":"usercenter","images":{"usernx/usercenter":"usernx/usercenter:${VERSION}"}}' \
+    "http://118.196.63.209:18060/kuboard-api/cluster/my-server/kind/CICDApi/admin/resource/updateImageTag"
+
 usercenter_qiniu_release:
 	@docker buildx build --platform=linux/arm64  -t yoozy-cn-shanghai.cr.volces.com/ve/usercenter:${VERSION} --build-arg SRV=usercenter -f Dockerfile-arm64 . --push
 	@curl -X PUT \

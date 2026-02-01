@@ -89,12 +89,6 @@ service ProjProService {
       body: "*"
     };
   }
-
-  rpc ListTemplateSegments(ListResourceSegmentsRequest) returns (api.proj.ResourceSegmentList) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/template-segments"
-    };
-  }
   // ---------------
   rpc GetAssetSummary(google.protobuf.Empty) returns (AssetSummary) {
     option (google.api.http) = {
@@ -453,7 +447,6 @@ message CreateAssetV2Request {
   api.proj.ResourceSegment segment = 3;
   string workflowName = 4;
   api.proj.DataBus initialData = 5;
-  bool auto = 6;
 }
 
 message CreateAssetV3Request {

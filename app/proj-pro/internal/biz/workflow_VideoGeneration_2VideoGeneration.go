@@ -68,8 +68,8 @@ func (t VideoGeneration_VideoGenerationJob) Execute(ctx context.Context, jobStat
 
 	if videoGeneration.Url != "" {
 		return &ExecuteResult{
-			Status: ExecuteStatusCompleted,
-			//SkipConfirm: true,
+			Status:      ExecuteStatusCompleted,
+			SkipConfirm: true,
 		}, nil
 	}
 
@@ -142,7 +142,7 @@ func (t VideoGeneration_VideoGenerationJob) Execute(ctx context.Context, jobStat
 				wfState.XId,
 				mgz.Op().
 					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), 0, "url", url).
-					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), 0, "status", ExecuteStatusCompleted).
+					//SetListItem("dataBus.videoGenerations", 0, "status", ExecuteStatusCompleted).
 					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), 0, "coverUrl", coverUrl),
 			)
 			if err != nil {
@@ -161,7 +161,7 @@ func (t VideoGeneration_VideoGenerationJob) Execute(ctx context.Context, jobStat
 		return nil, nil
 	}
 
-	seconds := "12"
+	seconds := "4"
 
 	var inputReference io.Reader
 	if len(dataBus.SegmentScript.GetImages()) > 0 {
@@ -180,9 +180,8 @@ func (t VideoGeneration_VideoGenerationJob) Execute(ctx context.Context, jobStat
 	}
 
 	video, err := t.data.OpenAI.Videos().New(ctx, openai.VideoNewParams{
-		Model: openai.VideoModelSora2,
-		//Prompt:         dataBus.SegmentScript.GetScript(),
-		Prompt:         helper.OrString(videoGeneration.Prompt, dataBus.SegmentScript.GetScript()),
+		Model:          openai.VideoModelSora2,
+		Prompt:         dataBus.SegmentScript.GetScript(),
 		InputReference: inputReference,
 		Seconds:        openai.VideoSeconds(seconds),
 	})

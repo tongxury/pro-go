@@ -36,8 +36,11 @@ func (t *VideoGeneration) OnComplete(ctx context.Context, wfState *projpb.Workfl
 func (t *WorkflowBiz) CreateVideoGenerationWorkflow(ctx context.Context, userId string, script *projpb.SegmentScript) (*projpb.Workflow, error) {
 
 	return t.createWorkflow(ctx, "VideoGeneration", &projpb.DataBus{
-		UserId:        userId,
-		SegmentScript: script,
+		UserId: userId,
+		SegmentScript: &projpb.SegmentScript{
+			Script: script.Script,
+			Images: script.Images,
+		},
 	})
 }
 

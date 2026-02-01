@@ -60,11 +60,6 @@ message Remix {
   string status = 5;
 }
 
-message Review {
-  bool pass = 1;
-  string desc = 2;
-}
-
 message KeyFrames {
   message Frame {
     string url = 1;
@@ -75,9 +70,6 @@ message KeyFrames {
     string taskId = 6;
     string aspectRatio = 7;
     string error = 8;
-    string category = 9;
-
-      Review review = 10;
   }
 
   repeated Frame frames = 1;
@@ -121,10 +113,7 @@ message Job {
 
   //  map<string, string> context = 20;
   DataBus dataBus = 9;
-
-  repeated Job subJobs = 10;
 }
-
 
 message Workflow {
   string _id = 1 [json_name = '_id'];
@@ -136,10 +125,8 @@ message Workflow {
   int64 completedAt = 7;
   int64 lastResumedAt = 9;
   string userId = 8;
-  bool auto = 10;
 
   DataBus dataBus = 20;
-  DataBus data = 21;
 }
 
 

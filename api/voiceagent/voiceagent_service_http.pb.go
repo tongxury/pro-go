@@ -23,12 +23,23 @@ const _ = http.SupportPackageIsVersion1
 const OperationVoiceAgentServiceAddVoice = "/api.voiceagent.VoiceAgentService/AddVoice"
 const OperationVoiceAgentServiceCreateAgent = "/api.voiceagent.VoiceAgentService/CreateAgent"
 const OperationVoiceAgentServiceCreateConversation = "/api.voiceagent.VoiceAgentService/CreateConversation"
+const OperationVoiceAgentServiceCreateEvent = "/api.voiceagent.VoiceAgentService/CreateEvent"
+const OperationVoiceAgentServiceCreateMemory = "/api.voiceagent.VoiceAgentService/CreateMemory"
 const OperationVoiceAgentServiceDeleteAgent = "/api.voiceagent.VoiceAgentService/DeleteAgent"
+const OperationVoiceAgentServiceDeleteEvent = "/api.voiceagent.VoiceAgentService/DeleteEvent"
+const OperationVoiceAgentServiceDeleteMemory = "/api.voiceagent.VoiceAgentService/DeleteMemory"
 const OperationVoiceAgentServiceGetAgent = "/api.voiceagent.VoiceAgentService/GetAgent"
 const OperationVoiceAgentServiceGetConversation = "/api.voiceagent.VoiceAgentService/GetConversation"
+const OperationVoiceAgentServiceGetEmotionStats = "/api.voiceagent.VoiceAgentService/GetEmotionStats"
+const OperationVoiceAgentServiceGetGrowthReport = "/api.voiceagent.VoiceAgentService/GetGrowthReport"
 const OperationVoiceAgentServiceGetPersona = "/api.voiceagent.VoiceAgentService/GetPersona"
+const OperationVoiceAgentServiceGetUpcomingEvents = "/api.voiceagent.VoiceAgentService/GetUpcomingEvents"
+const OperationVoiceAgentServiceGetUserProfile = "/api.voiceagent.VoiceAgentService/GetUserProfile"
 const OperationVoiceAgentServiceListAgents = "/api.voiceagent.VoiceAgentService/ListAgents"
 const OperationVoiceAgentServiceListConversations = "/api.voiceagent.VoiceAgentService/ListConversations"
+const OperationVoiceAgentServiceListEmotionLogs = "/api.voiceagent.VoiceAgentService/ListEmotionLogs"
+const OperationVoiceAgentServiceListEvents = "/api.voiceagent.VoiceAgentService/ListEvents"
+const OperationVoiceAgentServiceListMemories = "/api.voiceagent.VoiceAgentService/ListMemories"
 const OperationVoiceAgentServiceListPersonas = "/api.voiceagent.VoiceAgentService/ListPersonas"
 const OperationVoiceAgentServiceListScenes = "/api.voiceagent.VoiceAgentService/ListScenes"
 const OperationVoiceAgentServiceListTranscriptEntries = "/api.voiceagent.VoiceAgentService/ListTranscriptEntries"
@@ -37,6 +48,8 @@ const OperationVoiceAgentServiceRecordTranscriptEntry = "/api.voiceagent.VoiceAg
 const OperationVoiceAgentServiceSendMessage = "/api.voiceagent.VoiceAgentService/SendMessage"
 const OperationVoiceAgentServiceUpdateAgent = "/api.voiceagent.VoiceAgentService/UpdateAgent"
 const OperationVoiceAgentServiceUpdateConversation = "/api.voiceagent.VoiceAgentService/UpdateConversation"
+const OperationVoiceAgentServiceUpdateEvent = "/api.voiceagent.VoiceAgentService/UpdateEvent"
+const OperationVoiceAgentServiceUpdateUserProfile = "/api.voiceagent.VoiceAgentService/UpdateUserProfile"
 
 type VoiceAgentServiceHTTPServer interface {
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
@@ -45,18 +58,40 @@ type VoiceAgentServiceHTTPServer interface {
 	CreateAgent(context.Context, *CreateAgentRequest) (*Agent, error)
 	// CreateConversation CreateConversation: 启动一个实时交互会话。
 	CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error)
+	// CreateEvent CreateEvent: 创建重要事件。
+	CreateEvent(context.Context, *CreateEventRequest) (*ImportantEvent, error)
+	// CreateMemory CreateMemory: 手动添加一条记忆。
+	CreateMemory(context.Context, *CreateMemoryRequest) (*Memory, error)
 	// DeleteAgent DeleteAgent: 删除角色。
 	DeleteAgent(context.Context, *DeleteAgentRequest) (*emptypb.Empty, error)
+	// DeleteEvent DeleteEvent: 删除重要事件。
+	DeleteEvent(context.Context, *DeleteEventRequest) (*emptypb.Empty, error)
+	// DeleteMemory DeleteMemory: 删除一条记忆。
+	DeleteMemory(context.Context, *DeleteMemoryRequest) (*emptypb.Empty, error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(context.Context, *GetAgentRequest) (*Agent, error)
 	// GetConversation GetConversation: 获取会话详情。
 	GetConversation(context.Context, *GetConversationRequest) (*Conversation, error)
+	// GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+	GetEmotionStats(context.Context, *GetEmotionStatsRequest) (*EmotionStats, error)
+	// GetGrowthReport GetGrowthReport: 获取成长报告。
+	GetGrowthReport(context.Context, *GetGrowthReportRequest) (*GrowthReport, error)
 	// GetPersona GetPersona: 获取特定角色模板详情。
 	GetPersona(context.Context, *GetPersonaRequest) (*Persona, error)
+	// GetUpcomingEvents GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+	GetUpcomingEvents(context.Context, *GetUpcomingEventsRequest) (*EventList, error)
+	// GetUserProfile GetUserProfile: 获取用户档案。
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*UserProfile, error)
 	// ListAgents ListAgents: 列出所有可用角色。
 	ListAgents(context.Context, *ListAgentsRequest) (*AgentList, error)
 	// ListConversations ListConversations: 分页列出通话记录。
 	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
+	// ListEmotionLogs ListEmotionLogs: 获取情绪记录列表。
+	ListEmotionLogs(context.Context, *ListEmotionLogsRequest) (*EmotionLogList, error)
+	// ListEvents ListEvents: 获取重要事件列表。
+	ListEvents(context.Context, *ListEventsRequest) (*EventList, error)
+	// ListMemories ListMemories: 获取用户的长期记忆列表。
+	ListMemories(context.Context, *ListMemoriesRequest) (*MemoryList, error)
 	// ListPersonas ListPersonas: 获取系统内置或自定义的角色模板。
 	ListPersonas(context.Context, *ListPersonasRequest) (*PersonaList, error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
@@ -73,6 +108,10 @@ type VoiceAgentServiceHTTPServer interface {
 	UpdateAgent(context.Context, *UpdateAgentRequest) (*Agent, error)
 	// UpdateConversation UpdateConversation: 更新会话状态或关联外部 ID。
 	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
+	// UpdateEvent UpdateEvent: 更新重要事件。
+	UpdateEvent(context.Context, *UpdateEventRequest) (*ImportantEvent, error)
+	// UpdateUserProfile UpdateUserProfile: 更新用户档案。
+	UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UserProfile, error)
 }
 
 func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHTTPServer) {
@@ -94,6 +133,19 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.GET("/api/va/conversations/{conversationId}/transcripts", _VoiceAgentService_ListTranscriptEntries0_HTTP_Handler(srv))
 	r.POST("/api/va/transcripts", _VoiceAgentService_RecordTranscriptEntry0_HTTP_Handler(srv))
 	r.POST("/api/va/messages", _VoiceAgentService_SendMessage0_HTTP_Handler(srv))
+	r.GET("/api/va/memories", _VoiceAgentService_ListMemories0_HTTP_Handler(srv))
+	r.POST("/api/va/memories", _VoiceAgentService_CreateMemory0_HTTP_Handler(srv))
+	r.DELETE("/api/va/memories/{id}", _VoiceAgentService_DeleteMemory0_HTTP_Handler(srv))
+	r.GET("/api/va/profile", _VoiceAgentService_GetUserProfile0_HTTP_Handler(srv))
+	r.PATCH("/api/va/profile", _VoiceAgentService_UpdateUserProfile0_HTTP_Handler(srv))
+	r.GET("/api/va/emotions", _VoiceAgentService_ListEmotionLogs0_HTTP_Handler(srv))
+	r.GET("/api/va/emotions/stats", _VoiceAgentService_GetEmotionStats0_HTTP_Handler(srv))
+	r.GET("/api/va/events", _VoiceAgentService_ListEvents0_HTTP_Handler(srv))
+	r.POST("/api/va/events", _VoiceAgentService_CreateEvent0_HTTP_Handler(srv))
+	r.PATCH("/api/va/events/{id}", _VoiceAgentService_UpdateEvent0_HTTP_Handler(srv))
+	r.DELETE("/api/va/events/{id}", _VoiceAgentService_DeleteEvent0_HTTP_Handler(srv))
+	r.GET("/api/va/events/upcoming", _VoiceAgentService_GetUpcomingEvents0_HTTP_Handler(srv))
+	r.GET("/api/va/growth-report", _VoiceAgentService_GetGrowthReport0_HTTP_Handler(srv))
 }
 
 func _VoiceAgentService_ListPersonas0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
@@ -461,6 +513,274 @@ func _VoiceAgentService_SendMessage0_HTTP_Handler(srv VoiceAgentServiceHTTPServe
 	}
 }
 
+func _VoiceAgentService_ListMemories0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListMemoriesRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceListMemories)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListMemories(ctx, req.(*ListMemoriesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*MemoryList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_CreateMemory0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateMemoryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceCreateMemory)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateMemory(ctx, req.(*CreateMemoryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*Memory)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_DeleteMemory0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteMemoryRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceDeleteMemory)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteMemory(ctx, req.(*DeleteMemoryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*emptypb.Empty)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_GetUserProfile0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserProfileRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceGetUserProfile)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserProfile(ctx, req.(*GetUserProfileRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UserProfile)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_UpdateUserProfile0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserProfileRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceUpdateUserProfile)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserProfile(ctx, req.(*UpdateUserProfileRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UserProfile)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_ListEmotionLogs0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListEmotionLogsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceListEmotionLogs)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListEmotionLogs(ctx, req.(*ListEmotionLogsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*EmotionLogList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_GetEmotionStats0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetEmotionStatsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceGetEmotionStats)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetEmotionStats(ctx, req.(*GetEmotionStatsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*EmotionStats)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_ListEvents0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListEventsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceListEvents)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListEvents(ctx, req.(*ListEventsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*EventList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_CreateEvent0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateEventRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceCreateEvent)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateEvent(ctx, req.(*CreateEventRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ImportantEvent)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_UpdateEvent0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateEventRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceUpdateEvent)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateEvent(ctx, req.(*UpdateEventRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ImportantEvent)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_DeleteEvent0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteEventRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceDeleteEvent)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteEvent(ctx, req.(*DeleteEventRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*emptypb.Empty)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_GetUpcomingEvents0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUpcomingEventsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceGetUpcomingEvents)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUpcomingEvents(ctx, req.(*GetUpcomingEventsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*EventList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_GetGrowthReport0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetGrowthReportRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceGetGrowthReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetGrowthReport(ctx, req.(*GetGrowthReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GrowthReport)
+		return ctx.Result(200, reply)
+	}
+}
+
 type VoiceAgentServiceHTTPClient interface {
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(ctx context.Context, req *AddVoiceRequest, opts ...http.CallOption) (rsp *Voice, err error)
@@ -468,18 +788,40 @@ type VoiceAgentServiceHTTPClient interface {
 	CreateAgent(ctx context.Context, req *CreateAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
 	// CreateConversation CreateConversation: 启动一个实时交互会话。
 	CreateConversation(ctx context.Context, req *CreateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
+	// CreateEvent CreateEvent: 创建重要事件。
+	CreateEvent(ctx context.Context, req *CreateEventRequest, opts ...http.CallOption) (rsp *ImportantEvent, err error)
+	// CreateMemory CreateMemory: 手动添加一条记忆。
+	CreateMemory(ctx context.Context, req *CreateMemoryRequest, opts ...http.CallOption) (rsp *Memory, err error)
 	// DeleteAgent DeleteAgent: 删除角色。
 	DeleteAgent(ctx context.Context, req *DeleteAgentRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	// DeleteEvent DeleteEvent: 删除重要事件。
+	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	// DeleteMemory DeleteMemory: 删除一条记忆。
+	DeleteMemory(ctx context.Context, req *DeleteMemoryRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(ctx context.Context, req *GetAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
 	// GetConversation GetConversation: 获取会话详情。
 	GetConversation(ctx context.Context, req *GetConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
+	// GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+	GetEmotionStats(ctx context.Context, req *GetEmotionStatsRequest, opts ...http.CallOption) (rsp *EmotionStats, err error)
+	// GetGrowthReport GetGrowthReport: 获取成长报告。
+	GetGrowthReport(ctx context.Context, req *GetGrowthReportRequest, opts ...http.CallOption) (rsp *GrowthReport, err error)
 	// GetPersona GetPersona: 获取特定角色模板详情。
 	GetPersona(ctx context.Context, req *GetPersonaRequest, opts ...http.CallOption) (rsp *Persona, err error)
+	// GetUpcomingEvents GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+	GetUpcomingEvents(ctx context.Context, req *GetUpcomingEventsRequest, opts ...http.CallOption) (rsp *EventList, err error)
+	// GetUserProfile GetUserProfile: 获取用户档案。
+	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *UserProfile, err error)
 	// ListAgents ListAgents: 列出所有可用角色。
 	ListAgents(ctx context.Context, req *ListAgentsRequest, opts ...http.CallOption) (rsp *AgentList, err error)
 	// ListConversations ListConversations: 分页列出通话记录。
 	ListConversations(ctx context.Context, req *ListConversationsRequest, opts ...http.CallOption) (rsp *ConversationList, err error)
+	// ListEmotionLogs ListEmotionLogs: 获取情绪记录列表。
+	ListEmotionLogs(ctx context.Context, req *ListEmotionLogsRequest, opts ...http.CallOption) (rsp *EmotionLogList, err error)
+	// ListEvents ListEvents: 获取重要事件列表。
+	ListEvents(ctx context.Context, req *ListEventsRequest, opts ...http.CallOption) (rsp *EventList, err error)
+	// ListMemories ListMemories: 获取用户的长期记忆列表。
+	ListMemories(ctx context.Context, req *ListMemoriesRequest, opts ...http.CallOption) (rsp *MemoryList, err error)
 	// ListPersonas ListPersonas: 获取系统内置或自定义的角色模板。
 	ListPersonas(ctx context.Context, req *ListPersonasRequest, opts ...http.CallOption) (rsp *PersonaList, err error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
@@ -496,6 +838,10 @@ type VoiceAgentServiceHTTPClient interface {
 	UpdateAgent(ctx context.Context, req *UpdateAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
 	// UpdateConversation UpdateConversation: 更新会话状态或关联外部 ID。
 	UpdateConversation(ctx context.Context, req *UpdateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
+	// UpdateEvent UpdateEvent: 更新重要事件。
+	UpdateEvent(ctx context.Context, req *UpdateEventRequest, opts ...http.CallOption) (rsp *ImportantEvent, err error)
+	// UpdateUserProfile UpdateUserProfile: 更新用户档案。
+	UpdateUserProfile(ctx context.Context, req *UpdateUserProfileRequest, opts ...http.CallOption) (rsp *UserProfile, err error)
 }
 
 type VoiceAgentServiceHTTPClientImpl struct {
@@ -548,12 +894,68 @@ func (c *VoiceAgentServiceHTTPClientImpl) CreateConversation(ctx context.Context
 	return &out, nil
 }
 
+// CreateEvent CreateEvent: 创建重要事件。
+func (c *VoiceAgentServiceHTTPClientImpl) CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...http.CallOption) (*ImportantEvent, error) {
+	var out ImportantEvent
+	pattern := "/api/va/events"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceCreateEvent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// CreateMemory CreateMemory: 手动添加一条记忆。
+func (c *VoiceAgentServiceHTTPClientImpl) CreateMemory(ctx context.Context, in *CreateMemoryRequest, opts ...http.CallOption) (*Memory, error) {
+	var out Memory
+	pattern := "/api/va/memories"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceCreateMemory))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // DeleteAgent DeleteAgent: 删除角色。
 func (c *VoiceAgentServiceHTTPClientImpl) DeleteAgent(ctx context.Context, in *DeleteAgentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
 	pattern := "/api/va/agents/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceDeleteAgent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// DeleteEvent DeleteEvent: 删除重要事件。
+func (c *VoiceAgentServiceHTTPClientImpl) DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+	var out emptypb.Empty
+	pattern := "/api/va/events/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceDeleteEvent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// DeleteMemory DeleteMemory: 删除一条记忆。
+func (c *VoiceAgentServiceHTTPClientImpl) DeleteMemory(ctx context.Context, in *DeleteMemoryRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+	var out emptypb.Empty
+	pattern := "/api/va/memories/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceDeleteMemory))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -590,12 +992,68 @@ func (c *VoiceAgentServiceHTTPClientImpl) GetConversation(ctx context.Context, i
 	return &out, nil
 }
 
+// GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
+func (c *VoiceAgentServiceHTTPClientImpl) GetEmotionStats(ctx context.Context, in *GetEmotionStatsRequest, opts ...http.CallOption) (*EmotionStats, error) {
+	var out EmotionStats
+	pattern := "/api/va/emotions/stats"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetEmotionStats))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetGrowthReport GetGrowthReport: 获取成长报告。
+func (c *VoiceAgentServiceHTTPClientImpl) GetGrowthReport(ctx context.Context, in *GetGrowthReportRequest, opts ...http.CallOption) (*GrowthReport, error) {
+	var out GrowthReport
+	pattern := "/api/va/growth-report"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetGrowthReport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // GetPersona GetPersona: 获取特定角色模板详情。
 func (c *VoiceAgentServiceHTTPClientImpl) GetPersona(ctx context.Context, in *GetPersonaRequest, opts ...http.CallOption) (*Persona, error) {
 	var out Persona
 	pattern := "/api/va/personas/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetPersona))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetUpcomingEvents GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
+func (c *VoiceAgentServiceHTTPClientImpl) GetUpcomingEvents(ctx context.Context, in *GetUpcomingEventsRequest, opts ...http.CallOption) (*EventList, error) {
+	var out EventList
+	pattern := "/api/va/events/upcoming"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetUpcomingEvents))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetUserProfile GetUserProfile: 获取用户档案。
+func (c *VoiceAgentServiceHTTPClientImpl) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...http.CallOption) (*UserProfile, error) {
+	var out UserProfile
+	pattern := "/api/va/profile"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetUserProfile))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -624,6 +1082,48 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListConversations(ctx context.Context,
 	pattern := "/api/va/conversations"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceListConversations))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListEmotionLogs ListEmotionLogs: 获取情绪记录列表。
+func (c *VoiceAgentServiceHTTPClientImpl) ListEmotionLogs(ctx context.Context, in *ListEmotionLogsRequest, opts ...http.CallOption) (*EmotionLogList, error) {
+	var out EmotionLogList
+	pattern := "/api/va/emotions"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceListEmotionLogs))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListEvents ListEvents: 获取重要事件列表。
+func (c *VoiceAgentServiceHTTPClientImpl) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...http.CallOption) (*EventList, error) {
+	var out EventList
+	pattern := "/api/va/events"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceListEvents))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListMemories ListMemories: 获取用户的长期记忆列表。
+func (c *VoiceAgentServiceHTTPClientImpl) ListMemories(ctx context.Context, in *ListMemoriesRequest, opts ...http.CallOption) (*MemoryList, error) {
+	var out MemoryList
+	pattern := "/api/va/memories"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceListMemories))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -736,6 +1236,34 @@ func (c *VoiceAgentServiceHTTPClientImpl) UpdateConversation(ctx context.Context
 	pattern := "/api/va/conversations/{id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceUpdateConversation))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateEvent UpdateEvent: 更新重要事件。
+func (c *VoiceAgentServiceHTTPClientImpl) UpdateEvent(ctx context.Context, in *UpdateEventRequest, opts ...http.CallOption) (*ImportantEvent, error) {
+	var out ImportantEvent
+	pattern := "/api/va/events/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceUpdateEvent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateUserProfile UpdateUserProfile: 更新用户档案。
+func (c *VoiceAgentServiceHTTPClientImpl) UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...http.CallOption) (*UserProfile, error) {
+	var out UserProfile
+	pattern := "/api/va/profile"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceUpdateUserProfile))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
 	if err != nil {

@@ -86,10 +86,6 @@ func NewHTTPServer(c confcenter.Server,
 		panic(err)
 	}
 
-	//if err := cc.Register("@every 5s", workflow, cronexecutor.RegisterOptions{Concurrency: 100}); err != nil {
-	//	panic(err)
-	//}
-
 	if err := cc.Register("@every 1m",
 		workflow.SyncRunningWorkflowIdsExecutor(),
 		cronexecutor.RegisterOptions{Concurrency: 1}); err != nil {

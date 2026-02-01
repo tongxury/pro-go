@@ -35,7 +35,6 @@ const (
 	ProjProService_XGetTemplate_FullMethodName         = "/api.proj.ProjProService/_GetTemplate"
 	ProjProService_XUpdateTemplate_FullMethodName      = "/api.proj.ProjProService/_UpdateTemplate"
 	ProjProService_CreateTemplate_FullMethodName       = "/api.proj.ProjProService/CreateTemplate"
-	ProjProService_ListTemplateSegments_FullMethodName = "/api.proj.ProjProService/ListTemplateSegments"
 	ProjProService_GetAssetSummary_FullMethodName      = "/api.proj.ProjProService/GetAssetSummary"
 	ProjProService_ListQualityAssets_FullMethodName    = "/api.proj.ProjProService/ListQualityAssets"
 	ProjProService_ReCreateAsset_FullMethodName        = "/api.proj.ProjProService/ReCreateAsset"
@@ -81,7 +80,6 @@ type ProjProServiceClient interface {
 	XGetTemplate(ctx context.Context, in *GetTemplateRequest, opts ...grpc.CallOption) (*Resource, error)
 	XUpdateTemplate(ctx context.Context, in *UpdateTemplateRequest, opts ...grpc.CallOption) (*Resource, error)
 	CreateTemplate(ctx context.Context, in *CreateTemplateRequest, opts ...grpc.CallOption) (*Resource, error)
-	ListTemplateSegments(ctx context.Context, in *ListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error)
 	// ---------------
 	GetAssetSummary(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AssetSummary, error)
 	ListQualityAssets(ctx context.Context, in *ListQualityAssetsRequest, opts ...grpc.CallOption) (*AssetList, error)
@@ -260,16 +258,6 @@ func (c *projProServiceClient) CreateTemplate(ctx context.Context, in *CreateTem
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Resource)
 	err := c.cc.Invoke(ctx, ProjProService_CreateTemplate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projProServiceClient) ListTemplateSegments(ctx context.Context, in *ListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ResourceSegmentList)
-	err := c.cc.Invoke(ctx, ProjProService_ListTemplateSegments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -526,7 +514,6 @@ type ProjProServiceServer interface {
 	XGetTemplate(context.Context, *GetTemplateRequest) (*Resource, error)
 	XUpdateTemplate(context.Context, *UpdateTemplateRequest) (*Resource, error)
 	CreateTemplate(context.Context, *CreateTemplateRequest) (*Resource, error)
-	ListTemplateSegments(context.Context, *ListResourceSegmentsRequest) (*ResourceSegmentList, error)
 	// ---------------
 	GetAssetSummary(context.Context, *emptypb.Empty) (*AssetSummary, error)
 	ListQualityAssets(context.Context, *ListQualityAssetsRequest) (*AssetList, error)
@@ -605,9 +592,6 @@ func (UnimplementedProjProServiceServer) XUpdateTemplate(context.Context, *Updat
 }
 func (UnimplementedProjProServiceServer) CreateTemplate(context.Context, *CreateTemplateRequest) (*Resource, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateTemplate not implemented")
-}
-func (UnimplementedProjProServiceServer) ListTemplateSegments(context.Context, *ListResourceSegmentsRequest) (*ResourceSegmentList, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListTemplateSegments not implemented")
 }
 func (UnimplementedProjProServiceServer) GetAssetSummary(context.Context, *emptypb.Empty) (*AssetSummary, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAssetSummary not implemented")
@@ -965,24 +949,6 @@ func _ProjProService_CreateTemplate_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProjProServiceServer).CreateTemplate(ctx, req.(*CreateTemplateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjProService_ListTemplateSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListResourceSegmentsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjProServiceServer).ListTemplateSegments(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjProService_ListTemplateSegments_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjProServiceServer).ListTemplateSegments(ctx, req.(*ListResourceSegmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1467,10 +1433,6 @@ var ProjProService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTemplate",
 			Handler:    _ProjProService_CreateTemplate_Handler,
-		},
-		{
-			MethodName: "ListTemplateSegments",
-			Handler:    _ProjProService_ListTemplateSegments_Handler,
 		},
 		{
 			MethodName: "GetAssetSummary",

@@ -239,31 +239,31 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		},
 		Server: serverConf,
 		Database: confcenter.Database{
-			Mongo: mgz.Config{
-				Uri:      fmt.Sprintf("mongodb://14.103.49.90:3717/yoozy_pro?retryWrites=true&w=majority"),
-				Username: "root",
-				Password: confs.MongoPasswordYuzhi,
-
-				Database: "admin",
-			},
-			Rediz: rediz.Config{
-				//Addrs:        []string{"redis-master.prod:6379"},
-				//Password:     "lveRN3bj7b",
-				Addrs:    []string{"118.196.63.209:6379"},
-				Password: confs.RedisPasswordProj,
-			},
-
 			//Mongo: mgz.Config{
-			//	Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+			//	Uri:      fmt.Sprintf("mongodb://14.103.49.90:3717/yoozy_pro?retryWrites=true&w=majority"),
 			//	Username: "root",
-			//	Password: confs.MongoPasswordProj,
-			//	Database: "yoozy_pro_beta",
+			//	Password: confs.MongoPasswordYuzhi,
+			//
+			//	Database: "admin",
 			//},
 			//Rediz: rediz.Config{
+			//	//Addrs:        []string{"redis-master.prod:6379"},
+			//	//Password:     "lveRN3bj7b",
 			//	Addrs:    []string{"118.196.63.209:6379"},
 			//	Password: confs.RedisPasswordProj,
-			//	DB:       1,
 			//},
+
+			Mongo: mgz.Config{
+				Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+				Username: "root",
+				Password: confs.MongoPasswordProj,
+				Database: "yoozy_pro_beta",
+			},
+			Rediz: rediz.Config{
+				Addrs:    []string{"118.196.63.209:6379"},
+				Password: confs.RedisPasswordProj,
+				DB:       1,
+			},
 
 			Elastics: elastics.Config{
 				//Addresses: []string{"http://localhost:9200/"},

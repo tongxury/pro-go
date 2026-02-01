@@ -7,13 +7,11 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
-	"store/pkg/sdk/helper/bytez"
 	"store/pkg/sdk/helper/wg"
 	"store/pkg/sdk/third/gemini"
 	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
-	"google.golang.org/genai"
 )
 
 type KeyFramesGenerationJob struct {
@@ -114,7 +112,6 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 					//	"依据以上分镜描述， 结合【图1的整体风格和场景】+【图2中的商品】,生成一张视频尾帧图片",
 					//),
 				),
-				Category: "first_frame",
 			}
 
 		} else {
@@ -159,9 +156,7 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 		return nil, err
 	}
 
-	logger.Debugw("settings", wfState.DataBus.GetSettings())
-
-	//// Waved AI 版
+	// Waved AI 版
 	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
 	//	if x.Status != ExecuteStatusRunning {
 	//		return nil
@@ -181,7 +176,7 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 	//			x.Status = ExecuteStatusCompleted
 	//
 	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
 	//
 	//			if err != nil {
 	//				return err
@@ -196,7 +191,7 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 	//			x.TaskId = ""
 	//
 	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
 	//
 	//			if err != nil {
 	//				return err
@@ -229,7 +224,7 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 	//
 	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 	//		mgz.Op().
-	//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+	//			Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
 	//
 	//	if err != nil {
 	//		return err
@@ -238,52 +233,28 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 	//	return nil
 	//})
 
+	logger.Debugw("settings", wfState.DataBus.GetSettings())
+
 	wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
 		if x.Status != ExecuteStatusRunning {
 			return nil
 		}
 
-		// 将整体实现改成 用下面的方法
-		// t.data.GenaiFactory.Get().C().Models.EditImage(ctx)
-
 		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
-
-		client := t.data.GenaiFactory.Get().C()
-		model := gemini.ModelImagen3Capability001
-
-		var refImages []genai.ReferenceImage
-		// Multi-Raw Test: use all images but as NewRawReferenceImage to check slice handling
-		for i, ref := range x.Refs {
-			imgBytes, err := bytez.ReadFileBytes(ref)
-			if err != nil {
-				return err
-			}
-
-			if len(imgBytes) == 0 {
-				return fmt.Errorf("reference image %d (%s) is empty", i, ref)
-			}
-
-			logger.Debugw("GenAI Multi-Raw Test", "index", i, "url", ref, "size", len(imgBytes), "mime", "image/png")
-
-			img := &genai.Image{
-				ImageBytes: imgBytes,
-				MIMEType:   "image/png",
-			}
-
-			// Using RawReferenceImage for all images for this test phase
-			refImages = append(refImages, genai.NewRawReferenceImage(img, int32(i+1)))
-		}
-
-		// Use an empty config instead of nil to be safe with SDK internal converters.
-		resp, err := client.Models.EditImage(ctx, model, x.Prompt, refImages, &genai.EditImageConfig{})
-
+		blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
+			Images: x.Refs,
+			//Videos: [][]byte{seg.Content},
+			Prompt:      x.Prompt,
+			AspectRatio: aspectRatio,
+			//Count: 8,
+		})
 		if err != nil {
-			logger.Errorw("EditImage err", err)
+			logger.Errorw("GenerateImage err", err)
 
 			x.Error = err.Error()
 			x.Status = ExecuteStatusFailed
 
-			_, _ = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 				mgz.Op().
 					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
 			)
@@ -291,16 +262,8 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 			return err
 		}
 
-		if len(resp.GeneratedImages) == 0 {
-			logger.Errorw("no image generated")
-			return fmt.Errorf("no image generated")
-		}
-
-		blob := resp.GeneratedImages[0].Image.ImageBytes
-
 		tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
 		if err != nil {
-			logger.Errorw("PutImage err", err)
 			return err
 		}
 

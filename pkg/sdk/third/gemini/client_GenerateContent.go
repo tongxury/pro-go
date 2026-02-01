@@ -101,7 +101,7 @@ func (t *Client) GenerateContentStream(ctx context.Context, req GenerateContentR
 type GenerateImageRequest struct {
 	Images      []string
 	ImageBytes  [][]byte
-	Parts       []*genai.Part
+	Videos      [][]byte
 	Prompt      string
 	ImageSize   string
 	AspectRatio string
@@ -128,8 +128,20 @@ func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([
 		parts = append(parts, genai.NewPartFromBytes(req.ImageBytes[i], "image/png"))
 	}
 
-	for i := range req.Parts {
-		parts = append(parts, req.Parts[i])
+	for i := range req.Videos {
+		//gsFile, err := t.UploadBlob(ctx, req.Videos[i], "video/mp4")
+		//if err != nil {
+		//	return nil, err
+		//}
+		//parts = append(parts, &genai.Part{
+		//	FileData: &genai.FileData{
+		//		MIMEType: "video/mp4",
+		//		FileURI:  gsFile,
+		//	},
+		//})
+
+		parts = append(parts, genai.NewPartFromBytes(req.Videos[i], "video/mp4"))
+		//if err != nil {, "video/mp4"))
 	}
 
 	parts = append(parts, &genai.Part{

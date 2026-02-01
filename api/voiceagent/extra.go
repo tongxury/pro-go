@@ -55,3 +55,35 @@ func (m *MotivationCard) GetID() string {
 func (m *MotivationCard) SetID(id string) {
 	m.XId = id
 }
+
+func (m *Memory) GetID() string {
+	return m.XId
+}
+
+func (m *Memory) SetID(id string) {
+	m.XId = id
+}
+
+func (m *UserProfile) GetID() string {
+	return m.XId
+}
+
+func (m *UserProfile) SetID(id string) {
+	m.XId = id
+}
+
+func (m *EmotionLog) GetID() string {
+	return m.XId
+}
+
+func (m *EmotionLog) SetID(id string) {
+	m.XId = id
+}
+
+func (m *ImportantEvent) GetID() string {
+	return m.XId
+}
+
+func (m *ImportantEvent) SetID(id string) {
+	m.XId = id
+}

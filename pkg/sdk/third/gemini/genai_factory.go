@@ -75,41 +75,14 @@ func newClient(config *Config) (*Client, error) {
 	}
 	_ = httpClient
 
-	// Determine backend based on config
-	// Default to Vertex AI for compatibility with proxy services that emulate Vertex AI
-	var backend genai.Backend
-	if config.Project != "" && config.Location != "" {
-		// Pure Vertex AI mode with GCP credentials
-		backend = genai.BackendVertexAI
-	} else if config.Key != "" {
-		// Proxy service mode: uses Vertex AI format but with API Key auth
-		backend = genai.BackendVertexAI
-	} else {
-		// Fall back to Gemini API
-		backend = genai.BackendGeminiAPI
-	}
-
-	clientConfig := &genai.ClientConfig{
-		Backend:    backend,
+	client, err := genai.NewClient(ctx, &genai.ClientConfig{
+		APIKey:     config.Key,
+		Backend:    genai.BackendVertexAI,
 		HTTPClient: httpClient,
 		HTTPOptions: genai.HTTPOptions{
 			BaseURL: config.BaseURL,
 		},
-	}
-
-	// Set API Key for proxy services that use Vertex AI format
-	if config.Key != "" {
-		clientConfig.APIKey = config.Key
-	}
-	// Vertex AI native mode requires Project and Location
-	if config.Project != "" {
-		clientConfig.Project = config.Project
-	}
-	if config.Location != "" {
-		clientConfig.Location = config.Location
-	}
-
-	client, err := genai.NewClient(ctx, clientConfig)
+	})
 
 	if err != nil {
 		return nil, err

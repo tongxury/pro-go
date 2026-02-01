@@ -78,7 +78,6 @@ func (t *WorkFlowService) SyncRunningWorkflowIdsExecutor() cronexecutor.IExecuto
 				log.Debugw("sync running workflow ids executor done", mgz.Ids(runningWorkflows))
 
 				if len(runningWorkflows) == 0 {
-					t.data.Redis.Del(ctx, "runningWorkflow:ids")
 					return nil
 				}
 

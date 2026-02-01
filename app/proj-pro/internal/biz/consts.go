@@ -23,5 +23,4 @@ const (
 	ExecuteStatusCompleted = "completed"
 	ExecuteStatusFailed    = "failed"
 	ExecuteStatusRunning   = "running"
-	ExecuteStatusReviewing = "reviewing"
 )
