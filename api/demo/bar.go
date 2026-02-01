@@ -4,6 +4,7 @@ package demopb
 // 这里的包名需要对应 proto 文件中 go_package 选项分号后的包名。
 
 // --- Bar 扩展 ---
+// 用于扩展 Bar 消息的 Go 结构体。 适配数据层 `*mgz.Core`
 
 // GetID 是一个辅助方法。
 func (m *Bar) GetID() string {
