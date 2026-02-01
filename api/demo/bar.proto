@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+// AI 提示：独立资源文件（Resource Message）
+// 资源文件建议按实体命名，不带 service 等后缀。
+package api.demo;
+
+// AI 提示：在复制时，请修改路径和包名为你的业务名。
+option go_package = "store/api/demo;demopb";
+
+// Bar 消息表示一个子资源或关联资源。
+// 规则：遵循通用命名（如原本叫 Session，这里改叫 Bar）。
+message Bar {
+  // _id: 唯一标识。
+  string _id = 1 [json_name = "_id"];
+
+  // fooId: 关联的父资源 ID。
+  string fooId = 2;
+
+  // status: 状态。
+  string status = 3;
+
+  // createdAt: 创建时间。
+  int64 createdAt = 4;
+
+}

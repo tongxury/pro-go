@@ -155,114 +155,6 @@ func (x *UserList) GetSize() int64 {
 	return 0
 }
 
-type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	XId           string                 `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Avatar        string                 `protobuf:"bytes,3,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Key           string                 `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
-	Phone         string                 `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	Nickname      string                 `protobuf:"bytes,7,opt,name=nickname,proto3" json:"nickname,omitempty"`
-	Email         string                 `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,20,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *User) Reset() {
-	*x = User{}
-	mi := &file_usercenter_user_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*User) ProtoMessage() {}
-
-func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_user_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_usercenter_user_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *User) GetXId() string {
-	if x != nil {
-		return x.XId
-	}
-	return ""
-}
-
-func (x *User) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *User) GetAvatar() string {
-	if x != nil {
-		return x.Avatar
-	}
-	return ""
-}
-
-func (x *User) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *User) GetPhone() string {
-	if x != nil {
-		return x.Phone
-	}
-	return ""
-}
-
-func (x *User) GetCreatedAt() int64 {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return 0
-}
-
-func (x *User) GetNickname() string {
-	if x != nil {
-		return x.Nickname
-	}
-	return ""
-}
-
-func (x *User) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *User) GetExtra() map[string]string {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
@@ -273,7 +165,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_usercenter_user_service_proto_msgTypes[3]
+	mi := &file_usercenter_user_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -285,7 +177,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_user_service_proto_msgTypes[3]
+	mi := &file_usercenter_user_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -298,7 +190,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_user_service_proto_rawDescGZIP(), []int{3}
+	return file_usercenter_user_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateUserRequest) GetAction() string {
@@ -323,7 +215,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_usercenter_user_service_proto_msgTypes[4]
+	mi := &file_usercenter_user_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -335,7 +227,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_user_service_proto_msgTypes[4]
+	mi := &file_usercenter_user_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -348,7 +240,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_user_service_proto_rawDescGZIP(), []int{4}
+	return file_usercenter_user_service_proto_rawDescGZIP(), []int{3}
 }
 
 type XGetUserRequest struct {
@@ -360,7 +252,7 @@ type XGetUserRequest struct {
 
 func (x *XGetUserRequest) Reset() {
 	*x = XGetUserRequest{}
-	mi := &file_usercenter_user_service_proto_msgTypes[5]
+	mi := &file_usercenter_user_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -372,7 +264,7 @@ func (x *XGetUserRequest) String() string {
 func (*XGetUserRequest) ProtoMessage() {}
 
 func (x *XGetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_user_service_proto_msgTypes[5]
+	mi := &file_usercenter_user_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -385,7 +277,7 @@ func (x *XGetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use XGetUserRequest.ProtoReflect.Descriptor instead.
 func (*XGetUserRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_user_service_proto_rawDescGZIP(), []int{5}
+	return file_usercenter_user_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *XGetUserRequest) GetId() string {
@@ -404,7 +296,7 @@ type XGetUserByPhoneRequest struct {
 
 func (x *XGetUserByPhoneRequest) Reset() {
 	*x = XGetUserByPhoneRequest{}
-	mi := &file_usercenter_user_service_proto_msgTypes[6]
+	mi := &file_usercenter_user_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -416,7 +308,7 @@ func (x *XGetUserByPhoneRequest) String() string {
 func (*XGetUserByPhoneRequest) ProtoMessage() {}
 
 func (x *XGetUserByPhoneRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_usercenter_user_service_proto_msgTypes[6]
+	mi := &file_usercenter_user_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -429,7 +321,7 @@ func (x *XGetUserByPhoneRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use XGetUserByPhoneRequest.ProtoReflect.Descriptor instead.
 func (*XGetUserByPhoneRequest) Descriptor() ([]byte, []int) {
-	return file_usercenter_user_service_proto_rawDescGZIP(), []int{6}
+	return file_usercenter_user_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *XGetUserByPhoneRequest) GetPhone() string {
@@ -443,7 +335,7 @@ var File_usercenter_user_service_proto protoreflect.FileDescriptor
 
 const file_usercenter_user_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dusercenter/user_service.proto\x12\x0eapi.usercenter\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x15user/types/user.proto\x1a\x19user/types/settings.proto\x1a\x1daiagent/aiagent_service.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\"U\n" +
+	"\x1dusercenter/user_service.proto\x12\x0eapi.usercenter\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x15user/types/user.proto\x1a\x19user/types/settings.proto\x1a\x1daiagent/aiagent_service.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x15usercenter/user.proto\"U\n" +
 	"\x11_ListUsersRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x12\n" +
 	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x18\n" +
@@ -452,21 +344,7 @@ const file_usercenter_user_service_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x14.api.usercenter.UserR\x04list\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04size\"\xad\x02\n" +
-	"\x04User\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06avatar\x18\x03 \x01(\tR\x06avatar\x12\x10\n" +
-	"\x03key\x18\x04 \x01(\tR\x03key\x12\x14\n" +
-	"\x05phone\x18\x05 \x01(\tR\x05phone\x12\x1c\n" +
-	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\x12\x1a\n" +
-	"\bnickname\x18\a \x01(\tR\bnickname\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\x125\n" +
-	"\x05extra\x18\x14 \x03(\v2\x1f.api.usercenter.User.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xad\x01\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\"\xad\x01\n" +
 	"\x11UpdateUserRequest\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12E\n" +
 	"\x06params\x18\x02 \x03(\v2-.api.usercenter.UpdateUserRequest.ParamsEntryR\x06params\x1a9\n" +
@@ -499,37 +377,35 @@ func file_usercenter_user_service_proto_rawDescGZIP() []byte {
 	return file_usercenter_user_service_proto_rawDescData
 }
 
-var file_usercenter_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_usercenter_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_usercenter_user_service_proto_goTypes = []any{
 	(*XListUsersRequest)(nil),      // 0: api.usercenter._ListUsersRequest
 	(*UserList)(nil),               // 1: api.usercenter.UserList
-	(*User)(nil),                   // 2: api.usercenter.User
-	(*UpdateUserRequest)(nil),      // 3: api.usercenter.UpdateUserRequest
-	(*GetUserRequest)(nil),         // 4: api.usercenter.GetUserRequest
-	(*XGetUserRequest)(nil),        // 5: api.usercenter._GetUserRequest
-	(*XGetUserByPhoneRequest)(nil), // 6: api.usercenter._GetUserByPhoneRequest
-	nil,                            // 7: api.usercenter.User.ExtraEntry
-	nil,                            // 8: api.usercenter.UpdateUserRequest.ParamsEntry
+	(*UpdateUserRequest)(nil),      // 2: api.usercenter.UpdateUserRequest
+	(*GetUserRequest)(nil),         // 3: api.usercenter.GetUserRequest
+	(*XGetUserRequest)(nil),        // 4: api.usercenter._GetUserRequest
+	(*XGetUserByPhoneRequest)(nil), // 5: api.usercenter._GetUserByPhoneRequest
+	nil,                            // 6: api.usercenter.UpdateUserRequest.ParamsEntry
+	(*User)(nil),                   // 7: api.usercenter.User
 }
 var file_usercenter_user_service_proto_depIdxs = []int32{
-	2, // 0: api.usercenter.UserList.list:type_name -> api.usercenter.User
-	7, // 1: api.usercenter.User.extra:type_name -> api.usercenter.User.ExtraEntry
-	8, // 2: api.usercenter.UpdateUserRequest.params:type_name -> api.usercenter.UpdateUserRequest.ParamsEntry
-	4, // 3: api.usercenter.UserService.GetUser:input_type -> api.usercenter.GetUserRequest
-	3, // 4: api.usercenter.UserService.UpdateUser:input_type -> api.usercenter.UpdateUserRequest
-	0, // 5: api.usercenter.UserService._ListUsers:input_type -> api.usercenter._ListUsersRequest
-	5, // 6: api.usercenter.UserService._GetUser:input_type -> api.usercenter._GetUserRequest
-	6, // 7: api.usercenter.UserService._GetUserByPhone:input_type -> api.usercenter._GetUserByPhoneRequest
-	2, // 8: api.usercenter.UserService.GetUser:output_type -> api.usercenter.User
-	2, // 9: api.usercenter.UserService.UpdateUser:output_type -> api.usercenter.User
-	1, // 10: api.usercenter.UserService._ListUsers:output_type -> api.usercenter.UserList
-	2, // 11: api.usercenter.UserService._GetUser:output_type -> api.usercenter.User
-	2, // 12: api.usercenter.UserService._GetUserByPhone:output_type -> api.usercenter.User
-	8, // [8:13] is the sub-list for method output_type
-	3, // [3:8] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7, // 0: api.usercenter.UserList.list:type_name -> api.usercenter.User
+	6, // 1: api.usercenter.UpdateUserRequest.params:type_name -> api.usercenter.UpdateUserRequest.ParamsEntry
+	3, // 2: api.usercenter.UserService.GetUser:input_type -> api.usercenter.GetUserRequest
+	2, // 3: api.usercenter.UserService.UpdateUser:input_type -> api.usercenter.UpdateUserRequest
+	0, // 4: api.usercenter.UserService._ListUsers:input_type -> api.usercenter._ListUsersRequest
+	4, // 5: api.usercenter.UserService._GetUser:input_type -> api.usercenter._GetUserRequest
+	5, // 6: api.usercenter.UserService._GetUserByPhone:input_type -> api.usercenter._GetUserByPhoneRequest
+	7, // 7: api.usercenter.UserService.GetUser:output_type -> api.usercenter.User
+	7, // 8: api.usercenter.UserService.UpdateUser:output_type -> api.usercenter.User
+	1, // 9: api.usercenter.UserService._ListUsers:output_type -> api.usercenter.UserList
+	7, // 10: api.usercenter.UserService._GetUser:output_type -> api.usercenter.User
+	7, // 11: api.usercenter.UserService._GetUserByPhone:output_type -> api.usercenter.User
+	7, // [7:12] is the sub-list for method output_type
+	2, // [2:7] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_usercenter_user_service_proto_init() }
@@ -537,13 +413,14 @@ func file_usercenter_user_service_proto_init() {
 	if File_usercenter_user_service_proto != nil {
 		return
 	}
+	file_usercenter_user_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_usercenter_user_service_proto_rawDesc), len(file_usercenter_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

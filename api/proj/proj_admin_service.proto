@@ -11,6 +11,7 @@ import "proj/item.proto";
 import "proj/settings.proto";
 import "proj/proj_pro_service.proto";
 import "usercenter/user_service.proto";
+import "usercenter/user.proto";
 import "proj/feedback.proto";
 import "proj/asset.proto";
 import "credit/credit_service.proto";

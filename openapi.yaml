@@ -1441,6 +1441,108 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.admin.types.Notification'
+    /api/ba/bars:
+        get:
+            tags:
+                - BarService
+            description: 'ListBars: 获取 Bar 列表。'
+            operationId: BarService_ListBars
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: string
+                - name: size
+                  in: query
+                  schema:
+                    type: string
+                - name: fooId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.BarList'
+        post:
+            tags:
+                - BarService
+            description: 'CreateBar: 创建一个新的 Bar。'
+            operationId: BarService_CreateBar
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.demo.CreateBarRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Bar'
+    /api/ba/bars/{id}:
+        get:
+            tags:
+                - BarService
+            description: 'GetBar: 获取 Bar 详情。'
+            operationId: BarService_GetBar
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Bar'
+        delete:
+            tags:
+                - BarService
+            description: 'DeleteBar: 删除 Bar。'
+            operationId: BarService_DeleteBar
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        patch:
+            tags:
+                - BarService
+            description: 'UpdateBar: 修改 Bar。'
+            operationId: BarService_UpdateBar
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.demo.UpdateBarRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Bar'
     /api/bi/events:
         post:
             tags:
@@ -1963,6 +2065,108 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.note.Meeting'
+    /api/fo/foos:
+        get:
+            tags:
+                - FooService
+            description: 'ListFoos: 获取列表。'
+            operationId: FooService_ListFoos
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: string
+                - name: size
+                  in: query
+                  schema:
+                    type: string
+                - name: keyword
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.FooList'
+        post:
+            tags:
+                - FooService
+            description: 'CreateFoo: 创建一个新的记录。'
+            operationId: FooService_CreateFoo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.demo.CreateFooRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Foo'
+    /api/fo/foos/{id}:
+        get:
+            tags:
+                - FooService
+            description: 'GetFoo: 获取详情。'
+            operationId: FooService_GetFoo
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Foo'
+        delete:
+            tags:
+                - FooService
+            description: 'DeleteFoo: 删除记录。'
+            operationId: FooService_DeleteFoo
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        patch:
+            tags:
+                - FooService
+            description: 'UpdateFoo: 修改记录。'
+            operationId: FooService_UpdateFoo
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.demo.UpdateFooRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.demo.Foo'
     /api/ma/resources:
         get:
             tags:
@@ -7104,6 +7308,126 @@ components:
                     type: string
                 md5:
                     type: string
+        api.demo.Bar:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: '_id: 唯一标识。'
+                fooId:
+                    type: string
+                    description: 'fooId: 关联的父资源 ID。'
+                status:
+                    type: string
+                    description: 'status: 状态。'
+                createdAt:
+                    type: string
+                    description: 'createdAt: 创建时间。'
+            description: |-
+                Bar 消息表示一个子资源或关联资源。
+                 规则：遵循通用命名（如原本叫 Session，这里改叫 Bar）。
+        api.demo.BarList:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.demo.Bar'
+                total:
+                    type: string
+        api.demo.CreateBarRequest:
+            type: object
+            properties:
+                fooId:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+        api.demo.CreateFooRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                avatar:
+                    type: string
+                desc:
+                    type: string
+        api.demo.Foo:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: _id 是 MongoDB 的唯一标识。
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: user 表示该记录所属的用户（演示跨项目 import）。
+                foo:
+                    type: string
+                    description: foo 其他业务字段。
+                bar:
+                    type: string
+                    description: bar 其他业务字段。
+                status:
+                    type: string
+                    description: status 业务状态。
+                createdAt:
+                    type: string
+                    description: createdAt 创建时间。
+                updatedAt:
+                    type: string
+                    description: updatedAt 更新时间。
+                bars:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.demo.Bar'
+                    description: |-
+                        bars 关联的资源列表（演示 1:N 关系）。
+                         AI 提示：引用了 bar.proto 中的 Bar 消息。
+                extra:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: extra 扩展字段。
+            description: |-
+                Foo 消息定义了核心数据模型。
+                 AI 提示：使用 Foo/Bar 这种通用名字，一眼就能看出是示例模板。
+        api.demo.FooList:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.demo.Foo'
+                total:
+                    type: string
+                page:
+                    type: string
+                size:
+                    type: string
+        api.demo.UpdateBarRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                status:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+        api.demo.UpdateFooRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                avatar:
+                    type: string
+                desc:
+                    type: string
         api.dex.AddFollowingWalletParams:
             type: object
             properties:
@@ -11356,12 +11680,19 @@ tags:
     - name: AdminService
     - name: Auth
     - name: AuthService
+    - name: BarService
+      description: BarService 处理 Bar 资源的业务逻辑及管理任务。
     - name: Bi
     - name: Chat
     - name: Chat
     - name: CounselorService
     - name: CreditService
     - name: Databank
+    - name: FooService
+      description: |-
+        *
+        FooService 定义了业务逻辑接口。
+        AI 提示：使用 Foo/Bar 作为示例名，一眼就能看懂是模板。
     - name: MarketService
     - name: Member
     - name: Mgmt
