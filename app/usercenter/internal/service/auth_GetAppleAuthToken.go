@@ -16,9 +16,12 @@ import (
 
 func (t AuthService) GetAppleAuthToken(ctx context.Context, params *ucpb.GetAppleAuthTokenRequest) (*ucpb.Token, error) {
 
+	log.Infow("GetAppleAuthToken", "", "params", params)
+
 	set, err := jwk.Fetch(context.Background(), "https://appleid.apple.com/auth/keys")
 
 	if err != nil {
+		log.Errorw("jwk.Fetch err", err)
 		return nil, err
 	}
 
@@ -43,16 +46,21 @@ func (t AuthService) GetAppleAuthToken(ctx context.Context, params *ucpb.GetAppl
 	})
 
 	if err != nil {
+		log.Errorw("jwt.Parse err", err)
 		return nil, fmt.Errorf("failed to parse token: %v", err)
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok || !token.Valid {
+		log.Errorw("invalid token", "", "claims", claims, "token", token)
 		return nil, fmt.Errorf("invalid token")
 	}
 
+	log.Debugw("GetAppleAuthToken", "", "claims", claims)
+
 	// 验证 token 是否过期
 	if !claims.VerifyExpiresAt(time.Now().Unix(), true) {
+		log.Errorw("token expired", "", "claims", claims, "token", token)
 		return nil, fmt.Errorf("token expired")
 	}
 
@@ -64,16 +72,17 @@ func (t AuthService) GetAppleAuthToken(ctx context.Context, params *ucpb.GetAppl
 
 	// 验证 issuer
 	if !claims.VerifyIssuer("https://appleid.apple.com", true) {
+		log.Errorw("invalid issuer", "", "claims", claims, "token", token)
 		return nil, fmt.Errorf("invalid issuer")
 	}
 
 	userId, isNew, err := t.data.Mongo.User.InsertNX(ctx,
 		&ucpb.User{
-			Key:       params.Email,
-			Email:     params.Email,
+			Key:       claims["email"].(string),
+			Email:     claims["email"].(string),
 			CreatedAt: time.Now().Unix(),
 		},
-		mgz.Filter().EQ("key", params.Email).
+		mgz.Filter().EQ("key", claims["email"].(string)).
 			B(),
 	)
 
