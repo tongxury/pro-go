@@ -253,6 +253,22 @@ service VoiceAgentService {
       get: "/api/va/growth-report"
     };
   }
+
+  // GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
+  rpc GenerateCartesiaToken(GenerateCartesiaTokenRequest) returns (GenerateCartesiaTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/va/cartesia/token"
+      body: "*"
+    };
+  }
+
+  // GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
+  rpc GenerateLiveKitToken(GenerateLiveKitTokenRequest) returns (GenerateLiveKitTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/va/livekit/token"
+      body: "*"
+    };
+  }
 }
 
 // --- Request/Response Messages ---
@@ -513,4 +529,20 @@ message GrowthReport {
 
   // upcomingEvents: 即将到来的重要事件。
   repeated ImportantEvent upcomingEvents = 10;
+}
+
+message GenerateCartesiaTokenRequest {}
+
+message GenerateCartesiaTokenResponse {
+  string accessToken = 1;
+}
+
+message GenerateLiveKitTokenRequest {
+  string roomName = 1;
+  string identity = 2;
+}
+
+message GenerateLiveKitTokenResponse {
+  string accessToken = 1;
+  string url = 2;
 }

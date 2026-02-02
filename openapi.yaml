@@ -5767,6 +5767,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.Agent'
+    /api/va/cartesia/token:
+        post:
+            tags:
+                - VoiceAgentService
+            description: 'GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。'
+            operationId: VoiceAgentService_GenerateCartesiaToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.voiceagent.GenerateCartesiaTokenRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.GenerateCartesiaTokenResponse'
     /api/va/conversations:
         get:
             tags:
@@ -6047,6 +6066,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.GrowthReport'
+    /api/va/livekit/token:
+        post:
+            tags:
+                - VoiceAgentService
+            description: 'GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。'
+            operationId: VoiceAgentService_GenerateLiveKitToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.voiceagent.GenerateLiveKitTokenRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.GenerateLiveKitTokenResponse'
     /api/va/memories:
         get:
             tags:
@@ -11633,6 +11671,28 @@ components:
                     items:
                         $ref: '#/components/schemas/api.voiceagent.ImportantEvent'
                 total:
+                    type: string
+        api.voiceagent.GenerateCartesiaTokenRequest:
+            type: object
+            properties: {}
+        api.voiceagent.GenerateCartesiaTokenResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+        api.voiceagent.GenerateLiveKitTokenRequest:
+            type: object
+            properties:
+                roomName:
+                    type: string
+                identity:
+                    type: string
+        api.voiceagent.GenerateLiveKitTokenResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                url:
                     type: string
         api.voiceagent.GrowthReport:
             type: object

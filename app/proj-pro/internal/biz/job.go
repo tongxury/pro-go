@@ -9,6 +9,7 @@ type ExecuteResult struct {
 	Status      string
 	Cost        int
 	SkipConfirm bool
+	Error       string
 }
 
 type Options struct {

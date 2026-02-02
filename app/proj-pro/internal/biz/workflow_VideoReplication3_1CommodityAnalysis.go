@@ -100,7 +100,10 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 
 	if len(segments) == 0 {
 		logger.Errorw("searchTemplateSegments err", "no segment found")
-		return nil, errors.New("no segment template found")
+		return &ExecuteResult{
+			Status: ExecuteStatusFailed,
+			Error:  "no segment found",
+		}, errors.New("no segment template found")
 	}
 
 	// 更新 workflow 中的 dataBus

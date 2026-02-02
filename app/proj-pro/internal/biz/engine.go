@@ -485,7 +485,9 @@ func (t *WorkflowBiz) boost(ctx context.Context, wfState *projpb.Workflow) error
 		if es.Status == ExecuteStatusFailed {
 			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 				mgz.Op().
-					Set(fmt.Sprintf("jobs.%d.status", currentJobState.Index), JobStatusFailed),
+					Set(fmt.Sprintf("jobs.%d.status", currentJobState.Index), JobStatusFailed).
+					Set(fmt.Sprintf("jobs.%d.error", currentJobState.Index), es.Error).
+					Set("status", WorkflowStatusFailed),
 			)
 			return nil
 		}

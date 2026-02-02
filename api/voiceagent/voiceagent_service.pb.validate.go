@@ -4775,3 +4775,425 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GrowthReportValidationError{}
+
+// Validate checks the field values on GenerateCartesiaTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GenerateCartesiaTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateCartesiaTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GenerateCartesiaTokenRequestMultiError, or nil if none found.
+func (m *GenerateCartesiaTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateCartesiaTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GenerateCartesiaTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateCartesiaTokenRequestMultiError is an error wrapping multiple
+// validation errors returned by GenerateCartesiaTokenRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GenerateCartesiaTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateCartesiaTokenRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateCartesiaTokenRequestMultiError) AllErrors() []error { return m }
+
+// GenerateCartesiaTokenRequestValidationError is the validation error returned
+// by GenerateCartesiaTokenRequest.Validate if the designated constraints
+// aren't met.
+type GenerateCartesiaTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateCartesiaTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateCartesiaTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateCartesiaTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateCartesiaTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateCartesiaTokenRequestValidationError) ErrorName() string {
+	return "GenerateCartesiaTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateCartesiaTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateCartesiaTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateCartesiaTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateCartesiaTokenRequestValidationError{}
+
+// Validate checks the field values on GenerateCartesiaTokenResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GenerateCartesiaTokenResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateCartesiaTokenResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GenerateCartesiaTokenResponseMultiError, or nil if none found.
+func (m *GenerateCartesiaTokenResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateCartesiaTokenResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccessToken
+
+	if len(errors) > 0 {
+		return GenerateCartesiaTokenResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateCartesiaTokenResponseMultiError is an error wrapping multiple
+// validation errors returned by GenerateCartesiaTokenResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GenerateCartesiaTokenResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateCartesiaTokenResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateCartesiaTokenResponseMultiError) AllErrors() []error { return m }
+
+// GenerateCartesiaTokenResponseValidationError is the validation error
+// returned by GenerateCartesiaTokenResponse.Validate if the designated
+// constraints aren't met.
+type GenerateCartesiaTokenResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateCartesiaTokenResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateCartesiaTokenResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateCartesiaTokenResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateCartesiaTokenResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateCartesiaTokenResponseValidationError) ErrorName() string {
+	return "GenerateCartesiaTokenResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateCartesiaTokenResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateCartesiaTokenResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateCartesiaTokenResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateCartesiaTokenResponseValidationError{}
+
+// Validate checks the field values on GenerateLiveKitTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GenerateLiveKitTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateLiveKitTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GenerateLiveKitTokenRequestMultiError, or nil if none found.
+func (m *GenerateLiveKitTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateLiveKitTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoomName
+
+	// no validation rules for Identity
+
+	if len(errors) > 0 {
+		return GenerateLiveKitTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateLiveKitTokenRequestMultiError is an error wrapping multiple
+// validation errors returned by GenerateLiveKitTokenRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GenerateLiveKitTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateLiveKitTokenRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateLiveKitTokenRequestMultiError) AllErrors() []error { return m }
+
+// GenerateLiveKitTokenRequestValidationError is the validation error returned
+// by GenerateLiveKitTokenRequest.Validate if the designated constraints
+// aren't met.
+type GenerateLiveKitTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateLiveKitTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateLiveKitTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateLiveKitTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateLiveKitTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateLiveKitTokenRequestValidationError) ErrorName() string {
+	return "GenerateLiveKitTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateLiveKitTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateLiveKitTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateLiveKitTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateLiveKitTokenRequestValidationError{}
+
+// Validate checks the field values on GenerateLiveKitTokenResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GenerateLiveKitTokenResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateLiveKitTokenResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GenerateLiveKitTokenResponseMultiError, or nil if none found.
+func (m *GenerateLiveKitTokenResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateLiveKitTokenResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccessToken
+
+	// no validation rules for Url
+
+	if len(errors) > 0 {
+		return GenerateLiveKitTokenResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateLiveKitTokenResponseMultiError is an error wrapping multiple
+// validation errors returned by GenerateLiveKitTokenResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GenerateLiveKitTokenResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateLiveKitTokenResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateLiveKitTokenResponseMultiError) AllErrors() []error { return m }
+
+// GenerateLiveKitTokenResponseValidationError is the validation error returned
+// by GenerateLiveKitTokenResponse.Validate if the designated constraints
+// aren't met.
+type GenerateLiveKitTokenResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateLiveKitTokenResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateLiveKitTokenResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateLiveKitTokenResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateLiveKitTokenResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateLiveKitTokenResponseValidationError) ErrorName() string {
+	return "GenerateLiveKitTokenResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateLiveKitTokenResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateLiveKitTokenResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateLiveKitTokenResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateLiveKitTokenResponseValidationError{}

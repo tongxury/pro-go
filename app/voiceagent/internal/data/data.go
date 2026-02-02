@@ -3,12 +3,14 @@ package data
 import (
 	"store/app/voiceagent/configs"
 	"store/app/voiceagent/internal/data/repo/mongodb"
+	"store/confs"
 	"store/pkg/clients"
 	"store/pkg/clients/grpcz"
 	"store/pkg/confcenter"
 	"store/pkg/rediz"
 	"store/pkg/sdk/third/bytedance/sms"
 	"store/pkg/sdk/third/bytedance/tos"
+	"store/pkg/sdk/third/cartesia"
 	"store/pkg/sdk/third/elevenlabs"
 	"store/pkg/sdk/third/gemini"
 	"store/pkg/sdk/third/tikhub"
@@ -23,6 +25,7 @@ type Data struct {
 	//Alisms      *alisms.Client
 	VolcSmsClient *sms.Client
 	ElevenLabs    *elevenlabs.Client
+	Cartesia      *cartesia.Client
 	Tikhub        *tikhub.Client
 	Gemini        *gemini.GenaiFactory
 	KafkaClient   *clients.KafkaClient
@@ -47,6 +50,7 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 		VolcSmsClient: sms.NewClient(),
 		Tikhub:        tikhub.NewClient(),
 		ElevenLabs:    elevenlabs.NewClient(),
+		Cartesia:      cartesia.NewClient(confs.CartesiaKey),
 		Gemini:        gemini.NewGenaiFactory(&c.Component.Genai),
 		KafkaClient:   clients.NewKafkaClient(c.Component.Kafka),
 		Conf:          c,
