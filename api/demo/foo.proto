@@ -16,7 +16,12 @@ message Foo {
   // status: 状态。
   string status = 3;
 
+  string name = 5;
+  string avatar = 6;
+  string desc = 7;
+
   // createdAt: 创建时间。
   int64 createdAt = 4;
 
+  int64 updatedAt = 8;
 }

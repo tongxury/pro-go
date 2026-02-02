@@ -7519,9 +7519,17 @@ components:
                 status:
                     type: string
                     description: 'status: 状态。'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                desc:
+                    type: string
                 createdAt:
                     type: string
                     description: 'createdAt: 创建时间。'
+                updatedAt:
+                    type: string
             description: |-
                 Foo 消息表示一个子资源或关联资源。
                  规则：遵循通用命名（如原本叫 Session，这里改叫 Bar）。

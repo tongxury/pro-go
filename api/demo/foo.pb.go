@@ -32,8 +32,12 @@ type Foo struct {
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
 	// status: 状态。
 	Status string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Name   string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Avatar string `protobuf:"bytes,6,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Desc   string `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc,omitempty"`
 	// createdAt: 创建时间。
 	CreatedAt     int64 `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     int64 `protobuf:"varint,8,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -82,9 +86,37 @@ func (x *Foo) GetStatus() string {
 	return ""
 }
 
+func (x *Foo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Foo) GetAvatar() string {
+	if x != nil {
+		return x.Avatar
+	}
+	return ""
+}
+
+func (x *Foo) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
 func (x *Foo) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *Foo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return 0
 }
@@ -93,11 +125,15 @@ var File_demo_foo_proto protoreflect.FileDescriptor
 
 const file_demo_foo_proto_rawDesc = "" +
 	"\n" +
-	"\x0edemo/foo.proto\x12\bapi.demo\"M\n" +
+	"\x0edemo/foo.proto\x12\bapi.demo\"\xab\x01\n" +
 	"\x03Foo\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1c\n" +
-	"\tcreatedAt\x18\x04 \x01(\x03R\tcreatedAtB\x17Z\x15store/api/demo;demopbb\x06proto3"
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12\x16\n" +
+	"\x06avatar\x18\x06 \x01(\tR\x06avatar\x12\x12\n" +
+	"\x04desc\x18\a \x01(\tR\x04desc\x12\x1c\n" +
+	"\tcreatedAt\x18\x04 \x01(\x03R\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\b \x01(\x03R\tupdatedAtB\x17Z\x15store/api/demo;demopbb\x06proto3"
 
 var (
 	file_demo_foo_proto_rawDescOnce sync.Once

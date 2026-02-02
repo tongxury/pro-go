@@ -60,7 +60,15 @@ func (m *Foo) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Name
+
+	// no validation rules for Avatar
+
+	// no validation rules for Desc
+
 	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
 
 	if len(errors) > 0 {
 		return FooMultiError(errors)

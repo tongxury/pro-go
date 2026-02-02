@@ -16,10 +16,12 @@ func (t *FooService) UpdateFoo(ctx context.Context, req *demopb.UpdateFooRequest
 	}
 
 	// AI 提示：根据需求更新字段
-	foo.Foo = req.Name
+	foo.Name = req.Name
+	foo.Avatar = req.Avatar
+	foo.Desc = req.Desc
 	foo.UpdatedAt = time.Now().Unix()
 
-	err = t.data.Mongo.Foo.UpdateByID(ctx, req.Id, foo)
+	_, err = t.data.Mongo.Foo.ReplaceByID(ctx, req.Id, foo)
 	if err != nil {
 		return nil, err
 	}

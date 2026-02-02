@@ -14,13 +14,12 @@ func (t *FooService) ListFoos(ctx context.Context, req *demopb.ListFoosRequest) 
 		filter["foo"] = bson.M{"$regex": req.Keyword, "$options": "i"}
 	}
 
-	opts := &mgz.Options{
-		Page: req.Page,
-		Size: req.Size,
-		Sort: bson.M{"createdAt": -1},
-	}
+	opts := mgz.Find().
+		Paging(req.Page, req.Size).
+		SetSort("createdAt", -1).
+		B()
 
-	list, total, err := t.data.Mongo.Foo.Find(ctx, filter, opts)
+	list, total, err := t.data.Mongo.Foo.ListAndCount(ctx, filter, opts)
 	if err != nil {
 		return nil, err
 	}
