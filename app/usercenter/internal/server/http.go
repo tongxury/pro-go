@@ -47,6 +47,7 @@ func NewHTTPServer(c confcenter.Server,
 					ucpb.AuthService_GetToken_FullMethodName,
 					ucpb.AuthService_SendCode_FullMethodName,
 					ucpb.UserService_GetUser_FullMethodName,
+					ucpb.AuthService_GetAppleAuthToken_FullMethodName,
 				})
 			}).Build(),
 			recovery.Recovery(),
