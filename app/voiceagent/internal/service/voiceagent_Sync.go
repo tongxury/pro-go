@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/sdk/third/elevenlabs"
 	"time"
@@ -13,6 +14,7 @@ import (
 
 // StartSyncLoop 启动定时同步任务
 func (s *VoiceAgentService) StartSyncLoop(ctx context.Context) {
+
 	ticker := time.NewTicker(1 * time.Minute)
 	go func() {
 		// 启动后立即执行一次
@@ -31,9 +33,8 @@ func (s *VoiceAgentService) StartSyncLoop(ctx context.Context) {
 // SyncData 执行全量数据同步 (Agent & Voice & Persona)
 func (s *VoiceAgentService) SyncData(ctx context.Context) {
 	fmt.Println("[Sync] Starting data synchronization with ElevenLabs...")
-	//s.SyncAgents(ctx)
+	s.SyncAgents(ctx)
 	//s.SyncVoices(ctx)
-	s.SyncPersonas(ctx)
 	fmt.Println("[Sync] Data synchronization completed.")
 }
 
@@ -74,7 +75,10 @@ func (s *VoiceAgentService) SyncAgents(ctx context.Context) {
 		for _, la := range localAgents {
 			if la.AgentId == id {
 				// 更新逻辑
-				la.Name = ra.Name
+				if la.Persona == nil {
+					la.Persona = &voiceagent.Persona{}
+				}
+				la.Persona.DisplayName = ra.Name
 
 				if ra.ConversationConfig.Agent.Prompt != nil {
 					//la.SystemPrompt = ra.ConversationConfig.Agent.Prompt.Text
@@ -96,8 +100,12 @@ func (s *VoiceAgentService) SyncAgents(ctx context.Context) {
 
 			newAgent := &voiceagent.Agent{
 				//XId:          primitive.NewObjectID().Hex(),
-				UserId: "system", // 同步的数据标记为系统
-				Name:   ra.Name,
+				User: &ucpb.User{
+					XId: "system", // 同步的数据标记为系统
+				},
+				Persona: &voiceagent.Persona{
+					DisplayName: ra.Name,
+				},
 				//SystemPrompt: prompt,
 				AgentId:   ra.AgentID,
 				Status:    "active",
@@ -114,7 +122,11 @@ func (s *VoiceAgentService) SyncAgents(ctx context.Context) {
 			if _, exists := remoteAgents[la.AgentId]; !exists {
 				// 远程已删除，本地同步物理删除或软删除 (此处根据要求执行物理删除)
 				_ = s.Data.Mongo.Agent.DeleteByID(ctx, la.XId)
-				fmt.Printf("[Sync] Deleted redundant agent: %s\n", la.Name)
+				name := ""
+				if la.Persona != nil {
+					name = la.Persona.DisplayName
+				}
+				fmt.Printf("[Sync] Deleted redundant agent: %s\n", name)
 			}
 		}
 	}

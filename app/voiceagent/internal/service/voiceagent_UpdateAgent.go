@@ -13,11 +13,10 @@ func (s *VoiceAgentService) UpdateAgent(ctx context.Context, req *voiceagent.Upd
 	}
 
 	// 如果模板 ID 发生变化，更新系统提示词
-	if req.PersonaId != "" && req.PersonaId != p.PersonaId {
+	if req.PersonaId != "" && (p.Persona == nil || req.PersonaId != p.Persona.XId) {
 		persona, err := s.Data.Mongo.Persona.GetById(ctx, req.PersonaId)
 		if err == nil && persona != nil {
-			//p.SystemPrompt = mongodb.GenerateSystemPromptFromPersona(persona)
-			p.PersonaId = req.PersonaId
+			p.Persona = persona
 		}
 	}
 
@@ -40,9 +39,12 @@ func (s *VoiceAgentService) UpdateAgent(ctx context.Context, req *voiceagent.Upd
 		}
 	}
 
-	p.Name = req.Name
-	p.Avatar = req.Avatar
-	p.Desc = req.Desc
+	if p.Persona == nil {
+		p.Persona = &voiceagent.Persona{}
+	}
+	p.Persona.DisplayName = req.Name
+	p.Persona.Avatar = req.Avatar
+	p.Persona.Description = req.Desc
 	p.VoiceId = req.VoiceId
 	p.DefaultSceneId = req.DefaultSceneId
 	p.IsPublic = req.IsPublic

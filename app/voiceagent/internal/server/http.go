@@ -53,5 +53,11 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, logg
 	srv := http.NewServer(opts...)
 	voiceagent.RegisterVoiceAgentServiceHTTPServer(srv, service)
 	voiceagent.RegisterMotivationServiceHTTPServer(srv, service)
+
+	go func() {
+		helpers.DeferFunc()
+		service.StartConsumer()
+	}()
+
 	return srv
 }

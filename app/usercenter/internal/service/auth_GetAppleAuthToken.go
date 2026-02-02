@@ -6,12 +6,15 @@ import (
 	"fmt"
 	ucpb "store/api/usercenter"
 	"store/pkg/clients/mgz"
+	"store/pkg/events"
 	"store/pkg/krathelper"
+	"store/pkg/sdk/conv"
 	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/lestrrat-go/jwx/jwk"
+	"github.com/segmentio/kafka-go"
 )
 
 func (t AuthService) GetAppleAuthToken(ctx context.Context, params *ucpb.GetAppleAuthTokenRequest) (*ucpb.Token, error) {
@@ -94,6 +97,20 @@ func (t AuthService) GetAppleAuthToken(ctx context.Context, params *ucpb.GetAppl
 	tokenStr, err := krathelper.GenerateTokenV2(userId)
 	if err != nil {
 		return nil, err
+	}
+
+	msg := kafka.Message{
+		Value: conv.S2B(events.AuthEvent{
+			UserID:     userId,
+			LoginBy:    "apple",
+			TS:         time.Now().Unix(),
+			IsRegister: isNew,
+		}),
+	}
+
+	err = t.data.KafkaClient.W().Write(ctx, events.Topic_AuthLogin, msg)
+	if err != nil {
+		log.Errorw("KafkaClient.W().Write err", err, "msg", msg)
 	}
 
 	return &ucpb.Token{

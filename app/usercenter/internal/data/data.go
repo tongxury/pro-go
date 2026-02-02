@@ -3,6 +3,7 @@ package data
 import (
 	"store/app/usercenter/configs"
 	"store/app/usercenter/internal/data/repo"
+	"store/pkg/clients"
 	"store/pkg/clients/grpcz"
 	"store/pkg/clients/mgz"
 	"store/pkg/confcenter"
@@ -21,6 +22,7 @@ type Data struct {
 	Alioss        *alioss.Client
 	Alisms        *alisms.Client
 	VolcSmsClient *sms.Client
+	KafkaClient   *clients.KafkaClient
 
 	Tikhub *tikhub.Client
 	TOS    *tos.Client
@@ -41,7 +43,7 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 		return nil, nil, err
 	}
 
-	clients, err := grpcz.NewClients(c.Component.Grpc)
+	grpcClients, err := grpcz.NewClients(c.Component.Grpc)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -49,12 +51,13 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 	d := &Data{
 		Mongo:         repo.NewCollections(mg),
 		Redis:         rediz.NewRedisClient(c.Database.Rediz),
-		GrpcClients:   clients,
+		GrpcClients:   grpcClients,
 		Alioss:        alioss.NewClient(c.Database.Oss),
 		Alisms:        client,
 		VolcSmsClient: sms.NewClient(),
 		Tikhub:        tikhub.NewClient(),
 		TOS:           tos.NewClient(c.Database.Tos),
+		KafkaClient:   clients.NewKafkaClient(c.Component.Kafka),
 		Conf:          c,
 	}
 

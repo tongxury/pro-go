@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package api.voiceagent;
 
+import "usercenter/user.proto";
+import "voiceagent/persona.proto";
+
 option go_package = "store/api/voiceagent;voiceagent";
 
 // Agent (角色): 代表 ElevenLabs Agents 架构中的“大脑”实体。
@@ -10,21 +13,11 @@ message Agent {
   // _id: MongoDB 唯一标识。
   string _id = 1 [json_name = "_id"];
   
-  // userId: 所属用户 ID。
-  string userId = 2;
+  // user: 所属用户。
+  api.usercenter.User user = 2;
 
-  // name: 角色名称。
-  // [必要性]: 必须。用于 UI 展示，并作为 LLM 自我认知的参考。
-  // [参考文档]: Prompting Guide -> Role (/docs/agents-platform/best-practices/prompting-guide)
-  string name = 3;
-  
-  // avatar: 角色头像 URL。
-  // [含义]: 客户端渲染用，增强交互沉浸感。
-  string avatar = 4;
-  
-  // desc: 角色简短描述。
-  string desc = 5;
-  
+  Persona persona = 3;
+
   // voiceId: 绑定的 ElevenLabs Voice ID。
   // [必要性]: 关键。决定角色说话的音色。
   // [参考文档]: Design and Configure -> Voice & language (/docs/agents-platform/customization/voice)
@@ -44,6 +37,4 @@ message Agent {
   // agentId: ElevenLabs 端的 Agent ID。
   string agentId = 12;
 
-  // personaId: 该角色所使用的模板 ID。
-  string personaId = 13;
 }

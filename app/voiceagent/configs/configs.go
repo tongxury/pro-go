@@ -1,12 +1,10 @@
 package configs
 
 import (
-	"fmt"
 	"os"
 	"store/confs"
 	"store/pkg/clients/grpcz"
 
-	"store/pkg/clients/mgz"
 	"store/pkg/confcenter"
 	"store/pkg/rediz"
 	"store/pkg/sdk/third/bytedance/tos"
@@ -39,15 +37,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		},
 		Logger: log.DefaultLogger,
 		Database: confcenter.Database{
-			Mongo: mgz.Config{
-				//Uri:      "mongodb://mongodb-sharded.prod:27017/tgbot?retryWrites=true&w=majority",
-				//Username: "root",
-				//Password: "z4XNmlaOjo",
-				Uri:      fmt.Sprintf("mongodb://%s:27017/pro?retryWrites=true&w=majority", "103.30.78.254"),
-				Username: "root",
-				Password: confs.MongoPassword1,
-				Database: "pro",
-			},
+			Mongo: confs.MongoMy,
 			Rediz: rediz.Config{
 				//Addrs:        []string{"redis-master.prod:6379"},
 				//Password:     "lveRN3bj7b",
@@ -63,6 +53,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 			},
 		},
 		Component: confcenter.Component{
+			Kafka: confs.KafkaMy,
 			Grpc: grpcz.Configs{
 				UserCenter: &grpcz.Config{
 					Endpoint: "usercenter.prod.svc.cluster.local:8090",
@@ -92,16 +83,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 			},
 		},
 		Database: confcenter.Database{
-			Mongo: mgz.Config{
-				//Uri:      "mongodb://mongodb-sharded.prod:27017/tgbot?retryWrites=true&w=majority",
-				//Username: "root",
-				//Password: "z4XNmlaOjo",
-				Uri:      fmt.Sprintf("mongodb://%s:27017/pro?retryWrites=true&w=majority", "101.132.192.41"),
-				Username: "root",
-				Password: confs.MongoPassword,
-
-				Database: "pro",
-			},
+			Mongo: confs.MongoMy,
 			Rediz: rediz.Config{
 				//Addrs:        []string{"redis-master.prod:6379"},
 				//Password:     "lveRN3bj7b",
@@ -122,6 +104,9 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 			},
 		},
 		Component: confcenter.Component{
+			Kafka: confcenter.KafkaConfig{
+				Brokers: []string{ip + ":9092"},
+			},
 			Solana: confcenter.SolanaConfig{
 				Endpoint:   "https://light-proud-pine.solana-mainnet.quiknode.pro/ab05da0bef752cdf59801f675a549691dc45e4c6",
 				WSEndpoint: "wss://light-proud-pine.solana-mainnet.quiknode.pro/ab05da0bef752cdf59801f675a549691dc45e4c6",

@@ -11276,23 +11276,12 @@ components:
                 _id:
                     type: string
                     description: '_id: MongoDB 唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
-                name:
-                    type: string
-                    description: |-
-                        name: 角色名称。
-                         [必要性]: 必须。用于 UI 展示，并作为 LLM 自我认知的参考。
-                         [参考文档]: Prompting Guide -> Role (/docs/agents-platform/best-practices/prompting-guide)
-                avatar:
-                    type: string
-                    description: |-
-                        avatar: 角色头像 URL。
-                         [含义]: 客户端渲染用，增强交互沉浸感。
-                desc:
-                    type: string
-                    description: 'desc: 角色简短描述。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
+                persona:
+                    $ref: '#/components/schemas/api.voiceagent.Persona'
                 voiceId:
                     type: string
                     description: |-
@@ -11313,9 +11302,6 @@ components:
                 agentId:
                     type: string
                     description: 'agentId: ElevenLabs 端的 Agent ID。'
-                personaId:
-                    type: string
-                    description: 'personaId: 该角色所使用的模板 ID。'
             description: |-
                 Agent (角色): 代表 ElevenLabs Agents 架构中的“大脑”实体。
                  [参考文档]: Architecture -> Language Model (/docs/agents-platform/overview#architecture)

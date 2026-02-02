@@ -1,9 +1,10 @@
 package clients
 
 import (
-	"github.com/segmentio/kafka-go/sasl"
-	"github.com/segmentio/kafka-go/sasl/scram"
 	"store/pkg/confcenter"
+
+	"github.com/segmentio/kafka-go/sasl"
+	"github.com/segmentio/kafka-go/sasl/plain"
 )
 
 type KafkaClient struct {
@@ -17,12 +18,10 @@ func NewKafkaClient(conf confcenter.KafkaConfig) *KafkaClient {
 		brokers: conf.Brokers,
 	}
 	if conf.Password != "" {
-		mechanism, err := scram.Mechanism(scram.SHA512, conf.Username, conf.Password)
-		if err != nil {
-			panic(err)
+		c.mechanism = plain.Mechanism{
+			Username: conf.Username,
+			Password: conf.Password,
 		}
-
-		c.mechanism = mechanism
 	}
 
 	return c

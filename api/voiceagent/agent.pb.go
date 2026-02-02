@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,17 +28,9 @@ type Agent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: MongoDB 唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	// name: 角色名称。
-	// [必要性]: 必须。用于 UI 展示，并作为 LLM 自我认知的参考。
-	// [参考文档]: Prompting Guide -> Role (/docs/agents-platform/best-practices/prompting-guide)
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// avatar: 角色头像 URL。
-	// [含义]: 客户端渲染用，增强交互沉浸感。
-	Avatar string `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	// desc: 角色简短描述。
-	Desc string `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
+	// user: 所属用户。
+	User    *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	Persona *Persona         `protobuf:"bytes,3,opt,name=persona,proto3" json:"persona,omitempty"`
 	// voiceId: 绑定的 ElevenLabs Voice ID。
 	// [必要性]: 关键。决定角色说话的音色。
 	// [参考文档]: Design and Configure -> Voice & language (/docs/agents-platform/customization/voice)
@@ -50,9 +43,7 @@ type Agent struct {
 	Status    string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt int64  `protobuf:"varint,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	// agentId: ElevenLabs 端的 Agent ID。
-	AgentId string `protobuf:"bytes,12,opt,name=agentId,proto3" json:"agentId,omitempty"`
-	// personaId: 该角色所使用的模板 ID。
-	PersonaId     string `protobuf:"bytes,13,opt,name=personaId,proto3" json:"personaId,omitempty"`
+	AgentId       string `protobuf:"bytes,12,opt,name=agentId,proto3" json:"agentId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -94,32 +85,18 @@ func (x *Agent) GetXId() string {
 	return ""
 }
 
-func (x *Agent) GetUserId() string {
+func (x *Agent) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
-func (x *Agent) GetName() string {
+func (x *Agent) GetPersona() *Persona {
 	if x != nil {
-		return x.Name
+		return x.Persona
 	}
-	return ""
-}
-
-func (x *Agent) GetAvatar() string {
-	if x != nil {
-		return x.Avatar
-	}
-	return ""
-}
-
-func (x *Agent) GetDesc() string {
-	if x != nil {
-		return x.Desc
-	}
-	return ""
+	return nil
 }
 
 func (x *Agent) GetVoiceId() string {
@@ -164,32 +141,22 @@ func (x *Agent) GetAgentId() string {
 	return ""
 }
 
-func (x *Agent) GetPersonaId() string {
-	if x != nil {
-		return x.PersonaId
-	}
-	return ""
-}
-
 var File_voiceagent_agent_proto protoreflect.FileDescriptor
 
 const file_voiceagent_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x16voiceagent/agent.proto\x12\x0eapi.voiceagent\"\xbd\x02\n" +
+	"\x16voiceagent/agent.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x18voiceagent/persona.proto\"\xa4\x02\n" +
 	"\x05Agent\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x16\n" +
-	"\x06avatar\x18\x04 \x01(\tR\x06avatar\x12\x12\n" +
-	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x18\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x121\n" +
+	"\apersona\x18\x03 \x01(\v2\x17.api.voiceagent.PersonaR\apersona\x12\x18\n" +
 	"\avoiceId\x18\a \x01(\tR\avoiceId\x12&\n" +
 	"\x0edefaultSceneId\x18\b \x01(\tR\x0edefaultSceneId\x12\x1a\n" +
 	"\bisPublic\x18\t \x01(\bR\bisPublic\x12\x16\n" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1c\n" +
 	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\x12\x18\n" +
-	"\aagentId\x18\f \x01(\tR\aagentId\x12\x1c\n" +
-	"\tpersonaId\x18\r \x01(\tR\tpersonaIdB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\aagentId\x18\f \x01(\tR\aagentIdB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_agent_proto_rawDescOnce sync.Once
@@ -205,14 +172,18 @@ func file_voiceagent_agent_proto_rawDescGZIP() []byte {
 
 var file_voiceagent_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_agent_proto_goTypes = []any{
-	(*Agent)(nil), // 0: api.voiceagent.Agent
+	(*Agent)(nil),           // 0: api.voiceagent.Agent
+	(*usercenter.User)(nil), // 1: api.usercenter.User
+	(*Persona)(nil),         // 2: api.voiceagent.Persona
 }
 var file_voiceagent_agent_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: api.voiceagent.Agent.user:type_name -> api.usercenter.User
+	2, // 1: api.voiceagent.Agent.persona:type_name -> api.voiceagent.Persona
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_agent_proto_init() }
@@ -220,6 +191,7 @@ func file_voiceagent_agent_proto_init() {
 	if File_voiceagent_agent_proto != nil {
 		return
 	}
+	file_voiceagent_persona_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

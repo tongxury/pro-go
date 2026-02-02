@@ -3,6 +3,7 @@ package data
 import (
 	"store/app/voiceagent/configs"
 	"store/app/voiceagent/internal/data/repo/mongodb"
+	"store/pkg/clients"
 	"store/pkg/clients/grpcz"
 	"store/pkg/confcenter"
 	"store/pkg/rediz"
@@ -24,13 +25,14 @@ type Data struct {
 	ElevenLabs    *elevenlabs.Client
 	Tikhub        *tikhub.Client
 	Gemini        *gemini.GenaiFactory
+	KafkaClient   *clients.KafkaClient
 
 	Conf confcenter.Config[configs.BizConfig]
 }
 
 func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 
-	clients, err := grpcz.NewClients(c.Component.Grpc)
+	grpcClients, err := grpcz.NewClients(c.Component.Grpc)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -38,7 +40,7 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 	d := &Data{
 		Mongo:       mongodb.NewCollections(c.Database.Mongo),
 		Redis:       rediz.NewRedisClient(c.Database.Rediz),
-		GrpcClients: clients,
+		GrpcClients: grpcClients,
 		//Alioss:      alioss.NewClient(c.Database.Oss),
 		TOS: tos.NewClient(c.Database.Tos),
 		//Alisms:      client,
@@ -46,6 +48,7 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 		Tikhub:        tikhub.NewClient(),
 		ElevenLabs:    elevenlabs.NewClient(),
 		Gemini:        gemini.NewGenaiFactory(&c.Component.Genai),
+		KafkaClient:   clients.NewKafkaClient(c.Component.Kafka),
 		Conf:          c,
 	}
 

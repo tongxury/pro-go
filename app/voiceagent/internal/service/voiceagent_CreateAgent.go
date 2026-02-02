@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/app/voiceagent/internal/data/repo/mongodb"
 	"store/pkg/krathelper"
@@ -64,18 +65,21 @@ func (s *VoiceAgentService) CreateAgent(ctx context.Context, req *voiceagent.Cre
 	}
 
 	p := &voiceagent.Agent{
-		UserId: userId,
-		Name:   name,
-		Avatar: avatar,
-		Desc:   desc,
-		//SystemPrompt:   systemPrompt,
+		User: &ucpb.User{
+			XId: userId,
+		},
+		Persona: &voiceagent.Persona{
+			XId:         req.PersonaId,
+			DisplayName: name,
+			Avatar:      avatar,
+			Description: desc,
+		},
 		VoiceId:        voiceId,
 		DefaultSceneId: req.DefaultSceneId,
 		IsPublic:       req.IsPublic,
 		Status:         "active",
 		CreatedAt:      time.Now().Unix(),
 		AgentId:        elAgentId,
-		PersonaId:      req.PersonaId,
 	}
 
 	res, err := s.Data.Mongo.Agent.Insert(ctx, p)

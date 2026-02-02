@@ -16,7 +16,7 @@ type SubscribeEvent struct {
 }
 
 type AuthEvent struct {
-	UserID     int64
+	UserID     string
 	LoginBy    string
 	TS         int64
 	DeviceID   string
@@ -25,7 +25,7 @@ type AuthEvent struct {
 
 type AuthEventValues map[string]interface{}
 
-func NewAuthEvent(userID int64, loginBy, deviceID string) map[string]interface{} {
+func NewAuthEvent(userID string, loginBy, deviceID string) map[string]interface{} {
 	t := &AuthEvent{
 		UserID:   userID,
 		LoginBy:  loginBy,
@@ -46,7 +46,7 @@ func (t *AuthEvent) AsValues() map[string]interface{} {
 
 func (t AuthEventValues) AsAuthEvent() *AuthEvent {
 	return &AuthEvent{
-		UserID:   conv.Int64(t["userID"]),
+		UserID:   conv.String(t["userID"]),
 		LoginBy:  conv.String(t["loginBy"]),
 		TS:       conv.Int64(t["ts"]),
 		DeviceID: conv.String(t["deviceID"]),

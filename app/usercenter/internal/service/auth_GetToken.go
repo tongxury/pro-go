@@ -5,11 +5,14 @@ import (
 	"fmt"
 	ucpb "store/api/usercenter"
 	"store/pkg/clients/mgz"
+	"store/pkg/events"
 	"store/pkg/krathelper"
+	"store/pkg/sdk/conv"
 	"time"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/segmentio/kafka-go"
 )
 
 func (t AuthService) GetToken(ctx context.Context, request *ucpb.GetTokenRequest) (*ucpb.Token, error) {
@@ -42,6 +45,20 @@ func (t AuthService) GetToken(ctx context.Context, request *ucpb.GetTokenRequest
 	}
 
 	token, err := krathelper.GenerateTokenV2(userId)
+
+	msg := kafka.Message{
+		Value: conv.S2B(events.AuthEvent{
+			UserID:     userId,
+			LoginBy:    "phone",
+			TS:         time.Now().Unix(),
+			IsRegister: isNew,
+		}),
+	}
+
+	err = t.data.KafkaClient.W().Write(ctx, events.Topic_AuthLogin, msg)
+	if err != nil {
+		log.Errorw("KafkaClient.W().Write err", err, "msg", msg)
+	}
 
 	return &ucpb.Token{
 		Token:  token,

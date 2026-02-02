@@ -71,6 +71,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 			},
 		},
 		Component: confcenter.Component{
+			Kafka: confs.KafkaMy,
 			Alisms: alisms.Config{
 				AccessKey:    confs.AliyunAccessKey,
 				AccessSecret: confs.AliyunAccessSecret,
@@ -106,7 +107,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				//Username: "root",
 				//Database: "yoozy_pro_beta",
 
-				Uri:      fmt.Sprintf("mongodb://mongoreplicad78433cc0e940.mongodb.cn-shanghai.ivolces.com:3717/yoozy_pro?retryWrites=true&w=majority"),
+				Uri:      "mongodb://mongoreplicad78433cc0e940.mongodb.cn-shanghai.ivolces.com:3717/yoozy_pro?retryWrites=true&w=majority",
 				Username: "root",
 				Password: confs.MongoPasswordYuzhi,
 				Database: "admin",
@@ -152,6 +153,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				Sign:         "唯构科技深圳",
 				TemplateCode: "SMS_316000047",
 			},
+			Kafka: confs.KafkaMy,
 			Grpc: grpcz.Configs{
 				ProjAdmin: &grpcz.Config{
 					Endpoint: "admin:8090",
@@ -176,7 +178,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		Database: confcenter.Database{
 			Mongo: mgz.Config{
 				//Uri:           "173.208.218.161:27017",
-				Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+				Uri:      "mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority",
 				Username: "root",
 				Password: confs.RedisPasswordProj,
 
@@ -216,6 +218,11 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 			},
 		},
 		Component: confcenter.Component{
+			Kafka: confcenter.KafkaConfig{
+				Brokers:  []string{"103.30.78.254:9092"},
+				Username: "admin",
+				Password: "admin-secret",
+			},
 			Alisms: alisms.Config{
 				AccessKey:    confs.AliyunAccessKey,
 				AccessSecret: confs.AliyunAccessSecret,

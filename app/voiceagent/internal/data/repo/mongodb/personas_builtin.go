@@ -3,6 +3,7 @@ package mongodb
 import (
 	"context"
 	voiceagent "store/api/voiceagent"
+	"store/pkg/clients/mgz"
 )
 
 // GetBuiltinPersonas 返回系统预设的角色模板。
@@ -387,7 +388,7 @@ func GenerateSystemPromptFromPersona(p *voiceagent.Persona) string {
 func (c *PersonaCollection) SeedBuiltinPersonas(ctx context.Context) error {
 	for _, p := range GetBuiltinPersonas() {
 		// 检查是否已存在
-		exists, _ := c.GetById(ctx, p.XId)
+		exists, _ := c.FindOne(ctx, mgz.Filter().EQ("name", p.Name).B())
 		if exists != nil {
 			continue
 		}
