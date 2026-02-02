@@ -13,10 +13,24 @@ import "proj/credit.proto";
 import "proj/account.proto";
 import "proj/session.proto";
 import "proj/workflow.proto";
+import "proj/commodity.proto";
 
 option go_package = "store/api/proj;projpb";
 
 service WorkflowService {
+
+  rpc CreateWorkflow(CreateWorkflowRequest) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      post: "/api/proj/v1/workflows"
+      body: "*"
+    };
+  }
+
+  rpc GetWorkflow(GetWorkflowRequest) returns (api.proj.Workflow) {
+    option (google.api.http) = {
+      get: "/api/proj/v1/workflows/{id}"
+    };
+  }
 
   rpc UpdateWorkflow(UpdateWorkflowRequest) returns (api.proj.Workflow) {
     option (google.api.http) = {
@@ -44,6 +58,36 @@ service WorkflowService {
     };
   }
 
+  rpc ListWorkflows(ListWorkflowsRequest) returns (WorkflowList) {
+    option (google.api.http) = {
+      get: "/api/proj/v1/workflows"
+    };
+  }
+
+}
+
+message ListWorkflowsRequest {
+  int64 page = 1;
+  int64 size = 2;
+  string status = 3;
+}
+
+message WorkflowList {
+  repeated Workflow list = 1;
+  int64 total = 2;
+  int64 page = 3;
+  int64 size = 4;
+  bool hasMore = 5;
+}
+
+message CreateWorkflowRequest {
+  string name = 1;
+
+  Commodity commodity = 2;
+}
+
+message GetWorkflowRequest {
+  string id = 1;
 }
 
 message UpdateWorkflowJobRequest {
