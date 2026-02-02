@@ -32,8 +32,9 @@ func wireApp(config confcenter.Config[configs.BizConfig], meta confcenter.Meta, 
 	itemBiz := biz.NewItemBiz(dataData)
 	agentBiz := biz.NewAgentBiz(dataData)
 	voiceAgentService := service.NewVoiceAgentService(dataData, itemBiz, agentBiz)
-	grpcServer := server.NewGRPCServer(confcenterServer, voiceAgentService, logger)
-	httpServer := server.NewHTTPServer(confcenterServer, voiceAgentService, logger)
+	liveKitService := service.NewLiveKitService()
+	grpcServer := server.NewGRPCServer(confcenterServer, voiceAgentService, liveKitService, logger)
+	httpServer := server.NewHTTPServer(confcenterServer, voiceAgentService, liveKitService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

@@ -29,7 +29,6 @@ const OperationVoiceAgentServiceDeleteAgent = "/api.voiceagent.VoiceAgentService
 const OperationVoiceAgentServiceDeleteEvent = "/api.voiceagent.VoiceAgentService/DeleteEvent"
 const OperationVoiceAgentServiceDeleteMemory = "/api.voiceagent.VoiceAgentService/DeleteMemory"
 const OperationVoiceAgentServiceGenerateCartesiaToken = "/api.voiceagent.VoiceAgentService/GenerateCartesiaToken"
-const OperationVoiceAgentServiceGenerateLiveKitToken = "/api.voiceagent.VoiceAgentService/GenerateLiveKitToken"
 const OperationVoiceAgentServiceGetAgent = "/api.voiceagent.VoiceAgentService/GetAgent"
 const OperationVoiceAgentServiceGetConversation = "/api.voiceagent.VoiceAgentService/GetConversation"
 const OperationVoiceAgentServiceGetEmotionStats = "/api.voiceagent.VoiceAgentService/GetEmotionStats"
@@ -72,8 +71,6 @@ type VoiceAgentServiceHTTPServer interface {
 	DeleteMemory(context.Context, *DeleteMemoryRequest) (*emptypb.Empty, error)
 	// GenerateCartesiaToken GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
 	GenerateCartesiaToken(context.Context, *GenerateCartesiaTokenRequest) (*GenerateCartesiaTokenResponse, error)
-	// GenerateLiveKitToken GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(context.Context, *GenerateLiveKitTokenRequest) (*GenerateLiveKitTokenResponse, error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(context.Context, *GetAgentRequest) (*Agent, error)
 	// GetConversation GetConversation: 获取会话详情。
@@ -153,7 +150,6 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.GET("/api/va/events/upcoming", _VoiceAgentService_GetUpcomingEvents0_HTTP_Handler(srv))
 	r.GET("/api/va/growth-report", _VoiceAgentService_GetGrowthReport0_HTTP_Handler(srv))
 	r.POST("/api/va/cartesia/token", _VoiceAgentService_GenerateCartesiaToken0_HTTP_Handler(srv))
-	r.POST("/api/va/livekit/token", _VoiceAgentService_GenerateLiveKitToken0_HTTP_Handler(srv))
 }
 
 func _VoiceAgentService_ListPersonas0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
@@ -811,28 +807,6 @@ func _VoiceAgentService_GenerateCartesiaToken0_HTTP_Handler(srv VoiceAgentServic
 	}
 }
 
-func _VoiceAgentService_GenerateLiveKitToken0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GenerateLiveKitTokenRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceGenerateLiveKitToken)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GenerateLiveKitToken(ctx, req.(*GenerateLiveKitTokenRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GenerateLiveKitTokenResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type VoiceAgentServiceHTTPClient interface {
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(ctx context.Context, req *AddVoiceRequest, opts ...http.CallOption) (rsp *Voice, err error)
@@ -852,8 +826,6 @@ type VoiceAgentServiceHTTPClient interface {
 	DeleteMemory(ctx context.Context, req *DeleteMemoryRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	// GenerateCartesiaToken GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
 	GenerateCartesiaToken(ctx context.Context, req *GenerateCartesiaTokenRequest, opts ...http.CallOption) (rsp *GenerateCartesiaTokenResponse, err error)
-	// GenerateLiveKitToken GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(ctx context.Context, req *GenerateLiveKitTokenRequest, opts ...http.CallOption) (rsp *GenerateLiveKitTokenResponse, err error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(ctx context.Context, req *GetAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
 	// GetConversation GetConversation: 获取会话详情。
@@ -1026,20 +998,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) GenerateCartesiaToken(ctx context.Cont
 	pattern := "/api/va/cartesia/token"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceGenerateCartesiaToken))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// GenerateLiveKitToken GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-func (c *VoiceAgentServiceHTTPClientImpl) GenerateLiveKitToken(ctx context.Context, in *GenerateLiveKitTokenRequest, opts ...http.CallOption) (*GenerateLiveKitTokenResponse, error) {
-	var out GenerateLiveKitTokenResponse
-	pattern := "/api/va/livekit/token"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceGenerateLiveKitToken))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

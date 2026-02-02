@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+import "google/api/annotations.proto";
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+// LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
+service LiveKitService {
+  // GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
+  rpc GenerateLiveKitToken(GenerateLiveKitTokenRequest) returns (GenerateLiveKitTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/va/livekit/token"
+      body: "*"
+    };
+  }
+}
+
+message GenerateLiveKitTokenRequest {
+  string roomName = 1;
+  string identity = 2;
+}
+
+message GenerateLiveKitTokenResponse {
+  string accessToken = 1;
+  string url = 2;
+}

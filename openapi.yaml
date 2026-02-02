@@ -6069,9 +6069,9 @@ paths:
     /api/va/livekit/token:
         post:
             tags:
-                - VoiceAgentService
+                - LiveKitService
             description: 'GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。'
-            operationId: VoiceAgentService_GenerateLiveKitToken
+            operationId: LiveKitService_GenerateLiveKitToken
             requestBody:
                 content:
                     application/json:
@@ -12259,6 +12259,8 @@ tags:
         *
         FooService 定义了业务逻辑接口。
         AI 提示：使用 Foo/Bar 作为示例名，一眼就能看懂是模板。
+    - name: LiveKitService
+      description: LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
     - name: MarketService
     - name: Member
     - name: Mgmt

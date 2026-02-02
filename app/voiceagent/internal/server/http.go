@@ -19,7 +19,7 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, logger log.Logger) *http.Server {
+func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, livekit *service.LiveKitService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.ErrorEncoder(encoder.ErrorEncoder),
 		http.ResponseEncoder(encoder.ResponseEncoder),
@@ -53,6 +53,7 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, logg
 	srv := http.NewServer(opts...)
 	voiceagent.RegisterVoiceAgentServiceHTTPServer(srv, service)
 	voiceagent.RegisterMotivationServiceHTTPServer(srv, service)
+	voiceagent.RegisterLiveKitServiceHTTPServer(srv, livekit)
 
 	go func() {
 		helpers.DeferFunc()

@@ -51,7 +51,6 @@ const (
 	VoiceAgentService_GetUpcomingEvents_FullMethodName     = "/api.voiceagent.VoiceAgentService/GetUpcomingEvents"
 	VoiceAgentService_GetGrowthReport_FullMethodName       = "/api.voiceagent.VoiceAgentService/GetGrowthReport"
 	VoiceAgentService_GenerateCartesiaToken_FullMethodName = "/api.voiceagent.VoiceAgentService/GenerateCartesiaToken"
-	VoiceAgentService_GenerateLiveKitToken_FullMethodName  = "/api.voiceagent.VoiceAgentService/GenerateLiveKitToken"
 )
 
 // VoiceAgentServiceClient is the client API for VoiceAgentService service.
@@ -124,8 +123,6 @@ type VoiceAgentServiceClient interface {
 	GetGrowthReport(ctx context.Context, in *GetGrowthReportRequest, opts ...grpc.CallOption) (*GrowthReport, error)
 	// GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
 	GenerateCartesiaToken(ctx context.Context, in *GenerateCartesiaTokenRequest, opts ...grpc.CallOption) (*GenerateCartesiaTokenResponse, error)
-	// GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(ctx context.Context, in *GenerateLiveKitTokenRequest, opts ...grpc.CallOption) (*GenerateLiveKitTokenResponse, error)
 }
 
 type voiceAgentServiceClient struct {
@@ -446,16 +443,6 @@ func (c *voiceAgentServiceClient) GenerateCartesiaToken(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *voiceAgentServiceClient) GenerateLiveKitToken(ctx context.Context, in *GenerateLiveKitTokenRequest, opts ...grpc.CallOption) (*GenerateLiveKitTokenResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GenerateLiveKitTokenResponse)
-	err := c.cc.Invoke(ctx, VoiceAgentService_GenerateLiveKitToken_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // VoiceAgentServiceServer is the server API for VoiceAgentService service.
 // All implementations must embed UnimplementedVoiceAgentServiceServer
 // for forward compatibility.
@@ -526,8 +513,6 @@ type VoiceAgentServiceServer interface {
 	GetGrowthReport(context.Context, *GetGrowthReportRequest) (*GrowthReport, error)
 	// GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
 	GenerateCartesiaToken(context.Context, *GenerateCartesiaTokenRequest) (*GenerateCartesiaTokenResponse, error)
-	// GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(context.Context, *GenerateLiveKitTokenRequest) (*GenerateLiveKitTokenResponse, error)
 	mustEmbedUnimplementedVoiceAgentServiceServer()
 }
 
@@ -630,9 +615,6 @@ func (UnimplementedVoiceAgentServiceServer) GetGrowthReport(context.Context, *Ge
 }
 func (UnimplementedVoiceAgentServiceServer) GenerateCartesiaToken(context.Context, *GenerateCartesiaTokenRequest) (*GenerateCartesiaTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GenerateCartesiaToken not implemented")
-}
-func (UnimplementedVoiceAgentServiceServer) GenerateLiveKitToken(context.Context, *GenerateLiveKitTokenRequest) (*GenerateLiveKitTokenResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GenerateLiveKitToken not implemented")
 }
 func (UnimplementedVoiceAgentServiceServer) mustEmbedUnimplementedVoiceAgentServiceServer() {}
 func (UnimplementedVoiceAgentServiceServer) testEmbeddedByValue()                           {}
@@ -1213,24 +1195,6 @@ func _VoiceAgentService_GenerateCartesiaToken_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VoiceAgentService_GenerateLiveKitToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GenerateLiveKitTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VoiceAgentServiceServer).GenerateLiveKitToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VoiceAgentService_GenerateLiveKitToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VoiceAgentServiceServer).GenerateLiveKitToken(ctx, req.(*GenerateLiveKitTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // VoiceAgentService_ServiceDesc is the grpc.ServiceDesc for VoiceAgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1361,10 +1325,6 @@ var VoiceAgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateCartesiaToken",
 			Handler:    _VoiceAgentService_GenerateCartesiaToken_Handler,
-		},
-		{
-			MethodName: "GenerateLiveKitToken",
-			Handler:    _VoiceAgentService_GenerateLiveKitToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
