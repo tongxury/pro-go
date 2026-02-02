@@ -20,8 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_SendCode_FullMethodName = "/api.usercenter.AuthService/SendCode"
-	AuthService_GetToken_FullMethodName = "/api.usercenter.AuthService/GetToken"
+	AuthService_SendCode_FullMethodName          = "/api.usercenter.AuthService/SendCode"
+	AuthService_GetToken_FullMethodName          = "/api.usercenter.AuthService/GetToken"
+	AuthService_GetAppleAuthToken_FullMethodName = "/api.usercenter.AuthService/GetAppleAuthToken"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -30,6 +31,7 @@ const (
 type AuthServiceClient interface {
 	SendCode(ctx context.Context, in *SendCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*Token, error)
+	GetAppleAuthToken(ctx context.Context, in *GetAppleAuthTokenRequest, opts ...grpc.CallOption) (*Token, error)
 }
 
 type authServiceClient struct {
@@ -60,12 +62,23 @@ func (c *authServiceClient) GetToken(ctx context.Context, in *GetTokenRequest, o
 	return out, nil
 }
 
+func (c *authServiceClient) GetAppleAuthToken(ctx context.Context, in *GetAppleAuthTokenRequest, opts ...grpc.CallOption) (*Token, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Token)
+	err := c.cc.Invoke(ctx, AuthService_GetAppleAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
 type AuthServiceServer interface {
 	SendCode(context.Context, *SendCodeRequest) (*emptypb.Empty, error)
 	GetToken(context.Context, *GetTokenRequest) (*Token, error)
+	GetAppleAuthToken(context.Context, *GetAppleAuthTokenRequest) (*Token, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -81,6 +94,9 @@ func (UnimplementedAuthServiceServer) SendCode(context.Context, *SendCodeRequest
 }
 func (UnimplementedAuthServiceServer) GetToken(context.Context, *GetTokenRequest) (*Token, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetToken not implemented")
+}
+func (UnimplementedAuthServiceServer) GetAppleAuthToken(context.Context, *GetAppleAuthTokenRequest) (*Token, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppleAuthToken not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -139,6 +155,24 @@ func _AuthService_GetToken_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_GetAppleAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppleAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetAppleAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetAppleAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetAppleAuthToken(ctx, req.(*GetAppleAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +187,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetToken",
 			Handler:    _AuthService_GetToken_Handler,
+		},
+		{
+			MethodName: "GetAppleAuthToken",
+			Handler:    _AuthService_GetAppleAuthToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

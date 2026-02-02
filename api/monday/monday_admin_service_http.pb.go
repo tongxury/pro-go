@@ -32,12 +32,12 @@ type MondayAdminServiceHTTPServer interface {
 
 func RegisterMondayAdminServiceHTTPServer(s *http.Server, srv MondayAdminServiceHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/ma/resources", _MondayAdminService_ListResources1_HTTP_Handler(srv))
+	r.GET("/api/ma/resources", _MondayAdminService_ListResources0_HTTP_Handler(srv))
 	r.POST("/api/ma/resources", _MondayAdminService_AddResources0_HTTP_Handler(srv))
 	r.GET("/api/ma/resources/{id}", _MondayAdminService_GetResource0_HTTP_Handler(srv))
 }
 
-func _MondayAdminService_ListResources1_HTTP_Handler(srv MondayAdminServiceHTTPServer) func(ctx http.Context) error {
+func _MondayAdminService_ListResources0_HTTP_Handler(srv MondayAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListResourceRequest
 		if err := ctx.BindQuery(&in); err != nil {

@@ -119,7 +119,7 @@ type AIAgentServiceHTTPServer interface {
 func RegisterAIAgentServiceHTTPServer(s *http.Server, srv AIAgentServiceHTTPServer) {
 	r := s.Route("/")
 	r.GET("/api/ag/oss/signed-url", _AIAgentService_GetAliOssSignedUrl0_HTTP_Handler(srv))
-	r.GET("/api/ag/qiniu/upload-token", _AIAgentService_GetQiniuUploadToken0_HTTP_Handler(srv))
+	r.GET("/api/ag/qiniu/upload-token", _AIAgentService_GetQiniuUploadToken1_HTTP_Handler(srv))
 	r.POST("/api/ag/v2/debug/axnetsue", _AIAgentService_Debug0_HTTP_Handler(srv))
 	r.POST("/api/ag/bind-accounts", _AIAgentService_BindAccount0_HTTP_Handler(srv))
 	r.POST("/api/ag/accounts", _AIAgentService_AddAccount0_HTTP_Handler(srv))
@@ -128,7 +128,7 @@ func RegisterAIAgentServiceHTTPServer(s *http.Server, srv AIAgentServiceHTTPServ
 	r.GET("/api/ag/accounts", _AIAgentService_ListAccounts0_HTTP_Handler(srv))
 	r.POST("/api/ag/v2/surveys", _AIAgentService_SubmitSurvey0_HTTP_Handler(srv))
 	r.GET("/api/ag/v2/surveys/{id}", _AIAgentService_GetSurvey0_HTTP_Handler(srv))
-	r.GET("/api/ag/v2/items", _AIAgentService_ListItems0_HTTP_Handler(srv))
+	r.GET("/api/ag/v2/items", _AIAgentService_ListItems1_HTTP_Handler(srv))
 	r.GET("/api/ag/v3/items", _AIAgentService_ListItemsV30_HTTP_Handler(srv))
 	r.POST("/api/ag/v2/resources", _AIAgentService_AddResourceV20_HTTP_Handler(srv))
 	r.POST("/api/ag/v3/resources", _AIAgentService_AddResourceV30_HTTP_Handler(srv))
@@ -140,7 +140,7 @@ func RegisterAIAgentServiceHTTPServer(s *http.Server, srv AIAgentServiceHTTPServ
 	r.POST("/api/ag/v1/quick-sessions", _AIAgentService_CreateQuickSession0_HTTP_Handler(srv))
 	r.POST("/api/ag/v2/sessions", _AIAgentService_CreateSessionV21_HTTP_Handler(srv))
 	r.POST("/api/ag/v3/sessions", _AIAgentService_CreateSessionV30_HTTP_Handler(srv))
-	r.GET("/api/ag/v1/sessions", _AIAgentService_ListSessions1_HTTP_Handler(srv))
+	r.GET("/api/ag/v1/sessions", _AIAgentService_ListSessions2_HTTP_Handler(srv))
 	r.GET("/api/ag/v1/sessions/{id}", _AIAgentService_GetSession1_HTTP_Handler(srv))
 	r.POST("/api/ag/v1/questions", _AIAgentService_SubmitQuestion0_HTTP_Handler(srv))
 	r.POST("/api/ag/v1/re-questions", _AIAgentService_RetryQuestion0_HTTP_Handler(srv))
@@ -148,7 +148,7 @@ func RegisterAIAgentServiceHTTPServer(s *http.Server, srv AIAgentServiceHTTPServ
 	r.GET("/api/ag/v1/questions/{questionId}/answer-chunks", _AIAgentService_GetAnswerChunks0_HTTP_Handler(srv))
 	r.POST("/api/ag/v1/questions", _AIAgentService_CreateQuestionV20_HTTP_Handler(srv))
 	r.GET("/api/ag/v1/questions/{id}", _AIAgentService_GetQuestion0_HTTP_Handler(srv))
-	r.GET("/api/ag/v1/questions", _AIAgentService_ListQuestions0_HTTP_Handler(srv))
+	r.GET("/api/ag/v1/questions", _AIAgentService_ListQuestions1_HTTP_Handler(srv))
 	r.POST("/api/ag/v1/users/me/profiles", _AIAgentService_AddProfile0_HTTP_Handler(srv))
 	r.PATCH("/api/ag/v1/users/me/profiles/{id}", _AIAgentService_DeleteProfile0_HTTP_Handler(srv))
 	r.GET("/api/ag/v1/users/me/profiles/{id}", _AIAgentService_GetProfile0_HTTP_Handler(srv))
@@ -163,7 +163,7 @@ func RegisterAIAgentServiceHTTPServer(s *http.Server, srv AIAgentServiceHTTPServ
 	r.GET("/api/ag/v1/pub-records", _AIAgentService_ListPublicRecords0_HTTP_Handler(srv))
 	r.GET("/api/ag/v1/pub-records/{id}", _AIAgentService_GetPublicRecord0_HTTP_Handler(srv))
 	r.POST("/api/ag/v1/resources", _AIAgentService_AddResource0_HTTP_Handler(srv))
-	r.GET("/api/ag/v1/resources", _AIAgentService_ListResources0_HTTP_Handler(srv))
+	r.GET("/api/ag/v1/resources", _AIAgentService_ListResources1_HTTP_Handler(srv))
 }
 
 func _AIAgentService_GetAliOssSignedUrl0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
@@ -185,7 +185,7 @@ func _AIAgentService_GetAliOssSignedUrl0_HTTP_Handler(srv AIAgentServiceHTTPServ
 	}
 }
 
-func _AIAgentService_GetQiniuUploadToken0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
+func _AIAgentService_GetQiniuUploadToken1_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetQiniuUploadTokenParams
 		if err := ctx.BindQuery(&in); err != nil {
@@ -380,7 +380,7 @@ func _AIAgentService_GetSurvey0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(
 	}
 }
 
-func _AIAgentService_ListItems0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
+func _AIAgentService_ListItems1_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListItemsParams
 		if err := ctx.BindQuery(&in); err != nil {
@@ -635,7 +635,7 @@ func _AIAgentService_CreateSessionV30_HTTP_Handler(srv AIAgentServiceHTTPServer)
 	}
 }
 
-func _AIAgentService_ListSessions1_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
+func _AIAgentService_ListSessions2_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListSessionsParams
 		if err := ctx.BindQuery(&in); err != nil {
@@ -808,7 +808,7 @@ func _AIAgentService_GetQuestion0_HTTP_Handler(srv AIAgentServiceHTTPServer) fun
 	}
 }
 
-func _AIAgentService_ListQuestions0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
+func _AIAgentService_ListQuestions1_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListQuestionsParams
 		if err := ctx.BindQuery(&in); err != nil {
@@ -1132,7 +1132,7 @@ func _AIAgentService_AddResource0_HTTP_Handler(srv AIAgentServiceHTTPServer) fun
 	}
 }
 
-func _AIAgentService_ListResources0_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
+func _AIAgentService_ListResources1_HTTP_Handler(srv AIAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListResourcesParams
 		if err := ctx.BindQuery(&in); err != nil {

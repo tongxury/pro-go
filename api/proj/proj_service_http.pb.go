@@ -86,7 +86,7 @@ func RegisterProjServiceHTTPServer(s *http.Server, srv ProjServiceHTTPServer) {
 	r.GET("/api/v1/wx-auth-tokens", _ProjService_GetWxAuthToken0_HTTP_Handler(srv))
 	r.GET("/api/v1/users/me", _ProjService_GetUser1_HTTP_Handler(srv))
 	r.GET("/api/v1/users/me/credit-state", _ProjService_GetCreditState1_HTTP_Handler(srv))
-	r.GET("/api/v1/qiniu/upload-token", _ProjService_GetQiniuUploadToken1_HTTP_Handler(srv))
+	r.GET("/api/v1/qiniu/upload-token", _ProjService_GetQiniuUploadToken0_HTTP_Handler(srv))
 	r.GET("/api/v1/wx-open-id", _ProjService_GetWxOpenId0_HTTP_Handler(srv))
 	r.POST("/api/v1/wx-orders", _ProjService_CreateWxOrder0_HTTP_Handler(srv))
 	r.POST("/api/pro/wxpay/webhook", _ProjService_WebhookByWxpay0_HTTP_Handler(srv))
@@ -442,7 +442,7 @@ func _ProjService_GetCreditState1_HTTP_Handler(srv ProjServiceHTTPServer) func(c
 	}
 }
 
-func _ProjService_GetQiniuUploadToken1_HTTP_Handler(srv ProjServiceHTTPServer) func(ctx http.Context) error {
+func _ProjService_GetQiniuUploadToken0_HTTP_Handler(srv ProjServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetQiniuUploadTokenParams
 		if err := ctx.BindQuery(&in); err != nil {

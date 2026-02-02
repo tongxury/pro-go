@@ -24,7 +24,35 @@ service AuthService {
       get: "/api/usr/auth-tokens"
     };
   };
+
+  rpc GetAppleAuthToken(GetAppleAuthTokenRequest) returns (Token) {
+    option (google.api.http) = {
+      get: "/api/usr/v1/apple-auth-tokens"
+    };
+  }
 }
+
+
+message GetAppleAuthTokenRequest {
+
+  /*  message FullName {
+      string familyName = 1;
+      string enName = 2;
+      string middleName = 3;
+      string namePrefix = 4;
+      string nameSuffix = 5;
+      string nickname = 6;
+    }*/
+
+  string authorizationCode = 1;
+  string email = 2;
+  string nickname = 3;
+  string identityToken = 4;
+  uint32 realUserStatus = 5;
+  string state = 6;
+  string user = 7;
+}
+
 
 message Token {
   string token = 1;

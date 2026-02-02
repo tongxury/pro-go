@@ -1417,7 +1417,7 @@ var File_proj_proj_admin_service_proto protoreflect.FileDescriptor
 
 const file_proj_proj_admin_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproj/proj_admin_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/item.proto\x1a\x13proj/settings.proto\x1a\x1bproj/proj_pro_service.proto\x1a\x1dusercenter/user_service.proto\x1a\x13proj/feedback.proto\x1a\x10proj/asset.proto\x1a\x1bcredit/credit_service.proto\"!\n" +
+	"\x1dproj/proj_admin_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/item.proto\x1a\x13proj/settings.proto\x1a\x1bproj/proj_pro_service.proto\x1a\x1dusercenter/user_service.proto\x1a\x15usercenter/user.proto\x1a\x13proj/feedback.proto\x1a\x10proj/asset.proto\x1a\x1bcredit/credit_service.proto\"!\n" +
 	"\x0fGetUserRequest_\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"o\n" +
 	"\bUserInfo\x12(\n" +

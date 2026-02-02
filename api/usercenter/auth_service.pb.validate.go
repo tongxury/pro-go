@@ -35,6 +35,122 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetAppleAuthTokenRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAppleAuthTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAppleAuthTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAppleAuthTokenRequestMultiError, or nil if none found.
+func (m *GetAppleAuthTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAppleAuthTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AuthorizationCode
+
+	// no validation rules for Email
+
+	// no validation rules for Nickname
+
+	// no validation rules for IdentityToken
+
+	// no validation rules for RealUserStatus
+
+	// no validation rules for State
+
+	// no validation rules for User
+
+	if len(errors) > 0 {
+		return GetAppleAuthTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAppleAuthTokenRequestMultiError is an error wrapping multiple validation
+// errors returned by GetAppleAuthTokenRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAppleAuthTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAppleAuthTokenRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAppleAuthTokenRequestMultiError) AllErrors() []error { return m }
+
+// GetAppleAuthTokenRequestValidationError is the validation error returned by
+// GetAppleAuthTokenRequest.Validate if the designated constraints aren't met.
+type GetAppleAuthTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAppleAuthTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAppleAuthTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAppleAuthTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAppleAuthTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAppleAuthTokenRequestValidationError) ErrorName() string {
+	return "GetAppleAuthTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAppleAuthTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAppleAuthTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAppleAuthTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAppleAuthTokenRequestValidationError{}
+
 // Validate checks the field values on Token with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

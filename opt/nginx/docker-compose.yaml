@@ -5,6 +5,7 @@ services:
     image: bitnami/nginx:1.25
     user: '0'
     volumes:
+      #  路径要改  版本比较滞后
       - './conf:/opt/bitnami/nginx/conf/server_blocks/:ro'
     restart: unless-stopped
     ports:

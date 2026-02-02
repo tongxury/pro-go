@@ -56,8 +56,8 @@ func RegisterChatHTTPServer(s *http.Server, srv ChatHTTPServer) {
 	r.POST("/api/v2/chat/translations", _Chat_Translate0_HTTP_Handler(srv))
 	r.GET("/api/v2/chat/pre-questions", _Chat_GetPreQuestions0_HTTP_Handler(srv))
 	r.POST("/api/v2/chat/chat-sessions", _Chat_AddSession0_HTTP_Handler(srv))
-	r.GET("/api/v2/chat/chat-sessions", _Chat_ListSessions2_HTTP_Handler(srv))
-	r.GET("/api/v2/chat/chat-questions", _Chat_ListQuestions1_HTTP_Handler(srv))
+	r.GET("/api/v2/chat/chat-sessions", _Chat_ListSessions1_HTTP_Handler(srv))
+	r.GET("/api/v2/chat/chat-questions", _Chat_ListQuestions0_HTTP_Handler(srv))
 	r.PATCH("/api/v2/chat/chat-answers/{answerId}/states", _Chat_UpdateAnswerState0_HTTP_Handler(srv))
 	r.GET("/api/v2/chat/chat-qas", _Chat_ListQuestionAnswers0_HTTP_Handler(srv))
 	r.GET("/api/v2/chat/chat-records", _Chat_ListChatRecords1_HTTP_Handler(srv))
@@ -189,7 +189,7 @@ func _Chat_AddSession0_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _Chat_ListSessions2_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context) error {
+func _Chat_ListSessions1_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListSessionsParams
 		if err := ctx.BindQuery(&in); err != nil {
@@ -208,7 +208,7 @@ func _Chat_ListSessions2_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context)
 	}
 }
 
-func _Chat_ListQuestions1_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context) error {
+func _Chat_ListQuestions0_HTTP_Handler(srv ChatHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListQuestionsParams
 		if err := ctx.BindQuery(&in); err != nil {

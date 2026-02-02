@@ -161,7 +161,7 @@ release_aiagent:
 
 
 usercenter_my_release:
-	@docker buildx build  -t usernx/usercenter:${VERSION} --build-arg SRV=usercenter -f Dockerfile-arm64 . --push
+	@docker buildx build --platform=linux/amd64  -t usernx/usercenter:${VERSION} --build-arg SRV=usercenter -f Dockerfile . --push
 	@curl -X PUT \
     -H "content-type: application/json" \
     -H "Cookie: KuboardUsername=admin; KuboardAccessKey=4342pex2bf55.kkx8hf6z665b85fsf38ichrnfrc238kz" \
@@ -183,6 +183,15 @@ voiceagent_qiniu_release:
          -H "Cookie: KuboardUsername=admin; KuboardAccessKey=4342pex2bf55.kkx8hf6z665b85fsf38ichrnfrc238kz" \
          -d '{"kind":"deployments","namespace":"prod","name":"voiceagent","images":{"yoozy-cn-shanghai.cr.volces.com/ve/voiceagent":"yoozy-cn-shanghai.cr.volces.com/ve/voiceagent:${VERSION}"}}' \
          "http://118.196.63.209:18060/kuboard-api/cluster/qiniu/kind/CICDApi/admin/resource/updateImageTag"
+
+voiceagent_my_release:
+	@docker buildx build --platform=linux/amd64  -t usernx/voiceagent:${VERSION} --build-arg SRV=voiceagent -f Dockerfile . --push
+	@curl -X PUT \
+    -H "content-type: application/json" \
+    -H "Cookie: KuboardUsername=admin; KuboardAccessKey=4342pex2bf55.kkx8hf6z665b85fsf38ichrnfrc238kz" \
+    -d '{"kind":"deployments","namespace":"prod","name":"voiceagent","images":{"usernx/voiceagent":"usernx/voiceagent:${VERSION}"}}' \
+    "http://118.196.63.209:18060/kuboard-api/cluster/my-server/kind/CICDApi/admin/resource/updateImageTag"
+
 
 #	@docker push yoozy-cn-shanghai.cr.volces.com/ve/aiagent:${VERSION}
 #	@make build-deploy SRV=aiagent SUB_ID=p12 VER=$(VERSION)
