@@ -14,6 +14,8 @@ import (
 	"store/pkg/sdk/third/elevenlabs"
 	"store/pkg/sdk/third/gemini"
 	"store/pkg/sdk/third/tikhub"
+
+	lksdk "github.com/livekit/server-sdk-go/v2"
 )
 
 type Data struct {
@@ -29,6 +31,7 @@ type Data struct {
 	Tikhub        *tikhub.Client
 	Gemini        *gemini.GenaiFactory
 	KafkaClient   *clients.KafkaClient
+	RoomClient    *lksdk.RoomServiceClient
 
 	Conf confcenter.Config[configs.BizConfig]
 }
@@ -53,7 +56,9 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 		Cartesia:      cartesia.NewClient(confs.CartesiaKey),
 		Gemini:        gemini.NewGenaiFactory(&c.Component.Genai),
 		KafkaClient:   clients.NewKafkaClient(c.Component.Kafka),
-		Conf:          c,
+		RoomClient:    lksdk.NewRoomServiceClient(confs.LiveKitUrl, confs.LiveKitApiKey, confs.LiveKitApiSecret),
+
+		Conf: c,
 	}
 
 	cleanup := func() {

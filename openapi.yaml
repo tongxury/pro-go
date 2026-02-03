@@ -11558,6 +11558,8 @@ components:
                     type: array
                     items:
                         type: string
+                userId:
+                    type: string
         api.voiceagent.CreateMotivationCardRequest:
             type: object
             properties:

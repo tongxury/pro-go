@@ -405,6 +405,7 @@ message CreateMemoryRequest {
   string content = 2 [(validate.rules).string.min_len = 1];
   int32 importance = 3;
   repeated string tags = 4;
+  string userId =5;
 }
 
 message DeleteMemoryRequest {

@@ -35,7 +35,9 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 					},
 				)).Match(func(ctx context.Context, operation string) bool {
 				// 可以根据需要排除不需要鉴权的接口
-				return !helpers.InSlice(operation, []string{})
+				return !helpers.InSlice(operation, []string{
+					voiceagent.VoiceAgentService_CreateMemory_FullMethodName,
+				})
 			}).Build(),
 			recovery.Recovery(),
 		),

@@ -2981,6 +2981,8 @@ func (m *CreateMemoryRequest) validate(all bool) error {
 
 	// no validation rules for Importance
 
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
 		return CreateMemoryRequestMultiError(errors)
 	}

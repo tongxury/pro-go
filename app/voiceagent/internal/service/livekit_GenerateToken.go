@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -10,6 +11,9 @@ import (
 	"store/pkg/krathelper"
 
 	"github.com/livekit/protocol/auth"
+	"github.com/livekit/protocol/livekit"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceagent.GenerateLiveKitTokenRequest) (*voiceagent.GenerateLiveKitTokenResponse, error) {
@@ -40,6 +44,63 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 
 	token, err := at.ToJWT()
 	if err != nil {
+		return nil, err
+	}
+
+	// 1. Fetch User Profile
+	var userNickname = "User"
+	// Use GetById from core.go
+	userProfile, err := s.data.Mongo.UserProfile.GetById(ctx, userId)
+	if err == nil && userProfile != nil {
+		if userProfile.Nickname != "" {
+			userNickname = userProfile.Nickname
+		}
+	}
+
+	// 2. Fetch User Memories (Important ones)
+	// Using ListAndCount with bson.M requires importing 'go.mongodb.org/mongo-driver/bson'
+	memoriesList, _, err := s.data.Mongo.Memory.ListAndCount(ctx, bson.M{"userId": userId}, options.Find().SetLimit(5).SetSort(bson.M{"createdAt": -1}))
+	var memoryTexts []string
+	if err == nil {
+		for _, m := range memoriesList {
+			// Simple filter: only send reasonably important memories
+			if m.Importance >= 5 {
+				memoryTexts = append(memoryTexts, m.Content)
+			}
+			if len(memoryTexts) >= 5 {
+				break
+			}
+		}
+	}
+
+	// 3. Construct Metadata
+	agentConfig := map[string]interface{}{
+		"agentName": "aura_zh", // Explicitly specify the role
+		"userId":    userId,
+		"userProfile": map[string]string{
+			"nickname": userNickname,
+		},
+		"memories": memoryTexts,
+	}
+	metadataJSON, _ := json.Marshal(agentConfig)
+
+	// Explicitly create room with Agent config
+	// "aura_zh" acts as the service pipe. The actual persona is driven by the Metadata inside.
+	_, err = s.data.RoomClient.CreateRoom(ctx, &livekit.CreateRoomRequest{
+		Name:            roomName,
+		EmptyTimeout:    10 * 60,
+		MaxParticipants: 2,
+		Metadata:        string(metadataJSON),
+		//Agents: []*livekit.RoomAgentDispatch{
+		//	{
+		//		AgentName: "aura_zh",
+		//		Metadata:  string(metadataJSON),
+		//	},
+		//},
+	})
+	if err != nil {
+		// Log error but proceed, as the token is still valid and room might be created on join
+		fmt.Printf("Warning: Failed to create room explicitely: %v\n", err)
 		return nil, err
 	}
 

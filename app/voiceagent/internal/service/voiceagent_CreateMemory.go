@@ -3,14 +3,17 @@ package service
 import (
 	"context"
 	voiceagent "store/api/voiceagent"
-	"store/pkg/krathelper"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (s *VoiceAgentService) CreateMemory(ctx context.Context, req *voiceagent.CreateMemoryRequest) (*voiceagent.Memory, error) {
-	userId := krathelper.RequireUserId(ctx)
+	// Allow userId to be passed in request (for Agent usage) or context (for User usage)
+	userId := req.UserId
+	//if userId == "" {
+	//	userId = krathelper.RequireUserId(ctx)
+	//}
 
 	memory := &voiceagent.Memory{
 		XId:        primitive.NewObjectID().Hex(),

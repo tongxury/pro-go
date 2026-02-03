@@ -1402,6 +1402,7 @@ type CreateMemoryRequest struct {
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	Importance    int32                  `protobuf:"varint,3,opt,name=importance,proto3" json:"importance,omitempty"`
 	Tags          []string               `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty"`
+	UserId        string                 `protobuf:"bytes,5,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1462,6 +1463,13 @@ func (x *CreateMemoryRequest) GetTags() []string {
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *CreateMemoryRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
 }
 
 type DeleteMemoryRequest struct {
@@ -2527,14 +2535,15 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\n" +
 	"MemoryList\x12*\n" +
 	"\x04list\x18\x01 \x03(\v2\x16.api.voiceagent.MemoryR\x04list\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\"\x89\x01\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\xa1\x01\n" +
 	"\x13CreateMemoryRequest\x12\x1b\n" +
 	"\x04type\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04type\x12!\n" +
 	"\acontent\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\acontent\x12\x1e\n" +
 	"\n" +
 	"importance\x18\x03 \x01(\x05R\n" +
 	"importance\x12\x12\n" +
-	"\x04tags\x18\x04 \x03(\tR\x04tags\".\n" +
+	"\x04tags\x18\x04 \x03(\tR\x04tags\x12\x16\n" +
+	"\x06userId\x18\x05 \x01(\tR\x06userId\".\n" +
 	"\x13DeleteMemoryRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\"\x17\n" +
 	"\x15GetUserProfileRequest\"\xb4\x01\n" +
