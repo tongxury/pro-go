@@ -63,6 +63,9 @@ func NewHTTPServer(c confcenter.Server,
 
 					projpb.ProjProService_CallbackByVolcengine_FullMethodName,
 					projpb.OperationProjProServiceListQualityAssets,
+
+					projpb.WorkflowService_CreateWorkflow_FullMethodName,
+					projpb.WorkflowService_GetWorkflow_FullMethodName,
 				})
 			}).Build(),
 			recovery.Recovery(),

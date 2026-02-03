@@ -3,17 +3,18 @@ package krathelper
 import (
 	"context"
 	"errors"
+	"store/pkg/sdk/conv"
+	"store/pkg/sdk/helper"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
 	"github.com/go-kratos/kratos/v2/middleware/selector"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	jwtv4 "github.com/golang-jwt/jwt/v4"
-	"store/pkg/sdk/conv"
-	"store/pkg/sdk/helper"
-	"strconv"
-	"strings"
-	"time"
 )
 
 var SecretSignKey = "1447cdd12451aceb97cc0ea8e5c1cc906f94dbb05c2397abcee8b64345a6b56e"
@@ -144,6 +145,15 @@ func NormalizeAuthorization(key string) middleware.Middleware {
 			}
 
 			token := request.Header.Get("Authorization")
+
+			if token == "" {
+				token = request.URL.Query().Get("token")
+			}
+
+			if token == "" {
+				token = request.URL.Query().Get("authorization")
+			}
+
 			if token != "" {
 
 				claims, err := ParseClaims(token, key)
