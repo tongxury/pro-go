@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"time"
 
@@ -17,7 +18,7 @@ func (s *VoiceAgentService) CreateMemory(ctx context.Context, req *voiceagent.Cr
 
 	memory := &voiceagent.Memory{
 		XId:        primitive.NewObjectID().Hex(),
-		UserId:     userId,
+		User:       &ucpb.User{XId: userId},
 		Type:       req.Type,
 		Content:    req.Content,
 		Importance: req.Importance,

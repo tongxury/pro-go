@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/krathelper"
 	"time"
@@ -24,7 +25,7 @@ func (s *VoiceAgentService) AddVoice(ctx context.Context, req *voiceagent.AddVoi
 	// 2. 构建本地 Voice 对象
 	v := &voiceagent.Voice{
 		XId:       primitive.NewObjectID().Hex(),
-		UserId:    userId,
+		User:      &ucpb.User{XId: userId},
 		Name:      req.Name,
 		Type:      req.Type,
 		VoiceId:   voiceId,

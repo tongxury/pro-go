@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,8 +28,8 @@ type EmotionLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 记录唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	// user: 所属用户。
+	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	// conversationId: 关联的会话 ID。
 	ConversationId string `protobuf:"bytes,3,opt,name=conversationId,proto3" json:"conversationId,omitempty"`
 	// emotion: 情绪类型 (happy, sad, anxious, calm, angry, excited, neutral)。
@@ -81,11 +82,11 @@ func (x *EmotionLog) GetXId() string {
 	return ""
 }
 
-func (x *EmotionLog) GetUserId() string {
+func (x *EmotionLog) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
 func (x *EmotionLog) GetConversationId() string {
@@ -277,11 +278,11 @@ var File_voiceagent_emotion_log_proto protoreflect.FileDescriptor
 
 const file_voiceagent_emotion_log_proto_rawDesc = "" +
 	"\n" +
-	"\x1cvoiceagent/emotion_log.proto\x12\x0eapi.voiceagent\"\xea\x01\n" +
+	"\x1cvoiceagent/emotion_log.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xfc\x01\n" +
 	"\n" +
 	"EmotionLog\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12&\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12&\n" +
 	"\x0econversationId\x18\x03 \x01(\tR\x0econversationId\x12\x18\n" +
 	"\aemotion\x18\x04 \x01(\tR\aemotion\x12\x1c\n" +
 	"\tintensity\x18\x05 \x01(\x05R\tintensity\x12\x18\n" +
@@ -320,15 +321,17 @@ var file_voiceagent_emotion_log_proto_goTypes = []any{
 	(*EmotionStats)(nil),     // 1: api.voiceagent.EmotionStats
 	(*EmotionDataPoint)(nil), // 2: api.voiceagent.EmotionDataPoint
 	nil,                      // 3: api.voiceagent.EmotionStats.EmotionCountsEntry
+	(*usercenter.User)(nil),  // 4: api.usercenter.User
 }
 var file_voiceagent_emotion_log_proto_depIdxs = []int32{
-	3, // 0: api.voiceagent.EmotionStats.emotionCounts:type_name -> api.voiceagent.EmotionStats.EmotionCountsEntry
-	2, // 1: api.voiceagent.EmotionStats.timeline:type_name -> api.voiceagent.EmotionDataPoint
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: api.voiceagent.EmotionLog.user:type_name -> api.usercenter.User
+	3, // 1: api.voiceagent.EmotionStats.emotionCounts:type_name -> api.voiceagent.EmotionStats.EmotionCountsEntry
+	2, // 2: api.voiceagent.EmotionStats.timeline:type_name -> api.voiceagent.EmotionDataPoint
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_emotion_log_proto_init() }

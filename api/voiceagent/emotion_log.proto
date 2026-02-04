@@ -4,14 +4,16 @@ package api.voiceagent;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
+import "usercenter/user.proto";
+
 // EmotionLog (情绪记录): 追踪每次对话的情绪状态。
 // 用于生成情绪曲线和分析用户情绪变化趋势。
 message EmotionLog {
   // _id: 记录唯一标识。
   string _id = 1 [json_name = "_id"];
 
-  // userId: 所属用户 ID。
-  string userId = 2;
+  // user: 所属用户。
+  api.usercenter.User user = 2;
 
   // conversationId: 关联的会话 ID。
   string conversationId = 3;

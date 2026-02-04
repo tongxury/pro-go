@@ -2,25 +2,24 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/clients/mgz"
 	"store/pkg/krathelper"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (s *VoiceAgentService) UpdateUserProfile(ctx context.Context, req *voiceagent.UpdateUserProfileRequest) (*voiceagent.UserProfile, error) {
 	userId := krathelper.RequireUserId(ctx)
 
 	// 先获取或创建档案
-	profile, err := s.Data.Mongo.UserProfile.FindOne(ctx, bson.M{"userId": userId})
+	profile, err := s.Data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
 	if err != nil {
 		// 如果不存在，创建新档案
 		profile = &voiceagent.UserProfile{
-			XId:       primitive.NewObjectID().Hex(),
-			UserId:    userId,
+			User:      &ucpb.User{XId: userId},
 			Nickname:  req.Nickname,
 			Birthday:  req.Birthday,
 			Interests: req.Interests,

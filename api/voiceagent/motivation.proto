@@ -5,14 +5,7 @@ package api.voiceagent;
 option go_package = "store/api/voiceagent;voiceagent";
 
 import "voiceagent/agent.proto";
-import "usercenter/user_service.proto";
-
-// User 代表创建者的精简信息。
-message User {
-  string id = 1;
-  string name = 2;
-  string avatar = 3;
-}
+import "usercenter/user.proto";
 
 // MotivationCard 代表一个生成的语音激励卡片。
 // 该模型的设计参考了 ElevenLabs 的 Voices 架构 (https://elevenlabs.io/docs/overview/capabilities/voices):
@@ -21,7 +14,7 @@ message MotivationCard {
   // _id: MongoDB 唯一标识。
   string _id = 1 [json_name = "_id"];
 
-  User user = 2;           // 创建者信息
+  api.usercenter.User user = 2;           // 创建者信息
   Agent agent = 5;         // 使用的助理信息（快照）
 
   string text = 7;          // 经过 AI 润色后的最终激励文案

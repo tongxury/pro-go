@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 import "validate/validate.proto";
 import "voiceagent/motivation.proto";
 import "voiceagent/agent.proto";
+import "usercenter/user.proto";
 
 option go_package = "store/api/voiceagent;voiceagent";
 
@@ -108,7 +109,7 @@ message MotivationCardResponse {
   string polishedText = 4;
   
   // 额外提供给前端生成海报的信息
-  User user = 5;
+  api.usercenter.User user = 5;
   Agent agent = 7;
 
   string emotionTag = 9;

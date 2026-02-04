@@ -169,7 +169,7 @@ func (s *VoiceAgentService) SyncVoices(ctx context.Context) {
 		if !found {
 			newVoice := &voiceagent.Voice{
 				XId:       primitive.NewObjectID().Hex(),
-				UserId:    "system",
+				User:      &ucpb.User{XId: "system"},
 				Name:      rv.Name,
 				Type:      rv.Category,
 				VoiceId:   rv.VoiceID,

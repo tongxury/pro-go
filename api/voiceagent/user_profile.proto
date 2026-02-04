@@ -4,14 +4,16 @@ package api.voiceagent;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
+import "usercenter/user.proto";
+
 // UserProfile (用户档案): 存储用户的个性化信息。
 // 包含用户基本信息、兴趣、目标以及 AI 观察到的特点。
 message UserProfile {
   // _id: 档案唯一标识。
   string _id = 1 [json_name = "_id"];
 
-  // userId: 所属用户 ID (唯一约束)。
-  string userId = 2;
+  // user: 所属用户 (唯一约束)。
+  api.usercenter.User user = 2;
 
   // nickname: 用户希望被称呼的名字。
   string nickname = 3;

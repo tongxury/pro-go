@@ -20,7 +20,7 @@ func (s *VoiceAgentService) GetEmotionStats(ctx context.Context, req *voiceagent
 	startTime := time.Now().AddDate(0, 0, -int(days)).Unix()
 
 	filter := bson.M{
-		"userId":    userId,
+		"user._id":  userId,
 		"createdAt": bson.M{"$gte": startTime},
 	}
 

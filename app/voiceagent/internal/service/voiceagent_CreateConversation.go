@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/krathelper"
 	"time"
@@ -15,8 +16,8 @@ func (s *VoiceAgentService) CreateConversation(ctx context.Context, req *voiceag
 
 	conv := &voiceagent.Conversation{
 		XId:           primitive.NewObjectID().Hex(),
-		UserId:        userId,
-		AgentId:       req.AgentId,
+		User:          &ucpb.User{XId: userId},
+		Agent:         &voiceagent.Agent{XId: req.AgentId},
 		Status:        "active",
 		CreatedAt:     time.Now().Unix(),
 		LastMessageAt: time.Now().Unix(),

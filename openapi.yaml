@@ -11436,6 +11436,8 @@ components:
                     description: 'user: 所属用户。'
                 persona:
                     $ref: '#/components/schemas/api.voiceagent.Persona'
+                name:
+                    type: string
                 voiceId:
                     type: string
                     description: |-
@@ -11474,12 +11476,14 @@ components:
                 _id:
                     type: string
                     description: '_id: 会话唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
-                agentId:
-                    type: string
-                    description: 'agentId: 该会话锁定的角色 ID。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
+                agent:
+                    allOf:
+                        - $ref: '#/components/schemas/api.voiceagent.Agent'
+                    description: 'agent: 该会话锁定的角色。'
                 sceneId:
                     type: string
                     description: 'sceneId: 会话当前激活的场景 ID。'
@@ -11624,9 +11628,10 @@ components:
                 _id:
                     type: string
                     description: '_id: 记录唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
                 conversationId:
                     type: string
                     description: 'conversationId: 关联的会话 ID。'
@@ -11804,9 +11809,10 @@ components:
                 _id:
                     type: string
                     description: '_id: 记忆唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
                 type:
                     type: string
                     description: 'type: 记忆类型 (fact: 事实, preference: 偏好, experience: 经历, relationship: 人际关系)。'
@@ -11848,7 +11854,7 @@ components:
                     type: string
                     description: '_id: MongoDB 唯一标识。'
                 user:
-                    $ref: '#/components/schemas/api.voiceagent.User'
+                    $ref: '#/components/schemas/api.usercenter.User'
                 agent:
                     $ref: '#/components/schemas/api.voiceagent.Agent'
                 text:
@@ -11906,7 +11912,7 @@ components:
                     description: 经过 AI 优化后的最终润色文案
                 user:
                     allOf:
-                        - $ref: '#/components/schemas/api.voiceagent.User'
+                        - $ref: '#/components/schemas/api.usercenter.User'
                     description: 额外提供给前端生成海报的信息
                 agent:
                     $ref: '#/components/schemas/api.voiceagent.Agent'
@@ -12048,12 +12054,14 @@ components:
                 _id:
                     type: string
                     description: '_id: 消息唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
-                conversationId:
-                    type: string
-                    description: 'conversationId: 所属会话 ID。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
+                conversation:
+                    allOf:
+                        - $ref: '#/components/schemas/api.voiceagent.Conversation'
+                    description: 'conversation: 所属会话。'
                 message:
                     type: string
                     description: 'message: AI 或用户输入的文本内容。'
@@ -12162,25 +12170,16 @@ components:
                     type: string
                 timezone:
                     type: string
-        api.voiceagent.User:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                avatar:
-                    type: string
-            description: User 代表创建者的精简信息。
         api.voiceagent.UserProfile:
             type: object
             properties:
                 _id:
                     type: string
                     description: '_id: 档案唯一标识。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID (唯一约束)。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户 (唯一约束)。'
                 nickname:
                     type: string
                     description: 'nickname: 用户希望被称呼的名字。'
@@ -12222,9 +12221,10 @@ components:
                 _id:
                     type: string
                     description: '_id: 内部存储 ID。'
-                userId:
-                    type: string
-                    description: 'userId: 所属用户 ID。'
+                user:
+                    allOf:
+                        - $ref: '#/components/schemas/api.usercenter.User'
+                    description: 'user: 所属用户。'
                 name:
                     type: string
                     description: 'name: 声音显示名称。'

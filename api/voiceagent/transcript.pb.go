@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,10 +28,10 @@ type TranscriptEntry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 消息唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	// conversationId: 所属会话 ID。
-	ConversationId string `protobuf:"bytes,3,opt,name=conversationId,proto3" json:"conversationId,omitempty"`
+	// user: 所属用户。
+	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// conversation: 所属会话。
+	Conversation *Conversation `protobuf:"bytes,3,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	// message: AI 或用户输入的文本内容。
 	Message string `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	// audioUrl: ElevenLabs 生成的音频切片 URL。
@@ -85,18 +86,18 @@ func (x *TranscriptEntry) GetXId() string {
 	return ""
 }
 
-func (x *TranscriptEntry) GetUserId() string {
+func (x *TranscriptEntry) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
-func (x *TranscriptEntry) GetConversationId() string {
+func (x *TranscriptEntry) GetConversation() *Conversation {
 	if x != nil {
-		return x.ConversationId
+		return x.Conversation
 	}
-	return ""
+	return nil
 }
 
 func (x *TranscriptEntry) GetMessage() string {
@@ -138,11 +139,11 @@ var File_voiceagent_transcript_proto protoreflect.FileDescriptor
 
 const file_voiceagent_transcript_proto_rawDesc = "" +
 	"\n" +
-	"\x1bvoiceagent/transcript.proto\x12\x0eapi.voiceagent\"\xe9\x01\n" +
+	"\x1bvoiceagent/transcript.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x1dvoiceagent/conversation.proto\"\x95\x02\n" +
 	"\x0fTranscriptEntry\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12&\n" +
-	"\x0econversationId\x18\x03 \x01(\tR\x0econversationId\x12\x18\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12@\n" +
+	"\fconversation\x18\x03 \x01(\v2\x1c.api.voiceagent.ConversationR\fconversation\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\x1a\n" +
 	"\baudioUrl\x18\x05 \x01(\tR\baudioUrl\x12\x12\n" +
 	"\x04role\x18\x06 \x01(\tR\x04role\x12\x1c\n" +
@@ -164,13 +165,17 @@ func file_voiceagent_transcript_proto_rawDescGZIP() []byte {
 var file_voiceagent_transcript_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_transcript_proto_goTypes = []any{
 	(*TranscriptEntry)(nil), // 0: api.voiceagent.TranscriptEntry
+	(*usercenter.User)(nil), // 1: api.usercenter.User
+	(*Conversation)(nil),    // 2: api.voiceagent.Conversation
 }
 var file_voiceagent_transcript_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: api.voiceagent.TranscriptEntry.user:type_name -> api.usercenter.User
+	2, // 1: api.voiceagent.TranscriptEntry.conversation:type_name -> api.voiceagent.Conversation
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_transcript_proto_init() }
@@ -178,6 +183,7 @@ func file_voiceagent_transcript_proto_init() {
 	if File_voiceagent_transcript_proto != nil {
 		return
 	}
+	file_voiceagent_conversation_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -4,17 +4,20 @@ package api.voiceagent;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
+import "usercenter/user.proto";
+import "voiceagent/agent.proto";
+
 // Conversation (对话会话): 用户与 Agent 交互的运行时实例。
 // [参考文档]: Design and Configure -> Conversation flow (/docs/agents-platform/customization/conversation-flow)
 message Conversation {
   // _id: 会话唯一标识。
   string _id = 1 [json_name = "_id"];
 
-  // userId: 所属用户 ID。
-  string userId = 2;
+  // user: 所属用户。
+  api.usercenter.User user = 2;
 
-  // agentId: 该会话锁定的角色 ID。
-  string agentId = 3;
+  // agent: 该会话锁定的角色。
+  Agent agent = 3;
 
   // sceneId: 会话当前激活的场景 ID。
   string sceneId = 4;

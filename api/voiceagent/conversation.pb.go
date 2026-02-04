@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,10 +28,10 @@ type Conversation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 会话唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	// agentId: 该会话锁定的角色 ID。
-	AgentId string `protobuf:"bytes,3,opt,name=agentId,proto3" json:"agentId,omitempty"`
+	// user: 所属用户。
+	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// agent: 该会话锁定的角色。
+	Agent *Agent `protobuf:"bytes,3,opt,name=agent,proto3" json:"agent,omitempty"`
 	// sceneId: 会话当前激活的场景 ID。
 	SceneId   string `protobuf:"bytes,4,opt,name=sceneId,proto3" json:"sceneId,omitempty"`
 	CreatedAt int64  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -91,18 +92,18 @@ func (x *Conversation) GetXId() string {
 	return ""
 }
 
-func (x *Conversation) GetUserId() string {
+func (x *Conversation) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
-func (x *Conversation) GetAgentId() string {
+func (x *Conversation) GetAgent() *Agent {
 	if x != nil {
-		return x.AgentId
+		return x.Agent
 	}
-	return ""
+	return nil
 }
 
 func (x *Conversation) GetSceneId() string {
@@ -158,11 +159,11 @@ var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\"\xa4\x02\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xc9\x02\n" +
 	"\fConversation\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x18\n" +
-	"\aagentId\x18\x03 \x01(\tR\aagentId\x12\x18\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
+	"\x05agent\x18\x03 \x01(\v2\x15.api.voiceagent.AgentR\x05agent\x12\x18\n" +
 	"\asceneId\x18\x04 \x01(\tR\asceneId\x12\x1c\n" +
 	"\tcreatedAt\x18\x05 \x01(\x03R\tcreatedAt\x12$\n" +
 	"\rlastMessageAt\x18\x06 \x01(\x03R\rlastMessageAt\x12\x16\n" +
@@ -186,14 +187,18 @@ func file_voiceagent_conversation_proto_rawDescGZIP() []byte {
 
 var file_voiceagent_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_conversation_proto_goTypes = []any{
-	(*Conversation)(nil), // 0: api.voiceagent.Conversation
+	(*Conversation)(nil),    // 0: api.voiceagent.Conversation
+	(*usercenter.User)(nil), // 1: api.usercenter.User
+	(*Agent)(nil),           // 2: api.voiceagent.Agent
 }
 var file_voiceagent_conversation_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: api.voiceagent.Conversation.user:type_name -> api.usercenter.User
+	2, // 1: api.voiceagent.Conversation.agent:type_name -> api.voiceagent.Agent
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_conversation_proto_init() }
@@ -201,6 +206,7 @@ func file_voiceagent_conversation_proto_init() {
 	if File_voiceagent_conversation_proto != nil {
 		return
 	}
+	file_voiceagent_agent_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -11,7 +11,7 @@ import (
 func (s *VoiceAgentService) ListMemories(ctx context.Context, req *voiceagent.ListMemoriesRequest) (*voiceagent.MemoryList, error) {
 	userId := krathelper.RequireUserId(ctx)
 
-	filter := bson.M{"userId": userId}
+	filter := bson.M{"user._id": userId}
 	if req.Type != "" {
 		filter["type"] = req.Type
 	}

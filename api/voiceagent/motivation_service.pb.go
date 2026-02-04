@@ -13,6 +13,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -189,14 +190,14 @@ type MotivationCardResponse struct {
 	// 经过 AI 优化后的最终润色文案
 	PolishedText string `protobuf:"bytes,4,opt,name=polishedText,proto3" json:"polishedText,omitempty"`
 	// 额外提供给前端生成海报的信息
-	User          *User     `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
-	Agent         *Agent    `protobuf:"bytes,7,opt,name=agent,proto3" json:"agent,omitempty"`
-	EmotionTag    string    `protobuf:"bytes,9,opt,name=emotionTag,proto3" json:"emotionTag,omitempty"`
-	CreatedAt     int64     `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	Waveform      []float32 `protobuf:"fixed32,11,rep,packed,name=waveform,proto3" json:"waveform,omitempty"`
-	PosterStyle   string    `protobuf:"bytes,12,opt,name=posterStyle,proto3" json:"posterStyle,omitempty"`
-	PosterUrl     string    `protobuf:"bytes,13,opt,name=posterUrl,proto3" json:"posterUrl,omitempty"`
-	QrCodeUrl     string    `protobuf:"bytes,14,opt,name=qrCodeUrl,proto3" json:"qrCodeUrl,omitempty"`
+	User          *usercenter.User `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	Agent         *Agent           `protobuf:"bytes,7,opt,name=agent,proto3" json:"agent,omitempty"`
+	EmotionTag    string           `protobuf:"bytes,9,opt,name=emotionTag,proto3" json:"emotionTag,omitempty"`
+	CreatedAt     int64            `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	Waveform      []float32        `protobuf:"fixed32,11,rep,packed,name=waveform,proto3" json:"waveform,omitempty"`
+	PosterStyle   string           `protobuf:"bytes,12,opt,name=posterStyle,proto3" json:"posterStyle,omitempty"`
+	PosterUrl     string           `protobuf:"bytes,13,opt,name=posterUrl,proto3" json:"posterUrl,omitempty"`
+	QrCodeUrl     string           `protobuf:"bytes,14,opt,name=qrCodeUrl,proto3" json:"qrCodeUrl,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -259,7 +260,7 @@ func (x *MotivationCardResponse) GetPolishedText() string {
 	return ""
 }
 
-func (x *MotivationCardResponse) GetUser() *User {
+func (x *MotivationCardResponse) GetUser() *usercenter.User {
 	if x != nil {
 		return x.User
 	}
@@ -511,7 +512,7 @@ var File_voiceagent_motivation_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_motivation_service_proto_rawDesc = "" +
 	"\n" +
-	"#voiceagent/motivation_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x1bvoiceagent/motivation.proto\x1a\x16voiceagent/agent.proto\"_\n" +
+	"#voiceagent/motivation_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x1bvoiceagent/motivation.proto\x1a\x16voiceagent/agent.proto\x1a\x15usercenter/user.proto\"_\n" +
 	"\x1dUpdateMotivationPosterRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\x12%\n" +
 	"\tposterUrl\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\tposterUrl\"\xff\x01\n" +
@@ -530,7 +531,7 @@ const file_voiceagent_motivation_service_proto_rawDesc = "" +
 	"\baudioUrl\x18\x02 \x01(\tR\baudioUrl\x12\x1a\n" +
 	"\bshareUrl\x18\x03 \x01(\tR\bshareUrl\x12\"\n" +
 	"\fpolishedText\x18\x04 \x01(\tR\fpolishedText\x12(\n" +
-	"\x04user\x18\x05 \x01(\v2\x14.api.voiceagent.UserR\x04user\x12+\n" +
+	"\x04user\x18\x05 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
 	"\x05agent\x18\a \x01(\v2\x15.api.voiceagent.AgentR\x05agent\x12\x1e\n" +
 	"\n" +
 	"emotionTag\x18\t \x01(\tR\n" +
@@ -579,13 +580,13 @@ var file_voiceagent_motivation_service_proto_goTypes = []any{
 	(*ListMotivationCardsRequest)(nil),    // 4: api.voiceagent.ListMotivationCardsRequest
 	(*MotivationCardList)(nil),            // 5: api.voiceagent.MotivationCardList
 	(*DeleteMotivationCardRequest)(nil),   // 6: api.voiceagent.DeleteMotivationCardRequest
-	(*User)(nil),                          // 7: api.voiceagent.User
+	(*usercenter.User)(nil),               // 7: api.usercenter.User
 	(*Agent)(nil),                         // 8: api.voiceagent.Agent
 	(*MotivationCard)(nil),                // 9: api.voiceagent.MotivationCard
 	(*emptypb.Empty)(nil),                 // 10: google.protobuf.Empty
 }
 var file_voiceagent_motivation_service_proto_depIdxs = []int32{
-	7,  // 0: api.voiceagent.MotivationCardResponse.user:type_name -> api.voiceagent.User
+	7,  // 0: api.voiceagent.MotivationCardResponse.user:type_name -> api.usercenter.User
 	8,  // 1: api.voiceagent.MotivationCardResponse.agent:type_name -> api.voiceagent.Agent
 	9,  // 2: api.voiceagent.MotivationCardList.list:type_name -> api.voiceagent.MotivationCard
 	1,  // 3: api.voiceagent.MotivationService.CreateMotivationCard:input_type -> api.voiceagent.CreateMotivationCardRequest

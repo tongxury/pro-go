@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/clients/mgz"
 	"store/pkg/krathelper"
@@ -14,12 +15,12 @@ func (s *VoiceAgentService) RecordTranscriptEntry(ctx context.Context, req *voic
 	userId := krathelper.RequireUserId(ctx)
 
 	entry := &voiceagent.TranscriptEntry{
-		XId:            primitive.NewObjectID().Hex(),
-		UserId:         userId,
-		ConversationId: req.ConversationId,
-		Role:           req.Role,
-		Message:        req.Message,
-		CreatedAt:      time.Now().Unix(),
+		XId:          primitive.NewObjectID().Hex(),
+		User:         &ucpb.User{XId: userId},
+		Conversation: &voiceagent.Conversation{XId: req.ConversationId},
+		Role:         req.Role,
+		Message:      req.Message,
+		CreatedAt:    time.Now().Unix(),
 	}
 
 	res, err := s.Data.Mongo.Transcript.Insert(ctx, entry)

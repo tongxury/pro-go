@@ -31,6 +31,7 @@ type Agent struct {
 	// user: 所属用户。
 	User    *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	Persona *Persona         `protobuf:"bytes,3,opt,name=persona,proto3" json:"persona,omitempty"`
+	Name    string           `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// voiceId: 绑定的 ElevenLabs Voice ID。
 	// [必要性]: 关键。决定角色说话的音色。
 	// [参考文档]: Design and Configure -> Voice & language (/docs/agents-platform/customization/voice)
@@ -99,6 +100,13 @@ func (x *Agent) GetPersona() *Persona {
 	return nil
 }
 
+func (x *Agent) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 func (x *Agent) GetVoiceId() string {
 	if x != nil {
 		return x.VoiceId
@@ -145,11 +153,12 @@ var File_voiceagent_agent_proto protoreflect.FileDescriptor
 
 const file_voiceagent_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x16voiceagent/agent.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x18voiceagent/persona.proto\"\xa4\x02\n" +
+	"\x16voiceagent/agent.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x18voiceagent/persona.proto\"\xb8\x02\n" +
 	"\x05Agent\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x121\n" +
-	"\apersona\x18\x03 \x01(\v2\x17.api.voiceagent.PersonaR\apersona\x12\x18\n" +
+	"\apersona\x18\x03 \x01(\v2\x17.api.voiceagent.PersonaR\apersona\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x18\n" +
 	"\avoiceId\x18\a \x01(\tR\avoiceId\x12&\n" +
 	"\x0edefaultSceneId\x18\b \x01(\tR\x0edefaultSceneId\x12\x1a\n" +
 	"\bisPublic\x18\t \x01(\bR\bisPublic\x12\x16\n" +

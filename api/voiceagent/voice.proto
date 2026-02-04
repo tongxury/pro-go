@@ -4,14 +4,16 @@ package api.voiceagent;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
+import "usercenter/user.proto";
+
 // Voice (声音): 对应 ElevenLabs 的 TTS 声音资产。
 // [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview#architecture)
 message Voice {
   // _id: 内部存储 ID。
   string _id = 1 [json_name = "_id"];
   
-  // userId: 所属用户 ID。
-  string userId = 2;
+  // user: 所属用户。
+  api.usercenter.User user = 2;
 
   // name: 声音显示名称。
   string name = 3;

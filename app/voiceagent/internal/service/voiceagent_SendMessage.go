@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/clients/mgz"
 	"store/pkg/krathelper"
@@ -19,12 +20,12 @@ func (s *VoiceAgentService) SendMessage(ctx context.Context, req *voiceagent.Sen
 	}
 
 	userMsg := &voiceagent.TranscriptEntry{
-		XId:            primitive.NewObjectID().Hex(),
-		UserId:         userId,
-		ConversationId: req.ConversationId,
-		Message:        req.Message,
-		Role:           "user",
-		CreatedAt:      time.Now().Unix(),
+		XId:          primitive.NewObjectID().Hex(),
+		User:         &ucpb.User{XId: userId},
+		Conversation: &voiceagent.Conversation{XId: req.ConversationId},
+		Message:      req.Message,
+		Role:         "user",
+		CreatedAt:    time.Now().Unix(),
 	}
 	if _, err := s.Data.Mongo.Transcript.Insert(ctx, userMsg); err != nil {
 		return nil, err
@@ -35,7 +36,11 @@ func (s *VoiceAgentService) SendMessage(ctx context.Context, req *voiceagent.Sen
 	messageId := ""
 
 	if req.EnableVoice {
-		agent, _ := s.Data.Mongo.Agent.GetById(ctx, sess.AgentId)
+		agentId := ""
+		if sess.Agent != nil {
+			agentId = sess.Agent.XId
+		}
+		agent, _ := s.Data.Mongo.Agent.GetById(ctx, agentId)
 		voiceId := agent.VoiceId
 		if voiceId == "" {
 			voiceId = "21m00Tcm4TlvDq8ikWAM"
@@ -44,14 +49,14 @@ func (s *VoiceAgentService) SendMessage(ctx context.Context, req *voiceagent.Sen
 	}
 
 	aiMsg := &voiceagent.TranscriptEntry{
-		XId:            primitive.NewObjectID().Hex(),
-		UserId:         userId,
-		ConversationId: req.ConversationId,
-		Message:        aiText,
-		AudioUrl:       aiAudioUrl,
-		Role:           "agent",
-		CreatedAt:      time.Now().Unix(),
-		MessageId:      messageId,
+		XId:          primitive.NewObjectID().Hex(),
+		User:         &ucpb.User{XId: userId},
+		Conversation: &voiceagent.Conversation{XId: req.ConversationId},
+		Message:      aiText,
+		AudioUrl:     aiAudioUrl,
+		Role:         "agent",
+		CreatedAt:    time.Now().Unix(),
+		MessageId:    messageId,
 	}
 	res, aiErr := s.Data.Mongo.Transcript.Insert(ctx, aiMsg)
 	if aiErr != nil {

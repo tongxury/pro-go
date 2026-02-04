@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,8 +28,8 @@ type Memory struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 记忆唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	// user: 所属用户。
+	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	// type: 记忆类型 (fact: 事实, preference: 偏好, experience: 经历, relationship: 人际关系)。
 	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	// content: 记忆内容。
@@ -82,11 +83,11 @@ func (x *Memory) GetXId() string {
 	return ""
 }
 
-func (x *Memory) GetUserId() string {
+func (x *Memory) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
 func (x *Memory) GetType() string {
@@ -142,10 +143,10 @@ var File_voiceagent_memory_proto protoreflect.FileDescriptor
 
 const file_voiceagent_memory_proto_rawDesc = "" +
 	"\n" +
-	"\x17voiceagent/memory.proto\x12\x0eapi.voiceagent\"\xe8\x01\n" +
+	"\x17voiceagent/memory.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xfa\x01\n" +
 	"\x06Memory\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x16\n" +
 	"\x06source\x18\x05 \x01(\tR\x06source\x12\x1e\n" +
@@ -170,14 +171,16 @@ func file_voiceagent_memory_proto_rawDescGZIP() []byte {
 
 var file_voiceagent_memory_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_memory_proto_goTypes = []any{
-	(*Memory)(nil), // 0: api.voiceagent.Memory
+	(*Memory)(nil),          // 0: api.voiceagent.Memory
+	(*usercenter.User)(nil), // 1: api.usercenter.User
 }
 var file_voiceagent_memory_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: api.voiceagent.Memory.user:type_name -> api.usercenter.User
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_memory_proto_init() }

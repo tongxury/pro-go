@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	ucpb "store/api/usercenter"
 	"store/api/voiceagent"
 	"store/confs"
 	"store/pkg/krathelper"
@@ -50,8 +51,8 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 
 	// 1. Fetch User Profile
 	var userNickname = "User"
-	// Use GetById from core.go
-	userProfile, err := s.data.Mongo.UserProfile.GetById(ctx, userId)
+	// Use FindOne to search by user.id
+	userProfile, err := s.data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
 	if err == nil && userProfile != nil {
 		if userProfile.Nickname != "" {
 			userNickname = userProfile.Nickname
@@ -60,7 +61,7 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 
 	// 2. Fetch User Memories (Important ones)
 	// Using ListAndCount with bson.M requires importing 'go.mongodb.org/mongo-driver/bson'
-	memoriesList, _, err := s.data.Mongo.Memory.ListAndCount(ctx, bson.M{"userId": userId}, options.Find().SetLimit(5).SetSort(bson.M{"createdAt": -1}))
+	memoriesList, _, err := s.data.Mongo.Memory.ListAndCount(ctx, bson.M{"user._id": userId}, options.Find().SetLimit(5).SetSort(bson.M{"createdAt": -1}))
 	var memoryTexts []string
 	if err == nil {
 		for _, m := range memoriesList {
@@ -77,8 +78,8 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 	// 3. Create Conversation Record
 	conversation := &voiceagent.Conversation{
 		XId:           primitive.NewObjectID().Hex(),
-		UserId:        userId,
-		AgentId:       "aura_zh", // Default or from req
+		User:          &ucpb.User{XId: userId},
+		Agent:         &voiceagent.Agent{Name: "aura_zh"}, // Default or from req
 		Status:        "pending",
 		CreatedAt:     time.Now().Unix(),
 		LastMessageAt: time.Now().Unix(),

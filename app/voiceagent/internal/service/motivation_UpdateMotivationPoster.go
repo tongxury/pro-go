@@ -23,7 +23,7 @@ func (s *VoiceAgentService) UpdateMotivationPoster(ctx context.Context, req *voi
 	}
 
 	// 2. 权限校验：只有创建者可以更新海报
-	if card.GetUser().GetId() != userId {
+	if card.GetUser().GetXId() != userId {
 		return nil, fmt.Errorf("unauthorized to update this poster")
 	}
 

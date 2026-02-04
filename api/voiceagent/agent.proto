@@ -17,6 +17,7 @@ message Agent {
   api.usercenter.User user = 2;
 
   Persona persona = 3;
+  string name = 4;
 
   // voiceId: 绑定的 ElevenLabs Voice ID。
   // [必要性]: 关键。决定角色说话的音色。

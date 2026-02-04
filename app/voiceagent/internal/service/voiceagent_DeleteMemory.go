@@ -16,7 +16,7 @@ func (s *VoiceAgentService) DeleteMemory(ctx context.Context, req *voiceagent.De
 	if err != nil {
 		return nil, err
 	}
-	if memory.UserId != userId {
+	if memory.User == nil || memory.User.XId != userId {
 		return nil, krathelper.ErrForbidden
 	}
 

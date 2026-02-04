@@ -13,7 +13,7 @@ import (
 func (s *VoiceAgentService) ListMotivationCards(ctx context.Context, req *voiceagent.ListMotivationCardsRequest) (*voiceagent.MotivationCardList, error) {
 	userId := krathelper.RequireUserId(ctx)
 
-	filter := bson.M{"userId": userId}
+	filter := bson.M{"user._id": userId}
 	list, total, err := s.Data.Mongo.Motivation.ListAndCount(ctx, filter, mgz.Paging(req.Page, req.Size))
 	if err != nil {
 		return nil, err

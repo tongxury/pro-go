@@ -90,8 +90,8 @@ func (s *VoiceAgentService) CreateMotivationCard(ctx context.Context, req *voice
 
 	// 5. 保存卡片到本地数据库
 	card := &voiceagent.MotivationCard{
-		User: &voiceagent.User{
-			Id:     userId,
+		User: &ucpb.User{
+			XId:    userId,
 			Name:   userName,
 			Avatar: userAvatar,
 		},

@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -27,8 +28,8 @@ type UserProfile struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 档案唯一标识。
 	XId string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	// userId: 所属用户 ID (唯一约束)。
-	UserId string `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	// user: 所属用户 (唯一约束)。
+	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	// nickname: 用户希望被称呼的名字。
 	Nickname string `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	// birthday: 生日 (格式: YYYY-MM-DD)。
@@ -88,11 +89,11 @@ func (x *UserProfile) GetXId() string {
 	return ""
 }
 
-func (x *UserProfile) GetUserId() string {
+func (x *UserProfile) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
 func (x *UserProfile) GetNickname() string {
@@ -169,10 +170,10 @@ var File_voiceagent_user_profile_proto protoreflect.FileDescriptor
 
 const file_voiceagent_user_profile_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/user_profile.proto\x12\x0eapi.voiceagent\"\xd9\x02\n" +
+	"\x1dvoiceagent/user_profile.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xeb\x02\n" +
 	"\vUserProfile\x12\x10\n" +
-	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12\x1a\n" +
 	"\bnickname\x18\x03 \x01(\tR\bnickname\x12\x1a\n" +
 	"\bbirthday\x18\x04 \x01(\tR\bbirthday\x12\x1c\n" +
 	"\tinterests\x18\x05 \x03(\tR\tinterests\x12\x14\n" +
@@ -199,14 +200,16 @@ func file_voiceagent_user_profile_proto_rawDescGZIP() []byte {
 
 var file_voiceagent_user_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_user_profile_proto_goTypes = []any{
-	(*UserProfile)(nil), // 0: api.voiceagent.UserProfile
+	(*UserProfile)(nil),     // 0: api.voiceagent.UserProfile
+	(*usercenter.User)(nil), // 1: api.usercenter.User
 }
 var file_voiceagent_user_profile_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: api.voiceagent.UserProfile.user:type_name -> api.usercenter.User
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_user_profile_proto_init() }

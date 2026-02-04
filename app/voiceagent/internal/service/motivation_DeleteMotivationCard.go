@@ -17,7 +17,7 @@ func (s *VoiceAgentService) DeleteMotivationCard(ctx context.Context, req *voice
 	if err != nil {
 		return nil, err
 	}
-	if card == nil || card.User.GetId() != userId {
+	if card == nil || card.User.GetXId() != userId {
 		return nil, fmt.Errorf("motivation card not found or unauthorized")
 	}
 

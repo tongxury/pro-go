@@ -10,7 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	_ "store/api/usercenter"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -22,82 +22,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// User 代表创建者的精简信息。
-type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Avatar        string                 `protobuf:"bytes,3,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *User) Reset() {
-	*x = User{}
-	mi := &file_voiceagent_motivation_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*User) ProtoMessage() {}
-
-func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_motivation_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_voiceagent_motivation_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *User) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *User) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *User) GetAvatar() string {
-	if x != nil {
-		return x.Avatar
-	}
-	return ""
-}
-
 // MotivationCard 代表一个生成的语音激励卡片。
 // 该模型的设计参考了 ElevenLabs 的 Voices 架构 (https://elevenlabs.io/docs/overview/capabilities/voices):
 // 通过克隆人声 (Cloned Voices) 赋予数字分身独特的灵魂。
 type MotivationCard struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: MongoDB 唯一标识。
-	XId        string `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
-	User       *User  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`             // 创建者信息
-	Agent      *Agent `protobuf:"bytes,5,opt,name=agent,proto3" json:"agent,omitempty"`           // 使用的助理信息（快照）
-	Text       string `protobuf:"bytes,7,opt,name=text,proto3" json:"text,omitempty"`             // 经过 AI 润色后的最终激励文案
-	AudioUrl   string `protobuf:"bytes,8,opt,name=audioUrl,proto3" json:"audioUrl,omitempty"`     // 合成后的音频文件链接（OSS/S3），技术说明: 该音频是由 ElevenLabs 高性能合成引擎生成的 44.1kHz 高保真语音。
-	EmotionTag string `protobuf:"bytes,9,opt,name=emotionTag,proto3" json:"emotionTag,omitempty"` // 情感标签 (如: encouraging, comfort, energetic)，参考 ElevenLabs v3 模型的情感丰富度 (Emotionally rich)。
-	CreatedAt  int64  `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"` // 创建时间戳
-	LikeCount  int32  `protobuf:"varint,11,opt,name=likeCount,proto3" json:"likeCount,omitempty"` // 被点赞或收藏的次数
-	IsPublic   bool   `protobuf:"varint,12,opt,name=isPublic,proto3" json:"isPublic,omitempty"`   // 是否开启了公开分享
+	XId        string           `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
+	User       *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`             // 创建者信息
+	Agent      *Agent           `protobuf:"bytes,5,opt,name=agent,proto3" json:"agent,omitempty"`           // 使用的助理信息（快照）
+	Text       string           `protobuf:"bytes,7,opt,name=text,proto3" json:"text,omitempty"`             // 经过 AI 润色后的最终激励文案
+	AudioUrl   string           `protobuf:"bytes,8,opt,name=audioUrl,proto3" json:"audioUrl,omitempty"`     // 合成后的音频文件链接（OSS/S3），技术说明: 该音频是由 ElevenLabs 高性能合成引擎生成的 44.1kHz 高保真语音。
+	EmotionTag string           `protobuf:"bytes,9,opt,name=emotionTag,proto3" json:"emotionTag,omitempty"` // 情感标签 (如: encouraging, comfort, energetic)，参考 ElevenLabs v3 模型的情感丰富度 (Emotionally rich)。
+	CreatedAt  int64            `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"` // 创建时间戳
+	LikeCount  int32            `protobuf:"varint,11,opt,name=likeCount,proto3" json:"likeCount,omitempty"` // 被点赞或收藏的次数
+	IsPublic   bool             `protobuf:"varint,12,opt,name=isPublic,proto3" json:"isPublic,omitempty"`   // 是否开启了公开分享
 	// 社交分享增强字段
 	Waveform      []float32 `protobuf:"fixed32,14,rep,packed,name=waveform,proto3" json:"waveform,omitempty"` // 音频波形数据，用于前端绘制声纹图
 	PosterStyle   string    `protobuf:"bytes,15,opt,name=posterStyle,proto3" json:"posterStyle,omitempty"`    // 海报样式模板 ID
@@ -109,7 +48,7 @@ type MotivationCard struct {
 
 func (x *MotivationCard) Reset() {
 	*x = MotivationCard{}
-	mi := &file_voiceagent_motivation_proto_msgTypes[1]
+	mi := &file_voiceagent_motivation_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -121,7 +60,7 @@ func (x *MotivationCard) String() string {
 func (*MotivationCard) ProtoMessage() {}
 
 func (x *MotivationCard) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_motivation_proto_msgTypes[1]
+	mi := &file_voiceagent_motivation_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -134,7 +73,7 @@ func (x *MotivationCard) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MotivationCard.ProtoReflect.Descriptor instead.
 func (*MotivationCard) Descriptor() ([]byte, []int) {
-	return file_voiceagent_motivation_proto_rawDescGZIP(), []int{1}
+	return file_voiceagent_motivation_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MotivationCard) GetXId() string {
@@ -144,7 +83,7 @@ func (x *MotivationCard) GetXId() string {
 	return ""
 }
 
-func (x *MotivationCard) GetUser() *User {
+func (x *MotivationCard) GetUser() *usercenter.User {
 	if x != nil {
 		return x.User
 	}
@@ -232,14 +171,10 @@ var File_voiceagent_motivation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_motivation_proto_rawDesc = "" +
 	"\n" +
-	"\x1bvoiceagent/motivation.proto\x12\x0eapi.voiceagent\x1a\x16voiceagent/agent.proto\x1a\x1dusercenter/user_service.proto\"B\n" +
-	"\x04User\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06avatar\x18\x03 \x01(\tR\x06avatar\"\x9b\x03\n" +
+	"\x1bvoiceagent/motivation.proto\x12\x0eapi.voiceagent\x1a\x16voiceagent/agent.proto\x1a\x15usercenter/user.proto\"\x9b\x03\n" +
 	"\x0eMotivationCard\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
-	"\x04user\x18\x02 \x01(\v2\x14.api.voiceagent.UserR\x04user\x12+\n" +
+	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
 	"\x05agent\x18\x05 \x01(\v2\x15.api.voiceagent.AgentR\x05agent\x12\x12\n" +
 	"\x04text\x18\a \x01(\tR\x04text\x12\x1a\n" +
 	"\baudioUrl\x18\b \x01(\tR\baudioUrl\x12\x1e\n" +
@@ -267,14 +202,14 @@ func file_voiceagent_motivation_proto_rawDescGZIP() []byte {
 	return file_voiceagent_motivation_proto_rawDescData
 }
 
-var file_voiceagent_motivation_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_voiceagent_motivation_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_voiceagent_motivation_proto_goTypes = []any{
-	(*User)(nil),           // 0: api.voiceagent.User
-	(*MotivationCard)(nil), // 1: api.voiceagent.MotivationCard
-	(*Agent)(nil),          // 2: api.voiceagent.Agent
+	(*MotivationCard)(nil),  // 0: api.voiceagent.MotivationCard
+	(*usercenter.User)(nil), // 1: api.usercenter.User
+	(*Agent)(nil),           // 2: api.voiceagent.Agent
 }
 var file_voiceagent_motivation_proto_depIdxs = []int32{
-	0, // 0: api.voiceagent.MotivationCard.user:type_name -> api.voiceagent.User
+	1, // 0: api.voiceagent.MotivationCard.user:type_name -> api.usercenter.User
 	2, // 1: api.voiceagent.MotivationCard.agent:type_name -> api.voiceagent.Agent
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
@@ -295,7 +230,7 @@ func file_voiceagent_motivation_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_motivation_proto_rawDesc), len(file_voiceagent_motivation_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

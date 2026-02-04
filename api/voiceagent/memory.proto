@@ -4,14 +4,16 @@ package api.voiceagent;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
+import "usercenter/user.proto";
+
 // Memory (长期记忆): 从对话中提取的用户重要信息。
 // 用于让 AI 记住用户的偏好、经历、事实等。
 message Memory {
   // _id: 记忆唯一标识。
   string _id = 1 [json_name = "_id"];
 
-  // userId: 所属用户 ID。
-  string userId = 2;
+  // user: 所属用户。
+  api.usercenter.User user = 2;
 
   // type: 记忆类型 (fact: 事实, preference: 偏好, experience: 经历, relationship: 人际关系)。
   string type = 3;

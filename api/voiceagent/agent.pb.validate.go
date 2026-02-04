@@ -116,6 +116,8 @@ func (m *Agent) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Name
+
 	// no validation rules for VoiceId
 
 	// no validation rules for DefaultSceneId
