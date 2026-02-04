@@ -11394,6 +11394,21 @@ components:
                     type: string
                 size:
                     type: string
+        api.voiceagent.AddTranscriptEntryRequest:
+            type: object
+            properties:
+                conversationId:
+                    type: string
+                userId:
+                    type: string
+                role:
+                    type: string
+                content:
+                    type: string
+                roomName:
+                    type: string
+                audioUrl:
+                    type: string
         api.voiceagent.AddVoiceRequest:
             type: object
             properties:
@@ -11525,6 +11540,8 @@ components:
                 agentId:
                     type: string
                 sceneId:
+                    type: string
+                roomName:
                     type: string
         api.voiceagent.CreateEventRequest:
             type: object

@@ -31,6 +31,7 @@ const (
 	VoiceAgentService_ListVoices_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListVoices"
 	VoiceAgentService_ListScenes_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListScenes"
 	VoiceAgentService_CreateConversation_FullMethodName    = "/api.voiceagent.VoiceAgentService/CreateConversation"
+	VoiceAgentService_AddTranscriptEntry_FullMethodName    = "/api.voiceagent.VoiceAgentService/AddTranscriptEntry"
 	VoiceAgentService_UpdateConversation_FullMethodName    = "/api.voiceagent.VoiceAgentService/UpdateConversation"
 	VoiceAgentService_GetConversation_FullMethodName       = "/api.voiceagent.VoiceAgentService/GetConversation"
 	VoiceAgentService_ListConversations_FullMethodName     = "/api.voiceagent.VoiceAgentService/ListConversations"
@@ -83,6 +84,8 @@ type VoiceAgentServiceClient interface {
 	ListScenes(ctx context.Context, in *ListScenesRequest, opts ...grpc.CallOption) (*SceneList, error)
 	// CreateConversation: 启动一个实时交互会话。
 	CreateConversation(ctx context.Context, in *CreateConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	// AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
 	// UpdateConversation: 更新会话状态或关联外部 ID。
 	UpdateConversation(ctx context.Context, in *UpdateConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
 	// GetConversation: 获取会话详情。
@@ -237,6 +240,16 @@ func (c *voiceAgentServiceClient) CreateConversation(ctx context.Context, in *Cr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Conversation)
 	err := c.cc.Invoke(ctx, VoiceAgentService_CreateConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TranscriptEntry)
+	err := c.cc.Invoke(ctx, VoiceAgentService_AddTranscriptEntry_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -473,6 +486,8 @@ type VoiceAgentServiceServer interface {
 	ListScenes(context.Context, *ListScenesRequest) (*SceneList, error)
 	// CreateConversation: 启动一个实时交互会话。
 	CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error)
+	// AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// UpdateConversation: 更新会话状态或关联外部 ID。
 	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
 	// GetConversation: 获取会话详情。
@@ -555,6 +570,9 @@ func (UnimplementedVoiceAgentServiceServer) ListScenes(context.Context, *ListSce
 }
 func (UnimplementedVoiceAgentServiceServer) CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateConversation not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTranscriptEntry not implemented")
 }
 func (UnimplementedVoiceAgentServiceServer) UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateConversation not implemented")
@@ -831,6 +849,24 @@ func _VoiceAgentService_CreateConversation_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VoiceAgentServiceServer).CreateConversation(ctx, req.(*CreateConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_AddTranscriptEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTranscriptEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).AddTranscriptEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_AddTranscriptEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).AddTranscriptEntry(ctx, req.(*AddTranscriptEntryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1245,6 +1281,10 @@ var VoiceAgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateConversation",
 			Handler:    _VoiceAgentService_CreateConversation_Handler,
+		},
+		{
+			MethodName: "AddTranscriptEntry",
+			Handler:    _VoiceAgentService_AddTranscriptEntry_Handler,
 		},
 		{
 			MethodName: "UpdateConversation",

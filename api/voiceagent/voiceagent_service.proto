@@ -104,6 +104,14 @@ service VoiceAgentService {
     };
   }
 
+  // AddTranscriptEntry: 记录一条对话消息。
+  rpc AddTranscriptEntry(AddTranscriptEntryRequest) returns (TranscriptEntry) {
+    option (google.api.http) = {
+      post: "/api/va/transcripts"
+      body: "*"
+    };
+  }
+
   // UpdateConversation: 更新会话状态或关联外部 ID。
   rpc UpdateConversation(UpdateConversationRequest) returns (Conversation) {
     option (google.api.http) = {
@@ -263,6 +271,7 @@ service VoiceAgentService {
   }
 }
 
+
 // --- Request/Response Messages ---
 
 message CreateAgentRequest {
@@ -342,6 +351,7 @@ message ListScenesRequest {}
 message CreateConversationRequest {
   string agentId = 1 [(validate.rules).string.min_len = 1];
   string sceneId = 2;
+  string roomName = 3;
 }
 
 message UpdateConversationRequest {
@@ -528,4 +538,13 @@ message GenerateCartesiaTokenRequest {}
 
 message GenerateCartesiaTokenResponse {
   string accessToken = 1;
+}
+
+message AddTranscriptEntryRequest {
+  string conversationId = 1; // Optional, try to resolve from roomName
+  string userId = 2; // Optional
+  string role = 3; // "user" or "agent"
+  string content = 4;
+  string roomName = 5; // To look up conversation if ID missing
+  string audioUrl = 6; // Optional
 }

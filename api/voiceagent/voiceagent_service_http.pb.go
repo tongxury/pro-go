@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationVoiceAgentServiceAddTranscriptEntry = "/api.voiceagent.VoiceAgentService/AddTranscriptEntry"
 const OperationVoiceAgentServiceAddVoice = "/api.voiceagent.VoiceAgentService/AddVoice"
 const OperationVoiceAgentServiceCreateAgent = "/api.voiceagent.VoiceAgentService/CreateAgent"
 const OperationVoiceAgentServiceCreateConversation = "/api.voiceagent.VoiceAgentService/CreateConversation"
@@ -53,6 +54,8 @@ const OperationVoiceAgentServiceUpdateEvent = "/api.voiceagent.VoiceAgentService
 const OperationVoiceAgentServiceUpdateUserProfile = "/api.voiceagent.VoiceAgentService/UpdateUserProfile"
 
 type VoiceAgentServiceHTTPServer interface {
+	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(context.Context, *AddVoiceRequest) (*Voice, error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
@@ -130,6 +133,7 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.GET("/api/va/voices", _VoiceAgentService_ListVoices0_HTTP_Handler(srv))
 	r.GET("/api/va/scenes", _VoiceAgentService_ListScenes0_HTTP_Handler(srv))
 	r.POST("/api/va/conversations", _VoiceAgentService_CreateConversation0_HTTP_Handler(srv))
+	r.POST("/api/va/transcripts", _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv))
 	r.PATCH("/api/va/conversations/{id}", _VoiceAgentService_UpdateConversation0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations/{id}", _VoiceAgentService_GetConversation0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations", _VoiceAgentService_ListConversations0_HTTP_Handler(srv))
@@ -381,6 +385,28 @@ func _VoiceAgentService_CreateConversation0_HTTP_Handler(srv VoiceAgentServiceHT
 			return err
 		}
 		reply := out.(*Conversation)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddTranscriptEntryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceAddTranscriptEntry)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddTranscriptEntry(ctx, req.(*AddTranscriptEntryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*TranscriptEntry)
 		return ctx.Result(200, reply)
 	}
 }
@@ -808,6 +834,8 @@ func _VoiceAgentService_GenerateCartesiaToken0_HTTP_Handler(srv VoiceAgentServic
 }
 
 type VoiceAgentServiceHTTPClient interface {
+	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(ctx context.Context, req *AddTranscriptEntryRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(ctx context.Context, req *AddVoiceRequest, opts ...http.CallOption) (rsp *Voice, err error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
@@ -878,6 +906,20 @@ type VoiceAgentServiceHTTPClientImpl struct {
 
 func NewVoiceAgentServiceHTTPClient(client *http.Client) VoiceAgentServiceHTTPClient {
 	return &VoiceAgentServiceHTTPClientImpl{client}
+}
+
+// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+func (c *VoiceAgentServiceHTTPClientImpl) AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...http.CallOption) (*TranscriptEntry, error) {
+	var out TranscriptEntry
+	pattern := "/api/va/transcripts"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceAddTranscriptEntry))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // AddVoice AddVoice: 用户自定义克隆声音或系统预设。

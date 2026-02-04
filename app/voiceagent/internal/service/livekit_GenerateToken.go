@@ -13,6 +13,7 @@ import (
 	"github.com/livekit/protocol/auth"
 	"github.com/livekit/protocol/livekit"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -73,10 +74,25 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 		}
 	}
 
-	// 3. Construct Metadata
+	// 3. Create Conversation Record
+	conversation := &voiceagent.Conversation{
+		XId:           primitive.NewObjectID().Hex(),
+		UserId:        userId,
+		AgentId:       "aura_zh", // Default or from req
+		Status:        "pending",
+		CreatedAt:     time.Now().Unix(),
+		LastMessageAt: time.Now().Unix(),
+	}
+	_, err = s.data.Mongo.Conversation.Insert(ctx, conversation) // Ignore error? Or log it?
+	if err != nil {
+		return nil, err
+	}
+
+	// 4. Construct Metadata
 	agentConfig := map[string]interface{}{
-		"agentName": "aura_zh", // Explicitly specify the role
-		"userId":    userId,
+		"conversationId": conversation.XId,
+		"agentName":      "aura_zh", // Explicitly specify the role
+		"userId":         userId,
 		"userProfile": map[string]string{
 			"nickname": userNickname,
 		},
@@ -100,8 +116,9 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 	})
 	if err != nil {
 		// Log error but proceed, as the token is still valid and room might be created on join
-		fmt.Printf("Warning: Failed to create room explicitely: %v\n", err)
-		return nil, err
+		// or already exists.
+		fmt.Printf("Warning: Failed to create room explicitely (likely exists): %v\n", err)
+		// Do not return error here, proceed to generate token.
 	}
 
 	return &voiceagent.GenerateLiveKitTokenResponse{
