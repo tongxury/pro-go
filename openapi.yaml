@@ -9535,6 +9535,8 @@ components:
             properties:
                 aspectRatio:
                     type: string
+                duration:
+                    type: string
         api.proj.Feedback:
             type: object
             properties:

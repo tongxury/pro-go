@@ -1897,6 +1897,8 @@ func (m *DataBus_Settings) validate(all bool) error {
 
 	// no validation rules for AspectRatio
 
+	// no validation rules for Duration
+
 	if len(errors) > 0 {
 		return DataBus_SettingsMultiError(errors)
 	}

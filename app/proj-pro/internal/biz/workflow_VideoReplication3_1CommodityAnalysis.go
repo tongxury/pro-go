@@ -98,6 +98,13 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		return nil, err
 	}
 
+	segments = helper.Filter(segments, func(param *projpb.ResourceSegment) bool {
+		if dataBus.GetSettings().GetDuration() == 0 {
+			return true
+		}
+		return int64(param.TimeEnd-param.TimeStart) < dataBus.GetSettings().GetDuration()
+	})
+
 	if len(segments) == 0 {
 		logger.Errorw("searchTemplateSegments err", "no segment found")
 		return &ExecuteResult{

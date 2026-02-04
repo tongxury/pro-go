@@ -26,6 +26,7 @@ func GetDataBus(wfState *projpb.Workflow) *projpb.DataBus {
 		if job.DataBus.Commodity != nil {
 			res.Commodity = job.DataBus.Commodity
 		}
+
 		if len(job.DataBus.VideoGenerations) > 0 {
 			res.VideoGenerations = job.DataBus.VideoGenerations
 		}

@@ -1016,6 +1016,7 @@ func (x *KeyFrames_Frame) GetReview() *Review {
 type DataBus_Settings struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AspectRatio   string                 `protobuf:"bytes,1,opt,name=aspectRatio,proto3" json:"aspectRatio,omitempty"`
+	Duration      int64                  `protobuf:"varint,2,opt,name=duration,proto3" json:"duration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1055,6 +1056,13 @@ func (x *DataBus_Settings) GetAspectRatio() string {
 		return x.AspectRatio
 	}
 	return ""
+}
+
+func (x *DataBus_Settings) GetDuration() int64 {
+	if x != nil {
+		return x.Duration
+	}
+	return 0
 }
 
 type Job_Progress struct {
@@ -1172,7 +1180,7 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x05error\x18\b \x01(\tR\x05error\x12\x1a\n" +
 	"\bcategory\x18\t \x01(\tR\bcategory\x12(\n" +
 	"\x06review\x18\n" +
-	" \x01(\v2\x10.api.proj.ReviewR\x06review\"\x9c\x04\n" +
+	" \x01(\v2\x10.api.proj.ReviewR\x06review\"\xb8\x04\n" +
 	"\aDataBus\x12\x16\n" +
 	"\x06userId\x18\x14 \x01(\tR\x06userId\x123\n" +
 	"\asegment\x18\x01 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x121\n" +
@@ -1182,9 +1190,10 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x12videoFramesChanges\x18\x05 \x03(\v2\x1b.api.proj.VideoFramesChangeR\x12videoFramesChanges\x12%\n" +
 	"\x05remix\x18\x06 \x01(\v2\x0f.api.proj.RemixR\x05remix\x12=\n" +
 	"\rsegmentScript\x18\a \x01(\v2\x17.api.proj.SegmentScriptR\rsegmentScript\x121\n" +
-	"\tkeyFrames\x18\b \x01(\v2\x13.api.proj.KeyFramesR\tkeyFrames\x1a,\n" +
+	"\tkeyFrames\x18\b \x01(\v2\x13.api.proj.KeyFramesR\tkeyFrames\x1aH\n" +
 	"\bSettings\x12 \n" +
-	"\vaspectRatio\x18\x01 \x01(\tR\vaspectRatio\"\xcd\x02\n" +
+	"\vaspectRatio\x18\x01 \x01(\tR\vaspectRatio\x12\x1a\n" +
+	"\bduration\x18\x02 \x01(\x03R\bduration\"\xcd\x02\n" +
 	"\x03Job\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x03R\x05index\x12\x16\n" +
