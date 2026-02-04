@@ -51,6 +51,8 @@ type Conversation struct {
 	//
 	// The conversationToken is valid for 10 minutes.
 	Token         string `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"`
+	EndedAt       int64  `protobuf:"varint,11,opt,name=endedAt,proto3" json:"endedAt,omitempty"`
+	RoomName      string `protobuf:"bytes,12,opt,name=roomName,proto3" json:"roomName,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -155,11 +157,25 @@ func (x *Conversation) GetToken() string {
 	return ""
 }
 
+func (x *Conversation) GetEndedAt() int64 {
+	if x != nil {
+		return x.EndedAt
+	}
+	return 0
+}
+
+func (x *Conversation) GetRoomName() string {
+	if x != nil {
+		return x.RoomName
+	}
+	return ""
+}
+
 var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xc9\x02\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xff\x02\n" +
 	"\fConversation\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
@@ -171,7 +187,9 @@ const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\x0econversationId\x18\b \x01(\tR\x0econversationId\x12\x1c\n" +
 	"\tsignedUrl\x18\t \x01(\tR\tsignedUrl\x12\x14\n" +
 	"\x05token\x18\n" +
-	" \x01(\tR\x05tokenB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	" \x01(\tR\x05token\x12\x18\n" +
+	"\aendedAt\x18\v \x01(\x03R\aendedAt\x12\x1a\n" +
+	"\broomName\x18\f \x01(\tR\broomNameB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_conversation_proto_rawDescOnce sync.Once

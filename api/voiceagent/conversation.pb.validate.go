@@ -131,6 +131,10 @@ func (m *Conversation) validate(all bool) error {
 
 	// no validation rules for Token
 
+	// no validation rules for EndedAt
+
+	// no validation rules for RoomName
+
 	if len(errors) > 0 {
 		return ConversationMultiError(errors)
 	}

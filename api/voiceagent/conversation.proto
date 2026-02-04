@@ -42,4 +42,8 @@ message Conversation {
   //  For private agents, you must pass in a conversationToken obtained from the ElevenLabs API. Generating this token requires an ElevenLabs API key.
   // The conversationToken is valid for 10 minutes.
   string token = 10;
+
+  int64 endedAt = 11;
+
+  string roomName = 12;
 }

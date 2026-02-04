@@ -356,11 +356,14 @@ message CreateConversationRequest {
 
 message UpdateConversationRequest {
   string id = 1;
-  string status = 2;
-  string conversationId = 3;
+  string action = 4;
 }
 
 message GetConversationRequest {
+  string id = 1;
+}
+
+message EndConversationRequest {
   string id = 1;
 }
 

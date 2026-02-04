@@ -11511,6 +11511,10 @@ components:
                         token:
                           For private agents, you must pass in a conversationToken obtained from the ElevenLabs API. Generating this token requires an ElevenLabs API key.
                          The conversationToken is valid for 10 minutes.
+                endedAt:
+                    type: string
+                roomName:
+                    type: string
             description: |-
                 Conversation (对话会话): 用户与 Agent 交互的运行时实例。
                  [参考文档]: Design and Configure -> Conversation flow (/docs/agents-platform/customization/conversation-flow)
@@ -12120,9 +12124,7 @@ components:
             properties:
                 id:
                     type: string
-                status:
-                    type: string
-                conversationId:
+                action:
                     type: string
         api.voiceagent.UpdateEventRequest:
             type: object

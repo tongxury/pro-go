@@ -83,6 +83,7 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 		Status:        "pending",
 		CreatedAt:     time.Now().Unix(),
 		LastMessageAt: time.Now().Unix(),
+		RoomName:      roomName,
 	}
 	_, err = s.data.Mongo.Conversation.Insert(ctx, conversation) // Ignore error? Or log it?
 	if err != nil {
