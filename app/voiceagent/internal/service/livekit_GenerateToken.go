@@ -109,18 +109,21 @@ func (s *LiveKitService) GenerateLiveKitToken(ctx context.Context, req *voiceage
 		EmptyTimeout:    10 * 60,
 		MaxParticipants: 2,
 		Metadata:        string(metadataJSON),
-		//Agents: []*livekit.RoomAgentDispatch{
-		//	{
-		//		AgentName: "aura_zh",
-		//		Metadata:  string(metadataJSON),
-		//	},
-		//},
 	})
 	if err != nil {
 		// Log error but proceed, as the token is still valid and room might be created on join
 		// or already exists.
 		fmt.Printf("Warning: Failed to create room explicitely (likely exists): %v\n", err)
-		// Do not return error here, proceed to generate token.
+	}
+
+	// 5. Proactively dispatch agent
+	_, err = s.data.AgentClient.CreateDispatch(ctx, &livekit.CreateAgentDispatchRequest{
+		AgentName: "aura_zh",
+		Room:      roomName,
+		Metadata:  string(metadataJSON),
+	})
+	if err != nil {
+		fmt.Printf("Warning: Failed to dispatch agent: %v\n", err)
 	}
 
 	return &voiceagent.GenerateLiveKitTokenResponse{

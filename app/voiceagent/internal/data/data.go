@@ -32,6 +32,7 @@ type Data struct {
 	Gemini        *gemini.GenaiFactory
 	KafkaClient   *clients.KafkaClient
 	RoomClient    *lksdk.RoomServiceClient
+	AgentClient   *lksdk.AgentDispatchClient
 
 	Conf confcenter.Config[configs.BizConfig]
 }
@@ -57,6 +58,7 @@ func NewData(c confcenter.Config[configs.BizConfig]) (*Data, func(), error) {
 		Gemini:        gemini.NewGenaiFactory(&c.Component.Genai),
 		KafkaClient:   clients.NewKafkaClient(c.Component.Kafka),
 		RoomClient:    lksdk.NewRoomServiceClient(confs.LiveKitUrl, confs.LiveKitApiKey, confs.LiveKitApiSecret),
+		AgentClient:   lksdk.NewAgentDispatchServiceClient(confs.LiveKitUrl, confs.LiveKitApiKey, confs.LiveKitApiSecret),
 
 		Conf: c,
 	}
