@@ -23,6 +23,7 @@ const (
 	LiveKitService_GetConversation_FullMethodName       = "/api.voiceagent.LiveKitService/GetConversation"
 	LiveKitService_ListConversations_FullMethodName     = "/api.voiceagent.LiveKitService/ListConversations"
 	LiveKitService_UpdateConversation_FullMethodName    = "/api.voiceagent.LiveKitService/UpdateConversation"
+	LiveKitService_StopConversation_FullMethodName      = "/api.voiceagent.LiveKitService/StopConversation"
 	LiveKitService_AddTranscriptEntry_FullMethodName    = "/api.voiceagent.LiveKitService/AddTranscriptEntry"
 	LiveKitService_ListTranscriptEntries_FullMethodName = "/api.voiceagent.LiveKitService/ListTranscriptEntries"
 )
@@ -41,6 +42,8 @@ type LiveKitServiceClient interface {
 	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ConversationList, error)
 	// UpdateConversation: 更新会话状态。
 	UpdateConversation(ctx context.Context, in *UpdateConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	// StopConversation: 结束会话。
+	StopConversation(ctx context.Context, in *StopConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
 	// AddTranscriptEntry: 记录一条对话消息。
 	AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
 	// ListTranscriptEntries: 获取某个会话的所有聊天记录。
@@ -95,6 +98,16 @@ func (c *liveKitServiceClient) UpdateConversation(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *liveKitServiceClient) StopConversation(ctx context.Context, in *StopConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, LiveKitService_StopConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *liveKitServiceClient) AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TranscriptEntry)
@@ -129,6 +142,8 @@ type LiveKitServiceServer interface {
 	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
 	// UpdateConversation: 更新会话状态。
 	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
+	// StopConversation: 结束会话。
+	StopConversation(context.Context, *StopConversationRequest) (*Conversation, error)
 	// AddTranscriptEntry: 记录一条对话消息。
 	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// ListTranscriptEntries: 获取某个会话的所有聊天记录。
@@ -154,6 +169,9 @@ func (UnimplementedLiveKitServiceServer) ListConversations(context.Context, *Lis
 }
 func (UnimplementedLiveKitServiceServer) UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateConversation not implemented")
+}
+func (UnimplementedLiveKitServiceServer) StopConversation(context.Context, *StopConversationRequest) (*Conversation, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopConversation not implemented")
 }
 func (UnimplementedLiveKitServiceServer) AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddTranscriptEntry not implemented")
@@ -254,6 +272,24 @@ func _LiveKitService_UpdateConversation_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LiveKitService_StopConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveKitServiceServer).StopConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LiveKitService_StopConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveKitServiceServer).StopConversation(ctx, req.(*StopConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _LiveKitService_AddTranscriptEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddTranscriptEntryRequest)
 	if err := dec(in); err != nil {
@@ -312,6 +348,10 @@ var LiveKitService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateConversation",
 			Handler:    _LiveKitService_UpdateConversation_Handler,
+		},
+		{
+			MethodName: "StopConversation",
+			Handler:    _LiveKitService_StopConversation_Handler,
 		},
 		{
 			MethodName: "AddTranscriptEntry",

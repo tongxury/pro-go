@@ -5896,6 +5896,31 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.Conversation'
+    /api/va/conversations/{id}/stop:
+        post:
+            tags:
+                - LiveKitService
+            description: 'StopConversation: 结束会话。'
+            operationId: LiveKitService_StopConversation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.voiceagent.StopConversationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.Conversation'
     /api/va/emotions:
         get:
             tags:
@@ -12000,6 +12025,11 @@ components:
                     type: string
                 enableVoice:
                     type: boolean
+        api.voiceagent.StopConversationRequest:
+            type: object
+            properties:
+                id:
+                    type: string
         api.voiceagent.TranscriptEntry:
             type: object
             properties:

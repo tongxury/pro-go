@@ -24,6 +24,7 @@ const OperationLiveKitServiceCreateConversation = "/api.voiceagent.LiveKitServic
 const OperationLiveKitServiceGetConversation = "/api.voiceagent.LiveKitService/GetConversation"
 const OperationLiveKitServiceListConversations = "/api.voiceagent.LiveKitService/ListConversations"
 const OperationLiveKitServiceListTranscriptEntries = "/api.voiceagent.LiveKitService/ListTranscriptEntries"
+const OperationLiveKitServiceStopConversation = "/api.voiceagent.LiveKitService/StopConversation"
 const OperationLiveKitServiceUpdateConversation = "/api.voiceagent.LiveKitService/UpdateConversation"
 
 type LiveKitServiceHTTPServer interface {
@@ -37,6 +38,8 @@ type LiveKitServiceHTTPServer interface {
 	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
 	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
 	ListTranscriptEntries(context.Context, *ListTranscriptEntriesRequest) (*TranscriptEntryList, error)
+	// StopConversation StopConversation: 结束会话。
+	StopConversation(context.Context, *StopConversationRequest) (*Conversation, error)
 	// UpdateConversation UpdateConversation: 更新会话状态。
 	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
 }
@@ -47,6 +50,7 @@ func RegisterLiveKitServiceHTTPServer(s *http.Server, srv LiveKitServiceHTTPServ
 	r.GET("/api/va/conversations/{id}", _LiveKitService_GetConversation0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations", _LiveKitService_ListConversations0_HTTP_Handler(srv))
 	r.PATCH("/api/va/conversations/{id}", _LiveKitService_UpdateConversation0_HTTP_Handler(srv))
+	r.POST("/api/va/conversations/{id}/stop", _LiveKitService_StopConversation0_HTTP_Handler(srv))
 	r.POST("/api/va/transcripts", _LiveKitService_AddTranscriptEntry0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations/{conversationId}/transcripts", _LiveKitService_ListTranscriptEntries0_HTTP_Handler(srv))
 }
@@ -139,6 +143,31 @@ func _LiveKitService_UpdateConversation0_HTTP_Handler(srv LiveKitServiceHTTPServ
 	}
 }
 
+func _LiveKitService_StopConversation0_HTTP_Handler(srv LiveKitServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in StopConversationRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationLiveKitServiceStopConversation)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.StopConversation(ctx, req.(*StopConversationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*Conversation)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _LiveKitService_AddTranscriptEntry0_HTTP_Handler(srv LiveKitServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddTranscriptEntryRequest
@@ -194,6 +223,8 @@ type LiveKitServiceHTTPClient interface {
 	ListConversations(ctx context.Context, req *ListConversationsRequest, opts ...http.CallOption) (rsp *ConversationList, err error)
 	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
 	ListTranscriptEntries(ctx context.Context, req *ListTranscriptEntriesRequest, opts ...http.CallOption) (rsp *TranscriptEntryList, err error)
+	// StopConversation StopConversation: 结束会话。
+	StopConversation(ctx context.Context, req *StopConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// UpdateConversation UpdateConversation: 更新会话状态。
 	UpdateConversation(ctx context.Context, req *UpdateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 }
@@ -270,6 +301,20 @@ func (c *LiveKitServiceHTTPClientImpl) ListTranscriptEntries(ctx context.Context
 	opts = append(opts, http.Operation(OperationLiveKitServiceListTranscriptEntries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// StopConversation StopConversation: 结束会话。
+func (c *LiveKitServiceHTTPClientImpl) StopConversation(ctx context.Context, in *StopConversationRequest, opts ...http.CallOption) (*Conversation, error) {
+	var out Conversation
+	pattern := "/api/va/conversations/{id}/stop"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationLiveKitServiceStopConversation))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

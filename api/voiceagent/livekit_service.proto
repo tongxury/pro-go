@@ -42,6 +42,14 @@ service LiveKitService {
     };
   }
 
+  // StopConversation: 结束会话。
+  rpc StopConversation(StopConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      post: "/api/va/conversations/{id}/stop"
+      body: "*"
+    };
+  }
+
   // AddTranscriptEntry: 记录一条对话消息。
   rpc AddTranscriptEntry(AddTranscriptEntryRequest) returns (TranscriptEntry) {
     option (google.api.http) = {
@@ -61,6 +69,10 @@ service LiveKitService {
 
 message CreateConversationRequest {
   string agentId = 1 [(validate.rules).string.min_len = 1];
+}
+
+message StopConversationRequest {
+  string id = 1;
 }
 
 message UpdateConversationRequest {
