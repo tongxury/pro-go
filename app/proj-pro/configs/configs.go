@@ -107,7 +107,13 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 					//	BaseURL: "https://api.viviai.cc",
 					//},
 
-					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.AQKey},
+					{
+						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
+						Location:        "us-central1",  // 常用 Vertex AI Location
+						APIVersion:      "v1",
+						CredentialsJSON: confs.VertexAiSecret,                             // 使用 JSON 字符串凭据
+						Proxy:           "http://proxy:strOngPAssWOrd@45.78.194.147:6060", // 如有需要
+					},
 				},
 			},
 			OpenAI: openaiz.Config{
@@ -198,7 +204,13 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		Component: confcenter.Component{
 			Genai: gemini.FactoryConfig{
 				Configs: []*gemini.Config{
-					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.AQKey},
+					{
+						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
+						Location:        "us-central1",  // 常用 Vertex AI Location
+						APIVersion:      "v1",
+						CredentialsJSON: confs.VertexAiSecret,                             // 使用 JSON 字符串凭据
+						Proxy:           "http://proxy:strOngPAssWOrd@45.78.194.147:6060", // 如有需要
+					},
 				},
 			},
 			OpenAI: openaiz.Config{
@@ -239,31 +251,31 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		},
 		Server: serverConf,
 		Database: confcenter.Database{
-			//Mongo: mgz.Config{
-			//	Uri:      fmt.Sprintf("mongodb://14.103.49.90:3717/yoozy_pro?retryWrites=true&w=majority"),
-			//	Username: "root",
-			//	Password: confs.MongoPasswordYuzhi,
-			//
-			//	Database: "admin",
-			//},
-			//Rediz: rediz.Config{
-			//	//Addrs:        []string{"redis-master.prod:6379"},
-			//	//Password:     "lveRN3bj7b",
-			//	Addrs:    []string{"118.196.63.209:6379"},
-			//	Password: confs.RedisPasswordProj,
-			//},
-
 			Mongo: mgz.Config{
-				Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+				Uri:      fmt.Sprintf("mongodb://14.103.49.90:3717/yoozy_pro?retryWrites=true&w=majority"),
 				Username: "root",
-				Password: confs.MongoPasswordProj,
-				Database: "yoozy_pro_beta",
+				Password: confs.MongoPasswordYuzhi,
+
+				Database: "admin",
 			},
 			Rediz: rediz.Config{
+				//Addrs:        []string{"redis-master.prod:6379"},
+				//Password:     "lveRN3bj7b",
 				Addrs:    []string{"118.196.63.209:6379"},
 				Password: confs.RedisPasswordProj,
-				DB:       1,
 			},
+
+			//Mongo: mgz.Config{
+			//	Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+			//	Username: "root",
+			//	Password: confs.MongoPasswordProj,
+			//	Database: "yoozy_pro_beta",
+			//},
+			//Rediz: rediz.Config{
+			//	Addrs:    []string{"118.196.63.209:6379"},
+			//	Password: confs.RedisPasswordProj,
+			//	DB:       1,
+			//},
 
 			Elastics: elastics.Config{
 				//Addresses: []string{"http://localhost:9200/"},
@@ -296,7 +308,13 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		Component: confcenter.Component{
 			Genai: gemini.FactoryConfig{
 				Configs: []*gemini.Config{
-					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.AQKey},
+					{
+						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
+						Location:        "us-central1",  // 常用 Vertex AI Location
+						APIVersion:      "v1",
+						CredentialsJSON: confs.VertexAiSecret,                             // 使用 JSON 字符串凭据
+						Proxy:           "http://proxy:strOngPAssWOrd@45.78.194.147:6060", // 如有需要
+					},
 				},
 			},
 			OpenAI: openaiz.Config{

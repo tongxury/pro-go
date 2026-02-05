@@ -41,13 +41,15 @@ func newClient(config *Config) (*Client, error) {
 
 	var httpClient *http.Client
 
+	var transport *http.Transport
+
 	if config.Proxy != "" {
 		proxyURL, err := url.Parse(config.Proxy)
 		if err != nil {
 			return nil, fmt.Errorf("invalid proxy URL: %v", err)
 		}
 
-		transport := &http.Transport{
+		transport = &http.Transport{
 			Proxy: http.ProxyURL(proxyURL),
 			DialContext: (&net.Dialer{
 				Timeout:   600 * time.Second,
@@ -61,21 +63,43 @@ func newClient(config *Config) (*Client, error) {
 				InsecureSkipVerify: true,
 			},
 			ResponseHeaderTimeout: 600 * time.Second,
+			ForceAttemptHTTP2:     false,
 		}
+	} else {
+		// Default transport if no proxy (though user config implies proxy)
+		transport = &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   30 * time.Second,
+				KeepAlive: 30 * time.Second,
+			}).DialContext,
+			TLSHandshakeTimeout: 10 * time.Second,
+			ForceAttemptHTTP2:   true,
+		}
+	}
 
-		// Use ProxyRoundTripper for API Key mode
-		if config.Key != "" {
-			httpClient = &http.Client{
-				Transport: &ProxyRoundTripper{
-					APIKey:    config.Key,
-					Transport: transport,
-				},
-			}
-		} else {
-			// For Vertex AI with Credentials, we need to add auth middleware
-			httpClient = &http.Client{
+	// Create clients
+	// tokenHttpClient is used strictly for fetching tokens (Proxy only, no Auth middleware injection)
+	tokenHttpClient := &http.Client{
+		Transport: transport,
+		Timeout:   600 * time.Second,
+	}
+
+	// httpClient is used for actual API calls (Proxy + Auth middleware injected later)
+	if config.Key != "" {
+		// API Key mode: Use ProxyRoundTripper
+		httpClient = &http.Client{
+			Transport: &ProxyRoundTripper{
+				APIKey:    config.Key,
 				Transport: transport,
-			}
+			},
+			Timeout: 600 * time.Second,
+		}
+	} else {
+		// Vertex AI / Credentials mode
+		httpClient = &http.Client{
+			Transport: transport,
+			Timeout:   600 * time.Second,
 		}
 	}
 
@@ -95,10 +119,13 @@ func newClient(config *Config) (*Client, error) {
 			cred, err := credentials.DetectDefault(&credentials.DetectOptions{
 				Scopes:          []string{"https://www.googleapis.com/auth/cloud-platform"},
 				CredentialsJSON: []byte(config.CredentialsJSON),
+				Client:          tokenHttpClient,
 			})
 			if err != nil {
 				return nil, fmt.Errorf("failed to create credentials from JSON: %w", err)
 			}
+			clientConfig.Credentials = cred
+
 			// Explicitly add auth middleware to the custom HTTP Client if it exists
 			if httpClient != nil {
 				err = httptransport.AddAuthorizationMiddleware(httpClient, cred)

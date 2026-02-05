@@ -40,9 +40,10 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 
 	logger.Debug("keyFrames generation job start")
 
-	doings := helper.Filter(dataBus.KeyFrames.GetFrames(), func(x *projpb.KeyFrames_Frame) bool {
-		return x.Url == ""
-	})
+	doings := helper.Filter(dataBus.KeyFrames.GetFrames(),
+		func(x *projpb.KeyFrames_Frame) bool {
+			return x.Url == ""
+		})
 
 	// 已完成
 	if len(dataBus.KeyFrames.GetFrames()) > 0 && len(doings) == 0 {
@@ -117,6 +118,7 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 			if lastFrame.Url != "" {
 				frames[i] = &projpb.KeyFrames_Frame{
 					Status: ExecuteStatusCompleted,
+					Url:    lastFrame.Url,
 					Refs: []string{
 						lastFrame.Url,
 						helper.SliceElement[string](
