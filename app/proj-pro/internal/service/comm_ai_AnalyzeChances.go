@@ -125,6 +125,13 @@ func (t ProjService) doAnalyzeChances(ctx context.Context, commodity *projpb.Com
 		parts = append(parts, part)
 	}
 
+	prompt, err := t.data.Mongo.Settings.GetPrompt(ctx, "product_analysis")
+	if err != nil {
+		return nil, err
+	}
+
+	parts = append(parts, gemini.NewTextPart(prompt.Content))
+
 	generationConfig := &genai.GenerateContentConfig{
 		ResponseMIMEType: "application/json",
 		ResponseSchema: &genai.Schema{
@@ -132,37 +139,21 @@ func (t ProjService) doAnalyzeChances(ctx context.Context, commodity *projpb.Com
 			Required: []string{"name", "tags", "brand", "character", "packagingAttributes", "description", "chances"},
 			Properties: map[string]*genai.Schema{
 				"name": {
-					Type:        genai.TypeString,
-					Description: projpb.PromptCommodityName,
+					Type: genai.TypeString,
 				},
 				"tags": {
 					Type: genai.TypeArray,
 					Items: &genai.Schema{
 						Type: genai.TypeString,
 					},
-					Description: projpb.PromptCommodityTags,
 				},
 				"character": {
-					Type: genai.TypeString,
-					Description: `
-分析产品质地与属性:
-示例:
-视觉质地:	表面特征（光滑度、光泽度、孔隙等）	面包的孔洞、牛奶的浓稠度、粉底的光泽感
-触觉质地:	物体在接触时的物理感受	润肤霜的丝滑感、饼干的酥脆感、牛奶的浓稠度
-听觉质地:	声音反馈（脆性、易碎感）	薯片的咔嚓声、饼干的碎裂声
-`,
+					Type:        genai.TypeString,
+					Description: `产品质地与属性`,
 				},
 				"packagingAttributes": {
-					Type: genai.TypeString,
-					Description: `
-外包装属性。
-示例:
-纸质包装	环保、亲和力强、易回收	"塑料太不环保了"	特写：手撕纸盒+回收标志+孩子开心笑
-玻璃瓶	纯净感、高端、可重复使用	"玻璃瓶装的才放心"	慢镜头：阳光透过玻璃瓶，牛奶清澈透亮
-金属罐	保鲜、防潮、高端	"罐装比袋装更保质"	实验：金属罐vs塑料袋牛奶对比
-塑料瓶	轻便、防摔、成本低	"出门带不破"	场景：孩子蹦跳，瓶子完好无损
-复合材料	多功能（阻氧+保鲜+环保）	"既要保质又要环保"	对比：普通包装vs复合包装保质期测试
-`,
+					Type:        genai.TypeString,
+					Description: `外包装属性`,
 				},
 				"brand": {
 					Type:        genai.TypeString,
@@ -173,8 +164,8 @@ func (t ProjService) doAnalyzeChances(ctx context.Context, commodity *projpb.Com
 					Description: `帮我分析图片中的产品品牌，产品卖点对应推理出核心人群及具体需求场景`,
 				},
 				"chances": {
-					Type:        genai.TypeArray,
-					Description: projpb.PromptCommodityChance,
+					Type: genai.TypeArray,
+					//Description: projpb.PromptCommodityChance,
 					Items: &genai.Schema{
 						Type:     genai.TypeObject,
 						Required: []string{"targetAudience", "sellingPoints"},

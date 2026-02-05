@@ -151,6 +151,13 @@ func (t ProjService) analyzeSegmentByGemini(ctx context.Context, data *analyzeSe
 		},
 	}
 
+	prompt, err = t.data.Mongo.Settings.GetPrompt(ctx, "product_analysis")
+	if err != nil {
+		return nil, err
+	}
+
+	parts = append(parts, gemini.NewTextPart(prompt.Content))
+
 	config := &genai.GenerateContentConfig{
 		ResponseMIMEType: "application/json",
 		ResponseSchema: &genai.Schema{
@@ -162,15 +169,13 @@ func (t ProjService) analyzeSegmentByGemini(ctx context.Context, data *analyzeSe
 					Required: []string{"tags", "name"},
 					Properties: map[string]*genai.Schema{
 						"name": {
-							Type:        genai.TypeString,
-							Description: projpb.PromptCommodityName,
+							Type: genai.TypeString,
 						},
 						"tags": {
 							Type: genai.TypeArray,
 							Items: &genai.Schema{
 								Type: genai.TypeString,
 							},
-							Description: projpb.PromptCommodityTags,
 						},
 					},
 				},
