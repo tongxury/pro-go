@@ -6,6 +6,8 @@ import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "voiceagent/conversation.proto";
 
+import "voiceagent/transcript.proto";
+
 option go_package = "store/api/voiceagent;voiceagent";
 
 // LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
@@ -39,6 +41,22 @@ service LiveKitService {
       body: "*"
     };
   }
+
+  // AddTranscriptEntry: 记录一条对话消息。
+  rpc AddTranscriptEntry(AddTranscriptEntryRequest) returns (TranscriptEntry) {
+    option (google.api.http) = {
+      post: "/api/va/transcripts"
+      body: "*"
+    };
+  }
+
+  // ListTranscriptEntries: 获取某个会话的所有聊天记录。
+  rpc ListTranscriptEntries(ListTranscriptEntriesRequest) returns (TranscriptEntryList) {
+    option (google.api.http) = {
+      get: "/api/va/conversations/{conversationId}/transcripts"
+    };
+  }
+
 }
 
 message CreateConversationRequest {
@@ -63,3 +81,24 @@ message ConversationList {
   repeated Conversation list = 1;
   int64 total = 2;
 }
+
+message ListTranscriptEntriesRequest {
+  string conversationId = 1;
+  int64 page = 2;
+  int64 size = 3;
+}
+
+message TranscriptEntryList {
+  repeated TranscriptEntry list = 1;
+  int64 total = 2;
+}
+
+message AddTranscriptEntryRequest {
+  string conversationId = 1; // Optional, try to resolve from roomName
+  string userId = 2; // Optional
+  string role = 3; // "user" or "agent"
+  string content = 4;
+  string roomName = 5; // To look up conversation if ID missing
+  string audioUrl = 6; // Optional
+}
+

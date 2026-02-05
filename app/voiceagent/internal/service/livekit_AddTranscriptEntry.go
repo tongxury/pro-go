@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func (s *VoiceAgentService) AddTranscriptEntry(ctx context.Context, req *voiceagent.AddTranscriptEntryRequest) (*voiceagent.TranscriptEntry, error) {
+func (s *LiveKitService) AddTranscriptEntry(ctx context.Context, req *voiceagent.AddTranscriptEntryRequest) (*voiceagent.TranscriptEntry, error) {
 	// TODO: Auth check if needed, but currently internal or Python Agent calls it.
 
 	entry := &voiceagent.TranscriptEntry{
@@ -20,7 +20,7 @@ func (s *VoiceAgentService) AddTranscriptEntry(ctx context.Context, req *voiceag
 		AudioUrl:     req.AudioUrl,
 	}
 
-	_, err := s.Data.Mongo.Transcript.Insert(ctx, entry)
+	_, err := s.data.Mongo.Transcript.Insert(ctx, entry)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +28,7 @@ func (s *VoiceAgentService) AddTranscriptEntry(ctx context.Context, req *voiceag
 	// Update conversation status to active and refresh LastMessageAt
 	if req.ConversationId != "" {
 		// Use underlying collection to avoid defining generic update methods if not present
-		_, err = s.Data.Mongo.Conversation.UpdateByIDIfExists(ctx, req.ConversationId,
+		_, err = s.data.Mongo.Conversation.UpdateByIDIfExists(ctx, req.ConversationId,
 			mgz.Op().Set("status", "ongoing").Set("lastMessageAt", time.Now().Unix()),
 		)
 

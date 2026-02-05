@@ -5829,9 +5829,9 @@ paths:
     /api/va/conversations/{conversationId}/transcripts:
         get:
             tags:
-                - VoiceAgentService
+                - LiveKitService
             description: 'ListTranscriptEntries: 获取某个会话的所有聊天记录。'
-            operationId: VoiceAgentService_ListTranscriptEntries
+            operationId: LiveKitService_ListTranscriptEntries
             parameters:
                 - name: conversationId
                   in: path
@@ -6335,14 +6335,14 @@ paths:
     /api/va/transcripts:
         post:
             tags:
-                - VoiceAgentService
-            description: 'RecordTranscriptEntry: 记录实时通话产生的文本片段。'
-            operationId: VoiceAgentService_RecordTranscriptEntry
+                - LiveKitService
+            description: 'AddTranscriptEntry: 记录一条对话消息。'
+            operationId: LiveKitService_AddTranscriptEntry
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.voiceagent.RecordTranscriptEntryRequest'
+                            $ref: '#/components/schemas/api.voiceagent.AddTranscriptEntryRequest'
                 required: true
             responses:
                 "200":
@@ -11951,15 +11951,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.voiceagent.Persona'
-        api.voiceagent.RecordTranscriptEntryRequest:
-            type: object
-            properties:
-                conversationId:
-                    type: string
-                role:
-                    type: string
-                message:
-                    type: string
         api.voiceagent.Scene:
             type: object
             properties:

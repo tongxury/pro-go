@@ -19,18 +19,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationLiveKitServiceAddTranscriptEntry = "/api.voiceagent.LiveKitService/AddTranscriptEntry"
 const OperationLiveKitServiceCreateConversation = "/api.voiceagent.LiveKitService/CreateConversation"
 const OperationLiveKitServiceGetConversation = "/api.voiceagent.LiveKitService/GetConversation"
 const OperationLiveKitServiceListConversations = "/api.voiceagent.LiveKitService/ListConversations"
+const OperationLiveKitServiceListTranscriptEntries = "/api.voiceagent.LiveKitService/ListTranscriptEntries"
 const OperationLiveKitServiceUpdateConversation = "/api.voiceagent.LiveKitService/UpdateConversation"
 
 type LiveKitServiceHTTPServer interface {
+	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// CreateConversation CreateConversation: 启动一个实时交互会话。基础功能。
 	CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error)
 	// GetConversation GetConversation: 获取会话详情。
 	GetConversation(context.Context, *GetConversationRequest) (*Conversation, error)
 	// ListConversations ListConversations: 分页列出通话记录。
 	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
+	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
+	ListTranscriptEntries(context.Context, *ListTranscriptEntriesRequest) (*TranscriptEntryList, error)
 	// UpdateConversation UpdateConversation: 更新会话状态。
 	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
 }
@@ -41,6 +47,8 @@ func RegisterLiveKitServiceHTTPServer(s *http.Server, srv LiveKitServiceHTTPServ
 	r.GET("/api/va/conversations/{id}", _LiveKitService_GetConversation0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations", _LiveKitService_ListConversations0_HTTP_Handler(srv))
 	r.PATCH("/api/va/conversations/{id}", _LiveKitService_UpdateConversation0_HTTP_Handler(srv))
+	r.POST("/api/va/transcripts", _LiveKitService_AddTranscriptEntry0_HTTP_Handler(srv))
+	r.GET("/api/va/conversations/{conversationId}/transcripts", _LiveKitService_ListTranscriptEntries0_HTTP_Handler(srv))
 }
 
 func _LiveKitService_CreateConversation0_HTTP_Handler(srv LiveKitServiceHTTPServer) func(ctx http.Context) error {
@@ -131,13 +139,61 @@ func _LiveKitService_UpdateConversation0_HTTP_Handler(srv LiveKitServiceHTTPServ
 	}
 }
 
+func _LiveKitService_AddTranscriptEntry0_HTTP_Handler(srv LiveKitServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddTranscriptEntryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationLiveKitServiceAddTranscriptEntry)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddTranscriptEntry(ctx, req.(*AddTranscriptEntryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*TranscriptEntry)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _LiveKitService_ListTranscriptEntries0_HTTP_Handler(srv LiveKitServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListTranscriptEntriesRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationLiveKitServiceListTranscriptEntries)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListTranscriptEntries(ctx, req.(*ListTranscriptEntriesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*TranscriptEntryList)
+		return ctx.Result(200, reply)
+	}
+}
+
 type LiveKitServiceHTTPClient interface {
+	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+	AddTranscriptEntry(ctx context.Context, req *AddTranscriptEntryRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// CreateConversation CreateConversation: 启动一个实时交互会话。基础功能。
 	CreateConversation(ctx context.Context, req *CreateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// GetConversation GetConversation: 获取会话详情。
 	GetConversation(ctx context.Context, req *GetConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// ListConversations ListConversations: 分页列出通话记录。
 	ListConversations(ctx context.Context, req *ListConversationsRequest, opts ...http.CallOption) (rsp *ConversationList, err error)
+	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
+	ListTranscriptEntries(ctx context.Context, req *ListTranscriptEntriesRequest, opts ...http.CallOption) (rsp *TranscriptEntryList, err error)
 	// UpdateConversation UpdateConversation: 更新会话状态。
 	UpdateConversation(ctx context.Context, req *UpdateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 }
@@ -148,6 +204,20 @@ type LiveKitServiceHTTPClientImpl struct {
 
 func NewLiveKitServiceHTTPClient(client *http.Client) LiveKitServiceHTTPClient {
 	return &LiveKitServiceHTTPClientImpl{client}
+}
+
+// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
+func (c *LiveKitServiceHTTPClientImpl) AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...http.CallOption) (*TranscriptEntry, error) {
+	var out TranscriptEntry
+	pattern := "/api/va/transcripts"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationLiveKitServiceAddTranscriptEntry))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // CreateConversation CreateConversation: 启动一个实时交互会话。基础功能。
@@ -184,6 +254,20 @@ func (c *LiveKitServiceHTTPClientImpl) ListConversations(ctx context.Context, in
 	pattern := "/api/va/conversations"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationLiveKitServiceListConversations))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
+func (c *LiveKitServiceHTTPClientImpl) ListTranscriptEntries(ctx context.Context, in *ListTranscriptEntriesRequest, opts ...http.CallOption) (*TranscriptEntryList, error) {
+	var out TranscriptEntryList
+	pattern := "/api/va/conversations/{conversationId}/transcripts"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationLiveKitServiceListTranscriptEntries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

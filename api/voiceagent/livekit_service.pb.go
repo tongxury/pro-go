@@ -267,11 +267,207 @@ func (x *ConversationList) GetTotal() int64 {
 	return 0
 }
 
+type ListTranscriptEntriesRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ConversationId string                 `protobuf:"bytes,1,opt,name=conversationId,proto3" json:"conversationId,omitempty"`
+	Page           int64                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size           int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListTranscriptEntriesRequest) Reset() {
+	*x = ListTranscriptEntriesRequest{}
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTranscriptEntriesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTranscriptEntriesRequest) ProtoMessage() {}
+
+func (x *ListTranscriptEntriesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTranscriptEntriesRequest.ProtoReflect.Descriptor instead.
+func (*ListTranscriptEntriesRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_livekit_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListTranscriptEntriesRequest) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *ListTranscriptEntriesRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListTranscriptEntriesRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+type TranscriptEntryList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*TranscriptEntry     `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TranscriptEntryList) Reset() {
+	*x = TranscriptEntryList{}
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TranscriptEntryList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TranscriptEntryList) ProtoMessage() {}
+
+func (x *TranscriptEntryList) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TranscriptEntryList.ProtoReflect.Descriptor instead.
+func (*TranscriptEntryList) Descriptor() ([]byte, []int) {
+	return file_voiceagent_livekit_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TranscriptEntryList) GetList() []*TranscriptEntry {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *TranscriptEntryList) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type AddTranscriptEntryRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ConversationId string                 `protobuf:"bytes,1,opt,name=conversationId,proto3" json:"conversationId,omitempty"` // Optional, try to resolve from roomName
+	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`                 // Optional
+	Role           string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`                     // "user" or "agent"
+	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	RoomName       string                 `protobuf:"bytes,5,opt,name=roomName,proto3" json:"roomName,omitempty"` // To look up conversation if ID missing
+	AudioUrl       string                 `protobuf:"bytes,6,opt,name=audioUrl,proto3" json:"audioUrl,omitempty"` // Optional
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AddTranscriptEntryRequest) Reset() {
+	*x = AddTranscriptEntryRequest{}
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddTranscriptEntryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTranscriptEntryRequest) ProtoMessage() {}
+
+func (x *AddTranscriptEntryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_livekit_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTranscriptEntryRequest.ProtoReflect.Descriptor instead.
+func (*AddTranscriptEntryRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_livekit_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddTranscriptEntryRequest) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *AddTranscriptEntryRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *AddTranscriptEntryRequest) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *AddTranscriptEntryRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *AddTranscriptEntryRequest) GetRoomName() string {
+	if x != nil {
+		return x.RoomName
+	}
+	return ""
+}
+
+func (x *AddTranscriptEntryRequest) GetAudioUrl() string {
+	if x != nil {
+		return x.AudioUrl
+	}
+	return ""
+}
+
 var File_voiceagent_livekit_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\n" +
-	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1dvoiceagent/conversation.proto\">\n" +
+	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\">\n" +
 	"\x19CreateConversationRequest\x12!\n" +
 	"\aagentId\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aagentId\"C\n" +
 	"\x19UpdateConversationRequest\x12\x0e\n" +
@@ -284,12 +480,28 @@ const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\x04size\x18\x02 \x01(\x03R\x04size\"Z\n" +
 	"\x10ConversationList\x120\n" +
 	"\x04list\x18\x01 \x03(\v2\x1c.api.voiceagent.ConversationR\x04list\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total2\x95\x04\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"n\n" +
+	"\x1cListTranscriptEntriesRequest\x12&\n" +
+	"\x0econversationId\x18\x01 \x01(\tR\x0econversationId\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\"`\n" +
+	"\x13TranscriptEntryList\x123\n" +
+	"\x04list\x18\x01 \x03(\v2\x1f.api.voiceagent.TranscriptEntryR\x04list\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\xc1\x01\n" +
+	"\x19AddTranscriptEntryRequest\x12&\n" +
+	"\x0econversationId\x18\x01 \x01(\tR\x0econversationId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1a\n" +
+	"\broomName\x18\x05 \x01(\tR\broomName\x12\x1a\n" +
+	"\baudioUrl\x18\x06 \x01(\tR\baudioUrl2\xc1\x06\n" +
 	"\x0eLiveKitService\x12\x7f\n" +
 	"\x12CreateConversation\x12).api.voiceagent.CreateConversationRequest\x1a\x1c.api.voiceagent.Conversation\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/va/conversations\x12{\n" +
 	"\x0fGetConversation\x12&.api.voiceagent.GetConversationRequest\x1a\x1c.api.voiceagent.Conversation\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/va/conversations/{id}\x12~\n" +
 	"\x11ListConversations\x12(.api.voiceagent.ListConversationsRequest\x1a .api.voiceagent.ConversationList\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/va/conversations\x12\x84\x01\n" +
-	"\x12UpdateConversation\x12).api.voiceagent.UpdateConversationRequest\x1a\x1c.api.voiceagent.Conversation\"%\x82\xd3\xe4\x93\x02\x1f:\x01*2\x1a/api/va/conversations/{id}B!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\x12UpdateConversation\x12).api.voiceagent.UpdateConversationRequest\x1a\x1c.api.voiceagent.Conversation\"%\x82\xd3\xe4\x93\x02\x1f:\x01*2\x1a/api/va/conversations/{id}\x12\x80\x01\n" +
+	"\x12AddTranscriptEntry\x12).api.voiceagent.AddTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12\xa6\x01\n" +
+	"\x15ListTranscriptEntries\x12,.api.voiceagent.ListTranscriptEntriesRequest\x1a#.api.voiceagent.TranscriptEntryList\":\x82\xd3\xe4\x93\x024\x122/api/va/conversations/{conversationId}/transcriptsB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_livekit_service_proto_rawDescOnce sync.Once
@@ -303,30 +515,39 @@ func file_voiceagent_livekit_service_proto_rawDescGZIP() []byte {
 	return file_voiceagent_livekit_service_proto_rawDescData
 }
 
-var file_voiceagent_livekit_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_voiceagent_livekit_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_voiceagent_livekit_service_proto_goTypes = []any{
-	(*CreateConversationRequest)(nil), // 0: api.voiceagent.CreateConversationRequest
-	(*UpdateConversationRequest)(nil), // 1: api.voiceagent.UpdateConversationRequest
-	(*GetConversationRequest)(nil),    // 2: api.voiceagent.GetConversationRequest
-	(*ListConversationsRequest)(nil),  // 3: api.voiceagent.ListConversationsRequest
-	(*ConversationList)(nil),          // 4: api.voiceagent.ConversationList
-	(*Conversation)(nil),              // 5: api.voiceagent.Conversation
+	(*CreateConversationRequest)(nil),    // 0: api.voiceagent.CreateConversationRequest
+	(*UpdateConversationRequest)(nil),    // 1: api.voiceagent.UpdateConversationRequest
+	(*GetConversationRequest)(nil),       // 2: api.voiceagent.GetConversationRequest
+	(*ListConversationsRequest)(nil),     // 3: api.voiceagent.ListConversationsRequest
+	(*ConversationList)(nil),             // 4: api.voiceagent.ConversationList
+	(*ListTranscriptEntriesRequest)(nil), // 5: api.voiceagent.ListTranscriptEntriesRequest
+	(*TranscriptEntryList)(nil),          // 6: api.voiceagent.TranscriptEntryList
+	(*AddTranscriptEntryRequest)(nil),    // 7: api.voiceagent.AddTranscriptEntryRequest
+	(*Conversation)(nil),                 // 8: api.voiceagent.Conversation
+	(*TranscriptEntry)(nil),              // 9: api.voiceagent.TranscriptEntry
 }
 var file_voiceagent_livekit_service_proto_depIdxs = []int32{
-	5, // 0: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
-	0, // 1: api.voiceagent.LiveKitService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
-	2, // 2: api.voiceagent.LiveKitService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
-	3, // 3: api.voiceagent.LiveKitService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
-	1, // 4: api.voiceagent.LiveKitService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
-	5, // 5: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
-	5, // 6: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
-	4, // 7: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
-	5, // 8: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	8, // 0: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
+	9, // 1: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
+	0, // 2: api.voiceagent.LiveKitService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
+	2, // 3: api.voiceagent.LiveKitService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
+	3, // 4: api.voiceagent.LiveKitService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
+	1, // 5: api.voiceagent.LiveKitService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
+	7, // 6: api.voiceagent.LiveKitService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
+	5, // 7: api.voiceagent.LiveKitService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
+	8, // 8: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
+	8, // 9: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
+	4, // 10: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
+	8, // 11: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
+	9, // 12: api.voiceagent.LiveKitService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	6, // 13: api.voiceagent.LiveKitService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
+	8, // [8:14] is the sub-list for method output_type
+	2, // [2:8] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_livekit_service_proto_init() }
@@ -335,13 +556,14 @@ func file_voiceagent_livekit_service_proto_init() {
 		return
 	}
 	file_voiceagent_conversation_proto_init()
+	file_voiceagent_transcript_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_livekit_service_proto_rawDesc), len(file_voiceagent_livekit_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

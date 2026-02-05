@@ -96,29 +96,6 @@ service VoiceAgentService {
     };
   }
 
-  // AddTranscriptEntry: 记录一条对话消息。
-  rpc AddTranscriptEntry(AddTranscriptEntryRequest) returns (TranscriptEntry) {
-    option (google.api.http) = {
-      post: "/api/va/transcripts"
-      body: "*"
-    };
-  }
-
-  // ListTranscriptEntries: 获取某个会话的所有聊天记录。
-  rpc ListTranscriptEntries(ListTranscriptEntriesRequest) returns (TranscriptEntryList) {
-    option (google.api.http) = {
-      get: "/api/va/conversations/{conversationId}/transcripts"
-    };
-  }
-
-  // RecordTranscriptEntry: 记录实时通话产生的文本片段。
-  rpc RecordTranscriptEntry(RecordTranscriptEntryRequest) returns (TranscriptEntry) {
-    option (google.api.http) = {
-      post: "/api/va/transcripts"
-      body: "*"
-    };
-  }
-
   // SendMessage: 发送消息并获得 AI 的回复（非流式）。
   rpc SendMessage(SendMessageRequest) returns (TranscriptEntry) {
     option (google.api.http) = {
@@ -320,22 +297,6 @@ message ListScenesRequest {}
 
 
 
-message ListTranscriptEntriesRequest {
-  string conversationId = 1;
-  int64 page = 2;
-  int64 size = 3;
-}
-
-message TranscriptEntryList {
-  repeated TranscriptEntry list = 1;
-  int64 total = 2;
-}
-
-message RecordTranscriptEntryRequest {
-  string conversationId = 1;
-  string role = 2; // user or agent
-  string message = 3;
-}
 
 message SendMessageRequest {
   string conversationId = 1;
@@ -486,11 +447,3 @@ message GenerateCartesiaTokenResponse {
   string accessToken = 1;
 }
 
-message AddTranscriptEntryRequest {
-  string conversationId = 1; // Optional, try to resolve from roomName
-  string userId = 2; // Optional
-  string role = 3; // "user" or "agent"
-  string content = 4;
-  string roomName = 5; // To look up conversation if ID missing
-  string audioUrl = 6; // Optional
-}

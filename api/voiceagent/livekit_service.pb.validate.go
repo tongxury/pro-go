@@ -599,3 +599,364 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ConversationListValidationError{}
+
+// Validate checks the field values on ListTranscriptEntriesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTranscriptEntriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTranscriptEntriesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTranscriptEntriesRequestMultiError, or nil if none found.
+func (m *ListTranscriptEntriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTranscriptEntriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ConversationId
+
+	// no validation rules for Page
+
+	// no validation rules for Size
+
+	if len(errors) > 0 {
+		return ListTranscriptEntriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTranscriptEntriesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListTranscriptEntriesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListTranscriptEntriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTranscriptEntriesRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTranscriptEntriesRequestMultiError) AllErrors() []error { return m }
+
+// ListTranscriptEntriesRequestValidationError is the validation error returned
+// by ListTranscriptEntriesRequest.Validate if the designated constraints
+// aren't met.
+type ListTranscriptEntriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTranscriptEntriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTranscriptEntriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTranscriptEntriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTranscriptEntriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTranscriptEntriesRequestValidationError) ErrorName() string {
+	return "ListTranscriptEntriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTranscriptEntriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTranscriptEntriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTranscriptEntriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTranscriptEntriesRequestValidationError{}
+
+// Validate checks the field values on TranscriptEntryList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *TranscriptEntryList) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TranscriptEntryList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// TranscriptEntryListMultiError, or nil if none found.
+func (m *TranscriptEntryList) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TranscriptEntryList) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, TranscriptEntryListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, TranscriptEntryListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return TranscriptEntryListValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return TranscriptEntryListMultiError(errors)
+	}
+
+	return nil
+}
+
+// TranscriptEntryListMultiError is an error wrapping multiple validation
+// errors returned by TranscriptEntryList.ValidateAll() if the designated
+// constraints aren't met.
+type TranscriptEntryListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TranscriptEntryListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TranscriptEntryListMultiError) AllErrors() []error { return m }
+
+// TranscriptEntryListValidationError is the validation error returned by
+// TranscriptEntryList.Validate if the designated constraints aren't met.
+type TranscriptEntryListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TranscriptEntryListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TranscriptEntryListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TranscriptEntryListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TranscriptEntryListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TranscriptEntryListValidationError) ErrorName() string {
+	return "TranscriptEntryListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e TranscriptEntryListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTranscriptEntryList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TranscriptEntryListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TranscriptEntryListValidationError{}
+
+// Validate checks the field values on AddTranscriptEntryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddTranscriptEntryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddTranscriptEntryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddTranscriptEntryRequestMultiError, or nil if none found.
+func (m *AddTranscriptEntryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddTranscriptEntryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ConversationId
+
+	// no validation rules for UserId
+
+	// no validation rules for Role
+
+	// no validation rules for Content
+
+	// no validation rules for RoomName
+
+	// no validation rules for AudioUrl
+
+	if len(errors) > 0 {
+		return AddTranscriptEntryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddTranscriptEntryRequestMultiError is an error wrapping multiple validation
+// errors returned by AddTranscriptEntryRequest.ValidateAll() if the
+// designated constraints aren't met.
+type AddTranscriptEntryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddTranscriptEntryRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddTranscriptEntryRequestMultiError) AllErrors() []error { return m }
+
+// AddTranscriptEntryRequestValidationError is the validation error returned by
+// AddTranscriptEntryRequest.Validate if the designated constraints aren't met.
+type AddTranscriptEntryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddTranscriptEntryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddTranscriptEntryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddTranscriptEntryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddTranscriptEntryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddTranscriptEntryRequestValidationError) ErrorName() string {
+	return "AddTranscriptEntryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddTranscriptEntryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddTranscriptEntryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddTranscriptEntryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddTranscriptEntryRequestValidationError{}

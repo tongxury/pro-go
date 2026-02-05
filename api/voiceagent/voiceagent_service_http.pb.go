@@ -20,7 +20,6 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationVoiceAgentServiceAddTranscriptEntry = "/api.voiceagent.VoiceAgentService/AddTranscriptEntry"
 const OperationVoiceAgentServiceAddVoice = "/api.voiceagent.VoiceAgentService/AddVoice"
 const OperationVoiceAgentServiceCreateAgent = "/api.voiceagent.VoiceAgentService/CreateAgent"
 const OperationVoiceAgentServiceCreateEvent = "/api.voiceagent.VoiceAgentService/CreateEvent"
@@ -41,17 +40,13 @@ const OperationVoiceAgentServiceListEvents = "/api.voiceagent.VoiceAgentService/
 const OperationVoiceAgentServiceListMemories = "/api.voiceagent.VoiceAgentService/ListMemories"
 const OperationVoiceAgentServiceListPersonas = "/api.voiceagent.VoiceAgentService/ListPersonas"
 const OperationVoiceAgentServiceListScenes = "/api.voiceagent.VoiceAgentService/ListScenes"
-const OperationVoiceAgentServiceListTranscriptEntries = "/api.voiceagent.VoiceAgentService/ListTranscriptEntries"
 const OperationVoiceAgentServiceListVoices = "/api.voiceagent.VoiceAgentService/ListVoices"
-const OperationVoiceAgentServiceRecordTranscriptEntry = "/api.voiceagent.VoiceAgentService/RecordTranscriptEntry"
 const OperationVoiceAgentServiceSendMessage = "/api.voiceagent.VoiceAgentService/SendMessage"
 const OperationVoiceAgentServiceUpdateAgent = "/api.voiceagent.VoiceAgentService/UpdateAgent"
 const OperationVoiceAgentServiceUpdateEvent = "/api.voiceagent.VoiceAgentService/UpdateEvent"
 const OperationVoiceAgentServiceUpdateUserProfile = "/api.voiceagent.VoiceAgentService/UpdateUserProfile"
 
 type VoiceAgentServiceHTTPServer interface {
-	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
-	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(context.Context, *AddVoiceRequest) (*Voice, error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
@@ -92,12 +87,8 @@ type VoiceAgentServiceHTTPServer interface {
 	ListPersonas(context.Context, *ListPersonasRequest) (*PersonaList, error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
 	ListScenes(context.Context, *ListScenesRequest) (*SceneList, error)
-	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
-	ListTranscriptEntries(context.Context, *ListTranscriptEntriesRequest) (*TranscriptEntryList, error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error)
-	// RecordTranscriptEntry RecordTranscriptEntry: 记录实时通话产生的文本片段。
-	RecordTranscriptEntry(context.Context, *RecordTranscriptEntryRequest) (*TranscriptEntry, error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
@@ -120,9 +111,6 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.POST("/api/va/voices", _VoiceAgentService_AddVoice0_HTTP_Handler(srv))
 	r.GET("/api/va/voices", _VoiceAgentService_ListVoices0_HTTP_Handler(srv))
 	r.GET("/api/va/scenes", _VoiceAgentService_ListScenes0_HTTP_Handler(srv))
-	r.POST("/api/va/transcripts", _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv))
-	r.GET("/api/va/conversations/{conversationId}/transcripts", _VoiceAgentService_ListTranscriptEntries0_HTTP_Handler(srv))
-	r.POST("/api/va/transcripts", _VoiceAgentService_RecordTranscriptEntry0_HTTP_Handler(srv))
 	r.POST("/api/va/messages", _VoiceAgentService_SendMessage0_HTTP_Handler(srv))
 	r.GET("/api/va/memories", _VoiceAgentService_ListMemories0_HTTP_Handler(srv))
 	r.POST("/api/va/memories", _VoiceAgentService_CreateMemory0_HTTP_Handler(srv))
@@ -347,72 +335,6 @@ func _VoiceAgentService_ListScenes0_HTTP_Handler(srv VoiceAgentServiceHTTPServer
 			return err
 		}
 		reply := out.(*SceneList)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddTranscriptEntryRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceAddTranscriptEntry)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddTranscriptEntry(ctx, req.(*AddTranscriptEntryRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*TranscriptEntry)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_ListTranscriptEntries0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListTranscriptEntriesRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceListTranscriptEntries)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListTranscriptEntries(ctx, req.(*ListTranscriptEntriesRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*TranscriptEntryList)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_RecordTranscriptEntry0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecordTranscriptEntryRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceRecordTranscriptEntry)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordTranscriptEntry(ctx, req.(*RecordTranscriptEntryRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*TranscriptEntry)
 		return ctx.Result(200, reply)
 	}
 }
@@ -730,8 +652,6 @@ func _VoiceAgentService_GenerateCartesiaToken0_HTTP_Handler(srv VoiceAgentServic
 }
 
 type VoiceAgentServiceHTTPClient interface {
-	// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
-	AddTranscriptEntry(ctx context.Context, req *AddTranscriptEntryRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// AddVoice AddVoice: 用户自定义克隆声音或系统预设。
 	AddVoice(ctx context.Context, req *AddVoiceRequest, opts ...http.CallOption) (rsp *Voice, err error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
@@ -772,12 +692,8 @@ type VoiceAgentServiceHTTPClient interface {
 	ListPersonas(ctx context.Context, req *ListPersonasRequest, opts ...http.CallOption) (rsp *PersonaList, err error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
 	ListScenes(ctx context.Context, req *ListScenesRequest, opts ...http.CallOption) (rsp *SceneList, err error)
-	// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
-	ListTranscriptEntries(ctx context.Context, req *ListTranscriptEntriesRequest, opts ...http.CallOption) (rsp *TranscriptEntryList, err error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(ctx context.Context, req *ListVoicesRequest, opts ...http.CallOption) (rsp *VoiceList, err error)
-	// RecordTranscriptEntry RecordTranscriptEntry: 记录实时通话产生的文本片段。
-	RecordTranscriptEntry(ctx context.Context, req *RecordTranscriptEntryRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(ctx context.Context, req *SendMessageRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
@@ -794,20 +710,6 @@ type VoiceAgentServiceHTTPClientImpl struct {
 
 func NewVoiceAgentServiceHTTPClient(client *http.Client) VoiceAgentServiceHTTPClient {
 	return &VoiceAgentServiceHTTPClientImpl{client}
-}
-
-// AddTranscriptEntry AddTranscriptEntry: 记录一条对话消息。
-func (c *VoiceAgentServiceHTTPClientImpl) AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...http.CallOption) (*TranscriptEntry, error) {
-	var out TranscriptEntry
-	pattern := "/api/va/transcripts"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceAddTranscriptEntry))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 // AddVoice AddVoice: 用户自定义克隆声音或系统预设。
@@ -1090,20 +992,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListScenes(ctx context.Context, in *Li
 	return &out, nil
 }
 
-// ListTranscriptEntries ListTranscriptEntries: 获取某个会话的所有聊天记录。
-func (c *VoiceAgentServiceHTTPClientImpl) ListTranscriptEntries(ctx context.Context, in *ListTranscriptEntriesRequest, opts ...http.CallOption) (*TranscriptEntryList, error) {
-	var out TranscriptEntryList
-	pattern := "/api/va/conversations/{conversationId}/transcripts"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceListTranscriptEntries))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // ListVoices ListVoices: 获取可用声音列表。
 func (c *VoiceAgentServiceHTTPClientImpl) ListVoices(ctx context.Context, in *ListVoicesRequest, opts ...http.CallOption) (*VoiceList, error) {
 	var out VoiceList
@@ -1112,20 +1000,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListVoices(ctx context.Context, in *Li
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceListVoices))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// RecordTranscriptEntry RecordTranscriptEntry: 记录实时通话产生的文本片段。
-func (c *VoiceAgentServiceHTTPClientImpl) RecordTranscriptEntry(ctx context.Context, in *RecordTranscriptEntryRequest, opts ...http.CallOption) (*TranscriptEntry, error) {
-	var out TranscriptEntry
-	pattern := "/api/va/transcripts"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceRecordTranscriptEntry))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
