@@ -35,46 +35,53 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on GenerateLiveKitTokenRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on CreateConversationRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GenerateLiveKitTokenRequest) Validate() error {
+func (m *CreateConversationRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GenerateLiveKitTokenRequest with the
+// ValidateAll checks the field values on CreateConversationRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GenerateLiveKitTokenRequestMultiError, or nil if none found.
-func (m *GenerateLiveKitTokenRequest) ValidateAll() error {
+// CreateConversationRequestMultiError, or nil if none found.
+func (m *CreateConversationRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GenerateLiveKitTokenRequest) validate(all bool) error {
+func (m *CreateConversationRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for RoomName
-
-	// no validation rules for Identity
+	if utf8.RuneCountInString(m.GetAgentId()) < 1 {
+		err := CreateConversationRequestValidationError{
+			field:  "AgentId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
-		return GenerateLiveKitTokenRequestMultiError(errors)
+		return CreateConversationRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GenerateLiveKitTokenRequestMultiError is an error wrapping multiple
-// validation errors returned by GenerateLiveKitTokenRequest.ValidateAll() if
-// the designated constraints aren't met.
-type GenerateLiveKitTokenRequestMultiError []error
+// CreateConversationRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateConversationRequest.ValidateAll() if the
+// designated constraints aren't met.
+type CreateConversationRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GenerateLiveKitTokenRequestMultiError) Error() string {
+func (m CreateConversationRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -83,12 +90,11 @@ func (m GenerateLiveKitTokenRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GenerateLiveKitTokenRequestMultiError) AllErrors() []error { return m }
+func (m CreateConversationRequestMultiError) AllErrors() []error { return m }
 
-// GenerateLiveKitTokenRequestValidationError is the validation error returned
-// by GenerateLiveKitTokenRequest.Validate if the designated constraints
-// aren't met.
-type GenerateLiveKitTokenRequestValidationError struct {
+// CreateConversationRequestValidationError is the validation error returned by
+// CreateConversationRequest.Validate if the designated constraints aren't met.
+type CreateConversationRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -96,24 +102,24 @@ type GenerateLiveKitTokenRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GenerateLiveKitTokenRequestValidationError) Field() string { return e.field }
+func (e CreateConversationRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GenerateLiveKitTokenRequestValidationError) Reason() string { return e.reason }
+func (e CreateConversationRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GenerateLiveKitTokenRequestValidationError) Cause() error { return e.cause }
+func (e CreateConversationRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GenerateLiveKitTokenRequestValidationError) Key() bool { return e.key }
+func (e CreateConversationRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GenerateLiveKitTokenRequestValidationError) ErrorName() string {
-	return "GenerateLiveKitTokenRequestValidationError"
+func (e CreateConversationRequestValidationError) ErrorName() string {
+	return "CreateConversationRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GenerateLiveKitTokenRequestValidationError) Error() string {
+func (e CreateConversationRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -125,14 +131,14 @@ func (e GenerateLiveKitTokenRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGenerateLiveKitTokenRequest.%s: %s%s",
+		"invalid %sCreateConversationRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GenerateLiveKitTokenRequestValidationError{}
+var _ error = CreateConversationRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -140,48 +146,48 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GenerateLiveKitTokenRequestValidationError{}
+} = CreateConversationRequestValidationError{}
 
-// Validate checks the field values on GenerateLiveKitTokenResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on UpdateConversationRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GenerateLiveKitTokenResponse) Validate() error {
+func (m *UpdateConversationRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GenerateLiveKitTokenResponse with the
+// ValidateAll checks the field values on UpdateConversationRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GenerateLiveKitTokenResponseMultiError, or nil if none found.
-func (m *GenerateLiveKitTokenResponse) ValidateAll() error {
+// UpdateConversationRequestMultiError, or nil if none found.
+func (m *UpdateConversationRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GenerateLiveKitTokenResponse) validate(all bool) error {
+func (m *UpdateConversationRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for AccessToken
+	// no validation rules for Id
 
-	// no validation rules for Url
+	// no validation rules for Action
 
 	if len(errors) > 0 {
-		return GenerateLiveKitTokenResponseMultiError(errors)
+		return UpdateConversationRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GenerateLiveKitTokenResponseMultiError is an error wrapping multiple
-// validation errors returned by GenerateLiveKitTokenResponse.ValidateAll() if
-// the designated constraints aren't met.
-type GenerateLiveKitTokenResponseMultiError []error
+// UpdateConversationRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateConversationRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateConversationRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GenerateLiveKitTokenResponseMultiError) Error() string {
+func (m UpdateConversationRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -190,12 +196,11 @@ func (m GenerateLiveKitTokenResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GenerateLiveKitTokenResponseMultiError) AllErrors() []error { return m }
+func (m UpdateConversationRequestMultiError) AllErrors() []error { return m }
 
-// GenerateLiveKitTokenResponseValidationError is the validation error returned
-// by GenerateLiveKitTokenResponse.Validate if the designated constraints
-// aren't met.
-type GenerateLiveKitTokenResponseValidationError struct {
+// UpdateConversationRequestValidationError is the validation error returned by
+// UpdateConversationRequest.Validate if the designated constraints aren't met.
+type UpdateConversationRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -203,24 +208,24 @@ type GenerateLiveKitTokenResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GenerateLiveKitTokenResponseValidationError) Field() string { return e.field }
+func (e UpdateConversationRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GenerateLiveKitTokenResponseValidationError) Reason() string { return e.reason }
+func (e UpdateConversationRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GenerateLiveKitTokenResponseValidationError) Cause() error { return e.cause }
+func (e UpdateConversationRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GenerateLiveKitTokenResponseValidationError) Key() bool { return e.key }
+func (e UpdateConversationRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GenerateLiveKitTokenResponseValidationError) ErrorName() string {
-	return "GenerateLiveKitTokenResponseValidationError"
+func (e UpdateConversationRequestValidationError) ErrorName() string {
+	return "UpdateConversationRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GenerateLiveKitTokenResponseValidationError) Error() string {
+func (e UpdateConversationRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -232,14 +237,14 @@ func (e GenerateLiveKitTokenResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGenerateLiveKitTokenResponse.%s: %s%s",
+		"invalid %sUpdateConversationRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GenerateLiveKitTokenResponseValidationError{}
+var _ error = UpdateConversationRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -247,4 +252,350 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GenerateLiveKitTokenResponseValidationError{}
+} = UpdateConversationRequestValidationError{}
+
+// Validate checks the field values on GetConversationRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetConversationRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetConversationRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetConversationRequestMultiError, or nil if none found.
+func (m *GetConversationRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetConversationRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return GetConversationRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetConversationRequestMultiError is an error wrapping multiple validation
+// errors returned by GetConversationRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetConversationRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetConversationRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetConversationRequestMultiError) AllErrors() []error { return m }
+
+// GetConversationRequestValidationError is the validation error returned by
+// GetConversationRequest.Validate if the designated constraints aren't met.
+type GetConversationRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetConversationRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetConversationRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetConversationRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetConversationRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetConversationRequestValidationError) ErrorName() string {
+	return "GetConversationRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetConversationRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetConversationRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetConversationRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetConversationRequestValidationError{}
+
+// Validate checks the field values on ListConversationsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListConversationsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListConversationsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListConversationsRequestMultiError, or nil if none found.
+func (m *ListConversationsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListConversationsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for Size
+
+	if len(errors) > 0 {
+		return ListConversationsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListConversationsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListConversationsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListConversationsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListConversationsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListConversationsRequestMultiError) AllErrors() []error { return m }
+
+// ListConversationsRequestValidationError is the validation error returned by
+// ListConversationsRequest.Validate if the designated constraints aren't met.
+type ListConversationsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListConversationsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListConversationsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListConversationsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListConversationsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListConversationsRequestValidationError) ErrorName() string {
+	return "ListConversationsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListConversationsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListConversationsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListConversationsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListConversationsRequestValidationError{}
+
+// Validate checks the field values on ConversationList with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ConversationList) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConversationList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConversationListMultiError, or nil if none found.
+func (m *ConversationList) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConversationList) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ConversationListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ConversationListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ConversationListValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ConversationListMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConversationListMultiError is an error wrapping multiple validation errors
+// returned by ConversationList.ValidateAll() if the designated constraints
+// aren't met.
+type ConversationListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConversationListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConversationListMultiError) AllErrors() []error { return m }
+
+// ConversationListValidationError is the validation error returned by
+// ConversationList.Validate if the designated constraints aren't met.
+type ConversationListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConversationListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConversationListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConversationListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConversationListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConversationListValidationError) ErrorName() string { return "ConversationListValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ConversationListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConversationList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConversationListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConversationListValidationError{}

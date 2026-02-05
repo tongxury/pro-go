@@ -31,9 +31,7 @@ type Conversation struct {
 	// user: 所属用户。
 	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	// agent: 该会话锁定的角色。
-	Agent *Agent `protobuf:"bytes,3,opt,name=agent,proto3" json:"agent,omitempty"`
-	// sceneId: 会话当前激活的场景 ID。
-	SceneId   string `protobuf:"bytes,4,opt,name=sceneId,proto3" json:"sceneId,omitempty"`
+	Agent     *Agent `protobuf:"bytes,3,opt,name=agent,proto3" json:"agent,omitempty"`
 	CreatedAt int64  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	// lastMessageAt: 最后一次交互时间。
 	// [用法]: 用于列表排序及清理僵尸会话。
@@ -41,8 +39,6 @@ type Conversation struct {
 	// status: 状态 (active: 通话中, ended: 通话结束)。
 	// [用法]: 管理 WebSocket 连接的生命周期。
 	Status string `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
-	// conversationId: ElevenLabs 端的会话 ID。
-	ConversationId string `protobuf:"bytes,8,opt,name=conversationId,proto3" json:"conversationId,omitempty"`
 	// signedUrl: 预生成的带签名的 WebSocket 连接地址 (有效期短)。
 	SignedUrl string `protobuf:"bytes,9,opt,name=signedUrl,proto3" json:"signedUrl,omitempty"`
 	// token:
@@ -108,13 +104,6 @@ func (x *Conversation) GetAgent() *Agent {
 	return nil
 }
 
-func (x *Conversation) GetSceneId() string {
-	if x != nil {
-		return x.SceneId
-	}
-	return ""
-}
-
 func (x *Conversation) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
@@ -132,13 +121,6 @@ func (x *Conversation) GetLastMessageAt() int64 {
 func (x *Conversation) GetStatus() string {
 	if x != nil {
 		return x.Status
-	}
-	return ""
-}
-
-func (x *Conversation) GetConversationId() string {
-	if x != nil {
-		return x.ConversationId
 	}
 	return ""
 }
@@ -175,16 +157,14 @@ var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xff\x02\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xbd\x02\n" +
 	"\fConversation\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
-	"\x05agent\x18\x03 \x01(\v2\x15.api.voiceagent.AgentR\x05agent\x12\x18\n" +
-	"\asceneId\x18\x04 \x01(\tR\asceneId\x12\x1c\n" +
+	"\x05agent\x18\x03 \x01(\v2\x15.api.voiceagent.AgentR\x05agent\x12\x1c\n" +
 	"\tcreatedAt\x18\x05 \x01(\x03R\tcreatedAt\x12$\n" +
 	"\rlastMessageAt\x18\x06 \x01(\x03R\rlastMessageAt\x12\x16\n" +
-	"\x06status\x18\a \x01(\tR\x06status\x12&\n" +
-	"\x0econversationId\x18\b \x01(\tR\x0econversationId\x12\x1c\n" +
+	"\x06status\x18\a \x01(\tR\x06status\x12\x1c\n" +
 	"\tsignedUrl\x18\t \x01(\tR\tsignedUrl\x12\x14\n" +
 	"\x05token\x18\n" +
 	" \x01(\tR\x05token\x12\x18\n" +

@@ -792,310 +792,6 @@ func (*ListScenesRequest) Descriptor() ([]byte, []int) {
 	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{13}
 }
 
-type CreateConversationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AgentId       string                 `protobuf:"bytes,1,opt,name=agentId,proto3" json:"agentId,omitempty"`
-	SceneId       string                 `protobuf:"bytes,2,opt,name=sceneId,proto3" json:"sceneId,omitempty"`
-	RoomName      string                 `protobuf:"bytes,3,opt,name=roomName,proto3" json:"roomName,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateConversationRequest) Reset() {
-	*x = CreateConversationRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateConversationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateConversationRequest) ProtoMessage() {}
-
-func (x *CreateConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateConversationRequest.ProtoReflect.Descriptor instead.
-func (*CreateConversationRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *CreateConversationRequest) GetAgentId() string {
-	if x != nil {
-		return x.AgentId
-	}
-	return ""
-}
-
-func (x *CreateConversationRequest) GetSceneId() string {
-	if x != nil {
-		return x.SceneId
-	}
-	return ""
-}
-
-func (x *CreateConversationRequest) GetRoomName() string {
-	if x != nil {
-		return x.RoomName
-	}
-	return ""
-}
-
-type UpdateConversationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Action        string                 `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateConversationRequest) Reset() {
-	*x = UpdateConversationRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateConversationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateConversationRequest) ProtoMessage() {}
-
-func (x *UpdateConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateConversationRequest.ProtoReflect.Descriptor instead.
-func (*UpdateConversationRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *UpdateConversationRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *UpdateConversationRequest) GetAction() string {
-	if x != nil {
-		return x.Action
-	}
-	return ""
-}
-
-type GetConversationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetConversationRequest) Reset() {
-	*x = GetConversationRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetConversationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetConversationRequest) ProtoMessage() {}
-
-func (x *GetConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetConversationRequest.ProtoReflect.Descriptor instead.
-func (*GetConversationRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *GetConversationRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-type EndConversationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EndConversationRequest) Reset() {
-	*x = EndConversationRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EndConversationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EndConversationRequest) ProtoMessage() {}
-
-func (x *EndConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EndConversationRequest.ProtoReflect.Descriptor instead.
-func (*EndConversationRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *EndConversationRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-type ListConversationsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListConversationsRequest) Reset() {
-	*x = ListConversationsRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListConversationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListConversationsRequest) ProtoMessage() {}
-
-func (x *ListConversationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListConversationsRequest.ProtoReflect.Descriptor instead.
-func (*ListConversationsRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *ListConversationsRequest) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *ListConversationsRequest) GetSize() int64 {
-	if x != nil {
-		return x.Size
-	}
-	return 0
-}
-
-type ConversationList struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	List          []*Conversation        `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ConversationList) Reset() {
-	*x = ConversationList{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConversationList) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConversationList) ProtoMessage() {}
-
-func (x *ConversationList) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConversationList.ProtoReflect.Descriptor instead.
-func (*ConversationList) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *ConversationList) GetList() []*Conversation {
-	if x != nil {
-		return x.List
-	}
-	return nil
-}
-
-func (x *ConversationList) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
 type ListTranscriptEntriesRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	ConversationId string                 `protobuf:"bytes,1,opt,name=conversationId,proto3" json:"conversationId,omitempty"`
@@ -1107,7 +803,7 @@ type ListTranscriptEntriesRequest struct {
 
 func (x *ListTranscriptEntriesRequest) Reset() {
 	*x = ListTranscriptEntriesRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[20]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1119,7 +815,7 @@ func (x *ListTranscriptEntriesRequest) String() string {
 func (*ListTranscriptEntriesRequest) ProtoMessage() {}
 
 func (x *ListTranscriptEntriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[20]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1132,7 +828,7 @@ func (x *ListTranscriptEntriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTranscriptEntriesRequest.ProtoReflect.Descriptor instead.
 func (*ListTranscriptEntriesRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{20}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListTranscriptEntriesRequest) GetConversationId() string {
@@ -1166,7 +862,7 @@ type TranscriptEntryList struct {
 
 func (x *TranscriptEntryList) Reset() {
 	*x = TranscriptEntryList{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[21]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1178,7 +874,7 @@ func (x *TranscriptEntryList) String() string {
 func (*TranscriptEntryList) ProtoMessage() {}
 
 func (x *TranscriptEntryList) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[21]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1191,7 +887,7 @@ func (x *TranscriptEntryList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TranscriptEntryList.ProtoReflect.Descriptor instead.
 func (*TranscriptEntryList) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{21}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *TranscriptEntryList) GetList() []*TranscriptEntry {
@@ -1219,7 +915,7 @@ type RecordTranscriptEntryRequest struct {
 
 func (x *RecordTranscriptEntryRequest) Reset() {
 	*x = RecordTranscriptEntryRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[22]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +927,7 @@ func (x *RecordTranscriptEntryRequest) String() string {
 func (*RecordTranscriptEntryRequest) ProtoMessage() {}
 
 func (x *RecordTranscriptEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[22]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +940,7 @@ func (x *RecordTranscriptEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordTranscriptEntryRequest.ProtoReflect.Descriptor instead.
 func (*RecordTranscriptEntryRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{22}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *RecordTranscriptEntryRequest) GetConversationId() string {
@@ -1279,7 +975,7 @@ type SendMessageRequest struct {
 
 func (x *SendMessageRequest) Reset() {
 	*x = SendMessageRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1291,7 +987,7 @@ func (x *SendMessageRequest) String() string {
 func (*SendMessageRequest) ProtoMessage() {}
 
 func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1304,7 +1000,7 @@ func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendMessageRequest.ProtoReflect.Descriptor instead.
 func (*SendMessageRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{23}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SendMessageRequest) GetConversationId() string {
@@ -1339,7 +1035,7 @@ type ListMemoriesRequest struct {
 
 func (x *ListMemoriesRequest) Reset() {
 	*x = ListMemoriesRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1351,7 +1047,7 @@ func (x *ListMemoriesRequest) String() string {
 func (*ListMemoriesRequest) ProtoMessage() {}
 
 func (x *ListMemoriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1364,7 +1060,7 @@ func (x *ListMemoriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoriesRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoriesRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{24}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListMemoriesRequest) GetType() string {
@@ -1398,7 +1094,7 @@ type MemoryList struct {
 
 func (x *MemoryList) Reset() {
 	*x = MemoryList{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1410,7 +1106,7 @@ func (x *MemoryList) String() string {
 func (*MemoryList) ProtoMessage() {}
 
 func (x *MemoryList) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1423,7 +1119,7 @@ func (x *MemoryList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryList.ProtoReflect.Descriptor instead.
 func (*MemoryList) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{25}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *MemoryList) GetList() []*Memory {
@@ -1453,7 +1149,7 @@ type CreateMemoryRequest struct {
 
 func (x *CreateMemoryRequest) Reset() {
 	*x = CreateMemoryRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1465,7 +1161,7 @@ func (x *CreateMemoryRequest) String() string {
 func (*CreateMemoryRequest) ProtoMessage() {}
 
 func (x *CreateMemoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1478,7 +1174,7 @@ func (x *CreateMemoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMemoryRequest.ProtoReflect.Descriptor instead.
 func (*CreateMemoryRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{26}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CreateMemoryRequest) GetType() string {
@@ -1525,7 +1221,7 @@ type DeleteMemoryRequest struct {
 
 func (x *DeleteMemoryRequest) Reset() {
 	*x = DeleteMemoryRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1537,7 +1233,7 @@ func (x *DeleteMemoryRequest) String() string {
 func (*DeleteMemoryRequest) ProtoMessage() {}
 
 func (x *DeleteMemoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1550,7 +1246,7 @@ func (x *DeleteMemoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMemoryRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMemoryRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{27}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DeleteMemoryRequest) GetId() string {
@@ -1568,7 +1264,7 @@ type GetUserProfileRequest struct {
 
 func (x *GetUserProfileRequest) Reset() {
 	*x = GetUserProfileRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1580,7 +1276,7 @@ func (x *GetUserProfileRequest) String() string {
 func (*GetUserProfileRequest) ProtoMessage() {}
 
 func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1593,7 +1289,7 @@ func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserProfileRequest.ProtoReflect.Descriptor instead.
 func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{28}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{22}
 }
 
 type UpdateUserProfileRequest struct {
@@ -1610,7 +1306,7 @@ type UpdateUserProfileRequest struct {
 
 func (x *UpdateUserProfileRequest) Reset() {
 	*x = UpdateUserProfileRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1622,7 +1318,7 @@ func (x *UpdateUserProfileRequest) String() string {
 func (*UpdateUserProfileRequest) ProtoMessage() {}
 
 func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1635,7 +1331,7 @@ func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserProfileRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserProfileRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{29}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UpdateUserProfileRequest) GetNickname() string {
@@ -1692,7 +1388,7 @@ type ListEmotionLogsRequest struct {
 
 func (x *ListEmotionLogsRequest) Reset() {
 	*x = ListEmotionLogsRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +1400,7 @@ func (x *ListEmotionLogsRequest) String() string {
 func (*ListEmotionLogsRequest) ProtoMessage() {}
 
 func (x *ListEmotionLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1413,7 @@ func (x *ListEmotionLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEmotionLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListEmotionLogsRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{30}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListEmotionLogsRequest) GetPage() int64 {
@@ -1758,7 +1454,7 @@ type EmotionLogList struct {
 
 func (x *EmotionLogList) Reset() {
 	*x = EmotionLogList{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1770,7 +1466,7 @@ func (x *EmotionLogList) String() string {
 func (*EmotionLogList) ProtoMessage() {}
 
 func (x *EmotionLogList) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1783,7 +1479,7 @@ func (x *EmotionLogList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmotionLogList.ProtoReflect.Descriptor instead.
 func (*EmotionLogList) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{31}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *EmotionLogList) GetList() []*EmotionLog {
@@ -1809,7 +1505,7 @@ type GetEmotionStatsRequest struct {
 
 func (x *GetEmotionStatsRequest) Reset() {
 	*x = GetEmotionStatsRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1821,7 +1517,7 @@ func (x *GetEmotionStatsRequest) String() string {
 func (*GetEmotionStatsRequest) ProtoMessage() {}
 
 func (x *GetEmotionStatsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1834,7 +1530,7 @@ func (x *GetEmotionStatsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEmotionStatsRequest.ProtoReflect.Descriptor instead.
 func (*GetEmotionStatsRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{32}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *GetEmotionStatsRequest) GetDays() int32 {
@@ -1855,7 +1551,7 @@ type ListEventsRequest struct {
 
 func (x *ListEventsRequest) Reset() {
 	*x = ListEventsRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1867,7 +1563,7 @@ func (x *ListEventsRequest) String() string {
 func (*ListEventsRequest) ProtoMessage() {}
 
 func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1880,7 +1576,7 @@ func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListEventsRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{33}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListEventsRequest) GetType() string {
@@ -1914,7 +1610,7 @@ type EventList struct {
 
 func (x *EventList) Reset() {
 	*x = EventList{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1926,7 +1622,7 @@ func (x *EventList) String() string {
 func (*EventList) ProtoMessage() {}
 
 func (x *EventList) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1939,7 +1635,7 @@ func (x *EventList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventList.ProtoReflect.Descriptor instead.
 func (*EventList) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{34}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *EventList) GetList() []*ImportantEvent {
@@ -1971,7 +1667,7 @@ type CreateEventRequest struct {
 
 func (x *CreateEventRequest) Reset() {
 	*x = CreateEventRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1983,7 +1679,7 @@ func (x *CreateEventRequest) String() string {
 func (*CreateEventRequest) ProtoMessage() {}
 
 func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1996,7 +1692,7 @@ func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEventRequest.ProtoReflect.Descriptor instead.
 func (*CreateEventRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{35}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *CreateEventRequest) GetTitle() string {
@@ -2064,7 +1760,7 @@ type UpdateEventRequest struct {
 
 func (x *UpdateEventRequest) Reset() {
 	*x = UpdateEventRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2076,7 +1772,7 @@ func (x *UpdateEventRequest) String() string {
 func (*UpdateEventRequest) ProtoMessage() {}
 
 func (x *UpdateEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +1785,7 @@ func (x *UpdateEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEventRequest.ProtoReflect.Descriptor instead.
 func (*UpdateEventRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{36}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *UpdateEventRequest) GetId() string {
@@ -2157,7 +1853,7 @@ type DeleteEventRequest struct {
 
 func (x *DeleteEventRequest) Reset() {
 	*x = DeleteEventRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2169,7 +1865,7 @@ func (x *DeleteEventRequest) String() string {
 func (*DeleteEventRequest) ProtoMessage() {}
 
 func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2182,7 +1878,7 @@ func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEventRequest.ProtoReflect.Descriptor instead.
 func (*DeleteEventRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{37}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DeleteEventRequest) GetId() string {
@@ -2201,7 +1897,7 @@ type GetUpcomingEventsRequest struct {
 
 func (x *GetUpcomingEventsRequest) Reset() {
 	*x = GetUpcomingEventsRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[38]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2213,7 +1909,7 @@ func (x *GetUpcomingEventsRequest) String() string {
 func (*GetUpcomingEventsRequest) ProtoMessage() {}
 
 func (x *GetUpcomingEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[38]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2226,7 +1922,7 @@ func (x *GetUpcomingEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUpcomingEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetUpcomingEventsRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{38}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetUpcomingEventsRequest) GetDays() int32 {
@@ -2245,7 +1941,7 @@ type GetGrowthReportRequest struct {
 
 func (x *GetGrowthReportRequest) Reset() {
 	*x = GetGrowthReportRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[39]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2257,7 +1953,7 @@ func (x *GetGrowthReportRequest) String() string {
 func (*GetGrowthReportRequest) ProtoMessage() {}
 
 func (x *GetGrowthReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[39]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2270,7 +1966,7 @@ func (x *GetGrowthReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGrowthReportRequest.ProtoReflect.Descriptor instead.
 func (*GetGrowthReportRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{39}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetGrowthReportRequest) GetPeriod() string {
@@ -2309,7 +2005,7 @@ type GrowthReport struct {
 
 func (x *GrowthReport) Reset() {
 	*x = GrowthReport{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[40]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2321,7 +2017,7 @@ func (x *GrowthReport) String() string {
 func (*GrowthReport) ProtoMessage() {}
 
 func (x *GrowthReport) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[40]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2334,7 +2030,7 @@ func (x *GrowthReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrowthReport.ProtoReflect.Descriptor instead.
 func (*GrowthReport) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{40}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GrowthReport) GetPeriod() string {
@@ -2415,7 +2111,7 @@ type GenerateCartesiaTokenRequest struct {
 
 func (x *GenerateCartesiaTokenRequest) Reset() {
 	*x = GenerateCartesiaTokenRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[41]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2427,7 +2123,7 @@ func (x *GenerateCartesiaTokenRequest) String() string {
 func (*GenerateCartesiaTokenRequest) ProtoMessage() {}
 
 func (x *GenerateCartesiaTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[41]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2440,7 +2136,7 @@ func (x *GenerateCartesiaTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateCartesiaTokenRequest.ProtoReflect.Descriptor instead.
 func (*GenerateCartesiaTokenRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{41}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{35}
 }
 
 type GenerateCartesiaTokenResponse struct {
@@ -2452,7 +2148,7 @@ type GenerateCartesiaTokenResponse struct {
 
 func (x *GenerateCartesiaTokenResponse) Reset() {
 	*x = GenerateCartesiaTokenResponse{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[42]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2464,7 +2160,7 @@ func (x *GenerateCartesiaTokenResponse) String() string {
 func (*GenerateCartesiaTokenResponse) ProtoMessage() {}
 
 func (x *GenerateCartesiaTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[42]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2477,7 +2173,7 @@ func (x *GenerateCartesiaTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateCartesiaTokenResponse.ProtoReflect.Descriptor instead.
 func (*GenerateCartesiaTokenResponse) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{42}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GenerateCartesiaTokenResponse) GetAccessToken() string {
@@ -2501,7 +2197,7 @@ type AddTranscriptEntryRequest struct {
 
 func (x *AddTranscriptEntryRequest) Reset() {
 	*x = AddTranscriptEntryRequest{}
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[43]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2513,7 +2209,7 @@ func (x *AddTranscriptEntryRequest) String() string {
 func (*AddTranscriptEntryRequest) ProtoMessage() {}
 
 func (x *AddTranscriptEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[43]
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2526,7 +2222,7 @@ func (x *AddTranscriptEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddTranscriptEntryRequest.ProtoReflect.Descriptor instead.
 func (*AddTranscriptEntryRequest) Descriptor() ([]byte, []int) {
-	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{43}
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *AddTranscriptEntryRequest) GetConversationId() string {
@@ -2625,24 +2321,7 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\x05owner\x18\x01 \x01(\tR\x05owner\"6\n" +
 	"\tSceneList\x12)\n" +
 	"\x04list\x18\x01 \x03(\v2\x15.api.voiceagent.SceneR\x04list\"\x13\n" +
-	"\x11ListScenesRequest\"t\n" +
-	"\x19CreateConversationRequest\x12!\n" +
-	"\aagentId\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aagentId\x12\x18\n" +
-	"\asceneId\x18\x02 \x01(\tR\asceneId\x12\x1a\n" +
-	"\broomName\x18\x03 \x01(\tR\broomName\"C\n" +
-	"\x19UpdateConversationRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06action\x18\x04 \x01(\tR\x06action\"(\n" +
-	"\x16GetConversationRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
-	"\x16EndConversationRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"B\n" +
-	"\x18ListConversationsRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x02 \x01(\x03R\x04size\"Z\n" +
-	"\x10ConversationList\x120\n" +
-	"\x04list\x18\x01 \x03(\v2\x1c.api.voiceagent.ConversationR\x04list\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\"n\n" +
+	"\x11ListScenesRequest\"n\n" +
 	"\x1cListTranscriptEntriesRequest\x12&\n" +
 	"\x0econversationId\x18\x01 \x01(\tR\x0econversationId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x12\n" +
@@ -2747,7 +2426,7 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1a\n" +
 	"\broomName\x18\x05 \x01(\tR\broomName\x12\x1a\n" +
-	"\baudioUrl\x18\x06 \x01(\tR\baudioUrl2\x86\x1d\n" +
+	"\baudioUrl\x18\x06 \x01(\tR\baudioUrl2\x81\x19\n" +
 	"\x11VoiceAgentService\x12j\n" +
 	"\fListPersonas\x12#.api.voiceagent.ListPersonasRequest\x1a\x1b.api.voiceagent.PersonaList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/personas\x12g\n" +
 	"\n" +
@@ -2762,12 +2441,8 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\n" +
 	"ListVoices\x12!.api.voiceagent.ListVoicesRequest\x1a\x19.api.voiceagent.VoiceList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/voices\x12b\n" +
 	"\n" +
-	"ListScenes\x12!.api.voiceagent.ListScenesRequest\x1a\x19.api.voiceagent.SceneList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/scenes\x12\x7f\n" +
-	"\x12CreateConversation\x12).api.voiceagent.CreateConversationRequest\x1a\x1c.api.voiceagent.Conversation\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/va/conversations\x12\x80\x01\n" +
-	"\x12AddTranscriptEntry\x12).api.voiceagent.AddTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12\x84\x01\n" +
-	"\x12UpdateConversation\x12).api.voiceagent.UpdateConversationRequest\x1a\x1c.api.voiceagent.Conversation\"%\x82\xd3\xe4\x93\x02\x1f:\x01*2\x1a/api/va/conversations/{id}\x12{\n" +
-	"\x0fGetConversation\x12&.api.voiceagent.GetConversationRequest\x1a\x1c.api.voiceagent.Conversation\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/va/conversations/{id}\x12~\n" +
-	"\x11ListConversations\x12(.api.voiceagent.ListConversationsRequest\x1a .api.voiceagent.ConversationList\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/va/conversations\x12\xa6\x01\n" +
+	"ListScenes\x12!.api.voiceagent.ListScenesRequest\x1a\x19.api.voiceagent.SceneList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/scenes\x12\x80\x01\n" +
+	"\x12AddTranscriptEntry\x12).api.voiceagent.AddTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12\xa6\x01\n" +
 	"\x15ListTranscriptEntries\x12,.api.voiceagent.ListTranscriptEntriesRequest\x1a#.api.voiceagent.TranscriptEntryList\":\x82\xd3\xe4\x93\x024\x122/api/va/conversations/{conversationId}/transcripts\x12\x86\x01\n" +
 	"\x15RecordTranscriptEntry\x12,.api.voiceagent.RecordTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12o\n" +
 	"\vSendMessage\x12\".api.voiceagent.SendMessageRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/messages\x12i\n" +
@@ -2799,7 +2474,7 @@ func file_voiceagent_voiceagent_service_proto_rawDescGZIP() []byte {
 	return file_voiceagent_voiceagent_service_proto_rawDescData
 }
 
-var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*CreateAgentRequest)(nil),            // 0: api.voiceagent.CreateAgentRequest
 	(*ListPersonasRequest)(nil),           // 1: api.voiceagent.ListPersonasRequest
@@ -2815,133 +2490,117 @@ var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*ListVoicesRequest)(nil),             // 11: api.voiceagent.ListVoicesRequest
 	(*SceneList)(nil),                     // 12: api.voiceagent.SceneList
 	(*ListScenesRequest)(nil),             // 13: api.voiceagent.ListScenesRequest
-	(*CreateConversationRequest)(nil),     // 14: api.voiceagent.CreateConversationRequest
-	(*UpdateConversationRequest)(nil),     // 15: api.voiceagent.UpdateConversationRequest
-	(*GetConversationRequest)(nil),        // 16: api.voiceagent.GetConversationRequest
-	(*EndConversationRequest)(nil),        // 17: api.voiceagent.EndConversationRequest
-	(*ListConversationsRequest)(nil),      // 18: api.voiceagent.ListConversationsRequest
-	(*ConversationList)(nil),              // 19: api.voiceagent.ConversationList
-	(*ListTranscriptEntriesRequest)(nil),  // 20: api.voiceagent.ListTranscriptEntriesRequest
-	(*TranscriptEntryList)(nil),           // 21: api.voiceagent.TranscriptEntryList
-	(*RecordTranscriptEntryRequest)(nil),  // 22: api.voiceagent.RecordTranscriptEntryRequest
-	(*SendMessageRequest)(nil),            // 23: api.voiceagent.SendMessageRequest
-	(*ListMemoriesRequest)(nil),           // 24: api.voiceagent.ListMemoriesRequest
-	(*MemoryList)(nil),                    // 25: api.voiceagent.MemoryList
-	(*CreateMemoryRequest)(nil),           // 26: api.voiceagent.CreateMemoryRequest
-	(*DeleteMemoryRequest)(nil),           // 27: api.voiceagent.DeleteMemoryRequest
-	(*GetUserProfileRequest)(nil),         // 28: api.voiceagent.GetUserProfileRequest
-	(*UpdateUserProfileRequest)(nil),      // 29: api.voiceagent.UpdateUserProfileRequest
-	(*ListEmotionLogsRequest)(nil),        // 30: api.voiceagent.ListEmotionLogsRequest
-	(*EmotionLogList)(nil),                // 31: api.voiceagent.EmotionLogList
-	(*GetEmotionStatsRequest)(nil),        // 32: api.voiceagent.GetEmotionStatsRequest
-	(*ListEventsRequest)(nil),             // 33: api.voiceagent.ListEventsRequest
-	(*EventList)(nil),                     // 34: api.voiceagent.EventList
-	(*CreateEventRequest)(nil),            // 35: api.voiceagent.CreateEventRequest
-	(*UpdateEventRequest)(nil),            // 36: api.voiceagent.UpdateEventRequest
-	(*DeleteEventRequest)(nil),            // 37: api.voiceagent.DeleteEventRequest
-	(*GetUpcomingEventsRequest)(nil),      // 38: api.voiceagent.GetUpcomingEventsRequest
-	(*GetGrowthReportRequest)(nil),        // 39: api.voiceagent.GetGrowthReportRequest
-	(*GrowthReport)(nil),                  // 40: api.voiceagent.GrowthReport
-	(*GenerateCartesiaTokenRequest)(nil),  // 41: api.voiceagent.GenerateCartesiaTokenRequest
-	(*GenerateCartesiaTokenResponse)(nil), // 42: api.voiceagent.GenerateCartesiaTokenResponse
-	(*AddTranscriptEntryRequest)(nil),     // 43: api.voiceagent.AddTranscriptEntryRequest
-	nil,                                   // 44: api.voiceagent.AddVoiceRequest.SettingsEntry
-	(*Persona)(nil),                       // 45: api.voiceagent.Persona
-	(*Agent)(nil),                         // 46: api.voiceagent.Agent
-	(*Voice)(nil),                         // 47: api.voiceagent.Voice
-	(*Scene)(nil),                         // 48: api.voiceagent.Scene
-	(*Conversation)(nil),                  // 49: api.voiceagent.Conversation
-	(*TranscriptEntry)(nil),               // 50: api.voiceagent.TranscriptEntry
-	(*Memory)(nil),                        // 51: api.voiceagent.Memory
-	(*EmotionLog)(nil),                    // 52: api.voiceagent.EmotionLog
-	(*ImportantEvent)(nil),                // 53: api.voiceagent.ImportantEvent
-	(*EmotionStats)(nil),                  // 54: api.voiceagent.EmotionStats
-	(*emptypb.Empty)(nil),                 // 55: google.protobuf.Empty
-	(*UserProfile)(nil),                   // 56: api.voiceagent.UserProfile
+	(*ListTranscriptEntriesRequest)(nil),  // 14: api.voiceagent.ListTranscriptEntriesRequest
+	(*TranscriptEntryList)(nil),           // 15: api.voiceagent.TranscriptEntryList
+	(*RecordTranscriptEntryRequest)(nil),  // 16: api.voiceagent.RecordTranscriptEntryRequest
+	(*SendMessageRequest)(nil),            // 17: api.voiceagent.SendMessageRequest
+	(*ListMemoriesRequest)(nil),           // 18: api.voiceagent.ListMemoriesRequest
+	(*MemoryList)(nil),                    // 19: api.voiceagent.MemoryList
+	(*CreateMemoryRequest)(nil),           // 20: api.voiceagent.CreateMemoryRequest
+	(*DeleteMemoryRequest)(nil),           // 21: api.voiceagent.DeleteMemoryRequest
+	(*GetUserProfileRequest)(nil),         // 22: api.voiceagent.GetUserProfileRequest
+	(*UpdateUserProfileRequest)(nil),      // 23: api.voiceagent.UpdateUserProfileRequest
+	(*ListEmotionLogsRequest)(nil),        // 24: api.voiceagent.ListEmotionLogsRequest
+	(*EmotionLogList)(nil),                // 25: api.voiceagent.EmotionLogList
+	(*GetEmotionStatsRequest)(nil),        // 26: api.voiceagent.GetEmotionStatsRequest
+	(*ListEventsRequest)(nil),             // 27: api.voiceagent.ListEventsRequest
+	(*EventList)(nil),                     // 28: api.voiceagent.EventList
+	(*CreateEventRequest)(nil),            // 29: api.voiceagent.CreateEventRequest
+	(*UpdateEventRequest)(nil),            // 30: api.voiceagent.UpdateEventRequest
+	(*DeleteEventRequest)(nil),            // 31: api.voiceagent.DeleteEventRequest
+	(*GetUpcomingEventsRequest)(nil),      // 32: api.voiceagent.GetUpcomingEventsRequest
+	(*GetGrowthReportRequest)(nil),        // 33: api.voiceagent.GetGrowthReportRequest
+	(*GrowthReport)(nil),                  // 34: api.voiceagent.GrowthReport
+	(*GenerateCartesiaTokenRequest)(nil),  // 35: api.voiceagent.GenerateCartesiaTokenRequest
+	(*GenerateCartesiaTokenResponse)(nil), // 36: api.voiceagent.GenerateCartesiaTokenResponse
+	(*AddTranscriptEntryRequest)(nil),     // 37: api.voiceagent.AddTranscriptEntryRequest
+	nil,                                   // 38: api.voiceagent.AddVoiceRequest.SettingsEntry
+	(*Persona)(nil),                       // 39: api.voiceagent.Persona
+	(*Agent)(nil),                         // 40: api.voiceagent.Agent
+	(*Voice)(nil),                         // 41: api.voiceagent.Voice
+	(*Scene)(nil),                         // 42: api.voiceagent.Scene
+	(*TranscriptEntry)(nil),               // 43: api.voiceagent.TranscriptEntry
+	(*Memory)(nil),                        // 44: api.voiceagent.Memory
+	(*EmotionLog)(nil),                    // 45: api.voiceagent.EmotionLog
+	(*ImportantEvent)(nil),                // 46: api.voiceagent.ImportantEvent
+	(*EmotionStats)(nil),                  // 47: api.voiceagent.EmotionStats
+	(*emptypb.Empty)(nil),                 // 48: google.protobuf.Empty
+	(*UserProfile)(nil),                   // 49: api.voiceagent.UserProfile
 }
 var file_voiceagent_voiceagent_service_proto_depIdxs = []int32{
-	45, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
-	46, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
-	44, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
-	47, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
-	48, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
-	49, // 5: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
-	50, // 6: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
-	51, // 7: api.voiceagent.MemoryList.list:type_name -> api.voiceagent.Memory
-	52, // 8: api.voiceagent.EmotionLogList.list:type_name -> api.voiceagent.EmotionLog
-	53, // 9: api.voiceagent.EventList.list:type_name -> api.voiceagent.ImportantEvent
-	51, // 10: api.voiceagent.GrowthReport.newMemories:type_name -> api.voiceagent.Memory
-	54, // 11: api.voiceagent.GrowthReport.emotionSummary:type_name -> api.voiceagent.EmotionStats
-	53, // 12: api.voiceagent.GrowthReport.upcomingEvents:type_name -> api.voiceagent.ImportantEvent
-	1,  // 13: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
-	3,  // 14: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
-	0,  // 15: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
-	4,  // 16: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
-	5,  // 17: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
-	6,  // 18: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
-	7,  // 19: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
-	9,  // 20: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
-	11, // 21: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
-	13, // 22: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
-	14, // 23: api.voiceagent.VoiceAgentService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
-	43, // 24: api.voiceagent.VoiceAgentService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
-	15, // 25: api.voiceagent.VoiceAgentService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
-	16, // 26: api.voiceagent.VoiceAgentService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
-	18, // 27: api.voiceagent.VoiceAgentService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
-	20, // 28: api.voiceagent.VoiceAgentService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
-	22, // 29: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:input_type -> api.voiceagent.RecordTranscriptEntryRequest
-	23, // 30: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
-	24, // 31: api.voiceagent.VoiceAgentService.ListMemories:input_type -> api.voiceagent.ListMemoriesRequest
-	26, // 32: api.voiceagent.VoiceAgentService.CreateMemory:input_type -> api.voiceagent.CreateMemoryRequest
-	27, // 33: api.voiceagent.VoiceAgentService.DeleteMemory:input_type -> api.voiceagent.DeleteMemoryRequest
-	28, // 34: api.voiceagent.VoiceAgentService.GetUserProfile:input_type -> api.voiceagent.GetUserProfileRequest
-	29, // 35: api.voiceagent.VoiceAgentService.UpdateUserProfile:input_type -> api.voiceagent.UpdateUserProfileRequest
-	30, // 36: api.voiceagent.VoiceAgentService.ListEmotionLogs:input_type -> api.voiceagent.ListEmotionLogsRequest
-	32, // 37: api.voiceagent.VoiceAgentService.GetEmotionStats:input_type -> api.voiceagent.GetEmotionStatsRequest
-	33, // 38: api.voiceagent.VoiceAgentService.ListEvents:input_type -> api.voiceagent.ListEventsRequest
-	35, // 39: api.voiceagent.VoiceAgentService.CreateEvent:input_type -> api.voiceagent.CreateEventRequest
-	36, // 40: api.voiceagent.VoiceAgentService.UpdateEvent:input_type -> api.voiceagent.UpdateEventRequest
-	37, // 41: api.voiceagent.VoiceAgentService.DeleteEvent:input_type -> api.voiceagent.DeleteEventRequest
-	38, // 42: api.voiceagent.VoiceAgentService.GetUpcomingEvents:input_type -> api.voiceagent.GetUpcomingEventsRequest
-	39, // 43: api.voiceagent.VoiceAgentService.GetGrowthReport:input_type -> api.voiceagent.GetGrowthReportRequest
-	41, // 44: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:input_type -> api.voiceagent.GenerateCartesiaTokenRequest
-	2,  // 45: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
-	45, // 46: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
-	46, // 47: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
-	46, // 48: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
-	55, // 49: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
-	46, // 50: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
-	8,  // 51: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
-	47, // 52: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
-	10, // 53: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
-	12, // 54: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
-	49, // 55: api.voiceagent.VoiceAgentService.CreateConversation:output_type -> api.voiceagent.Conversation
-	50, // 56: api.voiceagent.VoiceAgentService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
-	49, // 57: api.voiceagent.VoiceAgentService.UpdateConversation:output_type -> api.voiceagent.Conversation
-	49, // 58: api.voiceagent.VoiceAgentService.GetConversation:output_type -> api.voiceagent.Conversation
-	19, // 59: api.voiceagent.VoiceAgentService.ListConversations:output_type -> api.voiceagent.ConversationList
-	21, // 60: api.voiceagent.VoiceAgentService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
-	50, // 61: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
-	50, // 62: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
-	25, // 63: api.voiceagent.VoiceAgentService.ListMemories:output_type -> api.voiceagent.MemoryList
-	51, // 64: api.voiceagent.VoiceAgentService.CreateMemory:output_type -> api.voiceagent.Memory
-	55, // 65: api.voiceagent.VoiceAgentService.DeleteMemory:output_type -> google.protobuf.Empty
-	56, // 66: api.voiceagent.VoiceAgentService.GetUserProfile:output_type -> api.voiceagent.UserProfile
-	56, // 67: api.voiceagent.VoiceAgentService.UpdateUserProfile:output_type -> api.voiceagent.UserProfile
-	31, // 68: api.voiceagent.VoiceAgentService.ListEmotionLogs:output_type -> api.voiceagent.EmotionLogList
-	54, // 69: api.voiceagent.VoiceAgentService.GetEmotionStats:output_type -> api.voiceagent.EmotionStats
-	34, // 70: api.voiceagent.VoiceAgentService.ListEvents:output_type -> api.voiceagent.EventList
-	53, // 71: api.voiceagent.VoiceAgentService.CreateEvent:output_type -> api.voiceagent.ImportantEvent
-	53, // 72: api.voiceagent.VoiceAgentService.UpdateEvent:output_type -> api.voiceagent.ImportantEvent
-	55, // 73: api.voiceagent.VoiceAgentService.DeleteEvent:output_type -> google.protobuf.Empty
-	34, // 74: api.voiceagent.VoiceAgentService.GetUpcomingEvents:output_type -> api.voiceagent.EventList
-	40, // 75: api.voiceagent.VoiceAgentService.GetGrowthReport:output_type -> api.voiceagent.GrowthReport
-	42, // 76: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:output_type -> api.voiceagent.GenerateCartesiaTokenResponse
-	45, // [45:77] is the sub-list for method output_type
-	13, // [13:45] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	39, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
+	40, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
+	38, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
+	41, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
+	42, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
+	43, // 5: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
+	44, // 6: api.voiceagent.MemoryList.list:type_name -> api.voiceagent.Memory
+	45, // 7: api.voiceagent.EmotionLogList.list:type_name -> api.voiceagent.EmotionLog
+	46, // 8: api.voiceagent.EventList.list:type_name -> api.voiceagent.ImportantEvent
+	44, // 9: api.voiceagent.GrowthReport.newMemories:type_name -> api.voiceagent.Memory
+	47, // 10: api.voiceagent.GrowthReport.emotionSummary:type_name -> api.voiceagent.EmotionStats
+	46, // 11: api.voiceagent.GrowthReport.upcomingEvents:type_name -> api.voiceagent.ImportantEvent
+	1,  // 12: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
+	3,  // 13: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
+	0,  // 14: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
+	4,  // 15: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
+	5,  // 16: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
+	6,  // 17: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
+	7,  // 18: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
+	9,  // 19: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
+	11, // 20: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
+	13, // 21: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
+	37, // 22: api.voiceagent.VoiceAgentService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
+	14, // 23: api.voiceagent.VoiceAgentService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
+	16, // 24: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:input_type -> api.voiceagent.RecordTranscriptEntryRequest
+	17, // 25: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
+	18, // 26: api.voiceagent.VoiceAgentService.ListMemories:input_type -> api.voiceagent.ListMemoriesRequest
+	20, // 27: api.voiceagent.VoiceAgentService.CreateMemory:input_type -> api.voiceagent.CreateMemoryRequest
+	21, // 28: api.voiceagent.VoiceAgentService.DeleteMemory:input_type -> api.voiceagent.DeleteMemoryRequest
+	22, // 29: api.voiceagent.VoiceAgentService.GetUserProfile:input_type -> api.voiceagent.GetUserProfileRequest
+	23, // 30: api.voiceagent.VoiceAgentService.UpdateUserProfile:input_type -> api.voiceagent.UpdateUserProfileRequest
+	24, // 31: api.voiceagent.VoiceAgentService.ListEmotionLogs:input_type -> api.voiceagent.ListEmotionLogsRequest
+	26, // 32: api.voiceagent.VoiceAgentService.GetEmotionStats:input_type -> api.voiceagent.GetEmotionStatsRequest
+	27, // 33: api.voiceagent.VoiceAgentService.ListEvents:input_type -> api.voiceagent.ListEventsRequest
+	29, // 34: api.voiceagent.VoiceAgentService.CreateEvent:input_type -> api.voiceagent.CreateEventRequest
+	30, // 35: api.voiceagent.VoiceAgentService.UpdateEvent:input_type -> api.voiceagent.UpdateEventRequest
+	31, // 36: api.voiceagent.VoiceAgentService.DeleteEvent:input_type -> api.voiceagent.DeleteEventRequest
+	32, // 37: api.voiceagent.VoiceAgentService.GetUpcomingEvents:input_type -> api.voiceagent.GetUpcomingEventsRequest
+	33, // 38: api.voiceagent.VoiceAgentService.GetGrowthReport:input_type -> api.voiceagent.GetGrowthReportRequest
+	35, // 39: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:input_type -> api.voiceagent.GenerateCartesiaTokenRequest
+	2,  // 40: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
+	39, // 41: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
+	40, // 42: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
+	40, // 43: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
+	48, // 44: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
+	40, // 45: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
+	8,  // 46: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
+	41, // 47: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
+	10, // 48: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
+	12, // 49: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
+	43, // 50: api.voiceagent.VoiceAgentService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	15, // 51: api.voiceagent.VoiceAgentService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
+	43, // 52: api.voiceagent.VoiceAgentService.RecordTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	43, // 53: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
+	19, // 54: api.voiceagent.VoiceAgentService.ListMemories:output_type -> api.voiceagent.MemoryList
+	44, // 55: api.voiceagent.VoiceAgentService.CreateMemory:output_type -> api.voiceagent.Memory
+	48, // 56: api.voiceagent.VoiceAgentService.DeleteMemory:output_type -> google.protobuf.Empty
+	49, // 57: api.voiceagent.VoiceAgentService.GetUserProfile:output_type -> api.voiceagent.UserProfile
+	49, // 58: api.voiceagent.VoiceAgentService.UpdateUserProfile:output_type -> api.voiceagent.UserProfile
+	25, // 59: api.voiceagent.VoiceAgentService.ListEmotionLogs:output_type -> api.voiceagent.EmotionLogList
+	47, // 60: api.voiceagent.VoiceAgentService.GetEmotionStats:output_type -> api.voiceagent.EmotionStats
+	28, // 61: api.voiceagent.VoiceAgentService.ListEvents:output_type -> api.voiceagent.EventList
+	46, // 62: api.voiceagent.VoiceAgentService.CreateEvent:output_type -> api.voiceagent.ImportantEvent
+	46, // 63: api.voiceagent.VoiceAgentService.UpdateEvent:output_type -> api.voiceagent.ImportantEvent
+	48, // 64: api.voiceagent.VoiceAgentService.DeleteEvent:output_type -> google.protobuf.Empty
+	28, // 65: api.voiceagent.VoiceAgentService.GetUpcomingEvents:output_type -> api.voiceagent.EventList
+	34, // 66: api.voiceagent.VoiceAgentService.GetGrowthReport:output_type -> api.voiceagent.GrowthReport
+	36, // 67: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:output_type -> api.voiceagent.GenerateCartesiaTokenResponse
+	40, // [40:68] is the sub-list for method output_type
+	12, // [12:40] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_voiceagent_service_proto_init() }
@@ -2965,7 +2624,7 @@ func file_voiceagent_voiceagent_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_voiceagent_service_proto_rawDesc), len(file_voiceagent_voiceagent_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   45,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

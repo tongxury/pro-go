@@ -13,13 +13,15 @@ type VoiceAgentService struct {
 	Data     *data.Data
 	item     *biz.ItemBiz
 	AgentBiz *biz.AgentBiz
+	lk       *LiveKitService
 }
 
-func NewVoiceAgentService(data *data.Data, item *biz.ItemBiz, agentBiz *biz.AgentBiz) *VoiceAgentService {
+func NewVoiceAgentService(data *data.Data, item *biz.ItemBiz, agentBiz *biz.AgentBiz, lk *LiveKitService) *VoiceAgentService {
 	s := &VoiceAgentService{
 		Data:     data,
 		item:     item,
 		AgentBiz: agentBiz,
+		lk:       lk,
 	}
 	// 自动启动异步同步循环
 	//s.StartSyncLoop(context.Background())

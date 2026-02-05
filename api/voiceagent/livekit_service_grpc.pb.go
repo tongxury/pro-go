@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LiveKitService_GenerateLiveKitToken_FullMethodName = "/api.voiceagent.LiveKitService/GenerateLiveKitToken"
+	LiveKitService_CreateConversation_FullMethodName = "/api.voiceagent.LiveKitService/CreateConversation"
+	LiveKitService_GetConversation_FullMethodName    = "/api.voiceagent.LiveKitService/GetConversation"
+	LiveKitService_ListConversations_FullMethodName  = "/api.voiceagent.LiveKitService/ListConversations"
+	LiveKitService_UpdateConversation_FullMethodName = "/api.voiceagent.LiveKitService/UpdateConversation"
 )
 
 // LiveKitServiceClient is the client API for LiveKitService service.
@@ -28,8 +31,14 @@ const (
 //
 // LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
 type LiveKitServiceClient interface {
-	// GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(ctx context.Context, in *GenerateLiveKitTokenRequest, opts ...grpc.CallOption) (*GenerateLiveKitTokenResponse, error)
+	// CreateConversation: 启动一个实时交互会话。基础功能。
+	CreateConversation(ctx context.Context, in *CreateConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	// GetConversation: 获取会话详情。
+	GetConversation(ctx context.Context, in *GetConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	// ListConversations: 分页列出通话记录。
+	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ConversationList, error)
+	// UpdateConversation: 更新会话状态。
+	UpdateConversation(ctx context.Context, in *UpdateConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
 }
 
 type liveKitServiceClient struct {
@@ -40,10 +49,40 @@ func NewLiveKitServiceClient(cc grpc.ClientConnInterface) LiveKitServiceClient {
 	return &liveKitServiceClient{cc}
 }
 
-func (c *liveKitServiceClient) GenerateLiveKitToken(ctx context.Context, in *GenerateLiveKitTokenRequest, opts ...grpc.CallOption) (*GenerateLiveKitTokenResponse, error) {
+func (c *liveKitServiceClient) CreateConversation(ctx context.Context, in *CreateConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GenerateLiveKitTokenResponse)
-	err := c.cc.Invoke(ctx, LiveKitService_GenerateLiveKitToken_FullMethodName, in, out, cOpts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, LiveKitService_CreateConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *liveKitServiceClient) GetConversation(ctx context.Context, in *GetConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, LiveKitService_GetConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *liveKitServiceClient) ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ConversationList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConversationList)
+	err := c.cc.Invoke(ctx, LiveKitService_ListConversations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *liveKitServiceClient) UpdateConversation(ctx context.Context, in *UpdateConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, LiveKitService_UpdateConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,8 +95,14 @@ func (c *liveKitServiceClient) GenerateLiveKitToken(ctx context.Context, in *Gen
 //
 // LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
 type LiveKitServiceServer interface {
-	// GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-	GenerateLiveKitToken(context.Context, *GenerateLiveKitTokenRequest) (*GenerateLiveKitTokenResponse, error)
+	// CreateConversation: 启动一个实时交互会话。基础功能。
+	CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error)
+	// GetConversation: 获取会话详情。
+	GetConversation(context.Context, *GetConversationRequest) (*Conversation, error)
+	// ListConversations: 分页列出通话记录。
+	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
+	// UpdateConversation: 更新会话状态。
+	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
 	mustEmbedUnimplementedLiveKitServiceServer()
 }
 
@@ -68,8 +113,17 @@ type LiveKitServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLiveKitServiceServer struct{}
 
-func (UnimplementedLiveKitServiceServer) GenerateLiveKitToken(context.Context, *GenerateLiveKitTokenRequest) (*GenerateLiveKitTokenResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GenerateLiveKitToken not implemented")
+func (UnimplementedLiveKitServiceServer) CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateConversation not implemented")
+}
+func (UnimplementedLiveKitServiceServer) GetConversation(context.Context, *GetConversationRequest) (*Conversation, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConversation not implemented")
+}
+func (UnimplementedLiveKitServiceServer) ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListConversations not implemented")
+}
+func (UnimplementedLiveKitServiceServer) UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateConversation not implemented")
 }
 func (UnimplementedLiveKitServiceServer) mustEmbedUnimplementedLiveKitServiceServer() {}
 func (UnimplementedLiveKitServiceServer) testEmbeddedByValue()                        {}
@@ -92,20 +146,74 @@ func RegisterLiveKitServiceServer(s grpc.ServiceRegistrar, srv LiveKitServiceSer
 	s.RegisterService(&LiveKitService_ServiceDesc, srv)
 }
 
-func _LiveKitService_GenerateLiveKitToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GenerateLiveKitTokenRequest)
+func _LiveKitService_CreateConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateConversationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LiveKitServiceServer).GenerateLiveKitToken(ctx, in)
+		return srv.(LiveKitServiceServer).CreateConversation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: LiveKitService_GenerateLiveKitToken_FullMethodName,
+		FullMethod: LiveKitService_CreateConversation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LiveKitServiceServer).GenerateLiveKitToken(ctx, req.(*GenerateLiveKitTokenRequest))
+		return srv.(LiveKitServiceServer).CreateConversation(ctx, req.(*CreateConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LiveKitService_GetConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveKitServiceServer).GetConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LiveKitService_GetConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveKitServiceServer).GetConversation(ctx, req.(*GetConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LiveKitService_ListConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveKitServiceServer).ListConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LiveKitService_ListConversations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveKitServiceServer).ListConversations(ctx, req.(*ListConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LiveKitService_UpdateConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveKitServiceServer).UpdateConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LiveKitService_UpdateConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveKitServiceServer).UpdateConversation(ctx, req.(*UpdateConversationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -118,8 +226,20 @@ var LiveKitService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LiveKitServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GenerateLiveKitToken",
-			Handler:    _LiveKitService_GenerateLiveKitToken_Handler,
+			MethodName: "CreateConversation",
+			Handler:    _LiveKitService_CreateConversation_Handler,
+		},
+		{
+			MethodName: "GetConversation",
+			Handler:    _LiveKitService_GetConversation_Handler,
+		},
+		{
+			MethodName: "ListConversations",
+			Handler:    _LiveKitService_ListConversations_Handler,
+		},
+		{
+			MethodName: "UpdateConversation",
+			Handler:    _LiveKitService_UpdateConversation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

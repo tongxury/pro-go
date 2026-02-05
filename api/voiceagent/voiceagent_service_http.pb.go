@@ -23,7 +23,6 @@ const _ = http.SupportPackageIsVersion1
 const OperationVoiceAgentServiceAddTranscriptEntry = "/api.voiceagent.VoiceAgentService/AddTranscriptEntry"
 const OperationVoiceAgentServiceAddVoice = "/api.voiceagent.VoiceAgentService/AddVoice"
 const OperationVoiceAgentServiceCreateAgent = "/api.voiceagent.VoiceAgentService/CreateAgent"
-const OperationVoiceAgentServiceCreateConversation = "/api.voiceagent.VoiceAgentService/CreateConversation"
 const OperationVoiceAgentServiceCreateEvent = "/api.voiceagent.VoiceAgentService/CreateEvent"
 const OperationVoiceAgentServiceCreateMemory = "/api.voiceagent.VoiceAgentService/CreateMemory"
 const OperationVoiceAgentServiceDeleteAgent = "/api.voiceagent.VoiceAgentService/DeleteAgent"
@@ -31,14 +30,12 @@ const OperationVoiceAgentServiceDeleteEvent = "/api.voiceagent.VoiceAgentService
 const OperationVoiceAgentServiceDeleteMemory = "/api.voiceagent.VoiceAgentService/DeleteMemory"
 const OperationVoiceAgentServiceGenerateCartesiaToken = "/api.voiceagent.VoiceAgentService/GenerateCartesiaToken"
 const OperationVoiceAgentServiceGetAgent = "/api.voiceagent.VoiceAgentService/GetAgent"
-const OperationVoiceAgentServiceGetConversation = "/api.voiceagent.VoiceAgentService/GetConversation"
 const OperationVoiceAgentServiceGetEmotionStats = "/api.voiceagent.VoiceAgentService/GetEmotionStats"
 const OperationVoiceAgentServiceGetGrowthReport = "/api.voiceagent.VoiceAgentService/GetGrowthReport"
 const OperationVoiceAgentServiceGetPersona = "/api.voiceagent.VoiceAgentService/GetPersona"
 const OperationVoiceAgentServiceGetUpcomingEvents = "/api.voiceagent.VoiceAgentService/GetUpcomingEvents"
 const OperationVoiceAgentServiceGetUserProfile = "/api.voiceagent.VoiceAgentService/GetUserProfile"
 const OperationVoiceAgentServiceListAgents = "/api.voiceagent.VoiceAgentService/ListAgents"
-const OperationVoiceAgentServiceListConversations = "/api.voiceagent.VoiceAgentService/ListConversations"
 const OperationVoiceAgentServiceListEmotionLogs = "/api.voiceagent.VoiceAgentService/ListEmotionLogs"
 const OperationVoiceAgentServiceListEvents = "/api.voiceagent.VoiceAgentService/ListEvents"
 const OperationVoiceAgentServiceListMemories = "/api.voiceagent.VoiceAgentService/ListMemories"
@@ -49,7 +46,6 @@ const OperationVoiceAgentServiceListVoices = "/api.voiceagent.VoiceAgentService/
 const OperationVoiceAgentServiceRecordTranscriptEntry = "/api.voiceagent.VoiceAgentService/RecordTranscriptEntry"
 const OperationVoiceAgentServiceSendMessage = "/api.voiceagent.VoiceAgentService/SendMessage"
 const OperationVoiceAgentServiceUpdateAgent = "/api.voiceagent.VoiceAgentService/UpdateAgent"
-const OperationVoiceAgentServiceUpdateConversation = "/api.voiceagent.VoiceAgentService/UpdateConversation"
 const OperationVoiceAgentServiceUpdateEvent = "/api.voiceagent.VoiceAgentService/UpdateEvent"
 const OperationVoiceAgentServiceUpdateUserProfile = "/api.voiceagent.VoiceAgentService/UpdateUserProfile"
 
@@ -60,8 +56,6 @@ type VoiceAgentServiceHTTPServer interface {
 	AddVoice(context.Context, *AddVoiceRequest) (*Voice, error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
 	CreateAgent(context.Context, *CreateAgentRequest) (*Agent, error)
-	// CreateConversation CreateConversation: 启动一个实时交互会话。
-	CreateConversation(context.Context, *CreateConversationRequest) (*Conversation, error)
 	// CreateEvent CreateEvent: 创建重要事件。
 	CreateEvent(context.Context, *CreateEventRequest) (*ImportantEvent, error)
 	// CreateMemory CreateMemory: 手动添加一条记忆。
@@ -76,8 +70,6 @@ type VoiceAgentServiceHTTPServer interface {
 	GenerateCartesiaToken(context.Context, *GenerateCartesiaTokenRequest) (*GenerateCartesiaTokenResponse, error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(context.Context, *GetAgentRequest) (*Agent, error)
-	// GetConversation GetConversation: 获取会话详情。
-	GetConversation(context.Context, *GetConversationRequest) (*Conversation, error)
 	// GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
 	GetEmotionStats(context.Context, *GetEmotionStatsRequest) (*EmotionStats, error)
 	// GetGrowthReport GetGrowthReport: 获取成长报告。
@@ -90,8 +82,6 @@ type VoiceAgentServiceHTTPServer interface {
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*UserProfile, error)
 	// ListAgents ListAgents: 列出所有可用角色。
 	ListAgents(context.Context, *ListAgentsRequest) (*AgentList, error)
-	// ListConversations ListConversations: 分页列出通话记录。
-	ListConversations(context.Context, *ListConversationsRequest) (*ConversationList, error)
 	// ListEmotionLogs ListEmotionLogs: 获取情绪记录列表。
 	ListEmotionLogs(context.Context, *ListEmotionLogsRequest) (*EmotionLogList, error)
 	// ListEvents ListEvents: 获取重要事件列表。
@@ -112,8 +102,6 @@ type VoiceAgentServiceHTTPServer interface {
 	SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
 	UpdateAgent(context.Context, *UpdateAgentRequest) (*Agent, error)
-	// UpdateConversation UpdateConversation: 更新会话状态或关联外部 ID。
-	UpdateConversation(context.Context, *UpdateConversationRequest) (*Conversation, error)
 	// UpdateEvent UpdateEvent: 更新重要事件。
 	UpdateEvent(context.Context, *UpdateEventRequest) (*ImportantEvent, error)
 	// UpdateUserProfile UpdateUserProfile: 更新用户档案。
@@ -132,11 +120,7 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.POST("/api/va/voices", _VoiceAgentService_AddVoice0_HTTP_Handler(srv))
 	r.GET("/api/va/voices", _VoiceAgentService_ListVoices0_HTTP_Handler(srv))
 	r.GET("/api/va/scenes", _VoiceAgentService_ListScenes0_HTTP_Handler(srv))
-	r.POST("/api/va/conversations", _VoiceAgentService_CreateConversation0_HTTP_Handler(srv))
 	r.POST("/api/va/transcripts", _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv))
-	r.PATCH("/api/va/conversations/{id}", _VoiceAgentService_UpdateConversation0_HTTP_Handler(srv))
-	r.GET("/api/va/conversations/{id}", _VoiceAgentService_GetConversation0_HTTP_Handler(srv))
-	r.GET("/api/va/conversations", _VoiceAgentService_ListConversations0_HTTP_Handler(srv))
 	r.GET("/api/va/conversations/{conversationId}/transcripts", _VoiceAgentService_ListTranscriptEntries0_HTTP_Handler(srv))
 	r.POST("/api/va/transcripts", _VoiceAgentService_RecordTranscriptEntry0_HTTP_Handler(srv))
 	r.POST("/api/va/messages", _VoiceAgentService_SendMessage0_HTTP_Handler(srv))
@@ -367,28 +351,6 @@ func _VoiceAgentService_ListScenes0_HTTP_Handler(srv VoiceAgentServiceHTTPServer
 	}
 }
 
-func _VoiceAgentService_CreateConversation0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CreateConversationRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceCreateConversation)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateConversation(ctx, req.(*CreateConversationRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*Conversation)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddTranscriptEntryRequest
@@ -407,72 +369,6 @@ func _VoiceAgentService_AddTranscriptEntry0_HTTP_Handler(srv VoiceAgentServiceHT
 			return err
 		}
 		reply := out.(*TranscriptEntry)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_UpdateConversation0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateConversationRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceUpdateConversation)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateConversation(ctx, req.(*UpdateConversationRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*Conversation)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_GetConversation0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetConversationRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceGetConversation)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetConversation(ctx, req.(*GetConversationRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*Conversation)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _VoiceAgentService_ListConversations0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListConversationsRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationVoiceAgentServiceListConversations)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListConversations(ctx, req.(*ListConversationsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ConversationList)
 		return ctx.Result(200, reply)
 	}
 }
@@ -840,8 +736,6 @@ type VoiceAgentServiceHTTPClient interface {
 	AddVoice(ctx context.Context, req *AddVoiceRequest, opts ...http.CallOption) (rsp *Voice, err error)
 	// CreateAgent CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
 	CreateAgent(ctx context.Context, req *CreateAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
-	// CreateConversation CreateConversation: 启动一个实时交互会话。
-	CreateConversation(ctx context.Context, req *CreateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// CreateEvent CreateEvent: 创建重要事件。
 	CreateEvent(ctx context.Context, req *CreateEventRequest, opts ...http.CallOption) (rsp *ImportantEvent, err error)
 	// CreateMemory CreateMemory: 手动添加一条记忆。
@@ -856,8 +750,6 @@ type VoiceAgentServiceHTTPClient interface {
 	GenerateCartesiaToken(ctx context.Context, req *GenerateCartesiaTokenRequest, opts ...http.CallOption) (rsp *GenerateCartesiaTokenResponse, err error)
 	// GetAgent GetAgent: 获取特定角色的详细信息。
 	GetAgent(ctx context.Context, req *GetAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
-	// GetConversation GetConversation: 获取会话详情。
-	GetConversation(ctx context.Context, req *GetConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
 	GetEmotionStats(ctx context.Context, req *GetEmotionStatsRequest, opts ...http.CallOption) (rsp *EmotionStats, err error)
 	// GetGrowthReport GetGrowthReport: 获取成长报告。
@@ -870,8 +762,6 @@ type VoiceAgentServiceHTTPClient interface {
 	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *UserProfile, err error)
 	// ListAgents ListAgents: 列出所有可用角色。
 	ListAgents(ctx context.Context, req *ListAgentsRequest, opts ...http.CallOption) (rsp *AgentList, err error)
-	// ListConversations ListConversations: 分页列出通话记录。
-	ListConversations(ctx context.Context, req *ListConversationsRequest, opts ...http.CallOption) (rsp *ConversationList, err error)
 	// ListEmotionLogs ListEmotionLogs: 获取情绪记录列表。
 	ListEmotionLogs(ctx context.Context, req *ListEmotionLogsRequest, opts ...http.CallOption) (rsp *EmotionLogList, err error)
 	// ListEvents ListEvents: 获取重要事件列表。
@@ -892,8 +782,6 @@ type VoiceAgentServiceHTTPClient interface {
 	SendMessage(ctx context.Context, req *SendMessageRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
 	UpdateAgent(ctx context.Context, req *UpdateAgentRequest, opts ...http.CallOption) (rsp *Agent, err error)
-	// UpdateConversation UpdateConversation: 更新会话状态或关联外部 ID。
-	UpdateConversation(ctx context.Context, req *UpdateConversationRequest, opts ...http.CallOption) (rsp *Conversation, err error)
 	// UpdateEvent UpdateEvent: 更新重要事件。
 	UpdateEvent(ctx context.Context, req *UpdateEventRequest, opts ...http.CallOption) (rsp *ImportantEvent, err error)
 	// UpdateUserProfile UpdateUserProfile: 更新用户档案。
@@ -942,20 +830,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) CreateAgent(ctx context.Context, in *C
 	pattern := "/api/va/agents"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceCreateAgent))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// CreateConversation CreateConversation: 启动一个实时交互会话。
-func (c *VoiceAgentServiceHTTPClientImpl) CreateConversation(ctx context.Context, in *CreateConversationRequest, opts ...http.CallOption) (*Conversation, error) {
-	var out Conversation
-	pattern := "/api/va/conversations"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceCreateConversation))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1062,20 +936,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) GetAgent(ctx context.Context, in *GetA
 	return &out, nil
 }
 
-// GetConversation GetConversation: 获取会话详情。
-func (c *VoiceAgentServiceHTTPClientImpl) GetConversation(ctx context.Context, in *GetConversationRequest, opts ...http.CallOption) (*Conversation, error) {
-	var out Conversation
-	pattern := "/api/va/conversations/{id}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceGetConversation))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // GetEmotionStats GetEmotionStats: 获取情绪统计数据（用于曲线图）。
 func (c *VoiceAgentServiceHTTPClientImpl) GetEmotionStats(ctx context.Context, in *GetEmotionStatsRequest, opts ...http.CallOption) (*EmotionStats, error) {
 	var out EmotionStats
@@ -1152,20 +1012,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListAgents(ctx context.Context, in *Li
 	pattern := "/api/va/agents"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceListAgents))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// ListConversations ListConversations: 分页列出通话记录。
-func (c *VoiceAgentServiceHTTPClientImpl) ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...http.CallOption) (*ConversationList, error) {
-	var out ConversationList
-	pattern := "/api/va/conversations"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceListConversations))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -1306,20 +1152,6 @@ func (c *VoiceAgentServiceHTTPClientImpl) UpdateAgent(ctx context.Context, in *U
 	pattern := "/api/va/agents/{id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceUpdateAgent))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// UpdateConversation UpdateConversation: 更新会话状态或关联外部 ID。
-func (c *VoiceAgentServiceHTTPClientImpl) UpdateConversation(ctx context.Context, in *UpdateConversationRequest, opts ...http.CallOption) (*Conversation, error) {
-	var out Conversation
-	pattern := "/api/va/conversations/{id}"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationVoiceAgentServiceUpdateConversation))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
 	if err != nil {

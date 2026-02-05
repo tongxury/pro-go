@@ -9,10 +9,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (s *VoiceAgentService) ListConversations(ctx context.Context, req *voiceagent.ListConversationsRequest) (*voiceagent.ConversationList, error) {
+func (s *LiveKitService) ListConversations(ctx context.Context, req *voiceagent.ListConversationsRequest) (*voiceagent.ConversationList, error) {
 	userId := krathelper.RequireUserId(ctx)
 
-	list, total, err := s.Data.Mongo.Conversation.ListAndCount(ctx, bson.M{"user._id": userId}, mgz.Paging(req.Page, req.Size))
+	list, total, err := s.data.Mongo.Conversation.ListAndCount(ctx, bson.M{"user._id": userId}, mgz.Paging(req.Page, req.Size))
 	if err != nil {
 		return nil, err
 	}

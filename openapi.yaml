@@ -5789,9 +5789,9 @@ paths:
     /api/va/conversations:
         get:
             tags:
-                - VoiceAgentService
+                - LiveKitService
             description: 'ListConversations: 分页列出通话记录。'
-            operationId: VoiceAgentService_ListConversations
+            operationId: LiveKitService_ListConversations
             parameters:
                 - name: page
                   in: query
@@ -5810,9 +5810,9 @@ paths:
                                 $ref: '#/components/schemas/api.voiceagent.ConversationList'
         post:
             tags:
-                - VoiceAgentService
-            description: 'CreateConversation: 启动一个实时交互会话。'
-            operationId: VoiceAgentService_CreateConversation
+                - LiveKitService
+            description: 'CreateConversation: 启动一个实时交互会话。基础功能。'
+            operationId: LiveKitService_CreateConversation
             requestBody:
                 content:
                     application/json:
@@ -5856,9 +5856,9 @@ paths:
     /api/va/conversations/{id}:
         get:
             tags:
-                - VoiceAgentService
+                - LiveKitService
             description: 'GetConversation: 获取会话详情。'
-            operationId: VoiceAgentService_GetConversation
+            operationId: LiveKitService_GetConversation
             parameters:
                 - name: id
                   in: path
@@ -5874,9 +5874,9 @@ paths:
                                 $ref: '#/components/schemas/api.voiceagent.Conversation'
         patch:
             tags:
-                - VoiceAgentService
-            description: 'UpdateConversation: 更新会话状态或关联外部 ID。'
-            operationId: VoiceAgentService_UpdateConversation
+                - LiveKitService
+            description: 'UpdateConversation: 更新会话状态。'
+            operationId: LiveKitService_UpdateConversation
             parameters:
                 - name: id
                   in: path
@@ -6066,25 +6066,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.GrowthReport'
-    /api/va/livekit/token:
-        post:
-            tags:
-                - LiveKitService
-            description: 'GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。'
-            operationId: LiveKitService_GenerateLiveKitToken
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.voiceagent.GenerateLiveKitTokenRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.voiceagent.GenerateLiveKitTokenResponse'
     /api/va/memories:
         get:
             tags:
@@ -11484,9 +11465,6 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.voiceagent.Agent'
                     description: 'agent: 该会话锁定的角色。'
-                sceneId:
-                    type: string
-                    description: 'sceneId: 会话当前激活的场景 ID。'
                 createdAt:
                     type: string
                 lastMessageAt:
@@ -11499,9 +11477,6 @@ components:
                     description: |-
                         status: 状态 (active: 通话中, ended: 通话结束)。
                          [用法]: 管理 WebSocket 连接的生命周期。
-                conversationId:
-                    type: string
-                    description: 'conversationId: ElevenLabs 端的会话 ID。'
                 signedUrl:
                     type: string
                     description: 'signedUrl: 预生成的带签名的 WebSocket 连接地址 (有效期短)。'
@@ -11548,10 +11523,6 @@ components:
             type: object
             properties:
                 agentId:
-                    type: string
-                sceneId:
-                    type: string
-                roomName:
                     type: string
         api.voiceagent.CreateEventRequest:
             type: object
@@ -11709,20 +11680,6 @@ components:
             type: object
             properties:
                 accessToken:
-                    type: string
-        api.voiceagent.GenerateLiveKitTokenRequest:
-            type: object
-            properties:
-                roomName:
-                    type: string
-                identity:
-                    type: string
-        api.voiceagent.GenerateLiveKitTokenResponse:
-            type: object
-            properties:
-                accessToken:
-                    type: string
-                url:
                     type: string
         api.voiceagent.GrowthReport:
             type: object

@@ -31,8 +31,8 @@ func wireApp(config confcenter.Config[configs.BizConfig], meta confcenter.Meta, 
 	}
 	itemBiz := biz.NewItemBiz(dataData)
 	agentBiz := biz.NewAgentBiz(dataData)
-	voiceAgentService := service.NewVoiceAgentService(dataData, itemBiz, agentBiz)
 	liveKitService := service.NewLiveKitService(dataData)
+	voiceAgentService := service.NewVoiceAgentService(dataData, itemBiz, agentBiz, liveKitService)
 	grpcServer := server.NewGRPCServer(confcenterServer, voiceAgentService, liveKitService, logger)
 	httpServer := server.NewHTTPServer(confcenterServer, voiceAgentService, liveKitService, logger)
 	app := newApp(logger, grpcServer, httpServer)

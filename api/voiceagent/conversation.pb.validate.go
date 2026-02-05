@@ -117,15 +117,11 @@ func (m *Conversation) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for SceneId
-
 	// no validation rules for CreatedAt
 
 	// no validation rules for LastMessageAt
 
 	// no validation rules for Status
-
-	// no validation rules for ConversationId
 
 	// no validation rules for SignedUrl
 

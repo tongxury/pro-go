@@ -9,12 +9,12 @@ import (
 	"time"
 )
 
-func (s *VoiceAgentService) UpdateConversation(ctx context.Context, req *voiceagent.UpdateConversationRequest) (*voiceagent.Conversation, error) {
+func (s *LiveKitService) UpdateConversation(ctx context.Context, req *voiceagent.UpdateConversationRequest) (*voiceagent.Conversation, error) {
 
 	userId := krathelper.RequireUserId(ctx)
 
 	// 1. Get conversation to verify ownership and existence
-	conv, err := s.Data.Mongo.Conversation.GetById(ctx, req.Id)
+	conv, err := s.data.Mongo.Conversation.GetById(ctx, req.Id)
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (s *VoiceAgentService) UpdateConversation(ctx context.Context, req *voiceag
 			Set("status", "ended").
 			Set("endedAt", time.Now().Unix())
 
-		_, err := s.Data.Mongo.Conversation.UpdateByIDIfExists(ctx, req.Id, updateOp)
+		_, err := s.data.Mongo.Conversation.UpdateByIDIfExists(ctx, req.Id, updateOp)
 		if err != nil {
 			return nil, err
 		}

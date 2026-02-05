@@ -19,9 +19,6 @@ message Conversation {
   // agent: 该会话锁定的角色。
   Agent agent = 3;
 
-  // sceneId: 会话当前激活的场景 ID。
-  string sceneId = 4;
-
   int64 createdAt = 5;
 
   // lastMessageAt: 最后一次交互时间。
@@ -31,10 +28,7 @@ message Conversation {
   // status: 状态 (active: 通话中, ended: 通话结束)。
   // [用法]: 管理 WebSocket 连接的生命周期。
   string status = 7;
-
-  // conversationId: ElevenLabs 端的会话 ID。
-  string conversationId = 8;
-
+  
   // signedUrl: 预生成的带签名的 WebSocket 连接地址 (有效期短)。
   string signedUrl = 9;
 

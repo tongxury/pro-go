@@ -3,26 +3,63 @@ syntax = "proto3";
 package api.voiceagent;
 
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "voiceagent/conversation.proto";
 
 option go_package = "store/api/voiceagent;voiceagent";
 
 // LiveKitService 提供了与 LiveKit 基础基础设施交互的接口。
 service LiveKitService {
-  // GenerateLiveKitToken: 为前端生成 LiveKit 的加入房间令牌。
-  rpc GenerateLiveKitToken(GenerateLiveKitTokenRequest) returns (GenerateLiveKitTokenResponse) {
+  // CreateConversation: 启动一个实时交互会话。基础功能。
+  rpc CreateConversation(CreateConversationRequest) returns (Conversation) {
     option (google.api.http) = {
-      post: "/api/va/livekit/token"
+      post: "/api/va/conversations"
+      body: "*"
+    };
+  }
+
+  // GetConversation: 获取会话详情。
+  rpc GetConversation(GetConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      get: "/api/va/conversations/{id}"
+    };
+  }
+
+  // ListConversations: 分页列出通话记录。
+  rpc ListConversations(ListConversationsRequest) returns (ConversationList) {
+    option (google.api.http) = {
+      get: "/api/va/conversations"
+    };
+  }
+
+  // UpdateConversation: 更新会话状态。
+  rpc UpdateConversation(UpdateConversationRequest) returns (Conversation) {
+    option (google.api.http) = {
+      patch: "/api/va/conversations/{id}"
       body: "*"
     };
   }
 }
 
-message GenerateLiveKitTokenRequest {
-  string roomName = 1;
-  string identity = 2;
+message CreateConversationRequest {
+  string agentId = 1 [(validate.rules).string.min_len = 1];
 }
 
-message GenerateLiveKitTokenResponse {
-  string accessToken = 1;
-  string url = 2;
+message UpdateConversationRequest {
+  string id = 1;
+  string action = 4;
+}
+
+message GetConversationRequest {
+  string id = 1;
+}
+
+message ListConversationsRequest {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+message ConversationList {
+  repeated Conversation list = 1;
+  int64 total = 2;
 }
