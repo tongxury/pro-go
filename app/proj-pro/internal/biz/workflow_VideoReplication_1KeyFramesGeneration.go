@@ -8,7 +8,7 @@ import (
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
 	"store/pkg/sdk/helper/wg"
-	"store/pkg/sdk/third/gemini"
+	"store/pkg/sdk/third/wavespeed"
 	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -157,124 +157,74 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 	}
 
 	// Waved AI 版
-	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
-	//	if x.Status != ExecuteStatusRunning {
-	//		return nil
-	//	}
-	//
-	//	if x.TaskId != "" {
-	//		result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
-	//		if err != nil {
-	//			return err
-	//		}
-	//
-	//		logger.Debugw("keyFrames generation job task check result", result)
-	//
-	//		if len(result.Data.Outputs) > 0 {
-	//
-	//			x.Url = result.Data.Outputs[0]
-	//			x.Status = ExecuteStatusCompleted
-	//
-	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//			if err != nil {
-	//				return err
-	//			}
-	//
-	//			return nil
-	//		}
-	//
-	//		if result.Data.Status == "failed" {
-	//			x.Url = ""
-	//			x.Status = ExecuteStatusRunning
-	//			x.TaskId = ""
-	//
-	//			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-	//				Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//			if err != nil {
-	//				return err
-	//			}
-	//
-	//			return nil
-	//		}
-	//
-	//		return nil
-	//	}
-	//
-	//	res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
-	//		Prompt:       x.Prompt,
-	//		Images:       x.Refs,
-	//		AspectRatio:  "9:16",
-	//		Resolution:   "1k",
-	//		OutputFormat: "",
-	//		//EnableSyncMode: true,
-	//		//EnableBase64Output: false,
-	//	})
-	//	if err != nil {
-	//		logger.Errorw("Gemini3ProImage err", err)
-	//		return err
-	//	}
-	//
-	//	logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
-	//
-	//	x.TaskId = res.Data.Id
-	//	x.Status = ExecuteStatusRunning
-	//
-	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-	//		mgz.Op().
-	//			Set(fmt.Sprintf("dataBus.keyFrames.frames.%d", index), x))
-	//
-	//	if err != nil {
-	//		return err
-	//	}
-	//
-	//	return nil
-	//})
-
-	logger.Debugw("settings", wfState.DataBus.GetSettings())
-
 	wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
 		if x.Status != ExecuteStatusRunning {
 			return nil
 		}
 
-		aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
-		blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
-			Images: x.Refs,
-			//Videos: [][]byte{seg.Content},
-			Prompt:      x.Prompt,
-			AspectRatio: aspectRatio,
-			//Count: 8,
+		if x.TaskId != "" {
+			result, err := t.data.Wavespeed.GetResult(ctx, x.GetTaskId())
+			if err != nil {
+				return err
+			}
+
+			logger.Debugw("keyFrames generation job task check result", result)
+
+			if len(result.Data.Outputs) > 0 {
+
+				x.Url = result.Data.Outputs[0]
+				x.Status = ExecuteStatusCompleted
+
+				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+
+				if err != nil {
+					return err
+				}
+
+				return nil
+			}
+
+			if result.Data.Status == "failed" {
+				x.Url = ""
+				x.Status = ExecuteStatusRunning
+				x.TaskId = ""
+
+				_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
+
+				if err != nil {
+					return err
+				}
+
+				return nil
+			}
+
+			return nil
+		}
+
+		res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
+			Prompt:       x.Prompt,
+			Images:       x.Refs,
+			AspectRatio:  "9:16",
+			Resolution:   "1k",
+			OutputFormat: "",
+			//EnableSyncMode: true,
+			//EnableBase64Output: false,
 		})
 		if err != nil {
-			logger.Errorw("GenerateImage err", err)
-
-			x.Error = err.Error()
-			x.Status = ExecuteStatusFailed
-
-			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-				mgz.Op().
-					Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
-			)
-
+			logger.Errorw("Gemini3ProImage err", err)
 			return err
 		}
 
-		tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
-		if err != nil {
-			return err
-		}
+		logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
 
-		x.Url = tmpUrl
-		x.Status = ExecuteStatusCompleted
-		x.AspectRatio = aspectRatio
+		x.TaskId = res.Data.Id
+		x.Status = ExecuteStatusRunning
 
 		_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
 			mgz.Op().
-				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
-		)
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x))
 
 		if err != nil {
 			return err
@@ -282,6 +232,56 @@ func (t KeyFramesGenerationJob) Execute(ctx context.Context, jobState *projpb.Jo
 
 		return nil
 	})
+
+	logger.Debugw("settings", wfState.DataBus.GetSettings())
+
+	//wg.WaitGroupIndexed(ctx, frames, func(ctx context.Context, x *projpb.KeyFrames_Frame, index int) error {
+	//	if x.Status != ExecuteStatusRunning {
+	//		return nil
+	//	}
+	//
+	//	aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
+	//	blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
+	//		Images: x.Refs,
+	//		//Videos: [][]byte{seg.Content},
+	//		Prompt:      x.Prompt,
+	//		AspectRatio: aspectRatio,
+	//		//Count: 8,
+	//	})
+	//	if err != nil {
+	//		logger.Errorw("GenerateImage err", err)
+	//
+	//		x.Error = err.Error()
+	//		x.Status = ExecuteStatusFailed
+	//
+	//		_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//			mgz.Op().
+	//				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
+	//		)
+	//
+	//		return err
+	//	}
+	//
+	//	tmpUrl, err := t.data.TOS.PutImageBytes(ctx, blob)
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	x.Url = tmpUrl
+	//	x.Status = ExecuteStatusCompleted
+	//	x.AspectRatio = aspectRatio
+	//
+	//	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//		mgz.Op().
+	//			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.%d", jobState.Index, index), x),
+	//	)
+	//
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	return nil
+	//})
 
 	return nil, nil
 }

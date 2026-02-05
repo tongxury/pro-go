@@ -9,7 +9,8 @@ import (
 )
 
 func (s *LiveKitService) ListTranscriptEntries(ctx context.Context, req *voiceagent.ListTranscriptEntriesRequest) (*voiceagent.TranscriptEntryList, error) {
-	list, total, err := s.data.Mongo.Transcript.ListAndCount(ctx, bson.M{"conversation._id": req.ConversationId}, mgz.Paging(req.Page, req.Size))
+	list, total, err := s.data.Mongo.Transcript.ListAndCount(ctx, bson.M{"conversation._id": req.ConversationId},
+		mgz.Paging(req.Page, req.Size))
 	if err != nil {
 		return nil, err
 	}

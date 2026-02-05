@@ -48,41 +48,43 @@ func newClient(config *Config) (*Client, error) {
 		transport := &http.Transport{
 			Proxy: http.ProxyURL(proxyURL),
 			DialContext: (&net.Dialer{
-				Timeout:   600 * time.Second, // 增加连接超时
+				Timeout:   600 * time.Second,
 				KeepAlive: 600 * time.Second,
 			}).DialContext,
 			MaxIdleConns:          100,
-			IdleConnTimeout:       600 * time.Second, // 增加空闲连接超时
-			TLSHandshakeTimeout:   600 * time.Second, // 增加TLS握手超时
-			ExpectContinueTimeout: 600 * time.Second, // 增加Expect超时
+			IdleConnTimeout:       600 * time.Second,
+			TLSHandshakeTimeout:   600 * time.Second,
+			ExpectContinueTimeout: 600 * time.Second,
 			TLSClientConfig: &tls.Config{
 				InsecureSkipVerify: true,
 			},
-			// 添加响应头超时
 			ResponseHeaderTimeout: 600 * time.Second,
 		}
-		// 更新选项
+
 		httpClient = &http.Client{
-			//Transport: &http.Transport{
-			//	Proxy: http.ProxyURL(proxyURL),
-			//},
 			Transport: &ProxyRoundTripper{
-				APIKey: config.Key,
-				//ProxyURL:  config.Proxy,
+				APIKey:    config.Key,
 				Transport: transport,
 			},
 		}
 	}
-	_ = httpClient
 
-	client, err := genai.NewClient(ctx, &genai.ClientConfig{
+	clientConfig := &genai.ClientConfig{
 		APIKey:     config.Key,
-		Backend:    genai.BackendVertexAI,
 		HTTPClient: httpClient,
 		HTTPOptions: genai.HTTPOptions{
 			BaseURL: config.BaseURL,
 		},
-	})
+	}
+
+	if config.Project != "" {
+		clientConfig.Backend = genai.BackendVertexAI
+		clientConfig.Project = config.Project
+		clientConfig.Location = config.Location
+		clientConfig.CredentialsJSON = config.CredentialsJSON
+	}
+
+	client, err := genai.NewClient(ctx, clientConfig)
 
 	if err != nil {
 		return nil, err
