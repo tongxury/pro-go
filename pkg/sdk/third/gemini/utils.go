@@ -10,10 +10,11 @@ import (
 )
 
 const (
-	DefaultModel                 = ModelGenmini3FlashPreview
-	ModelGenmini3ProPreview      = "gemini-3-pro-preview"
-	ModelGenmini3ProImagePreview = "gemini-3-pro-image-preview"
-	ModelGenmini3FlashPreview    = "gemini-3-flash-preview"
+	DefaultModel = ModelGenmini3FlashPreview
+	//ModelGenmini3ProPreview      = "gemini-1.5-pro-002"
+	//ModelGenmini3ProImagePreview = "imagen-4.0-generate-001"
+	ModelGenmini3ProImagePreview = "imagen-3.0-fast-generate-001"
+	ModelGenmini3FlashPreview    = "gemini-2.0-flash-001"
 )
 
 func NewVideoPart(url string) (*genai.Part, error) {

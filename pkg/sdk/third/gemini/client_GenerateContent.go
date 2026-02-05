@@ -99,6 +99,7 @@ func (t *Client) GenerateContentStream(ctx context.Context, req GenerateContentR
 }
 
 type GenerateImageRequest struct {
+	Model       string
 	Images      []string
 	ImageBytes  [][]byte
 	Videos      [][]byte
@@ -125,7 +126,7 @@ func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([
 	}
 
 	for i := range req.ImageBytes {
-		parts = append(parts, genai.NewPartFromBytes(req.ImageBytes[i], "image/png"))
+		parts = append(parts, genai.NewPartFromBytes(req.ImageBytes[i], "image/jpeg"))
 	}
 
 	for i := range req.Videos {

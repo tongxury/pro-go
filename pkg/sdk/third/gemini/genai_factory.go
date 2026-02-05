@@ -10,6 +10,8 @@ import (
 	"store/pkg/sdk/helper/mathz"
 	"time"
 
+	"cloud.google.com/go/auth/credentials"
+	"cloud.google.com/go/auth/httptransport"
 	"google.golang.org/genai"
 )
 
@@ -61,16 +63,23 @@ func newClient(config *Config) (*Client, error) {
 			ResponseHeaderTimeout: 600 * time.Second,
 		}
 
-		httpClient = &http.Client{
-			Transport: &ProxyRoundTripper{
-				APIKey:    config.Key,
+		// Use ProxyRoundTripper for API Key mode
+		if config.Key != "" {
+			httpClient = &http.Client{
+				Transport: &ProxyRoundTripper{
+					APIKey:    config.Key,
+					Transport: transport,
+				},
+			}
+		} else {
+			// For Vertex AI with Credentials, we need to add auth middleware
+			httpClient = &http.Client{
 				Transport: transport,
-			},
+			}
 		}
 	}
 
 	clientConfig := &genai.ClientConfig{
-		APIKey:     config.Key,
 		HTTPClient: httpClient,
 		HTTPOptions: genai.HTTPOptions{
 			BaseURL: config.BaseURL,
@@ -81,7 +90,26 @@ func newClient(config *Config) (*Client, error) {
 		clientConfig.Backend = genai.BackendVertexAI
 		clientConfig.Project = config.Project
 		clientConfig.Location = config.Location
-		clientConfig.CredentialsJSON = config.CredentialsJSON
+
+		if config.CredentialsJSON != "" {
+			cred, err := credentials.DetectDefault(&credentials.DetectOptions{
+				Scopes:          []string{"https://www.googleapis.com/auth/cloud-platform"},
+				CredentialsJSON: []byte(config.CredentialsJSON),
+			})
+			if err != nil {
+				return nil, fmt.Errorf("failed to create credentials from JSON: %w", err)
+			}
+			// Explicitly add auth middleware to the custom HTTP Client if it exists
+			if httpClient != nil {
+				err = httptransport.AddAuthorizationMiddleware(httpClient, cred)
+				if err != nil {
+					return nil, fmt.Errorf("failed to add auth middleware: %w", err)
+				}
+			}
+		}
+	} else {
+		// Only set APIKey if not using Vertex AI (or if strictly using API Key mode)
+		clientConfig.APIKey = config.Key
 	}
 
 	client, err := genai.NewClient(ctx, clientConfig)

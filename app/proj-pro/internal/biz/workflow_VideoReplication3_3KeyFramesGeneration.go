@@ -116,7 +116,7 @@ func (t VideoReplication3_KeyFramesGenerationJob) Execute(ctx context.Context, j
 			lastFrame := frames[i-1]
 			if lastFrame.Url != "" {
 				frames[i] = &projpb.KeyFrames_Frame{
-					Status: ExecuteStatusRunning,
+					Status: ExecuteStatusCompleted,
 					Refs: []string{
 						lastFrame.Url,
 						helper.SliceElement[string](
