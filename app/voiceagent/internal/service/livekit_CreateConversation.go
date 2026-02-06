@@ -8,8 +8,10 @@ import (
 	voiceagent "store/api/voiceagent"
 	"store/confs"
 	"store/pkg/krathelper"
+	"store/pkg/sdk/conv"
 	"time"
 
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/livekit/protocol/auth"
 	"github.com/livekit/protocol/livekit"
 	"go.mongodb.org/mongo-driver/bson"
@@ -66,10 +68,10 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 	var memoryTexts []string
 	if err == nil {
 		for _, m := range memoriesList {
-			if m.Importance >= 5 {
-				memoryTexts = append(memoryTexts, m.Content)
+			if m.Importance >= 3 {
+				memoryTexts = append(memoryTexts, conv.S2J(m))
 			}
-			if len(memoryTexts) >= 5 {
+			if len(memoryTexts) >= 10 {
 				break
 			}
 		}
@@ -85,6 +87,8 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 		"agentName":      "aura_zh", // Base service pipe. TODO: Maybe fetch from Agent definition?
 	}
 	metadataJSON, _ := json.Marshal(agentConfig)
+
+	log.Debugw("metadataJSON", string(metadataJSON))
 
 	// 4. Create Room with Metadata
 	_, err = s.data.RoomClient.CreateRoom(ctx, &livekit.CreateRoomRequest{
