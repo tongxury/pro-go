@@ -65,7 +65,7 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 
 		// Start background cron jobs
 		c := cron.New()
-		_, _ = c.AddJob("@every 5s", crond.NewJobWrapper(func() {
+		_, _ = c.AddJob("@every 5m", crond.NewJobWrapper(func() {
 			log.Info("Running SummarizeEndedConversations in background cron")
 			if err := service.AgentBiz.SummarizeEndedConversations(context.Background()); err != nil {
 				log.Errorw("msg", "SummarizeEndedConversations failed", "err", err)

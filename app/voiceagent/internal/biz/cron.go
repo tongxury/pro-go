@@ -52,7 +52,7 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 
 	if len(transcripts) == 0 {
 		// No transcripts, mark as completed
-		_, _ = b.data.Mongo.Conversation.UpdateOne(ctx, mgz.Filter().EQ("_id", conv.XId).B(), mgz.Op().Set("extra.analysisStatus", "completed"))
+		_, _ = b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, conv.XId, mgz.Op().Set("extra.analysisStatus", "completed"))
 		return nil
 	}
 
@@ -134,7 +134,7 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 	}
 
 	// 6. Update conversation status
-	_, err = b.data.Mongo.Conversation.UpdateOne(ctx, mgz.Filter().EQ("_id", conv.XId).B(), mgz.Op().Set("extra.analysisStatus", "completed"))
+	_, err = b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, conv.XId, mgz.Op().Set("extra.analysisStatus", "completed"))
 	if err != nil {
 		return fmt.Errorf("failed to update conversation status: %w", err)
 	}

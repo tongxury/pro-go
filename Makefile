@@ -188,9 +188,9 @@ voiceagent_my_release:
 	@docker buildx build --platform=linux/amd64  -t usernx/voiceagent:${VERSION} --build-arg SRV=voiceagent -f Dockerfile . --push
 	@curl -X PUT \
     -H "content-type: application/json" \
-    -H "Cookie: KuboardUsername=admin; KuboardAccessKey=4342pex2bf55.kkx8hf6z665b85fsf38ichrnfrc238kz" \
+    -H "Cookie: KuboardUsername=admin; KuboardAccessKey=2fsetf66fich.acr7fxr2c8ht336y4a7pef8a8dres74r" \
     -d '{"kind":"deployments","namespace":"prod","name":"voiceagent","images":{"usernx/voiceagent":"usernx/voiceagent:${VERSION}"}}' \
-    "http://118.196.63.209:18060/kuboard-api/cluster/my-server/kind/CICDApi/admin/resource/updateImageTag"
+    "http://103.30.78.254:18060/kuboard-api/cluster/my-server/kind/CICDApi/admin/resource/updateImageTag"
 
 
 #	@docker push yoozy-cn-shanghai.cr.volces.com/ve/aiagent:${VERSION}
