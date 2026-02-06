@@ -131,6 +131,35 @@ func (m *Conversation) validate(all bool) error {
 
 	// no validation rules for RoomName
 
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ConversationValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ConversationValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ConversationValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return ConversationMultiError(errors)
 	}
@@ -207,3 +236,107 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ConversationValidationError{}
+
+// Validate checks the field values on Conversation_Extra with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *Conversation_Extra) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Conversation_Extra with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Conversation_ExtraMultiError, or nil if none found.
+func (m *Conversation_Extra) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Conversation_Extra) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AnalysisStatus
+
+	if len(errors) > 0 {
+		return Conversation_ExtraMultiError(errors)
+	}
+
+	return nil
+}
+
+// Conversation_ExtraMultiError is an error wrapping multiple validation errors
+// returned by Conversation_Extra.ValidateAll() if the designated constraints
+// aren't met.
+type Conversation_ExtraMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Conversation_ExtraMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Conversation_ExtraMultiError) AllErrors() []error { return m }
+
+// Conversation_ExtraValidationError is the validation error returned by
+// Conversation_Extra.Validate if the designated constraints aren't met.
+type Conversation_ExtraValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Conversation_ExtraValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Conversation_ExtraValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Conversation_ExtraValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Conversation_ExtraValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Conversation_ExtraValidationError) ErrorName() string {
+	return "Conversation_ExtraValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Conversation_ExtraValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConversation_Extra.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Conversation_ExtraValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Conversation_ExtraValidationError{}

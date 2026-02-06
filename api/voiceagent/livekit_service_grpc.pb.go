@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,13 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LiveKitService_CreateConversation_FullMethodName    = "/api.voiceagent.LiveKitService/CreateConversation"
-	LiveKitService_GetConversation_FullMethodName       = "/api.voiceagent.LiveKitService/GetConversation"
-	LiveKitService_ListConversations_FullMethodName     = "/api.voiceagent.LiveKitService/ListConversations"
-	LiveKitService_UpdateConversation_FullMethodName    = "/api.voiceagent.LiveKitService/UpdateConversation"
-	LiveKitService_StopConversation_FullMethodName      = "/api.voiceagent.LiveKitService/StopConversation"
-	LiveKitService_AddTranscriptEntry_FullMethodName    = "/api.voiceagent.LiveKitService/AddTranscriptEntry"
-	LiveKitService_ListTranscriptEntries_FullMethodName = "/api.voiceagent.LiveKitService/ListTranscriptEntries"
+	LiveKitService_CreateConversation_FullMethodName     = "/api.voiceagent.LiveKitService/CreateConversation"
+	LiveKitService_GetConversation_FullMethodName        = "/api.voiceagent.LiveKitService/GetConversation"
+	LiveKitService_ListConversations_FullMethodName      = "/api.voiceagent.LiveKitService/ListConversations"
+	LiveKitService_UpdateConversation_FullMethodName     = "/api.voiceagent.LiveKitService/UpdateConversation"
+	LiveKitService_StopConversation_FullMethodName       = "/api.voiceagent.LiveKitService/StopConversation"
+	LiveKitService_AddTranscriptEntry_FullMethodName     = "/api.voiceagent.LiveKitService/AddTranscriptEntry"
+	LiveKitService_ListTranscriptEntries_FullMethodName  = "/api.voiceagent.LiveKitService/ListTranscriptEntries"
+	LiveKitService_SummarizeConversations_FullMethodName = "/api.voiceagent.LiveKitService/SummarizeConversations"
 )
 
 // LiveKitServiceClient is the client API for LiveKitService service.
@@ -48,6 +50,8 @@ type LiveKitServiceClient interface {
 	AddTranscriptEntry(ctx context.Context, in *AddTranscriptEntryRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
 	// ListTranscriptEntries: 获取某个会话的所有聊天记录。
 	ListTranscriptEntries(ctx context.Context, in *ListTranscriptEntriesRequest, opts ...grpc.CallOption) (*TranscriptEntryList, error)
+	// SummarizeConversations: 触发会话总结任务。通常由 Cron Job 调用。
+	SummarizeConversations(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type liveKitServiceClient struct {
@@ -128,6 +132,16 @@ func (c *liveKitServiceClient) ListTranscriptEntries(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *liveKitServiceClient) SummarizeConversations(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, LiveKitService_SummarizeConversations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LiveKitServiceServer is the server API for LiveKitService service.
 // All implementations must embed UnimplementedLiveKitServiceServer
 // for forward compatibility.
@@ -148,6 +162,8 @@ type LiveKitServiceServer interface {
 	AddTranscriptEntry(context.Context, *AddTranscriptEntryRequest) (*TranscriptEntry, error)
 	// ListTranscriptEntries: 获取某个会话的所有聊天记录。
 	ListTranscriptEntries(context.Context, *ListTranscriptEntriesRequest) (*TranscriptEntryList, error)
+	// SummarizeConversations: 触发会话总结任务。通常由 Cron Job 调用。
+	SummarizeConversations(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedLiveKitServiceServer()
 }
 
@@ -178,6 +194,9 @@ func (UnimplementedLiveKitServiceServer) AddTranscriptEntry(context.Context, *Ad
 }
 func (UnimplementedLiveKitServiceServer) ListTranscriptEntries(context.Context, *ListTranscriptEntriesRequest) (*TranscriptEntryList, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListTranscriptEntries not implemented")
+}
+func (UnimplementedLiveKitServiceServer) SummarizeConversations(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SummarizeConversations not implemented")
 }
 func (UnimplementedLiveKitServiceServer) mustEmbedUnimplementedLiveKitServiceServer() {}
 func (UnimplementedLiveKitServiceServer) testEmbeddedByValue()                        {}
@@ -326,6 +345,24 @@ func _LiveKitService_ListTranscriptEntries_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LiveKitService_SummarizeConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveKitServiceServer).SummarizeConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LiveKitService_SummarizeConversations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveKitServiceServer).SummarizeConversations(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LiveKitService_ServiceDesc is the grpc.ServiceDesc for LiveKitService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -360,6 +397,10 @@ var LiveKitService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTranscriptEntries",
 			Handler:    _LiveKitService_ListTranscriptEntries_Handler,
+		},
+		{
+			MethodName: "SummarizeConversations",
+			Handler:    _LiveKitService_SummarizeConversations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

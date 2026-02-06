@@ -58,11 +58,19 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				UserCenter: &grpcz.Config{
 					Endpoint: "usercenter.prod.svc.cluster.local:8090",
 				},
+				VoiceAgent: &grpcz.Config{
+					Endpoint: "voiceagent.prod.svc.cluster.local:8090",
+				},
 			},
 			Genai: gemini.FactoryConfig{
 				Configs: []*gemini.Config{
-					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.GeminiKeys[23]},
-					{Proxy: "http://proxy:strOngPAssWOrd@45.78.194.147:6060", Key: confs.GeminiKeys[18]},
+					{
+						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
+						Location:        "us-central1",  // 常用 Vertex AI Location
+						APIVersion:      "v1",
+						CredentialsJSON: confs.VertexAiSecret,                             // 使用 JSON 字符串凭据
+						Proxy:           "http://proxy:strOngPAssWOrd@45.78.194.147:6060", // 如有需要
+					},
 				},
 			},
 		},
@@ -111,9 +119,23 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				Endpoint:   "https://light-proud-pine.solana-mainnet.quiknode.pro/ab05da0bef752cdf59801f675a549691dc45e4c6",
 				WSEndpoint: "wss://light-proud-pine.solana-mainnet.quiknode.pro/ab05da0bef752cdf59801f675a549691dc45e4c6",
 			},
+			Genai: gemini.FactoryConfig{
+				Configs: []*gemini.Config{
+					{
+						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
+						Location:        "us-central1",  // 常用 Vertex AI Location
+						APIVersion:      "v1",
+						CredentialsJSON: confs.VertexAiSecret,                             // 使用 JSON 字符串凭据
+						Proxy:           "http://proxy:strOngPAssWOrd@45.78.194.147:6060", // 如有需要
+					},
+				},
+			},
 			Grpc: grpcz.Configs{
 				User: &grpcz.Config{
 					Endpoint: "localhost:8090",
+				},
+				VoiceAgent: &grpcz.Config{
+					Endpoint: "localhost:8096",
 				},
 			},
 		},

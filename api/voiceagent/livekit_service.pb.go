@@ -11,6 +11,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -511,7 +512,7 @@ var File_voiceagent_livekit_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\n" +
-	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\">\n" +
+	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\">\n" +
 	"\x19CreateConversationRequest\x12!\n" +
 	"\aagentId\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aagentId\")\n" +
 	"\x17StopConversationRequest\x12\x0e\n" +
@@ -540,7 +541,7 @@ const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1a\n" +
 	"\broomName\x18\x05 \x01(\tR\broomName\x12\x1a\n" +
-	"\baudioUrl\x18\x06 \x01(\tR\baudioUrl2\xc9\a\n" +
+	"\baudioUrl\x18\x06 \x01(\tR\baudioUrl2\x95\b\n" +
 	"\x0eLiveKitService\x12\x7f\n" +
 	"\x12CreateConversation\x12).api.voiceagent.CreateConversationRequest\x1a\x1c.api.voiceagent.Conversation\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/va/conversations\x12{\n" +
 	"\x0fGetConversation\x12&.api.voiceagent.GetConversationRequest\x1a\x1c.api.voiceagent.Conversation\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/va/conversations/{id}\x12~\n" +
@@ -548,7 +549,8 @@ const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\x12UpdateConversation\x12).api.voiceagent.UpdateConversationRequest\x1a\x1c.api.voiceagent.Conversation\"%\x82\xd3\xe4\x93\x02\x1f:\x01*2\x1a/api/va/conversations/{id}\x12\x85\x01\n" +
 	"\x10StopConversation\x12'.api.voiceagent.StopConversationRequest\x1a\x1c.api.voiceagent.Conversation\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/va/conversations/{id}/stop\x12\x80\x01\n" +
 	"\x12AddTranscriptEntry\x12).api.voiceagent.AddTranscriptEntryRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/va/transcripts\x12\xa6\x01\n" +
-	"\x15ListTranscriptEntries\x12,.api.voiceagent.ListTranscriptEntriesRequest\x1a#.api.voiceagent.TranscriptEntryList\":\x82\xd3\xe4\x93\x024\x122/api/va/conversations/{conversationId}/transcriptsB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\x15ListTranscriptEntries\x12,.api.voiceagent.ListTranscriptEntriesRequest\x1a#.api.voiceagent.TranscriptEntryList\":\x82\xd3\xe4\x93\x024\x122/api/va/conversations/{conversationId}/transcripts\x12J\n" +
+	"\x16SummarizeConversations\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x00B!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_livekit_service_proto_rawDescOnce sync.Once
@@ -575,6 +577,7 @@ var file_voiceagent_livekit_service_proto_goTypes = []any{
 	(*AddTranscriptEntryRequest)(nil),    // 8: api.voiceagent.AddTranscriptEntryRequest
 	(*Conversation)(nil),                 // 9: api.voiceagent.Conversation
 	(*TranscriptEntry)(nil),              // 10: api.voiceagent.TranscriptEntry
+	(*emptypb.Empty)(nil),                // 11: google.protobuf.Empty
 }
 var file_voiceagent_livekit_service_proto_depIdxs = []int32{
 	9,  // 0: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
@@ -586,15 +589,17 @@ var file_voiceagent_livekit_service_proto_depIdxs = []int32{
 	1,  // 6: api.voiceagent.LiveKitService.StopConversation:input_type -> api.voiceagent.StopConversationRequest
 	8,  // 7: api.voiceagent.LiveKitService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
 	6,  // 8: api.voiceagent.LiveKitService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
-	9,  // 9: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
-	9,  // 10: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
-	5,  // 11: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
-	9,  // 12: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
-	9,  // 13: api.voiceagent.LiveKitService.StopConversation:output_type -> api.voiceagent.Conversation
-	10, // 14: api.voiceagent.LiveKitService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
-	7,  // 15: api.voiceagent.LiveKitService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
-	9,  // [9:16] is the sub-list for method output_type
-	2,  // [2:9] is the sub-list for method input_type
+	11, // 9: api.voiceagent.LiveKitService.SummarizeConversations:input_type -> google.protobuf.Empty
+	9,  // 10: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
+	9,  // 11: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
+	5,  // 12: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
+	9,  // 13: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
+	9,  // 14: api.voiceagent.LiveKitService.StopConversation:output_type -> api.voiceagent.Conversation
+	10, // 15: api.voiceagent.LiveKitService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	7,  // 16: api.voiceagent.LiveKitService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
+	11, // 17: api.voiceagent.LiveKitService.SummarizeConversations:output_type -> google.protobuf.Empty
+	10, // [10:18] is the sub-list for method output_type
+	2,  // [2:10] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
 	2,  // [2:2] is the sub-list for extension extendee
 	0,  // [0:2] is the sub-list for field type_name

@@ -11515,6 +11515,8 @@ components:
                     type: string
                 roomName:
                     type: string
+                extra:
+                    $ref: '#/components/schemas/api.voiceagent.Conversation_Extra'
             description: |-
                 Conversation (对话会话): 用户与 Agent 交互的运行时实例。
                  [参考文档]: Design and Configure -> Conversation flow (/docs/agents-platform/customization/conversation-flow)
@@ -11527,6 +11529,14 @@ components:
                         $ref: '#/components/schemas/api.voiceagent.Conversation'
                 total:
                     type: string
+        api.voiceagent.Conversation_Extra:
+            type: object
+            properties:
+                analysisStatus:
+                    type: string
+                    description: |-
+                        analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)
+                         [用法]: 配合 Cron Job 进行会话总结和记忆提取。
         api.voiceagent.CreateAgentRequest:
             type: object
             properties:
@@ -11805,9 +11815,6 @@ components:
                 content:
                     type: string
                     description: 'content: 记忆内容。'
-                source:
-                    type: string
-                    description: 'source: 来源会话 ID (可选，自动提取时填充)。'
                 importance:
                     type: integer
                     description: 'importance: 重要程度 (1-10)。'
@@ -11817,6 +11824,8 @@ components:
                     items:
                         type: string
                     description: 'tags: 标签列表，便于检索。'
+                extra:
+                    $ref: '#/components/schemas/api.voiceagent.Memory_Extra'
                 createdAt:
                     type: string
                 updatedAt:
@@ -11833,6 +11842,12 @@ components:
                         $ref: '#/components/schemas/api.voiceagent.Memory'
                 total:
                     type: string
+        api.voiceagent.Memory_Extra:
+            type: object
+            properties:
+                source:
+                    type: string
+                    description: 'source: 来源会话 ID (可选，自动提取时填充)。'
         api.voiceagent.MotivationCard:
             type: object
             properties:

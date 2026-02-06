@@ -34,14 +34,13 @@ type Memory struct {
 	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	// content: 记忆内容。
 	Content string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	// source: 来源会话 ID (可选，自动提取时填充)。
-	Source string `protobuf:"bytes,5,opt,name=source,proto3" json:"source,omitempty"`
 	// importance: 重要程度 (1-10)。
 	Importance int32 `protobuf:"varint,6,opt,name=importance,proto3" json:"importance,omitempty"`
 	// tags: 标签列表，便于检索。
-	Tags          []string `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
-	CreatedAt     int64    `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt     int64    `protobuf:"varint,9,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
+	Tags          []string      `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
+	Extra         *Memory_Extra `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
+	CreatedAt     int64         `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     int64         `protobuf:"varint,9,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -104,13 +103,6 @@ func (x *Memory) GetContent() string {
 	return ""
 }
 
-func (x *Memory) GetSource() string {
-	if x != nil {
-		return x.Source
-	}
-	return ""
-}
-
 func (x *Memory) GetImportance() int32 {
 	if x != nil {
 		return x.Importance
@@ -121,6 +113,13 @@ func (x *Memory) GetImportance() int32 {
 func (x *Memory) GetTags() []string {
 	if x != nil {
 		return x.Tags
+	}
+	return nil
+}
+
+func (x *Memory) GetExtra() *Memory_Extra {
+	if x != nil {
+		return x.Extra
 	}
 	return nil
 }
@@ -139,23 +138,70 @@ func (x *Memory) GetUpdatedAt() int64 {
 	return 0
 }
 
+type Memory_Extra struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// source: 来源会话 ID (可选，自动提取时填充)。
+	Source        string `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Memory_Extra) Reset() {
+	*x = Memory_Extra{}
+	mi := &file_voiceagent_memory_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Memory_Extra) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Memory_Extra) ProtoMessage() {}
+
+func (x *Memory_Extra) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_memory_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Memory_Extra.ProtoReflect.Descriptor instead.
+func (*Memory_Extra) Descriptor() ([]byte, []int) {
+	return file_voiceagent_memory_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Memory_Extra) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
 var File_voiceagent_memory_proto protoreflect.FileDescriptor
 
 const file_voiceagent_memory_proto_rawDesc = "" +
 	"\n" +
-	"\x17voiceagent/memory.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xfa\x01\n" +
+	"\x17voiceagent/memory.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xb7\x02\n" +
 	"\x06Memory\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12\x16\n" +
-	"\x06source\x18\x05 \x01(\tR\x06source\x12\x1e\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1e\n" +
 	"\n" +
 	"importance\x18\x06 \x01(\x05R\n" +
 	"importance\x12\x12\n" +
-	"\x04tags\x18\a \x03(\tR\x04tags\x12\x1c\n" +
+	"\x04tags\x18\a \x03(\tR\x04tags\x122\n" +
+	"\x05extra\x18\x14 \x01(\v2\x1c.api.voiceagent.Memory.ExtraR\x05extra\x12\x1c\n" +
 	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\t \x01(\x03R\tupdatedAtB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\tupdatedAt\x18\t \x01(\x03R\tupdatedAt\x1a\x1f\n" +
+	"\x05Extra\x12\x16\n" +
+	"\x06source\x18\x01 \x01(\tR\x06sourceB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_memory_proto_rawDescOnce sync.Once
@@ -169,18 +215,20 @@ func file_voiceagent_memory_proto_rawDescGZIP() []byte {
 	return file_voiceagent_memory_proto_rawDescData
 }
 
-var file_voiceagent_memory_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_voiceagent_memory_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_voiceagent_memory_proto_goTypes = []any{
 	(*Memory)(nil),          // 0: api.voiceagent.Memory
-	(*usercenter.User)(nil), // 1: api.usercenter.User
+	(*Memory_Extra)(nil),    // 1: api.voiceagent.Memory.Extra
+	(*usercenter.User)(nil), // 2: api.usercenter.User
 }
 var file_voiceagent_memory_proto_depIdxs = []int32{
-	1, // 0: api.voiceagent.Memory.user:type_name -> api.usercenter.User
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: api.voiceagent.Memory.user:type_name -> api.usercenter.User
+	1, // 1: api.voiceagent.Memory.extra:type_name -> api.voiceagent.Memory.Extra
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_memory_proto_init() }
@@ -194,7 +242,7 @@ func file_voiceagent_memory_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_memory_proto_rawDesc), len(file_voiceagent_memory_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

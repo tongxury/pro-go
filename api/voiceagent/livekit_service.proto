@@ -4,6 +4,7 @@ package api.voiceagent;
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "google/protobuf/empty.proto";
 import "voiceagent/conversation.proto";
 
 import "voiceagent/transcript.proto";
@@ -63,6 +64,10 @@ service LiveKitService {
     option (google.api.http) = {
       get: "/api/va/conversations/{conversationId}/transcripts"
     };
+  }
+
+  // SummarizeConversations: 触发会话总结任务。通常由 Cron Job 调用。
+  rpc SummarizeConversations(google.protobuf.Empty) returns (google.protobuf.Empty) {
   }
 
 }

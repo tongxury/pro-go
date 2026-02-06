@@ -98,15 +98,6 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		Component: confcenter.Component{
 			Genai: gemini.FactoryConfig{
 				Configs: []*gemini.Config{
-
-					//{
-					//	BaseURL: "http://45.78.194.147:6000",
-					//},
-					//
-					//{
-					//	BaseURL: "https://api.viviai.cc",
-					//},
-
 					{
 						Project:         "yuzhi-483807", // 从 secrets.go 或 configs.go 中提取的 Project ID
 						Location:        "us-central1",  // 常用 Vertex AI Location

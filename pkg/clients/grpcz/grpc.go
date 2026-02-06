@@ -16,6 +16,7 @@ import (
 	projpb "store/api/proj"
 	userpb "store/api/user"
 	ucpb "store/api/usercenter"
+	voiceagentpb "store/api/voiceagent"
 	"store/pkg/sdk/conv"
 	"time"
 
@@ -48,6 +49,7 @@ type Clients struct {
 	UserCenterClient  ucpb.UserServiceClient
 	MondayAdminClient mondaypb.MondayAdminServiceClient
 	CreditClient      creditpb.CreditServiceClient
+	VoiceAgentClient  voiceagentpb.LiveKitServiceClient
 }
 
 type Configs struct {
@@ -57,6 +59,7 @@ type Configs struct {
 	ProjAdmin   *Config
 	ProjPro     *Config
 	AiAgent     *Config
+	VoiceAgent  *Config
 	User        *Config
 	Member      *Config
 	Payment     *Config
@@ -217,6 +220,14 @@ func NewClients(configs Configs) (*Clients, error) {
 			return nil, err
 		}
 		clients.DexAdminClient = dexpb.NewAdminServiceClient(dexAdminConn)
+	}
+
+	if configs.VoiceAgent != nil {
+		voiceAgentConn, err := getConn(configs.VoiceAgent.Endpoint)
+		if err != nil {
+			return nil, err
+		}
+		clients.VoiceAgentClient = voiceagentpb.NewLiveKitServiceClient(voiceAgentConn)
 	}
 
 	log.Debugw("NewGrpcClients", "done", "configs", conv.S2J(configs))

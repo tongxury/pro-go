@@ -40,4 +40,12 @@ message Conversation {
   int64 endedAt = 11;
 
   string roomName = 12;
+
+  message Extra {
+    // analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)
+    // [用法]: 配合 Cron Job 进行会话总结和记忆提取。
+    string analysisStatus = 1;
+  }
+
+  Extra extra = 20;
 }

@@ -8,7 +8,8 @@ import (
 	pkgConf "store/pkg/confcenter"
 	"store/pkg/krathelper"
 	"store/pkg/middlewares/encoder"
-	helpers "store/pkg/sdk/helper"
+	"store/pkg/sdk/helper"
+	"store/pkg/sdk/helper/crond"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
@@ -16,6 +17,7 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/selector"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	jwtv4 "github.com/golang-jwt/jwt/v4"
+	"github.com/robfig/cron/v3"
 )
 
 // NewHTTPServer new an HTTP server.
@@ -35,7 +37,7 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 					},
 				)).Match(func(ctx context.Context, operation string) bool {
 				// 可以根据需要排除不需要鉴权的接口
-				return !helpers.InSlice(operation, []string{
+				return !helper.InSlice(operation, []string{
 					voiceagent.VoiceAgentService_CreateMemory_FullMethodName,
 					voiceagent.LiveKitService_AddTranscriptEntry_FullMethodName,
 				})
@@ -59,9 +61,20 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 	voiceagent.RegisterLiveKitServiceHTTPServer(srv, livekit)
 
 	go func() {
-		helpers.DeferFunc()
-		service.StartConsumer()
+		defer helper.DeferFunc()
+
+		// Start background cron jobs
+		c := cron.New()
+		_, _ = c.AddJob("@every 5s", crond.NewJobWrapper(func() {
+			log.Info("Running SummarizeEndedConversations in background cron")
+			if err := service.AgentBiz.SummarizeEndedConversations(context.Background()); err != nil {
+				log.Errorw("msg", "SummarizeEndedConversations failed", "err", err)
+			}
+		}))
+		c.Start()
 	}()
+
+	service.StartConsumer()
 
 	return srv
 }

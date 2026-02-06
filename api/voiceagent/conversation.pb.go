@@ -46,9 +46,10 @@ type Conversation struct {
 	//	For private agents, you must pass in a conversationToken obtained from the ElevenLabs API. Generating this token requires an ElevenLabs API key.
 	//
 	// The conversationToken is valid for 10 minutes.
-	Token         string `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"`
-	EndedAt       int64  `protobuf:"varint,11,opt,name=endedAt,proto3" json:"endedAt,omitempty"`
-	RoomName      string `protobuf:"bytes,12,opt,name=roomName,proto3" json:"roomName,omitempty"`
+	Token         string              `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"`
+	EndedAt       int64               `protobuf:"varint,11,opt,name=endedAt,proto3" json:"endedAt,omitempty"`
+	RoomName      string              `protobuf:"bytes,12,opt,name=roomName,proto3" json:"roomName,omitempty"`
+	Extra         *Conversation_Extra `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -153,11 +154,64 @@ func (x *Conversation) GetRoomName() string {
 	return ""
 }
 
+func (x *Conversation) GetExtra() *Conversation_Extra {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+type Conversation_Extra struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)
+	// [用法]: 配合 Cron Job 进行会话总结和记忆提取。
+	AnalysisStatus string `protobuf:"bytes,1,opt,name=analysisStatus,proto3" json:"analysisStatus,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Conversation_Extra) Reset() {
+	*x = Conversation_Extra{}
+	mi := &file_voiceagent_conversation_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Conversation_Extra) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Conversation_Extra) ProtoMessage() {}
+
+func (x *Conversation_Extra) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_conversation_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Conversation_Extra.ProtoReflect.Descriptor instead.
+func (*Conversation_Extra) Descriptor() ([]byte, []int) {
+	return file_voiceagent_conversation_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Conversation_Extra) GetAnalysisStatus() string {
+	if x != nil {
+		return x.AnalysisStatus
+	}
+	return ""
+}
+
 var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xbd\x02\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xa8\x03\n" +
 	"\fConversation\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
@@ -169,7 +223,10 @@ const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\x05token\x18\n" +
 	" \x01(\tR\x05token\x12\x18\n" +
 	"\aendedAt\x18\v \x01(\x03R\aendedAt\x12\x1a\n" +
-	"\broomName\x18\f \x01(\tR\broomNameB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
+	"\broomName\x18\f \x01(\tR\broomName\x128\n" +
+	"\x05extra\x18\x14 \x01(\v2\".api.voiceagent.Conversation.ExtraR\x05extra\x1a/\n" +
+	"\x05Extra\x12&\n" +
+	"\x0eanalysisStatus\x18\x01 \x01(\tR\x0eanalysisStatusB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
 
 var (
 	file_voiceagent_conversation_proto_rawDescOnce sync.Once
@@ -183,20 +240,22 @@ func file_voiceagent_conversation_proto_rawDescGZIP() []byte {
 	return file_voiceagent_conversation_proto_rawDescData
 }
 
-var file_voiceagent_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_voiceagent_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_voiceagent_conversation_proto_goTypes = []any{
-	(*Conversation)(nil),    // 0: api.voiceagent.Conversation
-	(*usercenter.User)(nil), // 1: api.usercenter.User
-	(*Agent)(nil),           // 2: api.voiceagent.Agent
+	(*Conversation)(nil),       // 0: api.voiceagent.Conversation
+	(*Conversation_Extra)(nil), // 1: api.voiceagent.Conversation.Extra
+	(*usercenter.User)(nil),    // 2: api.usercenter.User
+	(*Agent)(nil),              // 3: api.voiceagent.Agent
 }
 var file_voiceagent_conversation_proto_depIdxs = []int32{
-	1, // 0: api.voiceagent.Conversation.user:type_name -> api.usercenter.User
-	2, // 1: api.voiceagent.Conversation.agent:type_name -> api.voiceagent.Agent
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2, // 0: api.voiceagent.Conversation.user:type_name -> api.usercenter.User
+	3, // 1: api.voiceagent.Conversation.agent:type_name -> api.voiceagent.Agent
+	1, // 2: api.voiceagent.Conversation.extra:type_name -> api.voiceagent.Conversation.Extra
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_conversation_proto_init() }
@@ -211,7 +270,7 @@ func file_voiceagent_conversation_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_conversation_proto_rawDesc), len(file_voiceagent_conversation_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
