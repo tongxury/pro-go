@@ -43,49 +43,40 @@ func newClient(config *Config) (*Client, error) {
 
 	var transport *http.Transport
 
+	// Base transport configuration with robust defaults
+	transport = &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true, // Allow custom certs/gateways
+		},
+		ResponseHeaderTimeout: 600 * time.Second, // Allow long waits for generation
+		ForceAttemptHTTP2:     false,             // Disable HTTP/2 for better stability
+	}
+
 	if config.Proxy != "" {
 		proxyURL, err := url.Parse(config.Proxy)
 		if err != nil {
 			return nil, fmt.Errorf("invalid proxy URL: %v", err)
 		}
-
-		transport = &http.Transport{
-			Proxy: http.ProxyURL(proxyURL),
-			DialContext: (&net.Dialer{
-				Timeout:   600 * time.Second,
-				KeepAlive: 600 * time.Second,
-			}).DialContext,
-			MaxIdleConns:          100,
-			IdleConnTimeout:       600 * time.Second,
-			TLSHandshakeTimeout:   600 * time.Second,
-			ExpectContinueTimeout: 600 * time.Second,
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-			ResponseHeaderTimeout: 600 * time.Second,
-			ForceAttemptHTTP2:     false,
-		}
-	} else {
-		// Default transport if no proxy (though user config implies proxy)
-		transport = &http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   30 * time.Second,
-				KeepAlive: 30 * time.Second,
-			}).DialContext,
-			TLSHandshakeTimeout: 10 * time.Second,
-			ForceAttemptHTTP2:   true,
-		}
+		transport.Proxy = http.ProxyURL(proxyURL)
 	}
 
 	// Create clients
-	// tokenHttpClient is used strictly for fetching tokens (Proxy only, no Auth middleware injection)
+	// tokenHttpClient is used strictly for fetching tokens (Proxy/Direct, no Auth middleware injection)
 	tokenHttpClient := &http.Client{
 		Transport: transport,
 		Timeout:   600 * time.Second,
 	}
 
-	// httpClient is used for actual API calls (Proxy + Auth middleware injected later)
+	// httpClient is used for actual API calls (Proxy/Direct + Auth middleware injected later)
 	if config.Key != "" {
 		// API Key mode: Use ProxyRoundTripper
 		httpClient = &http.Client{
@@ -139,15 +130,20 @@ func newClient(config *Config) (*Client, error) {
 		clientConfig.APIKey = config.Key
 	}
 
-	client, err := genai.NewClient(ctx, clientConfig)
+	// Use a timed context for NewClient to prevent hanging during discovery/initialization
+	newClientCtx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+
+	client, err := genai.NewClient(newClientCtx, clientConfig)
 
 	if err != nil {
 		return nil, err
 	}
 
 	return &Client{
-		c:     client,
-		cache: config.Cache,
+		c:          client,
+		httpClient: httpClient,
+		cache:      config.Cache,
 	}, nil
 }
 

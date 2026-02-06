@@ -8,6 +8,7 @@ import (
 	"store/pkg/sdk/conv"
 	"store/pkg/sdk/helper"
 	"strings"
+	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"google.golang.org/genai"
@@ -111,6 +112,50 @@ type GenerateImageRequest struct {
 }
 
 func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([]byte, error) {
+	var loop int
+	for {
+		fmt.Printf("GenerateImage attempt %d\n", loop+1)
+		res, err := t.generateImage(ctx, req)
+		if err == nil && len(res) > 0 {
+			return res, nil
+		}
+
+		loop++
+		if loop >= 3 {
+			if err != nil {
+				return nil, err
+			}
+			return nil, errors.New("GenerateImage failed: empty result after retries")
+		}
+
+		fmt.Printf("GenerateImage failed (err: %v), retrying in 1s...\n", err)
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func (t *Client) GenerateImageV2(ctx context.Context, req GenerateImageRequest) ([]byte, error) {
+	var loop int
+	for {
+		fmt.Printf("GenerateImageV2 attempt %d\n", loop+1)
+		res, err := t.generateImageV2(ctx, req)
+		if err == nil && len(res) > 0 {
+			return res, nil
+		}
+
+		loop++
+		if loop >= 3 {
+			if err != nil {
+				return nil, err
+			}
+			return nil, errors.New("GenerateImageV2 failed: empty result after retries")
+		}
+
+		fmt.Printf("GenerateImageV2 failed (err: %v), retrying in 1s...\n", err)
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func (t *Client) generateImage(ctx context.Context, req GenerateImageRequest) ([]byte, error) {
 	imageSize := helper.OrString(req.ImageSize, "1K")
 	aspectRatio := helper.OrString(req.AspectRatio, "9:16")
 
@@ -131,9 +176,9 @@ func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([
 	// Case 1: Text-to-Image (No input images)
 	if len(req.ImageBytes) == 0 && len(req.Images) == 0 {
 		resp, err := t.c.Models.GenerateImages(ctx, model, prompt, &genai.GenerateImagesConfig{
-			AspectRatio: aspectRatio,
-			// ImageSize is set in config later if needed, but GenerateImagesConfig uses ImageSize string
-			ImageSize: imageSize,
+			AspectRatio:      aspectRatio,
+			ImageSize:        imageSize,
+			PersonGeneration: genai.PersonGenerationAllowAll,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("GenerateImages failed: %w", err)
@@ -186,7 +231,8 @@ func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([
 	}
 
 	resp, err := t.c.Models.EditImage(ctx, model, prompt, refs, &genai.EditImageConfig{
-		AspectRatio: aspectRatio,
+		AspectRatio:      aspectRatio,
+		PersonGeneration: genai.PersonGenerationAllowAll,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("EditImage failed: %w", err)
@@ -197,6 +243,56 @@ func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([
 	}
 
 	return resp.GeneratedImages[0].Image.ImageBytes, nil
+}
+
+func (t *Client) generateImageV2(ctx context.Context, req GenerateImageRequest) ([]byte, error) {
+	model := req.Model
+	if model == "" {
+		model = "gemini-3-pro-image-preview"
+	}
+
+	var parts []*genai.Part
+
+	// Add images
+	for _, url := range req.Images {
+		p, err := NewImagePart(url)
+		if err != nil {
+			return nil, err
+		}
+		parts = append(parts, p)
+	}
+	for _, b := range req.ImageBytes {
+		parts = append(parts, genai.NewPartFromBytes(b, "image/jpeg"))
+	}
+
+	// Add text prompt
+	prompt := req.Prompt
+	if prompt == "" {
+		prompt = "high quality, photorealistic, cinematic lighting, highly detailed"
+	}
+	parts = append(parts, genai.NewPartFromText(prompt))
+
+	config := &genai.GenerateContentConfig{
+		ResponseModalities: []string{"TEXT", "IMAGE"},
+	}
+
+	resp, err := t.c.Models.GenerateContent(ctx, model, []*genai.Content{{Role: "user", Parts: parts}}, config)
+	if err != nil {
+		return nil, fmt.Errorf("GenerateContent for image failed: %w", err)
+	}
+
+	for _, candidate := range resp.Candidates {
+		if candidate.Content == nil {
+			continue
+		}
+		for _, part := range candidate.Content.Parts {
+			if part.InlineData != nil && strings.HasPrefix(part.InlineData.MIMEType, "image/") {
+				return part.InlineData.Data, nil
+			}
+		}
+	}
+
+	return nil, errors.New("no image part found in multimodal response")
 }
 
 func (t *Client) GenerateBlob(ctx context.Context, req GenerateContentRequest) (*genai.Blob, error) {
