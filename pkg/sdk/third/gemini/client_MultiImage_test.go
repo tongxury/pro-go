@@ -1,10 +1,11 @@
-package gemini
+package gemini_test
 
 import (
 	"context"
 	"fmt"
 	"os"
 	"store/confs"
+	"store/pkg/sdk/third/gemini"
 	"testing"
 	"time"
 
@@ -20,8 +21,8 @@ func TestClient_GenerateImage_MultiImage(t *testing.T) {
 		t.Skip("Skipping test: VertexAiSecret is empty")
 	}
 
-	factory := NewGenaiFactory(&FactoryConfig{
-		Configs: []*Config{
+	factory := gemini.NewGenaiFactory(&gemini.FactoryConfig{
+		Configs: []*gemini.Config{
 			{
 				Project:         "yuzhi-483807",
 				Location:        "us-central1",
@@ -45,7 +46,7 @@ func TestClient_GenerateImage_MultiImage(t *testing.T) {
 	}
 
 	// Test multi-image: using the same image twice as a sample
-	resp, err := client.GenerateImage(ctx, GenerateImageRequest{
+	resp, err := client.GenerateImage(ctx, gemini.GenerateImageRequest{
 		ImageBytes:  [][]byte{imageBytes, imageBytes},
 		Prompt:      "Combine elements from these two images into a new high quality commercial background for fashion video.",
 		AspectRatio: "9:16",

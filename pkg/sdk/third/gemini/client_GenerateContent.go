@@ -7,6 +7,7 @@ import (
 	"iter"
 	"store/pkg/sdk/conv"
 	"store/pkg/sdk/helper"
+	"strings"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"google.golang.org/genai"
@@ -110,66 +111,92 @@ type GenerateImageRequest struct {
 }
 
 func (t *Client) GenerateImage(ctx context.Context, req GenerateImageRequest) ([]byte, error) {
-
-	var parts []*genai.Part
-
 	imageSize := helper.OrString(req.ImageSize, "1K")
 	aspectRatio := helper.OrString(req.AspectRatio, "9:16")
 
-	for i := range req.Images {
-		p, err := NewImagePart(req.Images[i])
+	model := req.Model
+	if model == "" {
+		if len(req.ImageBytes) > 0 || len(req.Images) > 0 {
+			model = ModelGenmini3CapabilityPreview
+		} else {
+			model = ModelGenmini3ProImagePreview
+		}
+	}
+
+	prompt := req.Prompt
+	if prompt == "" {
+		prompt = "high quality, photorealistic, cinematic lighting, highly detailed"
+	}
+
+	// Case 1: Text-to-Image (No input images)
+	if len(req.ImageBytes) == 0 && len(req.Images) == 0 {
+		resp, err := t.c.Models.GenerateImages(ctx, model, prompt, &genai.GenerateImagesConfig{
+			AspectRatio: aspectRatio,
+			// ImageSize is set in config later if needed, but GenerateImagesConfig uses ImageSize string
+			ImageSize: imageSize,
+		})
+		if err != nil {
+			return nil, fmt.Errorf("GenerateImages failed: %w", err)
+		}
+		if len(resp.GeneratedImages) == 0 || resp.GeneratedImages[0].Image == nil {
+			return nil, errors.New("no image generated")
+		}
+		return resp.GeneratedImages[0].Image.ImageBytes, nil
+	}
+
+	// Case 2: Image Editing or Fusion
+	var refs []genai.ReferenceImage
+
+	// Collect all images from URL and Bytes
+	var allImages [][]byte
+	for _, url := range req.Images {
+		p, err := NewImagePart(url)
 		if err != nil {
 			return nil, err
 		}
+		if p.InlineData != nil {
+			allImages = append(allImages, p.InlineData.Data)
+		}
+	}
+	allImages = append(allImages, req.ImageBytes...)
 
-		parts = append(parts, p)
+	if len(allImages) == 0 {
+		return nil, errors.New("no images provided for editing")
 	}
 
-	for i := range req.ImageBytes {
-		parts = append(parts, genai.NewPartFromBytes(req.ImageBytes[i], "image/jpeg"))
+	// Construct ReferenceImages
+	// First image is Raw (Base)
+	refs = append(refs, genai.NewRawReferenceImage(&genai.Image{
+		ImageBytes: allImages[0],
+		MIMEType:   "image/jpeg",
+	}, 1))
+
+	// Subsequent images are Content (referenced as [2], [3], etc.)
+	for i := 1; i < len(allImages); i++ {
+		refs = append(refs, genai.NewContentReferenceImage(&genai.Image{
+			ImageBytes: allImages[i],
+			MIMEType:   "image/jpeg",
+		}, int32(i+1)))
+
+		// Ensure the prompt mentions the subjects if not already there
+		// This is a bit of a hack to make multi-image fusion more likely to work
+		if !strings.Contains(prompt, fmt.Sprintf("[%d]", i+1)) {
+			prompt += fmt.Sprintf(" and refer to image [%d]", i+1)
+		}
 	}
 
-	for i := range req.Videos {
-		//gsFile, err := t.UploadBlob(ctx, req.Videos[i], "video/mp4")
-		//if err != nil {
-		//	return nil, err
-		//}
-		//parts = append(parts, &genai.Part{
-		//	FileData: &genai.FileData{
-		//		MIMEType: "video/mp4",
-		//		FileURI:  gsFile,
-		//	},
-		//})
-
-		parts = append(parts, genai.NewPartFromBytes(req.Videos[i], "video/mp4"))
-		//if err != nil {, "video/mp4"))
-	}
-
-	parts = append(parts, &genai.Part{
-		Text: req.Prompt + ", high quality, photorealistic, cinematic lighting, highly detailed",
-	})
-
-	blob3, err := t.GenerateBlob(ctx, GenerateContentRequest{
-		Model: ModelGenmini3ProImagePreview,
-		Parts: parts,
-		//Config: config,
-		Config: &genai.GenerateContentConfig{
-			ImageConfig: &genai.ImageConfig{
-				AspectRatio: aspectRatio,
-				ImageSize:   imageSize,
-				//OutputMIMEType:           "",
-				//OutputCompressionQuality: nil,
-			},
-		},
+	resp, err := t.c.Models.EditImage(ctx, model, prompt, refs, &genai.EditImageConfig{
+		AspectRatio: aspectRatio,
 	})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("EditImage failed: %w", err)
 	}
 
-	//b64Image := base64.StdEncoding.EncodeToString(blob3.Data)
+	if len(resp.GeneratedImages) == 0 || resp.GeneratedImages[0].Image == nil {
+		return nil, errors.New("no edited image generated")
+	}
 
-	return blob3.Data, nil
-
+	return resp.GeneratedImages[0].Image.ImageBytes, nil
 }
 
 func (t *Client) GenerateBlob(ctx context.Context, req GenerateContentRequest) (*genai.Blob, error) {

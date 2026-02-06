@@ -4,13 +4,6 @@ import (
 	"context"
 	"crypto/rsa"
 	"fmt"
-	"github.com/go-kratos/kratos/v2/errors"
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/golang-jwt/jwt/v4"
-	"github.com/lestrrat-go/jwx/jwk"
-	"github.com/redis/go-redis/v9"
-	"github.com/segmentio/kafka-go"
-	"google.golang.org/protobuf/types/known/emptypb"
 	responsepb "store/api/public/response"
 	userpb "store/api/user"
 	typepb "store/api/user/types"
@@ -25,6 +18,14 @@ import (
 	"store/pkg/sdk/helper/mathz"
 	"store/pkg/sdk/mail"
 	"time"
+
+	"github.com/go-kratos/kratos/v2/errors"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/lestrrat-go/jwx/jwk"
+	"github.com/redis/go-redis/v9"
+	"github.com/segmentio/kafka-go"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type AuthService struct {
@@ -141,7 +142,7 @@ func (t *AuthService) GetEmailAuthToken(ctx context.Context, params *userpb.GetE
 
 	msg := kafka.Message{
 		Value: conv.S2B(events.AuthEvent{
-			UserID:     id,
+			UserID:     conv.Str(id),
 			LoginBy:    "email",
 			TS:         time.Now().Unix(),
 			DeviceID:   deviceId,
@@ -233,7 +234,7 @@ func (t *AuthService) GetPhoneAuthToken(ctx context.Context, params *userpb.GetP
 
 	msg := kafka.Message{
 		Value: conv.S2B(events.AuthEvent{
-			UserID:     id,
+			UserID:     conv.Str(id),
 			LoginBy:    "phone",
 			TS:         time.Now().Unix(),
 			DeviceID:   deviceId,
@@ -277,7 +278,7 @@ func (t *AuthService) GetWxAuthToken(ctx context.Context, params *userpb.GetWxAu
 
 	msg := kafka.Message{
 		Value: conv.S2B(events.AuthEvent{
-			UserID:     id,
+			UserID:     conv.Str(id),
 			LoginBy:    "apple",
 			TS:         time.Now().Unix(),
 			DeviceID:   deviceId,
@@ -374,7 +375,7 @@ func (t *AuthService) GetAppleAuthToken(ctx context.Context, params *userpb.GetA
 
 	msg := kafka.Message{
 		Value: conv.S2B(events.AuthEvent{
-			UserID:     id,
+			UserID:     conv.Str(id),
 			LoginBy:    "apple",
 			TS:         time.Now().Unix(),
 			DeviceID:   deviceId,

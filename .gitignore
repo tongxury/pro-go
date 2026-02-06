@@ -7,3 +7,7 @@ secret/
 
 confs/
 config.ts
+**/**.png
+**/**.jpg
+**/**.jpeg
+
