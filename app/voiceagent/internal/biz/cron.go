@@ -13,6 +13,7 @@ import (
 	"store/pkg/sdk/third/gemini"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/livekit/protocol/livekit"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/genai"
 )
@@ -140,6 +141,58 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 	}
 
 	log.Infow("msg", "successfully summarized conversation", "id", conv.XId, "memories_count", len(memories))
+
+	return nil
+}
+
+func (b *AgentBiz) CleanupOrphanedConversations(ctx context.Context) error {
+	// 1. Find active conversations created more than 30 minutes ago
+	thirtyMinsAgo := time.Now().Unix() - 1800
+	filter := mgz.Filter().EQ("status", "ongoing").LT("createdAt", thirtyMinsAgo).B()
+
+	conversations, err := b.data.Mongo.Conversation.Find(ctx, filter, mgz.Find().Limit(10).B())
+	if err != nil {
+		return err
+	}
+	if len(conversations) == 0 {
+		return nil
+	}
+
+	// 2. Fetch active rooms from LiveKit
+	var roomNames []string
+	for _, c := range conversations {
+		if c.RoomName != "" {
+			roomNames = append(roomNames, c.RoomName)
+		}
+	}
+
+	if len(roomNames) == 0 {
+		return nil
+	}
+
+	resp, err := b.data.RoomClient.ListRooms(ctx, &livekit.ListRoomsRequest{
+		Names: roomNames,
+	})
+	if err != nil {
+		log.Errorw("msg", "failed to list rooms from LiveKit", "err", err)
+		return err
+	}
+
+	activeRooms := make(map[string]bool)
+	for _, r := range resp.Rooms {
+		activeRooms[r.Name] = true
+	}
+
+	// 3. Mark orphaned conversations as completed
+	for _, c := range conversations {
+		if !activeRooms[c.RoomName] {
+			log.Infow("msg", "cleaning up orphaned conversation", "convId", c.XId, "roomName", c.RoomName)
+			_, err := b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, c.XId, mgz.Op().Set("status", "completed").Set("endedAt", time.Now().Unix()))
+			if err != nil {
+				log.Errorw("msg", "failed to update orphaned conversation", "convId", c.XId, "err", err)
+			}
+		}
+	}
 
 	return nil
 }

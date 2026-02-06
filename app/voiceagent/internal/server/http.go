@@ -71,6 +71,12 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 				log.Errorw("msg", "SummarizeEndedConversations failed", "err", err)
 			}
 		}))
+		_, _ = c.AddJob("@every 1s", crond.NewJobWrapper(func() {
+			log.Info("Running CleanupOrphanedConversations in background cron")
+			if err := service.AgentBiz.CleanupOrphanedConversations(context.Background()); err != nil {
+				log.Errorw("msg", "CleanupOrphanedConversations failed", "err", err)
+			}
+		}))
 		c.Start()
 	}()
 
