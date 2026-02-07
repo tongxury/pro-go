@@ -11,7 +11,7 @@ import (
 )
 
 // NewGRPCServer new a gRPC server.
-func NewGRPCServer(c confcenter.Server, ss *service.VoiceAgentService, livekit *service.LiveKitService, logger log.Logger) *grpc.Server {
+func NewGRPCServer(c confcenter.Server, ss *service.VoiceAgentService, livekit *service.LiveKitService, assessment *service.AssessmentService, logger log.Logger) *grpc.Server {
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
@@ -30,5 +30,6 @@ func NewGRPCServer(c confcenter.Server, ss *service.VoiceAgentService, livekit *
 	voiceagent.RegisterVoiceAgentServiceServer(srv, ss)
 	voiceagent.RegisterMotivationServiceServer(srv, ss)
 	voiceagent.RegisterLiveKitServiceServer(srv, livekit)
+	voiceagent.RegisterAssessmentServiceServer(srv, assessment)
 	return srv
 }

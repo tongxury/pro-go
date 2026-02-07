@@ -16,6 +16,7 @@ type Collections struct {
 	UserProfile    *UserProfileCollection
 	EmotionLog     *EmotionLogCollection
 	ImportantEvent *ImportantEventCollection
+	Assessment     *AssessmentCollection
 }
 
 func NewCollections(config mgz.Config) *Collections {
@@ -36,5 +37,6 @@ func NewCollections(config mgz.Config) *Collections {
 		UserProfile:    NewUserProfileCollection(database),
 		EmotionLog:     NewEmotionLogCollection(database),
 		ImportantEvent: NewImportantEventCollection(database),
+		Assessment:     NewAssessmentCollection(database),
 	}
 }

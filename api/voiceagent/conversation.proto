@@ -41,6 +41,7 @@ message Conversation {
 
   string roomName = 12;
   string subject = 13;
+  string summary = 14;
 
   message Extra {
     // analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)

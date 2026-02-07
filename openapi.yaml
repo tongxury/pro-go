@@ -5767,6 +5767,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.Agent'
+    /api/va/assessments:
+        get:
+            tags:
+                - AssessmentService
+            operationId: AssessmentService_ListAssessments
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: string
+                - name: size
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.AssessmentList'
+        post:
+            tags:
+                - AssessmentService
+            operationId: AssessmentService_CreateAssessment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.voiceagent.CreateAssessmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.Assessment'
     /api/va/cartesia/token:
         post:
             tags:
@@ -11476,6 +11514,33 @@ components:
                         $ref: '#/components/schemas/api.voiceagent.Agent'
                 total:
                     type: string
+        api.voiceagent.Assessment:
+            type: object
+            properties:
+                _id:
+                    type: string
+                user:
+                    $ref: '#/components/schemas/api.usercenter.User'
+                type:
+                    type: string
+                score:
+                    type: integer
+                    format: int32
+                level:
+                    type: string
+                createdAt:
+                    type: string
+                details:
+                    type: string
+        api.voiceagent.AssessmentList:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.voiceagent.Assessment'
+                total:
+                    type: string
         api.voiceagent.Conversation:
             type: object
             properties:
@@ -11517,6 +11582,8 @@ components:
                     type: string
                 subject:
                     type: string
+                summary:
+                    type: string
                 extra:
                     $ref: '#/components/schemas/api.voiceagent.Conversation_Extra'
             description: |-
@@ -11556,6 +11623,18 @@ components:
                     type: string
                 isPublic:
                     type: boolean
+        api.voiceagent.CreateAssessmentRequest:
+            type: object
+            properties:
+                type:
+                    type: string
+                score:
+                    type: integer
+                    format: int32
+                level:
+                    type: string
+                details:
+                    type: string
         api.voiceagent.CreateConversationRequest:
             type: object
             properties:
@@ -12262,6 +12341,7 @@ tags:
     - name: AIAgentService
     - name: Admin
     - name: AdminService
+    - name: AssessmentService
     - name: Auth
     - name: AuthService
     - name: BarService

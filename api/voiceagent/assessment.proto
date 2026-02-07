@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+import "google/api/annotations.proto";
+import "usercenter/user.proto";
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+service AssessmentService {
+  rpc CreateAssessment (CreateAssessmentRequest) returns (Assessment) {
+    option (google.api.http) = {
+      post: "/api/va/assessments"
+      body: "*"
+    };
+  }
+
+  rpc ListAssessments (ListAssessmentsRequest) returns (AssessmentList) {
+    option (google.api.http) = {
+      get: "/api/va/assessments"
+    };
+  }
+}
+
+message Assessment {
+  string _id = 1 [json_name = "_id"];
+
+  api.usercenter.User user = 2;
+  string type = 3; // e.g. "phq9", "gad7"
+  int32 score = 4;
+  string level = 5; // e.g. "mild", "severe"
+  int64 createdAt = 6;
+  string details = 7; // JSON string of answers
+  string userId = 8;
+}
+
+message CreateAssessmentRequest {
+  string type = 1 [(validate.rules).string.min_len = 1];
+  int32 score = 2;
+  string level = 3;
+  string details = 4; // JSON string of answers
+}
+
+message ListAssessmentsRequest {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+message AssessmentList {
+  repeated Assessment list = 1;
+  int64 total = 2;
+}

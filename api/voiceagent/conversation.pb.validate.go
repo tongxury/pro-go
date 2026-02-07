@@ -133,6 +133,8 @@ func (m *Conversation) validate(all bool) error {
 
 	// no validation rules for Subject
 
+	// no validation rules for Summary
+
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
 		case interface{ ValidateAll() error }:

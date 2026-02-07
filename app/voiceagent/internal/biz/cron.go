@@ -88,6 +88,10 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 						Type:        genai.TypeString,
 						Description: "会话主题，精简描述，10个字左右",
 					},
+					"summary": {
+						Type:        genai.TypeString,
+						Description: "咨询总结。请扮演一位专业的心理咨询师，对本次对话进行总结。内容应通过第一人称（AI）视角撰写，包含：用户的主要困扰、你的回应策略、以及对用户的建议。",
+					},
 					"memories": {
 						Type: genai.TypeArray,
 						Items: &genai.Schema{
@@ -129,6 +133,7 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 	var result struct {
 		Memories []*voiceagent.Memory
 		Subject  string
+		Summary  string
 	}
 
 	if err := json.Unmarshal([]byte(responseText), &result); err != nil {
@@ -153,7 +158,8 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 	_, err = b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, conv.XId,
 		mgz.Op().
 			Set("extra.analysisStatus", "completed").
-			Set("subject", result.Subject),
+			Set("subject", result.Subject).
+			Set("summary", result.Summary),
 	)
 	if err != nil {
 		return fmt.Errorf("failed to update conversation status: %w", err)
