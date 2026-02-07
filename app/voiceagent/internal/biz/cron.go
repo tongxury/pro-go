@@ -6,10 +6,10 @@ import (
 	"fmt"
 	voiceagent "store/api/voiceagent"
 	"store/pkg/clients/mgz"
+	"store/pkg/sdk/helper"
 	"strings"
 	"time"
 
-	"store/pkg/sdk/helper"
 	"store/pkg/sdk/third/gemini"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -80,30 +80,39 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 		Config: &genai.GenerateContentConfig{
 			ResponseMIMEType: "application/json",
 			ResponseSchema: &genai.Schema{
-				Type: genai.TypeArray,
-				Items: &genai.Schema{
-					Type:     genai.TypeObject,
-					Required: []string{"type", "content", "importance", "tags"},
-					Properties: map[string]*genai.Schema{
-						"type": {
-							Type:        genai.TypeString,
-							Description: "One of 'fact', 'preference', 'event', 'relationship'",
-							Enum:        []string{"fact", "preference", "event", "relationship"},
-						},
-						"content": {
-							Type:        genai.TypeString,
-							Description: "Concise description of the extracted information",
-						},
-						"importance": {
-							Type:        genai.TypeInteger,
-							Minimum:     helper.Pointer[float64](1),
-							Maximum:     helper.Pointer[float64](5),
-							Description: "Importance level from 1 to 5",
-						},
-						"tags": {
-							Type: genai.TypeArray,
-							Items: &genai.Schema{
-								Type: genai.TypeString,
+				Type: "object",
+				Properties: map[string]*genai.Schema{
+					"subject": {
+						Type:        genai.TypeString,
+						Description: "会话主题，精简描述，10个字左右",
+					},
+					"memories": {
+						Type: genai.TypeArray,
+						Items: &genai.Schema{
+							Type:     genai.TypeObject,
+							Required: []string{"type", "content", "importance", "tags"},
+							Properties: map[string]*genai.Schema{
+								"type": {
+									Type:        genai.TypeString,
+									Description: "One of 'fact', 'preference', 'event', 'relationship'",
+									Enum:        []string{"fact", "preference", "event", "relationship"},
+								},
+								"content": {
+									Type:        genai.TypeString,
+									Description: "Concise description of the extracted information",
+								},
+								"importance": {
+									Type:        genai.TypeInteger,
+									Minimum:     helper.Pointer[float64](1),
+									Maximum:     helper.Pointer[float64](5),
+									Description: "Importance level from 1 to 5",
+								},
+								"tags": {
+									Type: genai.TypeArray,
+									Items: &genai.Schema{
+										Type: genai.TypeString,
+									},
+								},
 							},
 						},
 					},
@@ -115,32 +124,40 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 		return fmt.Errorf("gemini generation failed: %w", err)
 	}
 
-	var memories []*voiceagent.Memory
-	if err := json.Unmarshal([]byte(responseText), &memories); err != nil {
+	var result struct {
+		Memories []*voiceagent.Memory
+		Subject  string
+	}
+
+	if err := json.Unmarshal([]byte(responseText), &result); err != nil {
 		log.Errorw("msg", "failed to unmarshal gemini response", "response", responseText, "err", err)
 		return fmt.Errorf("json unmarshal failed: %w", err)
 	}
 
 	// 5. Save memories
-	for _, x := range memories {
+	for _, x := range result.Memories {
 		x.CreatedAt = time.Now().Unix()
 		x.UpdatedAt = time.Now().Unix()
 		x.Extra = &voiceagent.Memory_Extra{Source: conv.XId}
 		x.User = conv.User
 	}
-	_, err = b.data.Mongo.Memory.InsertMany(ctx, memories...)
+	_, err = b.data.Mongo.Memory.InsertMany(ctx, result.Memories...)
 	if err != nil {
 		log.Errorw("msg", "failed to insert memory", "err", err)
 		return err
 	}
 
 	// 6. Update conversation status
-	_, err = b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, conv.XId, mgz.Op().Set("extra.analysisStatus", "completed"))
+	_, err = b.data.Mongo.Conversation.UpdateByIDIfExists(ctx, conv.XId,
+		mgz.Op().
+			Set("extra.analysisStatus", "completed").
+			Set("subject", result.Subject),
+	)
 	if err != nil {
 		return fmt.Errorf("failed to update conversation status: %w", err)
 	}
 
-	log.Infow("msg", "successfully summarized conversation", "id", conv.XId, "memories_count", len(memories))
+	log.Infow("msg", "successfully summarized conversation", "id", conv.XId, "memories_count", len(result.Memories), "subject", result.Subject)
 
 	return nil
 }

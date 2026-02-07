@@ -93,9 +93,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		Database: confcenter.Database{
 			Mongo: confs.MongoMy,
 			Rediz: rediz.Config{
-				//Addrs:        []string{"redis-master.prod:6379"},
-				//Password:     "lveRN3bj7b",
-				Addrs:    []string{"101.132.192.41:6379"},
+				Addrs:    []string{"103.30.78.254:6379"},
 				Password: confs.RedisPassword,
 			},
 			Tos: tos.Config{

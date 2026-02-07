@@ -49,6 +49,7 @@ type Conversation struct {
 	Token         string              `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"`
 	EndedAt       int64               `protobuf:"varint,11,opt,name=endedAt,proto3" json:"endedAt,omitempty"`
 	RoomName      string              `protobuf:"bytes,12,opt,name=roomName,proto3" json:"roomName,omitempty"`
+	Subject       string              `protobuf:"bytes,13,opt,name=subject,proto3" json:"subject,omitempty"`
 	Extra         *Conversation_Extra `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -154,6 +155,13 @@ func (x *Conversation) GetRoomName() string {
 	return ""
 }
 
+func (x *Conversation) GetSubject() string {
+	if x != nil {
+		return x.Subject
+	}
+	return ""
+}
+
 func (x *Conversation) GetExtra() *Conversation_Extra {
 	if x != nil {
 		return x.Extra
@@ -211,7 +219,7 @@ var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xa8\x03\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xc2\x03\n" +
 	"\fConversation\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
@@ -223,7 +231,8 @@ const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\x05token\x18\n" +
 	" \x01(\tR\x05token\x12\x18\n" +
 	"\aendedAt\x18\v \x01(\x03R\aendedAt\x12\x1a\n" +
-	"\broomName\x18\f \x01(\tR\broomName\x128\n" +
+	"\broomName\x18\f \x01(\tR\broomName\x12\x18\n" +
+	"\asubject\x18\r \x01(\tR\asubject\x128\n" +
 	"\x05extra\x18\x14 \x01(\v2\".api.voiceagent.Conversation.ExtraR\x05extra\x1a/\n" +
 	"\x05Extra\x12&\n" +
 	"\x0eanalysisStatus\x18\x01 \x01(\tR\x0eanalysisStatusB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"

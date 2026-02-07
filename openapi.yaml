@@ -11515,6 +11515,8 @@ components:
                     type: string
                 roomName:
                     type: string
+                subject:
+                    type: string
                 extra:
                     $ref: '#/components/schemas/api.voiceagent.Conversation_Extra'
             description: |-

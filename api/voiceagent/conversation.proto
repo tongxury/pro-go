@@ -28,7 +28,7 @@ message Conversation {
   // status: 状态 (active: 通话中, ended: 通话结束)。
   // [用法]: 管理 WebSocket 连接的生命周期。
   string status = 7;
-  
+
   // signedUrl: 预生成的带签名的 WebSocket 连接地址 (有效期短)。
   string signedUrl = 9;
 
@@ -40,6 +40,7 @@ message Conversation {
   int64 endedAt = 11;
 
   string roomName = 12;
+  string subject = 13;
 
   message Extra {
     // analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)
@@ -48,4 +49,5 @@ message Conversation {
   }
 
   Extra extra = 20;
+
 }
