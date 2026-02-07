@@ -67,7 +67,9 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 		transcriptText.WriteString(fmt.Sprintf("%s: %s\n", role, t.Message))
 	}
 
-	prompt := fmt.Sprintf(`Extract user facts, preferences, events, and relationship updates from this transcript:
+	prompt := fmt.Sprintf(`基于以下对话记录，提取关键的用户信息、偏好、重要事件和人际关系更新，并总结会话主题。请用中文输出。
+你的目标是生成一份“记忆”，让 AI 在未来的对话中能够准确回忆起用户的这些细节。
+对话记录：
 %s`, transcriptText.String())
 
 	// 4. Call Gemini
@@ -99,13 +101,13 @@ func (b *AgentBiz) processConversation(ctx context.Context, conv *voiceagent.Con
 								},
 								"content": {
 									Type:        genai.TypeString,
-									Description: "Concise description of the extracted information",
+									Description: "提取的信息，用中文描述",
 								},
 								"importance": {
 									Type:        genai.TypeInteger,
 									Minimum:     helper.Pointer[float64](1),
 									Maximum:     helper.Pointer[float64](5),
-									Description: "Importance level from 1 to 5",
+									Description: "重要程度，1-5分",
 								},
 								"tags": {
 									Type: genai.TypeArray,
