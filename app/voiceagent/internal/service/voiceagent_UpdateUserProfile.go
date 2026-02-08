@@ -16,18 +16,19 @@ func (s *VoiceAgentService) UpdateUserProfile(ctx context.Context, req *voiceage
 
 	// 先获取或创建档案
 	profile, err := s.Data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
-	if err != nil {
+	if err != nil || profile == nil {
 		// 如果不存在，创建新档案
 		profile = &voiceagent.UserProfile{
-			User:      &ucpb.User{XId: userId},
-			Nickname:  req.Nickname,
-			Birthday:  req.Birthday,
-			Interests: req.Interests,
-			Goals:     req.Goals,
-			Bio:       req.Bio,
-			Timezone:  req.Timezone,
-			CreatedAt: time.Now().Unix(),
-			UpdatedAt: time.Now().Unix(),
+			User:        &ucpb.User{XId: userId},
+			Nickname:    req.Nickname,
+			Birthday:    req.Birthday,
+			Interests:   req.Interests,
+			Goals:       req.Goals,
+			Bio:         req.Bio,
+			Personality: req.Personality,
+			Timezone:    req.Timezone,
+			CreatedAt:   time.Now().Unix(),
+			UpdatedAt:   time.Now().Unix(),
 		}
 		res, err := s.Data.Mongo.UserProfile.Insert(ctx, profile)
 		if err != nil {
@@ -53,6 +54,9 @@ func (s *VoiceAgentService) UpdateUserProfile(ctx context.Context, req *voiceage
 	}
 	if req.Bio != "" {
 		updateOp = updateOp.Set("bio", req.Bio)
+	}
+	if req.Personality != "" {
+		updateOp = updateOp.Set("personality", req.Personality)
 	}
 	if req.Timezone != "" {
 		updateOp = updateOp.Set("timezone", req.Timezone)

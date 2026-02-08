@@ -1128,6 +1128,7 @@ type UpdateUserProfileRequest struct {
 	Goals         []string               `protobuf:"bytes,4,rep,name=goals,proto3" json:"goals,omitempty"`
 	Bio           string                 `protobuf:"bytes,5,opt,name=bio,proto3" json:"bio,omitempty"`
 	Timezone      string                 `protobuf:"bytes,6,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Personality   string                 `protobuf:"bytes,7,opt,name=personality,proto3" json:"personality,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1200,6 +1201,13 @@ func (x *UpdateUserProfileRequest) GetBio() string {
 func (x *UpdateUserProfileRequest) GetTimezone() string {
 	if x != nil {
 		return x.Timezone
+	}
+	return ""
+}
+
+func (x *UpdateUserProfileRequest) GetPersonality() string {
+	if x != nil {
+		return x.Personality
 	}
 	return ""
 }
@@ -2168,14 +2176,15 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\x06userId\x18\x05 \x01(\tR\x06userId\".\n" +
 	"\x13DeleteMemoryRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\"\x17\n" +
-	"\x15GetUserProfileRequest\"\xb4\x01\n" +
+	"\x15GetUserProfileRequest\"\xd6\x01\n" +
 	"\x18UpdateUserProfileRequest\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x1a\n" +
 	"\bbirthday\x18\x02 \x01(\tR\bbirthday\x12\x1c\n" +
 	"\tinterests\x18\x03 \x03(\tR\tinterests\x12\x14\n" +
 	"\x05goals\x18\x04 \x03(\tR\x05goals\x12\x10\n" +
 	"\x03bio\x18\x05 \x01(\tR\x03bio\x12\x1a\n" +
-	"\btimezone\x18\x06 \x01(\tR\btimezone\"x\n" +
+	"\btimezone\x18\x06 \x01(\tR\btimezone\x12 \n" +
+	"\vpersonality\x18\a \x01(\tR\vpersonality\"x\n" +
 	"\x16ListEmotionLogsRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x12\n" +
 	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x1c\n" +

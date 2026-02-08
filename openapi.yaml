@@ -12289,6 +12289,8 @@ components:
                     type: string
                 timezone:
                     type: string
+                personality:
+                    type: string
         api.voiceagent.UserProfile:
             type: object
             properties:

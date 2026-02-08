@@ -348,6 +348,7 @@ message UpdateUserProfileRequest {
   repeated string goals = 4;
   string bio = 5;
   string timezone = 6;
+  string personality = 7;
 }
 
 // ==================== Emotion Request/Response ====================

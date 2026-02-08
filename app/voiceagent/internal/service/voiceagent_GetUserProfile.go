@@ -15,7 +15,7 @@ func (s *VoiceAgentService) GetUserProfile(ctx context.Context, req *voiceagent.
 	userId := krathelper.RequireUserId(ctx)
 
 	profile, err := s.Data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
-	if err != nil {
+	if err != nil || profile == nil {
 		// 如果不存在，创建一个空的档案
 		profile = &voiceagent.UserProfile{
 			XId:       primitive.NewObjectID().Hex(),

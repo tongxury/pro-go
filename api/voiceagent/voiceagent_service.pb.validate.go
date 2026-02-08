@@ -2383,6 +2383,8 @@ func (m *UpdateUserProfileRequest) validate(all bool) error {
 
 	// no validation rules for Timezone
 
+	// no validation rules for Personality
+
 	if len(errors) > 0 {
 		return UpdateUserProfileRequestMultiError(errors)
 	}
