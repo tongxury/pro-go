@@ -8,7 +8,9 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
-	"store/pkg/sdk/third/gemini"
+	"store/pkg/sdk/third/wavespeed"
+
+	// "store/pkg/sdk/third/gemini"
 
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -102,6 +104,81 @@ func (t VideoReplication2_KeyFrameGenerationJob) Execute(ctx context.Context, jo
 
 	log.Debug("start 1")
 
+	// Waved AI 版
+	if keyFrame.TaskId != "" {
+		result, err := t.data.Wavespeed.GetResult(ctx, keyFrame.GetTaskId())
+		if err != nil {
+			return nil, err
+		}
+
+		logger.Debugw("keyFrames generation job task check result", result)
+
+		if len(result.Data.Outputs) > 0 {
+
+			keyFrame.Url = result.Data.Outputs[0]
+			keyFrame.Status = ExecuteStatusCompleted
+
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
+
+			if err != nil {
+				return nil, err
+			}
+
+			return &ExecuteResult{
+				Status: ExecuteStatusCompleted,
+			}, nil
+		}
+
+		if result.Data.Status == "failed" {
+			keyFrame.Url = ""
+			keyFrame.Status = ExecuteStatusRunning
+			keyFrame.TaskId = ""
+
+			_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+				Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
+
+			if err != nil {
+				return nil, err
+			}
+
+			return nil, nil // Return nil to allow retry/polling by workflow engine
+		}
+
+		return nil, nil // Still running
+	}
+
+	// Submit new task
+	res, err := t.data.Wavespeed.Gemini3ProImage(ctx, wavespeed.Gemini3ProImageRequest{
+		Prompt:       keyFrame.Prompt,
+		Images:       keyFrame.Refs,
+		AspectRatio:  "9:16",
+		Resolution:   "2k",
+		OutputFormat: "",
+		//EnableSyncMode: true,
+		//EnableBase64Output: false,
+	})
+	if err != nil {
+		logger.Errorw("Gemini3ProImage err", err)
+		return nil, err
+	}
+
+	logger.Debugw("keyFrames generation job task Gemini3ProImage", res)
+
+	keyFrame.TaskId = res.Data.Id
+	keyFrame.Status = ExecuteStatusRunning
+
+	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+		mgz.Op().
+			Set(fmt.Sprintf("jobs.%d.dataBus.keyFrames.frames.0", jobState.Index), keyFrame))
+
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+
+	/* Legacy Gemini Implementation
 	aspectRatio := helper.OrString(wfState.GetDataBus().GetSettings().GetAspectRatio(), "9:16")
 	blob, err := t.data.GenaiFactory.Get().GenerateImage(ctx, gemini.GenerateImageRequest{
 		Images: keyFrame.Refs,
@@ -141,4 +218,5 @@ func (t VideoReplication2_KeyFrameGenerationJob) Execute(ctx context.Context, jo
 	return &ExecuteResult{
 		Status: ExecuteStatusCompleted,
 	}, nil
+	*/
 }
