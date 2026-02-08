@@ -40,6 +40,7 @@ const OperationVoiceAgentServiceListEvents = "/api.voiceagent.VoiceAgentService/
 const OperationVoiceAgentServiceListMemories = "/api.voiceagent.VoiceAgentService/ListMemories"
 const OperationVoiceAgentServiceListPersonas = "/api.voiceagent.VoiceAgentService/ListPersonas"
 const OperationVoiceAgentServiceListScenes = "/api.voiceagent.VoiceAgentService/ListScenes"
+const OperationVoiceAgentServiceListTopics = "/api.voiceagent.VoiceAgentService/ListTopics"
 const OperationVoiceAgentServiceListVoices = "/api.voiceagent.VoiceAgentService/ListVoices"
 const OperationVoiceAgentServiceSendMessage = "/api.voiceagent.VoiceAgentService/SendMessage"
 const OperationVoiceAgentServiceUpdateAgent = "/api.voiceagent.VoiceAgentService/UpdateAgent"
@@ -87,6 +88,8 @@ type VoiceAgentServiceHTTPServer interface {
 	ListPersonas(context.Context, *ListPersonasRequest) (*PersonaList, error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
 	ListScenes(context.Context, *ListScenesRequest) (*SceneList, error)
+	// ListTopics ListTopics: 获取预设的对话主题。
+	ListTopics(context.Context, *ListTopicsRequest) (*TopicList, error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
@@ -111,6 +114,7 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.POST("/api/va/voices", _VoiceAgentService_AddVoice0_HTTP_Handler(srv))
 	r.GET("/api/va/voices", _VoiceAgentService_ListVoices0_HTTP_Handler(srv))
 	r.GET("/api/va/scenes", _VoiceAgentService_ListScenes0_HTTP_Handler(srv))
+	r.GET("/api/va/topics", _VoiceAgentService_ListTopics0_HTTP_Handler(srv))
 	r.POST("/api/va/messages", _VoiceAgentService_SendMessage0_HTTP_Handler(srv))
 	r.GET("/api/va/memories", _VoiceAgentService_ListMemories0_HTTP_Handler(srv))
 	r.POST("/api/va/memories", _VoiceAgentService_CreateMemory0_HTTP_Handler(srv))
@@ -335,6 +339,25 @@ func _VoiceAgentService_ListScenes0_HTTP_Handler(srv VoiceAgentServiceHTTPServer
 			return err
 		}
 		reply := out.(*SceneList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_ListTopics0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListTopicsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServiceListTopics)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListTopics(ctx, req.(*ListTopicsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*TopicList)
 		return ctx.Result(200, reply)
 	}
 }
@@ -692,6 +715,8 @@ type VoiceAgentServiceHTTPClient interface {
 	ListPersonas(ctx context.Context, req *ListPersonasRequest, opts ...http.CallOption) (rsp *PersonaList, err error)
 	// ListScenes ListScenes: 获取系统预设的交互场景。
 	ListScenes(ctx context.Context, req *ListScenesRequest, opts ...http.CallOption) (rsp *SceneList, err error)
+	// ListTopics ListTopics: 获取预设的对话主题。
+	ListTopics(ctx context.Context, req *ListTopicsRequest, opts ...http.CallOption) (rsp *TopicList, err error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(ctx context.Context, req *ListVoicesRequest, opts ...http.CallOption) (rsp *VoiceList, err error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
@@ -984,6 +1009,20 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListScenes(ctx context.Context, in *Li
 	pattern := "/api/va/scenes"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceListScenes))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListTopics ListTopics: 获取预设的对话主题。
+func (c *VoiceAgentServiceHTTPClientImpl) ListTopics(ctx context.Context, in *ListTopicsRequest, opts ...http.CallOption) (*TopicList, error) {
+	var out TopicList
+	pattern := "/api/va/topics"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationVoiceAgentServiceListTopics))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

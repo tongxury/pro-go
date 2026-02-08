@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "google/protobuf/empty.proto";
 import "voiceagent/conversation.proto";
+import "voiceagent/topic.proto";
 
 import "voiceagent/transcript.proto";
 
@@ -74,6 +75,7 @@ service LiveKitService {
 
 message CreateConversationRequest {
   string agentId = 1 [(validate.rules).string.min_len = 1];
+  Topic topic = 2;
 }
 
 message StopConversationRequest {

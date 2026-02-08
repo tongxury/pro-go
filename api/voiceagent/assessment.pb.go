@@ -34,6 +34,7 @@ type Assessment struct {
 	Level         string                 `protobuf:"bytes,5,opt,name=level,proto3" json:"level,omitempty"` // e.g. "mild", "severe"
 	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	Details       string                 `protobuf:"bytes,7,opt,name=details,proto3" json:"details,omitempty"` // JSON string of answers
+	UserId        string                 `protobuf:"bytes,8,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -113,6 +114,13 @@ func (x *Assessment) GetCreatedAt() int64 {
 func (x *Assessment) GetDetails() string {
 	if x != nil {
 		return x.Details
+	}
+	return ""
+}
+
+func (x *Assessment) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -293,7 +301,7 @@ var File_voiceagent_assessment_proto protoreflect.FileDescriptor
 
 const file_voiceagent_assessment_proto_rawDesc = "" +
 	"\n" +
-	"\x1bvoiceagent/assessment.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x15usercenter/user.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\"\xc0\x01\n" +
+	"\x1bvoiceagent/assessment.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x15usercenter/user.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\"\xd8\x01\n" +
 	"\n" +
 	"Assessment\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
@@ -302,7 +310,8 @@ const file_voiceagent_assessment_proto_rawDesc = "" +
 	"\x05score\x18\x04 \x01(\x05R\x05score\x12\x14\n" +
 	"\x05level\x18\x05 \x01(\tR\x05level\x12\x1c\n" +
 	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\x12\x18\n" +
-	"\adetails\x18\a \x01(\tR\adetails\"|\n" +
+	"\adetails\x18\a \x01(\tR\adetails\x12\x16\n" +
+	"\x06userId\x18\b \x01(\tR\x06userId\"|\n" +
 	"\x17CreateAssessmentRequest\x12\x1b\n" +
 	"\x04type\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04type\x12\x14\n" +
 	"\x05score\x18\x02 \x01(\x05R\x05score\x12\x14\n" +

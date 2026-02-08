@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package api.voiceagent;
+
+option go_package = "store/api/voiceagent;voiceagent";
+
+message Topic {
+  string id = 1;
+  string title = 2; // i18n key or text
+  string icon = 3;  // Ionicons name
+  string color = 4; // Hex color
+  string desc = 5;  // i18n key or text
+  string greeting = 6; // Text used by Python agent
+  string instruction = 7; // Prompt instruction used by Python agent
+}

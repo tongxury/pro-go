@@ -30,6 +30,7 @@ const (
 	VoiceAgentService_AddVoice_FullMethodName              = "/api.voiceagent.VoiceAgentService/AddVoice"
 	VoiceAgentService_ListVoices_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListVoices"
 	VoiceAgentService_ListScenes_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListScenes"
+	VoiceAgentService_ListTopics_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListTopics"
 	VoiceAgentService_SendMessage_FullMethodName           = "/api.voiceagent.VoiceAgentService/SendMessage"
 	VoiceAgentService_ListMemories_FullMethodName          = "/api.voiceagent.VoiceAgentService/ListMemories"
 	VoiceAgentService_CreateMemory_FullMethodName          = "/api.voiceagent.VoiceAgentService/CreateMemory"
@@ -75,6 +76,8 @@ type VoiceAgentServiceClient interface {
 	ListVoices(ctx context.Context, in *ListVoicesRequest, opts ...grpc.CallOption) (*VoiceList, error)
 	// ListScenes: 获取系统预设的交互场景。
 	ListScenes(ctx context.Context, in *ListScenesRequest, opts ...grpc.CallOption) (*SceneList, error)
+	// ListTopics: 获取预设的对话主题。
+	ListTopics(ctx context.Context, in *ListTopicsRequest, opts ...grpc.CallOption) (*TopicList, error)
 	// SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*TranscriptEntry, error)
 	// ListMemories: 获取用户的长期记忆列表。
@@ -209,6 +212,16 @@ func (c *voiceAgentServiceClient) ListScenes(ctx context.Context, in *ListScenes
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SceneList)
 	err := c.cc.Invoke(ctx, VoiceAgentService_ListScenes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) ListTopics(ctx context.Context, in *ListTopicsRequest, opts ...grpc.CallOption) (*TopicList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TopicList)
+	err := c.cc.Invoke(ctx, VoiceAgentService_ListTopics_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -393,6 +406,8 @@ type VoiceAgentServiceServer interface {
 	ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error)
 	// ListScenes: 获取系统预设的交互场景。
 	ListScenes(context.Context, *ListScenesRequest) (*SceneList, error)
+	// ListTopics: 获取预设的对话主题。
+	ListTopics(context.Context, *ListTopicsRequest) (*TopicList, error)
 	// SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error)
 	// ListMemories: 获取用户的长期记忆列表。
@@ -462,6 +477,9 @@ func (UnimplementedVoiceAgentServiceServer) ListVoices(context.Context, *ListVoi
 }
 func (UnimplementedVoiceAgentServiceServer) ListScenes(context.Context, *ListScenesRequest) (*SceneList, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListScenes not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) ListTopics(context.Context, *ListTopicsRequest) (*TopicList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListTopics not implemented")
 }
 func (UnimplementedVoiceAgentServiceServer) SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendMessage not implemented")
@@ -705,6 +723,24 @@ func _VoiceAgentService_ListScenes_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VoiceAgentServiceServer).ListScenes(ctx, req.(*ListScenesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_ListTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTopicsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).ListTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_ListTopics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).ListTopics(ctx, req.(*ListTopicsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1025,6 +1061,10 @@ var VoiceAgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListScenes",
 			Handler:    _VoiceAgentService_ListScenes_Handler,
+		},
+		{
+			MethodName: "ListTopics",
+			Handler:    _VoiceAgentService_ListTopics_Handler,
 		},
 		{
 			MethodName: "SendMessage",

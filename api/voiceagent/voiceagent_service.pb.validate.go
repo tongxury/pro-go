@@ -4060,3 +4060,238 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GenerateCartesiaTokenResponseValidationError{}
+
+// Validate checks the field values on ListTopicsRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListTopicsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTopicsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTopicsRequestMultiError, or nil if none found.
+func (m *ListTopicsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTopicsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListTopicsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTopicsRequestMultiError is an error wrapping multiple validation errors
+// returned by ListTopicsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListTopicsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTopicsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTopicsRequestMultiError) AllErrors() []error { return m }
+
+// ListTopicsRequestValidationError is the validation error returned by
+// ListTopicsRequest.Validate if the designated constraints aren't met.
+type ListTopicsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTopicsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTopicsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTopicsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTopicsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTopicsRequestValidationError) ErrorName() string {
+	return "ListTopicsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTopicsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTopicsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTopicsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTopicsRequestValidationError{}
+
+// Validate checks the field values on TopicList with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *TopicList) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TopicList with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in TopicListMultiError, or nil
+// if none found.
+func (m *TopicList) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TopicList) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, TopicListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, TopicListValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return TopicListValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return TopicListMultiError(errors)
+	}
+
+	return nil
+}
+
+// TopicListMultiError is an error wrapping multiple validation errors returned
+// by TopicList.ValidateAll() if the designated constraints aren't met.
+type TopicListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TopicListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TopicListMultiError) AllErrors() []error { return m }
+
+// TopicListValidationError is the validation error returned by
+// TopicList.Validate if the designated constraints aren't met.
+type TopicListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TopicListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TopicListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TopicListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TopicListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TopicListValidationError) ErrorName() string { return "TopicListValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TopicListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTopicList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TopicListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TopicListValidationError{}

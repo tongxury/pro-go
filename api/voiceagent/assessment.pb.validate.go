@@ -98,6 +98,8 @@ func (m *Assessment) validate(all bool) error {
 
 	// no validation rules for Details
 
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
 		return AssessmentMultiError(errors)
 	}

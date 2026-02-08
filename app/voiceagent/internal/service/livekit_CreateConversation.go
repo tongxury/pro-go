@@ -34,6 +34,7 @@ func (s *LiveKitService) CreateConversation(ctx context.Context, req *voiceagent
 		CreatedAt:     time.Now().Unix(),
 		LastMessageAt: time.Now().Unix(),
 		RoomName:      roomName,
+		Topic:         req.Topic,
 	}
 
 	_, err := s.data.Mongo.Conversation.Insert(ctx, conv)
@@ -42,7 +43,7 @@ func (s *LiveKitService) CreateConversation(ctx context.Context, req *voiceagent
 	}
 
 	// Delegate join logic (context gathering, room creation, dispatch, token gen)
-	token, url, err := s.joinRoom(ctx, userId, req.AgentId, conv.XId, roomName)
+	token, url, err := s.joinRoom(ctx, userId, req.AgentId, conv.XId, roomName, req.Topic)
 	if err != nil {
 		// Note: Conversation record exists but room join failed.
 		// We might want to log this or consider cleanup, but for now just return error.
@@ -55,7 +56,7 @@ func (s *LiveKitService) CreateConversation(ctx context.Context, req *voiceagent
 	return conv, nil
 }
 
-func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversationId, roomName string) (string, string, error) {
+func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversationId, roomName string, topic *voiceagent.Topic) (string, string, error) {
 	// 1. Fetch Business Context: User Profile
 	var userNickname = "User"
 	userProfile, err := s.data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
@@ -85,6 +86,12 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 		"nickname":       userNickname,
 		"memories":       memoryTexts,
 		"agentName":      "aura_zh", // Base service pipe. TODO: Maybe fetch from Agent definition?
+	}
+
+	if topic != nil {
+		agentConfig["topic"] = topic.Id
+		agentConfig["topicGreeting"] = topic.Greeting
+		agentConfig["topicInstruction"] = topic.Instruction
 	}
 	metadataJSON, _ := json.Marshal(agentConfig)
 

@@ -6395,6 +6395,19 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.SceneList'
+    /api/va/topics:
+        get:
+            tags:
+                - VoiceAgentService
+            description: 'ListTopics: 获取预设的对话主题。'
+            operationId: VoiceAgentService_ListTopics
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.TopicList'
     /api/va/transcripts:
         post:
             tags:
@@ -11532,6 +11545,8 @@ components:
                     type: string
                 details:
                     type: string
+                userId:
+                    type: string
         api.voiceagent.AssessmentList:
             type: object
             properties:
@@ -11584,6 +11599,8 @@ components:
                     type: string
                 summary:
                     type: string
+                topic:
+                    $ref: '#/components/schemas/api.voiceagent.Topic'
                 extra:
                     $ref: '#/components/schemas/api.voiceagent.Conversation_Extra'
             description: |-
@@ -11640,6 +11657,8 @@ components:
             properties:
                 agentId:
                     type: string
+                topic:
+                    $ref: '#/components/schemas/api.voiceagent.Topic'
         api.voiceagent.CreateEventRequest:
             type: object
             properties:
@@ -12126,6 +12145,30 @@ components:
             properties:
                 id:
                     type: string
+        api.voiceagent.Topic:
+            type: object
+            properties:
+                id:
+                    type: string
+                title:
+                    type: string
+                icon:
+                    type: string
+                color:
+                    type: string
+                desc:
+                    type: string
+                greeting:
+                    type: string
+                instruction:
+                    type: string
+        api.voiceagent.TopicList:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.voiceagent.Topic'
         api.voiceagent.TranscriptEntry:
             type: object
             properties:

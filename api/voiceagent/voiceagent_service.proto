@@ -12,6 +12,7 @@ import "voiceagent/scene.proto";
 import "voiceagent/conversation.proto";
 import "voiceagent/transcript.proto";
 import "voiceagent/memory.proto";
+import "voiceagent/topic.proto";
 import "voiceagent/user_profile.proto";
 import "voiceagent/emotion_log.proto";
 import "voiceagent/important_event.proto";
@@ -93,6 +94,13 @@ service VoiceAgentService {
   rpc ListScenes(ListScenesRequest) returns (SceneList) {
     option (google.api.http) = {
       get: "/api/va/scenes"
+    };
+  }
+
+  // ListTopics: 获取预设的对话主题。
+  rpc ListTopics(ListTopicsRequest) returns (TopicList) {
+    option (google.api.http) = {
+      get: "/api/va/topics"
     };
   }
 
@@ -445,5 +453,11 @@ message GenerateCartesiaTokenRequest {}
 
 message GenerateCartesiaTokenResponse {
   string accessToken = 1;
+}
+
+message ListTopicsRequest {}
+
+message TopicList {
+  repeated Topic list = 1;
 }
 

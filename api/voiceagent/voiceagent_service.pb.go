@@ -2011,11 +2011,91 @@ func (x *GenerateCartesiaTokenResponse) GetAccessToken() string {
 	return ""
 }
 
+type ListTopicsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTopicsRequest) Reset() {
+	*x = ListTopicsRequest{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTopicsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTopicsRequest) ProtoMessage() {}
+
+func (x *ListTopicsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTopicsRequest.ProtoReflect.Descriptor instead.
+func (*ListTopicsRequest) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{34}
+}
+
+type TopicList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*Topic               `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopicList) Reset() {
+	*x = TopicList{}
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopicList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopicList) ProtoMessage() {}
+
+func (x *TopicList) ProtoReflect() protoreflect.Message {
+	mi := &file_voiceagent_voiceagent_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopicList.ProtoReflect.Descriptor instead.
+func (*TopicList) Descriptor() ([]byte, []int) {
+	return file_voiceagent_voiceagent_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *TopicList) GetList() []*Topic {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 var File_voiceagent_voiceagent_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\n" +
-	"#voiceagent/voiceagent_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x18voiceagent/persona.proto\x1a\x16voiceagent/agent.proto\x1a\x16voiceagent/voice.proto\x1a\x16voiceagent/scene.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\x1a\x17voiceagent/memory.proto\x1a\x1dvoiceagent/user_profile.proto\x1a\x1cvoiceagent/emotion_log.proto\x1a voiceagent/important_event.proto\"\xe2\x01\n" +
+	"#voiceagent/voiceagent_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17validate/validate.proto\x1a\x18voiceagent/persona.proto\x1a\x16voiceagent/agent.proto\x1a\x16voiceagent/voice.proto\x1a\x16voiceagent/scene.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\x1a\x17voiceagent/memory.proto\x1a\x16voiceagent/topic.proto\x1a\x1dvoiceagent/user_profile.proto\x1a\x1cvoiceagent/emotion_log.proto\x1a voiceagent/important_event.proto\"\xe2\x01\n" +
 	"\x12CreateAgentRequest\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x12\x16\n" +
 	"\x06avatar\x18\x02 \x01(\tR\x06avatar\x12\x12\n" +
@@ -2152,7 +2232,10 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	" \x03(\v2\x1e.api.voiceagent.ImportantEventR\x0eupcomingEvents\"\x1e\n" +
 	"\x1cGenerateCartesiaTokenRequest\"A\n" +
 	"\x1dGenerateCartesiaTokenResponse\x12 \n" +
-	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken2\xcc\x15\n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\"\x13\n" +
+	"\x11ListTopicsRequest\"6\n" +
+	"\tTopicList\x12)\n" +
+	"\x04list\x18\x01 \x03(\v2\x15.api.voiceagent.TopicR\x04list2\xb0\x16\n" +
 	"\x11VoiceAgentService\x12j\n" +
 	"\fListPersonas\x12#.api.voiceagent.ListPersonasRequest\x1a\x1b.api.voiceagent.PersonaList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/personas\x12g\n" +
 	"\n" +
@@ -2167,7 +2250,9 @@ const file_voiceagent_voiceagent_service_proto_rawDesc = "" +
 	"\n" +
 	"ListVoices\x12!.api.voiceagent.ListVoicesRequest\x1a\x19.api.voiceagent.VoiceList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/voices\x12b\n" +
 	"\n" +
-	"ListScenes\x12!.api.voiceagent.ListScenesRequest\x1a\x19.api.voiceagent.SceneList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/scenes\x12o\n" +
+	"ListScenes\x12!.api.voiceagent.ListScenesRequest\x1a\x19.api.voiceagent.SceneList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/scenes\x12b\n" +
+	"\n" +
+	"ListTopics\x12!.api.voiceagent.ListTopicsRequest\x1a\x19.api.voiceagent.TopicList\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/va/topics\x12o\n" +
 	"\vSendMessage\x12\".api.voiceagent.SendMessageRequest\x1a\x1f.api.voiceagent.TranscriptEntry\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/messages\x12i\n" +
 	"\fListMemories\x12#.api.voiceagent.ListMemoriesRequest\x1a\x1a.api.voiceagent.MemoryList\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/va/memories\x12h\n" +
 	"\fCreateMemory\x12#.api.voiceagent.CreateMemoryRequest\x1a\x16.api.voiceagent.Memory\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/va/memories\x12j\n" +
@@ -2197,7 +2282,7 @@ func file_voiceagent_voiceagent_service_proto_rawDescGZIP() []byte {
 	return file_voiceagent_voiceagent_service_proto_rawDescData
 }
 
-var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_voiceagent_voiceagent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*CreateAgentRequest)(nil),            // 0: api.voiceagent.CreateAgentRequest
 	(*ListPersonasRequest)(nil),           // 1: api.voiceagent.ListPersonasRequest
@@ -2233,86 +2318,92 @@ var file_voiceagent_voiceagent_service_proto_goTypes = []any{
 	(*GrowthReport)(nil),                  // 31: api.voiceagent.GrowthReport
 	(*GenerateCartesiaTokenRequest)(nil),  // 32: api.voiceagent.GenerateCartesiaTokenRequest
 	(*GenerateCartesiaTokenResponse)(nil), // 33: api.voiceagent.GenerateCartesiaTokenResponse
-	nil,                                   // 34: api.voiceagent.AddVoiceRequest.SettingsEntry
-	(*Persona)(nil),                       // 35: api.voiceagent.Persona
-	(*Agent)(nil),                         // 36: api.voiceagent.Agent
-	(*Voice)(nil),                         // 37: api.voiceagent.Voice
-	(*Scene)(nil),                         // 38: api.voiceagent.Scene
-	(*Memory)(nil),                        // 39: api.voiceagent.Memory
-	(*EmotionLog)(nil),                    // 40: api.voiceagent.EmotionLog
-	(*ImportantEvent)(nil),                // 41: api.voiceagent.ImportantEvent
-	(*EmotionStats)(nil),                  // 42: api.voiceagent.EmotionStats
-	(*emptypb.Empty)(nil),                 // 43: google.protobuf.Empty
-	(*TranscriptEntry)(nil),               // 44: api.voiceagent.TranscriptEntry
-	(*UserProfile)(nil),                   // 45: api.voiceagent.UserProfile
+	(*ListTopicsRequest)(nil),             // 34: api.voiceagent.ListTopicsRequest
+	(*TopicList)(nil),                     // 35: api.voiceagent.TopicList
+	nil,                                   // 36: api.voiceagent.AddVoiceRequest.SettingsEntry
+	(*Persona)(nil),                       // 37: api.voiceagent.Persona
+	(*Agent)(nil),                         // 38: api.voiceagent.Agent
+	(*Voice)(nil),                         // 39: api.voiceagent.Voice
+	(*Scene)(nil),                         // 40: api.voiceagent.Scene
+	(*Memory)(nil),                        // 41: api.voiceagent.Memory
+	(*EmotionLog)(nil),                    // 42: api.voiceagent.EmotionLog
+	(*ImportantEvent)(nil),                // 43: api.voiceagent.ImportantEvent
+	(*EmotionStats)(nil),                  // 44: api.voiceagent.EmotionStats
+	(*Topic)(nil),                         // 45: api.voiceagent.Topic
+	(*emptypb.Empty)(nil),                 // 46: google.protobuf.Empty
+	(*TranscriptEntry)(nil),               // 47: api.voiceagent.TranscriptEntry
+	(*UserProfile)(nil),                   // 48: api.voiceagent.UserProfile
 }
 var file_voiceagent_voiceagent_service_proto_depIdxs = []int32{
-	35, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
-	36, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
-	34, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
-	37, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
-	38, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
-	39, // 5: api.voiceagent.MemoryList.list:type_name -> api.voiceagent.Memory
-	40, // 6: api.voiceagent.EmotionLogList.list:type_name -> api.voiceagent.EmotionLog
-	41, // 7: api.voiceagent.EventList.list:type_name -> api.voiceagent.ImportantEvent
-	39, // 8: api.voiceagent.GrowthReport.newMemories:type_name -> api.voiceagent.Memory
-	42, // 9: api.voiceagent.GrowthReport.emotionSummary:type_name -> api.voiceagent.EmotionStats
-	41, // 10: api.voiceagent.GrowthReport.upcomingEvents:type_name -> api.voiceagent.ImportantEvent
-	1,  // 11: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
-	3,  // 12: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
-	0,  // 13: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
-	4,  // 14: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
-	5,  // 15: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
-	6,  // 16: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
-	7,  // 17: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
-	9,  // 18: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
-	11, // 19: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
-	13, // 20: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
-	14, // 21: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
-	15, // 22: api.voiceagent.VoiceAgentService.ListMemories:input_type -> api.voiceagent.ListMemoriesRequest
-	17, // 23: api.voiceagent.VoiceAgentService.CreateMemory:input_type -> api.voiceagent.CreateMemoryRequest
-	18, // 24: api.voiceagent.VoiceAgentService.DeleteMemory:input_type -> api.voiceagent.DeleteMemoryRequest
-	19, // 25: api.voiceagent.VoiceAgentService.GetUserProfile:input_type -> api.voiceagent.GetUserProfileRequest
-	20, // 26: api.voiceagent.VoiceAgentService.UpdateUserProfile:input_type -> api.voiceagent.UpdateUserProfileRequest
-	21, // 27: api.voiceagent.VoiceAgentService.ListEmotionLogs:input_type -> api.voiceagent.ListEmotionLogsRequest
-	23, // 28: api.voiceagent.VoiceAgentService.GetEmotionStats:input_type -> api.voiceagent.GetEmotionStatsRequest
-	24, // 29: api.voiceagent.VoiceAgentService.ListEvents:input_type -> api.voiceagent.ListEventsRequest
-	26, // 30: api.voiceagent.VoiceAgentService.CreateEvent:input_type -> api.voiceagent.CreateEventRequest
-	27, // 31: api.voiceagent.VoiceAgentService.UpdateEvent:input_type -> api.voiceagent.UpdateEventRequest
-	28, // 32: api.voiceagent.VoiceAgentService.DeleteEvent:input_type -> api.voiceagent.DeleteEventRequest
-	29, // 33: api.voiceagent.VoiceAgentService.GetUpcomingEvents:input_type -> api.voiceagent.GetUpcomingEventsRequest
-	30, // 34: api.voiceagent.VoiceAgentService.GetGrowthReport:input_type -> api.voiceagent.GetGrowthReportRequest
-	32, // 35: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:input_type -> api.voiceagent.GenerateCartesiaTokenRequest
-	2,  // 36: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
-	35, // 37: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
-	36, // 38: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
-	36, // 39: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
-	43, // 40: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
-	36, // 41: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
-	8,  // 42: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
-	37, // 43: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
-	10, // 44: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
-	12, // 45: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
-	44, // 46: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
-	16, // 47: api.voiceagent.VoiceAgentService.ListMemories:output_type -> api.voiceagent.MemoryList
-	39, // 48: api.voiceagent.VoiceAgentService.CreateMemory:output_type -> api.voiceagent.Memory
-	43, // 49: api.voiceagent.VoiceAgentService.DeleteMemory:output_type -> google.protobuf.Empty
-	45, // 50: api.voiceagent.VoiceAgentService.GetUserProfile:output_type -> api.voiceagent.UserProfile
-	45, // 51: api.voiceagent.VoiceAgentService.UpdateUserProfile:output_type -> api.voiceagent.UserProfile
-	22, // 52: api.voiceagent.VoiceAgentService.ListEmotionLogs:output_type -> api.voiceagent.EmotionLogList
-	42, // 53: api.voiceagent.VoiceAgentService.GetEmotionStats:output_type -> api.voiceagent.EmotionStats
-	25, // 54: api.voiceagent.VoiceAgentService.ListEvents:output_type -> api.voiceagent.EventList
-	41, // 55: api.voiceagent.VoiceAgentService.CreateEvent:output_type -> api.voiceagent.ImportantEvent
-	41, // 56: api.voiceagent.VoiceAgentService.UpdateEvent:output_type -> api.voiceagent.ImportantEvent
-	43, // 57: api.voiceagent.VoiceAgentService.DeleteEvent:output_type -> google.protobuf.Empty
-	25, // 58: api.voiceagent.VoiceAgentService.GetUpcomingEvents:output_type -> api.voiceagent.EventList
-	31, // 59: api.voiceagent.VoiceAgentService.GetGrowthReport:output_type -> api.voiceagent.GrowthReport
-	33, // 60: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:output_type -> api.voiceagent.GenerateCartesiaTokenResponse
-	36, // [36:61] is the sub-list for method output_type
-	11, // [11:36] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	37, // 0: api.voiceagent.PersonaList.list:type_name -> api.voiceagent.Persona
+	38, // 1: api.voiceagent.AgentList.list:type_name -> api.voiceagent.Agent
+	36, // 2: api.voiceagent.AddVoiceRequest.settings:type_name -> api.voiceagent.AddVoiceRequest.SettingsEntry
+	39, // 3: api.voiceagent.VoiceList.list:type_name -> api.voiceagent.Voice
+	40, // 4: api.voiceagent.SceneList.list:type_name -> api.voiceagent.Scene
+	41, // 5: api.voiceagent.MemoryList.list:type_name -> api.voiceagent.Memory
+	42, // 6: api.voiceagent.EmotionLogList.list:type_name -> api.voiceagent.EmotionLog
+	43, // 7: api.voiceagent.EventList.list:type_name -> api.voiceagent.ImportantEvent
+	41, // 8: api.voiceagent.GrowthReport.newMemories:type_name -> api.voiceagent.Memory
+	44, // 9: api.voiceagent.GrowthReport.emotionSummary:type_name -> api.voiceagent.EmotionStats
+	43, // 10: api.voiceagent.GrowthReport.upcomingEvents:type_name -> api.voiceagent.ImportantEvent
+	45, // 11: api.voiceagent.TopicList.list:type_name -> api.voiceagent.Topic
+	1,  // 12: api.voiceagent.VoiceAgentService.ListPersonas:input_type -> api.voiceagent.ListPersonasRequest
+	3,  // 13: api.voiceagent.VoiceAgentService.GetPersona:input_type -> api.voiceagent.GetPersonaRequest
+	0,  // 14: api.voiceagent.VoiceAgentService.CreateAgent:input_type -> api.voiceagent.CreateAgentRequest
+	4,  // 15: api.voiceagent.VoiceAgentService.UpdateAgent:input_type -> api.voiceagent.UpdateAgentRequest
+	5,  // 16: api.voiceagent.VoiceAgentService.DeleteAgent:input_type -> api.voiceagent.DeleteAgentRequest
+	6,  // 17: api.voiceagent.VoiceAgentService.GetAgent:input_type -> api.voiceagent.GetAgentRequest
+	7,  // 18: api.voiceagent.VoiceAgentService.ListAgents:input_type -> api.voiceagent.ListAgentsRequest
+	9,  // 19: api.voiceagent.VoiceAgentService.AddVoice:input_type -> api.voiceagent.AddVoiceRequest
+	11, // 20: api.voiceagent.VoiceAgentService.ListVoices:input_type -> api.voiceagent.ListVoicesRequest
+	13, // 21: api.voiceagent.VoiceAgentService.ListScenes:input_type -> api.voiceagent.ListScenesRequest
+	34, // 22: api.voiceagent.VoiceAgentService.ListTopics:input_type -> api.voiceagent.ListTopicsRequest
+	14, // 23: api.voiceagent.VoiceAgentService.SendMessage:input_type -> api.voiceagent.SendMessageRequest
+	15, // 24: api.voiceagent.VoiceAgentService.ListMemories:input_type -> api.voiceagent.ListMemoriesRequest
+	17, // 25: api.voiceagent.VoiceAgentService.CreateMemory:input_type -> api.voiceagent.CreateMemoryRequest
+	18, // 26: api.voiceagent.VoiceAgentService.DeleteMemory:input_type -> api.voiceagent.DeleteMemoryRequest
+	19, // 27: api.voiceagent.VoiceAgentService.GetUserProfile:input_type -> api.voiceagent.GetUserProfileRequest
+	20, // 28: api.voiceagent.VoiceAgentService.UpdateUserProfile:input_type -> api.voiceagent.UpdateUserProfileRequest
+	21, // 29: api.voiceagent.VoiceAgentService.ListEmotionLogs:input_type -> api.voiceagent.ListEmotionLogsRequest
+	23, // 30: api.voiceagent.VoiceAgentService.GetEmotionStats:input_type -> api.voiceagent.GetEmotionStatsRequest
+	24, // 31: api.voiceagent.VoiceAgentService.ListEvents:input_type -> api.voiceagent.ListEventsRequest
+	26, // 32: api.voiceagent.VoiceAgentService.CreateEvent:input_type -> api.voiceagent.CreateEventRequest
+	27, // 33: api.voiceagent.VoiceAgentService.UpdateEvent:input_type -> api.voiceagent.UpdateEventRequest
+	28, // 34: api.voiceagent.VoiceAgentService.DeleteEvent:input_type -> api.voiceagent.DeleteEventRequest
+	29, // 35: api.voiceagent.VoiceAgentService.GetUpcomingEvents:input_type -> api.voiceagent.GetUpcomingEventsRequest
+	30, // 36: api.voiceagent.VoiceAgentService.GetGrowthReport:input_type -> api.voiceagent.GetGrowthReportRequest
+	32, // 37: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:input_type -> api.voiceagent.GenerateCartesiaTokenRequest
+	2,  // 38: api.voiceagent.VoiceAgentService.ListPersonas:output_type -> api.voiceagent.PersonaList
+	37, // 39: api.voiceagent.VoiceAgentService.GetPersona:output_type -> api.voiceagent.Persona
+	38, // 40: api.voiceagent.VoiceAgentService.CreateAgent:output_type -> api.voiceagent.Agent
+	38, // 41: api.voiceagent.VoiceAgentService.UpdateAgent:output_type -> api.voiceagent.Agent
+	46, // 42: api.voiceagent.VoiceAgentService.DeleteAgent:output_type -> google.protobuf.Empty
+	38, // 43: api.voiceagent.VoiceAgentService.GetAgent:output_type -> api.voiceagent.Agent
+	8,  // 44: api.voiceagent.VoiceAgentService.ListAgents:output_type -> api.voiceagent.AgentList
+	39, // 45: api.voiceagent.VoiceAgentService.AddVoice:output_type -> api.voiceagent.Voice
+	10, // 46: api.voiceagent.VoiceAgentService.ListVoices:output_type -> api.voiceagent.VoiceList
+	12, // 47: api.voiceagent.VoiceAgentService.ListScenes:output_type -> api.voiceagent.SceneList
+	35, // 48: api.voiceagent.VoiceAgentService.ListTopics:output_type -> api.voiceagent.TopicList
+	47, // 49: api.voiceagent.VoiceAgentService.SendMessage:output_type -> api.voiceagent.TranscriptEntry
+	16, // 50: api.voiceagent.VoiceAgentService.ListMemories:output_type -> api.voiceagent.MemoryList
+	41, // 51: api.voiceagent.VoiceAgentService.CreateMemory:output_type -> api.voiceagent.Memory
+	46, // 52: api.voiceagent.VoiceAgentService.DeleteMemory:output_type -> google.protobuf.Empty
+	48, // 53: api.voiceagent.VoiceAgentService.GetUserProfile:output_type -> api.voiceagent.UserProfile
+	48, // 54: api.voiceagent.VoiceAgentService.UpdateUserProfile:output_type -> api.voiceagent.UserProfile
+	22, // 55: api.voiceagent.VoiceAgentService.ListEmotionLogs:output_type -> api.voiceagent.EmotionLogList
+	44, // 56: api.voiceagent.VoiceAgentService.GetEmotionStats:output_type -> api.voiceagent.EmotionStats
+	25, // 57: api.voiceagent.VoiceAgentService.ListEvents:output_type -> api.voiceagent.EventList
+	43, // 58: api.voiceagent.VoiceAgentService.CreateEvent:output_type -> api.voiceagent.ImportantEvent
+	43, // 59: api.voiceagent.VoiceAgentService.UpdateEvent:output_type -> api.voiceagent.ImportantEvent
+	46, // 60: api.voiceagent.VoiceAgentService.DeleteEvent:output_type -> google.protobuf.Empty
+	25, // 61: api.voiceagent.VoiceAgentService.GetUpcomingEvents:output_type -> api.voiceagent.EventList
+	31, // 62: api.voiceagent.VoiceAgentService.GetGrowthReport:output_type -> api.voiceagent.GrowthReport
+	33, // 63: api.voiceagent.VoiceAgentService.GenerateCartesiaToken:output_type -> api.voiceagent.GenerateCartesiaTokenResponse
+	38, // [38:64] is the sub-list for method output_type
+	12, // [12:38] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_voiceagent_service_proto_init() }
@@ -2327,6 +2418,7 @@ func file_voiceagent_voiceagent_service_proto_init() {
 	file_voiceagent_conversation_proto_init()
 	file_voiceagent_transcript_proto_init()
 	file_voiceagent_memory_proto_init()
+	file_voiceagent_topic_proto_init()
 	file_voiceagent_user_profile_proto_init()
 	file_voiceagent_emotion_log_proto_init()
 	file_voiceagent_important_event_proto_init()
@@ -2336,7 +2428,7 @@ func file_voiceagent_voiceagent_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_voiceagent_voiceagent_service_proto_rawDesc), len(file_voiceagent_voiceagent_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   35,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

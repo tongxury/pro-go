@@ -27,6 +27,7 @@ const (
 type CreateConversationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AgentId       string                 `protobuf:"bytes,1,opt,name=agentId,proto3" json:"agentId,omitempty"`
+	Topic         *Topic                 `protobuf:"bytes,2,opt,name=topic,proto3" json:"topic,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66,6 +67,13 @@ func (x *CreateConversationRequest) GetAgentId() string {
 		return x.AgentId
 	}
 	return ""
+}
+
+func (x *CreateConversationRequest) GetTopic() *Topic {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
 }
 
 type StopConversationRequest struct {
@@ -512,9 +520,10 @@ var File_voiceagent_livekit_service_proto protoreflect.FileDescriptor
 
 const file_voiceagent_livekit_service_proto_rawDesc = "" +
 	"\n" +
-	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x1bvoiceagent/transcript.proto\">\n" +
+	" voiceagent/livekit_service.proto\x12\x0eapi.voiceagent\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dvoiceagent/conversation.proto\x1a\x16voiceagent/topic.proto\x1a\x1bvoiceagent/transcript.proto\"k\n" +
 	"\x19CreateConversationRequest\x12!\n" +
-	"\aagentId\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aagentId\")\n" +
+	"\aagentId\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aagentId\x12+\n" +
+	"\x05topic\x18\x02 \x01(\v2\x15.api.voiceagent.TopicR\x05topic\")\n" +
 	"\x17StopConversationRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"C\n" +
 	"\x19UpdateConversationRequest\x12\x0e\n" +
@@ -575,34 +584,36 @@ var file_voiceagent_livekit_service_proto_goTypes = []any{
 	(*ListTranscriptEntriesRequest)(nil), // 6: api.voiceagent.ListTranscriptEntriesRequest
 	(*TranscriptEntryList)(nil),          // 7: api.voiceagent.TranscriptEntryList
 	(*AddTranscriptEntryRequest)(nil),    // 8: api.voiceagent.AddTranscriptEntryRequest
-	(*Conversation)(nil),                 // 9: api.voiceagent.Conversation
-	(*TranscriptEntry)(nil),              // 10: api.voiceagent.TranscriptEntry
-	(*emptypb.Empty)(nil),                // 11: google.protobuf.Empty
+	(*Topic)(nil),                        // 9: api.voiceagent.Topic
+	(*Conversation)(nil),                 // 10: api.voiceagent.Conversation
+	(*TranscriptEntry)(nil),              // 11: api.voiceagent.TranscriptEntry
+	(*emptypb.Empty)(nil),                // 12: google.protobuf.Empty
 }
 var file_voiceagent_livekit_service_proto_depIdxs = []int32{
-	9,  // 0: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
-	10, // 1: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
-	0,  // 2: api.voiceagent.LiveKitService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
-	3,  // 3: api.voiceagent.LiveKitService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
-	4,  // 4: api.voiceagent.LiveKitService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
-	2,  // 5: api.voiceagent.LiveKitService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
-	1,  // 6: api.voiceagent.LiveKitService.StopConversation:input_type -> api.voiceagent.StopConversationRequest
-	8,  // 7: api.voiceagent.LiveKitService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
-	6,  // 8: api.voiceagent.LiveKitService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
-	11, // 9: api.voiceagent.LiveKitService.SummarizeConversations:input_type -> google.protobuf.Empty
-	9,  // 10: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
-	9,  // 11: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
-	5,  // 12: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
-	9,  // 13: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
-	9,  // 14: api.voiceagent.LiveKitService.StopConversation:output_type -> api.voiceagent.Conversation
-	10, // 15: api.voiceagent.LiveKitService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
-	7,  // 16: api.voiceagent.LiveKitService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
-	11, // 17: api.voiceagent.LiveKitService.SummarizeConversations:output_type -> google.protobuf.Empty
-	10, // [10:18] is the sub-list for method output_type
-	2,  // [2:10] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	9,  // 0: api.voiceagent.CreateConversationRequest.topic:type_name -> api.voiceagent.Topic
+	10, // 1: api.voiceagent.ConversationList.list:type_name -> api.voiceagent.Conversation
+	11, // 2: api.voiceagent.TranscriptEntryList.list:type_name -> api.voiceagent.TranscriptEntry
+	0,  // 3: api.voiceagent.LiveKitService.CreateConversation:input_type -> api.voiceagent.CreateConversationRequest
+	3,  // 4: api.voiceagent.LiveKitService.GetConversation:input_type -> api.voiceagent.GetConversationRequest
+	4,  // 5: api.voiceagent.LiveKitService.ListConversations:input_type -> api.voiceagent.ListConversationsRequest
+	2,  // 6: api.voiceagent.LiveKitService.UpdateConversation:input_type -> api.voiceagent.UpdateConversationRequest
+	1,  // 7: api.voiceagent.LiveKitService.StopConversation:input_type -> api.voiceagent.StopConversationRequest
+	8,  // 8: api.voiceagent.LiveKitService.AddTranscriptEntry:input_type -> api.voiceagent.AddTranscriptEntryRequest
+	6,  // 9: api.voiceagent.LiveKitService.ListTranscriptEntries:input_type -> api.voiceagent.ListTranscriptEntriesRequest
+	12, // 10: api.voiceagent.LiveKitService.SummarizeConversations:input_type -> google.protobuf.Empty
+	10, // 11: api.voiceagent.LiveKitService.CreateConversation:output_type -> api.voiceagent.Conversation
+	10, // 12: api.voiceagent.LiveKitService.GetConversation:output_type -> api.voiceagent.Conversation
+	5,  // 13: api.voiceagent.LiveKitService.ListConversations:output_type -> api.voiceagent.ConversationList
+	10, // 14: api.voiceagent.LiveKitService.UpdateConversation:output_type -> api.voiceagent.Conversation
+	10, // 15: api.voiceagent.LiveKitService.StopConversation:output_type -> api.voiceagent.Conversation
+	11, // 16: api.voiceagent.LiveKitService.AddTranscriptEntry:output_type -> api.voiceagent.TranscriptEntry
+	7,  // 17: api.voiceagent.LiveKitService.ListTranscriptEntries:output_type -> api.voiceagent.TranscriptEntryList
+	12, // 18: api.voiceagent.LiveKitService.SummarizeConversations:output_type -> google.protobuf.Empty
+	11, // [11:19] is the sub-list for method output_type
+	3,  // [3:11] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_livekit_service_proto_init() }
@@ -611,6 +622,7 @@ func file_voiceagent_livekit_service_proto_init() {
 		return
 	}
 	file_voiceagent_conversation_proto_init()
+	file_voiceagent_topic_proto_init()
 	file_voiceagent_transcript_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

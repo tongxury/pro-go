@@ -51,6 +51,7 @@ type Conversation struct {
 	RoomName      string              `protobuf:"bytes,12,opt,name=roomName,proto3" json:"roomName,omitempty"`
 	Subject       string              `protobuf:"bytes,13,opt,name=subject,proto3" json:"subject,omitempty"`
 	Summary       string              `protobuf:"bytes,14,opt,name=summary,proto3" json:"summary,omitempty"`
+	Topic         *Topic              `protobuf:"bytes,15,opt,name=topic,proto3" json:"topic,omitempty"`
 	Extra         *Conversation_Extra `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -170,6 +171,13 @@ func (x *Conversation) GetSummary() string {
 	return ""
 }
 
+func (x *Conversation) GetTopic() *Topic {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
 func (x *Conversation) GetExtra() *Conversation_Extra {
 	if x != nil {
 		return x.Extra
@@ -227,7 +235,7 @@ var File_voiceagent_conversation_proto protoreflect.FileDescriptor
 
 const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\"\xdc\x03\n" +
+	"\x1dvoiceagent/conversation.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\x1a\x16voiceagent/agent.proto\x1a\x16voiceagent/topic.proto\"\x89\x04\n" +
 	"\fConversation\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12+\n" +
@@ -241,7 +249,8 @@ const file_voiceagent_conversation_proto_rawDesc = "" +
 	"\aendedAt\x18\v \x01(\x03R\aendedAt\x12\x1a\n" +
 	"\broomName\x18\f \x01(\tR\broomName\x12\x18\n" +
 	"\asubject\x18\r \x01(\tR\asubject\x12\x18\n" +
-	"\asummary\x18\x0e \x01(\tR\asummary\x128\n" +
+	"\asummary\x18\x0e \x01(\tR\asummary\x12+\n" +
+	"\x05topic\x18\x0f \x01(\v2\x15.api.voiceagent.TopicR\x05topic\x128\n" +
 	"\x05extra\x18\x14 \x01(\v2\".api.voiceagent.Conversation.ExtraR\x05extra\x1a/\n" +
 	"\x05Extra\x12&\n" +
 	"\x0eanalysisStatus\x18\x01 \x01(\tR\x0eanalysisStatusB!Z\x1fstore/api/voiceagent;voiceagentb\x06proto3"
@@ -264,16 +273,18 @@ var file_voiceagent_conversation_proto_goTypes = []any{
 	(*Conversation_Extra)(nil), // 1: api.voiceagent.Conversation.Extra
 	(*usercenter.User)(nil),    // 2: api.usercenter.User
 	(*Agent)(nil),              // 3: api.voiceagent.Agent
+	(*Topic)(nil),              // 4: api.voiceagent.Topic
 }
 var file_voiceagent_conversation_proto_depIdxs = []int32{
 	2, // 0: api.voiceagent.Conversation.user:type_name -> api.usercenter.User
 	3, // 1: api.voiceagent.Conversation.agent:type_name -> api.voiceagent.Agent
-	1, // 2: api.voiceagent.Conversation.extra:type_name -> api.voiceagent.Conversation.Extra
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 2: api.voiceagent.Conversation.topic:type_name -> api.voiceagent.Topic
+	1, // 3: api.voiceagent.Conversation.extra:type_name -> api.voiceagent.Conversation.Extra
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_voiceagent_conversation_proto_init() }
@@ -282,6 +293,7 @@ func file_voiceagent_conversation_proto_init() {
 		return
 	}
 	file_voiceagent_agent_proto_init()
+	file_voiceagent_topic_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

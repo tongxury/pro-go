@@ -6,6 +6,7 @@ option go_package = "store/api/voiceagent;voiceagent";
 
 import "usercenter/user.proto";
 import "voiceagent/agent.proto";
+import "voiceagent/topic.proto";
 
 // Conversation (对话会话): 用户与 Agent 交互的运行时实例。
 // [参考文档]: Design and Configure -> Conversation flow (/docs/agents-platform/customization/conversation-flow)
@@ -42,6 +43,7 @@ message Conversation {
   string roomName = 12;
   string subject = 13;
   string summary = 14;
+  Topic topic = 15;
 
   message Extra {
     // analysisStatus: 分析状态 (pending: 待分析, completed: 已分析, failed: 分析失败)
