@@ -86,10 +86,10 @@ func RegisterProjAdminServiceHTTPServer(s *http.Server, srv ProjAdminServiceHTTP
 	r.PATCH("/api/am/v1/templates/{id}", _ProjAdminService_UpdateTemplate_0_HTTP_Handler(srv))
 	r.GET("/api/am/v1/settings/all", _ProjAdminService_GetSettings0_HTTP_Handler(srv))
 	r.PATCH("/api/am/v1/settings/all", _ProjAdminService_UpdateSettings0_HTTP_Handler(srv))
-	r.GET("/api/am/v2/resource-segments", _ProjAdminService_ListResourceSegments0_HTTP_Handler(srv))
+	r.GET("/api/am/v2/resource-segments", _ProjAdminService_ListResourceSegments1_HTTP_Handler(srv))
 	r.POST("/api/am/v1/resource-segments", _ProjAdminService_AddResourceSegments0_HTTP_Handler(srv))
-	r.PATCH("/api/am/v1/resource-segments/{id}", _ProjAdminService_UpdateResourceSegment0_HTTP_Handler(srv))
-	r.GET("/api/am/v2/resource-segments/{id}", _ProjAdminService_GetResourceSegment0_HTTP_Handler(srv))
+	r.PATCH("/api/am/v1/resource-segments/{id}", _ProjAdminService_UpdateResourceSegment1_HTTP_Handler(srv))
+	r.GET("/api/am/v2/resource-segments/{id}", _ProjAdminService_GetResourceSegment1_HTTP_Handler(srv))
 	r.GET("/api/am/v1/items", _ProjAdminService_ListItems0_HTTP_Handler(srv))
 	r.POST("/api/am/v1/items", _ProjAdminService_AddItems0_HTTP_Handler(srv))
 	r.GET("/api/am/v1/items/{id}", _ProjAdminService_GetItem0_HTTP_Handler(srv))
@@ -355,7 +355,7 @@ func _ProjAdminService_UpdateSettings0_HTTP_Handler(srv ProjAdminServiceHTTPServ
 	}
 }
 
-func _ProjAdminService_ListResourceSegments0_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
+func _ProjAdminService_ListResourceSegments1_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListResourceSegmentsRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -396,7 +396,7 @@ func _ProjAdminService_AddResourceSegments0_HTTP_Handler(srv ProjAdminServiceHTT
 	}
 }
 
-func _ProjAdminService_UpdateResourceSegment0_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
+func _ProjAdminService_UpdateResourceSegment1_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateResourceSegmentRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -421,7 +421,7 @@ func _ProjAdminService_UpdateResourceSegment0_HTTP_Handler(srv ProjAdminServiceH
 	}
 }
 
-func _ProjAdminService_GetResourceSegment0_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
+func _ProjAdminService_GetResourceSegment1_HTTP_Handler(srv ProjAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetResourceSegmentRequest
 		if err := ctx.BindQuery(&in); err != nil {

@@ -22,12 +22,11 @@ func (t ProjService) ListResourceSegments(ctx context.Context, params *projpb.Li
 	size := helper.Select(params.Size > 0, params.Size, 24)
 	page := helper.Select(params.Page > 0, params.Page, 1)
 
+	var sortIds []string
 	var finalIds []string
-	useIds := false
 
-	// 1. Gather Candidate IDs from Collected
+	// 1. Filter by Collection
 	if params.Collected {
-		useIds = true
 		if userId == "" {
 			return nil, errors.Unauthorized("unauthorized", "login required")
 		}
@@ -38,61 +37,40 @@ func (t ProjService) ListResourceSegments(ctx context.Context, params *projpb.Li
 		if err != nil {
 			return nil, err
 		}
-		if len(list) == 0 {
-			return &projpb.ResourceSegmentList{Page: page, Size: size}, nil
-		}
 		for _, item := range list {
-			seg := item.ResourceSegment
-			if seg == nil {
-				seg = item.ResourceSemgentLegacy
-			}
+			seg := helper.Select(item.ResourceSegment != nil, item.ResourceSegment, item.ResourceSemgentLegacy)
 			if seg != nil {
 				finalIds = append(finalIds, seg.XId)
 			}
 		}
+		if len(finalIds) == 0 {
+			return &projpb.ResourceSegmentList{Page: page, Size: size}, nil
+		}
 	}
 
-	// 2. Gather Candidate IDs from Keyword Search (and Intersect)
+	// 2. Filter by Keyword (via VikingDB)
 	if params.Keyword != "" {
-		var err error
-		var items *vikingdb.SearchResponse
-		limit := helper.Select(useIds, 500, int(size))
-
-		searchReq := vikingdb.SearchByKeywordsRequest{
+		limit := helper.Select(params.Collected, 500, int(size))
+		resp, err := t.data.VikingDB.SearchByKeywords(ctx, vikingdb.SearchByKeywordsRequest{
 			SearchRequest: vikingdb.SearchRequest{
 				CollectionName: helper.Select(params.SearchBy == "video", "segment_video_coll", "segment_commodity_coll"),
 				IndexName:      helper.Select(params.SearchBy == "video", "segment_video_idx", "segment_commodity_idx"),
 				Limit:          limit,
 			},
 			Keywords: []string{params.Keyword},
-		}
-
-		items, err = t.data.VikingDB.SearchByKeywords(ctx, searchReq)
+		})
 		if err != nil {
 			return nil, err
 		}
 
-		var searchIds []string
-		for _, item := range items.Data {
-			searchIds = append(searchIds, item.Id)
+		for _, item := range resp.Data {
+			sortIds = append(sortIds, item.Id)
 		}
 
-		if useIds {
-			// Intersection
-			collectedMap := make(map[string]bool)
-			for _, id := range finalIds {
-				collectedMap[id] = true
-			}
-			var intersected []string
-			for _, id := range searchIds {
-				if collectedMap[id] {
-					intersected = append(intersected, id)
-				}
-			}
-			finalIds = intersected
+		if params.Collected {
+			finalIds = helper.SliceIntersect(finalIds, sortIds)
 		} else {
-			finalIds = searchIds
-			useIds = true
+			finalIds = sortIds
 		}
 
 		if len(finalIds) == 0 {
@@ -105,7 +83,7 @@ func (t ProjService) ListResourceSegments(ctx context.Context, params *projpb.Li
 	var total int64
 	var err error
 
-	if useIds {
+	if len(finalIds) > 0 {
 		total = int64(len(finalIds))
 		start := (page - 1) * size
 		if start >= total {

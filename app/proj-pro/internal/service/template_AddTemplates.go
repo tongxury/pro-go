@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	projpb "store/api/proj"
+	usercenter "store/api/usercenter"
 	"store/pkg/krathelper"
 	"store/pkg/sdk/helper"
 	"store/pkg/sdk/helper/videoz"
@@ -52,7 +53,7 @@ func (t ProjService) AddTemplates(ctx context.Context, params *projpb.AddTemplat
 		items = append(items, &projpb.Resource{
 			Status: "created",
 			//Title:     x.Title,
-			UserId:    userId,
+			User:      &usercenter.User{XId: userId},
 			Url:       x.Url,
 			CoverUrl:  x.CoverUrl,
 			CreatedAt: time.Now().Unix(),
@@ -105,7 +106,7 @@ func (t ProjService) XAddTemplates(ctx context.Context, params *projpb.AddTempla
 			Status: "created",
 			//Title:     x.Title,
 			Url:       x.Url,
-			UserId:    "system",
+			User:      &usercenter.User{XId: "system"},
 			CoverUrl:  x.CoverUrl,
 			CreatedAt: time.Now().Unix(),
 		})

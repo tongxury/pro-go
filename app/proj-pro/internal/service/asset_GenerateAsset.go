@@ -356,15 +356,15 @@ func (t ProjService) generateAssetVideoBySora2(ctx context.Context, data *assetJ
 			logger.Debugw("Update status ", "success")
 
 			_, err = t.data.GrpcClients.CreditClient.XCost(ctx, &creditpb.XCostRequest{
-				UserId: asset.UserId,
+				UserId: asset.GetUser().GetXId(),
 				Amount: configs.CreditCostAsset,
 				Key:    asset.XId,
 			})
 			if err != nil {
-				logger.Errorw("Cost err", err, "userId", asset.UserId)
+				logger.Errorw("Cost err", err, "userId", asset.GetUser().GetXId())
 			}
 
-			logger.Debugw("XCost", "", "userId", asset.UserId, "amount", configs.CreditCostAsset)
+			logger.Debugw("XCost", "", "userId", asset.GetUser().GetXId(), "amount", configs.CreditCostAsset)
 
 			return nil
 		}

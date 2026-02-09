@@ -11,6 +11,7 @@ import "validate/validate.proto";
 import "proj/commodity.proto";
 import "proj/item.proto";
 import "proj/workflow.proto";
+import "usercenter/user.proto";
 
 option go_package = "store/api/proj;projpb";
 
@@ -54,7 +55,7 @@ message Asset {
   string _id = 1 [json_name = '_id'];
   api.proj.Commodity commodity = 2;
   api.proj.ResourceSegment segment = 3;
-  string userId = 7;
+  api.usercenter.User user = 7;
   string status = 4;
   int64 createdAt = 5;
 

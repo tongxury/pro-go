@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"store/pkg/sdk/conv"
 
+	"github.com/go-kratos/kratos/v2/log"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -146,6 +147,7 @@ func (t *CoreCollectionV3[T]) FindById(ctx context.Context, id string) (*T, erro
 
 	hex, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
+		log.Errorw("mgz.CoreCollectionV3.FindById invalid hex", "id", id, "err", err)
 		return nil, err
 	}
 	cursor, err := t.c.Find(ctx, bson.M{"_id": hex})

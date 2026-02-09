@@ -33,6 +33,7 @@ const OperationProjProServiceCreateTemplate = "/api.proj.ProjProService/CreateTe
 const OperationProjProServiceGetAsset = "/api.proj.ProjProService/GetAsset"
 const OperationProjProServiceGetAssetSummary = "/api.proj.ProjProService/GetAssetSummary"
 const OperationProjProServiceGetCommodity = "/api.proj.ProjProService/GetCommodity"
+const OperationProjProServiceGetResourceSegment = "/api.proj.ProjProService/GetResourceSegment"
 const OperationProjProServiceGetTask = "/api.proj.ProjProService/GetTask"
 const OperationProjProServiceGetTemplate = "/api.proj.ProjProService/GetTemplate"
 const OperationProjProServiceListAssets = "/api.proj.ProjProService/ListAssets"
@@ -43,11 +44,13 @@ const OperationProjProServiceListPublicTemplates = "/api.proj.ProjProService/Lis
 const OperationProjProServiceListQualityAssets = "/api.proj.ProjProService/ListQualityAssets"
 const OperationProjProServiceListRelatedItems = "/api.proj.ProjProService/ListRelatedItems"
 const OperationProjProServiceListRemixOptions = "/api.proj.ProjProService/ListRemixOptions"
+const OperationProjProServiceListResourceSegments = "/api.proj.ProjProService/ListResourceSegments"
 const OperationProjProServiceListTasks = "/api.proj.ProjProService/ListTasks"
 const OperationProjProServiceListTemplates = "/api.proj.ProjProService/ListTemplates"
 const OperationProjProServiceReCreateAsset = "/api.proj.ProjProService/ReCreateAsset"
 const OperationProjProServiceUpdateAsset = "/api.proj.ProjProService/UpdateAsset"
 const OperationProjProServiceUpdateCommodity = "/api.proj.ProjProService/UpdateCommodity"
+const OperationProjProServiceUpdateResourceSegment = "/api.proj.ProjProService/UpdateResourceSegment"
 const OperationProjProServiceUpdateTask = "/api.proj.ProjProService/UpdateTask"
 const OperationProjProServiceUpdateTaskSegment = "/api.proj.ProjProService/UpdateTaskSegment"
 const OperationProjProServiceUpdateTemplate = "/api.proj.ProjProService/UpdateTemplate"
@@ -67,6 +70,7 @@ type ProjProServiceHTTPServer interface {
 	// GetAssetSummary ---------------
 	GetAssetSummary(context.Context, *emptypb.Empty) (*AssetSummary, error)
 	GetCommodity(context.Context, *GetCommodityRequest) (*Commodity, error)
+	GetResourceSegment(context.Context, *GetResourceSegmentRequest) (*ResourceSegment, error)
 	GetTask(context.Context, *GetTaskRequest) (*Task, error)
 	GetTemplate(context.Context, *GetTemplateRequest) (*Resource, error)
 	ListAssets(context.Context, *ListAssetsRequest) (*AssetList, error)
@@ -77,12 +81,15 @@ type ProjProServiceHTTPServer interface {
 	ListQualityAssets(context.Context, *ListQualityAssetsRequest) (*AssetList, error)
 	ListRelatedItems(context.Context, *ListRelatedItemsRequest) (*ItemList, error)
 	ListRemixOptions(context.Context, *ListRemixOptionsRequest) (*RemixOptions, error)
+	// ListResourceSegments ResourceSegment Public
+	ListResourceSegments(context.Context, *ListResourceSegmentsRequest) (*ResourceSegmentList, error)
 	ListTasks(context.Context, *ListTaskRequest) (*TaskList, error)
-	// ListTemplates  -------------
+	// ListTemplates -------------
 	ListTemplates(context.Context, *ListTemplatesRequest) (*ResourceList, error)
 	ReCreateAsset(context.Context, *ReCreateAssetRequest) (*Asset, error)
 	UpdateAsset(context.Context, *UpdateAssetRequest) (*Asset, error)
 	UpdateCommodity(context.Context, *UpdateCommodityRequest) (*emptypb.Empty, error)
+	UpdateResourceSegment(context.Context, *UpdateResourceSegmentRequest) (*emptypb.Empty, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*Task, error)
 	UpdateTaskSegment(context.Context, *UpdateTaskSegmentRequest) (*emptypb.Empty, error)
 	UpdateTemplate(context.Context, *UpdateTemplateRequest) (*Resource, error)
@@ -121,6 +128,9 @@ func RegisterProjProServiceHTTPServer(s *http.Server, srv ProjProServiceHTTPServ
 	r.GET("/api/proj/v1/tasks/{id}", _ProjProService_GetTask0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/tasks/{id}", _ProjProService_UpdateTask0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/taskSegments/{id}", _ProjProService_UpdateTaskSegment0_HTTP_Handler(srv))
+	r.GET("/api/proj/v1/resource-segments", _ProjProService_ListResourceSegments0_HTTP_Handler(srv))
+	r.GET("/api/proj/v1/resource-segments/{id}", _ProjProService_GetResourceSegment0_HTTP_Handler(srv))
+	r.PATCH("/api/proj/v1/resource-segments/{id}", _ProjProService_UpdateResourceSegment0_HTTP_Handler(srv))
 }
 
 func _ProjProService_ListRemixOptions0_HTTP_Handler(srv ProjProServiceHTTPServer) func(ctx http.Context) error {
@@ -787,6 +797,72 @@ func _ProjProService_UpdateTaskSegment0_HTTP_Handler(srv ProjProServiceHTTPServe
 	}
 }
 
+func _ProjProService_ListResourceSegments0_HTTP_Handler(srv ProjProServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListResourceSegmentsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationProjProServiceListResourceSegments)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListResourceSegments(ctx, req.(*ListResourceSegmentsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ResourceSegmentList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ProjProService_GetResourceSegment0_HTTP_Handler(srv ProjProServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetResourceSegmentRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationProjProServiceGetResourceSegment)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetResourceSegment(ctx, req.(*GetResourceSegmentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ResourceSegment)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ProjProService_UpdateResourceSegment0_HTTP_Handler(srv ProjProServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateResourceSegmentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationProjProServiceUpdateResourceSegment)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateResourceSegment(ctx, req.(*UpdateResourceSegmentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*emptypb.Empty)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ProjProServiceHTTPClient interface {
 	AddFeedback(ctx context.Context, req *AddFeedbackRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	AddTemplates(ctx context.Context, req *AddTemplatesRequest, opts ...http.CallOption) (rsp *ResourceList, err error)
@@ -802,6 +878,7 @@ type ProjProServiceHTTPClient interface {
 	// GetAssetSummary ---------------
 	GetAssetSummary(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *AssetSummary, err error)
 	GetCommodity(ctx context.Context, req *GetCommodityRequest, opts ...http.CallOption) (rsp *Commodity, err error)
+	GetResourceSegment(ctx context.Context, req *GetResourceSegmentRequest, opts ...http.CallOption) (rsp *ResourceSegment, err error)
 	GetTask(ctx context.Context, req *GetTaskRequest, opts ...http.CallOption) (rsp *Task, err error)
 	GetTemplate(ctx context.Context, req *GetTemplateRequest, opts ...http.CallOption) (rsp *Resource, err error)
 	ListAssets(ctx context.Context, req *ListAssetsRequest, opts ...http.CallOption) (rsp *AssetList, err error)
@@ -812,12 +889,15 @@ type ProjProServiceHTTPClient interface {
 	ListQualityAssets(ctx context.Context, req *ListQualityAssetsRequest, opts ...http.CallOption) (rsp *AssetList, err error)
 	ListRelatedItems(ctx context.Context, req *ListRelatedItemsRequest, opts ...http.CallOption) (rsp *ItemList, err error)
 	ListRemixOptions(ctx context.Context, req *ListRemixOptionsRequest, opts ...http.CallOption) (rsp *RemixOptions, err error)
+	// ListResourceSegments ResourceSegment Public
+	ListResourceSegments(ctx context.Context, req *ListResourceSegmentsRequest, opts ...http.CallOption) (rsp *ResourceSegmentList, err error)
 	ListTasks(ctx context.Context, req *ListTaskRequest, opts ...http.CallOption) (rsp *TaskList, err error)
-	// ListTemplates  -------------
+	// ListTemplates -------------
 	ListTemplates(ctx context.Context, req *ListTemplatesRequest, opts ...http.CallOption) (rsp *ResourceList, err error)
 	ReCreateAsset(ctx context.Context, req *ReCreateAssetRequest, opts ...http.CallOption) (rsp *Asset, err error)
 	UpdateAsset(ctx context.Context, req *UpdateAssetRequest, opts ...http.CallOption) (rsp *Asset, err error)
 	UpdateCommodity(ctx context.Context, req *UpdateCommodityRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	UpdateResourceSegment(ctx context.Context, req *UpdateResourceSegmentRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateTask(ctx context.Context, req *UpdateTaskRequest, opts ...http.CallOption) (rsp *Task, err error)
 	UpdateTaskSegment(ctx context.Context, req *UpdateTaskSegmentRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateTemplate(ctx context.Context, req *UpdateTemplateRequest, opts ...http.CallOption) (rsp *Resource, err error)
@@ -1001,6 +1081,19 @@ func (c *ProjProServiceHTTPClientImpl) GetCommodity(ctx context.Context, in *Get
 	return &out, nil
 }
 
+func (c *ProjProServiceHTTPClientImpl) GetResourceSegment(ctx context.Context, in *GetResourceSegmentRequest, opts ...http.CallOption) (*ResourceSegment, error) {
+	var out ResourceSegment
+	pattern := "/api/proj/v1/resource-segments/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationProjProServiceGetResourceSegment))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *ProjProServiceHTTPClientImpl) GetTask(ctx context.Context, in *GetTaskRequest, opts ...http.CallOption) (*Task, error) {
 	var out Task
 	pattern := "/api/proj/v1/tasks/{id}"
@@ -1131,6 +1224,20 @@ func (c *ProjProServiceHTTPClientImpl) ListRemixOptions(ctx context.Context, in 
 	return &out, nil
 }
 
+// ListResourceSegments ResourceSegment Public
+func (c *ProjProServiceHTTPClientImpl) ListResourceSegments(ctx context.Context, in *ListResourceSegmentsRequest, opts ...http.CallOption) (*ResourceSegmentList, error) {
+	var out ResourceSegmentList
+	pattern := "/api/proj/v1/resource-segments"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationProjProServiceListResourceSegments))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *ProjProServiceHTTPClientImpl) ListTasks(ctx context.Context, in *ListTaskRequest, opts ...http.CallOption) (*TaskList, error) {
 	var out TaskList
 	pattern := "/api/proj/v1/tasks"
@@ -1144,7 +1251,7 @@ func (c *ProjProServiceHTTPClientImpl) ListTasks(ctx context.Context, in *ListTa
 	return &out, nil
 }
 
-// ListTemplates  -------------
+// ListTemplates -------------
 func (c *ProjProServiceHTTPClientImpl) ListTemplates(ctx context.Context, in *ListTemplatesRequest, opts ...http.CallOption) (*ResourceList, error) {
 	var out ResourceList
 	pattern := "/api/proj/v2/templates"
@@ -1189,6 +1296,19 @@ func (c *ProjProServiceHTTPClientImpl) UpdateCommodity(ctx context.Context, in *
 	pattern := "/api/proj/v1/commodities/{id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationProjProServiceUpdateCommodity))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ProjProServiceHTTPClientImpl) UpdateResourceSegment(ctx context.Context, in *UpdateResourceSegmentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+	var out emptypb.Empty
+	pattern := "/api/proj/v1/resource-segments/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationProjProServiceUpdateResourceSegment))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PATCH", path, in, &out, opts...)
 	if err != nil {

@@ -2519,6 +2519,286 @@ func (x *UpdateTaskSegmentRequest) GetParams() map[string]string {
 	return nil
 }
 
+type XListResourceSegmentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	SearchBy      string                 `protobuf:"bytes,6,opt,name=searchBy,proto3" json:"searchBy,omitempty"`
+	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Ids           []string               `protobuf:"bytes,7,rep,name=ids,proto3" json:"ids,omitempty"`
+	ReturnFields  string                 `protobuf:"bytes,8,opt,name=returnFields,proto3" json:"returnFields,omitempty"`
+	UserId        string                 `protobuf:"bytes,9,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *XListResourceSegmentsRequest) Reset() {
+	*x = XListResourceSegmentsRequest{}
+	mi := &file_proj_proj_pro_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *XListResourceSegmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*XListResourceSegmentsRequest) ProtoMessage() {}
+
+func (x *XListResourceSegmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_proj_pro_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use XListResourceSegmentsRequest.ProtoReflect.Descriptor instead.
+func (*XListResourceSegmentsRequest) Descriptor() ([]byte, []int) {
+	return file_proj_proj_pro_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *XListResourceSegmentsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *XListResourceSegmentsRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+func (x *XListResourceSegmentsRequest) GetSearchBy() string {
+	if x != nil {
+		return x.SearchBy
+	}
+	return ""
+}
+
+func (x *XListResourceSegmentsRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *XListResourceSegmentsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *XListResourceSegmentsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *XListResourceSegmentsRequest) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *XListResourceSegmentsRequest) GetReturnFields() string {
+	if x != nil {
+		return x.ReturnFields
+	}
+	return ""
+}
+
+func (x *XListResourceSegmentsRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type XAddResourcesSegmentRequest struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Items         []*XAddResourcesSegmentRequest_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	UserId        string                              `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *XAddResourcesSegmentRequest) Reset() {
+	*x = XAddResourcesSegmentRequest{}
+	mi := &file_proj_proj_pro_service_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *XAddResourcesSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*XAddResourcesSegmentRequest) ProtoMessage() {}
+
+func (x *XAddResourcesSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_proj_pro_service_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use XAddResourcesSegmentRequest.ProtoReflect.Descriptor instead.
+func (*XAddResourcesSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_proj_pro_service_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *XAddResourcesSegmentRequest) GetItems() []*XAddResourcesSegmentRequest_Item {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *XAddResourcesSegmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type XUpdateResourceSegmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	RootId        string                 `protobuf:"bytes,3,opt,name=rootId,proto3" json:"rootId,omitempty"`
+	UserId        string                 `protobuf:"bytes,4,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *XUpdateResourceSegmentRequest) Reset() {
+	*x = XUpdateResourceSegmentRequest{}
+	mi := &file_proj_proj_pro_service_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *XUpdateResourceSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*XUpdateResourceSegmentRequest) ProtoMessage() {}
+
+func (x *XUpdateResourceSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_proj_pro_service_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use XUpdateResourceSegmentRequest.ProtoReflect.Descriptor instead.
+func (*XUpdateResourceSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_proj_pro_service_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *XUpdateResourceSegmentRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *XUpdateResourceSegmentRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *XUpdateResourceSegmentRequest) GetRootId() string {
+	if x != nil {
+		return x.RootId
+	}
+	return ""
+}
+
+func (x *XUpdateResourceSegmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type XGetResourceSegmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *XGetResourceSegmentRequest) Reset() {
+	*x = XGetResourceSegmentRequest{}
+	mi := &file_proj_proj_pro_service_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *XGetResourceSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*XGetResourceSegmentRequest) ProtoMessage() {}
+
+func (x *XGetResourceSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_proj_pro_service_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use XGetResourceSegmentRequest.ProtoReflect.Descriptor instead.
+func (*XGetResourceSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_proj_pro_service_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *XGetResourceSegmentRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *XGetResourceSegmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 type AddTemplatesRequest_Item struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
@@ -2529,7 +2809,7 @@ type AddTemplatesRequest_Item struct {
 
 func (x *AddTemplatesRequest_Item) Reset() {
 	*x = AddTemplatesRequest_Item{}
-	mi := &file_proj_proj_pro_service_proto_msgTypes[40]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2541,7 +2821,7 @@ func (x *AddTemplatesRequest_Item) String() string {
 func (*AddTemplatesRequest_Item) ProtoMessage() {}
 
 func (x *AddTemplatesRequest_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_pro_service_proto_msgTypes[40]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2581,7 +2861,7 @@ type CallbackByVolcengineParams_Content struct {
 
 func (x *CallbackByVolcengineParams_Content) Reset() {
 	*x = CallbackByVolcengineParams_Content{}
-	mi := &file_proj_proj_pro_service_proto_msgTypes[41]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2593,7 +2873,7 @@ func (x *CallbackByVolcengineParams_Content) String() string {
 func (*CallbackByVolcengineParams_Content) ProtoMessage() {}
 
 func (x *CallbackByVolcengineParams_Content) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_pro_service_proto_msgTypes[41]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2633,7 +2913,7 @@ type CallbackByVolcengineParams_Usage struct {
 
 func (x *CallbackByVolcengineParams_Usage) Reset() {
 	*x = CallbackByVolcengineParams_Usage{}
-	mi := &file_proj_proj_pro_service_proto_msgTypes[42]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2645,7 +2925,7 @@ func (x *CallbackByVolcengineParams_Usage) String() string {
 func (*CallbackByVolcengineParams_Usage) ProtoMessage() {}
 
 func (x *CallbackByVolcengineParams_Usage) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_pro_service_proto_msgTypes[42]
+	mi := &file_proj_proj_pro_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2671,6 +2951,74 @@ func (x *CallbackByVolcengineParams_Usage) GetCompletionTokens() uint32 {
 func (x *CallbackByVolcengineParams_Usage) GetTotalTokens() uint32 {
 	if x != nil {
 		return x.TotalTokens
+	}
+	return 0
+}
+
+type XAddResourcesSegmentRequest_Item struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	CoverUrl      string                 `protobuf:"bytes,3,opt,name=coverUrl,proto3" json:"coverUrl,omitempty"`
+	TimeStart     float64                `protobuf:"fixed64,4,opt,name=timeStart,proto3" json:"timeStart,omitempty"`
+	TimeEnd       float64                `protobuf:"fixed64,5,opt,name=timeEnd,proto3" json:"timeEnd,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *XAddResourcesSegmentRequest_Item) Reset() {
+	*x = XAddResourcesSegmentRequest_Item{}
+	mi := &file_proj_proj_pro_service_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *XAddResourcesSegmentRequest_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*XAddResourcesSegmentRequest_Item) ProtoMessage() {}
+
+func (x *XAddResourcesSegmentRequest_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_proj_pro_service_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use XAddResourcesSegmentRequest_Item.ProtoReflect.Descriptor instead.
+func (*XAddResourcesSegmentRequest_Item) Descriptor() ([]byte, []int) {
+	return file_proj_proj_pro_service_proto_rawDescGZIP(), []int{40, 0}
+}
+
+func (x *XAddResourcesSegmentRequest_Item) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *XAddResourcesSegmentRequest_Item) GetCoverUrl() string {
+	if x != nil {
+		return x.CoverUrl
+	}
+	return ""
+}
+
+func (x *XAddResourcesSegmentRequest_Item) GetTimeStart() float64 {
+	if x != nil {
+		return x.TimeStart
+	}
+	return 0
+}
+
+func (x *XAddResourcesSegmentRequest_Item) GetTimeEnd() float64 {
+	if x != nil {
+		return x.TimeEnd
 	}
 	return 0
 }
@@ -2887,7 +3235,33 @@ const file_proj_proj_pro_service_proto_rawDesc = "" +
 	"\x06params\x18\x03 \x03(\v2..api.proj.UpdateTaskSegmentRequest.ParamsEntryR\x06params\x1a9\n" +
 	"\vParamsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xc2\x1d\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xfe\x01\n" +
+	"\x1c_ListResourceSegmentsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x18\n" +
+	"\akeyword\x18\x02 \x01(\tR\akeyword\x12\x1a\n" +
+	"\bsearchBy\x18\x06 \x01(\tR\bsearchBy\x12\x1a\n" +
+	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x12\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x10\n" +
+	"\x03ids\x18\a \x03(\tR\x03ids\x12\"\n" +
+	"\freturnFields\x18\b \x01(\tR\freturnFields\x12\x16\n" +
+	"\x06userId\x18\t \x01(\tR\x06userId\"\xe5\x01\n" +
+	"\x1b_AddResourcesSegmentRequest\x12@\n" +
+	"\x05items\x18\x01 \x03(\v2*.api.proj._AddResourcesSegmentRequest.ItemR\x05items\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x1al\n" +
+	"\x04Item\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1a\n" +
+	"\bcoverUrl\x18\x03 \x01(\tR\bcoverUrl\x12\x1c\n" +
+	"\ttimeStart\x18\x04 \x01(\x01R\ttimeStart\x12\x18\n" +
+	"\atimeEnd\x18\x05 \x01(\x01R\atimeEnd\"w\n" +
+	"\x1d_UpdateResourceSegmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\x12\x16\n" +
+	"\x06rootId\x18\x03 \x01(\tR\x06rootId\x12\x16\n" +
+	"\x06userId\x18\x04 \x01(\tR\x06userId\"D\n" +
+	"\x1a_GetResourceSegmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId2\xd3#\n" +
 	"\x0eProjProService\x12q\n" +
 	"\x10ListRemixOptions\x12!.api.proj.ListRemixOptionsRequest\x1a\x16.api.proj.RemixOptions\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/proj/v1/remix-options\x12q\n" +
 	"\x11ListOngoingIssues\x12\".api.proj.ListOngoingIssuesRequest\x1a\x13.api.proj.IssueList\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/proj/v1/ongoing-issues\x12g\n" +
@@ -2929,7 +3303,14 @@ const file_proj_proj_pro_service_proto_rawDesc = "" +
 	"\aGetTask\x12\x18.api.proj.GetTaskRequest\x1a\x0e.api.proj.Task\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/proj/v1/tasks/{id}\x12]\n" +
 	"\n" +
 	"UpdateTask\x12\x1b.api.proj.UpdateTaskRequest\x1a\x0e.api.proj.Task\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*2\x17/api/proj/v1/tasks/{id}\x12z\n" +
-	"\x11UpdateTaskSegment\x12\".api.proj.UpdateTaskSegmentRequest\x1a\x16.google.protobuf.Empty\")\x82\xd3\xe4\x93\x02#:\x01*2\x1e/api/proj/v1/taskSegments/{id}B\x17Z\x15store/api/proj;projpbb\x06proto3"
+	"\x11UpdateTaskSegment\x12\".api.proj.UpdateTaskSegmentRequest\x1a\x16.google.protobuf.Empty\")\x82\xd3\xe4\x93\x02#:\x01*2\x1e/api/proj/v1/taskSegments/{id}\x12\x84\x01\n" +
+	"\x14ListResourceSegments\x12%.api.proj.ListResourceSegmentsRequest\x1a\x1d.api.proj.ResourceSegmentList\"&\x82\xd3\xe4\x93\x02 \x12\x1e/api/proj/v1/resource-segments\x12\x81\x01\n" +
+	"\x12GetResourceSegment\x12#.api.proj.GetResourceSegmentRequest\x1a\x19.api.proj.ResourceSegment\"+\x82\xd3\xe4\x93\x02%\x12#/api/proj/v1/resource-segments/{id}\x12\x87\x01\n" +
+	"\x15UpdateResourceSegment\x12&.api.proj.UpdateResourceSegmentRequest\x1a\x16.google.protobuf.Empty\".\x82\xd3\xe4\x93\x02(:\x01*2#/api/proj/v1/resource-segments/{id}\x12`\n" +
+	"\x15_ListResourceSegments\x12&.api.proj._ListResourceSegmentsRequest\x1a\x1d.api.proj.ResourceSegmentList\"\x00\x12^\n" +
+	"\x14_AddResourceSegments\x12%.api.proj._AddResourcesSegmentRequest\x1a\x1d.api.proj.ResourceSegmentList\"\x00\x12^\n" +
+	"\x16_UpdateResourceSegment\x12'.api.proj._UpdateResourceSegmentRequest\x1a\x19.api.proj.ResourceSegment\"\x00\x12X\n" +
+	"\x13_GetResourceSegment\x12$.api.proj._GetResourceSegmentRequest\x1a\x19.api.proj.ResourceSegment\"\x00B\x17Z\x15store/api/proj;projpbb\x06proto3"
 
 var (
 	file_proj_proj_pro_service_proto_rawDescOnce sync.Once
@@ -2943,7 +3324,7 @@ func file_proj_proj_pro_service_proto_rawDescGZIP() []byte {
 	return file_proj_proj_pro_service_proto_rawDescData
 }
 
-var file_proj_proj_pro_service_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
+var file_proj_proj_pro_service_proto_msgTypes = make([]protoimpl.MessageInfo, 51)
 var file_proj_proj_pro_service_proto_goTypes = []any{
 	(*ListRemixOptionsRequest)(nil),            // 0: api.proj.ListRemixOptionsRequest
 	(*AddFeedbackRequest)(nil),                 // 1: api.proj.AddFeedbackRequest
@@ -2984,126 +3365,150 @@ var file_proj_proj_pro_service_proto_goTypes = []any{
 	(*GetTaskRequest)(nil),                     // 36: api.proj.GetTaskRequest
 	(*UpdateTaskRequest)(nil),                  // 37: api.proj.UpdateTaskRequest
 	(*UpdateTaskSegmentRequest)(nil),           // 38: api.proj.UpdateTaskSegmentRequest
-	nil,                                        // 39: api.proj.AddFeedbackRequest.ContentEntry
-	(*AddTemplatesRequest_Item)(nil),           // 40: api.proj.AddTemplatesRequest.Item
-	(*CallbackByVolcengineParams_Content)(nil), // 41: api.proj.CallbackByVolcengineParams.Content
-	(*CallbackByVolcengineParams_Usage)(nil),   // 42: api.proj.CallbackByVolcengineParams.Usage
-	nil,                                        // 43: api.proj.UpdateAssetRequest.ParamsEntry
-	nil,                                        // 44: api.proj.UpdateTaskRequest.ParamsEntry
-	nil,                                        // 45: api.proj.UpdateTaskSegmentRequest.ParamsEntry
-	(*Media)(nil),                              // 46: api.proj.Media
-	(*Commodity)(nil),                          // 47: api.proj.Commodity
-	(*ResourceSegment)(nil),                    // 48: api.proj.ResourceSegment
-	(*AssetPrompts)(nil),                       // 49: api.proj.AssetPrompts
-	(*DataBus)(nil),                            // 50: api.proj.DataBus
-	(*emptypb.Empty)(nil),                      // 51: google.protobuf.Empty
-	(*RemixOptions)(nil),                       // 52: api.proj.RemixOptions
-	(*FeedbackList)(nil),                       // 53: api.proj.FeedbackList
-	(*ResourceList)(nil),                       // 54: api.proj.ResourceList
-	(*Resource)(nil),                           // 55: api.proj.Resource
-	(*AssetList)(nil),                          // 56: api.proj.AssetList
-	(*Asset)(nil),                              // 57: api.proj.Asset
-	(*ItemList)(nil),                           // 58: api.proj.ItemList
-	(*CommodityList)(nil),                      // 59: api.proj.CommodityList
-	(*Task)(nil),                               // 60: api.proj.Task
-	(*TaskList)(nil),                           // 61: api.proj.TaskList
+	(*XListResourceSegmentsRequest)(nil),       // 39: api.proj._ListResourceSegmentsRequest
+	(*XAddResourcesSegmentRequest)(nil),        // 40: api.proj._AddResourcesSegmentRequest
+	(*XUpdateResourceSegmentRequest)(nil),      // 41: api.proj._UpdateResourceSegmentRequest
+	(*XGetResourceSegmentRequest)(nil),         // 42: api.proj._GetResourceSegmentRequest
+	nil,                                        // 43: api.proj.AddFeedbackRequest.ContentEntry
+	(*AddTemplatesRequest_Item)(nil),           // 44: api.proj.AddTemplatesRequest.Item
+	(*CallbackByVolcengineParams_Content)(nil), // 45: api.proj.CallbackByVolcengineParams.Content
+	(*CallbackByVolcengineParams_Usage)(nil),   // 46: api.proj.CallbackByVolcengineParams.Usage
+	nil,                                        // 47: api.proj.UpdateAssetRequest.ParamsEntry
+	nil,                                        // 48: api.proj.UpdateTaskRequest.ParamsEntry
+	nil,                                        // 49: api.proj.UpdateTaskSegmentRequest.ParamsEntry
+	(*XAddResourcesSegmentRequest_Item)(nil),   // 50: api.proj._AddResourcesSegmentRequest.Item
+	(*Media)(nil),                              // 51: api.proj.Media
+	(*Commodity)(nil),                          // 52: api.proj.Commodity
+	(*ResourceSegment)(nil),                    // 53: api.proj.ResourceSegment
+	(*AssetPrompts)(nil),                       // 54: api.proj.AssetPrompts
+	(*DataBus)(nil),                            // 55: api.proj.DataBus
+	(*emptypb.Empty)(nil),                      // 56: google.protobuf.Empty
+	(*ListResourceSegmentsRequest)(nil),        // 57: api.proj.ListResourceSegmentsRequest
+	(*GetResourceSegmentRequest)(nil),          // 58: api.proj.GetResourceSegmentRequest
+	(*UpdateResourceSegmentRequest)(nil),       // 59: api.proj.UpdateResourceSegmentRequest
+	(*RemixOptions)(nil),                       // 60: api.proj.RemixOptions
+	(*FeedbackList)(nil),                       // 61: api.proj.FeedbackList
+	(*ResourceList)(nil),                       // 62: api.proj.ResourceList
+	(*Resource)(nil),                           // 63: api.proj.Resource
+	(*AssetList)(nil),                          // 64: api.proj.AssetList
+	(*Asset)(nil),                              // 65: api.proj.Asset
+	(*ItemList)(nil),                           // 66: api.proj.ItemList
+	(*CommodityList)(nil),                      // 67: api.proj.CommodityList
+	(*Task)(nil),                               // 68: api.proj.Task
+	(*TaskList)(nil),                           // 69: api.proj.TaskList
+	(*ResourceSegmentList)(nil),                // 70: api.proj.ResourceSegmentList
 }
 var file_proj_proj_pro_service_proto_depIdxs = []int32{
-	39, // 0: api.proj.AddFeedbackRequest.content:type_name -> api.proj.AddFeedbackRequest.ContentEntry
-	40, // 1: api.proj.AddTemplatesRequest.items:type_name -> api.proj.AddTemplatesRequest.Item
+	43, // 0: api.proj.AddFeedbackRequest.content:type_name -> api.proj.AddFeedbackRequest.ContentEntry
+	44, // 1: api.proj.AddTemplatesRequest.items:type_name -> api.proj.AddTemplatesRequest.Item
 	7,  // 2: api.proj.IssueList.list:type_name -> api.proj.Issue
-	41, // 3: api.proj.CallbackByVolcengineParams.content:type_name -> api.proj.CallbackByVolcengineParams.Content
-	42, // 4: api.proj.CallbackByVolcengineParams.usage:type_name -> api.proj.CallbackByVolcengineParams.Usage
-	46, // 5: api.proj.CreateCommodityRequest.medias:type_name -> api.proj.Media
-	43, // 6: api.proj.UpdateAssetRequest.params:type_name -> api.proj.UpdateAssetRequest.ParamsEntry
-	47, // 7: api.proj.CreateAssetRequest.commodity:type_name -> api.proj.Commodity
-	48, // 8: api.proj.CreateAssetRequest.segment:type_name -> api.proj.ResourceSegment
-	49, // 9: api.proj.CreateAssetRequest.prompts:type_name -> api.proj.AssetPrompts
-	48, // 10: api.proj.CreateAssetV2Request.segment:type_name -> api.proj.ResourceSegment
-	50, // 11: api.proj.CreateAssetV2Request.initialData:type_name -> api.proj.DataBus
-	44, // 12: api.proj.UpdateTaskRequest.params:type_name -> api.proj.UpdateTaskRequest.ParamsEntry
-	45, // 13: api.proj.UpdateTaskSegmentRequest.params:type_name -> api.proj.UpdateTaskSegmentRequest.ParamsEntry
-	0,  // 14: api.proj.ProjProService.ListRemixOptions:input_type -> api.proj.ListRemixOptionsRequest
-	6,  // 15: api.proj.ProjProService.ListOngoingIssues:input_type -> api.proj.ListOngoingIssuesRequest
-	9,  // 16: api.proj.ProjProService.ListFeedbacks:input_type -> api.proj.ListFeedbacksRequest
-	10, // 17: api.proj.ProjProService._ListFeedbacks:input_type -> api.proj._ListFeedbacksRequest
-	1,  // 18: api.proj.ProjProService.AddFeedback:input_type -> api.proj.AddFeedbackRequest
-	11, // 19: api.proj.ProjProService.ListTemplates:input_type -> api.proj.ListTemplatesRequest
-	13, // 20: api.proj.ProjProService.ListPublicTemplates:input_type -> api.proj.ListPublicTemplatesRequest
-	5,  // 21: api.proj.ProjProService.AddTemplates:input_type -> api.proj.AddTemplatesRequest
-	4,  // 22: api.proj.ProjProService.GetTemplate:input_type -> api.proj.GetTemplateRequest
-	3,  // 23: api.proj.ProjProService.UpdateTemplate:input_type -> api.proj.UpdateTemplateRequest
-	12, // 24: api.proj.ProjProService._ListTemplates:input_type -> api.proj._ListTemplatesRequest
-	5,  // 25: api.proj.ProjProService._AddTemplates:input_type -> api.proj.AddTemplatesRequest
-	4,  // 26: api.proj.ProjProService._GetTemplate:input_type -> api.proj.GetTemplateRequest
-	3,  // 27: api.proj.ProjProService._UpdateTemplate:input_type -> api.proj.UpdateTemplateRequest
-	32, // 28: api.proj.ProjProService.CreateTemplate:input_type -> api.proj.CreateTemplateRequest
-	51, // 29: api.proj.ProjProService.GetAssetSummary:input_type -> google.protobuf.Empty
-	21, // 30: api.proj.ProjProService.ListQualityAssets:input_type -> api.proj.ListQualityAssetsRequest
-	33, // 31: api.proj.ProjProService.ReCreateAsset:input_type -> api.proj.ReCreateAssetRequest
-	28, // 32: api.proj.ProjProService.CreateAsset:input_type -> api.proj.CreateAssetRequest
-	29, // 33: api.proj.ProjProService.CreateAssetV2:input_type -> api.proj.CreateAssetV2Request
-	30, // 34: api.proj.ProjProService.CreateAssetV3:input_type -> api.proj.CreateAssetV3Request
-	31, // 35: api.proj.ProjProService.CreateAssetV5:input_type -> api.proj.CreateAssetV5Request
-	19, // 36: api.proj.ProjProService.ListAssets:input_type -> api.proj.ListAssetsRequest
-	20, // 37: api.proj.ProjProService._ListAssets:input_type -> api.proj._ListAssetsRequest
-	27, // 38: api.proj.ProjProService.UpdateAsset:input_type -> api.proj.UpdateAssetRequest
-	22, // 39: api.proj.ProjProService.GetAsset:input_type -> api.proj.GetAssetRequest
-	23, // 40: api.proj.ProjProService._GetAsset:input_type -> api.proj._GetAssetRequest
-	14, // 41: api.proj.ProjProService.CallbackByVolcengine:input_type -> api.proj.CallbackByVolcengineParams
-	15, // 42: api.proj.ProjProService.ListRelatedItems:input_type -> api.proj.ListRelatedItemsRequest
-	16, // 43: api.proj.ProjProService.CreateCommodity:input_type -> api.proj.CreateCommodityRequest
-	24, // 44: api.proj.ProjProService.ListCommodities:input_type -> api.proj.ListCommodityRequest
-	25, // 45: api.proj.ProjProService.GetCommodity:input_type -> api.proj.GetCommodityRequest
-	26, // 46: api.proj.ProjProService.UpdateCommodity:input_type -> api.proj.UpdateCommodityRequest
-	34, // 47: api.proj.ProjProService.CreateTask:input_type -> api.proj.CreateTaskTaskRequest
-	35, // 48: api.proj.ProjProService.ListTasks:input_type -> api.proj.ListTaskRequest
-	36, // 49: api.proj.ProjProService.GetTask:input_type -> api.proj.GetTaskRequest
-	37, // 50: api.proj.ProjProService.UpdateTask:input_type -> api.proj.UpdateTaskRequest
-	38, // 51: api.proj.ProjProService.UpdateTaskSegment:input_type -> api.proj.UpdateTaskSegmentRequest
-	52, // 52: api.proj.ProjProService.ListRemixOptions:output_type -> api.proj.RemixOptions
-	8,  // 53: api.proj.ProjProService.ListOngoingIssues:output_type -> api.proj.IssueList
-	53, // 54: api.proj.ProjProService.ListFeedbacks:output_type -> api.proj.FeedbackList
-	53, // 55: api.proj.ProjProService._ListFeedbacks:output_type -> api.proj.FeedbackList
-	51, // 56: api.proj.ProjProService.AddFeedback:output_type -> google.protobuf.Empty
-	54, // 57: api.proj.ProjProService.ListTemplates:output_type -> api.proj.ResourceList
-	54, // 58: api.proj.ProjProService.ListPublicTemplates:output_type -> api.proj.ResourceList
-	54, // 59: api.proj.ProjProService.AddTemplates:output_type -> api.proj.ResourceList
-	55, // 60: api.proj.ProjProService.GetTemplate:output_type -> api.proj.Resource
-	55, // 61: api.proj.ProjProService.UpdateTemplate:output_type -> api.proj.Resource
-	54, // 62: api.proj.ProjProService._ListTemplates:output_type -> api.proj.ResourceList
-	54, // 63: api.proj.ProjProService._AddTemplates:output_type -> api.proj.ResourceList
-	55, // 64: api.proj.ProjProService._GetTemplate:output_type -> api.proj.Resource
-	55, // 65: api.proj.ProjProService._UpdateTemplate:output_type -> api.proj.Resource
-	55, // 66: api.proj.ProjProService.CreateTemplate:output_type -> api.proj.Resource
-	2,  // 67: api.proj.ProjProService.GetAssetSummary:output_type -> api.proj.AssetSummary
-	56, // 68: api.proj.ProjProService.ListQualityAssets:output_type -> api.proj.AssetList
-	57, // 69: api.proj.ProjProService.ReCreateAsset:output_type -> api.proj.Asset
-	57, // 70: api.proj.ProjProService.CreateAsset:output_type -> api.proj.Asset
-	57, // 71: api.proj.ProjProService.CreateAssetV2:output_type -> api.proj.Asset
-	57, // 72: api.proj.ProjProService.CreateAssetV3:output_type -> api.proj.Asset
-	57, // 73: api.proj.ProjProService.CreateAssetV5:output_type -> api.proj.Asset
-	56, // 74: api.proj.ProjProService.ListAssets:output_type -> api.proj.AssetList
-	56, // 75: api.proj.ProjProService._ListAssets:output_type -> api.proj.AssetList
-	57, // 76: api.proj.ProjProService.UpdateAsset:output_type -> api.proj.Asset
-	57, // 77: api.proj.ProjProService.GetAsset:output_type -> api.proj.Asset
-	57, // 78: api.proj.ProjProService._GetAsset:output_type -> api.proj.Asset
-	51, // 79: api.proj.ProjProService.CallbackByVolcengine:output_type -> google.protobuf.Empty
-	58, // 80: api.proj.ProjProService.ListRelatedItems:output_type -> api.proj.ItemList
-	47, // 81: api.proj.ProjProService.CreateCommodity:output_type -> api.proj.Commodity
-	59, // 82: api.proj.ProjProService.ListCommodities:output_type -> api.proj.CommodityList
-	47, // 83: api.proj.ProjProService.GetCommodity:output_type -> api.proj.Commodity
-	51, // 84: api.proj.ProjProService.UpdateCommodity:output_type -> google.protobuf.Empty
-	60, // 85: api.proj.ProjProService.CreateTask:output_type -> api.proj.Task
-	61, // 86: api.proj.ProjProService.ListTasks:output_type -> api.proj.TaskList
-	60, // 87: api.proj.ProjProService.GetTask:output_type -> api.proj.Task
-	60, // 88: api.proj.ProjProService.UpdateTask:output_type -> api.proj.Task
-	51, // 89: api.proj.ProjProService.UpdateTaskSegment:output_type -> google.protobuf.Empty
-	52, // [52:90] is the sub-list for method output_type
-	14, // [14:52] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	45, // 3: api.proj.CallbackByVolcengineParams.content:type_name -> api.proj.CallbackByVolcengineParams.Content
+	46, // 4: api.proj.CallbackByVolcengineParams.usage:type_name -> api.proj.CallbackByVolcengineParams.Usage
+	51, // 5: api.proj.CreateCommodityRequest.medias:type_name -> api.proj.Media
+	47, // 6: api.proj.UpdateAssetRequest.params:type_name -> api.proj.UpdateAssetRequest.ParamsEntry
+	52, // 7: api.proj.CreateAssetRequest.commodity:type_name -> api.proj.Commodity
+	53, // 8: api.proj.CreateAssetRequest.segment:type_name -> api.proj.ResourceSegment
+	54, // 9: api.proj.CreateAssetRequest.prompts:type_name -> api.proj.AssetPrompts
+	53, // 10: api.proj.CreateAssetV2Request.segment:type_name -> api.proj.ResourceSegment
+	55, // 11: api.proj.CreateAssetV2Request.initialData:type_name -> api.proj.DataBus
+	48, // 12: api.proj.UpdateTaskRequest.params:type_name -> api.proj.UpdateTaskRequest.ParamsEntry
+	49, // 13: api.proj.UpdateTaskSegmentRequest.params:type_name -> api.proj.UpdateTaskSegmentRequest.ParamsEntry
+	50, // 14: api.proj._AddResourcesSegmentRequest.items:type_name -> api.proj._AddResourcesSegmentRequest.Item
+	0,  // 15: api.proj.ProjProService.ListRemixOptions:input_type -> api.proj.ListRemixOptionsRequest
+	6,  // 16: api.proj.ProjProService.ListOngoingIssues:input_type -> api.proj.ListOngoingIssuesRequest
+	9,  // 17: api.proj.ProjProService.ListFeedbacks:input_type -> api.proj.ListFeedbacksRequest
+	10, // 18: api.proj.ProjProService._ListFeedbacks:input_type -> api.proj._ListFeedbacksRequest
+	1,  // 19: api.proj.ProjProService.AddFeedback:input_type -> api.proj.AddFeedbackRequest
+	11, // 20: api.proj.ProjProService.ListTemplates:input_type -> api.proj.ListTemplatesRequest
+	13, // 21: api.proj.ProjProService.ListPublicTemplates:input_type -> api.proj.ListPublicTemplatesRequest
+	5,  // 22: api.proj.ProjProService.AddTemplates:input_type -> api.proj.AddTemplatesRequest
+	4,  // 23: api.proj.ProjProService.GetTemplate:input_type -> api.proj.GetTemplateRequest
+	3,  // 24: api.proj.ProjProService.UpdateTemplate:input_type -> api.proj.UpdateTemplateRequest
+	12, // 25: api.proj.ProjProService._ListTemplates:input_type -> api.proj._ListTemplatesRequest
+	5,  // 26: api.proj.ProjProService._AddTemplates:input_type -> api.proj.AddTemplatesRequest
+	4,  // 27: api.proj.ProjProService._GetTemplate:input_type -> api.proj.GetTemplateRequest
+	3,  // 28: api.proj.ProjProService._UpdateTemplate:input_type -> api.proj.UpdateTemplateRequest
+	32, // 29: api.proj.ProjProService.CreateTemplate:input_type -> api.proj.CreateTemplateRequest
+	56, // 30: api.proj.ProjProService.GetAssetSummary:input_type -> google.protobuf.Empty
+	21, // 31: api.proj.ProjProService.ListQualityAssets:input_type -> api.proj.ListQualityAssetsRequest
+	33, // 32: api.proj.ProjProService.ReCreateAsset:input_type -> api.proj.ReCreateAssetRequest
+	28, // 33: api.proj.ProjProService.CreateAsset:input_type -> api.proj.CreateAssetRequest
+	29, // 34: api.proj.ProjProService.CreateAssetV2:input_type -> api.proj.CreateAssetV2Request
+	30, // 35: api.proj.ProjProService.CreateAssetV3:input_type -> api.proj.CreateAssetV3Request
+	31, // 36: api.proj.ProjProService.CreateAssetV5:input_type -> api.proj.CreateAssetV5Request
+	19, // 37: api.proj.ProjProService.ListAssets:input_type -> api.proj.ListAssetsRequest
+	20, // 38: api.proj.ProjProService._ListAssets:input_type -> api.proj._ListAssetsRequest
+	27, // 39: api.proj.ProjProService.UpdateAsset:input_type -> api.proj.UpdateAssetRequest
+	22, // 40: api.proj.ProjProService.GetAsset:input_type -> api.proj.GetAssetRequest
+	23, // 41: api.proj.ProjProService._GetAsset:input_type -> api.proj._GetAssetRequest
+	14, // 42: api.proj.ProjProService.CallbackByVolcengine:input_type -> api.proj.CallbackByVolcengineParams
+	15, // 43: api.proj.ProjProService.ListRelatedItems:input_type -> api.proj.ListRelatedItemsRequest
+	16, // 44: api.proj.ProjProService.CreateCommodity:input_type -> api.proj.CreateCommodityRequest
+	24, // 45: api.proj.ProjProService.ListCommodities:input_type -> api.proj.ListCommodityRequest
+	25, // 46: api.proj.ProjProService.GetCommodity:input_type -> api.proj.GetCommodityRequest
+	26, // 47: api.proj.ProjProService.UpdateCommodity:input_type -> api.proj.UpdateCommodityRequest
+	34, // 48: api.proj.ProjProService.CreateTask:input_type -> api.proj.CreateTaskTaskRequest
+	35, // 49: api.proj.ProjProService.ListTasks:input_type -> api.proj.ListTaskRequest
+	36, // 50: api.proj.ProjProService.GetTask:input_type -> api.proj.GetTaskRequest
+	37, // 51: api.proj.ProjProService.UpdateTask:input_type -> api.proj.UpdateTaskRequest
+	38, // 52: api.proj.ProjProService.UpdateTaskSegment:input_type -> api.proj.UpdateTaskSegmentRequest
+	57, // 53: api.proj.ProjProService.ListResourceSegments:input_type -> api.proj.ListResourceSegmentsRequest
+	58, // 54: api.proj.ProjProService.GetResourceSegment:input_type -> api.proj.GetResourceSegmentRequest
+	59, // 55: api.proj.ProjProService.UpdateResourceSegment:input_type -> api.proj.UpdateResourceSegmentRequest
+	39, // 56: api.proj.ProjProService._ListResourceSegments:input_type -> api.proj._ListResourceSegmentsRequest
+	40, // 57: api.proj.ProjProService._AddResourceSegments:input_type -> api.proj._AddResourcesSegmentRequest
+	41, // 58: api.proj.ProjProService._UpdateResourceSegment:input_type -> api.proj._UpdateResourceSegmentRequest
+	42, // 59: api.proj.ProjProService._GetResourceSegment:input_type -> api.proj._GetResourceSegmentRequest
+	60, // 60: api.proj.ProjProService.ListRemixOptions:output_type -> api.proj.RemixOptions
+	8,  // 61: api.proj.ProjProService.ListOngoingIssues:output_type -> api.proj.IssueList
+	61, // 62: api.proj.ProjProService.ListFeedbacks:output_type -> api.proj.FeedbackList
+	61, // 63: api.proj.ProjProService._ListFeedbacks:output_type -> api.proj.FeedbackList
+	56, // 64: api.proj.ProjProService.AddFeedback:output_type -> google.protobuf.Empty
+	62, // 65: api.proj.ProjProService.ListTemplates:output_type -> api.proj.ResourceList
+	62, // 66: api.proj.ProjProService.ListPublicTemplates:output_type -> api.proj.ResourceList
+	62, // 67: api.proj.ProjProService.AddTemplates:output_type -> api.proj.ResourceList
+	63, // 68: api.proj.ProjProService.GetTemplate:output_type -> api.proj.Resource
+	63, // 69: api.proj.ProjProService.UpdateTemplate:output_type -> api.proj.Resource
+	62, // 70: api.proj.ProjProService._ListTemplates:output_type -> api.proj.ResourceList
+	62, // 71: api.proj.ProjProService._AddTemplates:output_type -> api.proj.ResourceList
+	63, // 72: api.proj.ProjProService._GetTemplate:output_type -> api.proj.Resource
+	63, // 73: api.proj.ProjProService._UpdateTemplate:output_type -> api.proj.Resource
+	63, // 74: api.proj.ProjProService.CreateTemplate:output_type -> api.proj.Resource
+	2,  // 75: api.proj.ProjProService.GetAssetSummary:output_type -> api.proj.AssetSummary
+	64, // 76: api.proj.ProjProService.ListQualityAssets:output_type -> api.proj.AssetList
+	65, // 77: api.proj.ProjProService.ReCreateAsset:output_type -> api.proj.Asset
+	65, // 78: api.proj.ProjProService.CreateAsset:output_type -> api.proj.Asset
+	65, // 79: api.proj.ProjProService.CreateAssetV2:output_type -> api.proj.Asset
+	65, // 80: api.proj.ProjProService.CreateAssetV3:output_type -> api.proj.Asset
+	65, // 81: api.proj.ProjProService.CreateAssetV5:output_type -> api.proj.Asset
+	64, // 82: api.proj.ProjProService.ListAssets:output_type -> api.proj.AssetList
+	64, // 83: api.proj.ProjProService._ListAssets:output_type -> api.proj.AssetList
+	65, // 84: api.proj.ProjProService.UpdateAsset:output_type -> api.proj.Asset
+	65, // 85: api.proj.ProjProService.GetAsset:output_type -> api.proj.Asset
+	65, // 86: api.proj.ProjProService._GetAsset:output_type -> api.proj.Asset
+	56, // 87: api.proj.ProjProService.CallbackByVolcengine:output_type -> google.protobuf.Empty
+	66, // 88: api.proj.ProjProService.ListRelatedItems:output_type -> api.proj.ItemList
+	52, // 89: api.proj.ProjProService.CreateCommodity:output_type -> api.proj.Commodity
+	67, // 90: api.proj.ProjProService.ListCommodities:output_type -> api.proj.CommodityList
+	52, // 91: api.proj.ProjProService.GetCommodity:output_type -> api.proj.Commodity
+	56, // 92: api.proj.ProjProService.UpdateCommodity:output_type -> google.protobuf.Empty
+	68, // 93: api.proj.ProjProService.CreateTask:output_type -> api.proj.Task
+	69, // 94: api.proj.ProjProService.ListTasks:output_type -> api.proj.TaskList
+	68, // 95: api.proj.ProjProService.GetTask:output_type -> api.proj.Task
+	68, // 96: api.proj.ProjProService.UpdateTask:output_type -> api.proj.Task
+	56, // 97: api.proj.ProjProService.UpdateTaskSegment:output_type -> google.protobuf.Empty
+	70, // 98: api.proj.ProjProService.ListResourceSegments:output_type -> api.proj.ResourceSegmentList
+	53, // 99: api.proj.ProjProService.GetResourceSegment:output_type -> api.proj.ResourceSegment
+	56, // 100: api.proj.ProjProService.UpdateResourceSegment:output_type -> google.protobuf.Empty
+	70, // 101: api.proj.ProjProService._ListResourceSegments:output_type -> api.proj.ResourceSegmentList
+	70, // 102: api.proj.ProjProService._AddResourceSegments:output_type -> api.proj.ResourceSegmentList
+	53, // 103: api.proj.ProjProService._UpdateResourceSegment:output_type -> api.proj.ResourceSegment
+	53, // 104: api.proj.ProjProService._GetResourceSegment:output_type -> api.proj.ResourceSegment
+	60, // [60:105] is the sub-list for method output_type
+	15, // [15:60] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_proj_proj_pro_service_proto_init() }
@@ -3127,7 +3532,7 @@ func file_proj_proj_pro_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_proj_pro_service_proto_rawDesc), len(file_proj_proj_pro_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   46,
+			NumMessages:   51,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

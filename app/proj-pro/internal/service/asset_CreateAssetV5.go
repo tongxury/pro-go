@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	projpb "store/api/proj"
+	usercenter "store/api/usercenter"
 	"store/pkg/clients/mgz"
 	"store/pkg/krathelper"
 	"time"
@@ -13,7 +14,7 @@ func (t ProjService) CreateAssetV5(ctx context.Context, req *projpb.CreateAssetV
 	userId := krathelper.RequireUserId(ctx)
 
 	newAsset := &projpb.Asset{
-		UserId:    userId,
+		User:      &usercenter.User{XId: userId},
 		Status:    "completed",
 		CreatedAt: time.Now().Unix(),
 		Category:  "custom",

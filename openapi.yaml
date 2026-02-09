@@ -1339,6 +1339,10 @@ paths:
                   in: query
                   schema:
                     type: string
+                - name: collected
+                  in: query
+                  schema:
+                    type: boolean
             responses:
                 "200":
                     description: OK
@@ -3315,6 +3319,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.proj.RemixOptions'
+    /api/proj/v1/resource-segments:
+        get:
+            tags:
+                - ProjProService
+            description: ResourceSegment Public
+            operationId: ProjProService_ListResourceSegments
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: string
+                - name: keyword
+                  in: query
+                  schema:
+                    type: string
+                - name: searchBy
+                  in: query
+                  schema:
+                    type: string
+                - name: category
+                  in: query
+                  schema:
+                    type: string
+                - name: size
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: string
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: returnFields
+                  in: query
+                  schema:
+                    type: string
+                - name: collected
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.ResourceSegmentList'
+    /api/proj/v1/resource-segments/{id}:
+        get:
+            tags:
+                - ProjProService
+            operationId: ProjProService_GetResourceSegment
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.ResourceSegment'
+        patch:
+            tags:
+                - ProjProService
+            operationId: ProjProService_UpdateResourceSegment
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.proj.UpdateResourceSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
     /api/proj/v1/session-segments/{id}:
         patch:
             tags:
@@ -9179,8 +9273,8 @@ components:
                     $ref: '#/components/schemas/api.proj.Commodity'
                 segment:
                     $ref: '#/components/schemas/api.proj.ResourceSegment'
-                userId:
-                    type: string
+                user:
+                    $ref: '#/components/schemas/api.usercenter.User'
                 status:
                     type: string
                 createdAt:
@@ -10017,8 +10111,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.proj.ResourceSegment'
-                userId:
-                    type: string
+                user:
+                    $ref: '#/components/schemas/api.usercenter.User'
                 extra:
                     $ref: '#/components/schemas/api.proj.Resource_Extra'
         api.proj.ResourceList:
@@ -10105,6 +10199,8 @@ components:
                         $ref: '#/components/schemas/api.proj.ResourceSegment'
                 extra:
                     $ref: '#/components/schemas/api.proj.ResourceSegment_Extra'
+                collected:
+                    type: boolean
         api.proj.ResourceSegmentList:
             type: object
             properties:

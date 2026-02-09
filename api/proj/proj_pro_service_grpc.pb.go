@@ -20,44 +20,51 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProjProService_ListRemixOptions_FullMethodName     = "/api.proj.ProjProService/ListRemixOptions"
-	ProjProService_ListOngoingIssues_FullMethodName    = "/api.proj.ProjProService/ListOngoingIssues"
-	ProjProService_ListFeedbacks_FullMethodName        = "/api.proj.ProjProService/ListFeedbacks"
-	ProjProService_XListFeedbacks_FullMethodName       = "/api.proj.ProjProService/_ListFeedbacks"
-	ProjProService_AddFeedback_FullMethodName          = "/api.proj.ProjProService/AddFeedback"
-	ProjProService_ListTemplates_FullMethodName        = "/api.proj.ProjProService/ListTemplates"
-	ProjProService_ListPublicTemplates_FullMethodName  = "/api.proj.ProjProService/ListPublicTemplates"
-	ProjProService_AddTemplates_FullMethodName         = "/api.proj.ProjProService/AddTemplates"
-	ProjProService_GetTemplate_FullMethodName          = "/api.proj.ProjProService/GetTemplate"
-	ProjProService_UpdateTemplate_FullMethodName       = "/api.proj.ProjProService/UpdateTemplate"
-	ProjProService_XListTemplates_FullMethodName       = "/api.proj.ProjProService/_ListTemplates"
-	ProjProService_XAddTemplates_FullMethodName        = "/api.proj.ProjProService/_AddTemplates"
-	ProjProService_XGetTemplate_FullMethodName         = "/api.proj.ProjProService/_GetTemplate"
-	ProjProService_XUpdateTemplate_FullMethodName      = "/api.proj.ProjProService/_UpdateTemplate"
-	ProjProService_CreateTemplate_FullMethodName       = "/api.proj.ProjProService/CreateTemplate"
-	ProjProService_GetAssetSummary_FullMethodName      = "/api.proj.ProjProService/GetAssetSummary"
-	ProjProService_ListQualityAssets_FullMethodName    = "/api.proj.ProjProService/ListQualityAssets"
-	ProjProService_ReCreateAsset_FullMethodName        = "/api.proj.ProjProService/ReCreateAsset"
-	ProjProService_CreateAsset_FullMethodName          = "/api.proj.ProjProService/CreateAsset"
-	ProjProService_CreateAssetV2_FullMethodName        = "/api.proj.ProjProService/CreateAssetV2"
-	ProjProService_CreateAssetV3_FullMethodName        = "/api.proj.ProjProService/CreateAssetV3"
-	ProjProService_CreateAssetV5_FullMethodName        = "/api.proj.ProjProService/CreateAssetV5"
-	ProjProService_ListAssets_FullMethodName           = "/api.proj.ProjProService/ListAssets"
-	ProjProService_XListAssets_FullMethodName          = "/api.proj.ProjProService/_ListAssets"
-	ProjProService_UpdateAsset_FullMethodName          = "/api.proj.ProjProService/UpdateAsset"
-	ProjProService_GetAsset_FullMethodName             = "/api.proj.ProjProService/GetAsset"
-	ProjProService_XGetAsset_FullMethodName            = "/api.proj.ProjProService/_GetAsset"
-	ProjProService_CallbackByVolcengine_FullMethodName = "/api.proj.ProjProService/CallbackByVolcengine"
-	ProjProService_ListRelatedItems_FullMethodName     = "/api.proj.ProjProService/ListRelatedItems"
-	ProjProService_CreateCommodity_FullMethodName      = "/api.proj.ProjProService/CreateCommodity"
-	ProjProService_ListCommodities_FullMethodName      = "/api.proj.ProjProService/ListCommodities"
-	ProjProService_GetCommodity_FullMethodName         = "/api.proj.ProjProService/GetCommodity"
-	ProjProService_UpdateCommodity_FullMethodName      = "/api.proj.ProjProService/UpdateCommodity"
-	ProjProService_CreateTask_FullMethodName           = "/api.proj.ProjProService/CreateTask"
-	ProjProService_ListTasks_FullMethodName            = "/api.proj.ProjProService/ListTasks"
-	ProjProService_GetTask_FullMethodName              = "/api.proj.ProjProService/GetTask"
-	ProjProService_UpdateTask_FullMethodName           = "/api.proj.ProjProService/UpdateTask"
-	ProjProService_UpdateTaskSegment_FullMethodName    = "/api.proj.ProjProService/UpdateTaskSegment"
+	ProjProService_ListRemixOptions_FullMethodName       = "/api.proj.ProjProService/ListRemixOptions"
+	ProjProService_ListOngoingIssues_FullMethodName      = "/api.proj.ProjProService/ListOngoingIssues"
+	ProjProService_ListFeedbacks_FullMethodName          = "/api.proj.ProjProService/ListFeedbacks"
+	ProjProService_XListFeedbacks_FullMethodName         = "/api.proj.ProjProService/_ListFeedbacks"
+	ProjProService_AddFeedback_FullMethodName            = "/api.proj.ProjProService/AddFeedback"
+	ProjProService_ListTemplates_FullMethodName          = "/api.proj.ProjProService/ListTemplates"
+	ProjProService_ListPublicTemplates_FullMethodName    = "/api.proj.ProjProService/ListPublicTemplates"
+	ProjProService_AddTemplates_FullMethodName           = "/api.proj.ProjProService/AddTemplates"
+	ProjProService_GetTemplate_FullMethodName            = "/api.proj.ProjProService/GetTemplate"
+	ProjProService_UpdateTemplate_FullMethodName         = "/api.proj.ProjProService/UpdateTemplate"
+	ProjProService_XListTemplates_FullMethodName         = "/api.proj.ProjProService/_ListTemplates"
+	ProjProService_XAddTemplates_FullMethodName          = "/api.proj.ProjProService/_AddTemplates"
+	ProjProService_XGetTemplate_FullMethodName           = "/api.proj.ProjProService/_GetTemplate"
+	ProjProService_XUpdateTemplate_FullMethodName        = "/api.proj.ProjProService/_UpdateTemplate"
+	ProjProService_CreateTemplate_FullMethodName         = "/api.proj.ProjProService/CreateTemplate"
+	ProjProService_GetAssetSummary_FullMethodName        = "/api.proj.ProjProService/GetAssetSummary"
+	ProjProService_ListQualityAssets_FullMethodName      = "/api.proj.ProjProService/ListQualityAssets"
+	ProjProService_ReCreateAsset_FullMethodName          = "/api.proj.ProjProService/ReCreateAsset"
+	ProjProService_CreateAsset_FullMethodName            = "/api.proj.ProjProService/CreateAsset"
+	ProjProService_CreateAssetV2_FullMethodName          = "/api.proj.ProjProService/CreateAssetV2"
+	ProjProService_CreateAssetV3_FullMethodName          = "/api.proj.ProjProService/CreateAssetV3"
+	ProjProService_CreateAssetV5_FullMethodName          = "/api.proj.ProjProService/CreateAssetV5"
+	ProjProService_ListAssets_FullMethodName             = "/api.proj.ProjProService/ListAssets"
+	ProjProService_XListAssets_FullMethodName            = "/api.proj.ProjProService/_ListAssets"
+	ProjProService_UpdateAsset_FullMethodName            = "/api.proj.ProjProService/UpdateAsset"
+	ProjProService_GetAsset_FullMethodName               = "/api.proj.ProjProService/GetAsset"
+	ProjProService_XGetAsset_FullMethodName              = "/api.proj.ProjProService/_GetAsset"
+	ProjProService_CallbackByVolcengine_FullMethodName   = "/api.proj.ProjProService/CallbackByVolcengine"
+	ProjProService_ListRelatedItems_FullMethodName       = "/api.proj.ProjProService/ListRelatedItems"
+	ProjProService_CreateCommodity_FullMethodName        = "/api.proj.ProjProService/CreateCommodity"
+	ProjProService_ListCommodities_FullMethodName        = "/api.proj.ProjProService/ListCommodities"
+	ProjProService_GetCommodity_FullMethodName           = "/api.proj.ProjProService/GetCommodity"
+	ProjProService_UpdateCommodity_FullMethodName        = "/api.proj.ProjProService/UpdateCommodity"
+	ProjProService_CreateTask_FullMethodName             = "/api.proj.ProjProService/CreateTask"
+	ProjProService_ListTasks_FullMethodName              = "/api.proj.ProjProService/ListTasks"
+	ProjProService_GetTask_FullMethodName                = "/api.proj.ProjProService/GetTask"
+	ProjProService_UpdateTask_FullMethodName             = "/api.proj.ProjProService/UpdateTask"
+	ProjProService_UpdateTaskSegment_FullMethodName      = "/api.proj.ProjProService/UpdateTaskSegment"
+	ProjProService_ListResourceSegments_FullMethodName   = "/api.proj.ProjProService/ListResourceSegments"
+	ProjProService_GetResourceSegment_FullMethodName     = "/api.proj.ProjProService/GetResourceSegment"
+	ProjProService_UpdateResourceSegment_FullMethodName  = "/api.proj.ProjProService/UpdateResourceSegment"
+	ProjProService_XListResourceSegments_FullMethodName  = "/api.proj.ProjProService/_ListResourceSegments"
+	ProjProService_XAddResourceSegments_FullMethodName   = "/api.proj.ProjProService/_AddResourceSegments"
+	ProjProService_XUpdateResourceSegment_FullMethodName = "/api.proj.ProjProService/_UpdateResourceSegment"
+	ProjProService_XGetResourceSegment_FullMethodName    = "/api.proj.ProjProService/_GetResourceSegment"
 )
 
 // ProjProServiceClient is the client API for ProjProService service.
@@ -104,6 +111,15 @@ type ProjProServiceClient interface {
 	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*Task, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*Task, error)
 	UpdateTaskSegment(ctx context.Context, in *UpdateTaskSegmentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ResourceSegment Public
+	ListResourceSegments(ctx context.Context, in *ListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error)
+	GetResourceSegment(ctx context.Context, in *GetResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error)
+	UpdateResourceSegment(ctx context.Context, in *UpdateResourceSegmentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ResourceSegment Proxy
+	XListResourceSegments(ctx context.Context, in *XListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error)
+	XAddResourceSegments(ctx context.Context, in *XAddResourcesSegmentRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error)
+	XUpdateResourceSegment(ctx context.Context, in *XUpdateResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error)
+	XGetResourceSegment(ctx context.Context, in *XGetResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error)
 }
 
 type projProServiceClient struct {
@@ -494,6 +510,76 @@ func (c *projProServiceClient) UpdateTaskSegment(ctx context.Context, in *Update
 	return out, nil
 }
 
+func (c *projProServiceClient) ListResourceSegments(ctx context.Context, in *ListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegmentList)
+	err := c.cc.Invoke(ctx, ProjProService_ListResourceSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) GetResourceSegment(ctx context.Context, in *GetResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegment)
+	err := c.cc.Invoke(ctx, ProjProService_GetResourceSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) UpdateResourceSegment(ctx context.Context, in *UpdateResourceSegmentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ProjProService_UpdateResourceSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) XListResourceSegments(ctx context.Context, in *XListResourceSegmentsRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegmentList)
+	err := c.cc.Invoke(ctx, ProjProService_XListResourceSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) XAddResourceSegments(ctx context.Context, in *XAddResourcesSegmentRequest, opts ...grpc.CallOption) (*ResourceSegmentList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegmentList)
+	err := c.cc.Invoke(ctx, ProjProService_XAddResourceSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) XUpdateResourceSegment(ctx context.Context, in *XUpdateResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegment)
+	err := c.cc.Invoke(ctx, ProjProService_XUpdateResourceSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projProServiceClient) XGetResourceSegment(ctx context.Context, in *XGetResourceSegmentRequest, opts ...grpc.CallOption) (*ResourceSegment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceSegment)
+	err := c.cc.Invoke(ctx, ProjProService_XGetResourceSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjProServiceServer is the server API for ProjProService service.
 // All implementations must embed UnimplementedProjProServiceServer
 // for forward compatibility.
@@ -538,6 +624,15 @@ type ProjProServiceServer interface {
 	GetTask(context.Context, *GetTaskRequest) (*Task, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*Task, error)
 	UpdateTaskSegment(context.Context, *UpdateTaskSegmentRequest) (*emptypb.Empty, error)
+	// ResourceSegment Public
+	ListResourceSegments(context.Context, *ListResourceSegmentsRequest) (*ResourceSegmentList, error)
+	GetResourceSegment(context.Context, *GetResourceSegmentRequest) (*ResourceSegment, error)
+	UpdateResourceSegment(context.Context, *UpdateResourceSegmentRequest) (*emptypb.Empty, error)
+	// ResourceSegment Proxy
+	XListResourceSegments(context.Context, *XListResourceSegmentsRequest) (*ResourceSegmentList, error)
+	XAddResourceSegments(context.Context, *XAddResourcesSegmentRequest) (*ResourceSegmentList, error)
+	XUpdateResourceSegment(context.Context, *XUpdateResourceSegmentRequest) (*ResourceSegment, error)
+	XGetResourceSegment(context.Context, *XGetResourceSegmentRequest) (*ResourceSegment, error)
 	mustEmbedUnimplementedProjProServiceServer()
 }
 
@@ -661,6 +756,27 @@ func (UnimplementedProjProServiceServer) UpdateTask(context.Context, *UpdateTask
 }
 func (UnimplementedProjProServiceServer) UpdateTaskSegment(context.Context, *UpdateTaskSegmentRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateTaskSegment not implemented")
+}
+func (UnimplementedProjProServiceServer) ListResourceSegments(context.Context, *ListResourceSegmentsRequest) (*ResourceSegmentList, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListResourceSegments not implemented")
+}
+func (UnimplementedProjProServiceServer) GetResourceSegment(context.Context, *GetResourceSegmentRequest) (*ResourceSegment, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetResourceSegment not implemented")
+}
+func (UnimplementedProjProServiceServer) UpdateResourceSegment(context.Context, *UpdateResourceSegmentRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateResourceSegment not implemented")
+}
+func (UnimplementedProjProServiceServer) XListResourceSegments(context.Context, *XListResourceSegmentsRequest) (*ResourceSegmentList, error) {
+	return nil, status.Error(codes.Unimplemented, "method XListResourceSegments not implemented")
+}
+func (UnimplementedProjProServiceServer) XAddResourceSegments(context.Context, *XAddResourcesSegmentRequest) (*ResourceSegmentList, error) {
+	return nil, status.Error(codes.Unimplemented, "method XAddResourceSegments not implemented")
+}
+func (UnimplementedProjProServiceServer) XUpdateResourceSegment(context.Context, *XUpdateResourceSegmentRequest) (*ResourceSegment, error) {
+	return nil, status.Error(codes.Unimplemented, "method XUpdateResourceSegment not implemented")
+}
+func (UnimplementedProjProServiceServer) XGetResourceSegment(context.Context, *XGetResourceSegmentRequest) (*ResourceSegment, error) {
+	return nil, status.Error(codes.Unimplemented, "method XGetResourceSegment not implemented")
 }
 func (UnimplementedProjProServiceServer) mustEmbedUnimplementedProjProServiceServer() {}
 func (UnimplementedProjProServiceServer) testEmbeddedByValue()                        {}
@@ -1367,6 +1483,132 @@ func _ProjProService_UpdateTaskSegment_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjProService_ListResourceSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourceSegmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).ListResourceSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_ListResourceSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).ListResourceSegments(ctx, req.(*ListResourceSegmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_GetResourceSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourceSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).GetResourceSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_GetResourceSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).GetResourceSegment(ctx, req.(*GetResourceSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_UpdateResourceSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateResourceSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).UpdateResourceSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_UpdateResourceSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).UpdateResourceSegment(ctx, req.(*UpdateResourceSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_XListResourceSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(XListResourceSegmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).XListResourceSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_XListResourceSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).XListResourceSegments(ctx, req.(*XListResourceSegmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_XAddResourceSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(XAddResourcesSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).XAddResourceSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_XAddResourceSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).XAddResourceSegments(ctx, req.(*XAddResourcesSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_XUpdateResourceSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(XUpdateResourceSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).XUpdateResourceSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_XUpdateResourceSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).XUpdateResourceSegment(ctx, req.(*XUpdateResourceSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjProService_XGetResourceSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(XGetResourceSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjProServiceServer).XGetResourceSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjProService_XGetResourceSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjProServiceServer).XGetResourceSegment(ctx, req.(*XGetResourceSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjProService_ServiceDesc is the grpc.ServiceDesc for ProjProService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1525,6 +1767,34 @@ var ProjProService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTaskSegment",
 			Handler:    _ProjProService_UpdateTaskSegment_Handler,
+		},
+		{
+			MethodName: "ListResourceSegments",
+			Handler:    _ProjProService_ListResourceSegments_Handler,
+		},
+		{
+			MethodName: "GetResourceSegment",
+			Handler:    _ProjProService_GetResourceSegment_Handler,
+		},
+		{
+			MethodName: "UpdateResourceSegment",
+			Handler:    _ProjProService_UpdateResourceSegment_Handler,
+		},
+		{
+			MethodName: "_ListResourceSegments",
+			Handler:    _ProjProService_XListResourceSegments_Handler,
+		},
+		{
+			MethodName: "_AddResourceSegments",
+			Handler:    _ProjProService_XAddResourceSegments_Handler,
+		},
+		{
+			MethodName: "_UpdateResourceSegment",
+			Handler:    _ProjProService_XUpdateResourceSegment_Handler,
+		},
+		{
+			MethodName: "_GetResourceSegment",
+			Handler:    _ProjProService_XGetResourceSegment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

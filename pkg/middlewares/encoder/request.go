@@ -3,11 +3,12 @@ package encoder
 import (
 	"bytes"
 	"fmt"
+	"io"
+
 	"github.com/go-kratos/kratos/v2/encoding"
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"io"
 )
 
 type formCodec struct{}
@@ -25,6 +26,15 @@ func (formCodec) Name() string {
 }
 
 func RequestDecoder(r *http.Request, v interface{}) error {
+	data, err := io.ReadAll(r.Body)
+	// reset body.
+	r.Body = io.NopCloser(bytes.NewBuffer(data))
+	if err != nil {
+		return errors.BadRequest("CODEC", err.Error())
+	}
+	if len(data) == 0 {
+		return nil
+	}
 
 	encoding.RegisterCodec(formCodec{})
 
@@ -34,17 +44,7 @@ func RequestDecoder(r *http.Request, v interface{}) error {
 	if !ok {
 		return errors.BadRequest("CODEC", fmt.Sprintf("unregister Content-Type: %s", r.Header.Get("Content-Type")))
 	}
-	data, err := io.ReadAll(r.Body)
 
-	// reset body.
-	r.Body = io.NopCloser(bytes.NewBuffer(data))
-
-	if err != nil {
-		return errors.BadRequest("CODEC", err.Error())
-	}
-	if len(data) == 0 {
-		return nil
-	}
 	if err = codec.Unmarshal(data, v); err != nil {
 		return errors.BadRequest("CODEC", fmt.Sprintf("body unmarshal %s", err.Error()))
 	}

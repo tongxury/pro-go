@@ -170,7 +170,6 @@ require (
 	buf.build/go/protoyaml v0.6.0 // indirect
 	cel.dev/expr v0.25.1 // indirect
 	cloud.google.com/go v0.121.2 // indirect
-	cloud.google.com/go/auth v0.16.2 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	github.com/alex-ant/gomath v0.0.0-20160516115720-89013a210a82 // indirect
@@ -264,6 +263,7 @@ require (
 )
 
 require (
+	cloud.google.com/go/auth v0.16.2
 	github.com/AlekSi/pointer v1.1.0
 	github.com/GeertJohan/go.rice v1.0.0
 	github.com/awa/go-iap v1.43.1

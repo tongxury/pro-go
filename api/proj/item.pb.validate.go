@@ -130,7 +130,34 @@ func (m *Resource) validate(all bool) error {
 
 	}
 
-	// no validation rules for UserId
+	if all {
+		switch v := interface{}(m.GetUser()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResourceValidationError{
+					field:  "User",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResourceValidationError{
+					field:  "User",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUser()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResourceValidationError{
+				field:  "User",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
@@ -489,6 +516,8 @@ func (m *ResourceSegment) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for Collected
 
 	if len(errors) > 0 {
 		return ResourceSegmentMultiError(errors)
@@ -2345,6 +2374,474 @@ var _ interface {
 	ErrorName() string
 } = ItemListValidationError{}
 
+// Validate checks the field values on ListResourceSegmentsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListResourceSegmentsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListResourceSegmentsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListResourceSegmentsRequestMultiError, or nil if none found.
+func (m *ListResourceSegmentsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListResourceSegmentsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for Keyword
+
+	// no validation rules for SearchBy
+
+	// no validation rules for Category
+
+	// no validation rules for Size
+
+	// no validation rules for Status
+
+	// no validation rules for ReturnFields
+
+	// no validation rules for Collected
+
+	if len(errors) > 0 {
+		return ListResourceSegmentsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListResourceSegmentsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListResourceSegmentsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListResourceSegmentsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListResourceSegmentsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListResourceSegmentsRequestMultiError) AllErrors() []error { return m }
+
+// ListResourceSegmentsRequestValidationError is the validation error returned
+// by ListResourceSegmentsRequest.Validate if the designated constraints
+// aren't met.
+type ListResourceSegmentsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListResourceSegmentsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListResourceSegmentsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListResourceSegmentsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListResourceSegmentsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListResourceSegmentsRequestValidationError) ErrorName() string {
+	return "ListResourceSegmentsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListResourceSegmentsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListResourceSegmentsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListResourceSegmentsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListResourceSegmentsRequestValidationError{}
+
+// Validate checks the field values on AddResourcesSegmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddResourcesSegmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddResourcesSegmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddResourcesSegmentRequestMultiError, or nil if none found.
+func (m *AddResourcesSegmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddResourcesSegmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AddResourcesSegmentRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AddResourcesSegmentRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AddResourcesSegmentRequestValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AddResourcesSegmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddResourcesSegmentRequestMultiError is an error wrapping multiple
+// validation errors returned by AddResourcesSegmentRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AddResourcesSegmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddResourcesSegmentRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddResourcesSegmentRequestMultiError) AllErrors() []error { return m }
+
+// AddResourcesSegmentRequestValidationError is the validation error returned
+// by AddResourcesSegmentRequest.Validate if the designated constraints aren't met.
+type AddResourcesSegmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddResourcesSegmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddResourcesSegmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddResourcesSegmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddResourcesSegmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddResourcesSegmentRequestValidationError) ErrorName() string {
+	return "AddResourcesSegmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddResourcesSegmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddResourcesSegmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddResourcesSegmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddResourcesSegmentRequestValidationError{}
+
+// Validate checks the field values on UpdateResourceSegmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateResourceSegmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateResourceSegmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateResourceSegmentRequestMultiError, or nil if none found.
+func (m *UpdateResourceSegmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateResourceSegmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Action
+
+	// no validation rules for RootId
+
+	if len(errors) > 0 {
+		return UpdateResourceSegmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateResourceSegmentRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateResourceSegmentRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateResourceSegmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateResourceSegmentRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateResourceSegmentRequestMultiError) AllErrors() []error { return m }
+
+// UpdateResourceSegmentRequestValidationError is the validation error returned
+// by UpdateResourceSegmentRequest.Validate if the designated constraints
+// aren't met.
+type UpdateResourceSegmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateResourceSegmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateResourceSegmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateResourceSegmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateResourceSegmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateResourceSegmentRequestValidationError) ErrorName() string {
+	return "UpdateResourceSegmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateResourceSegmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateResourceSegmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateResourceSegmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateResourceSegmentRequestValidationError{}
+
+// Validate checks the field values on GetResourceSegmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetResourceSegmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetResourceSegmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetResourceSegmentRequestMultiError, or nil if none found.
+func (m *GetResourceSegmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetResourceSegmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return GetResourceSegmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetResourceSegmentRequestMultiError is an error wrapping multiple validation
+// errors returned by GetResourceSegmentRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetResourceSegmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetResourceSegmentRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetResourceSegmentRequestMultiError) AllErrors() []error { return m }
+
+// GetResourceSegmentRequestValidationError is the validation error returned by
+// GetResourceSegmentRequest.Validate if the designated constraints aren't met.
+type GetResourceSegmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetResourceSegmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetResourceSegmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetResourceSegmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetResourceSegmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetResourceSegmentRequestValidationError) ErrorName() string {
+	return "GetResourceSegmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetResourceSegmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetResourceSegmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetResourceSegmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetResourceSegmentRequestValidationError{}
+
 // Validate checks the field values on Resource_Extra with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -2554,3 +3051,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ResourceSegment_ExtraValidationError{}
+
+// Validate checks the field values on AddResourcesSegmentRequest_Item with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddResourcesSegmentRequest_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddResourcesSegmentRequest_Item with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddResourcesSegmentRequest_ItemMultiError, or nil if none found.
+func (m *AddResourcesSegmentRequest_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddResourcesSegmentRequest_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Url
+
+	// no validation rules for CoverUrl
+
+	// no validation rules for TimeStart
+
+	// no validation rules for TimeEnd
+
+	if len(errors) > 0 {
+		return AddResourcesSegmentRequest_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddResourcesSegmentRequest_ItemMultiError is an error wrapping multiple
+// validation errors returned by AddResourcesSegmentRequest_Item.ValidateAll()
+// if the designated constraints aren't met.
+type AddResourcesSegmentRequest_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddResourcesSegmentRequest_ItemMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddResourcesSegmentRequest_ItemMultiError) AllErrors() []error { return m }
+
+// AddResourcesSegmentRequest_ItemValidationError is the validation error
+// returned by AddResourcesSegmentRequest_Item.Validate if the designated
+// constraints aren't met.
+type AddResourcesSegmentRequest_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddResourcesSegmentRequest_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddResourcesSegmentRequest_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddResourcesSegmentRequest_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddResourcesSegmentRequest_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddResourcesSegmentRequest_ItemValidationError) ErrorName() string {
+	return "AddResourcesSegmentRequest_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddResourcesSegmentRequest_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddResourcesSegmentRequest_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddResourcesSegmentRequest_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddResourcesSegmentRequest_ItemValidationError{}

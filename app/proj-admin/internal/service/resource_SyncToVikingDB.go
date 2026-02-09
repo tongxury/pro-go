@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	usercenter "store/api/usercenter"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/third/bytedance/vikingdb"
 
@@ -36,15 +37,15 @@ func (t ProjAdminService) SyncTemplatesToVikingDB() {
 
 	x := list[0]
 
-	if x.UserId == "" {
-		x.UserId = "system"
+	if x.GetUser().GetXId() == "" {
+		x.User = &usercenter.User{XId: "system"}
 	}
 
 	_, err = t.data.VikingDB.Upsert(ctx, vikingdb.UpsertRequest{
 		Collection: "template_commodity_coll",
 		Data: map[string]any{
 			"id":          x.XId,
-			"userId":      x.UserId,
+			"userId":      x.GetUser().GetXId(),
 			"description": x.GetCommodity().GetName(),
 		},
 	})

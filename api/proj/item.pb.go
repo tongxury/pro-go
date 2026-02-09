@@ -15,6 +15,7 @@ import (
 	_ "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	_ "store/api/public/response"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -35,7 +36,7 @@ type Resource struct {
 	CreatedAt     int64                  `protobuf:"varint,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	Commodity     *Commodity             `protobuf:"bytes,9,opt,name=commodity,proto3" json:"commodity,omitempty"`
 	Segments      []*ResourceSegment     `protobuf:"bytes,10,rep,name=segments,proto3" json:"segments,omitempty"`
-	UserId        string                 `protobuf:"bytes,11,opt,name=userId,proto3" json:"userId,omitempty"`
+	User          *usercenter.User       `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
 	Extra         *Resource_Extra        `protobuf:"bytes,20,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -120,11 +121,11 @@ func (x *Resource) GetSegments() []*ResourceSegment {
 	return nil
 }
 
-func (x *Resource) GetUserId() string {
+func (x *Resource) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
 func (x *Resource) GetExtra() *Resource_Extra {
@@ -166,6 +167,7 @@ type ResourceSegment struct {
 	CreatedAt             int64                  `protobuf:"varint,17,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	Segments              []*ResourceSegment     `protobuf:"bytes,18,rep,name=segments,proto3" json:"segments,omitempty"`
 	Extra                 *ResourceSegment_Extra `protobuf:"bytes,40,opt,name=extra,proto3" json:"extra,omitempty"`
+	Collected             bool                   `protobuf:"varint,50,opt,name=collected,proto3" json:"collected,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -408,6 +410,13 @@ func (x *ResourceSegment) GetExtra() *ResourceSegment_Extra {
 		return x.Extra
 	}
 	return nil
+}
+
+func (x *ResourceSegment) GetCollected() bool {
+	if x != nil {
+		return x.Collected
+	}
+	return false
 }
 
 type HighlightFrame struct {
@@ -1149,7 +1158,7 @@ type Analysis struct {
 	ContentStyle  string             `protobuf:"bytes,2,opt,name=contentStyle,proto3" json:"contentStyle,omitempty"`
 	SceneStyle    string             `protobuf:"bytes,3,opt,name=sceneStyle,proto3" json:"sceneStyle,omitempty"`
 	Segments      []*SegmentAnalysis `protobuf:"bytes,4,rep,name=segments,proto3" json:"segments,omitempty"`
-	Segments2     []*SegmentAnalysis `protobuf:"bytes,5,rep,name=segments2,proto3" json:"segments2,omitempty"` //  string highlight = 2;
+	Segments2     []*SegmentAnalysis `protobuf:"bytes,5,rep,name=segments2,proto3" json:"segments2,omitempty"` // string highlight = 2                                 ;
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1387,6 +1396,262 @@ func (x *ItemList) GetSize() int64 {
 	return 0
 }
 
+type ListResourceSegmentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	SearchBy      string                 `protobuf:"bytes,6,opt,name=searchBy,proto3" json:"searchBy,omitempty"`
+	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Ids           []string               `protobuf:"bytes,7,rep,name=ids,proto3" json:"ids,omitempty"`
+	ReturnFields  string                 `protobuf:"bytes,8,opt,name=returnFields,proto3" json:"returnFields,omitempty"`
+	Collected     bool                   `protobuf:"varint,9,opt,name=collected,proto3" json:"collected,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListResourceSegmentsRequest) Reset() {
+	*x = ListResourceSegmentsRequest{}
+	mi := &file_proj_item_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListResourceSegmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListResourceSegmentsRequest) ProtoMessage() {}
+
+func (x *ListResourceSegmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_item_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListResourceSegmentsRequest.ProtoReflect.Descriptor instead.
+func (*ListResourceSegmentsRequest) Descriptor() ([]byte, []int) {
+	return file_proj_item_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ListResourceSegmentsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListResourceSegmentsRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+func (x *ListResourceSegmentsRequest) GetSearchBy() string {
+	if x != nil {
+		return x.SearchBy
+	}
+	return ""
+}
+
+func (x *ListResourceSegmentsRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *ListResourceSegmentsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListResourceSegmentsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListResourceSegmentsRequest) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *ListResourceSegmentsRequest) GetReturnFields() string {
+	if x != nil {
+		return x.ReturnFields
+	}
+	return ""
+}
+
+func (x *ListResourceSegmentsRequest) GetCollected() bool {
+	if x != nil {
+		return x.Collected
+	}
+	return false
+}
+
+type AddResourcesSegmentRequest struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Items         []*AddResourcesSegmentRequest_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddResourcesSegmentRequest) Reset() {
+	*x = AddResourcesSegmentRequest{}
+	mi := &file_proj_item_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddResourcesSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddResourcesSegmentRequest) ProtoMessage() {}
+
+func (x *AddResourcesSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_item_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddResourcesSegmentRequest.ProtoReflect.Descriptor instead.
+func (*AddResourcesSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_item_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AddResourcesSegmentRequest) GetItems() []*AddResourcesSegmentRequest_Item {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type UpdateResourceSegmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	RootId        string                 `protobuf:"bytes,3,opt,name=rootId,proto3" json:"rootId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateResourceSegmentRequest) Reset() {
+	*x = UpdateResourceSegmentRequest{}
+	mi := &file_proj_item_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateResourceSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateResourceSegmentRequest) ProtoMessage() {}
+
+func (x *UpdateResourceSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_item_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateResourceSegmentRequest.ProtoReflect.Descriptor instead.
+func (*UpdateResourceSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_item_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *UpdateResourceSegmentRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UpdateResourceSegmentRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *UpdateResourceSegmentRequest) GetRootId() string {
+	if x != nil {
+		return x.RootId
+	}
+	return ""
+}
+
+type GetResourceSegmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetResourceSegmentRequest) Reset() {
+	*x = GetResourceSegmentRequest{}
+	mi := &file_proj_item_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResourceSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResourceSegmentRequest) ProtoMessage() {}
+
+func (x *GetResourceSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_item_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResourceSegmentRequest.ProtoReflect.Descriptor instead.
+func (*GetResourceSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_proj_item_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetResourceSegmentRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 type Resource_Extra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Synced        bool                   `protobuf:"varint,1,opt,name=Synced,proto3" json:"Synced,omitempty"`
@@ -1397,7 +1662,7 @@ type Resource_Extra struct {
 
 func (x *Resource_Extra) Reset() {
 	*x = Resource_Extra{}
-	mi := &file_proj_item_proto_msgTypes[14]
+	mi := &file_proj_item_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1409,7 +1674,7 @@ func (x *Resource_Extra) String() string {
 func (*Resource_Extra) ProtoMessage() {}
 
 func (x *Resource_Extra) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[14]
+	mi := &file_proj_item_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1449,7 +1714,7 @@ type ResourceSegment_Extra struct {
 
 func (x *ResourceSegment_Extra) Reset() {
 	*x = ResourceSegment_Extra{}
-	mi := &file_proj_item_proto_msgTypes[15]
+	mi := &file_proj_item_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1461,7 +1726,7 @@ func (x *ResourceSegment_Extra) String() string {
 func (*ResourceSegment_Extra) ProtoMessage() {}
 
 func (x *ResourceSegment_Extra) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_item_proto_msgTypes[15]
+	mi := &file_proj_item_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1491,11 +1756,79 @@ func (x *ResourceSegment_Extra) GetPolling() bool {
 	return false
 }
 
+type AddResourcesSegmentRequest_Item struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	CoverUrl      string                 `protobuf:"bytes,3,opt,name=coverUrl,proto3" json:"coverUrl,omitempty"`
+	TimeStart     float64                `protobuf:"fixed64,4,opt,name=timeStart,proto3" json:"timeStart,omitempty"`
+	TimeEnd       float64                `protobuf:"fixed64,5,opt,name=timeEnd,proto3" json:"timeEnd,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddResourcesSegmentRequest_Item) Reset() {
+	*x = AddResourcesSegmentRequest_Item{}
+	mi := &file_proj_item_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddResourcesSegmentRequest_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddResourcesSegmentRequest_Item) ProtoMessage() {}
+
+func (x *AddResourcesSegmentRequest_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_proj_item_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddResourcesSegmentRequest_Item.ProtoReflect.Descriptor instead.
+func (*AddResourcesSegmentRequest_Item) Descriptor() ([]byte, []int) {
+	return file_proj_item_proto_rawDescGZIP(), []int{15, 0}
+}
+
+func (x *AddResourcesSegmentRequest_Item) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *AddResourcesSegmentRequest_Item) GetCoverUrl() string {
+	if x != nil {
+		return x.CoverUrl
+	}
+	return ""
+}
+
+func (x *AddResourcesSegmentRequest_Item) GetTimeStart() float64 {
+	if x != nil {
+		return x.TimeStart
+	}
+	return 0
+}
+
+func (x *AddResourcesSegmentRequest_Item) GetTimeEnd() float64 {
+	if x != nil {
+		return x.TimeEnd
+	}
+	return 0
+}
+
 var File_proj_item_proto protoreflect.FileDescriptor
 
 const file_proj_item_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproj/item.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x14proj/commodity.proto\"\xed\x02\n" +
+	"\x0fproj/item.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x14proj/commodity.proto\x1a\x15usercenter/user.proto\"\xff\x02\n" +
 	"\bResource\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x10\n" +
@@ -1504,12 +1837,12 @@ const file_proj_item_proto_rawDesc = "" +
 	"\tcreatedAt\x18\a \x01(\x03R\tcreatedAt\x121\n" +
 	"\tcommodity\x18\t \x01(\v2\x13.api.proj.CommodityR\tcommodity\x125\n" +
 	"\bsegments\x18\n" +
-	" \x03(\v2\x19.api.proj.ResourceSegmentR\bsegments\x12\x16\n" +
-	"\x06userId\x18\v \x01(\tR\x06userId\x12.\n" +
+	" \x03(\v2\x19.api.proj.ResourceSegmentR\bsegments\x12(\n" +
+	"\x04user\x18\v \x01(\v2\x14.api.usercenter.UserR\x04user\x12.\n" +
 	"\x05extra\x18\x14 \x01(\v2\x18.api.proj.Resource.ExtraR\x05extra\x1a9\n" +
 	"\x05Extra\x12\x16\n" +
 	"\x06Synced\x18\x01 \x01(\bR\x06Synced\x12\x18\n" +
-	"\apolling\x18\x02 \x01(\bR\apolling\"\xf7\b\n" +
+	"\apolling\x18\x02 \x01(\bR\apolling\"\x95\t\n" +
 	"\x0fResourceSegment\x12\x10\n" +
 	"\x03_id\x18\x0f \x01(\tR\x03_id\x12.\n" +
 	"\x12cameraMovementDesc\x18\x15 \x01(\tR\x12cameraMovementDesc\x12\x18\n" +
@@ -1547,7 +1880,8 @@ const file_proj_item_proto_rawDesc = "" +
 	"\x06status\x18\x10 \x01(\tR\x06status\x12\x1c\n" +
 	"\tcreatedAt\x18\x11 \x01(\x03R\tcreatedAt\x125\n" +
 	"\bsegments\x18\x12 \x03(\v2\x19.api.proj.ResourceSegmentR\bsegments\x125\n" +
-	"\x05extra\x18( \x01(\v2\x1f.api.proj.ResourceSegment.ExtraR\x05extra\x1a9\n" +
+	"\x05extra\x18( \x01(\v2\x1f.api.proj.ResourceSegment.ExtraR\x05extra\x12\x1c\n" +
+	"\tcollected\x182 \x01(\bR\tcollected\x1a9\n" +
 	"\x05Extra\x12\x16\n" +
 	"\x06Synced\x18\x01 \x01(\bR\x06Synced\x12\x18\n" +
 	"\apolling\x18\x02 \x01(\bR\apolling\"T\n" +
@@ -1637,7 +1971,30 @@ const file_proj_item_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x0e.api.proj.ItemR\x04list\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04sizeB\x17Z\x15store/api/proj;projpbb\x06proto3"
+	"\x04size\x18\x04 \x01(\x03R\x04size\"\x83\x02\n" +
+	"\x1bListResourceSegmentsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x18\n" +
+	"\akeyword\x18\x02 \x01(\tR\akeyword\x12\x1a\n" +
+	"\bsearchBy\x18\x06 \x01(\tR\bsearchBy\x12\x1a\n" +
+	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x12\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x10\n" +
+	"\x03ids\x18\a \x03(\tR\x03ids\x12\"\n" +
+	"\freturnFields\x18\b \x01(\tR\freturnFields\x12\x1c\n" +
+	"\tcollected\x18\t \x01(\bR\tcollected\"\xcb\x01\n" +
+	"\x1aAddResourcesSegmentRequest\x12?\n" +
+	"\x05items\x18\x01 \x03(\v2).api.proj.AddResourcesSegmentRequest.ItemR\x05items\x1al\n" +
+	"\x04Item\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1a\n" +
+	"\bcoverUrl\x18\x03 \x01(\tR\bcoverUrl\x12\x1c\n" +
+	"\ttimeStart\x18\x04 \x01(\x01R\ttimeStart\x12\x18\n" +
+	"\atimeEnd\x18\x05 \x01(\x01R\atimeEnd\"^\n" +
+	"\x1cUpdateResourceSegmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\x12\x16\n" +
+	"\x06rootId\x18\x03 \x01(\tR\x06rootId\"+\n" +
+	"\x19GetResourceSegmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02idB\x17Z\x15store/api/proj;projpbb\x06proto3"
 
 var (
 	file_proj_item_proto_rawDescOnce sync.Once
@@ -1651,57 +2008,65 @@ func file_proj_item_proto_rawDescGZIP() []byte {
 	return file_proj_item_proto_rawDescData
 }
 
-var file_proj_item_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_proj_item_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_proj_item_proto_goTypes = []any{
-	(*Resource)(nil),              // 0: api.proj.Resource
-	(*ResourceSegment)(nil),       // 1: api.proj.ResourceSegment
-	(*HighlightFrame)(nil),        // 2: api.proj.HighlightFrame
-	(*KeyFrameSeries)(nil),        // 3: api.proj.KeyFrameSeries
-	(*KeyFrame)(nil),              // 4: api.proj.KeyFrame
-	(*ResourceList)(nil),          // 5: api.proj.ResourceList
-	(*ResourceSegmentList)(nil),   // 6: api.proj.ResourceSegmentList
-	(*Item)(nil),                  // 7: api.proj.Item
-	(*ItemSegment)(nil),           // 8: api.proj.ItemSegment
-	(*ItemSegmentList)(nil),       // 9: api.proj.ItemSegmentList
-	(*SegmentAnalysis)(nil),       // 10: api.proj.SegmentAnalysis
-	(*Analysis)(nil),              // 11: api.proj.Analysis
-	(*TypedTags)(nil),             // 12: api.proj.TypedTags
-	(*ItemList)(nil),              // 13: api.proj.ItemList
-	(*Resource_Extra)(nil),        // 14: api.proj.Resource.Extra
-	(*ResourceSegment_Extra)(nil), // 15: api.proj.ResourceSegment.Extra
-	(*Commodity)(nil),             // 16: api.proj.Commodity
+	(*Resource)(nil),                        // 0: api.proj.Resource
+	(*ResourceSegment)(nil),                 // 1: api.proj.ResourceSegment
+	(*HighlightFrame)(nil),                  // 2: api.proj.HighlightFrame
+	(*KeyFrameSeries)(nil),                  // 3: api.proj.KeyFrameSeries
+	(*KeyFrame)(nil),                        // 4: api.proj.KeyFrame
+	(*ResourceList)(nil),                    // 5: api.proj.ResourceList
+	(*ResourceSegmentList)(nil),             // 6: api.proj.ResourceSegmentList
+	(*Item)(nil),                            // 7: api.proj.Item
+	(*ItemSegment)(nil),                     // 8: api.proj.ItemSegment
+	(*ItemSegmentList)(nil),                 // 9: api.proj.ItemSegmentList
+	(*SegmentAnalysis)(nil),                 // 10: api.proj.SegmentAnalysis
+	(*Analysis)(nil),                        // 11: api.proj.Analysis
+	(*TypedTags)(nil),                       // 12: api.proj.TypedTags
+	(*ItemList)(nil),                        // 13: api.proj.ItemList
+	(*ListResourceSegmentsRequest)(nil),     // 14: api.proj.ListResourceSegmentsRequest
+	(*AddResourcesSegmentRequest)(nil),      // 15: api.proj.AddResourcesSegmentRequest
+	(*UpdateResourceSegmentRequest)(nil),    // 16: api.proj.UpdateResourceSegmentRequest
+	(*GetResourceSegmentRequest)(nil),       // 17: api.proj.GetResourceSegmentRequest
+	(*Resource_Extra)(nil),                  // 18: api.proj.Resource.Extra
+	(*ResourceSegment_Extra)(nil),           // 19: api.proj.ResourceSegment.Extra
+	(*AddResourcesSegmentRequest_Item)(nil), // 20: api.proj.AddResourcesSegmentRequest.Item
+	(*Commodity)(nil),                       // 21: api.proj.Commodity
+	(*usercenter.User)(nil),                 // 22: api.usercenter.User
 }
 var file_proj_item_proto_depIdxs = []int32{
-	16, // 0: api.proj.Resource.commodity:type_name -> api.proj.Commodity
+	21, // 0: api.proj.Resource.commodity:type_name -> api.proj.Commodity
 	1,  // 1: api.proj.Resource.segments:type_name -> api.proj.ResourceSegment
-	14, // 2: api.proj.Resource.extra:type_name -> api.proj.Resource.Extra
-	3,  // 3: api.proj.ResourceSegment.keyFrames:type_name -> api.proj.KeyFrameSeries
-	0,  // 4: api.proj.ResourceSegment.root:type_name -> api.proj.Resource
-	12, // 5: api.proj.ResourceSegment.typedTags:type_name -> api.proj.TypedTags
-	2,  // 6: api.proj.ResourceSegment.highlightFrames:type_name -> api.proj.HighlightFrame
-	1,  // 7: api.proj.ResourceSegment.segments:type_name -> api.proj.ResourceSegment
-	15, // 8: api.proj.ResourceSegment.extra:type_name -> api.proj.ResourceSegment.Extra
-	4,  // 9: api.proj.KeyFrameSeries.storyBeginning:type_name -> api.proj.KeyFrame
-	4,  // 10: api.proj.KeyFrameSeries.climax:type_name -> api.proj.KeyFrame
-	4,  // 11: api.proj.KeyFrameSeries.storyEnding:type_name -> api.proj.KeyFrame
-	0,  // 12: api.proj.ResourceList.list:type_name -> api.proj.Resource
-	1,  // 13: api.proj.ResourceSegmentList.list:type_name -> api.proj.ResourceSegment
-	11, // 14: api.proj.Item.analysis:type_name -> api.proj.Analysis
-	11, // 15: api.proj.Item.analysis2:type_name -> api.proj.Analysis
-	16, // 16: api.proj.Item.commodity:type_name -> api.proj.Commodity
-	16, // 17: api.proj.ItemSegment.commodity:type_name -> api.proj.Commodity
-	12, // 18: api.proj.ItemSegment.typedTags:type_name -> api.proj.TypedTags
-	2,  // 19: api.proj.ItemSegment.highlightFrames:type_name -> api.proj.HighlightFrame
-	8,  // 20: api.proj.ItemSegmentList.list:type_name -> api.proj.ItemSegment
-	12, // 21: api.proj.SegmentAnalysis.typedTags:type_name -> api.proj.TypedTags
-	10, // 22: api.proj.Analysis.segments:type_name -> api.proj.SegmentAnalysis
-	10, // 23: api.proj.Analysis.segments2:type_name -> api.proj.SegmentAnalysis
-	7,  // 24: api.proj.ItemList.list:type_name -> api.proj.Item
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	22, // 2: api.proj.Resource.user:type_name -> api.usercenter.User
+	18, // 3: api.proj.Resource.extra:type_name -> api.proj.Resource.Extra
+	3,  // 4: api.proj.ResourceSegment.keyFrames:type_name -> api.proj.KeyFrameSeries
+	0,  // 5: api.proj.ResourceSegment.root:type_name -> api.proj.Resource
+	12, // 6: api.proj.ResourceSegment.typedTags:type_name -> api.proj.TypedTags
+	2,  // 7: api.proj.ResourceSegment.highlightFrames:type_name -> api.proj.HighlightFrame
+	1,  // 8: api.proj.ResourceSegment.segments:type_name -> api.proj.ResourceSegment
+	19, // 9: api.proj.ResourceSegment.extra:type_name -> api.proj.ResourceSegment.Extra
+	4,  // 10: api.proj.KeyFrameSeries.storyBeginning:type_name -> api.proj.KeyFrame
+	4,  // 11: api.proj.KeyFrameSeries.climax:type_name -> api.proj.KeyFrame
+	4,  // 12: api.proj.KeyFrameSeries.storyEnding:type_name -> api.proj.KeyFrame
+	0,  // 13: api.proj.ResourceList.list:type_name -> api.proj.Resource
+	1,  // 14: api.proj.ResourceSegmentList.list:type_name -> api.proj.ResourceSegment
+	11, // 15: api.proj.Item.analysis:type_name -> api.proj.Analysis
+	11, // 16: api.proj.Item.analysis2:type_name -> api.proj.Analysis
+	21, // 17: api.proj.Item.commodity:type_name -> api.proj.Commodity
+	21, // 18: api.proj.ItemSegment.commodity:type_name -> api.proj.Commodity
+	12, // 19: api.proj.ItemSegment.typedTags:type_name -> api.proj.TypedTags
+	2,  // 20: api.proj.ItemSegment.highlightFrames:type_name -> api.proj.HighlightFrame
+	8,  // 21: api.proj.ItemSegmentList.list:type_name -> api.proj.ItemSegment
+	12, // 22: api.proj.SegmentAnalysis.typedTags:type_name -> api.proj.TypedTags
+	10, // 23: api.proj.Analysis.segments:type_name -> api.proj.SegmentAnalysis
+	10, // 24: api.proj.Analysis.segments2:type_name -> api.proj.SegmentAnalysis
+	7,  // 25: api.proj.ItemList.list:type_name -> api.proj.Item
+	20, // 26: api.proj.AddResourcesSegmentRequest.items:type_name -> api.proj.AddResourcesSegmentRequest.Item
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_proj_item_proto_init() }
@@ -1716,7 +2081,7 @@ func file_proj_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_item_proto_rawDesc), len(file_proj_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

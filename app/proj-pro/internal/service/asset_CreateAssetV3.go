@@ -4,6 +4,7 @@ import (
 	"context"
 	creditpb "store/api/credit"
 	projpb "store/api/proj"
+	usercenter "store/api/usercenter"
 	"store/pkg/krathelper"
 	"time"
 
@@ -40,7 +41,7 @@ func (t ProjService) CreateAssetV3(ctx context.Context, req *projpb.CreateAssetV
 	}
 
 	newAsset, err := t.data.Mongo.Asset.Insert(ctx, &projpb.Asset{
-		UserId:    userId,
+		User:      &usercenter.User{XId: userId},
 		Status:    "created",
 		CreatedAt: time.Now().Unix(),
 		Category:  "videoGeneration",

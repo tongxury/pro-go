@@ -4,6 +4,7 @@ import (
 	"context"
 	creditpb "store/api/credit"
 	projpb "store/api/proj"
+	usercenter "store/api/usercenter"
 	"store/pkg/clients/mgz"
 	"store/pkg/krathelper"
 	"store/pkg/sdk/helper"
@@ -59,7 +60,7 @@ func (t ProjService) ReCreateAsset(ctx context.Context, req *projpb.ReCreateAsse
 	newAsset, err := t.data.Mongo.Asset.Insert(ctx, &projpb.Asset{
 		Commodity: refAsset.Commodity,
 		Segment:   refAsset.Segment,
-		UserId:    userId,
+		User:      &usercenter.User{XId: userId},
 		Status:    "generating",
 		CreatedAt: time.Now().Unix(),
 		Prompt:    refAsset.Prompt,
@@ -136,7 +137,7 @@ func (t ProjService) CreateAsset(ctx context.Context, req *projpb.CreateAssetReq
 	newAsset, err := t.data.Mongo.Asset.Insert(ctx, &projpb.Asset{
 		Commodity:      commodity,
 		Segment:        segment,
-		UserId:         userId,
+		User:           &usercenter.User{XId: userId},
 		Status:         "created",
 		CreatedAt:      time.Now().Unix(),
 		PromptAddition: req.PromptAddition,

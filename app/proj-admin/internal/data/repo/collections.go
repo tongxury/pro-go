@@ -8,6 +8,7 @@ type Collections struct {
 	Template        *TemplateCollection
 	TemplateSegment *TemplateSegmentCollection
 	Settings        *SettingsCollection
+	Database        *mongo.Database
 }
 
 func NewCollections(database *mongo.Database) *Collections {
@@ -15,5 +16,6 @@ func NewCollections(database *mongo.Database) *Collections {
 		Template:        NewTemplateCollection(database),
 		TemplateSegment: NewTemplateSegmentCollection(database),
 		Settings:        NewSettingsCollection(database),
+		Database:        database,
 	}
 }

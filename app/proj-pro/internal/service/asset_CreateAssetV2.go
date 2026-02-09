@@ -4,6 +4,7 @@ import (
 	"context"
 	creditpb "store/api/credit"
 	projpb "store/api/proj"
+	usercenter "store/api/usercenter"
 	"store/pkg/krathelper"
 	"time"
 
@@ -62,7 +63,7 @@ func (t ProjService) CreateAssetV2(ctx context.Context, req *projpb.CreateAssetV
 	newAsset, err := t.data.Mongo.Asset.Insert(ctx, &projpb.Asset{
 		Commodity: commodity,
 		Segment:   segment,
-		UserId:    userId,
+		User:      &usercenter.User{XId: userId},
 		Status:    "created",
 		Category:  "segmentReplication",
 		CreatedAt: time.Now().Unix(),

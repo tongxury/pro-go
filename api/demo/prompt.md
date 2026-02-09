@@ -7,6 +7,7 @@
 3. 取名字要通用一些， 便于业务切换，比如 VoiceMessage 直接叫 Message , VoiceSession 直接叫Session。
 4. 路径命名规则：/api/{service_name_short}/资源名复数 (例如 foo 缩写为 fo, manage 缩写为 mg)。
 5. 定义 extra.go 文件，是为了补充生成的go struct 的方法，
+6. proto之间的依赖要用不要只用id，例如 string user = x; 要用 api.usercenter.User user = x;
 
 
 ## 实现

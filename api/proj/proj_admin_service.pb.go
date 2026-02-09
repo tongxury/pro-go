@@ -456,50 +456,6 @@ func (x *GetAssetRequest_) GetId() string {
 	return ""
 }
 
-type GetResourceSegmentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetResourceSegmentRequest) Reset() {
-	*x = GetResourceSegmentRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetResourceSegmentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetResourceSegmentRequest) ProtoMessage() {}
-
-func (x *GetResourceSegmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetResourceSegmentRequest.ProtoReflect.Descriptor instead.
-func (*GetResourceSegmentRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetResourceSegmentRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
 type GetGetTemplateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -509,7 +465,7 @@ type GetGetTemplateRequest struct {
 
 func (x *GetGetTemplateRequest) Reset() {
 	*x = GetGetTemplateRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[8]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -521,7 +477,7 @@ func (x *GetGetTemplateRequest) String() string {
 func (*GetGetTemplateRequest) ProtoMessage() {}
 
 func (x *GetGetTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[8]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,7 +490,7 @@ func (x *GetGetTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGetTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetGetTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{8}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetGetTemplateRequest) GetId() string {
@@ -553,7 +509,7 @@ type GetSettingsRequest struct {
 
 func (x *GetSettingsRequest) Reset() {
 	*x = GetSettingsRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[9]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -565,7 +521,7 @@ func (x *GetSettingsRequest) String() string {
 func (*GetSettingsRequest) ProtoMessage() {}
 
 func (x *GetSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[9]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -578,7 +534,7 @@ func (x *GetSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSettingsRequest.ProtoReflect.Descriptor instead.
 func (*GetSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{9}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetSettingsRequest) GetFields() string {
@@ -599,7 +555,7 @@ type UpdateSettingsRequest struct {
 
 func (x *UpdateSettingsRequest) Reset() {
 	*x = UpdateSettingsRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[10]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -611,7 +567,7 @@ func (x *UpdateSettingsRequest) String() string {
 func (*UpdateSettingsRequest) ProtoMessage() {}
 
 func (x *UpdateSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[10]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -624,7 +580,7 @@ func (x *UpdateSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSettingsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{10}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateSettingsRequest) GetPrompts() map[string]*Prompt {
@@ -641,150 +597,6 @@ func (x *UpdateSettingsRequest) GetDeletePrompts() []string {
 	return nil
 }
 
-type ListResourceSegmentsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	SearchBy      string                 `protobuf:"bytes,6,opt,name=searchBy,proto3" json:"searchBy,omitempty"`
-	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
-	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
-	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Ids           []string               `protobuf:"bytes,7,rep,name=ids,proto3" json:"ids,omitempty"`
-	ReturnFields  string                 `protobuf:"bytes,8,opt,name=returnFields,proto3" json:"returnFields,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListResourceSegmentsRequest) Reset() {
-	*x = ListResourceSegmentsRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListResourceSegmentsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListResourceSegmentsRequest) ProtoMessage() {}
-
-func (x *ListResourceSegmentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListResourceSegmentsRequest.ProtoReflect.Descriptor instead.
-func (*ListResourceSegmentsRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *ListResourceSegmentsRequest) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *ListResourceSegmentsRequest) GetKeyword() string {
-	if x != nil {
-		return x.Keyword
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetSearchBy() string {
-	if x != nil {
-		return x.SearchBy
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetCategory() string {
-	if x != nil {
-		return x.Category
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetSize() int64 {
-	if x != nil {
-		return x.Size
-	}
-	return 0
-}
-
-func (x *ListResourceSegmentsRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *ListResourceSegmentsRequest) GetIds() []string {
-	if x != nil {
-		return x.Ids
-	}
-	return nil
-}
-
-func (x *ListResourceSegmentsRequest) GetReturnFields() string {
-	if x != nil {
-		return x.ReturnFields
-	}
-	return ""
-}
-
-type AddResourcesSegmentRequest struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Items         []*AddResourcesSegmentRequest_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddResourcesSegmentRequest) Reset() {
-	*x = AddResourcesSegmentRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddResourcesSegmentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddResourcesSegmentRequest) ProtoMessage() {}
-
-func (x *AddResourcesSegmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddResourcesSegmentRequest.ProtoReflect.Descriptor instead.
-func (*AddResourcesSegmentRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *AddResourcesSegmentRequest) GetItems() []*AddResourcesSegmentRequest_Item {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
 type SearchMatchedItemsParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Keyword       string                 `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
@@ -795,7 +607,7 @@ type SearchMatchedItemsParams struct {
 
 func (x *SearchMatchedItemsParams) Reset() {
 	*x = SearchMatchedItemsParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[13]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -807,7 +619,7 @@ func (x *SearchMatchedItemsParams) String() string {
 func (*SearchMatchedItemsParams) ProtoMessage() {}
 
 func (x *SearchMatchedItemsParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[13]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -820,7 +632,7 @@ func (x *SearchMatchedItemsParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMatchedItemsParams.ProtoReflect.Descriptor instead.
 func (*SearchMatchedItemsParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{13}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SearchMatchedItemsParams) GetKeyword() string {
@@ -849,7 +661,7 @@ type SearchMatchedItemSegmentsParams struct {
 
 func (x *SearchMatchedItemSegmentsParams) Reset() {
 	*x = SearchMatchedItemSegmentsParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[14]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -861,7 +673,7 @@ func (x *SearchMatchedItemSegmentsParams) String() string {
 func (*SearchMatchedItemSegmentsParams) ProtoMessage() {}
 
 func (x *SearchMatchedItemSegmentsParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[14]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -874,7 +686,7 @@ func (x *SearchMatchedItemSegmentsParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMatchedItemSegmentsParams.ProtoReflect.Descriptor instead.
 func (*SearchMatchedItemSegmentsParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{14}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SearchMatchedItemSegmentsParams) GetKeyword() string {
@@ -914,7 +726,7 @@ type GetItemParams struct {
 
 func (x *GetItemParams) Reset() {
 	*x = GetItemParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[15]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -926,7 +738,7 @@ func (x *GetItemParams) String() string {
 func (*GetItemParams) ProtoMessage() {}
 
 func (x *GetItemParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[15]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -939,7 +751,7 @@ func (x *GetItemParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemParams.ProtoReflect.Descriptor instead.
 func (*GetItemParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{15}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetItemParams) GetId() string {
@@ -959,7 +771,7 @@ type UpdateItemParams struct {
 
 func (x *UpdateItemParams) Reset() {
 	*x = UpdateItemParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[16]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -971,7 +783,7 @@ func (x *UpdateItemParams) String() string {
 func (*UpdateItemParams) ProtoMessage() {}
 
 func (x *UpdateItemParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[16]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -984,7 +796,7 @@ func (x *UpdateItemParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateItemParams.ProtoReflect.Descriptor instead.
 func (*UpdateItemParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{16}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateItemParams) GetId() string {
@@ -1001,66 +813,6 @@ func (x *UpdateItemParams) GetAction() string {
 	return ""
 }
 
-type UpdateResourceSegmentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
-	RootId        string                 `protobuf:"bytes,3,opt,name=rootId,proto3" json:"rootId,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateResourceSegmentRequest) Reset() {
-	*x = UpdateResourceSegmentRequest{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateResourceSegmentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateResourceSegmentRequest) ProtoMessage() {}
-
-func (x *UpdateResourceSegmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateResourceSegmentRequest.ProtoReflect.Descriptor instead.
-func (*UpdateResourceSegmentRequest) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *UpdateResourceSegmentRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *UpdateResourceSegmentRequest) GetAction() string {
-	if x != nil {
-		return x.Action
-	}
-	return ""
-}
-
-func (x *UpdateResourceSegmentRequest) GetRootId() string {
-	if x != nil {
-		return x.RootId
-	}
-	return ""
-}
-
 type UpdateItemTagParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1071,7 +823,7 @@ type UpdateItemTagParams struct {
 
 func (x *UpdateItemTagParams) Reset() {
 	*x = UpdateItemTagParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[18]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +835,7 @@ func (x *UpdateItemTagParams) String() string {
 func (*UpdateItemTagParams) ProtoMessage() {}
 
 func (x *UpdateItemTagParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[18]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +848,7 @@ func (x *UpdateItemTagParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateItemTagParams.ProtoReflect.Descriptor instead.
 func (*UpdateItemTagParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{18}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateItemTagParams) GetId() string {
@@ -1123,7 +875,7 @@ type UpdateItemCategoryParams struct {
 
 func (x *UpdateItemCategoryParams) Reset() {
 	*x = UpdateItemCategoryParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[19]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1135,7 +887,7 @@ func (x *UpdateItemCategoryParams) String() string {
 func (*UpdateItemCategoryParams) ProtoMessage() {}
 
 func (x *UpdateItemCategoryParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[19]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1148,7 +900,7 @@ func (x *UpdateItemCategoryParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateItemCategoryParams.ProtoReflect.Descriptor instead.
 func (*UpdateItemCategoryParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{19}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateItemCategoryParams) GetId() string {
@@ -1174,7 +926,7 @@ type AddItemParams struct {
 
 func (x *AddItemParams) Reset() {
 	*x = AddItemParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[20]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1186,7 +938,7 @@ func (x *AddItemParams) String() string {
 func (*AddItemParams) ProtoMessage() {}
 
 func (x *AddItemParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[20]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1199,7 +951,7 @@ func (x *AddItemParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddItemParams.ProtoReflect.Descriptor instead.
 func (*AddItemParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{20}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *AddItemParams) GetItems() []*AddItemParams_Item {
@@ -1223,7 +975,7 @@ type ListItemsParams struct {
 
 func (x *ListItemsParams) Reset() {
 	*x = ListItemsParams{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[21]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1235,7 +987,7 @@ func (x *ListItemsParams) String() string {
 func (*ListItemsParams) ProtoMessage() {}
 
 func (x *ListItemsParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[21]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1248,7 +1000,7 @@ func (x *ListItemsParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListItemsParams.ProtoReflect.Descriptor instead.
 func (*ListItemsParams) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{21}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListItemsParams) GetPage() int64 {
@@ -1293,74 +1045,6 @@ func (x *ListItemsParams) GetIds() []string {
 	return nil
 }
 
-type AddResourcesSegmentRequest_Item struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	CoverUrl      string                 `protobuf:"bytes,3,opt,name=coverUrl,proto3" json:"coverUrl,omitempty"`
-	TimeStart     float64                `protobuf:"fixed64,4,opt,name=timeStart,proto3" json:"timeStart,omitempty"`
-	TimeEnd       float64                `protobuf:"fixed64,5,opt,name=timeEnd,proto3" json:"timeEnd,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddResourcesSegmentRequest_Item) Reset() {
-	*x = AddResourcesSegmentRequest_Item{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddResourcesSegmentRequest_Item) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddResourcesSegmentRequest_Item) ProtoMessage() {}
-
-func (x *AddResourcesSegmentRequest_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddResourcesSegmentRequest_Item.ProtoReflect.Descriptor instead.
-func (*AddResourcesSegmentRequest_Item) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{12, 0}
-}
-
-func (x *AddResourcesSegmentRequest_Item) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-func (x *AddResourcesSegmentRequest_Item) GetCoverUrl() string {
-	if x != nil {
-		return x.CoverUrl
-	}
-	return ""
-}
-
-func (x *AddResourcesSegmentRequest_Item) GetTimeStart() float64 {
-	if x != nil {
-		return x.TimeStart
-	}
-	return 0
-}
-
-func (x *AddResourcesSegmentRequest_Item) GetTimeEnd() float64 {
-	if x != nil {
-		return x.TimeEnd
-	}
-	return 0
-}
-
 type AddItemParams_Item struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
@@ -1371,7 +1055,7 @@ type AddItemParams_Item struct {
 
 func (x *AddItemParams_Item) Reset() {
 	*x = AddItemParams_Item{}
-	mi := &file_proj_proj_admin_service_proto_msgTypes[25]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1383,7 +1067,7 @@ func (x *AddItemParams_Item) String() string {
 func (*AddItemParams_Item) ProtoMessage() {}
 
 func (x *AddItemParams_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_proj_proj_admin_service_proto_msgTypes[25]
+	mi := &file_proj_proj_admin_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1396,7 +1080,7 @@ func (x *AddItemParams_Item) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddItemParams_Item.ProtoReflect.Descriptor instead.
 func (*AddItemParams_Item) Descriptor() ([]byte, []int) {
-	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{20, 0}
+	return file_proj_proj_admin_service_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *AddItemParams_Item) GetUrl() string {
@@ -1449,8 +1133,6 @@ const file_proj_proj_admin_service_proto_rawDesc = "" +
 	"\x02id\x18\a \x01(\tR\x02id\x12\x1c\n" +
 	"\tuserPhone\x18\b \x01(\tR\tuserPhone\"\"\n" +
 	"\x10GetAssetRequest_\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"+\n" +
-	"\x19GetResourceSegmentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"'\n" +
 	"\x15GetGetTemplateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\",\n" +
@@ -1461,23 +1143,7 @@ const file_proj_proj_admin_service_proto_rawDesc = "" +
 	"\rdeletePrompts\x18\x03 \x03(\tR\rdeletePrompts\x1aL\n" +
 	"\fPromptsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12&\n" +
-	"\x05value\x18\x02 \x01(\v2\x10.api.proj.PromptR\x05value:\x028\x01\"\xe5\x01\n" +
-	"\x1bListResourceSegmentsRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x18\n" +
-	"\akeyword\x18\x02 \x01(\tR\akeyword\x12\x1a\n" +
-	"\bsearchBy\x18\x06 \x01(\tR\bsearchBy\x12\x1a\n" +
-	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\tR\x06status\x12\x10\n" +
-	"\x03ids\x18\a \x03(\tR\x03ids\x12\"\n" +
-	"\freturnFields\x18\b \x01(\tR\freturnFields\"\xcb\x01\n" +
-	"\x1aAddResourcesSegmentRequest\x12?\n" +
-	"\x05items\x18\x01 \x03(\v2).api.proj.AddResourcesSegmentRequest.ItemR\x05items\x1al\n" +
-	"\x04Item\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1a\n" +
-	"\bcoverUrl\x18\x03 \x01(\tR\bcoverUrl\x12\x1c\n" +
-	"\ttimeStart\x18\x04 \x01(\x01R\ttimeStart\x12\x18\n" +
-	"\atimeEnd\x18\x05 \x01(\x01R\atimeEnd\"J\n" +
+	"\x05value\x18\x02 \x01(\v2\x10.api.proj.PromptR\x05value:\x028\x01\"J\n" +
 	"\x18SearchMatchedItemsParams\x12\x18\n" +
 	"\akeyword\x18\x01 \x01(\tR\akeyword\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x03R\x05limit\"\xa7\x01\n" +
@@ -1490,11 +1156,7 @@ const file_proj_proj_admin_service_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\":\n" +
 	"\x10UpdateItemParams\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"^\n" +
-	"\x1cUpdateResourceSegmentRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\x12\x16\n" +
-	"\x06rootId\x18\x03 \x01(\tR\x06rootId\"9\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\"9\n" +
 	"\x13UpdateItemTagParams\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\"F\n" +
@@ -1556,7 +1218,7 @@ func file_proj_proj_admin_service_proto_rawDescGZIP() []byte {
 	return file_proj_proj_admin_service_proto_rawDescData
 }
 
-var file_proj_proj_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_proj_proj_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_proj_proj_admin_service_proto_goTypes = []any{
 	(*GetUserRequest_)(nil),                 // 0: api.proj.GetUserRequest_
 	(*UserInfo)(nil),                        // 1: api.proj.UserInfo
@@ -1565,110 +1227,108 @@ var file_proj_proj_admin_service_proto_goTypes = []any{
 	(*ListFeedbacksRequest_)(nil),           // 4: api.proj.ListFeedbacksRequest_
 	(*ListAssetsRequest_)(nil),              // 5: api.proj.ListAssetsRequest_
 	(*GetAssetRequest_)(nil),                // 6: api.proj.GetAssetRequest_
-	(*GetResourceSegmentRequest)(nil),       // 7: api.proj.GetResourceSegmentRequest
-	(*GetGetTemplateRequest)(nil),           // 8: api.proj.GetGetTemplateRequest
-	(*GetSettingsRequest)(nil),              // 9: api.proj.GetSettingsRequest
-	(*UpdateSettingsRequest)(nil),           // 10: api.proj.UpdateSettingsRequest
-	(*ListResourceSegmentsRequest)(nil),     // 11: api.proj.ListResourceSegmentsRequest
-	(*AddResourcesSegmentRequest)(nil),      // 12: api.proj.AddResourcesSegmentRequest
-	(*SearchMatchedItemsParams)(nil),        // 13: api.proj.SearchMatchedItemsParams
-	(*SearchMatchedItemSegmentsParams)(nil), // 14: api.proj.SearchMatchedItemSegmentsParams
-	(*GetItemParams)(nil),                   // 15: api.proj.GetItemParams
-	(*UpdateItemParams)(nil),                // 16: api.proj.UpdateItemParams
-	(*UpdateResourceSegmentRequest)(nil),    // 17: api.proj.UpdateResourceSegmentRequest
-	(*UpdateItemTagParams)(nil),             // 18: api.proj.UpdateItemTagParams
-	(*UpdateItemCategoryParams)(nil),        // 19: api.proj.UpdateItemCategoryParams
-	(*AddItemParams)(nil),                   // 20: api.proj.AddItemParams
-	(*ListItemsParams)(nil),                 // 21: api.proj.ListItemsParams
-	nil,                                     // 22: api.proj.UpdateUserRequest_.ParamsEntry
-	nil,                                     // 23: api.proj.UpdateSettingsRequest.PromptsEntry
-	(*AddResourcesSegmentRequest_Item)(nil), // 24: api.proj.AddResourcesSegmentRequest.Item
-	(*AddItemParams_Item)(nil),              // 25: api.proj.AddItemParams.Item
-	(*usercenter.User)(nil),                 // 26: api.usercenter.User
-	(*credit.CreditState)(nil),              // 27: api.credit.CreditState
-	(*Prompt)(nil),                          // 28: api.proj.Prompt
-	(*ListTemplatesRequest)(nil),            // 29: api.proj.ListTemplatesRequest
-	(*AddTemplatesRequest)(nil),             // 30: api.proj.AddTemplatesRequest
-	(*GetTemplateRequest)(nil),              // 31: api.proj.GetTemplateRequest
-	(*UpdateTemplateRequest)(nil),           // 32: api.proj.UpdateTemplateRequest
-	(*Item)(nil),                            // 33: api.proj.Item
-	(*AssetList)(nil),                       // 34: api.proj.AssetList
-	(*Asset)(nil),                           // 35: api.proj.Asset
-	(*FeedbackList)(nil),                    // 36: api.proj.FeedbackList
-	(*usercenter.UserList)(nil),             // 37: api.usercenter.UserList
-	(*ResourceList)(nil),                    // 38: api.proj.ResourceList
-	(*Resource)(nil),                        // 39: api.proj.Resource
-	(*AppSettings)(nil),                     // 40: api.proj.AppSettings
-	(*ResourceSegmentList)(nil),             // 41: api.proj.ResourceSegmentList
-	(*ResourceSegment)(nil),                 // 42: api.proj.ResourceSegment
+	(*GetGetTemplateRequest)(nil),           // 7: api.proj.GetGetTemplateRequest
+	(*GetSettingsRequest)(nil),              // 8: api.proj.GetSettingsRequest
+	(*UpdateSettingsRequest)(nil),           // 9: api.proj.UpdateSettingsRequest
+	(*SearchMatchedItemsParams)(nil),        // 10: api.proj.SearchMatchedItemsParams
+	(*SearchMatchedItemSegmentsParams)(nil), // 11: api.proj.SearchMatchedItemSegmentsParams
+	(*GetItemParams)(nil),                   // 12: api.proj.GetItemParams
+	(*UpdateItemParams)(nil),                // 13: api.proj.UpdateItemParams
+	(*UpdateItemTagParams)(nil),             // 14: api.proj.UpdateItemTagParams
+	(*UpdateItemCategoryParams)(nil),        // 15: api.proj.UpdateItemCategoryParams
+	(*AddItemParams)(nil),                   // 16: api.proj.AddItemParams
+	(*ListItemsParams)(nil),                 // 17: api.proj.ListItemsParams
+	nil,                                     // 18: api.proj.UpdateUserRequest_.ParamsEntry
+	nil,                                     // 19: api.proj.UpdateSettingsRequest.PromptsEntry
+	(*AddItemParams_Item)(nil),              // 20: api.proj.AddItemParams.Item
+	(*usercenter.User)(nil),                 // 21: api.usercenter.User
+	(*credit.CreditState)(nil),              // 22: api.credit.CreditState
+	(*Prompt)(nil),                          // 23: api.proj.Prompt
+	(*ListTemplatesRequest)(nil),            // 24: api.proj.ListTemplatesRequest
+	(*AddTemplatesRequest)(nil),             // 25: api.proj.AddTemplatesRequest
+	(*GetTemplateRequest)(nil),              // 26: api.proj.GetTemplateRequest
+	(*UpdateTemplateRequest)(nil),           // 27: api.proj.UpdateTemplateRequest
+	(*ListResourceSegmentsRequest)(nil),     // 28: api.proj.ListResourceSegmentsRequest
+	(*AddResourcesSegmentRequest)(nil),      // 29: api.proj.AddResourcesSegmentRequest
+	(*UpdateResourceSegmentRequest)(nil),    // 30: api.proj.UpdateResourceSegmentRequest
+	(*GetResourceSegmentRequest)(nil),       // 31: api.proj.GetResourceSegmentRequest
+	(*Item)(nil),                            // 32: api.proj.Item
+	(*AssetList)(nil),                       // 33: api.proj.AssetList
+	(*Asset)(nil),                           // 34: api.proj.Asset
+	(*FeedbackList)(nil),                    // 35: api.proj.FeedbackList
+	(*usercenter.UserList)(nil),             // 36: api.usercenter.UserList
+	(*ResourceList)(nil),                    // 37: api.proj.ResourceList
+	(*Resource)(nil),                        // 38: api.proj.Resource
+	(*AppSettings)(nil),                     // 39: api.proj.AppSettings
+	(*ResourceSegmentList)(nil),             // 40: api.proj.ResourceSegmentList
+	(*ResourceSegment)(nil),                 // 41: api.proj.ResourceSegment
 }
 var file_proj_proj_admin_service_proto_depIdxs = []int32{
-	26, // 0: api.proj.UserInfo.user:type_name -> api.usercenter.User
-	27, // 1: api.proj.UserInfo.creditState:type_name -> api.credit.CreditState
-	22, // 2: api.proj.UpdateUserRequest_.params:type_name -> api.proj.UpdateUserRequest_.ParamsEntry
-	23, // 3: api.proj.UpdateSettingsRequest.prompts:type_name -> api.proj.UpdateSettingsRequest.PromptsEntry
-	24, // 4: api.proj.AddResourcesSegmentRequest.items:type_name -> api.proj.AddResourcesSegmentRequest.Item
-	25, // 5: api.proj.AddItemParams.items:type_name -> api.proj.AddItemParams.Item
-	28, // 6: api.proj.UpdateSettingsRequest.PromptsEntry.value:type_name -> api.proj.Prompt
-	5,  // 7: api.proj.ProjAdminService.ListAssets_:input_type -> api.proj.ListAssetsRequest_
-	6,  // 8: api.proj.ProjAdminService.GetAsset_:input_type -> api.proj.GetAssetRequest_
-	4,  // 9: api.proj.ProjAdminService.ListFeedbacks_:input_type -> api.proj.ListFeedbacksRequest_
-	2,  // 10: api.proj.ProjAdminService.ListUsers_:input_type -> api.proj.ListUsersRequest_
-	0,  // 11: api.proj.ProjAdminService.GetUser_:input_type -> api.proj.GetUserRequest_
-	3,  // 12: api.proj.ProjAdminService.UpdateUser_:input_type -> api.proj.UpdateUserRequest_
-	29, // 13: api.proj.ProjAdminService.ListTemplates_:input_type -> api.proj.ListTemplatesRequest
-	30, // 14: api.proj.ProjAdminService.AddTemplates_:input_type -> api.proj.AddTemplatesRequest
-	31, // 15: api.proj.ProjAdminService.GetTemplate_:input_type -> api.proj.GetTemplateRequest
-	32, // 16: api.proj.ProjAdminService.UpdateTemplate_:input_type -> api.proj.UpdateTemplateRequest
-	9,  // 17: api.proj.ProjAdminService.GetSettings:input_type -> api.proj.GetSettingsRequest
-	10, // 18: api.proj.ProjAdminService.UpdateSettings:input_type -> api.proj.UpdateSettingsRequest
-	11, // 19: api.proj.ProjAdminService.ListResourceSegments:input_type -> api.proj.ListResourceSegmentsRequest
-	12, // 20: api.proj.ProjAdminService.AddResourceSegments:input_type -> api.proj.AddResourcesSegmentRequest
-	17, // 21: api.proj.ProjAdminService.UpdateResourceSegment:input_type -> api.proj.UpdateResourceSegmentRequest
-	7,  // 22: api.proj.ProjAdminService.GetResourceSegment:input_type -> api.proj.GetResourceSegmentRequest
-	21, // 23: api.proj.ProjAdminService.ListItems:input_type -> api.proj.ListItemsParams
-	20, // 24: api.proj.ProjAdminService.AddItems:input_type -> api.proj.AddItemParams
-	15, // 25: api.proj.ProjAdminService.GetItem:input_type -> api.proj.GetItemParams
-	33, // 26: api.proj.ProjAdminService.PutItem:input_type -> api.proj.Item
-	16, // 27: api.proj.ProjAdminService.UpdateItem:input_type -> api.proj.UpdateItemParams
-	18, // 28: api.proj.ProjAdminService.UpdateItemTags:input_type -> api.proj.UpdateItemTagParams
-	19, // 29: api.proj.ProjAdminService.UpdateItemCategory:input_type -> api.proj.UpdateItemCategoryParams
-	13, // 30: api.proj.ProjAdminService.SearchItems:input_type -> api.proj.SearchMatchedItemsParams
-	13, // 31: api.proj.ProjAdminService.SearchMatchedItems:input_type -> api.proj.SearchMatchedItemsParams
-	14, // 32: api.proj.ProjAdminService.SearchMatchedItemSegments:input_type -> api.proj.SearchMatchedItemSegmentsParams
-	8,  // 33: api.proj.ProjAdminService.GetTemplate:input_type -> api.proj.GetGetTemplateRequest
-	34, // 34: api.proj.ProjAdminService.ListAssets_:output_type -> api.proj.AssetList
-	35, // 35: api.proj.ProjAdminService.GetAsset_:output_type -> api.proj.Asset
-	36, // 36: api.proj.ProjAdminService.ListFeedbacks_:output_type -> api.proj.FeedbackList
-	37, // 37: api.proj.ProjAdminService.ListUsers_:output_type -> api.usercenter.UserList
-	1,  // 38: api.proj.ProjAdminService.GetUser_:output_type -> api.proj.UserInfo
-	26, // 39: api.proj.ProjAdminService.UpdateUser_:output_type -> api.usercenter.User
-	38, // 40: api.proj.ProjAdminService.ListTemplates_:output_type -> api.proj.ResourceList
-	38, // 41: api.proj.ProjAdminService.AddTemplates_:output_type -> api.proj.ResourceList
-	39, // 42: api.proj.ProjAdminService.GetTemplate_:output_type -> api.proj.Resource
-	39, // 43: api.proj.ProjAdminService.UpdateTemplate_:output_type -> api.proj.Resource
-	40, // 44: api.proj.ProjAdminService.GetSettings:output_type -> api.proj.AppSettings
-	40, // 45: api.proj.ProjAdminService.UpdateSettings:output_type -> api.proj.AppSettings
-	41, // 46: api.proj.ProjAdminService.ListResourceSegments:output_type -> api.proj.ResourceSegmentList
-	41, // 47: api.proj.ProjAdminService.AddResourceSegments:output_type -> api.proj.ResourceSegmentList
-	42, // 48: api.proj.ProjAdminService.UpdateResourceSegment:output_type -> api.proj.ResourceSegment
-	42, // 49: api.proj.ProjAdminService.GetResourceSegment:output_type -> api.proj.ResourceSegment
-	38, // 50: api.proj.ProjAdminService.ListItems:output_type -> api.proj.ResourceList
-	38, // 51: api.proj.ProjAdminService.AddItems:output_type -> api.proj.ResourceList
-	39, // 52: api.proj.ProjAdminService.GetItem:output_type -> api.proj.Resource
-	33, // 53: api.proj.ProjAdminService.PutItem:output_type -> api.proj.Item
-	39, // 54: api.proj.ProjAdminService.UpdateItem:output_type -> api.proj.Resource
-	33, // 55: api.proj.ProjAdminService.UpdateItemTags:output_type -> api.proj.Item
-	33, // 56: api.proj.ProjAdminService.UpdateItemCategory:output_type -> api.proj.Item
-	38, // 57: api.proj.ProjAdminService.SearchItems:output_type -> api.proj.ResourceList
-	38, // 58: api.proj.ProjAdminService.SearchMatchedItems:output_type -> api.proj.ResourceList
-	41, // 59: api.proj.ProjAdminService.SearchMatchedItemSegments:output_type -> api.proj.ResourceSegmentList
-	39, // 60: api.proj.ProjAdminService.GetTemplate:output_type -> api.proj.Resource
-	34, // [34:61] is the sub-list for method output_type
-	7,  // [7:34] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	21, // 0: api.proj.UserInfo.user:type_name -> api.usercenter.User
+	22, // 1: api.proj.UserInfo.creditState:type_name -> api.credit.CreditState
+	18, // 2: api.proj.UpdateUserRequest_.params:type_name -> api.proj.UpdateUserRequest_.ParamsEntry
+	19, // 3: api.proj.UpdateSettingsRequest.prompts:type_name -> api.proj.UpdateSettingsRequest.PromptsEntry
+	20, // 4: api.proj.AddItemParams.items:type_name -> api.proj.AddItemParams.Item
+	23, // 5: api.proj.UpdateSettingsRequest.PromptsEntry.value:type_name -> api.proj.Prompt
+	5,  // 6: api.proj.ProjAdminService.ListAssets_:input_type -> api.proj.ListAssetsRequest_
+	6,  // 7: api.proj.ProjAdminService.GetAsset_:input_type -> api.proj.GetAssetRequest_
+	4,  // 8: api.proj.ProjAdminService.ListFeedbacks_:input_type -> api.proj.ListFeedbacksRequest_
+	2,  // 9: api.proj.ProjAdminService.ListUsers_:input_type -> api.proj.ListUsersRequest_
+	0,  // 10: api.proj.ProjAdminService.GetUser_:input_type -> api.proj.GetUserRequest_
+	3,  // 11: api.proj.ProjAdminService.UpdateUser_:input_type -> api.proj.UpdateUserRequest_
+	24, // 12: api.proj.ProjAdminService.ListTemplates_:input_type -> api.proj.ListTemplatesRequest
+	25, // 13: api.proj.ProjAdminService.AddTemplates_:input_type -> api.proj.AddTemplatesRequest
+	26, // 14: api.proj.ProjAdminService.GetTemplate_:input_type -> api.proj.GetTemplateRequest
+	27, // 15: api.proj.ProjAdminService.UpdateTemplate_:input_type -> api.proj.UpdateTemplateRequest
+	8,  // 16: api.proj.ProjAdminService.GetSettings:input_type -> api.proj.GetSettingsRequest
+	9,  // 17: api.proj.ProjAdminService.UpdateSettings:input_type -> api.proj.UpdateSettingsRequest
+	28, // 18: api.proj.ProjAdminService.ListResourceSegments:input_type -> api.proj.ListResourceSegmentsRequest
+	29, // 19: api.proj.ProjAdminService.AddResourceSegments:input_type -> api.proj.AddResourcesSegmentRequest
+	30, // 20: api.proj.ProjAdminService.UpdateResourceSegment:input_type -> api.proj.UpdateResourceSegmentRequest
+	31, // 21: api.proj.ProjAdminService.GetResourceSegment:input_type -> api.proj.GetResourceSegmentRequest
+	17, // 22: api.proj.ProjAdminService.ListItems:input_type -> api.proj.ListItemsParams
+	16, // 23: api.proj.ProjAdminService.AddItems:input_type -> api.proj.AddItemParams
+	12, // 24: api.proj.ProjAdminService.GetItem:input_type -> api.proj.GetItemParams
+	32, // 25: api.proj.ProjAdminService.PutItem:input_type -> api.proj.Item
+	13, // 26: api.proj.ProjAdminService.UpdateItem:input_type -> api.proj.UpdateItemParams
+	14, // 27: api.proj.ProjAdminService.UpdateItemTags:input_type -> api.proj.UpdateItemTagParams
+	15, // 28: api.proj.ProjAdminService.UpdateItemCategory:input_type -> api.proj.UpdateItemCategoryParams
+	10, // 29: api.proj.ProjAdminService.SearchItems:input_type -> api.proj.SearchMatchedItemsParams
+	10, // 30: api.proj.ProjAdminService.SearchMatchedItems:input_type -> api.proj.SearchMatchedItemsParams
+	11, // 31: api.proj.ProjAdminService.SearchMatchedItemSegments:input_type -> api.proj.SearchMatchedItemSegmentsParams
+	7,  // 32: api.proj.ProjAdminService.GetTemplate:input_type -> api.proj.GetGetTemplateRequest
+	33, // 33: api.proj.ProjAdminService.ListAssets_:output_type -> api.proj.AssetList
+	34, // 34: api.proj.ProjAdminService.GetAsset_:output_type -> api.proj.Asset
+	35, // 35: api.proj.ProjAdminService.ListFeedbacks_:output_type -> api.proj.FeedbackList
+	36, // 36: api.proj.ProjAdminService.ListUsers_:output_type -> api.usercenter.UserList
+	1,  // 37: api.proj.ProjAdminService.GetUser_:output_type -> api.proj.UserInfo
+	21, // 38: api.proj.ProjAdminService.UpdateUser_:output_type -> api.usercenter.User
+	37, // 39: api.proj.ProjAdminService.ListTemplates_:output_type -> api.proj.ResourceList
+	37, // 40: api.proj.ProjAdminService.AddTemplates_:output_type -> api.proj.ResourceList
+	38, // 41: api.proj.ProjAdminService.GetTemplate_:output_type -> api.proj.Resource
+	38, // 42: api.proj.ProjAdminService.UpdateTemplate_:output_type -> api.proj.Resource
+	39, // 43: api.proj.ProjAdminService.GetSettings:output_type -> api.proj.AppSettings
+	39, // 44: api.proj.ProjAdminService.UpdateSettings:output_type -> api.proj.AppSettings
+	40, // 45: api.proj.ProjAdminService.ListResourceSegments:output_type -> api.proj.ResourceSegmentList
+	40, // 46: api.proj.ProjAdminService.AddResourceSegments:output_type -> api.proj.ResourceSegmentList
+	41, // 47: api.proj.ProjAdminService.UpdateResourceSegment:output_type -> api.proj.ResourceSegment
+	41, // 48: api.proj.ProjAdminService.GetResourceSegment:output_type -> api.proj.ResourceSegment
+	37, // 49: api.proj.ProjAdminService.ListItems:output_type -> api.proj.ResourceList
+	37, // 50: api.proj.ProjAdminService.AddItems:output_type -> api.proj.ResourceList
+	38, // 51: api.proj.ProjAdminService.GetItem:output_type -> api.proj.Resource
+	32, // 52: api.proj.ProjAdminService.PutItem:output_type -> api.proj.Item
+	38, // 53: api.proj.ProjAdminService.UpdateItem:output_type -> api.proj.Resource
+	32, // 54: api.proj.ProjAdminService.UpdateItemTags:output_type -> api.proj.Item
+	32, // 55: api.proj.ProjAdminService.UpdateItemCategory:output_type -> api.proj.Item
+	37, // 56: api.proj.ProjAdminService.SearchItems:output_type -> api.proj.ResourceList
+	37, // 57: api.proj.ProjAdminService.SearchMatchedItems:output_type -> api.proj.ResourceList
+	40, // 58: api.proj.ProjAdminService.SearchMatchedItemSegments:output_type -> api.proj.ResourceSegmentList
+	38, // 59: api.proj.ProjAdminService.GetTemplate:output_type -> api.proj.Resource
+	33, // [33:60] is the sub-list for method output_type
+	6,  // [6:33] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_proj_proj_admin_service_proto_init() }
@@ -1687,7 +1347,7 @@ func file_proj_proj_admin_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proj_proj_admin_service_proto_rawDesc), len(file_proj_proj_admin_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -153,6 +153,20 @@ func (x *Workflow) SetID(id string) {
 	x.XId = id
 }
 
+func (x *ResourceSegmentCollectionItem) GetID() string {
+	if x == nil {
+		return ""
+	}
+	return x.XId
+}
+
+func (x *ResourceSegmentCollectionItem) SetID(id string) {
+	if x == nil {
+		return
+	}
+	x.XId = id
+}
+
 func (t *TypedTags) Tags() []string {
 
 	if t == nil {

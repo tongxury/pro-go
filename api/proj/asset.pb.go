@@ -15,6 +15,7 @@ import (
 	_ "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	_ "store/api/public/response"
+	usercenter "store/api/usercenter"
 	sync "sync"
 	unsafe "unsafe"
 )
@@ -123,7 +124,7 @@ type Asset struct {
 	XId            string                 `protobuf:"bytes,1,opt,name=_id,proto3" json:"_id,omitempty"`
 	Commodity      *Commodity             `protobuf:"bytes,2,opt,name=commodity,proto3" json:"commodity,omitempty"`
 	Segment        *ResourceSegment       `protobuf:"bytes,3,opt,name=segment,proto3" json:"segment,omitempty"`
-	UserId         string                 `protobuf:"bytes,7,opt,name=userId,proto3" json:"userId,omitempty"`
+	User           *usercenter.User       `protobuf:"bytes,7,opt,name=user,proto3" json:"user,omitempty"`
 	Status         string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt      int64                  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	Url            string                 `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
@@ -195,11 +196,11 @@ func (x *Asset) GetSegment() *ResourceSegment {
 	return nil
 }
 
-func (x *Asset) GetUserId() string {
+func (x *Asset) GetUser() *usercenter.User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return ""
+	return nil
 }
 
 func (x *Asset) GetStatus() string {
@@ -650,7 +651,7 @@ var File_proj_asset_proto protoreflect.FileDescriptor
 
 const file_proj_asset_proto_rawDesc = "" +
 	"\n" +
-	"\x10proj/asset.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x14proj/commodity.proto\x1a\x0fproj/item.proto\x1a\x13proj/workflow.proto\"\xf8\x01\n" +
+	"\x10proj/asset.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x14proj/commodity.proto\x1a\x0fproj/item.proto\x1a\x13proj/workflow.proto\x1a\x15usercenter/user.proto\"\xf8\x01\n" +
 	"\n" +
 	"AssetGroup\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x121\n" +
@@ -659,12 +660,12 @@ const file_proj_asset_proto_rawDesc = "" +
 	"\x06assets\x18\x04 \x03(\v2\x0f.api.proj.AssetR\x06assets\x12\x1c\n" +
 	"\tcreatedAt\x18\x05 \x01(\x03R\tcreatedAt\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x16\n" +
-	"\x06userId\x18\a \x01(\tR\x06userId\"\xf4\b\n" +
+	"\x06userId\x18\a \x01(\tR\x06userId\"\x86\t\n" +
 	"\x05Asset\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x121\n" +
 	"\tcommodity\x18\x02 \x01(\v2\x13.api.proj.CommodityR\tcommodity\x123\n" +
-	"\asegment\x18\x03 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x12\x16\n" +
-	"\x06userId\x18\a \x01(\tR\x06userId\x12\x16\n" +
+	"\asegment\x18\x03 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x12(\n" +
+	"\x04user\x18\a \x01(\v2\x14.api.usercenter.UserR\x04user\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1c\n" +
 	"\tcreatedAt\x18\x05 \x01(\x03R\tcreatedAt\x12\x10\n" +
 	"\x03url\x18\x06 \x01(\tR\x03url\x12\x1a\n" +
@@ -739,7 +740,8 @@ var file_proj_asset_proto_goTypes = []any{
 	(*Commodity)(nil),       // 8: api.proj.Commodity
 	(*Resource)(nil),        // 9: api.proj.Resource
 	(*ResourceSegment)(nil), // 10: api.proj.ResourceSegment
-	(*Workflow)(nil),        // 11: api.proj.Workflow
+	(*usercenter.User)(nil), // 11: api.usercenter.User
+	(*Workflow)(nil),        // 12: api.proj.Workflow
 }
 var file_proj_asset_proto_depIdxs = []int32{
 	8,  // 0: api.proj.AssetGroup.commodity:type_name -> api.proj.Commodity
@@ -747,18 +749,19 @@ var file_proj_asset_proto_depIdxs = []int32{
 	1,  // 2: api.proj.AssetGroup.assets:type_name -> api.proj.Asset
 	8,  // 3: api.proj.Asset.commodity:type_name -> api.proj.Commodity
 	10, // 4: api.proj.Asset.segment:type_name -> api.proj.ResourceSegment
-	2,  // 5: api.proj.Asset.prompts:type_name -> api.proj.AssetPrompts
-	6,  // 6: api.proj.Asset.attrs:type_name -> api.proj.Asset.Attrs
-	4,  // 7: api.proj.Asset.extra:type_name -> api.proj.Asset.Extra
-	5,  // 8: api.proj.Asset.group:type_name -> api.proj.Asset.Group
-	11, // 9: api.proj.Asset.workflow:type_name -> api.proj.Workflow
-	1,  // 10: api.proj.AssetList.list:type_name -> api.proj.Asset
-	7,  // 11: api.proj.Asset.Extra.context:type_name -> api.proj.Asset.Extra.ContextEntry
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	11, // 5: api.proj.Asset.user:type_name -> api.usercenter.User
+	2,  // 6: api.proj.Asset.prompts:type_name -> api.proj.AssetPrompts
+	6,  // 7: api.proj.Asset.attrs:type_name -> api.proj.Asset.Attrs
+	4,  // 8: api.proj.Asset.extra:type_name -> api.proj.Asset.Extra
+	5,  // 9: api.proj.Asset.group:type_name -> api.proj.Asset.Group
+	12, // 10: api.proj.Asset.workflow:type_name -> api.proj.Workflow
+	1,  // 11: api.proj.AssetList.list:type_name -> api.proj.Asset
+	7,  // 12: api.proj.Asset.Extra.context:type_name -> api.proj.Asset.Extra.ContextEntry
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_proj_asset_proto_init() }

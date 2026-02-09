@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package api.proj;
+package api.proj ;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
@@ -21,479 +21,531 @@ import "proj/remixoptions.proto";
 
 option go_package = "store/api/proj;projpb";
 
-
 service ProjProService {
 
-  rpc ListRemixOptions(ListRemixOptionsRequest) returns (api.proj.RemixOptions) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/remix-options"
-    };
-  }
-
-  rpc ListOngoingIssues(ListOngoingIssuesRequest) returns (IssueList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/ongoing-issues"
-    };
-  }
-  rpc ListFeedbacks(ListFeedbacksRequest) returns (api.proj.FeedbackList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/feedbacks"
-    };
-  }
-  rpc _ListFeedbacks(_ListFeedbacksRequest) returns (api.proj.FeedbackList) {}
-
-  rpc AddFeedback(AddFeedbackRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/feedbacks",
-      body: "*"
-    };
-  }
-  //  -------------
-  rpc ListTemplates(api.proj.ListTemplatesRequest) returns (api.proj.ResourceList) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/templates"
-    };
-  }
-
-  rpc ListPublicTemplates(api.proj.ListPublicTemplatesRequest) returns (api.proj.ResourceList) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/public-templates"
-    };
-  }
-  rpc AddTemplates(api.proj.AddTemplatesRequest) returns (api.proj.ResourceList) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/templates",
-      body: "*"
-    };
-  }
-  rpc GetTemplate(api.proj.GetTemplateRequest) returns (api.proj.Resource) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/templates/{id}"
-    };
-  }
-  rpc UpdateTemplate(api.proj.UpdateTemplateRequest) returns (api.proj.Resource) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/templates/{id}",
-      body: "*"
-    };
-  }
-
-  rpc _ListTemplates(_ListTemplatesRequest) returns (api.proj.ResourceList) {}
-  rpc _AddTemplates(AddTemplatesRequest) returns (api.proj.ResourceList) {}
-  rpc _GetTemplate(GetTemplateRequest) returns (api.proj.Resource) {}
-  rpc _UpdateTemplate(UpdateTemplateRequest) returns (api.proj.Resource) {}
-
-  rpc CreateTemplate(CreateTemplateRequest) returns (api.proj.Resource) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/templates"
-      body: "*"
-    };
-  }
-  // ---------------
-  rpc GetAssetSummary(google.protobuf.Empty) returns (AssetSummary) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/asset-summaries"
-    };
-  }
-
-
-  rpc ListQualityAssets(ListQualityAssetsRequest) returns (api.proj.AssetList) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/quality-assets"
-    };
-  }
-
-  rpc ReCreateAsset(ReCreateAssetRequest) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/re-assets"
-      body: "*"
-    };
-  }
-  rpc CreateAsset(CreateAssetRequest) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/assets"
-      body: "*"
-    };
-  }
-
-  rpc CreateAssetV2(CreateAssetV2Request) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      post: "/api/proj/v2/assets"
-      body: "*"
-    };
-  }
-  rpc CreateAssetV3(CreateAssetV3Request) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      post: "/api/proj/v3/assets"
-      body: "*"
-    };
-  }
-
-  rpc CreateAssetV5(CreateAssetV5Request) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      post: "/api/proj/v5/assets"
-      body: "*"
-    };
-  }
-
-  rpc ListAssets(ListAssetsRequest) returns (api.proj.AssetList) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/assets"
-    };
-  }
-  rpc _ListAssets(_ListAssetsRequest) returns (api.proj.AssetList) {}
-
-  rpc UpdateAsset(UpdateAssetRequest) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/assets/{id}"
-      body: "*"
-    };
-  }
-
-  rpc GetAsset(GetAssetRequest) returns (api.proj.Asset) {
-    option (google.api.http) = {
-      get: "/api/proj/v2/assets/{id}"
-    };
-  }
-  rpc _GetAsset(_GetAssetRequest) returns (api.proj.Asset) {}
-
-  rpc CallbackByVolcengine(CallbackByVolcengineParams) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/callback-by-volcengine",
-      body: "*"
-    };
-  }
-
-  rpc ListRelatedItems(ListRelatedItemsRequest) returns (api.proj.ItemList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/related-items"
-    };
-  }
-  rpc CreateCommodity(CreateCommodityRequest) returns (api.proj.Commodity) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/commodities"
-      body: "*"
-    };
-  }
-  rpc ListCommodities(ListCommodityRequest) returns (api.proj.CommodityList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/commodities"
-    };
-  }
-  rpc GetCommodity(GetCommodityRequest) returns (api.proj.Commodity) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/commodities/{id}"
-    };
-  }
-  rpc UpdateCommodity(UpdateCommodityRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/commodities/{id}"
-      body: "*"
-    };
-  }
-  rpc CreateTask(CreateTaskTaskRequest) returns (api.proj.Task) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/tasks"
-      body: "*"
-    };
-  }
-  rpc ListTasks(ListTaskRequest) returns (api.proj.TaskList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/tasks"
-    };
-  }
-  rpc GetTask(GetTaskRequest) returns (api.proj.Task) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/tasks/{id}"
-    };
-  }
-  rpc UpdateTask(UpdateTaskRequest) returns (api.proj.Task) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/tasks/{id}"
-      body: "*"
-    };
-  }
-
-  rpc UpdateTaskSegment(UpdateTaskSegmentRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/taskSegments/{id}"
-      body: "*"
-    };
-  }
+rpc ListRemixOptions(ListRemixOptionsRequest) returns (api.proj.RemixOptions) {
+option (google.api.http) = {
+get: "/api/proj/v1/remix-options"
+}                                                                               ;
 }
 
+rpc ListOngoingIssues(ListOngoingIssuesRequest) returns (IssueList) {
+option (google.api.http) = {
+get: "/api/proj/v1/ongoing-issues"
+}                                                                            ;
+}
+rpc ListFeedbacks(ListFeedbacksRequest) returns (api.proj.FeedbackList) {
+option (google.api.http) = {
+get: "/api/proj/v1/feedbacks"
+}                                                                            ;
+}
+rpc _ListFeedbacks(_ListFeedbacksRequest) returns (api.proj.FeedbackList) {}
+
+rpc AddFeedback(AddFeedbackRequest) returns (google.protobuf.Empty) {
+option (google.api.http) = {
+post: "/api/proj/v1/feedbacks",
+body: "*"
+}                                                                                  ;
+}
+// -------------
+rpc ListTemplates(api.proj.ListTemplatesRequest) returns (api.proj.ResourceList) {
+option (google.api.http) = {
+get: "/api/proj/v2/templates"
+}                                                                                  ;
+}
+
+rpc ListPublicTemplates(api.proj.ListPublicTemplatesRequest) returns (api.proj.ResourceList) {
+option (google.api.http) = {
+get: "/api/proj/v2/public-templates"
+}                                                                                              ;
+}
+rpc AddTemplates(api.proj.AddTemplatesRequest) returns (api.proj.ResourceList) {
+option (google.api.http) = {
+post: "/api/proj/v1/templates",
+body: "*"
+}                                                                                              ;
+}
+rpc GetTemplate(api.proj.GetTemplateRequest) returns (api.proj.Resource) {
+option (google.api.http) = {
+get: "/api/proj/v2/templates/{id}"
+}                                                                                              ;
+}
+rpc UpdateTemplate(api.proj.UpdateTemplateRequest) returns (api.proj.Resource) {
+option (google.api.http) = {
+patch: "/api/proj/v1/templates/{id}",
+body: "*"
+}                                                                                              ;
+}
+
+rpc _ListTemplates(_ListTemplatesRequest) returns (api.proj.ResourceList) {}
+rpc _AddTemplates(AddTemplatesRequest) returns (api.proj.ResourceList) {}
+rpc _GetTemplate(GetTemplateRequest) returns (api.proj.Resource) {}
+rpc _UpdateTemplate(UpdateTemplateRequest) returns (api.proj.Resource) {}
+
+rpc CreateTemplate(CreateTemplateRequest) returns (api.proj.Resource) {
+option (google.api.http) = {
+post: "/api/proj/v1/templates"
+body: "*"
+}                                                                       ;
+}
+// ---------------
+rpc GetAssetSummary(google.protobuf.Empty) returns (AssetSummary) {
+option (google.api.http) = {
+get: "/api/proj/v1/asset-summaries"
+}                                                                       ;
+}
+
+rpc ListQualityAssets(ListQualityAssetsRequest) returns (api.proj.AssetList) {
+option (google.api.http) = {
+get: "/api/proj/v2/quality-assets"
+}                                                                              ;
+}
+
+rpc ReCreateAsset(ReCreateAssetRequest) returns (api.proj.Asset) {
+option (google.api.http) = {
+post: "/api/proj/v1/re-assets"
+body: "*"
+}                                                                  ;
+}
+rpc CreateAsset(CreateAssetRequest) returns (api.proj.Asset) {
+option (google.api.http) = {
+post: "/api/proj/v1/assets"
+body: "*"
+}                                                                  ;
+}
+
+rpc CreateAssetV2(CreateAssetV2Request) returns (api.proj.Asset) {
+option (google.api.http) = {
+post: "/api/proj/v2/assets"
+body: "*"
+}                                                                  ;
+}
+rpc CreateAssetV3(CreateAssetV3Request) returns (api.proj.Asset) {
+option (google.api.http) = {
+post: "/api/proj/v3/assets"
+body: "*"
+}                                                                  ;
+}
+
+rpc CreateAssetV5(CreateAssetV5Request) returns (api.proj.Asset) {
+option (google.api.http) = {
+post: "/api/proj/v5/assets"
+body: "*"
+}                                                                  ;
+}
+
+rpc ListAssets(ListAssetsRequest) returns (api.proj.AssetList) {
+option (google.api.http) = {
+get: "/api/proj/v2/assets"
+}                                                                   ;
+}
+rpc _ListAssets(_ListAssetsRequest) returns (api.proj.AssetList) {}
+
+rpc UpdateAsset(UpdateAssetRequest) returns (api.proj.Asset) {
+option (google.api.http) = {
+patch: "/api/proj/v1/assets/{id}"
+body: "*"
+}                                                              ;
+}
+
+rpc GetAsset(GetAssetRequest) returns (api.proj.Asset) {
+option (google.api.http) = {
+get: "/api/proj/v2/assets/{id}"
+}                                                           ;
+}
+rpc _GetAsset(_GetAssetRequest) returns (api.proj.Asset) {}
+
+rpc CallbackByVolcengine(CallbackByVolcengineParams) returns (google.protobuf.Empty) {
+option (google.api.http) = {
+post: "/api/proj/v1/callback-by-volcengine",
+body: "*"
+}                                                                                      ;
+}
+
+rpc ListRelatedItems(ListRelatedItemsRequest) returns (api.proj.ItemList) {
+option (google.api.http) = {
+get: "/api/proj/v1/related-items"
+}                                                                             ;
+}
+rpc CreateCommodity(CreateCommodityRequest) returns (api.proj.Commodity) {
+option (google.api.http) = {
+post: "/api/proj/v1/commodities"
+body: "*"
+}                                                                             ;
+}
+rpc ListCommodities(ListCommodityRequest) returns (api.proj.CommodityList) {
+option (google.api.http) = {
+get: "/api/proj/v1/commodities"
+}                                                                             ;
+}
+rpc GetCommodity(GetCommodityRequest) returns (api.proj.Commodity) {
+option (google.api.http) = {
+get: "/api/proj/v1/commodities/{id}"
+}                                                                             ;
+}
+rpc UpdateCommodity(UpdateCommodityRequest) returns (google.protobuf.Empty) {
+option (google.api.http) = {
+patch: "/api/proj/v1/commodities/{id}"
+body: "*"
+}                                                                             ;
+}
+rpc CreateTask(CreateTaskTaskRequest) returns (api.proj.Task) {
+option (google.api.http) = {
+post: "/api/proj/v1/tasks"
+body: "*"
+}                                                                             ;
+}
+rpc ListTasks(ListTaskRequest) returns (api.proj.TaskList) {
+option (google.api.http) = {
+get: "/api/proj/v1/tasks"
+}                                                                             ;
+}
+rpc GetTask(GetTaskRequest) returns (api.proj.Task) {
+option (google.api.http) = {
+get: "/api/proj/v1/tasks/{id}"
+}                                                                             ;
+}
+rpc UpdateTask(UpdateTaskRequest) returns (api.proj.Task) {
+option (google.api.http) = {
+patch: "/api/proj/v1/tasks/{id}"
+body: "*"
+}                                                                             ;
+}
+
+rpc UpdateTaskSegment(UpdateTaskSegmentRequest) returns (google.protobuf.Empty) {
+option (google.api.http) = {
+patch: "/api/proj/v1/taskSegments/{id}"
+body: "*"
+}                                                                                 ;
+}
+
+// ResourceSegment Public
+rpc ListResourceSegments(ListResourceSegmentsRequest) returns (api.proj.ResourceSegmentList) {
+option (google.api.http) = {
+get: "/api/proj/v1/resource-segments"
+}                                                                                              ;
+}
+
+rpc GetResourceSegment(GetResourceSegmentRequest) returns (api.proj.ResourceSegment) {
+option (google.api.http) = {
+get: "/api/proj/v1/resource-segments/{id}"
+}                                                                                                  ;
+}
+rpc UpdateResourceSegment(api.proj.UpdateResourceSegmentRequest) returns (google.protobuf.Empty) {
+option (google.api.http) = {
+patch: "/api/proj/v1/resource-segments/{id}"
+body: "*"
+}                                                                                                  ;
+}
+
+// ResourceSegment Proxy
+rpc _ListResourceSegments(_ListResourceSegmentsRequest) returns (api.proj.ResourceSegmentList) {}
+rpc _AddResourceSegments(_AddResourcesSegmentRequest) returns (api.proj.ResourceSegmentList) {}
+rpc _UpdateResourceSegment(_UpdateResourceSegmentRequest) returns (api.proj.ResourceSegment) {}
+rpc _GetResourceSegment(_GetResourceSegmentRequest) returns (api.proj.ResourceSegment) {}
+
+}
 
 message ListRemixOptionsRequest {
-  string fields = 1;
+string fields = 1                 ;
 }
 
 message AddFeedbackRequest {
-  string category = 1;
-  string url = 2;
-  repeated string issues = 3;
-  map<string, string> content = 4;
-  string targetId = 5;
+string category = 1             ;
+string url = 2                  ;
+repeated string issues = 3      ;
+map<string, string> content = 4 ;
+string targetId = 5             ;
 }
 
 message AssetSummary {
-  int64 total = 1;
-  int64 favorite = 2;
-  int64 processing = 3;
-  int64 completed = 4;
-  int64 failed = 5;
+int64 total = 1        ;
+int64 favorite = 2     ;
+int64 processing = 3   ;
+int64 completed = 4    ;
+int64 failed = 5       ;
 }
 
 message UpdateTemplateRequest {
-  string id = 1;
-  string action = 2;
+string id = 1                   ;
+string action = 2               ;
 }
-
 
 message GetTemplateRequest {
-  string id = 1;
+string id = 1                ;
 }
-
 
 message AddTemplatesRequest {
 
-  message Item {
-    string url = 1;
-    string coverUrl = 3;
-  }
+message Item {
+string url = 1      ;
+string coverUrl = 3 ;
+}
 
-  repeated Item items = 1;
+repeated Item items = 1 ;
 }
 
 message ListOngoingIssuesRequest {
 }
 
 message Issue {
-  string _id = 1;
-  string category = 2;
-  string title = 3;
+string _id = 1      ;
+string category = 2 ;
+string title = 3    ;
 }
 
 message IssueList {
-  repeated Issue list = 1;
+repeated Issue list = 1 ;
 }
 
 message ListFeedbacksRequest {
-  int64 page = 1;
-  string category = 3;
-  int64 size = 4;
-  string targetId = 5;
+int64 page = 1                 ;
+string category = 3            ;
+int64 size = 4                 ;
+string targetId = 5            ;
 }
 
 message _ListFeedbacksRequest {
-  int64 page = 1;
-  string category = 3;
-  int64 size = 4;
-  string targetId = 5;
-  string userId = 6;
+int64 page = 1                  ;
+string category = 3             ;
+int64 size = 4                  ;
+string targetId = 5             ;
+string userId = 6               ;
 }
-
 
 message ListTemplatesRequest {
-  int64 page = 1;
-  string keyword = 2;
-  string category = 3;
-  int64 size = 4;
-  string searchBy = 5;
-  repeated string ids = 7;
-  string returnFields = 8;
-  string status = 9;
+int64 page = 1                 ;
+string keyword = 2             ;
+string category = 3            ;
+int64 size = 4                 ;
+string searchBy = 5            ;
+repeated string ids = 7        ;
+string returnFields = 8        ;
+string status = 9              ;
 }
 
-
 message _ListTemplatesRequest {
-  int64 page = 1;
-  string category = 3;
-  int64 size = 4;
-  string keyword = 2;
-  string searchBy = 5;
-  repeated string ids = 7;
-  string userId = 8;
+int64 page = 1                  ;
+string category = 3             ;
+int64 size = 4                  ;
+string keyword = 2              ;
+string searchBy = 5             ;
+repeated string ids = 7         ;
+string userId = 8               ;
 
-  string returnFields = 9;
-  string status = 10;
+string returnFields = 9 ;
+string status = 10      ;
 
 }
 
 message ListPublicTemplatesRequest {
-  int64 page = 1;
-  string keyword = 2;
-  string category = 3;
-  int64 size = 4;
-  string searchBy = 5;
-  repeated string ids = 7;
-  string returnFields = 8;
-  string status = 9;
+int64 page = 1                       ;
+string keyword = 2                   ;
+string category = 3                  ;
+int64 size = 4                       ;
+string searchBy = 5                  ;
+repeated string ids = 7              ;
+string returnFields = 8              ;
+string status = 9                    ;
 }
-
 
 message CallbackByVolcengineParams {
-  message Content {
-    string video_url = 1;
-    string last_frame_url = 2;
-  }
-
-  message Usage {
-    uint32 completion_tokens = 1;
-    uint32 total_tokens = 2;
-  }
-
-  string id = 1;
-  string model = 2;
-  string status = 3;
-  Content content = 4;
-  Usage usage = 5;
-  uint32 created_at = 6;
-  uint32 updated_at = 7;
-  uint32 seed = 8;
-  string resolution = 9;
-  uint32 duration = 10;
-  string ratio = 11;
-  uint32 framespersecond = 12;
+message Content {
+string video_url = 1                 ;
+string last_frame_url = 2            ;
 }
 
+message Usage {
+uint32 completion_tokens = 1 ;
+uint32 total_tokens = 2      ;
+}
+
+string id = 1               ;
+string model = 2            ;
+string status = 3           ;
+Content content = 4         ;
+Usage usage = 5             ;
+uint32 created_at = 6       ;
+uint32 updated_at = 7       ;
+uint32 seed = 8             ;
+string resolution = 9       ;
+uint32 duration = 10        ;
+string ratio = 11           ;
+uint32 framespersecond = 12 ;
+}
 
 message ListRelatedItemsRequest {
-  string keyword = 1;
+string keyword = 1                ;
 }
 
 message CreateCommodityRequest {
-  string url = 1;
-  repeated api.proj.Media medias = 2;
+string url = 1                     ;
+repeated api.proj.Media medias = 2 ;
 }
 
 message GenerateAssetPromptRequest {
-  string id = 1;
+string id = 1                        ;
 }
 
 message GenerateAssetPromptResponse {
-  string text = 1;
+string text = 1                       ;
 }
 
 message ListAssetsRequest {
-  int64 page = 1;
-  int64 size = 2;
-  string returnFields = 3;
-  string status = 4;
-  string category = 5;
+int64 page = 1              ;
+int64 size = 2              ;
+string returnFields = 3     ;
+string status = 4           ;
+string category = 5         ;
 }
 
 message _ListAssetsRequest {
-  int64 page = 1;
-  int64 size = 2;
-  string returnFields = 3;
-  string status = 4;
-  string userId = 5;
-  string id = 6;
-  string category = 7;
+int64 page = 1               ;
+int64 size = 2               ;
+string returnFields = 3      ;
+string status = 4            ;
+string userId = 5            ;
+string id = 6                ;
+string category = 7          ;
 }
 
 message ListQualityAssetsRequest {
-  int64 page = 1;
-  int64 size = 2;
-  string returnFields = 3;
+int64 page = 1                     ;
+int64 size = 2                     ;
+string returnFields = 3            ;
 }
 
-
 message GetAssetRequest {
-  string id = 1;
-  string returnFields = 2;
+string id = 1             ;
+string returnFields = 2   ;
 }
 
 message _GetAssetRequest {
-  string id = 1;
-  string returnFields = 2;
+string id = 1              ;
+string returnFields = 2    ;
 
 }
 
 message ListCommodityRequest {
-  int64 page = 1;
-  string keyword = 2;
-  repeated string ids = 3;
-  int64 size = 4;
-  string returnFields = 5;
+int64 page = 1                   ;
+string keyword = 2               ;
+repeated string ids = 3          ;
+int64 size = 4                   ;
+string returnFields = 5          ;
 }
 message GetCommodityRequest {
-  string id = 1;
+string id = 1                    ;
 }
 message UpdateCommodityRequest {
-  string id = 1;
-  string action = 2;
+string id = 1                    ;
+string action = 2                ;
 }
 
 message UpdateAssetRequest {
-  string id = 1;
-  string action = 2;
-  string text = 3;
-  map<string, string> params = 4;
+string id = 1                  ;
+string action = 2              ;
+string text = 3                ;
+map<string, string> params = 4 ;
 }
 
 message CreateAssetRequest {
-  string templateId = 1;
-  api.proj.Commodity commodity = 2;
-  api.proj.ResourceSegment segment = 5;
-  string promptAddition = 3;
-  string baseAssetId = 4;
-  api.proj.AssetPrompts prompts = 6;
+string templateId = 1                ;
+api.proj.Commodity commodity = 2     ;
+api.proj.ResourceSegment segment = 5 ;
+string promptAddition = 3            ;
+string baseAssetId = 4               ;
+api.proj.AssetPrompts prompts = 6    ;
 }
 
 message CreateAssetV2Request {
-  string commodityId = 1;
-  string segmentId = 2;
-  api.proj.ResourceSegment segment = 3;
-  string workflowName = 4;
-  api.proj.DataBus initialData = 5;
+string commodityId = 1               ;
+string segmentId = 2                 ;
+api.proj.ResourceSegment segment = 3 ;
+string workflowName = 4              ;
+api.proj.DataBus initialData = 5     ;
 }
 
 message CreateAssetV3Request {
-  string prompt = 1;
-  repeated string images = 2;
+string prompt = 1              ;
+repeated string images = 2     ;
 }
 message CreateAssetV5Request {
-  string url = 1;
-  string coverUrl = 2;
+string url = 1                 ;
+string coverUrl = 2            ;
 }
 
 message CreateTemplateRequest {
-  string prompt = 3;
-  string assetId = 4;
+string prompt = 3               ;
+string assetId = 4              ;
 }
 
 message ReCreateAssetRequest {
-  string prompt = 3;
-  string assetId = 4;
+string prompt = 3              ;
+string assetId = 4             ;
 }
 
 message CreateTaskTaskRequest {
-  string commodityId = 1;
-  int64 chanceIndex = 2;
+string commodityId = 1          ;
+int64 chanceIndex = 2           ;
 }
 
 message ListTaskRequest {
-  int64 page = 1;
-  string keyword = 2;
-  string returnFields = 3;
-  int64 size = 4;
+int64 page = 1            ;
+string keyword = 2        ;
+string returnFields = 3   ;
+int64 size = 4            ;
 }
 
 message GetTaskRequest {
-  string id = 1;
-  string returnFields = 2;
+string id = 1            ;
+string returnFields = 2  ;
 }
 
 message UpdateTaskRequest{
-  string id = 1;
-  string action = 2;
-  map<string, string> params = 3;
-  int64 chanceIndex = 4;
-  string templateId = 5;
+string id = 1                     ;
+string action = 2                 ;
+map<string, string> params = 3    ;
+int64 chanceIndex = 4             ;
+string templateId = 5             ;
 }
 message UpdateTaskSegmentRequest{
-  string id = 1;
-  string action = 2;
-  map<string, string> params = 3;
+string id = 1                     ;
+string action = 2                 ;
+map<string, string> params = 3    ;
+}
+
+message _ListResourceSegmentsRequest {
+int64 page = 1                         ;
+string keyword = 2                     ;
+string searchBy = 6                    ;
+string category = 3                    ;
+int64 size = 4                         ;
+string status = 5                      ;
+repeated string ids = 7                ;
+string returnFields = 8                ;
+string userId = 9                      ;
+}
+
+message _AddResourcesSegmentRequest{
+message Item {
+string url = 1                       ;
+string coverUrl = 3                  ;
+double timeStart = 4                 ;
+double timeEnd = 5                   ;
+}
+
+repeated Item items = 1 ;
+string userId = 2       ;
+}
+
+message _UpdateResourceSegmentRequest {
+string id = 1                           ;
+string action = 2                       ;
+string rootId = 3                       ;
+string userId = 4                       ;
+}
+
+message _GetResourceSegmentRequest {
+string id = 1                        ;
+string userId = 2                    ;
 }
