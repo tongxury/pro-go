@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api.proj ;
+
+import "usercenter/user.proto";
+import "proj/item.proto";
+
+option go_package = "store/api/proj;projpb";
+
+message ResourceSegmentCollectionItem {
+// @inject_tag: bson:"_id,omitempty"
+string _id = 1 [json_name = '_id'];
+// @inject_tag: bson:"user"
+api.usercenter.User user = 2              ;
+// @inject_tag: bson:"resourceSegment"
+ResourceSegment resourceSegment = 3       ;
+// @inject_tag: bson:"resourceSemgent"
+ResourceSegment resourceSemgentLegacy = 5 ;
+// @inject_tag: bson:"createdAt"
+int64 createdAt = 4                       ;
+}
