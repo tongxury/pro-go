@@ -77,19 +77,27 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		})
 	}
 
-	_, err = t.data.Mongo.Commodity.UpdateByIDIfExists(ctx, commodity.XId,
-		mgz.Op().
-			Set("name", analyzeResult.Name).
-			Set("tags", analyzeResult.Tags).
-			Set("brand", analyzeResult.Brand).
-			Set("description", analyzeResult.Description).
-			Set("chances", analyzeResult.Chances).
-			Set("character", analyzeResult.Character).
-			Set("packagingAttributes", analyzeResult.PackagingAttributes).
-			Set("status", "completed"),
-	)
+	// _, err = t.data.Mongo.Commodity.UpdateByIDIfExists(ctx, commodity.XId,
+	// 	mgz.Op().
+	// 		Set("name", analyzeResult.Name).
+	// 		Set("tags", analyzeResult.Tags).
+	// 		Set("brand", analyzeResult.Brand).
+	// 		Set("description", analyzeResult.Description).
+	// 		Set("chances", analyzeResult.Chances).
+	// 		Set("character", analyzeResult.Character).
+	// 		Set("packagingAttributes", analyzeResult.PackagingAttributes).
+	// 		Set("status", "completed"),
+	// )
+	// if err != nil {
+	// 	logger.Errorw("update commodity err", err)
+	// 	return nil, err
+	// }
+
+	// 更新 workflow 中的 dataBus
+	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
+		Set(fmt.Sprintf("jobs.%d.dataBus.commdity", jobState.Index), commodity))
 	if err != nil {
-		logger.Errorw("update commodity err", err)
+		logger.Errorw("update workflow commodity fail", "err", err)
 		return nil, err
 	}
 
@@ -99,14 +107,21 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 	}
 
 	segments = helper.Filter(segments, func(param *projpb.ResourceSegment) bool {
-		if dataBus.GetSettings().GetDuration() == 0 {
-			return true
+
+		if int64(param.TimeEnd-param.TimeStart) < 8 {
+			return false
 		}
-		return int64(param.TimeEnd-param.TimeStart) < dataBus.GetSettings().GetDuration()
+
+		return true
+
+		// if dataBus.GetSettings().GetDuration() == 0 {
+		// 	return true
+		// }
+		// return int64(param.TimeEnd-param.TimeStart) < dataBus.GetSettings().GetDuration()
 	})
 
 	if len(segments) == 0 {
-		logger.Errorw("searchTemplateSegments err", "no segment found")
+		logger.Errorw("searchTemplateSegments err", "no segment found", "tags", strings.Join(analyzeResult.Tags, ","))
 		return &ExecuteResult{
 			Status: ExecuteStatusFailed,
 			Error:  "no segment found",
