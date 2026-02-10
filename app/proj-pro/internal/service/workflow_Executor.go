@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	projpb "store/api/proj"
 	"store/app/proj-pro/internal/biz"
 	"store/pkg/clients/cronexecutor"
 	"store/pkg/clients/mgz"
@@ -11,6 +12,49 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"go.mongodb.org/mongo-driver/bson"
 )
+
+// todo 目前有异常状态 workflow状态为failed  但是job却没有failed   临时解决方案
+func (t *WorkFlowService) CheckFailedExecutor() cronexecutor.IExecutor {
+	return cronexecutor.NewExecutor(func(ctx context.Context) ([]cronexecutor.ITask, error) {
+		return []cronexecutor.ITask{
+			cronexecutor.NewTask(time.Now().String(), func(ctx context.Context) error {
+
+				log.Debug("check failed workflow ids executor start")
+				filter := bson.M{
+					"status": biz.WorkflowStatusFailed,
+				}
+
+				timeoutWorkflows, err := t.data.Mongo.Workflow.List(ctx,
+					filter,
+				)
+				if err != nil {
+					log.Errorw("Failed to list running workflows", err)
+					return err
+				}
+
+				log.Debugw("check failed workflow ids executor done", len(timeoutWorkflows))
+
+				if len(timeoutWorkflows) == 0 {
+					return nil
+				}
+
+				for _, x := range timeoutWorkflows {
+
+					if len(helper.Filter(x.Jobs, func(param *projpb.Job) bool {
+						return param.Status == biz.JobStatusFailed
+					})) > 0 {
+						continue
+					}
+
+					t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, x.XId, mgz.Op().Set("status", biz.WorkflowStatusRunning))
+
+				}
+
+				return nil
+			}),
+		}, nil
+	})
+}
 
 func (t *WorkFlowService) PauseTimeoutWorkflowIdsExecutor() cronexecutor.IExecutor {
 	return cronexecutor.NewExecutor(func(ctx context.Context) ([]cronexecutor.ITask, error) {

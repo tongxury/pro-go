@@ -101,6 +101,12 @@ func NewHTTPServer(c confcenter.Server,
 		panic(err)
 	}
 
+	if err := cc.Register("@every 1m",
+		workflow.CheckFailedExecutor(),
+		cronexecutor.RegisterOptions{Concurrency: 1}); err != nil {
+		panic(err)
+	}
+
 	cc.Start()
 
 	go func() {

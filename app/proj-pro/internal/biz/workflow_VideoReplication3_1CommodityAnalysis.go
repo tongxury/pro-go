@@ -125,13 +125,14 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 	})
 
 	if len(segments) == 0 {
-		logger.Errorw("searchTemplateSegments err", "no segment found", "tags", strings.Join(analyzeResult.Tags, ","))
 
 		count, err := t.data.Redis.Incr(ctx, "video_replication_3_1_no_segment_found:retry:"+wfState.XId).Result()
 		if err != nil {
 			logger.Errorw("update workflow segment fail", "err", err)
 			return nil, err
 		}
+
+		logger.Errorw("searchTemplateSegments err", "no segment found", "tags", strings.Join(analyzeResult.Tags, ","), "count", count)
 
 		if count > 5 {
 			return &ExecuteResult{
@@ -143,7 +144,7 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		return nil, nil
 	}
 
-	logger.Debugw("searchTemplateSegments ", "success", "segments", len(segments))
+	logger.Debugw("searchTemplateSegments ", "success", "tags", strings.Join(analyzeResult.Tags, ","), "segments", len(segments))
 
 	// 更新 workflow 中的 dataBus
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().

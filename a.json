@@ -1,146 +1,194 @@
 [
   {
-    "name": "commodityAnalysisJob",
+    "name": "segmentScriptJob",
     "status": "completed",
     "dataBus": {
-      "segment": {
-        "_id": "695e7babe3c22874b959fed5",
-        "formula": "复古情怀视觉 + 拟人化IP反差 + 重磅利益点（真金）+ 奇葩产品堆叠 = 高转化种草",
-        "script": "【00:00-00:02】画面中心是一个红色边框的复古显像管电视。一只手握着灰色遥控器，大拇指用力按下红色开关。电视屏幕从五彩的干扰条闪烁，迅速转场到一个发光的放射状黄色背景，象征节目开场。【00:02-00:04】屏幕中出现四个立式麦克风，随后弹出“好东西整活大赛”大字报。恐龙主播在麦克风后探出头，神态严肃而呆滞，产生强烈反差萌。【00:04-00:07】切换至正式播报画面。恐龙主播上下开合嘴巴，左上角标有“整活头条”字样。文字标题“好东西整活大赛”以黑体加粗形式出现在屏幕下方。【00:08-00:14】画面转变为一张泛黄的“WANTED”悬赏令，中间画着一只卡通呆滞鱼。随着音效，屏幕中心盖上鲜红的“ANTED”红色印章，并强调“真金悬赏”。随后，一张精致的实物金鱼挂件图片快速滑入，增加吸引力。【00:15-00:19】恐龙主播再次出现，周围飞舞着各种简笔画线条鱼，背景切换为清新的浅蓝色。主播进行互动讲解，手势模拟讲解规则。【00:20-结束】进入高频混剪模式。画面被分割成多个小窗口，展示不同用户的实测素材：包括戴着恐龙嘴拖鞋的脚在开合、拿着绿鱼头套晃动、捏合豌豆荚玩具、以及各种奇形怪状的抱枕。每个素材都保留了UGC的真实感，色彩鲜艳，动作极具魔性。结尾处再次回到复古电视边框，呼吁大家搜索关键词参与，右下角带有“PLAY NEWS”字样的红色旋钮设计，增加整体设计的统一性。",
-        "root": {
-          "url": "https://yoozyres.tos-cn-shanghai.volces.com/dbf0acbe985df98c90018b4fcedec60d.mp4",
-          "coverUrl": "https://yoozyres.tos-cn-shanghai.volces.com/d7b800e3171649e7a97e3055c2c0a5b8.jpg",
-          "commodity": {
-            "name": "该视频通过趣味恐龙新闻播报形式，推介了包含鱼类头套、搞怪拖鞋、解压玩偶等在内的多款抖音整活好物，适合追求解压与社交趣味的年轻人。",
-            "tags": [
-              "整活好物",
-              "搞笑玩具",
-              "摸鱼神器",
-              "解压礼物",
-              "抖音爆款",
-              "新奇特周边"
-            ]
+      "segmentScript": {
+        "script": "{\n  \"segments\": [\n    {\n      \"timeStart\": 0.0,\n      \"timeEnd\": 1.0,\n      \"subtitle\": \"溪木源 (Simpcare) 山茶花洁面\",\n      \"intention\": \"品牌开场，确立视觉基调\",\n      \"coreAction\": \"品牌标志性山茶花元素由中心向外扩散\",\n      \"elementTransformation\": \"动态绿叶转化为品牌Logo\",\n      \"visualChange\": \"深绿背景渐变为透亮白绿色调\",\n      \"contentStyle\": \"极简清新风格\",\n      \"sceneStyle\": \"纯色动态背景\",\n      \"description\": \"画面中心出现溪木源品牌Logo，伴随山茶花瓣飞舞效果。\",\n      \"shootingStyle\": \"平面动画转场\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 0.1,\n          \"desc\": \"品牌Logo首次闪现\"\n        },\n        \"climax\": {\n          \"timestamp\": 0.5,\n          \"desc\": \"花瓣扩散到全屏\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 0.9,\n          \"desc\": \"画面定格在品牌名称\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 1.0,\n      \"timeEnd\": 4.0,\n      \"subtitle\": \"洗脸刺痛又紧绷？屏障受损很难受！\",\n      \"intention\": \"痛点展示，建立情绪共鸣\",\n      \"coreAction\": \"女生对着镜子触摸发红的脸颊，露出困扰表情\",\n      \"elementTransformation\": \"面部特写由自然光转为强调红血丝的暗光\",\n      \"visualChange\": \"色彩饱和度降低，突出面部干燥纹理\",\n      \"contentStyle\": \"真实生活质感\",\n      \"sceneStyle\": \"明亮现代的洗漱间，洗手台略显凌乱\",\n      \"description\": \"女生在洗手间面对镜子，手捂着泛红干燥的脸，文字“刺痛又紧绷”在侧边跳出。\",\n      \"shootingStyle\": \"中景切换特写，配合手持晃动感\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 1.2,\n          \"desc\": \"女生抬头看镜子\"\n        },\n        \"climax\": {\n          \"timestamp\": 2.5,\n          \"desc\": \"手触碰泛红皮肤特写\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 3.8,\n          \"desc\": \"文字特效消失\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 4.0,\n      \"timeEnd\": 8.0,\n      \"subtitle\": \"别怕，山茶花骑士来救你！\",\n      \"intention\": \"英雄（产品）登场，转折叙事\",\n      \"coreAction\": \"穿着绿色铠甲的3D山茶花骑士从洁面瓶身中飞跃而出\",\n      \"elementTransformation\": \"液体流向中心聚合成虚拟骑士形象\",\n      \"visualChange\": \"画面色调变暖，充满能量感\",\n      \"contentStyle\": \"科幻与清新融合\",\n      \"sceneStyle\": \"洗手台上方出现微缩景观式动态空间\",\n      \"description\": \"溪木源洗面奶瓶身上长出绿叶翅膀，骑士手持泡沫盾牌降落在洗手台上。\",\n      \"shootingStyle\": \"跟随运动镜头，动态快节奏切换\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 4.5,\n          \"desc\": \"瓶身发光产生骑士\"\n        },\n        \"climax\": {\n          \"timestamp\": 6.0,\n          \"desc\": \"骑士向镜头滑翔\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 7.5,\n          \"desc\": \"骑士摆出守护姿势\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 8.0,\n      \"timeEnd\": 14.0,\n      \"subtitle\": \"3:4:1 科学配比，细腻泡沫深层净澈\",\n      \"intention\": \"核心卖点展示，理性背书\",\n      \"coreAction\": \"特写泵头按压出绵密泡沫，并在脸部轻轻推开\",\n      \"elementTransformation\": \"液体转化为如云朵般支撑力极强的白沫\",\n      \"visualChange\": \"微距拍摄泡沫破裂与生成的瞬间，水润感满溢\",\n      \"contentStyle\": \"高级护肤品广告感\",\n      \"sceneStyle\": \"纯白背景与水波纹倒影\",\n      \"description\": \"展示泡沫在T区、脸颊的细腻清洁过程，配合“3:4:1”配比文字特效。\",\n      \"shootingStyle\": \"极高帧率微距摄影，慢动作展示质地\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 8.2,\n          \"desc\": \"泵头按压瞬间\"\n        },\n        \"climax\": {\n          \"timestamp\": 11.0,\n          \"desc\": \"泡沫在皮肤上回弹\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 13.5,\n          \"desc\": \"清水洗净的瞬间\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 14.0,\n      \"timeEnd\": 19.0,\n      \"subtitle\": \"温和洁净不紧绷，洗出水润透亮肌\",\n      \"intention\": \"效果验证，情绪释放\",\n      \"coreAction\": \"女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤\",\n      \"elementTransformation\": \"肤色从暗沉转为透亮清爽\",\n      \"visualChange\": \"光影增强，皮肤表面呈现自然光泽感\",\n      \"contentStyle\": \"明亮治愈风\",\n      \"sceneStyle\": \"阳光撒入的清爽浴室\",\n      \"description\": \"女生对镜微笑，背景洁净，文字“轻松清洁不刺激”横向滑过。\",\n      \"shootingStyle\": \"中远景固定，配合自然光侧拍\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 14.5,\n          \"desc\": \"毛巾擦脸后抬头\"\n        },\n        \"climax\": {\n          \"timestamp\": 16.5,\n          \"desc\": \"女生对镜甜笑\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 18.5,\n          \"desc\": \"皮肤光泽特写\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 19.0,\n      \"timeEnd\": 28.0,\n      \"subtitle\": \"溪木源山茶花洁面，敏感肌的温和守护者\",\n      \"intention\": \"品牌收尾与购买引导\",\n      \"coreAction\": \"女生与山茶花骑士同框合影，展示产品全系列\",\n      \"elementTransformation\": \"骑士收缩回Logo位置，瓶身特效强化\",\n      \"visualChange\": \"绿色品牌色大面积覆盖，形成视觉记忆点\",\n      \"contentStyle\": \"品牌宣传片画风\",\n      \"sceneStyle\": \"充满山茶花装饰的品牌展示空间\",\n      \"description\": \"右侧产品堆叠，左侧女生点赞，底部显示“10大无添加”等核心利益点文字。\",\n      \"shootingStyle\": \"固定全景，配合动态UI弹出\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 19.5,\n          \"desc\": \"骑士与女生并排站立\"\n        },\n        \"climax\": {\n          \"timestamp\": 23.0,\n          \"desc\": \"产品全家福展示\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 27.5,\n          \"desc\": \"品牌Slogan定格\"\n        }\n      }\n    }\n  ]\n}",
+        "segments": [
+          {
+            "coreAction": "品牌标志性山茶花元素由中心向外扩散",
+            "elementTransformation": "动态绿叶转化为品牌Logo",
+            "visualChange": "深绿背景渐变为透亮白绿色调",
+            "intention": "品牌开场，确立视觉基调",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 0.1,
+                "desc": "品牌Logo首次闪现"
+              },
+              "climax": {
+                "timestamp": 0.5,
+                "desc": "花瓣扩散到全屏"
+              },
+              "storyEnding": {
+                "timestamp": 0.9,
+                "desc": "画面定格在品牌名称"
+              }
+            },
+            "contentStyle": "极简清新风格",
+            "sceneStyle": "纯色动态背景",
+            "description": "画面中心出现溪木源品牌Logo，伴随山茶花瓣飞舞效果。",
+            "shootingStyle": "平面动画转场",
+            "timeEnd": 1,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3602cbcd75365673b78416bfff532af9.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d87ce7456f436b9f60bdfa7e718f71eb.jpg",
+            "subtitle": "溪木源 山茶花洁面泡沫"
+          },
+          {
+            "coreAction": "女生对着镜子触摸发红的脸颊，露出困扰表情",
+            "elementTransformation": "面部特写由自然光转为强调红血丝的暗光",
+            "visualChange": "色彩饱和度降低，突出面部干燥纹理",
+            "intention": "痛点展示，建立情绪共鸣",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 1.2,
+                "desc": "女生抬头看镜子"
+              },
+              "climax": {
+                "timestamp": 2.5,
+                "desc": "手触碰泛红皮肤特写"
+              },
+              "storyEnding": {
+                "timestamp": 3.8,
+                "desc": "文字特效消失"
+              }
+            },
+            "contentStyle": "真实生活质感",
+            "sceneStyle": "明亮现代的洗漱间，洗手台略显凌乱",
+            "description": "女生在洗手间面对镜子，手捂着泛红干燥的脸，文字“刺痛又紧绷”在侧边跳出。",
+            "shootingStyle": "中景切换特写，配合手持晃动感",
+            "timeStart": 1,
+            "timeEnd": 4,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b979744056ea9dc56ee7c244dd1fa4f7.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/977d2ff6467c88d9c5c4ac333cdfadff.jpg",
+            "subtitle": "洗脸刺痛又紧绷？屏障受损很难受！"
+          },
+          {
+            "coreAction": "穿着绿色铠甲的3D山茶花骑士从洁面瓶身中飞跃而出",
+            "elementTransformation": "液体流向中心聚合成虚拟骑士形象",
+            "visualChange": "画面色调变暖，充满能量感",
+            "intention": "英雄（产品）登场，转折叙事",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 4.5,
+                "desc": "瓶身发光产生骑士"
+              },
+              "climax": {
+                "timestamp": 6,
+                "desc": "骑士向镜头滑翔"
+              },
+              "storyEnding": {
+                "timestamp": 7.5,
+                "desc": "骑士摆出守护姿势"
+              }
+            },
+            "contentStyle": "科幻与清新融合",
+            "sceneStyle": "洗手台上方出现微缩景观式动态空间",
+            "description": "溪木源洗面奶瓶身上长出绿叶翅膀，骑士手持泡沫盾牌降落在洗手台上。",
+            "shootingStyle": "跟随运动镜头，动态快节奏切换",
+            "timeStart": 4,
+            "timeEnd": 8,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/1c7b0f46565b7e682e4ca1bb0b29ccb4.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/438a58a14681b6cfb86be128800f7613.jpg",
+            "subtitle": "别怕，山茶花洁面泡来救你！"
+          },
+          {
+            "coreAction": "特写泵头按压出绵密泡沫，并在脸部轻轻推开",
+            "elementTransformation": "液体转化为如云朵般支撑力极强的白沫",
+            "visualChange": "微距拍摄泡沫破裂与生成的瞬间，水润感满溢",
+            "intention": "核心卖点展示，理性背书",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 8.2,
+                "desc": "泵头按压瞬间"
+              },
+              "climax": {
+                "timestamp": 11,
+                "desc": "泡沫在皮肤上回弹"
+              },
+              "storyEnding": {
+                "timestamp": 13.5,
+                "desc": "清水洗净的瞬间"
+              }
+            },
+            "contentStyle": "高级护肤品广告感",
+            "sceneStyle": "纯白背景与水波纹倒影",
+            "description": "展示泡沫在T区、脸颊的细腻清洁过程，配合“3:4:1”配比文字特效。",
+            "shootingStyle": "极高帧率微距摄影，慢动作展示质地",
+            "timeStart": 8,
+            "timeEnd": 14,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4582ff9998f828f58396621bde469091.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9ba5202e6d7c745094097febb7ae6776.jpg",
+            "subtitle": "3:4:1 科学配比，细腻泡沫深层净澈"
+          },
+          {
+            "coreAction": "女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤",
+            "elementTransformation": "肤色从暗沉转为透亮清爽",
+            "visualChange": "光影增强，皮肤表面呈现自然光泽感",
+            "intention": "效果验证，情绪释放",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 14.5,
+                "desc": "毛巾擦脸后抬头"
+              },
+              "climax": {
+                "timestamp": 16.5,
+                "desc": "女生对镜甜笑"
+              },
+              "storyEnding": {
+                "timestamp": 18.5,
+                "desc": "皮肤光泽特写"
+              }
+            },
+            "contentStyle": "明亮治愈风",
+            "sceneStyle": "阳光撒入的清爽浴室",
+            "description": "女生对镜微笑，背景洁净，文字“轻松清洁不刺激”横向滑过。",
+            "shootingStyle": "中远景固定，配合自然光侧拍",
+            "timeStart": 14,
+            "timeEnd": 19,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/f87f24efb4f49df750efde732f302536.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/67e39be42d66623a291b90a76357ad73.jpg",
+            "subtitle": "温和洁净不紧绷，洗出水润透亮肌"
+          },
+          {
+            "coreAction": "女生与山茶花骑士同框合影，展示产品全系列",
+            "elementTransformation": "骑士收缩回Logo位置，瓶身特效强化",
+            "visualChange": "绿色品牌色大面积覆盖，形成视觉记忆点",
+            "intention": "品牌收尾与购买引导",
+            "keyFrames": {
+              "storyBeginning": {
+                "timestamp": 19.5,
+                "desc": "骑士与女生并排站立"
+              },
+              "climax": {
+                "timestamp": 23,
+                "desc": "产品全家福展示"
+              },
+              "storyEnding": {
+                "timestamp": 27.5,
+                "desc": "品牌Slogan定格"
+              }
+            },
+            "contentStyle": "品牌宣传片画风",
+            "sceneStyle": "充满山茶花装饰的品牌展示空间",
+            "description": "右侧产品堆叠，左侧女生点赞，底部显示“10大无添加”等核心利益点文字。",
+            "shootingStyle": "固定全景，配合动态UI弹出",
+            "timeStart": 19,
+            "timeEnd": 28,
+            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/e990f8ed912ffb4a305832d9e81f2bd5.jpg",
+            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c9a736e976000551bbfbad947ce6d19f.jpg",
+            "subtitle": "溪木源山茶花洁面，敏感肌的温和守护者"
           }
-        },
-        "style": "创意复古播报脚本",
-        "contentStyle": "诙谐幽默、趣味种草、大促活动预告",
-        "sceneStyle": "复古显像管电视（CRT）内部虚拟演播室，结合UGC产品展示切片",
-        "description": "视频采用独特的复古电视播报形式，通过一只绿色的恐龙布偶作为新闻主播，发布“好东西整活大赛”及“摸鱼悬赏令”。画面从切换频道开始，转入演播室公告，随后快速切换展示各种奇葩、可爱的搞怪好物，最后以真金大奖作为诱惑，引导用户参与互动。",
-        "shootingStyle": "镜头模拟电视信号切换效果。演播室部分采用固定中景镜头聚焦恐龙主播，产品展示部分采用多画面拼接和快速推写，强调产品的趣味外形和使用动态。",
-        "timeEnd": 20.8,
-        "subtitle": "2025年好东西整活大赛特别报道！本台重磅消息：官方于今日正式发布“摸鱼悬赏令”。真金悬赏全抖音新奇的鱼，最高奖励一只真金小金鱼！啥样的作品能参选？把各种各样的...",
-        "typedTags": {
-          "focusOn": [
-            "赠品活动",
-            "产品特点",
-            "外观样式",
-            "适用场景",
-            "引发好奇"
-          ],
-          "text": [
-            "引发好奇",
-            "价格优惠",
-            "产品引入",
-            "福利预告"
-          ],
-          "person": [
-            "手部出镜者",
-            "拟人化恐龙主播"
-          ],
-          "action": [
-            "按遥控器切换",
-            "恐龙主播播报",
-            "展示搞怪产品"
-          ],
-          "picture": [
-            "场景还原画面",
-            "悬念画面",
-            "产品细节特写",
-            "场景化使用演示",
-            "福利暗示画面"
-          ],
-          "scene": [
-            "复古演播室场景",
-            "真实生活场景",
-            "解压玩具场景"
-          ],
-          "shootingStyle": [
-            "推镜头",
-            "特殊视角运镜",
-            "主观视角"
-          ],
-          "emotion": [
-            "搞笑",
-            "俏皮",
-            "逗趣",
-            "轻松诙谐"
-          ]
-        },
-        "tags": [
-          "赠品活动",
-          "产品特点",
-          "外观样式",
-          "适用场景",
-          "引发好奇",
-          "引发好奇",
-          "价格优惠",
-          "产品引入",
-          "福利预告",
-          "手部出镜者",
-          "拟人化恐龙主播",
-          "场景还原画面",
-          "悬念画面",
-          "产品细节特写",
-          "场景化使用演示",
-          "福利暗示画面",
-          "复古演播室场景",
-          "真实生活场景",
-          "解压玩具场景",
-          "推镜头",
-          "特殊视角运镜",
-          "主观视角",
-          "搞笑",
-          "俏皮",
-          "逗趣",
-          "轻松诙谐"
-        ],
-        "highlightFrames": [
-          {
-            "timestamp": 0.001,
-            "desc": "特写手部按动复古遥控器，老式电视出现雪花信号并转台。",
-            "url": "https://yoozyres.tos-cn-shanghai.volces.com/16e2475a5e62dc0125378e2551a7520b.jpg"
-          },
-          {
-            "timestamp": 0.045,
-            "desc": "绿色恐龙主播站在话筒前进行严肃又滑稽的播报。",
-            "url": "https://yoozyres.tos-cn-shanghai.volces.com/d6c9d2f5d48be0ba87eda00a9d79b0c5.jpg"
-          },
-          {
-            "timestamp": 0.125,
-            "desc": "画面中心出现“WANTED”摸鱼悬赏令海报，展示真金奖励。",
-            "url": "https://yoozyres.tos-cn-shanghai.volces.com/6c7f2c0ece2c092552fc7b42197827b4.jpg"
-          },
-          {
-            "timestamp": 0.21,
-            "desc": "九宫格/多拼画面快速切换展示各种搞怪鱼类周边产品。",
-            "url": "https://yoozyres.tos-cn-shanghai.volces.com/b474558dfcf3034c8b9a06e86d716627.jpg"
-          }
-        ],
-        "status": "completed",
-        "createdAt": new
-        NumberLong(
-        "1767799771"
-        ),
-        "extra": {}
+        ]
       }
     },
     "completedAt": new
     NumberLong(
-    "1770292812"
+    "1769615356"
     )
   },
   {
-    "name": "segmentScriptJob",
+    "name": "keyFramesGenerationJob",
     "index": new
     NumberLong(
     "1"
@@ -148,165 +196,151 @@
     "status": "completed",
     "startedAt": new
     NumberLong(
-    "1770292818"
+    "1769615612"
     ),
     "dataBus": {
-      "segmentScript": {
-        "script": "{\n  \"segments\": [\n    {\n      \"timeStart\": 0.00,\n      \"timeEnd\": 4.00,\n      \"subtitle\": \"2025好东西整活大赛特别报道\",\n      \"intention\": \"展示活动海报和主题\",\n      \"coreAction\": \"切换电视屏幕上的内容\",\n      \"elementTransformation\": \"静态图像变为动态视频\",\n      \"visualChange\": \"色彩由杂乱变为清晰\",\n      \"contentStyle\": \"卡通，趣味\",\n      \"sceneStyle\": \"电视屏幕前\",\n      \"description\": \"复古电视机屏幕展示活动海报，卡通人物和麦克风，展示赛事信息。手持遥控器切换频道。\",\n      \"shootingStyle\": \"手持遥控器，屏幕切换\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 0.00,\n          \"desc\": \"电视机屏幕显示杂乱画面\"\n        },\n        \"climax\": {\n          \"timestamp\": 2.00,\n          \"desc\": \"电视机屏幕显示好东西整活大赛主题\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 4.00,\n          \"desc\": \"手持遥控器切换频道\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 4.00,\n      \"timeEnd\": 7.00,\n      \"subtitle\": \"摸鱼悬赏令，真金悬赏全抖音，新奇的鱼\",\n      \"intention\": \"宣传摸鱼悬赏活动\",\n      \"coreAction\": \"展示悬赏海报\",\n      \"elementTransformation\": \"静态图像变为动态效果\",\n      \"visualChange\": \"出现WANTED字样\",\n      \"contentStyle\": \"悬赏，趣味\",\n      \"sceneStyle\": \"电视屏幕前\",\n      \"description\": \"电视机屏幕显示“WANTED摸鱼悬赏令”海报，卡通鱼图案。出现“WANTED”红色印章。\",\n      \"shootingStyle\": \"屏幕特写\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 4.00,\n          \"desc\": \"显示悬赏海报\"\n        },\n        \"climax\": {\n          \"timestamp\": 6.00,\n          \"desc\": \"显示通缉海报\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 7.00,\n          \"desc\": \"手持遥控器，屏幕切换\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 7.00,\n      \"timeEnd\": 10.00,\n      \"subtitle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"intention\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"coreAction\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"elementTransformation\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"visualChange\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"contentStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"sceneStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"description\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"shootingStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 7.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        },\n        \"climax\": {\n          \"timestamp\": 8.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 9.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 10.00,\n      \"timeEnd\": 13.00,\n      \"subtitle\": \"前方由本台记者为你详解参与规则\",\n      \"intention\": \"讲解参与规则\",\n      \"coreAction\": \"电视机屏幕切换鱼的图案\",\n      \"elementTransformation\": \"静态图像变为动态\",\n      \"visualChange\": \"鱼的图案由少变多\",\n      \"contentStyle\": \"卡通，讲解\",\n      \"sceneStyle\": \"电视屏幕前\",\n      \"description\": \"电视屏幕上出现各种卡通鱼图案，绿色卡通恐龙形象的记者拿着麦克风。\",\n      \"shootingStyle\": \"屏幕动画\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 10.00,\n          \"desc\": \"屏幕显示水下卡通鱼\"\n        },\n        \"climax\": {\n          \"timestamp\": 11.00,\n          \"desc\": \"屏幕显示水下卡通鱼\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 12.00,\n          \"desc\": \"卡通人物进行讲解\"\n        }\n      }\n    },\n    {\n      \"timeStart\": 13.00,\n      \"timeEnd\": 16.00,\n      \"subtitle\": \"什么样的作品能参选，把各种各样的圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣放上来\",\n      \"intention\": \"展示参选作品示例\",\n      \"coreAction\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣展示\",\n      \"elementTransformation\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"visualChange\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"contentStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"sceneStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"description\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"shootingStyle\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\",\n      \"keyFrames\": {\n        \"storyBeginning\": {\n          \"timestamp\": 13.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        },\n        \"climax\": {\n          \"timestamp\": 14.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        },\n        \"storyEnding\": {\n          \"timestamp\": 15.00,\n          \"desc\": \"圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\"\n        }\n      }\n    }\n  ]\n}",
-        "segments": [
+      "keyFrames": {
+        "frames": [
           {
-            "coreAction": "切换电视屏幕上的内容",
-            "elementTransformation": "静态图像变为动态视频",
-            "visualChange": "色彩由杂乱变为清晰",
-            "intention": "展示活动海报和主题",
-            "keyFrames": {
-              "storyBeginning": {
-                "desc": "电视机屏幕显示杂乱画面"
-              },
-              "climax": {
-                "timestamp": 2,
-                "desc": "电视机屏幕显示好东西整活大赛主题"
-              },
-              "storyEnding": {
-                "timestamp": 4,
-                "desc": "手持遥控器切换频道"
-              }
-            },
-            "contentStyle": "卡通，趣味",
-            "sceneStyle": "电视屏幕前",
-            "description": "复古电视机屏幕展示活动海报，卡通人物和麦克风，展示赛事信息。手持遥控器切换频道。",
-            "shootingStyle": "手持遥控器，屏幕切换",
-            "timeEnd": 4,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/75912b2c3e041ce909d311c555a5e95a.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/15995c6a188a600ad7873278a3e6c161.jpg",
-            "subtitle": "2025好东西整活大赛特别报道"
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/bf5c852c67b77debc33da4901441b046.jpg",
+            "status": "completed",
+            "prompt": "品牌开场，确立视觉基调\n品牌标志性山茶花元素由中心向外扩散\n动态绿叶转化为品牌Logo\n\n深绿背景渐变为透亮白绿色调\n\n画面中心出现溪木源品牌Logo，伴随山茶花瓣飞舞效果。\n\n纯色动态背景\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/3602cbcd75365673b78416bfff532af9.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "category": "first_frame",
+            "review": {}
           },
           {
-            "coreAction": "展示悬赏海报",
-            "elementTransformation": "静态图像变为动态效果",
-            "visualChange": "出现WANTED字样",
-            "intention": "宣传摸鱼悬赏活动",
-            "keyFrames": {
-              "storyBeginning": {
-                "timestamp": 4,
-                "desc": "显示悬赏海报"
-              },
-              "climax": {
-                "timestamp": 6,
-                "desc": "显示通缉海报"
-              },
-              "storyEnding": {
-                "timestamp": 7,
-                "desc": "手持遥控器，屏幕切换"
-              }
-            },
-            "contentStyle": "悬赏，趣味",
-            "sceneStyle": "电视屏幕前",
-            "description": "电视机屏幕显示“WANTED摸鱼悬赏令”海报，卡通鱼图案。出现“WANTED”红色印章。",
-            "shootingStyle": "屏幕特写",
-            "timeStart": 4,
-            "timeEnd": 7,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/ea2b997272cd7ffc23caf8af675fe36c.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/0113ecf8eb60ff5e0c385ef7ad218fb3.jpg",
-            "subtitle": "摸鱼悬赏令，真金悬赏全抖音，新奇的鱼"
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/d865afa7b3efae952b6067fd48113060.jpg",
+            "status": "completed",
+            "prompt": "品牌标志性山茶花元素由中心向外扩散\n动态绿叶转化为品牌Logo\n\n深绿背景渐变为透亮白绿色调\n\n画面中心出现溪木源品牌Logo，伴随山茶花瓣飞舞效果。\n\n纯色动态背景\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/bf5c852c67b77debc33da4901441b046.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "review": {}
           },
           {
-            "coreAction": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "elementTransformation": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "visualChange": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "intention": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "keyFrames": {
-              "storyBeginning": {
-                "timestamp": 7,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              },
-              "climax": {
-                "timestamp": 8,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              },
-              "storyEnding": {
-                "timestamp": 9,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              }
-            },
-            "contentStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "sceneStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "description": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "shootingStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "timeStart": 7,
-            "timeEnd": 10,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/17d252d425e8dca2da6c2fb8d469eafc.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/17b6a64525c2df613d9725e670583343.jpg",
-            "subtitle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/dea5c30bbb5a6955453194df1f9d850a.jpg",
+            "status": "completed",
+            "prompt": "痛点展示，建立情绪共鸣\n女生对着镜子触摸发红的脸颊，露出困扰表情\n面部特写由自然光转为强调红血丝的暗光\n\n色彩饱和度降低，突出面部干燥纹理\n\n女生在洗手间面对镜子，手捂着泛红干燥的脸，文字“刺痛又紧绷”在侧边跳出。\n\n明亮现代的洗漱间，洗手台略显凌乱\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/b979744056ea9dc56ee7c244dd1fa4f7.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "category": "first_frame",
+            "review": {}
           },
           {
-            "coreAction": "电视机屏幕切换鱼的图案",
-            "elementTransformation": "静态图像变为动态",
-            "visualChange": "鱼的图案由少变多",
-            "intention": "讲解参与规则",
-            "keyFrames": {
-              "storyBeginning": {
-                "timestamp": 10,
-                "desc": "屏幕显示水下卡通鱼"
-              },
-              "climax": {
-                "timestamp": 11,
-                "desc": "屏幕显示水下卡通鱼"
-              },
-              "storyEnding": {
-                "timestamp": 12,
-                "desc": "卡通人物进行讲解"
-              }
-            },
-            "contentStyle": "卡通，讲解",
-            "sceneStyle": "电视屏幕前",
-            "description": "电视屏幕上出现各种卡通鱼图案，绿色卡通恐龙形象的记者拿着麦克风。",
-            "shootingStyle": "屏幕动画",
-            "timeStart": 10,
-            "timeEnd": 13,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b4eb085983a29965eca862b6ab357983.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/75d5d431e703e246cdb1ef349aaa2c56.jpg",
-            "subtitle": "前方由本台记者为你详解参与规则"
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/fed7355f357151b060f9a73d1c52915c.jpg",
+            "status": "completed",
+            "prompt": "女生对着镜子触摸发红的脸颊，露出困扰表情\n面部特写由自然光转为强调红血丝的暗光\n\n色彩饱和度降低，突出面部干燥纹理\n\n女生在洗手间面对镜子，手捂着泛红干燥的脸，文字“刺痛又紧绷”在侧边跳出。\n\n明亮现代的洗漱间，洗手台略显凌乱\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/dea5c30bbb5a6955453194df1f9d850a.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "review": {}
           },
           {
-            "coreAction": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣展示",
-            "elementTransformation": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "visualChange": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "intention": "展示参选作品示例",
-            "keyFrames": {
-              "storyBeginning": {
-                "timestamp": 13,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              },
-              "climax": {
-                "timestamp": 14,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              },
-              "storyEnding": {
-                "timestamp": 15,
-                "desc": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣"
-              }
-            },
-            "contentStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "sceneStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "description": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "shootingStyle": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣",
-            "timeStart": 13,
-            "timeEnd": 16,
-            "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/aab2d8e3684f32e3e6368505498dc087.jpg",
-            "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/830d3635257ed2b5359ab1eef332e9b5.jpg",
-            "subtitle": "什么样的作品能参选，把各种各样的圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣放上来"
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/649ed114950a6d778f4dc573fbe6555c.jpg",
+            "status": "completed",
+            "prompt": "产品以英雄人物的形象登场，转折叙事\n穿着白色铠甲的3D山茶花战士从洁面瓶身中飞跃而出\n液体流向中心聚合成虚拟战士形象\n\n画面色调变暖，充满能量感\n\n溪木源洗面奶瓶身上长出绿叶翅膀，展示手持山茶花洁面泡产品降落在洗手台上。\n\n洗手台上方出现微缩景观式动态空间\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/95f317acf219b8b0e585ba7cf42c2a40.jpg",
+            "status": "completed",
+            "prompt": "穿着白色铠甲的3D山茶花战士从洁面瓶身中飞跃而出\n液体流向中心聚合成虚拟战士形象\n\n画面色调变暖，充满能量感\n\n溪木源洗面奶瓶身上长出绿叶翅膀，展示手持山茶花洁面泡产品降落在洗手台上。\n\n洗手台上方出现微缩景观式动态空间\n\n溪木源洁面泡瓶身按照图一里面的信息\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/649ed114950a6d778f4dc573fbe6555c.jpg"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/a74e28563437214f501cd3de38bad164.jpg",
+            "status": "completed",
+            "prompt": "核心卖点展示，理性背书\n特写泵头按压出绵密泡沫，并在脸部轻轻推开\n液体转化为如云朵般支撑力极强的白沫\n\n微距拍摄泡沫破裂与生成的瞬间，水润感满溢\n\n展示泡沫在T区、脸颊的细腻清洁过程，配合“3:4:1”配比文字特效。\n\n纯白背景与水波纹倒影\n产品大小按照图一显示\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/ee728402aea45c5ef6d45d5f42a5b649.jpg",
+            "status": "completed",
+            "prompt": "特写泵头按压出绵密泡沫，并在脸部轻轻推开\n液体转化为如云朵般支撑力极强的白沫\n\n微距拍摄泡沫破裂与生成的瞬间，水润感满溢\n\n展示泡沫在T区、脸颊的细腻清洁过程，配合“3:4:1”配比文字特效。\n\n纯白背景与水波纹倒影\n\n产品大小按照图二\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/a74e28563437214f501cd3de38bad164.jpg"
+            ],
+            "aspectRatio": "9:16"
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/834e1beff22fa1ec306883a3921aef61.jpg",
+            "status": "completed",
+            "prompt": "效果验证，情绪释放\n女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤\n肤色从暗沉转为透亮清爽\n\n光影增强，皮肤表面呈现自然光泽感\n\n女生对镜微笑，背景洁净，文字“轻松清洁不刺激”横向滑过。\n\n阳光撒入的清爽浴室\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/f87f24efb4f49df750efde732f302536.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "category": "first_frame",
+            "review": {}
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/9f307310b195f370b7ad3e2840d3f9dd.jpg",
+            "status": "completed",
+            "prompt": "女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤\n肤色从暗沉转为透亮清爽\n\n光影增强，皮肤表面呈现自然光泽感\n\n女生对镜微笑，背景洁净，文字“轻松清洁不刺激”横向滑过。\n\n阳光撒入的清爽浴室\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/834e1beff22fa1ec306883a3921aef61.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "review": {}
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/f61c0f3f8d9b9425acd7fac37f1b013c.jpg",
+            "status": "completed",
+            "prompt": "品牌收尾与购买引导\n女生与山茶花骑士同框合影，展示产品全系列\n骑士收缩回Logo位置，瓶身特效强化\n\n绿色品牌色大面积覆盖，形成视觉记忆点\n\n右侧产品堆叠，左侧女生点赞，底部显示“10大无添加”等核心利益点文字。\n\n充满山茶花装饰的品牌展示空间\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【图1的整体风格和场景】+【精准识别采用图2中的商品及包装】,改变人物的发型、服装和骨相都要有明显区别变化， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/e990f8ed912ffb4a305832d9e81f2bd5.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "category": "first_frame",
+            "review": {}
+          },
+          {
+            "url": "https://yoozyres.tos-cn-shanghai.volces.com/44fc1966eb1d90d980a41a90abe2e8e7.jpg",
+            "status": "completed",
+            "prompt": "女生与山茶花骑士同框合影，展示产品全系列\n骑士收缩回Logo位置，瓶身特效强化\n\n绿色品牌色大面积覆盖，形成视觉记忆点\n\n右侧产品堆叠，左侧女生点赞，底部显示“10大无添加”等核心利益点文字。\n\n充满山茶花装饰的品牌展示空间\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
+            "refs": [
+              "https://yoozyres.tos-cn-shanghai.volces.com/f61c0f3f8d9b9425acd7fac37f1b013c.jpg",
+              "https://yoozyres.tos-cn-shanghai.volces.com/d34571abc1d6885f68a1f45867173e5d.jpg"
+            ],
+            "aspectRatio": "9:16",
+            "review": {}
           }
         ]
       }
     },
     "completedAt": new
     NumberLong(
-    "1770292850"
+    "1769621843"
     )
   },
   {
-    "name": "keyFramesGenerationJob",
+    "name": "videoSegmentsGenerationJob",
     "index": new
     NumberLong(
     "2"
@@ -314,107 +348,389 @@
     "status": "completed",
     "startedAt": new
     NumberLong(
-    "1770292858"
+    "1769622453"
     ),
     "dataBus": {
-      "keyFrames": {
-        "frames": [
+      "videoGenerations": [
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/bf5c852c67b77debc33da4901441b046.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/1c88eb33d3c5e9ab2c368f57d2ee55b5.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持首帧参考图产品外形/包装绝对不变，仅允许瓶身材质随环境光影发生高光位移；运镜过程中，利用花瓣与绿叶的遮挡关系自然过渡至尾帧Logo，确保产品视觉逻辑连续。\"\n2.动作描述：\n\"瓶身周围的山茶花瓣与绿叶采用【缓慢舒展】姿态向四周扩散，【持续3秒】完成从聚拢到发散的演变，【第2秒加速50%】形成视觉冲击力，尾帧品牌Logo保持1.5秒静态显现。\"\n3.轨迹逻辑：\n\"花瓣与绿叶的运动路径需符合【阿基米德螺旋】物理轨迹，扩散角度误差≤5°，以画面几何中心点作为运动基准锚点，确保动态平衡。\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进】（Dolly In）接【微距推焦】，镜头向前推进速度与花瓣扩散速度保持1:1同步，营造沉浸式空间穿透感。\"\n2.空间定位：\n\"设置【画面中心点】为恒定参照轴，瓶身与Logo的比例缩放需严格基于中心对称参照系，确保视觉重心不偏移。\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，在背景色彩剧烈变化的第2.5秒，确保帧间像素差异≤0.3px，实现深绿到白绿的无缝呼吸感过渡。\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与花瓣动作强耦合：花瓣向外扩散时，背景亮度同步线性增强20%，形成由内向外的光能释放感；当Logo定格时，周围产生微弱的动态光晕。\"\n2.物理模拟：\n\"启用【流体模拟】模块，模拟山茶花瓣在空气中的漂浮感，飘动路径符合3m/s的轻柔风速参数，叶片翻转频率≤2Hz，呈现柔和的生物力学特征。\"\n3.色彩控制：\n\"环境色温从首帧5600K冷深绿线性过渡到尾帧4800K透亮白绿，色彩饱和度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5），确保视觉观感自然通透。\"",
+          "tmpPrompt": "品牌标志性山茶花元素由中心向外扩散\n动态绿叶转化为品牌Logo\n\n深绿背景渐变为透亮白绿色调\n\n纯色动态背景\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015018-xq4jm",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/a3c00e09275d672a6d5a546269897b28.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/dea5c30bbb5a6955453194df1f9d850a.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/35ef3d86cec5fe6f3e6f098631ec0279.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图人物面部轮廓及洗手台产品外形/包装绝对不变，仅允许【面部肌肉微动/手部皮肤挤压/材质光影】变化，运镜自由发挥\"\n\n2.动作描述：\n\"人物右手手指在红肿脸颊处【缓慢抚摸并轻微按压】，指尖挤压皮肤产生自然形变，表情从焦虑转为深度困扰，【持续3秒】。随后镜头下移，洗手台上的三瓶产品保持绝对静止，仅瓶身液体随震动产生频率≤2Hz的微小晃动，尾帧保留1.5秒静态\"\n\n3.轨迹逻辑：\n\"手指移动路径需符合【贴合面部轮廓的圆弧】物理轨迹，关键帧位置误差≤3°，以第一帧人物鼻尖和尾帧中间产品泵头作为空间运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【俯冲摇移】镜头，从镜中的人物面部特写平滑下旋，衔接至实景洗手台的产品展示，镜头运动速度与人物手部撤离速度比1:1，确保视觉重心无缝切换\"\n\n2.空间定位：\n\"设置【镜框边缘】【水龙头支架】为恒定参照物，所有透视比例变化需基于此参照系，确保从虚拟镜像到实体空间的逻辑连贯\"\n\n3.动态衔接：\n\"首尾帧过渡使用【大光圈虚化过渡+光流补帧】技术，确保从面部皮肤纹理到瓶身材质切换时，90%以上帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与镜头移动同步：当镜头从面部移向洗手台时，背景自然光减弱15%，洗手台局部射灯亮度线性增强，瓶身产生流动的金属/塑料高光\"\n\n2.物理模拟：\n\"启用【刚体动力学】模块，背景洗脸巾的褶皱需符合0.5m/s的微弱室内气流参数，确保水池边缘残余水滴的折射率随运镜角度实时偏移\"\n\n3.色彩控制：\n\"色温从首帧强调红血丝的5600K冷调，线性过渡到尾帧产品的4800K暖金调，饱和度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5），突出产品的高级质感\"",
+          "tmpPrompt": "女生对着镜子触摸发红的脸颊，露出困扰表情\n面部特写由自然光转为强调红血丝的暗光\n\n色彩饱和度降低，突出面部干燥纹理\n\n明亮现代的洗漱间，洗手台略显凌乱\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015019-v7wkx",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/cf9072d90c99dbf21b3bae785e8dd6d6.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/649ed114950a6d778f4dc573fbe6555c.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b04b54c53a63b1a8f81f4895f347064c.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图三款产品瓶身外形、包装标签及空间位置绝对不变，仅允许金色流体材质的光影流转与局部形变变化，运镜自由发挥\"\n\n2.动作描述：\n\"画面中心的山茶花骑士采用【缓慢舒展】姿态，双臂微张带动周身金色液体进行【螺旋升腾】，持续5秒，第2秒随光效爆发加速50%，尾帧保持1.5秒静态英雄定格\"\n\n3.轨迹逻辑：\n\"金色流体运动路径需符合【螺旋上升】物理轨迹，围绕中心瓶身中轴线旋转，参考图作为运动基准锚点，确保主体结构不发生位移偏差\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【低角度轨道推进】并结合【微量环绕运镜】，镜头向中心瓶身缓缓推近，运动速度与骑士升腾速度保持1:1关联，增强视觉冲击力\"\n\n2.空间定位：\n\"设置两侧【绿色羽翼大叶片】及底部【微缩景观溪流】为恒定参照物，所有比例变化及透视缩放需基于此参照系，确保空间结构极其稳定\"\n\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，针对金色液体的溅射与流动进行平滑处理，确保90%以上帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与骑士动作同步：当骑士展开身体时，背景暖金色光芒增强20%，流体在瓶身表面产生随动的动态高光与阴影投射\"\n\n2.物理模拟：\n\"启用【流体模拟】模块，金色液体需呈现丝滑油脂质感；底部微缩景观水面波纹频率≤2Hz，周围散落的山茶花瓣随气流产生轻微物理震颤\"\n\n3.色彩控制：\n\"色温从首帧5600K（中性偏暖）线性过渡到尾帧4500K（浓郁能量感金色），饱和度变化曲线符合贝塞尔曲线（P0=0.2,P1=0.7,P2=0.5），强化能量聚集的视觉意象\"",
+          "tmpPrompt": "穿着绿色铠甲的3D山茶花骑士从洁面瓶身中飞跃而出\n液体流向中心聚合成虚拟骑士形象\n\n画面色调变暖，充满能量感\n\n洗手台上方出现微缩景观式动态空间\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015020-r2vlb",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/7412e07de40634b65442545752d26c1a.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/a74e28563437214f501cd3de38bad164.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/46923e35e92f675397f8bffbb50ecbe1.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【泵头垂直位移/泡沫溢出形变】变化，运镜自由发挥\"\n2.动作描述：\n\"采用【缓慢垂直按压】配合【泡沫云朵化膨胀】动作，持续3秒，第1.5秒泵头压至底部并喷射出浓密泡沫，第2秒泡沫在指尖实现支撑力极强的堆叠，尾帧保留1.5秒静态\"\n3.轨迹逻辑：\n\"泵头运动路径需符合【直线】物理轨迹，泡沫喷涌遵循【扇形扩散】路径，以瓶身logo位置作为运动基准锚点，误差≤5°\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【微距轨道推进】镜头，从首帧的泵头局部细节缓慢平滑过渡到尾帧包含水波纹倒影的半身全景，镜头运动速度与泡沫生成速度比1:1\"\n2.空间定位：\n\"设置【瓶底水波纹】和【瓶身3:4:1标识】为恒定参照物，所有空间位移及比例变化需基于此参照系量化\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保泡沫边缘及瓶身反光在90%以上的帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与主体动作同步：泵头按下瞬间，底部水面同步激发由中心向外扩散的圆环水波纹，波纹振幅随泡沫增多线性增强\"\n2.物理模拟：\n\"启用【流体模拟】模块，生成的白色泡沫需呈现如云朵般的固体支撑感与极细微的孔洞收缩，水面波纹频率保持≤2Hz\"\n3.色彩控制：\n\"全片维持5600K标准色温，泡沫纯净白度与背景粉橙色调保持恒定，光影明暗过渡符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5）\"",
+          "tmpPrompt": "特写泵头按压出绵密泡沫，并在脸部轻轻推开\n液体转化为如云朵般支撑力极强的白沫\n\n微距拍摄泡沫破裂与生成的瞬间，水润感满溢\n\n纯白背景与水波纹倒影\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015021-qdpdn",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/111306fb4f16a3e40eafb288c1472790.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/834e1beff22fa1ec306883a3921aef61.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/87d9c8f6c43f45297630140bfadba0ef.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【皮肤局部弹性形变/材质光影通透度】变化，运镜自由发挥\"\n\n2.动作描述：\n\"采用【指尖轻弹/皮肤回弹/自信微笑】具象动词。第1秒手指触碰并微陷皮肤，【第2秒手指迅速回弹并加速50%】带动皮肤呈现波纹状弹性恢复，肤色由暗沉转为晶莹透亮，尾帧保留1.5秒静止微笑表情\"\n\n3.轨迹逻辑：\n\"手指与皮肤接触路径需符合【简谐振动】物理轨迹，皮肤弹性反馈的关键帧位移误差≤5°，参考图中人物面部与瓶身作为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进】由中景平滑推至面部特写，镜头移动速度与皮肤亮化（透亮度提升）速度保持1:1同步，营造呼吸感\"\n\n2.空间定位：\n\"设置【前景三瓶洗护产品】与【左侧背景窗棂】为恒定参照物，确保相机推进过程中产品在画面的相对比例符合线性透视规律\"\n\n3.动态衔接：\n\"首尾帧肤色过渡使用【光流补帧】技术，实现暗沉到清爽透亮的无缝演变，确保90%以上帧间皮肤纹理差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与人物动作强关联：当指尖轻弹皮肤瞬间，背景窗外洒入的丁达尔效应增强20%，皮肤表面同步产生自然高光溢出效果\"\n\n2.物理模拟：\n\"启用【粒子散射】模块，空气中漂浮的微小水雾粒子在阳光照射下缓慢做12cm/s的布朗运动，光影闪烁频率控制在≤2Hz以匹配清爽氛围\"\n\n3.色彩控制：\n\"色温从首帧5600K线性过渡到尾帧5000K暖白光，皮肤饱和度与明度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.8, P2=0.6），精准模拟皮肤由内而外焕发的光泽感\"",
+          "tmpPrompt": "女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤\n肤色从暗沉转为透亮清爽\n\n光影增强，皮肤表面呈现自然光泽感\n\n阳光撒入的清爽浴室\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015022-88bbr",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/4a2db55c2586b3d5a52cdaf97daaa9f3.mp4"
+        },
+        {
+          "status": "completed",
+          "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/f61c0f3f8d9b9425acd7fac37f1b013c.jpg",
+          "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9d92f4e65dce3f688067a0292cabdf64.jpg",
+          "prompt": "一、主体运动控制\n1.物理规则：\n “保持参考图产品外形/包装绝对不变，仅允许【材质光影/金色流光特效】变化，运镜自由发挥” \n2.动作描述：\n “采用【缓慢螺旋重组】动词，三瓶产品在【第1秒】开始向画面中心垂直轴线汇聚并叠放，【第2秒加速50%】完成位移，左上角山茶花骑士徽章同步缩放至固定位置，尾帧保留1.5秒静态”\n3.轨迹逻辑：\n “产品运动路径需符合【中心轴向汇聚】物理轨迹，瓶身中心垂直重合度误差≤5°，参考图中女性的大拇指手势作为画面空间运动基准锚点”\n\n二、镜头语言构建\n1.运镜指令：\n “使用【轨道微距后撤】配合【中心轴向追踪】，镜头后退速度与产品垂直排布的扩展速度比1:1，确保三瓶产品始终位于视觉焦点中心”\n2.空间定位：\n“设置【背景绿色垂帘纹理】与【右侧山茶花簇】为恒定参照物，瓶身垂直重构的比例变化需基于此三维参照系”\n3.动态衔接：\n“首尾帧过渡使用【动态模糊+光流补帧】技术，确保瓶身位移过程中的90%以上帧间差异≤0.3px”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与主体动作同步：瓶身垂直对齐时，金色流光环绕亮度增强25%，并在人物绿色衬衫表面投射动态光斑漫反射”\n2.物理模拟：\n“启用【流体动力学】模块，金色粒子光环绕瓶身时需产生符合空气阻力的拖尾效应，背景山茶花瓣随光流扰动产生微小颤动频率≤2Hz”\n3.色彩控制：\n“色温从首帧偏暖的5200K线性过渡到尾帧清冷明亮的5600K，绿色背景饱和度变化曲线符合贝塞尔曲线（P0=0.2,P1=0.7,P2=0.5），强化品牌视觉冲击力”",
+          "tmpPrompt": "女生与山茶花骑士同框合影，展示产品全系列\n骑士收缩回Logo位置，瓶身特效强化\n\n绿色品牌色大面积覆盖，形成视觉记忆点\n\n充满山茶花装饰的品牌展示空间\n",
+          "aspectRatio": "9:16",
+          "taskId": "cgt-20260129015023-5fjjw",
+          "duration": new
+          NumberLong(
+          "4"
+          ),
+          "url": "https://yoozyres.tos-cn-shanghai.volces.com/3e7ca1e5bfbabeb53ac4c108f5700578.mp4"
+        }
+      ]
+    },
+    "completedAt": new
+    NumberLong(
+    "1769622703"
+    )
+  },
+  {
+    "name": "videoSegmentsRemixJob",
+    "index": new
+    NumberLong(
+    "3"
+    ),
+    "status": "running",
+    "dataBus": {
+      "remix": {
+        "segments": [
           {
-            "url": "https://d1q70pf5vjeyhc.cloudfront.net/predictions/083fa4691f1344378ad7777d9a367de2/1.png",
-            "status": "completed",
-            "prompt": "展示活动海报和主题\n切换电视屏幕上的内容\n静态图像变为动态视频\n\n色彩由杂乱变为清晰\n\n复古电视机屏幕展示活动海报，卡通人物和麦克风，展示赛事信息。手持遥控器切换频道。\n\n电视屏幕前\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【参考图1的整体风格和场景进行复刻并变化】+【精准识别采用图2中的商品及包装】,【改变原视频中人物的发型、长相和服饰】， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
-            "refs": [
-              "https://yoozyres.tos-cn-shanghai.volces.com/75912b2c3e041ce909d311c555a5e95a.jpg",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ],
-            "taskId": "faafac57e1fc43769e7a2cf537e1c183",
-            "category": "first_frame"
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/a3c00e09275d672a6d5a546269897b28.mp4",
+              "taskId": "cgt-20260129015018-xq4jm",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/bf5c852c67b77debc33da4901441b046.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/1c88eb33d3c5e9ab2c368f57d2ee55b5.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持首帧参考图产品外形/包装绝对不变，仅允许瓶身材质随环境光影发生高光位移；运镜过程中，利用花瓣与绿叶的遮挡关系自然过渡至尾帧Logo，确保产品视觉逻辑连续。\"\n2.动作描述：\n\"瓶身周围的山茶花瓣与绿叶采用【缓慢舒展】姿态向四周扩散，【持续3秒】完成从聚拢到发散的演变，【第2秒加速50%】形成视觉冲击力，尾帧品牌Logo保持1.5秒静态显现。\"\n3.轨迹逻辑：\n\"花瓣与绿叶的运动路径需符合【阿基米德螺旋】物理轨迹，扩散角度误差≤5°，以画面几何中心点作为运动基准锚点，确保动态平衡。\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进】（Dolly In）接【微距推焦】，镜头向前推进速度与花瓣扩散速度保持1:1同步，营造沉浸式空间穿透感。\"\n2.空间定位：\n\"设置【画面中心点】为恒定参照轴，瓶身与Logo的比例缩放需严格基于中心对称参照系，确保视觉重心不偏移。\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，在背景色彩剧烈变化的第2.5秒，确保帧间像素差异≤0.3px，实现深绿到白绿的无缝呼吸感过渡。\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与花瓣动作强耦合：花瓣向外扩散时，背景亮度同步线性增强20%，形成由内向外的光能释放感；当Logo定格时，周围产生微弱的动态光晕。\"\n2.物理模拟：\n\"启用【流体模拟】模块，模拟山茶花瓣在空气中的漂浮感，飘动路径符合3m/s的轻柔风速参数，叶片翻转频率≤2Hz，呈现柔和的生物力学特征。\"\n3.色彩控制：\n\"环境色温从首帧5600K冷深绿线性过渡到尾帧4800K透亮白绿，色彩饱和度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5），确保视觉观感自然通透。\"",
+              "tmpPrompt": "品牌标志性山茶花元素由中心向外扩散\n动态绿叶转化为品牌Logo\n\n深绿背景渐变为透亮白绿色调\n\n纯色动态背景\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "品牌标志性山茶花元素由中心向外扩散",
+              "elementTransformation": "动态绿叶转化为品牌Logo",
+              "visualChange": "深绿背景渐变为透亮白绿色调",
+              "intention": "品牌开场，确立视觉基调",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 0.1,
+                  "desc": "品牌Logo首次闪现"
+                },
+                "climax": {
+                  "timestamp": 0.5,
+                  "desc": "花瓣扩散到全屏"
+                },
+                "storyEnding": {
+                  "timestamp": 0.9,
+                  "desc": "画面定格在品牌名称"
+                }
+              },
+              "contentStyle": "极简清新风格",
+              "sceneStyle": "纯色动态背景",
+              "description": "画面中心出现溪木源品牌Logo，伴随山茶花瓣飞舞效果。",
+              "shootingStyle": "平面动画转场",
+              "timeEnd": 1,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/3602cbcd75365673b78416bfff532af9.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/d87ce7456f436b9f60bdfa7e718f71eb.jpg",
+              "subtitle": "溪木源 山茶花洁面泡沫"
+            }
           },
           {
-            "status": "completed",
-            "prompt": "切换电视屏幕上的内容\n静态图像变为动态视频\n\n色彩由杂乱变为清晰\n\n复古电视机屏幕展示活动海报，卡通人物和麦克风，展示赛事信息。手持遥控器切换频道。\n\n电视屏幕前\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
-            "refs": [
-              "https://d1q70pf5vjeyhc.cloudfront.net/predictions/083fa4691f1344378ad7777d9a367de2/1.png",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ]
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/cf9072d90c99dbf21b3bae785e8dd6d6.mp4",
+              "taskId": "cgt-20260129015019-v7wkx",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/dea5c30bbb5a6955453194df1f9d850a.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/35ef3d86cec5fe6f3e6f098631ec0279.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图人物面部轮廓及洗手台产品外形/包装绝对不变，仅允许【面部肌肉微动/手部皮肤挤压/材质光影】变化，运镜自由发挥\"\n\n2.动作描述：\n\"人物右手手指在红肿脸颊处【缓慢抚摸并轻微按压】，指尖挤压皮肤产生自然形变，表情从焦虑转为深度困扰，【持续3秒】。随后镜头下移，洗手台上的三瓶产品保持绝对静止，仅瓶身液体随震动产生频率≤2Hz的微小晃动，尾帧保留1.5秒静态\"\n\n3.轨迹逻辑：\n\"手指移动路径需符合【贴合面部轮廓的圆弧】物理轨迹，关键帧位置误差≤3°，以第一帧人物鼻尖和尾帧中间产品泵头作为空间运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【俯冲摇移】镜头，从镜中的人物面部特写平滑下旋，衔接至实景洗手台的产品展示，镜头运动速度与人物手部撤离速度比1:1，确保视觉重心无缝切换\"\n\n2.空间定位：\n\"设置【镜框边缘】【水龙头支架】为恒定参照物，所有透视比例变化需基于此参照系，确保从虚拟镜像到实体空间的逻辑连贯\"\n\n3.动态衔接：\n\"首尾帧过渡使用【大光圈虚化过渡+光流补帧】技术，确保从面部皮肤纹理到瓶身材质切换时，90%以上帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与镜头移动同步：当镜头从面部移向洗手台时，背景自然光减弱15%，洗手台局部射灯亮度线性增强，瓶身产生流动的金属/塑料高光\"\n\n2.物理模拟：\n\"启用【刚体动力学】模块，背景洗脸巾的褶皱需符合0.5m/s的微弱室内气流参数，确保水池边缘残余水滴的折射率随运镜角度实时偏移\"\n\n3.色彩控制：\n\"色温从首帧强调红血丝的5600K冷调，线性过渡到尾帧产品的4800K暖金调，饱和度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5），突出产品的高级质感\"",
+              "tmpPrompt": "女生对着镜子触摸发红的脸颊，露出困扰表情\n面部特写由自然光转为强调红血丝的暗光\n\n色彩饱和度降低，突出面部干燥纹理\n\n明亮现代的洗漱间，洗手台略显凌乱\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "女生对着镜子触摸发红的脸颊，露出困扰表情",
+              "elementTransformation": "面部特写由自然光转为强调红血丝的暗光",
+              "visualChange": "色彩饱和度降低，突出面部干燥纹理",
+              "intention": "痛点展示，建立情绪共鸣",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 1.2,
+                  "desc": "女生抬头看镜子"
+                },
+                "climax": {
+                  "timestamp": 2.5,
+                  "desc": "手触碰泛红皮肤特写"
+                },
+                "storyEnding": {
+                  "timestamp": 3.8,
+                  "desc": "文字特效消失"
+                }
+              },
+              "contentStyle": "真实生活质感",
+              "sceneStyle": "明亮现代的洗漱间，洗手台略显凌乱",
+              "description": "女生在洗手间面对镜子，手捂着泛红干燥的脸，文字“刺痛又紧绷”在侧边跳出。",
+              "shootingStyle": "中景切换特写，配合手持晃动感",
+              "timeStart": 1,
+              "timeEnd": 4,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b979744056ea9dc56ee7c244dd1fa4f7.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/977d2ff6467c88d9c5c4ac333cdfadff.jpg",
+              "subtitle": "洗脸刺痛又紧绷？屏障受损很难受！"
+            }
           },
           {
-            "url": "https://d1q70pf5vjeyhc.cloudfront.net/predictions/ab77ce71e53a486f88057761e5037cc6/1.png",
-            "status": "completed",
-            "prompt": "宣传摸鱼悬赏活动\n展示悬赏海报\n静态图像变为动态效果\n\n出现WANTED字样\n\n电视机屏幕显示“WANTED摸鱼悬赏令”海报，卡通鱼图案。出现“WANTED”红色印章。\n\n电视屏幕前\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【参考图1的整体风格和场景进行复刻并变化】+【精准识别采用图2中的商品及包装】,【改变原视频中人物的发型、长相和服饰】， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
-            "refs": [
-              "https://yoozyres.tos-cn-shanghai.volces.com/ea2b997272cd7ffc23caf8af675fe36c.jpg",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ],
-            "taskId": "7a129cba91ad47bfb8f6114768ba6ae4",
-            "category": "first_frame"
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/7412e07de40634b65442545752d26c1a.mp4",
+              "taskId": "cgt-20260129015020-r2vlb",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/649ed114950a6d778f4dc573fbe6555c.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/b04b54c53a63b1a8f81f4895f347064c.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图三款产品瓶身外形、包装标签及空间位置绝对不变，仅允许金色流体材质的光影流转与局部形变变化，运镜自由发挥\"\n\n2.动作描述：\n\"画面中心的山茶花骑士采用【缓慢舒展】姿态，双臂微张带动周身金色液体进行【螺旋升腾】，持续5秒，第2秒随光效爆发加速50%，尾帧保持1.5秒静态英雄定格\"\n\n3.轨迹逻辑：\n\"金色流体运动路径需符合【螺旋上升】物理轨迹，围绕中心瓶身中轴线旋转，参考图作为运动基准锚点，确保主体结构不发生位移偏差\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【低角度轨道推进】并结合【微量环绕运镜】，镜头向中心瓶身缓缓推近，运动速度与骑士升腾速度保持1:1关联，增强视觉冲击力\"\n\n2.空间定位：\n\"设置两侧【绿色羽翼大叶片】及底部【微缩景观溪流】为恒定参照物，所有比例变化及透视缩放需基于此参照系，确保空间结构极其稳定\"\n\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，针对金色液体的溅射与流动进行平滑处理，确保90%以上帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与骑士动作同步：当骑士展开身体时，背景暖金色光芒增强20%，流体在瓶身表面产生随动的动态高光与阴影投射\"\n\n2.物理模拟：\n\"启用【流体模拟】模块，金色液体需呈现丝滑油脂质感；底部微缩景观水面波纹频率≤2Hz，周围散落的山茶花瓣随气流产生轻微物理震颤\"\n\n3.色彩控制：\n\"色温从首帧5600K（中性偏暖）线性过渡到尾帧4500K（浓郁能量感金色），饱和度变化曲线符合贝塞尔曲线（P0=0.2,P1=0.7,P2=0.5），强化能量聚集的视觉意象\"",
+              "tmpPrompt": "穿着绿色铠甲的3D山茶花骑士从洁面瓶身中飞跃而出\n液体流向中心聚合成虚拟骑士形象\n\n画面色调变暖，充满能量感\n\n洗手台上方出现微缩景观式动态空间\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "穿着绿色铠甲的3D山茶花骑士从洁面瓶身中飞跃而出",
+              "elementTransformation": "液体流向中心聚合成虚拟骑士形象",
+              "visualChange": "画面色调变暖，充满能量感",
+              "intention": "英雄（产品）登场，转折叙事",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 4.5,
+                  "desc": "瓶身发光产生骑士"
+                },
+                "climax": {
+                  "timestamp": 6,
+                  "desc": "骑士向镜头滑翔"
+                },
+                "storyEnding": {
+                  "timestamp": 7.5,
+                  "desc": "骑士摆出守护姿势"
+                }
+              },
+              "contentStyle": "科幻与清新融合",
+              "sceneStyle": "洗手台上方出现微缩景观式动态空间",
+              "description": "溪木源洗面奶瓶身上长出绿叶翅膀，骑士手持泡沫盾牌降落在洗手台上。",
+              "shootingStyle": "跟随运动镜头，动态快节奏切换",
+              "timeStart": 4,
+              "timeEnd": 8,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/1c7b0f46565b7e682e4ca1bb0b29ccb4.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/438a58a14681b6cfb86be128800f7613.jpg",
+              "subtitle": "别怕，山茶花洁面泡来救你！"
+            }
           },
           {
-            "status": "completed",
-            "prompt": "展示悬赏海报\n静态图像变为动态效果\n\n出现WANTED字样\n\n电视机屏幕显示“WANTED摸鱼悬赏令”海报，卡通鱼图案。出现“WANTED”红色印章。\n\n电视屏幕前\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
-            "refs": [
-              "https://d1q70pf5vjeyhc.cloudfront.net/predictions/ab77ce71e53a486f88057761e5037cc6/1.png",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ]
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/111306fb4f16a3e40eafb288c1472790.mp4",
+              "taskId": "cgt-20260129015021-qdpdn",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/a74e28563437214f501cd3de38bad164.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/46923e35e92f675397f8bffbb50ecbe1.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【泵头垂直位移/泡沫溢出形变】变化，运镜自由发挥\"\n2.动作描述：\n\"采用【缓慢垂直按压】配合【泡沫云朵化膨胀】动作，持续3秒，第1.5秒泵头压至底部并喷射出浓密泡沫，第2秒泡沫在指尖实现支撑力极强的堆叠，尾帧保留1.5秒静态\"\n3.轨迹逻辑：\n\"泵头运动路径需符合【直线】物理轨迹，泡沫喷涌遵循【扇形扩散】路径，以瓶身logo位置作为运动基准锚点，误差≤5°\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【微距轨道推进】镜头，从首帧的泵头局部细节缓慢平滑过渡到尾帧包含水波纹倒影的半身全景，镜头运动速度与泡沫生成速度比1:1\"\n2.空间定位：\n\"设置【瓶底水波纹】和【瓶身3:4:1标识】为恒定参照物，所有空间位移及比例变化需基于此参照系量化\"\n3.动态衔接：\n\"首尾帧过渡使用【动态模糊+光流补帧】技术，确保泡沫边缘及瓶身反光在90%以上的帧间差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与主体动作同步：泵头按下瞬间，底部水面同步激发由中心向外扩散的圆环水波纹，波纹振幅随泡沫增多线性增强\"\n2.物理模拟：\n\"启用【流体模拟】模块，生成的白色泡沫需呈现如云朵般的固体支撑感与极细微的孔洞收缩，水面波纹频率保持≤2Hz\"\n3.色彩控制：\n\"全片维持5600K标准色温，泡沫纯净白度与背景粉橙色调保持恒定，光影明暗过渡符合贝塞尔曲线（P0=0.2, P1=0.7, P2=0.5）\"",
+              "tmpPrompt": "特写泵头按压出绵密泡沫，并在脸部轻轻推开\n液体转化为如云朵般支撑力极强的白沫\n\n微距拍摄泡沫破裂与生成的瞬间，水润感满溢\n\n纯白背景与水波纹倒影\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "特写泵头按压出绵密泡沫，并在脸部轻轻推开",
+              "elementTransformation": "液体转化为如云朵般支撑力极强的白沫",
+              "visualChange": "微距拍摄泡沫破裂与生成的瞬间，水润感满溢",
+              "intention": "核心卖点展示，理性背书",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 8.2,
+                  "desc": "泵头按压瞬间"
+                },
+                "climax": {
+                  "timestamp": 11,
+                  "desc": "泡沫在皮肤上回弹"
+                },
+                "storyEnding": {
+                  "timestamp": 13.5,
+                  "desc": "清水洗净的瞬间"
+                }
+              },
+              "contentStyle": "高级护肤品广告感",
+              "sceneStyle": "纯白背景与水波纹倒影",
+              "description": "展示泡沫在T区、脸颊的细腻清洁过程，配合“3:4:1”配比文字特效。",
+              "shootingStyle": "极高帧率微距摄影，慢动作展示质地",
+              "timeStart": 8,
+              "timeEnd": 14,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/4582ff9998f828f58396621bde469091.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9ba5202e6d7c745094097febb7ae6776.jpg",
+              "subtitle": "3:4:1 科学配比，细腻泡沫深层净澈"
+            }
           },
           {
-            "url": "https://d1q70pf5vjeyhc.cloudfront.net/predictions/807119a9f60a419299a9328df2a46bdf/1.png",
-            "status": "completed",
-            "prompt": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【参考图1的整体风格和场景进行复刻并变化】+【精准识别采用图2中的商品及包装】,【改变原视频中人物的发型、长相和服饰】， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
-            "refs": [
-              "https://yoozyres.tos-cn-shanghai.volces.com/17d252d425e8dca2da6c2fb8d469eafc.jpg",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ],
-            "taskId": "e753d28cb73f484592933c6ebb42eba1",
-            "category": "first_frame"
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/4a2db55c2586b3d5a52cdaf97daaa9f3.mp4",
+              "taskId": "cgt-20260129015022-88bbr",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/834e1beff22fa1ec306883a3921aef61.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/87d9c8f6c43f45297630140bfadba0ef.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n\"保持参考图产品外形/包装绝对不变，仅允许【皮肤局部弹性形变/材质光影通透度】变化，运镜自由发挥\"\n\n2.动作描述：\n\"采用【指尖轻弹/皮肤回弹/自信微笑】具象动词。第1秒手指触碰并微陷皮肤，【第2秒手指迅速回弹并加速50%】带动皮肤呈现波纹状弹性恢复，肤色由暗沉转为晶莹透亮，尾帧保留1.5秒静止微笑表情\"\n\n3.轨迹逻辑：\n\"手指与皮肤接触路径需符合【简谐振动】物理轨迹，皮肤弹性反馈的关键帧位移误差≤5°，参考图中人物面部与瓶身作为运动基准锚点\"\n\n二、镜头语言构建\n1.运镜指令：\n\"使用【轨道推进】由中景平滑推至面部特写，镜头移动速度与皮肤亮化（透亮度提升）速度保持1:1同步，营造呼吸感\"\n\n2.空间定位：\n\"设置【前景三瓶洗护产品】与【左侧背景窗棂】为恒定参照物，确保相机推进过程中产品在画面的相对比例符合线性透视规律\"\n\n3.动态衔接：\n\"首尾帧肤色过渡使用【光流补帧】技术，实现暗沉到清爽透亮的无缝演变，确保90%以上帧间皮肤纹理差异≤0.3px\"\n\n三、环境交互系统\n1.因果逻辑：\n\"环境变化与人物动作强关联：当指尖轻弹皮肤瞬间，背景窗外洒入的丁达尔效应增强20%，皮肤表面同步产生自然高光溢出效果\"\n\n2.物理模拟：\n\"启用【粒子散射】模块，空气中漂浮的微小水雾粒子在阳光照射下缓慢做12cm/s的布朗运动，光影闪烁频率控制在≤2Hz以匹配清爽氛围\"\n\n3.色彩控制：\n\"色温从首帧5600K线性过渡到尾帧5000K暖白光，皮肤饱和度与明度变化曲线符合贝塞尔曲线（P0=0.2, P1=0.8, P2=0.6），精准模拟皮肤由内而外焕发的光泽感\"",
+              "tmpPrompt": "女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤\n肤色从暗沉转为透亮清爽\n\n光影增强，皮肤表面呈现自然光泽感\n\n阳光撒入的清爽浴室\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "女生洗完脸后露出自信笑容，指尖轻弹弹润的皮肤",
+              "elementTransformation": "肤色从暗沉转为透亮清爽",
+              "visualChange": "光影增强，皮肤表面呈现自然光泽感",
+              "intention": "效果验证，情绪释放",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 14.5,
+                  "desc": "毛巾擦脸后抬头"
+                },
+                "climax": {
+                  "timestamp": 16.5,
+                  "desc": "女生对镜甜笑"
+                },
+                "storyEnding": {
+                  "timestamp": 18.5,
+                  "desc": "皮肤光泽特写"
+                }
+              },
+              "contentStyle": "明亮治愈风",
+              "sceneStyle": "阳光撒入的清爽浴室",
+              "description": "女生对镜微笑，背景洁净，文字“轻松清洁不刺激”横向滑过。",
+              "shootingStyle": "中远景固定，配合自然光侧拍",
+              "timeStart": 14,
+              "timeEnd": 19,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/f87f24efb4f49df750efde732f302536.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/67e39be42d66623a291b90a76357ad73.jpg",
+              "subtitle": "温和洁净不紧绷，洗出水润透亮肌"
+            }
           },
           {
-            "status": "completed",
-            "prompt": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
-            "refs": [
-              "https://d1q70pf5vjeyhc.cloudfront.net/predictions/807119a9f60a419299a9328df2a46bdf/1.png",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ]
-          },
-          {
-            "url": "https://d1q70pf5vjeyhc.cloudfront.net/predictions/5a378564d6dc44db9b5ae1c92fe232a0/1.png",
-            "status": "completed",
-            "prompt": "讲解参与规则\n电视机屏幕切换鱼的图案\n静态图像变为动态\n\n鱼的图案由少变多\n\n电视屏幕上出现各种卡通鱼图案，绿色卡通恐龙形象的记者拿着麦克风。\n\n电视屏幕前\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【参考图1的整体风格和场景进行复刻并变化】+【精准识别采用图2中的商品及包装】,【改变原视频中人物的发型、长相和服饰】， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
-            "refs": [
-              "https://yoozyres.tos-cn-shanghai.volces.com/b4eb085983a29965eca862b6ab357983.jpg",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ],
-            "taskId": "4c0d353c18074bd18a3466e6b038e9f3",
-            "category": "first_frame"
-          },
-          {
-            "status": "completed",
-            "prompt": "电视机屏幕切换鱼的图案\n静态图像变为动态\n\n鱼的图案由少变多\n\n电视屏幕上出现各种卡通鱼图案，绿色卡通恐龙形象的记者拿着麦克风。\n\n电视屏幕前\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
-            "refs": [
-              "https://d1q70pf5vjeyhc.cloudfront.net/predictions/5a378564d6dc44db9b5ae1c92fe232a0/1.png",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ]
-          },
-          {
-            "url": "https://d1q70pf5vjeyhc.cloudfront.net/predictions/5536c76c386041baa6e2f9408b39130f/1.png",
-            "status": "completed",
-            "prompt": "展示参选作品示例\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣展示\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n\n\n依据以上分镜描述和意图，首先一定要先判断分镜中是否有产品植入以及人物是否是从头到尾为同一个人，然后判断后按照以下两种实际情况生成一张视频首帧图：\n1. 如果视频的意图是介绍产品： 结合【参考图1的整体风格和场景进行复刻并变化】+【精准识别采用图2中的商品及包装】,【改变原视频中人物的发型、长相和服饰】， 要更自然真实的中国人，生成一张视频首帧图片, 图片中不要包含文字\n2. 如果视频的意思是拉停留烘托氛围(没有直接的商品漏出，参考【手法类型】)，只结合【图1的整体风格和场景】改变人物的发型变化、服装和骨相有明显区别变化， 要更自然真实感的中国人，生成一张视频首帧图片, 图片中不要包含文字\n\n===\n【手法类型】\n\n- 建立情境 (Establishing Context)\u200B。在黄金3秒内，不直接展示产品，而是通过场景、问题或情绪共鸣，让用户觉得视频“与我有关”，从而愿意继续观看。\n“黄金三秒”法则、“视觉钩子”、“情感连接”\n\n- 空镜头 / 景物镜头 (Scenery Shot)\u200B。一种无人物的画面，用于交代环境、烘托气氛、抒发情绪或实现场景转换，为后续内容营造氛围和节奏。空镜头的叙事与抒情功能、“空间粘合剂”与“情绪解码器”\n\n- 旁跳镜头 (Cutaway)\u200B。在主要动作或叙事线中，短暂插入一个与中心动作相关但不直接连续的镜头，用于暗示细节、控制节奏或过渡转场。辅助叙事、暗示伏笔、节奏控制\n\n- 悬念开场\u200B。激发好奇，引导探究，通过矛盾评论截图引发疑问\n\n- 两极镜头转场\u200B。强调对比，制造冲击，前一个特写接后一个全景或远景\n综上所述，按照以上的所有指令，请明确给到我一张高清图像并且细节到位\n\n- 特写转场\u200B。突出细节，衔接场景，从局部特写开始新场景\n\n- 主观镜头\u200B。强制视角，增强代入，前一个镜头是人物去看，后一个镜头是看到的场景\n\n- 封挡镜头转场\u200B。自然过渡，创造悬念，运动主体在运动中挡死镜头",
-            "refs": [
-              "https://yoozyres.tos-cn-shanghai.volces.com/aab2d8e3684f32e3e6368505498dc087.jpg",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ],
-            "taskId": "df8e07da6f534e7381c1310ee4e78d19",
-            "category": "first_frame"
-          },
-          {
-            "status": "completed",
-            "prompt": "圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣展示\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n圣诞配饰拉布布第四代labubu娃衣4.0心底密码手工钩织头套娃衣\n\n\n\n\n依据以上分镜描述和意思， 结合【图1的整体风格和场景】（视频首帧）,并且根据首帧逻辑和视觉动态变化推演出视频尾帧图片。要符合物理规律, 图片中不要包含文字， 不要和参考图一模一样\n",
-            "refs": [
-              "https://d1q70pf5vjeyhc.cloudfront.net/predictions/5536c76c386041baa6e2f9408b39130f/1.png",
-              "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d4d9f6d6ebe74a32da92521fb20a1cb5_sx_103999_www800-800"
-            ]
+            "videoGeneration": {
+              "url": "https://yoozyres.tos-cn-shanghai.volces.com/3e7ca1e5bfbabeb53ac4c108f5700578.mp4",
+              "taskId": "cgt-20260129015023-5fjjw",
+              "status": "completed",
+              "firstFrame": "https://yoozyres.tos-cn-shanghai.volces.com/f61c0f3f8d9b9425acd7fac37f1b013c.jpg",
+              "lastFrame": "https://yoozyres.tos-cn-shanghai.volces.com/9d92f4e65dce3f688067a0292cabdf64.jpg",
+              "prompt": "一、主体运动控制\n1.物理规则：\n “保持参考图产品外形/包装绝对不变，仅允许【材质光影/金色流光特效】变化，运镜自由发挥” \n2.动作描述：\n “采用【缓慢螺旋重组】动词，三瓶产品在【第1秒】开始向画面中心垂直轴线汇聚并叠放，【第2秒加速50%】完成位移，左上角山茶花骑士徽章同步缩放至固定位置，尾帧保留1.5秒静态”\n3.轨迹逻辑：\n “产品运动路径需符合【中心轴向汇聚】物理轨迹，瓶身中心垂直重合度误差≤5°，参考图中女性的大拇指手势作为画面空间运动基准锚点”\n\n二、镜头语言构建\n1.运镜指令：\n “使用【轨道微距后撤】配合【中心轴向追踪】，镜头后退速度与产品垂直排布的扩展速度比1:1，确保三瓶产品始终位于视觉焦点中心”\n2.空间定位：\n“设置【背景绿色垂帘纹理】与【右侧山茶花簇】为恒定参照物，瓶身垂直重构的比例变化需基于此三维参照系”\n3.动态衔接：\n“首尾帧过渡使用【动态模糊+光流补帧】技术，确保瓶身位移过程中的90%以上帧间差异≤0.3px”\n\n三、环境交互系统\n1.因果逻辑：\n“环境变化需与主体动作同步：瓶身垂直对齐时，金色流光环绕亮度增强25%，并在人物绿色衬衫表面投射动态光斑漫反射”\n2.物理模拟：\n“启用【流体动力学】模块，金色粒子光环绕瓶身时需产生符合空气阻力的拖尾效应，背景山茶花瓣随光流扰动产生微小颤动频率≤2Hz”\n3.色彩控制：\n“色温从首帧偏暖的5200K线性过渡到尾帧清冷明亮的5600K，绿色背景饱和度变化曲线符合贝塞尔曲线（P0=0.2,P1=0.7,P2=0.5），强化品牌视觉冲击力”",
+              "tmpPrompt": "女生与山茶花骑士同框合影，展示产品全系列\n骑士收缩回Logo位置，瓶身特效强化\n\n绿色品牌色大面积覆盖，形成视觉记忆点\n\n充满山茶花装饰的品牌展示空间\n",
+              "aspectRatio": "9:16",
+              "duration": new
+              NumberLong(
+              "4"
+              )
+            },
+            "remixOptions": {},
+            "scriptSegment": {
+              "coreAction": "女生与山茶花骑士同框合影，展示产品全系列",
+              "elementTransformation": "骑士收缩回Logo位置，瓶身特效强化",
+              "visualChange": "绿色品牌色大面积覆盖，形成视觉记忆点",
+              "intention": "品牌收尾与购买引导",
+              "keyFrames": {
+                "storyBeginning": {
+                  "timestamp": 19.5,
+                  "desc": "骑士与女生并排站立"
+                },
+                "climax": {
+                  "timestamp": 23,
+                  "desc": "产品全家福展示"
+                },
+                "storyEnding": {
+                  "timestamp": 27.5,
+                  "desc": "品牌Slogan定格"
+                }
+              },
+              "contentStyle": "品牌宣传片画风",
+              "sceneStyle": "充满山茶花装饰的品牌展示空间",
+              "description": "右侧产品堆叠，左侧女生点赞，底部显示“10大无添加”等核心利益点文字。",
+              "shootingStyle": "固定全景，配合动态UI弹出",
+              "timeStart": 19,
+              "timeEnd": 28,
+              "startFrame": "https://yoozyres.tos-cn-shanghai.volces.com/e990f8ed912ffb4a305832d9e81f2bd5.jpg",
+              "endFrame": "https://yoozyres.tos-cn-shanghai.volces.com/c9a736e976000551bbfbad947ce6d19f.jpg",
+              "subtitle": "溪木源山茶花洁面，敏感肌的温和守护者"
+            }
           }
-        ]
+        ],
+        "status": "running",
+        "taskId": "721403de-fd7a-11f0-a783-3436ac12094f"
       }
     }
   }

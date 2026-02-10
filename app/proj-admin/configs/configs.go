@@ -226,33 +226,32 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 		},
 		Server: serverConf,
 		Database: confcenter.Database{
-			//Clickhouse: confcenter.ClickHouseConfig{
-			//	//Addrs:    []string{"95.217.42.20:9000"},
-			//	//Database: "default",
-			//	//Username: "default",
-			//	//Password: "erGVO4a0QL",
-			//
-			//	//Addrs:    []string{"95.217.42.20:32589"},
-			//	//Database: "default",
-			//	//Username: "default",
-			//
-			//	Addrs:    []string{"173.208.218.161:9000"},
-			//	Database: "default",
-			//	Username: "default",
-			//},
+			Mongo: mgz.Config{
+				Uri:      fmt.Sprintf("mongodb://14.103.49.90:3717/yoozy_pro?retryWrites=true&w=majority"),
+				Username: "root",
+				Password: confs.MongoPasswordYuzhi,
+
+				Database: "admin",
+			},
 			Rediz: rediz.Config{
 				//Addrs:        []string{"redis-master.prod:6379"},
 				//Password:     "lveRN3bj7b",
 				Addrs:    []string{"118.196.63.209:6379"},
 				Password: confs.RedisPasswordProj,
 			},
-			Mongo: mgz.Config{
-				//Uri:           "173.208.218.161:27017",
-				Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
-				Username: "root",
-				Password: confs.MongoPasswordProj,
-				Database: "yoozy_pro_beta",
-			},
+			//Rediz: rediz.Config{
+			//	//Addrs:        []string{"redis-master.prod:6379"},
+			//	//Password:     "lveRN3bj7b",
+			//	Addrs:    []string{"118.196.63.209:6379"},
+			//	Password: confs.RedisPasswordProj,
+			//},
+			//Mongo: mgz.Config{
+			//	//Uri:           "173.208.218.161:27017",
+			//	Uri:      fmt.Sprintf("mongodb://118.196.63.209:27017/yoozy_pro?retryWrites=true&w=majority"),
+			//	Username: "root",
+			//	Password: confs.MongoPasswordProj,
+			//	Database: "yoozy_pro_beta",
+			//},
 			Elastics: elastics.Config{
 				//Addresses: []string{"http://localhost:9200/"},
 				//Addresses: []string{"http://118.196.63.209:9200/"},
@@ -308,7 +307,7 @@ func GetConfig() (*confcenter.Config[BizConfig], error) {
 
 	env := os.Getenv("POD_NAMESPACE")
 	if env == "" {
-		env = "prod"
+		env = "dev"
 	}
 
 	cc, ok := configs[env]
