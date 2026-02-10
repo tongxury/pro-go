@@ -37,7 +37,7 @@ func (t ProjService) XListAssets(ctx context.Context, params *projpb.XListAssets
 	}
 
 	if params.UserId != "" {
-		filter = filter.EQ("userId", params.UserId)
+		filter = filter.EQ("user._id", params.UserId)
 	}
 
 	if params.Category != "" {

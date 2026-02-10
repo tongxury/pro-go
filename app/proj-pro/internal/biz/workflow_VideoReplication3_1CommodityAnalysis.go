@@ -117,10 +117,21 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 
 	if len(segments) == 0 {
 		logger.Errorw("searchTemplateSegments err", "no segment found", "tags", strings.Join(analyzeResult.Tags, ","))
-		return &ExecuteResult{
-			Status: ExecuteStatusFailed,
-			Error:  "no segment found",
-		}, nil
+
+		count, err := t.data.Redis.Incr(ctx, "video_replication_3_1_no_segment_found:retry:"+wfState.XId).Result()
+		if err != nil {
+			logger.Errorw("update workflow segment fail", "err", err)
+			return nil, err
+		}
+
+		if count > 5 {
+			return &ExecuteResult{
+				Status: ExecuteStatusFailed,
+				Error:  "no segment found",
+			}, nil
+		}
+
+		return nil, nil
 	}
 
 	// 更新 workflow 中的 dataBus
