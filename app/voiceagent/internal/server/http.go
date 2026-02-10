@@ -40,6 +40,7 @@ func NewHTTPServer(c confcenter.Server, service *service.VoiceAgentService, live
 				return !helper.InSlice(operation, []string{
 					voiceagent.VoiceAgentService_CreateMemory_FullMethodName,
 					voiceagent.LiveKitService_AddTranscriptEntry_FullMethodName,
+					voiceagent.VoiceAgentService_ListTopics_FullMethodName,
 				})
 			}).Build(),
 			recovery.Recovery(),
