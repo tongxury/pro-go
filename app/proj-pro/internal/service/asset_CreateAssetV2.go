@@ -32,9 +32,7 @@ func (t ProjService) CreateAssetV2(ctx context.Context, req *projpb.CreateAssetV
 	// 模版的segment 没有id  包括后面可能得其他模版
 	segment := req.Segment
 	if req.SegmentId != "" {
-		segment, err = t.data.GrpcClients.ProjAdminClient.GetResourceSegment(ctx, &projpb.GetResourceSegmentRequest{
-			Id: req.SegmentId,
-		})
+		segment, err = t.data.Mongo.TemplateSegment.GetById(ctx, req.SegmentId)
 		if err != nil {
 			return nil, err
 		}
