@@ -9670,7 +9670,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.proj.VideoGeneration'
-                    description: api.proj.ResourceSegment segment_CommodityReplacement = 3;
+                    description: api.proj.ResourceSegment segment_CommodityReplacement = 3 ;
                 videoFramesChanges:
                     type: array
                     items:
@@ -9687,6 +9687,10 @@ components:
                 aspectRatio:
                     type: string
                 duration:
+                    type: string
+                durationStart:
+                    type: string
+                durationEnd:
                     type: string
         api.proj.Feedback:
             type: object
@@ -9894,7 +9898,7 @@ components:
                 dataBus:
                     allOf:
                         - $ref: '#/components/schemas/api.proj.DataBus'
-                    description: map<string, string> context = 20;
+                    description: map<string, string> context = 20 ;
                 subJobs:
                     type: array
                     items:

@@ -1899,6 +1899,10 @@ func (m *DataBus_Settings) validate(all bool) error {
 
 	// no validation rules for Duration
 
+	// no validation rules for DurationStart
+
+	// no validation rules for DurationEnd
+
 	if len(errors) > 0 {
 		return DataBus_SettingsMultiError(errors)
 	}

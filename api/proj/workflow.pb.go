@@ -493,7 +493,7 @@ type DataBus struct {
 	Segment   *ResourceSegment       `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
 	Commodity *Commodity             `protobuf:"bytes,2,opt,name=commodity,proto3" json:"commodity,omitempty"`
 	Settings  *DataBus_Settings      `protobuf:"bytes,3,opt,name=settings,proto3" json:"settings,omitempty"`
-	// api.proj.ResourceSegment segment_CommodityReplacement = 3;
+	// api.proj.ResourceSegment segment_CommodityReplacement = 3 ;
 	VideoGenerations   []*VideoGeneration   `protobuf:"bytes,4,rep,name=videoGenerations,proto3" json:"videoGenerations,omitempty"`
 	VideoFramesChanges []*VideoFramesChange `protobuf:"bytes,5,rep,name=videoFramesChanges,proto3" json:"videoFramesChanges,omitempty"`
 	Remix              *Remix               `protobuf:"bytes,6,opt,name=remix,proto3" json:"remix,omitempty"`
@@ -604,7 +604,7 @@ type Job struct {
 	StartedAt   int64                  `protobuf:"varint,6,opt,name=startedAt,proto3" json:"startedAt,omitempty"`
 	CompletedAt int64                  `protobuf:"varint,7,opt,name=completedAt,proto3" json:"completedAt,omitempty"`
 	Progress    *Job_Progress          `protobuf:"bytes,8,opt,name=progress,proto3" json:"progress,omitempty"`
-	// map<string, string> context = 20;
+	// map<string, string> context = 20 ;
 	DataBus       *DataBus `protobuf:"bytes,9,opt,name=dataBus,proto3" json:"dataBus,omitempty"`
 	SubJobs       []*Job   `protobuf:"bytes,10,rep,name=subJobs,proto3" json:"subJobs,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1017,6 +1017,8 @@ type DataBus_Settings struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AspectRatio   string                 `protobuf:"bytes,1,opt,name=aspectRatio,proto3" json:"aspectRatio,omitempty"`
 	Duration      int64                  `protobuf:"varint,2,opt,name=duration,proto3" json:"duration,omitempty"`
+	DurationStart int64                  `protobuf:"varint,3,opt,name=durationStart,proto3" json:"durationStart,omitempty"`
+	DurationEnd   int64                  `protobuf:"varint,4,opt,name=durationEnd,proto3" json:"durationEnd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1061,6 +1063,20 @@ func (x *DataBus_Settings) GetAspectRatio() string {
 func (x *DataBus_Settings) GetDuration() int64 {
 	if x != nil {
 		return x.Duration
+	}
+	return 0
+}
+
+func (x *DataBus_Settings) GetDurationStart() int64 {
+	if x != nil {
+		return x.DurationStart
+	}
+	return 0
+}
+
+func (x *DataBus_Settings) GetDurationEnd() int64 {
+	if x != nil {
+		return x.DurationEnd
 	}
 	return 0
 }
@@ -1180,7 +1196,7 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x05error\x18\b \x01(\tR\x05error\x12\x1a\n" +
 	"\bcategory\x18\t \x01(\tR\bcategory\x12(\n" +
 	"\x06review\x18\n" +
-	" \x01(\v2\x10.api.proj.ReviewR\x06review\"\xb8\x04\n" +
+	" \x01(\v2\x10.api.proj.ReviewR\x06review\"\x81\x05\n" +
 	"\aDataBus\x12\x16\n" +
 	"\x06userId\x18\x14 \x01(\tR\x06userId\x123\n" +
 	"\asegment\x18\x01 \x01(\v2\x19.api.proj.ResourceSegmentR\asegment\x121\n" +
@@ -1190,10 +1206,12 @@ const file_proj_workflow_proto_rawDesc = "" +
 	"\x12videoFramesChanges\x18\x05 \x03(\v2\x1b.api.proj.VideoFramesChangeR\x12videoFramesChanges\x12%\n" +
 	"\x05remix\x18\x06 \x01(\v2\x0f.api.proj.RemixR\x05remix\x12=\n" +
 	"\rsegmentScript\x18\a \x01(\v2\x17.api.proj.SegmentScriptR\rsegmentScript\x121\n" +
-	"\tkeyFrames\x18\b \x01(\v2\x13.api.proj.KeyFramesR\tkeyFrames\x1aH\n" +
+	"\tkeyFrames\x18\b \x01(\v2\x13.api.proj.KeyFramesR\tkeyFrames\x1a\x90\x01\n" +
 	"\bSettings\x12 \n" +
 	"\vaspectRatio\x18\x01 \x01(\tR\vaspectRatio\x12\x1a\n" +
-	"\bduration\x18\x02 \x01(\x03R\bduration\"\xcd\x02\n" +
+	"\bduration\x18\x02 \x01(\x03R\bduration\x12$\n" +
+	"\rdurationStart\x18\x03 \x01(\x03R\rdurationStart\x12 \n" +
+	"\vdurationEnd\x18\x04 \x01(\x03R\vdurationEnd\"\xcd\x02\n" +
 	"\x03Job\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x03R\x05index\x12\x16\n" +

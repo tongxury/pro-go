@@ -10,6 +10,7 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
+	"store/pkg/sdk/helper/mathz"
 	"store/pkg/sdk/third/bytedance/vikingdb"
 	"store/pkg/sdk/third/gemini"
 	"strings"
@@ -101,15 +102,23 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		return nil, err
 	}
 
-	segments, err := t.searchTemplateSegments(ctx, strings.Join(analyzeResult.Tags, ","), "", 1)
+	segments, err := t.searchTemplateSegments(ctx, strings.Join(analyzeResult.Tags, ","), "", 10)
 	if err != nil {
 		return nil, err
 	}
 
 	segments = helper.Filter(segments, func(param *projpb.ResourceSegment) bool {
 
-		if int64(param.TimeEnd-param.TimeStart) < 8 {
-			return false
+		if dataBus.Settings.GetDurationStart() > 0 {
+			if int64(param.TimeEnd-param.TimeStart) < dataBus.Settings.GetDurationStart() {
+				return false
+			}
+		}
+
+		if dataBus.Settings.GetDurationEnd() > 0 {
+			if int64(param.TimeEnd-param.TimeStart) > dataBus.Settings.GetDurationEnd() {
+				return false
+			}
 		}
 
 		return true
@@ -134,9 +143,11 @@ func (t VideoReplication3_CommodityAnalysisJob) Execute(ctx context.Context, job
 		return nil, nil
 	}
 
+	logger.Debugw("searchTemplateSegments ", "success", "segments", len(segments))
+
 	// 更新 workflow 中的 dataBus
 	_, err = t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId, mgz.Op().
-		Set(fmt.Sprintf("jobs.%d.dataBus.segment", jobState.Index), segments[0]))
+		Set(fmt.Sprintf("jobs.%d.dataBus.segment", jobState.Index), segments[mathz.RandNumber(0, len(segments)-1)]))
 	if err != nil {
 		logger.Errorw("update workflow segment fail", "err", err)
 		return nil, err
