@@ -8,7 +8,6 @@ import (
 	"store/app/proj-pro/internal/data"
 	"store/pkg/clients/mgz"
 	"store/pkg/sdk/helper"
-	"store/pkg/sdk/third/bytedance/arkr"
 	"store/pkg/sdk/third/gemini"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -89,12 +88,13 @@ func (t VideoReplication3_VideoSegmentsGenerationJob) Execute(ctx context.Contex
 				LastFrame:   last,
 				AspectRatio: wfState.GetDataBus().GetSettings().GetAspectRatio(),
 				// tmp 用ai 根据这生成新的
-				TmpPrompt: fmt.Sprintf("%s\n%s\n\n%s\n\n%s\n",
+				TmpPrompt: fmt.Sprintf("%s\n%s\n\n%s\n\n%s\n\n%s",
 					seg.GetCoreAction(),
 					seg.GetElementTransformation(),
 					seg.GetVisualChange(),
 					//seg.GetDescription(),
 					seg.GetSceneStyle(),
+					seg.GetScript(),
 					//strings.Join(seg.GetTypedTags().Tags(), " "),
 					//"依据以上分镜描述， 结合【图1的整体风格和场景】+【图2中的商品】,生成一张视频首帧图片",
 					//helper.Select(isFirstFrame,
@@ -114,7 +114,7 @@ func (t VideoReplication3_VideoSegmentsGenerationJob) Execute(ctx context.Contex
 
 	// 已完成
 	runnings := helper.Filter(dataBus.VideoGenerations, func(param *projpb.VideoGeneration) bool {
-		return param.Url == ""
+		return param.Prompt == ""
 	})
 
 	if len(runnings) == 0 {
@@ -141,11 +141,15 @@ func (t VideoReplication3_VideoSegmentsGenerationJob) Execute(ctx context.Contex
 			dataBus.VideoGenerations[i].Prompt, err = t.data.GenaiFactory.Get().GenerateContentV2(ctx, gemini.GenerateContentRequestV2{
 				ImageUrls: []string{x.FirstFrame, x.LastFrame},
 				Prompt: fmt.Sprintf(`
+
+生成提示词的逻辑:
 %s
 
 ===
-参考信息:
-%s
+
+参考一下信息：
+
+- 分镜信息: %s
 `, prompt,
 					x.TmpPrompt,
 				),
@@ -165,75 +169,75 @@ func (t VideoReplication3_VideoSegmentsGenerationJob) Execute(ctx context.Contex
 		return nil, nil
 	}
 
-	for i := range dataBus.VideoGenerations {
-
-		x := dataBus.VideoGenerations[i]
-
-		if x.Url != "" {
-			continue
-		}
-
-		if x.TaskId == "" {
-
-			taskId, err := t.data.Arkr.GenerateVideo(ctx, arkr.GenerateVideoRequest{
-				Prompt:        x.Prompt,
-				StartFrame:    x.FirstFrame,
-				EndFrame:      x.LastFrame,
-				GenerateAudio: helper.Pointer(false),
-				Duration:      x.Duration,
-				AspectRatio:   x.AspectRatio,
-			})
-			if err != nil {
-				logger.Errorw("GenerateVideo err", err)
-				//return nil, err
-				continue
-			}
-
-			// 发起后立即更新 避免重复
-			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-				mgz.Op().SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "taskId", taskId),
-			)
-
-		} else {
-
-			task, err := t.data.Arkr.GetTask(ctx, x.TaskId)
-			if err != nil {
-				logger.Errorw("GetTask err", err)
-				return nil, err
-			}
-
-			logger.Debugw("GetTask task ", "ing", "id", task.ID, "status", task.Status)
-
-			if task.Status == "succeeded" {
-
-				video, err := t.data.TOS.PutVideo(ctx, task.Content.VideoURL)
-				if err != nil {
-					return nil, err
-				}
-
-				image, err := t.data.TOS.PutImage(ctx, task.Content.LastFrameURL)
-				if err != nil {
-
-					return nil, err
-				}
-
-				t.data.Mongo.Workflow.UpdateByIDIfExists(ctx,
-					wfState.XId,
-					mgz.Op().
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "url", video).
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "duration", *task.Duration).
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "status", "completed").
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "lastFrame", image),
-				)
-			} else if task.Status == "failed" {
-				t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
-					mgz.Op().
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "status", "failed").
-						SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "error", task.Error.Message),
-				)
-			}
-		}
-	}
+	//for i := range dataBus.VideoGenerations {
+	//
+	//	x := dataBus.VideoGenerations[i]
+	//
+	//	if x.Url != "" {
+	//		continue
+	//	}
+	//
+	//	if x.TaskId == "" {
+	//
+	//		taskId, err := t.data.Arkr.GenerateVideo(ctx, arkr.GenerateVideoRequest{
+	//			Prompt:        x.Prompt,
+	//			StartFrame:    x.FirstFrame,
+	//			EndFrame:      x.LastFrame,
+	//			GenerateAudio: helper.Pointer(false),
+	//			Duration:      x.Duration,
+	//			AspectRatio:   x.AspectRatio,
+	//		})
+	//		if err != nil {
+	//			logger.Errorw("GenerateVideo err", err)
+	//			//return nil, err
+	//			continue
+	//		}
+	//
+	//		// 发起后立即更新 避免重复
+	//		t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//			mgz.Op().SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "taskId", taskId),
+	//		)
+	//
+	//	} else {
+	//
+	//		task, err := t.data.Arkr.GetTask(ctx, x.TaskId)
+	//		if err != nil {
+	//			logger.Errorw("GetTask err", err)
+	//			return nil, err
+	//		}
+	//
+	//		logger.Debugw("GetTask task ", "ing", "id", task.ID, "status", task.Status)
+	//
+	//		if task.Status == "succeeded" {
+	//
+	//			video, err := t.data.TOS.PutVideo(ctx, task.Content.VideoURL)
+	//			if err != nil {
+	//				return nil, err
+	//			}
+	//
+	//			image, err := t.data.TOS.PutImage(ctx, task.Content.LastFrameURL)
+	//			if err != nil {
+	//
+	//				return nil, err
+	//			}
+	//
+	//			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx,
+	//				wfState.XId,
+	//				mgz.Op().
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "url", video).
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "duration", *task.Duration).
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "status", "completed").
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "lastFrame", image),
+	//			)
+	//		} else if task.Status == "failed" {
+	//			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+	//				mgz.Op().
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "status", "failed").
+	//					SetListItem(fmt.Sprintf("jobs.%d.dataBus.videoGenerations", jobState.Index), i, "error", task.Error.Message),
+	//			)
+	//		}
+	//	}
+	//}
 
 	return nil, nil
 }

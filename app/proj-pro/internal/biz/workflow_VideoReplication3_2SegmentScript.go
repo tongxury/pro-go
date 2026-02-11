@@ -82,6 +82,7 @@ func (t VideoReplication3_SegmentScriptJob) Execute(ctx context.Context, jobStat
 							"sceneStyle",
 							"description",
 							"shootingStyle",
+							"script",
 							//"typedTags"
 						},
 						Properties: map[string]*genai.Schema{
@@ -89,6 +90,10 @@ func (t VideoReplication3_SegmentScriptJob) Execute(ctx context.Context, jobStat
 							//	Type:        genai.TypeString,
 							//	Description: "当前分段的拍摄脚本描述",
 							//},
+							"script": {
+								Type:        genai.TypeString,
+								Description: "镜头脚本",
+							},
 							"timeStart": {
 								Type:        genai.TypeNumber,
 								Description: "当前分镜脚本的开始时间戳(秒, 示例：1.22)",
