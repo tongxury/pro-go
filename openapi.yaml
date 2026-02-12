@@ -3319,6 +3319,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.proj.RemixOptions'
+    /api/proj/v1/remix-tasks:
+        post:
+            tags:
+                - WorkflowService
+            operationId: WorkflowService_CreateRemixTask
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.proj.CreateRemixTaskRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.RemixTask'
+    /api/proj/v1/remix-tasks/{taskId}:
+        get:
+            tags:
+                - WorkflowService
+            operationId: WorkflowService_GetRemixTask
+            parameters:
+                - name: taskId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.proj.RemixTask'
     /api/proj/v1/resource-segments:
         get:
             tags:
@@ -9587,6 +9623,20 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.proj.Media'
+        api.proj.CreateRemixTaskRequest:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.proj.CreateRemixTaskRequest_Item'
+        api.proj.CreateRemixTaskRequest_Item:
+            type: object
+            properties:
+                url:
+                    type: string
+                subtitle:
+                    type: string
         api.proj.CreateSessionRequest:
             type: object
             properties:
@@ -10085,6 +10135,15 @@ components:
                     type: string
                 downloadUrl:
                     type: string
+        api.proj.RemixTask:
+            type: object
+            properties:
+                taskId:
+                    type: string
+                status:
+                    type: string
+                url:
+                    type: string
         api.proj.Remix_Segment:
             type: object
             properties:
@@ -10154,6 +10213,8 @@ components:
                 visualChange:
                     type: string
                 intention:
+                    type: string
+                expression:
                     type: string
                 keyFrames:
                     $ref: '#/components/schemas/api.proj.KeyFrameSeries'

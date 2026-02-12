@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	WorkflowService_CreateRemixTask_FullMethodName       = "/api.proj.WorkflowService/CreateRemixTask"
+	WorkflowService_GetRemixTask_FullMethodName          = "/api.proj.WorkflowService/GetRemixTask"
 	WorkflowService_CreateWorkflow_FullMethodName        = "/api.proj.WorkflowService/CreateWorkflow"
 	WorkflowService_GetWorkflow_FullMethodName           = "/api.proj.WorkflowService/GetWorkflow"
 	WorkflowService_UpdateWorkflow_FullMethodName        = "/api.proj.WorkflowService/UpdateWorkflow"
@@ -32,6 +34,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkflowServiceClient interface {
+	CreateRemixTask(ctx context.Context, in *CreateRemixTaskRequest, opts ...grpc.CallOption) (*RemixTask, error)
+	GetRemixTask(ctx context.Context, in *GetRemixTaskRequest, opts ...grpc.CallOption) (*RemixTask, error)
 	CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
 	GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error)
@@ -47,6 +51,26 @@ type workflowServiceClient struct {
 
 func NewWorkflowServiceClient(cc grpc.ClientConnInterface) WorkflowServiceClient {
 	return &workflowServiceClient{cc}
+}
+
+func (c *workflowServiceClient) CreateRemixTask(ctx context.Context, in *CreateRemixTaskRequest, opts ...grpc.CallOption) (*RemixTask, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemixTask)
+	err := c.cc.Invoke(ctx, WorkflowService_CreateRemixTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowServiceClient) GetRemixTask(ctx context.Context, in *GetRemixTaskRequest, opts ...grpc.CallOption) (*RemixTask, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemixTask)
+	err := c.cc.Invoke(ctx, WorkflowService_GetRemixTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *workflowServiceClient) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*Workflow, error) {
@@ -123,6 +147,8 @@ func (c *workflowServiceClient) ListWorkflows(ctx context.Context, in *ListWorkf
 // All implementations must embed UnimplementedWorkflowServiceServer
 // for forward compatibility.
 type WorkflowServiceServer interface {
+	CreateRemixTask(context.Context, *CreateRemixTaskRequest) (*RemixTask, error)
+	GetRemixTask(context.Context, *GetRemixTaskRequest) (*RemixTask, error)
 	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error)
 	GetWorkflow(context.Context, *GetWorkflowRequest) (*Workflow, error)
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*Workflow, error)
@@ -140,6 +166,12 @@ type WorkflowServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWorkflowServiceServer struct{}
 
+func (UnimplementedWorkflowServiceServer) CreateRemixTask(context.Context, *CreateRemixTaskRequest) (*RemixTask, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRemixTask not implemented")
+}
+func (UnimplementedWorkflowServiceServer) GetRemixTask(context.Context, *GetRemixTaskRequest) (*RemixTask, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRemixTask not implemented")
+}
 func (UnimplementedWorkflowServiceServer) CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateWorkflow not implemented")
 }
@@ -180,6 +212,42 @@ func RegisterWorkflowServiceServer(s grpc.ServiceRegistrar, srv WorkflowServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&WorkflowService_ServiceDesc, srv)
+}
+
+func _WorkflowService_CreateRemixTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRemixTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowServiceServer).CreateRemixTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowService_CreateRemixTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowServiceServer).CreateRemixTask(ctx, req.(*CreateRemixTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowService_GetRemixTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRemixTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowServiceServer).GetRemixTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowService_GetRemixTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowServiceServer).GetRemixTask(ctx, req.(*GetRemixTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _WorkflowService_CreateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -315,6 +383,14 @@ var WorkflowService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.proj.WorkflowService",
 	HandlerType: (*WorkflowServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateRemixTask",
+			Handler:    _WorkflowService_CreateRemixTask_Handler,
+		},
+		{
+			MethodName: "GetRemixTask",
+			Handler:    _WorkflowService_GetRemixTask_Handler,
+		},
 		{
 			MethodName: "CreateWorkflow",
 			Handler:    _WorkflowService_CreateWorkflow_Handler,

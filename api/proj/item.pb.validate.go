@@ -307,6 +307,8 @@ func (m *ResourceSegment) validate(all bool) error {
 
 	// no validation rules for Intention
 
+	// no validation rules for Expression
+
 	if all {
 		switch v := interface{}(m.GetKeyFrames()).(type) {
 		case interface{ ValidateAll() error }:

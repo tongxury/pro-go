@@ -39,7 +39,7 @@ func TestClient_GenerateImage_MultiImage(t *testing.T) {
 	}
 
 	// Read local image
-	imagePath := "微信图片_20260130174959_1320_402.jpg"
+	imagePath := "截屏2026-02-12 12.08.13.png"
 	imageBytes, err := os.ReadFile(imagePath)
 	if err != nil {
 		t.Fatalf("Failed to read local image %s: %v", imagePath, err)
@@ -48,9 +48,9 @@ func TestClient_GenerateImage_MultiImage(t *testing.T) {
 	// Test multi-image: using the same image twice as a sample
 	resp, err := client.GenerateImage(ctx, gemini.GenerateImageRequest{
 
-		ImageBytes:  [][]byte{imageBytes, imageBytes},
-		Prompt:      "Combine elements from these two images into a new high quality commercial background for fashion video.",
-		AspectRatio: "9:16",
+		ImageBytes:  [][]byte{imageBytes},
+		Prompt:      "帮我生成 app store 介绍图, 只保留参考图的主图部分",
+		AspectRatio: "3:4",
 	})
 
 	if err != nil {
@@ -60,7 +60,7 @@ func TestClient_GenerateImage_MultiImage(t *testing.T) {
 	assert.NotEmpty(t, resp)
 
 	// Save output
-	outputPath := "multi_image_output.png"
+	outputPath := "output.png"
 	err = os.WriteFile(outputPath, resp, 0644)
 	assert.NoError(t, err)
 

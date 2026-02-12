@@ -66,6 +66,8 @@ func NewHTTPServer(c confcenter.Server,
 
 					projpb.WorkflowService_CreateWorkflow_FullMethodName,
 					projpb.WorkflowService_GetWorkflow_FullMethodName,
+					projpb.WorkflowService_CreateRemixTask_FullMethodName,
+					projpb.WorkflowService_GetRemixTask_FullMethodName,
 				})
 			}).Build(),
 			recovery.Recovery(),

@@ -35,6 +35,351 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on CreateRemixTaskRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateRemixTaskRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateRemixTaskRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateRemixTaskRequestMultiError, or nil if none found.
+func (m *CreateRemixTaskRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateRemixTaskRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateRemixTaskRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateRemixTaskRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateRemixTaskRequestValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CreateRemixTaskRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateRemixTaskRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateRemixTaskRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateRemixTaskRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateRemixTaskRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateRemixTaskRequestMultiError) AllErrors() []error { return m }
+
+// CreateRemixTaskRequestValidationError is the validation error returned by
+// CreateRemixTaskRequest.Validate if the designated constraints aren't met.
+type CreateRemixTaskRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateRemixTaskRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateRemixTaskRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateRemixTaskRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateRemixTaskRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateRemixTaskRequestValidationError) ErrorName() string {
+	return "CreateRemixTaskRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateRemixTaskRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateRemixTaskRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateRemixTaskRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateRemixTaskRequestValidationError{}
+
+// Validate checks the field values on RemixTask with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RemixTask) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RemixTask with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in RemixTaskMultiError, or nil
+// if none found.
+func (m *RemixTask) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RemixTask) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	// no validation rules for Status
+
+	// no validation rules for Url
+
+	if len(errors) > 0 {
+		return RemixTaskMultiError(errors)
+	}
+
+	return nil
+}
+
+// RemixTaskMultiError is an error wrapping multiple validation errors returned
+// by RemixTask.ValidateAll() if the designated constraints aren't met.
+type RemixTaskMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RemixTaskMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RemixTaskMultiError) AllErrors() []error { return m }
+
+// RemixTaskValidationError is the validation error returned by
+// RemixTask.Validate if the designated constraints aren't met.
+type RemixTaskValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemixTaskValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemixTaskValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemixTaskValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemixTaskValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemixTaskValidationError) ErrorName() string { return "RemixTaskValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RemixTaskValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemixTask.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemixTaskValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemixTaskValidationError{}
+
+// Validate checks the field values on GetRemixTaskRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetRemixTaskRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetRemixTaskRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetRemixTaskRequestMultiError, or nil if none found.
+func (m *GetRemixTaskRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetRemixTaskRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	if len(errors) > 0 {
+		return GetRemixTaskRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetRemixTaskRequestMultiError is an error wrapping multiple validation
+// errors returned by GetRemixTaskRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetRemixTaskRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetRemixTaskRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetRemixTaskRequestMultiError) AllErrors() []error { return m }
+
+// GetRemixTaskRequestValidationError is the validation error returned by
+// GetRemixTaskRequest.Validate if the designated constraints aren't met.
+type GetRemixTaskRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetRemixTaskRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetRemixTaskRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetRemixTaskRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetRemixTaskRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetRemixTaskRequestValidationError) ErrorName() string {
+	return "GetRemixTaskRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetRemixTaskRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetRemixTaskRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetRemixTaskRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetRemixTaskRequestValidationError{}
+
 // Validate checks the field values on ListWorkflowsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -936,3 +1281,110 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateWorkflowRequestValidationError{}
+
+// Validate checks the field values on CreateRemixTaskRequest_Item with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateRemixTaskRequest_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateRemixTaskRequest_Item with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateRemixTaskRequest_ItemMultiError, or nil if none found.
+func (m *CreateRemixTaskRequest_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateRemixTaskRequest_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Url
+
+	// no validation rules for Subtitle
+
+	if len(errors) > 0 {
+		return CreateRemixTaskRequest_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateRemixTaskRequest_ItemMultiError is an error wrapping multiple
+// validation errors returned by CreateRemixTaskRequest_Item.ValidateAll() if
+// the designated constraints aren't met.
+type CreateRemixTaskRequest_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateRemixTaskRequest_ItemMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateRemixTaskRequest_ItemMultiError) AllErrors() []error { return m }
+
+// CreateRemixTaskRequest_ItemValidationError is the validation error returned
+// by CreateRemixTaskRequest_Item.Validate if the designated constraints
+// aren't met.
+type CreateRemixTaskRequest_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateRemixTaskRequest_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateRemixTaskRequest_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateRemixTaskRequest_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateRemixTaskRequest_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateRemixTaskRequest_ItemValidationError) ErrorName() string {
+	return "CreateRemixTaskRequest_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateRemixTaskRequest_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateRemixTaskRequest_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateRemixTaskRequest_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateRemixTaskRequest_ItemValidationError{}

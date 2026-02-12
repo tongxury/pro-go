@@ -19,7 +19,9 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationWorkflowServiceCreateRemixTask = "/api.proj.WorkflowService/CreateRemixTask"
 const OperationWorkflowServiceCreateWorkflow = "/api.proj.WorkflowService/CreateWorkflow"
+const OperationWorkflowServiceGetRemixTask = "/api.proj.WorkflowService/GetRemixTask"
 const OperationWorkflowServiceGetWorkflow = "/api.proj.WorkflowService/GetWorkflow"
 const OperationWorkflowServiceListWorkflows = "/api.proj.WorkflowService/ListWorkflows"
 const OperationWorkflowServiceReplaceWorkflow = "/api.proj.WorkflowService/ReplaceWorkflow"
@@ -28,7 +30,9 @@ const OperationWorkflowServiceUpdateWorkflowJob = "/api.proj.WorkflowService/Upd
 const OperationWorkflowServiceUpdateWorkflowJobData = "/api.proj.WorkflowService/UpdateWorkflowJobData"
 
 type WorkflowServiceHTTPServer interface {
+	CreateRemixTask(context.Context, *CreateRemixTaskRequest) (*RemixTask, error)
 	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*Workflow, error)
+	GetRemixTask(context.Context, *GetRemixTaskRequest) (*RemixTask, error)
 	GetWorkflow(context.Context, *GetWorkflowRequest) (*Workflow, error)
 	ListWorkflows(context.Context, *ListWorkflowsRequest) (*WorkflowList, error)
 	ReplaceWorkflow(context.Context, *Workflow) (*Workflow, error)
@@ -39,6 +43,8 @@ type WorkflowServiceHTTPServer interface {
 
 func RegisterWorkflowServiceHTTPServer(s *http.Server, srv WorkflowServiceHTTPServer) {
 	r := s.Route("/")
+	r.POST("/api/proj/v1/remix-tasks", _WorkflowService_CreateRemixTask0_HTTP_Handler(srv))
+	r.GET("/api/proj/v1/remix-tasks/{taskId}", _WorkflowService_GetRemixTask0_HTTP_Handler(srv))
 	r.POST("/api/proj/v1/workflows", _WorkflowService_CreateWorkflow0_HTTP_Handler(srv))
 	r.GET("/api/proj/v1/workflows/{id}", _WorkflowService_GetWorkflow0_HTTP_Handler(srv))
 	r.PATCH("/api/proj/v1/workflows/{id}", _WorkflowService_UpdateWorkflow0_HTTP_Handler(srv))
@@ -46,6 +52,50 @@ func RegisterWorkflowServiceHTTPServer(s *http.Server, srv WorkflowServiceHTTPSe
 	r.PATCH("/api/proj/v1/workflows/{id}/job-data/{name}", _WorkflowService_UpdateWorkflowJobData0_HTTP_Handler(srv))
 	r.PUT("/api/proj/v1/workflows", _WorkflowService_ReplaceWorkflow0_HTTP_Handler(srv))
 	r.GET("/api/proj/v1/workflows", _WorkflowService_ListWorkflows0_HTTP_Handler(srv))
+}
+
+func _WorkflowService_CreateRemixTask0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateRemixTaskRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWorkflowServiceCreateRemixTask)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateRemixTask(ctx, req.(*CreateRemixTaskRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RemixTask)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _WorkflowService_GetRemixTask0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetRemixTaskRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWorkflowServiceGetRemixTask)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetRemixTask(ctx, req.(*GetRemixTaskRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RemixTask)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _WorkflowService_CreateWorkflow0_HTTP_Handler(srv WorkflowServiceHTTPServer) func(ctx http.Context) error {
@@ -209,7 +259,9 @@ func _WorkflowService_ListWorkflows0_HTTP_Handler(srv WorkflowServiceHTTPServer)
 }
 
 type WorkflowServiceHTTPClient interface {
+	CreateRemixTask(ctx context.Context, req *CreateRemixTaskRequest, opts ...http.CallOption) (rsp *RemixTask, err error)
 	CreateWorkflow(ctx context.Context, req *CreateWorkflowRequest, opts ...http.CallOption) (rsp *Workflow, err error)
+	GetRemixTask(ctx context.Context, req *GetRemixTaskRequest, opts ...http.CallOption) (rsp *RemixTask, err error)
 	GetWorkflow(ctx context.Context, req *GetWorkflowRequest, opts ...http.CallOption) (rsp *Workflow, err error)
 	ListWorkflows(ctx context.Context, req *ListWorkflowsRequest, opts ...http.CallOption) (rsp *WorkflowList, err error)
 	ReplaceWorkflow(ctx context.Context, req *Workflow, opts ...http.CallOption) (rsp *Workflow, err error)
@@ -226,6 +278,19 @@ func NewWorkflowServiceHTTPClient(client *http.Client) WorkflowServiceHTTPClient
 	return &WorkflowServiceHTTPClientImpl{client}
 }
 
+func (c *WorkflowServiceHTTPClientImpl) CreateRemixTask(ctx context.Context, in *CreateRemixTaskRequest, opts ...http.CallOption) (*RemixTask, error) {
+	var out RemixTask
+	pattern := "/api/proj/v1/remix-tasks"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWorkflowServiceCreateRemixTask))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *WorkflowServiceHTTPClientImpl) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...http.CallOption) (*Workflow, error) {
 	var out Workflow
 	pattern := "/api/proj/v1/workflows"
@@ -233,6 +298,19 @@ func (c *WorkflowServiceHTTPClientImpl) CreateWorkflow(ctx context.Context, in *
 	opts = append(opts, http.Operation(OperationWorkflowServiceCreateWorkflow))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *WorkflowServiceHTTPClientImpl) GetRemixTask(ctx context.Context, in *GetRemixTaskRequest, opts ...http.CallOption) (*RemixTask, error) {
+	var out RemixTask
+	pattern := "/api/proj/v1/remix-tasks/{taskId}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationWorkflowServiceGetRemixTask))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

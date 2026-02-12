@@ -147,6 +147,7 @@ type ResourceSegment struct {
 	ElementTransformation string                 `protobuf:"bytes,27,opt,name=elementTransformation,proto3" json:"elementTransformation,omitempty"` // 元素转化
 	VisualChange          string                 `protobuf:"bytes,28,opt,name=visualChange,proto3" json:"visualChange,omitempty"`                   // 视觉变化
 	Intention             string                 `protobuf:"bytes,29,opt,name=intention,proto3" json:"intention,omitempty"`                         // 意图
+	Expression            string                 `protobuf:"bytes,31,opt,name=expression,proto3" json:"expression,omitempty"`
 	KeyFrames             *KeyFrameSeries        `protobuf:"bytes,30,opt,name=keyFrames,proto3" json:"keyFrames,omitempty"`
 	Root                  *Resource              `protobuf:"bytes,1,opt,name=root,proto3" json:"root,omitempty"`
 	Style                 string                 `protobuf:"bytes,2,opt,name=style,proto3" json:"style,omitempty"`
@@ -268,6 +269,13 @@ func (x *ResourceSegment) GetVisualChange() string {
 func (x *ResourceSegment) GetIntention() string {
 	if x != nil {
 		return x.Intention
+	}
+	return ""
+}
+
+func (x *ResourceSegment) GetExpression() string {
+	if x != nil {
+		return x.Expression
 	}
 	return ""
 }
@@ -1842,7 +1850,7 @@ const file_proj_item_proto_rawDesc = "" +
 	"\x05extra\x18\x14 \x01(\v2\x18.api.proj.Resource.ExtraR\x05extra\x1a9\n" +
 	"\x05Extra\x12\x16\n" +
 	"\x06Synced\x18\x01 \x01(\bR\x06Synced\x12\x18\n" +
-	"\apolling\x18\x02 \x01(\bR\apolling\"\x95\t\n" +
+	"\apolling\x18\x02 \x01(\bR\apolling\"\xb5\t\n" +
 	"\x0fResourceSegment\x12\x10\n" +
 	"\x03_id\x18\x0f \x01(\tR\x03_id\x12.\n" +
 	"\x12cameraMovementDesc\x18\x15 \x01(\tR\x12cameraMovementDesc\x12\x18\n" +
@@ -1855,7 +1863,10 @@ const file_proj_item_proto_rawDesc = "" +
 	"coreAction\x124\n" +
 	"\x15elementTransformation\x18\x1b \x01(\tR\x15elementTransformation\x12\"\n" +
 	"\fvisualChange\x18\x1c \x01(\tR\fvisualChange\x12\x1c\n" +
-	"\tintention\x18\x1d \x01(\tR\tintention\x126\n" +
+	"\tintention\x18\x1d \x01(\tR\tintention\x12\x1e\n" +
+	"\n" +
+	"expression\x18\x1f \x01(\tR\n" +
+	"expression\x126\n" +
 	"\tkeyFrames\x18\x1e \x01(\v2\x18.api.proj.KeyFrameSeriesR\tkeyFrames\x12&\n" +
 	"\x04root\x18\x01 \x01(\v2\x12.api.proj.ResourceR\x04root\x12\x14\n" +
 	"\x05style\x18\x02 \x01(\tR\x05style\x12\"\n" +
