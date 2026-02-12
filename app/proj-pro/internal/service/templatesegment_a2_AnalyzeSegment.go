@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	projpb "store/api/proj"
 	"store/pkg/sdk/helper"
 	"store/pkg/sdk/helper/videoz"
@@ -68,7 +67,7 @@ func (t ProjService) analyzeSegment(ctx context.Context, data *analyzeSegmentJob
 
 	seg, err := t.analyzeSegmentByGemini(ctx, data)
 	if err != nil {
-		logger.Errorw("analyzeSegmentByGemini err", "err", err)
+		logger.Errorw("analyzeSegmentByGemini err", err)
 
 		return err
 	}
@@ -180,7 +179,8 @@ func (t ProjService) analyzeSegmentByGemini(ctx context.Context, data *analyzeSe
 					},
 				},
 				"segments": {
-					Type: genai.TypeArray,
+					Type:     genai.TypeArray,
+					MaxItems: helper.Pointer[int64](1),
 					Items: &genai.Schema{
 						Type:        genai.TypeObject,
 						Description: "只有1个，就是我提供给你的整个视频",
@@ -335,10 +335,10 @@ func (t ProjService) analyzeSegmentByGemini(ctx context.Context, data *analyzeSe
 		return nil, err
 	}
 
-	// 校验
-	if len(tmpItem.Segments) != 1 {
-		return nil, fmt.Errorf("invalid segments")
-	}
+	//// 校验
+	//if len(tmpItem.Segments) != 1 {
+	//	return nil, fmt.Errorf("invalid segments")
+	//}
 
 	//if len(tmpItem.Segments[0].HighlightFrames) > 7 || len(tmpItem.Segments[0].HighlightFrames) == 0 {
 	//	return nil, fmt.Errorf("invalid highlightFrames: %d", len(tmpItem.Segments[0].HighlightFrames))
