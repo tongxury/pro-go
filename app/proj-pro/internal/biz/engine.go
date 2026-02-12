@@ -430,6 +430,22 @@ func (t *WorkflowBiz) boost(ctx context.Context, wfState *projpb.Workflow) error
 
 		if err != nil {
 			logger.Errorf("Job execution failed: %v", err)
+
+			key := fmt.Sprintf("workflow:%s:%d:fails", wfState.XId, currentJobState.Index)
+			n, err := t.data.Redis.Incr(ctx, key).Result()
+			if err != nil {
+				logger.Errorf("redis incr err: %v", err)
+			} else {
+				t.data.Redis.Expire(ctx, key, time.Hour)
+
+				if n > 10 {
+					logger.Infof("Job failed > 10 times, pausing workflow %s", wfState.XId)
+					t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+						mgz.Op().Set("status", WorkflowStatusPaused),
+					)
+					return nil
+				}
+			}
 			//currentJobState.Status = JobStatusFailed
 			//wfState.Status = WorkflowStatusFailed
 			//wfState.CompletedAt = time.Now().Unix()
