@@ -44,12 +44,11 @@ func NewVideoReplication3(data *data.Data) *VideoReplication3 {
 			&VideoReplication3_VideoSegmentsGenerationJob{
 				data: data,
 			},
-			//&VideoReplication3_VideoSegmentsRemixJob{
-			//	data: data,
-			//},
+			&VideoReplication3_VideoSegmentsRemixJob{
+				data: data,
+			},
 		},
 	}
-
 }
 
 func (t *VideoReplication3) GetName() string {

@@ -29,6 +29,7 @@ const (
 type CreateRemixTaskRequest struct {
 	state         protoimpl.MessageState         `protogen:"open.v1"`
 	Items         []*CreateRemixTaskRequest_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	WorkflowId    string                         `protobuf:"bytes,2,opt,name=workflowId,proto3" json:"workflowId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -68,6 +69,13 @@ func (x *CreateRemixTaskRequest) GetItems() []*CreateRemixTaskRequest_Item {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *CreateRemixTaskRequest) GetWorkflowId() string {
+	if x != nil {
+		return x.WorkflowId
+	}
+	return ""
 }
 
 type RemixTask struct {
@@ -683,9 +691,12 @@ var File_proj_workflow_service_proto protoreflect.FileDescriptor
 
 const file_proj_workflow_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproj/workflow_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/task.proto\x1a\x0fproj/user.proto\x1a\x11proj/credit.proto\x1a\x12proj/account.proto\x1a\x12proj/session.proto\x1a\x13proj/workflow.proto\x1a\x14proj/commodity.proto\"\x8b\x01\n" +
+	"\x1bproj/workflow_service.proto\x12\bapi.proj\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x19google/protobuf/any.proto\x1a\x1epublic/response/response.proto\x1a\x17validate/validate.proto\x1a\x0fproj/task.proto\x1a\x0fproj/user.proto\x1a\x11proj/credit.proto\x1a\x12proj/account.proto\x1a\x12proj/session.proto\x1a\x13proj/workflow.proto\x1a\x14proj/commodity.proto\"\xab\x01\n" +
 	"\x16CreateRemixTaskRequest\x12;\n" +
-	"\x05items\x18\x01 \x03(\v2%.api.proj.CreateRemixTaskRequest.ItemR\x05items\x1a4\n" +
+	"\x05items\x18\x01 \x03(\v2%.api.proj.CreateRemixTaskRequest.ItemR\x05items\x12\x1e\n" +
+	"\n" +
+	"workflowId\x18\x02 \x01(\tR\n" +
+	"workflowId\x1a4\n" +
 	"\x04Item\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1a\n" +
 	"\bsubtitle\x18\x02 \x01(\tR\bsubtitle\"M\n" +

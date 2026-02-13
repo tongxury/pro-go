@@ -465,6 +465,19 @@ func (t *WorkflowBiz) boost(ctx context.Context, wfState *projpb.Workflow) error
 			return nil
 		}
 
+		if es.Status == ExecuteStatusCompletedAndSkipNextJobs {
+			logger.Infof("Job completed and skip next jobs: %s", currentJobDef.GetName())
+
+			t.data.Mongo.Workflow.UpdateByIDIfExists(ctx, wfState.XId,
+				mgz.Op().
+					Set(fmt.Sprintf("jobs.%d.status", currentJobState.Index), JobStatusCompleted).
+					Set(fmt.Sprintf("jobs.%d.completedAt", currentJobState.Index), time.Now().Unix()).
+					Set("status", WorkflowStatusCompleted),
+			)
+
+			return nil
+		}
+
 		if es.Status == ExecuteStatusCompleted {
 			logger.Infof("Job completed: %s", currentJobDef.GetName())
 			//currentJobState.Status = JobStatusCompleted

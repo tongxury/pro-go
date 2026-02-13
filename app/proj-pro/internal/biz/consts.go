@@ -19,8 +19,9 @@ const (
 )
 
 const (
-	ExecuteStatusWaiting   = "waiting"
-	ExecuteStatusCompleted = "completed"
-	ExecuteStatusFailed    = "failed"
-	ExecuteStatusRunning   = "running"
+	ExecuteStatusWaiting                  = "waiting"
+	ExecuteStatusCompleted                = "completed"
+	ExecuteStatusCompletedAndSkipNextJobs = "completed_and_skip_next"
+	ExecuteStatusFailed                   = "failed"
+	ExecuteStatusRunning                  = "running"
 )

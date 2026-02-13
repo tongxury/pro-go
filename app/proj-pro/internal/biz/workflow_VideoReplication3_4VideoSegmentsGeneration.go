@@ -119,7 +119,7 @@ func (t VideoReplication3_VideoSegmentsGenerationJob) Execute(ctx context.Contex
 
 	if len(runnings) == 0 {
 		return &ExecuteResult{
-			Status: ExecuteStatusCompleted,
+			Status: ExecuteStatusCompletedAndSkipNextJobs,
 		}, nil
 	}
 

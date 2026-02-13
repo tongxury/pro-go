@@ -19,129 +19,130 @@ option go_package = "store/api/proj;projpb";
 
 service WorkflowService {
 
-  rpc CreateRemixTask(CreateRemixTaskRequest) returns (RemixTask) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/remix-tasks"
-      body: "*"
-    }                                                                 ;
-  }
+rpc CreateRemixTask(CreateRemixTaskRequest) returns (RemixTask) {
+option (google.api.http) = {
+post: "/api/proj/v1/remix-tasks"
+body: "*"
+}                                                                 ;
+}
 
-  rpc GetRemixTask(GetRemixTaskRequest) returns (RemixTask) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/remix-tasks/{taskId}"
-    }                                                           ;
-  }
+rpc GetRemixTask(GetRemixTaskRequest) returns (RemixTask) {
+option (google.api.http) = {
+get: "/api/proj/v1/remix-tasks/{taskId}"
+}                                                           ;
+}
 
-  rpc CreateWorkflow(CreateWorkflowRequest) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      post: "/api/proj/v1/workflows"
-      body: "*"
-    }                                                                       ;
-  }
+rpc CreateWorkflow(CreateWorkflowRequest) returns (api.proj.Workflow) {
+option (google.api.http) = {
+post: "/api/proj/v1/workflows"
+body: "*"
+}                                                                       ;
+}
 
-  rpc GetWorkflow(GetWorkflowRequest) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/workflows/{id}"
-    }                                                                 ;
-  }
+rpc GetWorkflow(GetWorkflowRequest) returns (api.proj.Workflow) {
+option (google.api.http) = {
+get: "/api/proj/v1/workflows/{id}"
+}                                                                 ;
+}
 
-  rpc UpdateWorkflow(UpdateWorkflowRequest) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/workflows/{id}"
-      body: "*"
-    }                                                                                     ;
-  }
-  rpc UpdateWorkflowJob(UpdateWorkflowJobRequest) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/workflows/{id}/jobs/{index}"
-      body: "*"
-    }                                                                                     ;
-  }
-  rpc UpdateWorkflowJobData(UpdateWorkflowJobDataRequest) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      patch: "/api/proj/v1/workflows/{id}/job-data/{name}"
-      body: "*"
-    }                                                                                     ;
-  }
+rpc UpdateWorkflow(UpdateWorkflowRequest) returns (api.proj.Workflow) {
+option (google.api.http) = {
+patch: "/api/proj/v1/workflows/{id}"
+body: "*"
+}                                                                                     ;
+}
+rpc UpdateWorkflowJob(UpdateWorkflowJobRequest) returns (api.proj.Workflow) {
+option (google.api.http) = {
+patch: "/api/proj/v1/workflows/{id}/jobs/{index}"
+body: "*"
+}                                                                                     ;
+}
+rpc UpdateWorkflowJobData(UpdateWorkflowJobDataRequest) returns (api.proj.Workflow) {
+option (google.api.http) = {
+patch: "/api/proj/v1/workflows/{id}/job-data/{name}"
+body: "*"
+}                                                                                     ;
+}
 
-  rpc ReplaceWorkflow(api.proj.Workflow) returns (api.proj.Workflow) {
-    option (google.api.http) = {
-      put: "/api/proj/v1/workflows"
-      body: "*"
-    }                                                                    ;
-  }
+rpc ReplaceWorkflow(api.proj.Workflow) returns (api.proj.Workflow) {
+option (google.api.http) = {
+put: "/api/proj/v1/workflows"
+body: "*"
+}                                                                    ;
+}
 
-  rpc ListWorkflows(ListWorkflowsRequest) returns (WorkflowList) {
-    option (google.api.http) = {
-      get: "/api/proj/v1/workflows"
-    }                                                                ;
-  }
+rpc ListWorkflows(ListWorkflowsRequest) returns (WorkflowList) {
+option (google.api.http) = {
+get: "/api/proj/v1/workflows"
+}                                                                ;
+}
 
 }
 
 message CreateRemixTaskRequest {
-  message Item {
-    string url = 1                   ;
-    string subtitle = 2              ;
-  }
+message Item {
+string url = 1                   ;
+string subtitle = 2              ;
+}
 
-  repeated Item items = 1 ;
+repeated Item items = 1 ;
+string workflowId = 2   ;
 }
 
 message RemixTask {
-  string taskId = 1   ;
-  string status = 2   ;
-  string url = 3      ;
+string taskId = 1   ;
+string status = 2   ;
+string url = 3      ;
 }
 
 message GetRemixTaskRequest {
-  string taskId = 1             ;
+string taskId = 1             ;
 }
 
 message ListWorkflowsRequest {
-  int64 page = 1                 ;
-  int64 size = 2                 ;
-  string status = 3              ;
+int64 page = 1                 ;
+int64 size = 2                 ;
+string status = 3              ;
 }
 
 message WorkflowList {
-  repeated Workflow list = 1 ;
-  int64 total = 2            ;
-  int64 page = 3             ;
-  int64 size = 4             ;
-  bool hasMore = 5           ;
+repeated Workflow list = 1 ;
+int64 total = 2            ;
+int64 page = 3             ;
+int64 size = 4             ;
+bool hasMore = 5           ;
 }
 
 message CreateWorkflowRequest {
-  string name = 1                 ;
+string name = 1                 ;
 
-  Commodity commodity = 2 ;
+Commodity commodity = 2 ;
 }
 
 message GetWorkflowRequest {
-  string id = 1                ;
+string id = 1                ;
 }
 
 message UpdateWorkflowJobRequest {
-  string id = 1                      ;
-  int64 index = 2                    ;
-  string action = 3                  ;
-  map<string, string> params = 4     ;
-  string dataKey = 5                 ;
-  api.proj.DataBus data = 6          ;
-  bool runImmediately = 7            ;
+string id = 1                      ;
+int64 index = 2                    ;
+string action = 3                  ;
+map<string, string> params = 4     ;
+string dataKey = 5                 ;
+api.proj.DataBus data = 6          ;
+bool runImmediately = 7            ;
 }
 
 message UpdateWorkflowJobDataRequest {
-  string id = 1                          ;
-  string name = 2                        ;
-  api.proj.DataBus data = 3              ;
+string id = 1                          ;
+string name = 2                        ;
+api.proj.DataBus data = 3              ;
 }
 
 message UpdateWorkflowRequest {
-  string id = 1                   ;
-  string action = 2               ;
-  api.proj.DataBus data = 3       ;
-  // for debug
-  map<string, string> kv = 4      ;
+string id = 1                   ;
+string action = 2               ;
+api.proj.DataBus data = 3       ;
+// for debug
+map<string, string> kv = 4      ;
 }

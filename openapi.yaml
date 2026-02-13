@@ -9630,6 +9630,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.proj.CreateRemixTaskRequest_Item'
+                workflowId:
+                    type: string
         api.proj.CreateRemixTaskRequest_Item:
             type: object
             properties:

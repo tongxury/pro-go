@@ -91,6 +91,8 @@ func (m *CreateRemixTaskRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for WorkflowId
+
 	if len(errors) > 0 {
 		return CreateRemixTaskRequestMultiError(errors)
 	}
