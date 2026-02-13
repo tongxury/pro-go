@@ -138,13 +138,18 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 	}
 
 	// 5. Construct Metadata for Python Agent
+	voiceId := "a53c3509-ec3f-425c-a223-977f5f7424dd" // Default AURA
+	// if agent != nil && agent.VoiceId != "" {
+	// 	voiceId = agent.VoiceId
+	// }
+
 	agentConfig := map[string]interface{}{
 		"conversationId": conversationId,
 		"agentId":        agentId,
 		"userId":         userId,
 		"systemPrompt":   systemPrompt, // The fully formed prompt
 		"greeting":       greeting,
-		"voiceId":        "fb277717-578b-4a56-820d-88c919747900", // Passed to Python to avoid local defaults
+		"voiceId":        voiceId,
 		// "agentName" is used for dispatching, assume "aura_zh" for now or fetch from agent
 		"agentName": "aura_zh",
 	}
