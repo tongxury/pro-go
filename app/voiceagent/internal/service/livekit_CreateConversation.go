@@ -6,6 +6,7 @@ import (
 	"fmt"
 	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
+	"store/app/voiceagent/internal/data/repo/mongodb"
 	"store/confs"
 	"store/pkg/krathelper"
 	"store/pkg/sdk/conv"
@@ -57,14 +58,27 @@ func (s *LiveKitService) CreateConversation(ctx context.Context, req *voiceagent
 }
 
 func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversationId, roomName string, topic *voiceagent.Topic) (string, string, error) {
-	// 1. Fetch Business Context: User Profile
-	var userNickname = "User"
-	userProfile, err := s.data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
-	if err == nil && userProfile != nil && userProfile.Nickname != "" {
-		userNickname = userProfile.Nickname
+	// 1. Fetch Agent & Persona
+	var agent *voiceagent.Agent
+	if agentId != "" {
+		a, err := s.data.Mongo.Agent.GetById(ctx, agentId)
+		if err == nil {
+			agent = a
+		}
 	}
 
-	// 2. Fetch Business Context: Memories
+	// 2. Fetch Business Context: User Profile
+	var userNickname = "User"
+	var userBio = ""
+	userProfile, err := s.data.Mongo.UserProfile.FindOne(ctx, bson.M{"user._id": userId})
+	if err == nil && userProfile != nil {
+		if userProfile.Nickname != "" {
+			userNickname = userProfile.Nickname
+		}
+		userBio = userProfile.Bio
+	}
+
+	// 3. Fetch Business Context: Memories
 	memoriesList, _, err := s.data.Mongo.Memory.ListAndCount(ctx, bson.M{"user._id": userId}, options.Find().SetLimit(5).SetSort(bson.M{"createdAt": -1}))
 	var memoryTexts []string
 	if err == nil {
@@ -78,26 +92,67 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 		}
 	}
 
-	// 3. Construct Business Metadata for the Agent
+	// 4. Construct System Prompt
+	var systemPrompt string
+	var greeting string = "Hello, I am your AI assistant."
+
+	if agent != nil {
+		if agent.Persona != nil {
+			// Generate base prompt from Persona
+			systemPrompt = mongodb.GenerateSystemPromptFromPersona(agent.Persona)
+			if agent.Persona.WelcomeMessage != "" {
+				greeting = agent.Persona.WelcomeMessage
+			}
+		}
+	}
+
+	// Append User Context
+	systemPrompt += fmt.Sprintf("\n\n# User Context\nName: %s\n", userNickname)
+	if userBio != "" {
+		systemPrompt += fmt.Sprintf("Bio: %s\n", userBio)
+	}
+
+	// Append Memories
+	if len(memoryTexts) > 0 {
+		systemPrompt += "\n# Relevant Memories\n"
+		for _, m := range memoryTexts {
+			systemPrompt += fmt.Sprintf("- %s\n", m)
+		}
+		systemPrompt += "\nIMPORTANT: Use the user's name and past memories to make the conversation feel warm, personal, and continuous.\n"
+	}
+
+	// Append Topic Context
+	if topic != nil {
+		// Topic Greeting takes precedence
+		if topic.Greeting != "" {
+			greeting = topic.Greeting
+			if userNickname != "User" {
+				greeting = fmt.Sprintf("Hi %s, %s", userNickname, topic.Greeting)
+			}
+		}
+
+		if topic.Instruction != "" {
+			systemPrompt += fmt.Sprintf("\n\n# Current Topic: %s\nInstruction: %s\n", topic.Title, topic.Instruction)
+			systemPrompt += "Tone Requirement: Be warm, empathetic, and intimate. Start by acknowledging the situation gently.\n"
+		}
+	}
+
+	// 5. Construct Metadata for Python Agent
 	agentConfig := map[string]interface{}{
 		"conversationId": conversationId,
 		"agentId":        agentId,
 		"userId":         userId,
-		"nickname":       userNickname,
-		"memories":       memoryTexts,
-		"agentName":      "aura_zh", // Base service pipe. TODO: Maybe fetch from Agent definition?
-	}
-
-	if topic != nil {
-		agentConfig["topic"] = topic.Id
-		agentConfig["topicGreeting"] = topic.Greeting
-		agentConfig["topicInstruction"] = topic.Instruction
+		"systemPrompt":   systemPrompt, // The fully formed prompt
+		"greeting":       greeting,
+		"voiceId":        "fb277717-578b-4a56-820d-88c919747900", // Passed to Python to avoid local defaults
+		// "agentName" is used for dispatching, assume "aura_zh" for now or fetch from agent
+		"agentName": "aura_zh",
 	}
 	metadataJSON, _ := json.Marshal(agentConfig)
 
 	log.Debugw("metadataJSON", string(metadataJSON))
 
-	// 4. Create Room with Metadata
+	// 6. Create Room with Metadata
 	_, err = s.data.RoomClient.CreateRoom(ctx, &livekit.CreateRoomRequest{
 		Name:            roomName,
 		EmptyTimeout:    10 * 60,
@@ -108,9 +163,9 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 		fmt.Printf("Warning: Failed to create room: %v\n", err)
 	}
 
-	// 5. Dispatch Agent
+	// 7. Dispatch Agent
 	_, err = s.data.AgentClient.CreateDispatch(ctx, &livekit.CreateAgentDispatchRequest{
-		AgentName: "aura_zh",
+		AgentName: "aura_zh", // This must match the Prewarm/AgentName in Python
 		Room:      roomName,
 		Metadata:  string(metadataJSON),
 	})
@@ -118,7 +173,7 @@ func (s *LiveKitService) joinRoom(ctx context.Context, userId, agentId, conversa
 		fmt.Printf("Warning: Failed to dispatch agent: %v\n", err)
 	}
 
-	// 6. Generate LiveKit Token
+	// 8. Generate LiveKit Token
 	apiKey := confs.LiveKitApiKey
 	apiSecret := confs.LiveKitApiSecret
 	identity := fmt.Sprintf("user_%s_%d", userId, time.Now().Unix())
