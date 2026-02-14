@@ -6,8 +6,6 @@ import (
 
 	"github.com/go-kratos/kratos/v2/log"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo/options"
 
 	ucpb "store/api/usercenter"
 	voiceagent "store/api/voiceagent"
@@ -15,9 +13,6 @@ import (
 )
 
 func (s *VoiceAgentService) SeedSystemVoices(ctx context.Context) {
-	if s.Data == nil || s.Data.Mongo == nil || s.Data.Mongo.Voice == nil {
-		return
-	}
 
 	// 1. Fetch voices from Cartesia API
 	// Filter for Chinese voices directly via API
@@ -32,7 +27,7 @@ func (s *VoiceAgentService) SeedSystemVoices(ctx context.Context) {
 	var systemVoices []*voiceagent.Voice
 
 	// 2. Map to system voices
-	for _, v := range voices {
+	for _, v := range voices.Data {
 		systemVoices = append(systemVoices, &voiceagent.Voice{
 			User:      &ucpb.User{XId: "system"},
 			Name:      v.Name,
@@ -55,21 +50,33 @@ func (s *VoiceAgentService) SeedSystemVoices(ctx context.Context) {
 			"user._id": "system",
 		}
 
-		update := bson.M{
-			"$setOnInsert": bson.M{
-				"_id":       primitive.NewObjectID().Hex(),
-				"createdAt": time.Now().Unix(),
-				"user":      v.User,
-			},
-			"$set": bson.M{
-				"name":   v.Name,
-				"type":   v.Type,
-				"status": v.Status,
-			},
+		// 改成实时查找 (Real-time lookup)
+		count, err := s.Data.Mongo.Voice.C().CountDocuments(ctx, filter)
+		if err != nil {
+			log.Errorf("Failed to count voice %s: %v", v.VoiceId, err)
+			continue
 		}
 
-		// Use upsert to insert if not exists, or update mutable fields if exists
-		opts := options.Update().SetUpsert(true)
-		_, _ = s.Data.Mongo.Voice.C().UpdateOne(ctx, filter, update, opts)
+		if count > 0 {
+			// 如果数据库有 就跳过 (If exists, skip)
+			continue
+		}
+
+		// 没有就插入 (If not exists, insert)
+		// 不要生成 _id (Do not generate _id manually, let Mongo handle it)
+		doc := bson.M{
+			"voiceId":   v.VoiceId,
+			"user":      v.User,
+			"name":      v.Name,
+			"type":      v.Type,
+			"status":    v.Status,
+			"sampleUrl": v.SampleUrl,
+			"createdAt": time.Now().Unix(),
+		}
+
+		_, err = s.Data.Mongo.Voice.C().InsertOne(ctx, doc)
+		if err != nil {
+			log.Errorf("Failed to insert voice %s: %v", v.Name, err)
+		}
 	}
 }

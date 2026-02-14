@@ -1,39 +1,39 @@
 syntax = "proto3";
 
-package api.voiceagent;
+package api.voiceagent ;
 
 option go_package = "store/api/voiceagent;voiceagent";
 
 import "usercenter/user.proto";
 
-// Voice (声音): 对应 ElevenLabs 的 TTS 声音资产。
-// [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview#architecture)
+// Voice (声音): 对应 TTS 声音资产。
+// [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview #architecture)
 message Voice {
-  // _id: 内部存储 ID。
-  string _id = 1 [json_name = "_id"];
-  
-  // user: 所属用户。
-  api.usercenter.User user = 2;
+// _id: 内部存储 ID。
+string _id = 1 [json_name = "_id"];
 
-  // name: 声音显示名称。
-  string name = 3;
-  
-  // type: 声音来源类型 (preset: 系统预设, cloned: 用户克隆)。
-  // [参考文档]: Voice Cloning (/docs/speech-synthesis/voice-cloning)
-  string type = 4;
-  
-  // voiceId: ElevenLabs 系统的唯一 Voice ID。
-  // [必要性]: 关键。所有语音合成请求必须指向该 ID。
-  string voiceId = 5;
-  
-  // status: 处理状态 (processing: 克隆中, active: 可用)。
-  // [用法]: 克隆声音通常是异步任务，前端需根据此状态展示进度。
-  string status = 6;
-  
-  // sampleUrl: 采样音频 URL。
-  // [含义]: 用户克隆声音时上传的 30s-1min 原始素材。
-  // [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning#instant-voice-cloning)
-  string sampleUrl = 7;
-  
-  int64 createdAt = 10;
+// user: 所属用户。
+api.usercenter.User user = 2 ;
+
+// name: 声音显示名称。
+string name = 3                ;
+
+// type: 声音来源类型 (preset: 系统预设, cloned: 用户克隆)。
+// [参考文档]: Voice Cloning (/docs/speech-synthesis/voice-cloning)
+string type = 4                                                             ;
+
+// voiceId: TTS 系统的唯一 Voice ID。
+// [必要性]: 关键。所有语音合成请求必须指向该 ID。
+string voiceId = 5                                                     ;
+
+// status: 处理状态 (processing: 克隆中, active: 可用)。
+// [用法]: 克隆声音通常是异步任务，前端需根据此状态展示进度。
+string status = 6                                                                        ;
+
+// sampleUrl: 采样音频 URL。
+// [含义]: 用户克隆声音时上传的 30s-1min 原始素材。
+// [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning #instant-voice-cloning)
+string sampleUrl = 7                                                           ;
+
+int64 createdAt = 10 ;
 }

@@ -14,15 +14,17 @@ func (s *VoiceAgentService) ListVoices(ctx context.Context, req *voiceagent.List
 
 	// 列出系统预设、用户克隆或全部声音
 	var filter bson.M
+	// 注意：数据库中存储的是 nested user object, key 为 "user._id"
 	if req.Owner == "system" {
-		filter = bson.M{"userId": "system"}
+		filter = bson.M{"user._id": "system"}
 	} else if req.Owner == "custom" {
-		filter = bson.M{"userId": userId}
+		filter = bson.M{"user._id": userId}
 	} else {
+		// 默认返回 System + Custom
 		filter = bson.M{
 			"$or": []bson.M{
-				{"userId": userId},
-				{"userId": "system"},
+				{"user._id": userId},
+				{"user._id": "system"},
 			},
 		}
 	}
