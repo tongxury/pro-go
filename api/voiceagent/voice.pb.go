@@ -31,7 +31,9 @@ type Voice struct {
 	// user: 所属用户。
 	User *usercenter.User `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
 	// name: 声音显示名称。
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Description string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
+	Lang        string `protobuf:"bytes,9,opt,name=lang,proto3" json:"lang,omitempty"`
 	// type: 声音来源类型 (preset: 系统预设, cloned: 用户克隆)。
 	// [参考文档]: Voice Cloning (/docs/speech-synthesis/voice-cloning)
 	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
@@ -101,6 +103,20 @@ func (x *Voice) GetName() string {
 	return ""
 }
 
+func (x *Voice) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Voice) GetLang() string {
+	if x != nil {
+		return x.Lang
+	}
+	return ""
+}
+
 func (x *Voice) GetType() string {
 	if x != nil {
 		return x.Type
@@ -140,11 +156,13 @@ var File_voiceagent_voice_proto protoreflect.FileDescriptor
 
 const file_voiceagent_voice_proto_rawDesc = "" +
 	"\n" +
-	"\x16voiceagent/voice.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\xd9\x01\n" +
+	"\x16voiceagent/voice.proto\x12\x0eapi.voiceagent\x1a\x15usercenter/user.proto\"\x8f\x02\n" +
 	"\x05Voice\x12\x10\n" +
 	"\x03_id\x18\x01 \x01(\tR\x03_id\x12(\n" +
 	"\x04user\x18\x02 \x01(\v2\x14.api.usercenter.UserR\x04user\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\b \x01(\tR\vdescription\x12\x12\n" +
+	"\x04lang\x18\t \x01(\tR\x04lang\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x18\n" +
 	"\avoiceId\x18\x05 \x01(\tR\avoiceId\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1c\n" +

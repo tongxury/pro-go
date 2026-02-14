@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"store/api/voiceagent"
+	voiceagent "store/api/voiceagent"
 	"time"
 
 	ucpb "store/api/usercenter"
@@ -14,10 +14,11 @@ import (
 
 func (s *VoiceAgentService) SeedSystemVoices(ctx context.Context) {
 
+	lang := "zh"
 	// 1. Fetch voices from Cartesia API
 	// Filter for Chinese voices directly via API
 	voices, err := s.Data.Cartesia.ListVoices(ctx, &cartesia.ListVoicesRequest{
-		Language: "zh",
+		Language: lang,
 	})
 	if err != nil {
 		log.Errorf("Failed to list voices from Cartesia: %v", err)
@@ -48,13 +49,15 @@ func (s *VoiceAgentService) SeedSystemVoices(ctx context.Context) {
 		}
 
 		_, err = s.Data.Mongo.Voice.Insert(ctx, &voiceagent.Voice{
-			User:      &ucpb.User{XId: "system"},
-			Name:      v.Name,
-			Type:      "preset",
-			VoiceId:   v.Id,
-			Status:    "active",
-			SampleUrl: url,
-			CreatedAt: time.Now().Unix(),
+			User:        &ucpb.User{XId: "system"},
+			Name:        s.Translate(ctx, v.Name, lang),
+			Description: s.Translate(ctx, v.Description, lang),
+			Lang:        lang,
+			Type:        "preset",
+			VoiceId:     v.Id,
+			Status:      "active",
+			SampleUrl:   url,
+			CreatedAt:   time.Now().Unix(),
 		})
 		if err != nil {
 			continue

@@ -12543,6 +12543,10 @@ components:
                 name:
                     type: string
                     description: 'name: 声音显示名称。'
+                description:
+                    type: string
+                lang:
+                    type: string
                 type:
                     type: string
                     description: |-
