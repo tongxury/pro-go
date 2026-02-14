@@ -26,7 +26,7 @@ func NewVoiceAgentService(data *data.Data, item *biz.ItemBiz, agentBiz *biz.Agen
 	// 自动启动异步同步循环
 	//s.StartSyncLoop(context.Background())
 
-	s.SeedSystemVoices(context.Background())
-	s.SyncPersonas(context.Background())
+	go s.SeedSystemVoices(context.Background())
+	go s.SyncPersonas(context.Background())
 	return s
 }

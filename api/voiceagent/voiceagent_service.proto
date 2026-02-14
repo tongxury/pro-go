@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package api.voiceagent;
+package api.voiceagent ;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
@@ -28,14 +28,14 @@ service VoiceAgentService {
   rpc ListPersonas(ListPersonasRequest) returns (PersonaList) {
     option (google.api.http) = {
       get: "/api/va/personas"
-    };
+    }                                                                 ;
   }
 
   // GetPersona: 获取特定角色模板详情。
   rpc GetPersona(GetPersonaRequest) returns (Persona) {
     option (google.api.http) = {
       get: "/api/va/personas/{id}"
-    };
+    }                                                     ;
   }
 
   // CreateAgent: 注册一个新的 AI 角色。支持基于 PersonaId 快速创建。
@@ -43,36 +43,36 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/agents"
       body: "*"
-    };
+    }                                                                                     ;
   }
-  
+
   // UpdateAgent: 修改已有角色。
   rpc UpdateAgent(UpdateAgentRequest) returns (Agent) {
     option (google.api.http) = {
       patch: "/api/va/agents/{id}"
       body: "*"
-    };
+    }                                                     ;
   }
 
   // DeleteAgent: 删除角色。
   rpc DeleteAgent(DeleteAgentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/api/va/agents/{id}"
-    };
+    }                                                                     ;
   }
 
   // GetAgent: 获取特定角色的详细信息。
   rpc GetAgent(GetAgentRequest) returns (Agent) {
     option (google.api.http) = {
       get: "/api/va/agents/{id}"
-    };
+    }                                                 ;
   }
 
   // ListAgents: 列出所有可用角色。
   rpc ListAgents(ListAgentsRequest) returns (AgentList) {
     option (google.api.http) = {
       get: "/api/va/agents"
-    };
+    }                                                       ;
   }
 
   // AddVoice: 用户自定义克隆声音或系统预设。
@@ -80,28 +80,36 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/voices"
       body: "*"
-    };
+    }                                                          ;
   }
 
   // ListVoices: 获取可用声音列表。
   rpc ListVoices(ListVoicesRequest) returns (VoiceList) {
     option (google.api.http) = {
       get: "/api/va/voices"
-    };
+    }                                                       ;
+  }
+
+  // PreviewVoice: 为特定声音生成试听音频。
+  rpc PreviewVoice(PreviewVoiceRequest) returns (PreviewVoiceResponse) {
+    option (google.api.http) = {
+      post: "/api/va/voices/preview"
+      body: "*"
+    }                                                                      ;
   }
 
   // ListScenes: 获取系统预设的交互场景。
   rpc ListScenes(ListScenesRequest) returns (SceneList) {
     option (google.api.http) = {
       get: "/api/va/scenes"
-    };
+    }                                                       ;
   }
 
   // ListTopics: 获取预设的对话主题。
   rpc ListTopics(ListTopicsRequest) returns (TopicList) {
     option (google.api.http) = {
       get: "/api/va/topics"
-    };
+    }                                                       ;
   }
 
   // SendMessage: 发送消息并获得 AI 的回复（非流式）。
@@ -109,16 +117,16 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/messages"
       body: "*"
-    };
+    }                                                                    ;
   }
 
   // ==================== Memory APIs ====================
-  
+
   // ListMemories: 获取用户的长期记忆列表。
   rpc ListMemories(ListMemoriesRequest) returns (MemoryList) {
     option (google.api.http) = {
       get: "/api/va/memories"
-    };
+    }                                                            ;
   }
 
   // CreateMemory: 手动添加一条记忆。
@@ -126,14 +134,14 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/memories"
       body: "*"
-    };
+    }                                                        ;
   }
 
   // DeleteMemory: 删除一条记忆。
   rpc DeleteMemory(DeleteMemoryRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/api/va/memories/{id}"
-    };
+    }                                                                       ;
   }
 
   // ==================== Profile APIs ====================
@@ -142,7 +150,7 @@ service VoiceAgentService {
   rpc GetUserProfile(GetUserProfileRequest) returns (UserProfile) {
     option (google.api.http) = {
       get: "/api/va/profile"
-    };
+    }                                                                 ;
   }
 
   // UpdateUserProfile: 更新用户档案。
@@ -150,7 +158,7 @@ service VoiceAgentService {
     option (google.api.http) = {
       patch: "/api/va/profile"
       body: "*"
-    };
+    }                                                                       ;
   }
 
   // ==================== Emotion APIs ====================
@@ -159,14 +167,14 @@ service VoiceAgentService {
   rpc ListEmotionLogs(ListEmotionLogsRequest) returns (EmotionLogList) {
     option (google.api.http) = {
       get: "/api/va/emotions"
-    };
+    }                                                                      ;
   }
 
   // GetEmotionStats: 获取情绪统计数据（用于曲线图）。
   rpc GetEmotionStats(GetEmotionStatsRequest) returns (EmotionStats) {
     option (google.api.http) = {
       get: "/api/va/emotions/stats"
-    };
+    }                                                                    ;
   }
 
   // ==================== Event APIs ====================
@@ -175,7 +183,7 @@ service VoiceAgentService {
   rpc ListEvents(ListEventsRequest) returns (EventList) {
     option (google.api.http) = {
       get: "/api/va/events"
-    };
+    }                                                       ;
   }
 
   // CreateEvent: 创建重要事件。
@@ -183,7 +191,7 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/events"
       body: "*"
-    };
+    }                                                              ;
   }
 
   // UpdateEvent: 更新重要事件。
@@ -191,21 +199,21 @@ service VoiceAgentService {
     option (google.api.http) = {
       patch: "/api/va/events/{id}"
       body: "*"
-    };
+    }                                                              ;
   }
 
   // DeleteEvent: 删除重要事件。
   rpc DeleteEvent(DeleteEventRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/api/va/events/{id}"
-    };
+    }                                                                     ;
   }
 
   // GetUpcomingEvents: 获取即将到来的事件（用于提醒）。
   rpc GetUpcomingEvents(GetUpcomingEventsRequest) returns (EventList) {
     option (google.api.http) = {
       get: "/api/va/events/upcoming"
-    };
+    }                                                                      ;
   }
 
   // ==================== Growth Report APIs ====================
@@ -214,7 +222,7 @@ service VoiceAgentService {
   rpc GetGrowthReport(GetGrowthReportRequest) returns (GrowthReport) {
     option (google.api.http) = {
       get: "/api/va/growth-report"
-    };
+    }                                                                    ;
   }
 
   // GenerateCartesiaToken: 为前端生成 Cartesia 的临时访问令牌。
@@ -222,119 +230,124 @@ service VoiceAgentService {
     option (google.api.http) = {
       post: "/api/va/cartesia/token"
       body: "*"
-    };
+    }                                                                                                 ;
   }
 }
-
 
 // --- Request/Response Messages ---
 
 message CreateAgentRequest {
-  string name = 1 [(validate.rules).string.min_len = 1];
-  string avatar = 2;
-  string desc = 3;
-  string personaId = 4 [(validate.rules).string.min_len = 1]; // 强制选择模板
-  string voiceId = 5;
-  string defaultSceneId = 6;
-  bool isPublic = 7;
+  string name = 1 [(validate.rules).string.min_len = 1]      ;
+  string avatar = 2                                          ;
+  string desc = 3                                            ;
+  string personaId = 4 [(validate.rules).string.min_len = 1] ; // 强制选择模板
+  string voiceId = 5                                         ;
+  string defaultSceneId = 6                                  ;
+  bool isPublic = 7                                          ;
 }
 
 message ListPersonasRequest {
-  string category = 1;
+  string category = 1           ;
 }
 
 message PersonaList {
-  repeated Persona list = 1;
+  repeated Persona list = 1 ;
 }
 
 message GetPersonaRequest {
-  string id = 1;
+  string id = 1               ;
 }
 
 message UpdateAgentRequest {
-  string id = 1;
-  string name = 2;
-  string avatar = 3;
-  string desc = 4;
-  string personaId = 5; // 切换模板
-  string voiceId = 6;
-  string defaultSceneId = 7;
-  bool isPublic = 8;
-  string status = 9;
+  string id = 1                ;
+  string name = 2              ;
+  string avatar = 3            ;
+  string desc = 4              ;
+  string personaId = 5         ; // 切换模板
+  string voiceId = 6           ;
+  string defaultSceneId = 7    ;
+  bool isPublic = 8            ;
+  string status = 9            ;
 }
 
 message DeleteAgentRequest {
-  string id = 1;
+  string id = 1                ;
 }
 
 message GetAgentRequest {
-  string id = 1;
+  string id = 1             ;
 }
 
 message ListAgentsRequest {
-  string category = 1;
-  int64 page = 2;
-  int64 size = 3;
+  string category = 1         ;
+  int64 page = 2              ;
+  int64 size = 3              ;
 }
 
 message AgentList {
-  repeated Agent list = 1;
-  int64 total = 2;
+  repeated Agent list = 1 ;
+  int64 total = 2         ;
 }
 
 message AddVoiceRequest {
-  string name = 1;
-  string type = 2;
-  string sampleUrl = 3;
-  map<string, string> settings = 4;
+  string name = 1                  ;
+  string type = 2                  ;
+  string sampleUrl = 3             ;
+  map<string, string> settings = 4 ;
 }
 
 message VoiceList {
-  repeated Voice list = 1;
+  repeated Voice list = 1 ;
 }
 
 message ListVoicesRequest {
-  string owner = 1; // system, custom or ''
+  string owner = 1            ; // system, custom or ''
+}
+
+message PreviewVoiceRequest {
+  string voiceId = 1 [(validate.rules).string.min_len = 1] ;
+  string text = 2                                          ; // 可选，默认为预设试听文本
+}
+
+message PreviewVoiceResponse {
+  string audioUrl = 1            ;
 }
 
 message SceneList {
-  repeated Scene list = 1;
+  repeated Scene list = 1 ;
 }
 
 message ListScenesRequest {}
 
-
-
-
 message SendMessageRequest {
-  string conversationId = 1;
-  string message = 2;
-  bool enableVoice = 3;
+  string conversationId = 1    ;
+  string message = 2           ;
+  bool enableVoice = 3         ;
 }
 
 // ==================== Memory Request/Response ====================
 
 message ListMemoriesRequest {
-  string type = 1;     // 可选，按类型筛选
-  int64 page = 2;
-  int64 size = 3;
+  string type = 1               ;     // 可选，按类型筛选
+  int64 page = 2                ;
+  int64 size = 3                ;
 }
 
 message MemoryList {
-  repeated Memory list = 1;
-  int64 total = 2;
+  repeated Memory list = 1 ;
+  int64 total = 2          ;
 }
 
 message CreateMemoryRequest {
-  string type = 1 [(validate.rules).string.min_len = 1];
-  string content = 2 [(validate.rules).string.min_len = 1];
-  int32 importance = 3;
-  repeated string tags = 4;
-  string userId =5;
+  string type = 1 [(validate.rules).string.min_len = 1]    ;
+  string content = 2 [(validate.rules).string.min_len = 1] ;
+  int32 importance = 3                                     ;
+  repeated string tags = 4                                 ;
+  string userId = 5                                         ;
 }
 
 message DeleteMemoryRequest {
-  string id = 1 [(validate.rules).string.min_len = 1];
+  string id = 1 [(validate.rules).string.min_len = 1] ;
 }
 
 // ==================== Profile Request/Response ====================
@@ -342,123 +355,122 @@ message DeleteMemoryRequest {
 message GetUserProfileRequest {}
 
 message UpdateUserProfileRequest {
-  string nickname = 1;
-  string birthday = 2;
-  repeated string interests = 3;
-  repeated string goals = 4;
-  string bio = 5;
-  string timezone = 6;
-  string personality = 7;
+  string nickname = 1                ;
+  string birthday = 2                ;
+  repeated string interests = 3      ;
+  repeated string goals = 4          ;
+  string bio = 5                     ;
+  string timezone = 6                ;
+  string personality = 7             ;
 }
 
 // ==================== Emotion Request/Response ====================
 
 message ListEmotionLogsRequest {
-  int64 page = 1;
-  int64 size = 2;
-  int64 startTime = 3;  // 可选，起始时间戳
-  int64 endTime = 4;    // 可选，结束时间戳
+  int64 page = 1                   ;
+  int64 size = 2                   ;
+  int64 startTime = 3              ;  // 可选，起始时间戳
+  int64 endTime = 4                ;    // 可选，结束时间戳
 }
 
 message EmotionLogList {
-  repeated EmotionLog list = 1;
-  int64 total = 2;
+  repeated EmotionLog list = 1 ;
+  int64 total = 2              ;
 }
 
 message GetEmotionStatsRequest {
-  int32 days = 1;  // 统计最近多少天，默认30天
+  int32 days = 1                   ;  // 统计最近多少天，默认30天
 }
 
 // ==================== Event Request/Response ====================
 
 message ListEventsRequest {
-  string type = 1;   // 可选，按类型筛选
-  int64 page = 2;
-  int64 size = 3;
+  string type = 1             ;   // 可选，按类型筛选
+  int64 page = 2              ;
+  int64 size = 3              ;
 }
 
 message EventList {
-  repeated ImportantEvent list = 1;
-  int64 total = 2;
+  repeated ImportantEvent list = 1 ;
+  int64 total = 2                  ;
 }
 
 message CreateEventRequest {
-  string title = 1 [(validate.rules).string.min_len = 1];
-  string type = 2 [(validate.rules).string.min_len = 1];
-  string date = 3 [(validate.rules).string.min_len = 1];
-  bool isRecurring = 4;
-  string note = 5;
-  string relatedPerson = 6;
-  int32 reminderDays = 7;
+  string title = 1 [(validate.rules).string.min_len = 1] ;
+  string type = 2 [(validate.rules).string.min_len = 1]  ;
+  string date = 3 [(validate.rules).string.min_len = 1]  ;
+  bool isRecurring = 4                                   ;
+  string note = 5                                        ;
+  string relatedPerson = 6                               ;
+  int32 reminderDays = 7                                 ;
 }
 
 message UpdateEventRequest {
-  string id = 1 [(validate.rules).string.min_len = 1];
-  string title = 2;
-  string type = 3;
-  string date = 4;
-  bool isRecurring = 5;
-  string note = 6;
-  string relatedPerson = 7;
-  int32 reminderDays = 8;
+  string id = 1 [(validate.rules).string.min_len = 1] ;
+  string title = 2                                    ;
+  string type = 3                                     ;
+  string date = 4                                     ;
+  bool isRecurring = 5                                ;
+  string note = 6                                     ;
+  string relatedPerson = 7                            ;
+  int32 reminderDays = 8                              ;
 }
 
 message DeleteEventRequest {
-  string id = 1 [(validate.rules).string.min_len = 1];
+  string id = 1 [(validate.rules).string.min_len = 1] ;
 }
 
 message GetUpcomingEventsRequest {
-  int32 days = 1;  // 获取未来多少天内的事件，默认7天
+  int32 days = 1                     ;  // 获取未来多少天内的事件，默认7天
 }
 
 // ==================== Growth Report Request/Response ====================
 
 message GetGrowthReportRequest {
-  string period = 1;  // week, month, year
+  string period = 1                ;  // week, month, year
 }
 
 // GrowthReport (成长报告): 周期性的成长回顾总结。
 message GrowthReport {
   // period: 报告周期 (week, month, year)。
-  string period = 1;
+  string period = 1                                                 ;
 
   // startDate: 报告起始日期时间戳。
-  int64 startDate = 2;
+  int64 startDate = 2                          ;
 
   // endDate: 报告结束日期时间戳。
-  int64 endDate = 3;
+  int64 endDate = 3                          ;
 
   // conversationCount: 该周期内对话次数。
-  int32 conversationCount = 4;
+  int32 conversationCount = 4                       ;
 
   // totalDuration: 总对话时长（秒）。
-  int32 totalDuration = 5;
+  int32 totalDuration = 5                       ;
 
   // newMemories: 该周期内新增的记忆。
-  repeated Memory newMemories = 6;
+  repeated Memory newMemories = 6                ;
 
   // emotionSummary: 情绪统计摘要。
-  EmotionStats emotionSummary = 7;
+  EmotionStats emotionSummary = 7          ;
 
   // highlights: AI 生成的成长亮点列表。
-  repeated string highlights = 8;
+  repeated string highlights = 8                   ;
 
   // suggestions: AI 生成的建议列表。
-  repeated string suggestions = 9;
+  repeated string suggestions = 9             ;
 
   // upcomingEvents: 即将到来的重要事件。
-  repeated ImportantEvent upcomingEvents = 10;
+  repeated ImportantEvent upcomingEvents = 10       ;
 }
 
 message GenerateCartesiaTokenRequest {}
 
 message GenerateCartesiaTokenResponse {
-  string accessToken = 1;
+  string accessToken = 1                  ;
 }
 
 message ListTopicsRequest {}
 
 message TopicList {
-  repeated Topic list = 1;
+  repeated Topic list = 1 ;
 }
-

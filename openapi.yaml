@@ -6593,6 +6593,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.voiceagent.Voice'
+    /api/va/voices/preview:
+        post:
+            tags:
+                - VoiceAgentService
+            description: 'PreviewVoice: 为特定声音生成试听音频。'
+            operationId: VoiceAgentService_PreviewVoice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.voiceagent.PreviewVoiceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.voiceagent.PreviewVoiceResponse'
     /homework/{sessionKey}:
         get:
             tags:
@@ -12254,6 +12273,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.voiceagent.Persona'
+        api.voiceagent.PreviewVoiceRequest:
+            type: object
+            properties:
+                voiceId:
+                    type: string
+                text:
+                    type: string
+        api.voiceagent.PreviewVoiceResponse:
+            type: object
+            properties:
+                audioUrl:
+                    type: string
         api.voiceagent.Scene:
             type: object
             properties:
@@ -12520,7 +12551,7 @@ components:
                 voiceId:
                     type: string
                     description: |-
-                        voiceId: ElevenLabs 系统的唯一 Voice ID。
+                        voiceId: TTS 系统的唯一 Voice ID。
                          [必要性]: 关键。所有语音合成请求必须指向该 ID。
                 status:
                     type: string
@@ -12532,12 +12563,12 @@ components:
                     description: |-
                         sampleUrl: 采样音频 URL。
                          [含义]: 用户克隆声音时上传的 30s-1min 原始素材。
-                         [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning#instant-voice-cloning)
+                         [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning #instant-voice-cloning)
                 createdAt:
                     type: string
             description: |-
-                Voice (声音): 对应 ElevenLabs 的 TTS 声音资产。
-                 [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview#architecture)
+                Voice (声音): 对应 TTS 声音资产。
+                 [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview #architecture)
         api.voiceagent.VoiceList:
             type: object
             properties:

@@ -7,7 +7,6 @@ import (
 
 	"store/pkg/confcenter"
 	"store/pkg/rediz"
-	"store/pkg/sdk/third/bytedance/tos"
 	"store/pkg/sdk/third/gemini"
 	"store/pkg/sdk/third/qiniu"
 	"time"
@@ -44,13 +43,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				Addrs:    []string{"103.30.78.254:6379"},
 				Password: confs.RedisPassword,
 			},
-			Tos: tos.Config{
-				AccessKeyID:     confs.BytedanceAccessKeyID,
-				AccessKeySecret: confs.BytedanceSecretAccessKey,
-				Endpoint:        "tos-cn-shanghai.volces.com",
-				DefaultBucket:   "veres",
-				Region:          "cn-shanghai",
-			},
+			Tos: confs.MyTos,
 		},
 		Component: confcenter.Component{
 			Kafka: confs.KafkaMy,
@@ -96,14 +89,7 @@ var configs = map[string]*confcenter.Config[BizConfig]{
 				Addrs:    []string{"103.30.78.254:6379"},
 				Password: confs.RedisPassword,
 			},
-			Tos: tos.Config{
-				AccessKeyID:     confs.BytedanceAccessKeyID,
-				AccessKeySecret: confs.BytedanceSecretAccessKey,
-
-				Endpoint:      "tos-cn-shanghai.volces.com",
-				DefaultBucket: "veres",
-				Region:        "cn-shanghai",
-			},
+			Tos: confs.MyTos,
 			Qiniu: qiniu.Config{
 				AccessKey:    confs.QiniuAccessKey,
 				AccessSecret: confs.QiniuAccessSecret,

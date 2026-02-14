@@ -1424,6 +1424,225 @@ var _ interface {
 	ErrorName() string
 } = ListVoicesRequestValidationError{}
 
+// Validate checks the field values on PreviewVoiceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PreviewVoiceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PreviewVoiceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PreviewVoiceRequestMultiError, or nil if none found.
+func (m *PreviewVoiceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PreviewVoiceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetVoiceId()) < 1 {
+		err := PreviewVoiceRequestValidationError{
+			field:  "VoiceId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Text
+
+	if len(errors) > 0 {
+		return PreviewVoiceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PreviewVoiceRequestMultiError is an error wrapping multiple validation
+// errors returned by PreviewVoiceRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PreviewVoiceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PreviewVoiceRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PreviewVoiceRequestMultiError) AllErrors() []error { return m }
+
+// PreviewVoiceRequestValidationError is the validation error returned by
+// PreviewVoiceRequest.Validate if the designated constraints aren't met.
+type PreviewVoiceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PreviewVoiceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PreviewVoiceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PreviewVoiceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PreviewVoiceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PreviewVoiceRequestValidationError) ErrorName() string {
+	return "PreviewVoiceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PreviewVoiceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPreviewVoiceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PreviewVoiceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PreviewVoiceRequestValidationError{}
+
+// Validate checks the field values on PreviewVoiceResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PreviewVoiceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PreviewVoiceResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PreviewVoiceResponseMultiError, or nil if none found.
+func (m *PreviewVoiceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PreviewVoiceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AudioUrl
+
+	if len(errors) > 0 {
+		return PreviewVoiceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PreviewVoiceResponseMultiError is an error wrapping multiple validation
+// errors returned by PreviewVoiceResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PreviewVoiceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PreviewVoiceResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PreviewVoiceResponseMultiError) AllErrors() []error { return m }
+
+// PreviewVoiceResponseValidationError is the validation error returned by
+// PreviewVoiceResponse.Validate if the designated constraints aren't met.
+type PreviewVoiceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PreviewVoiceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PreviewVoiceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PreviewVoiceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PreviewVoiceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PreviewVoiceResponseValidationError) ErrorName() string {
+	return "PreviewVoiceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PreviewVoiceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPreviewVoiceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PreviewVoiceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PreviewVoiceResponseValidationError{}
+
 // Validate checks the field values on SceneList with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

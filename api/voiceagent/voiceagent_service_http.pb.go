@@ -42,6 +42,7 @@ const OperationVoiceAgentServiceListPersonas = "/api.voiceagent.VoiceAgentServic
 const OperationVoiceAgentServiceListScenes = "/api.voiceagent.VoiceAgentService/ListScenes"
 const OperationVoiceAgentServiceListTopics = "/api.voiceagent.VoiceAgentService/ListTopics"
 const OperationVoiceAgentServiceListVoices = "/api.voiceagent.VoiceAgentService/ListVoices"
+const OperationVoiceAgentServicePreviewVoice = "/api.voiceagent.VoiceAgentService/PreviewVoice"
 const OperationVoiceAgentServiceSendMessage = "/api.voiceagent.VoiceAgentService/SendMessage"
 const OperationVoiceAgentServiceUpdateAgent = "/api.voiceagent.VoiceAgentService/UpdateAgent"
 const OperationVoiceAgentServiceUpdateEvent = "/api.voiceagent.VoiceAgentService/UpdateEvent"
@@ -92,6 +93,8 @@ type VoiceAgentServiceHTTPServer interface {
 	ListTopics(context.Context, *ListTopicsRequest) (*TopicList, error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error)
+	// PreviewVoice PreviewVoice: 为特定声音生成试听音频。
+	PreviewVoice(context.Context, *PreviewVoiceRequest) (*PreviewVoiceResponse, error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(context.Context, *SendMessageRequest) (*TranscriptEntry, error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
@@ -113,6 +116,7 @@ func RegisterVoiceAgentServiceHTTPServer(s *http.Server, srv VoiceAgentServiceHT
 	r.GET("/api/va/agents", _VoiceAgentService_ListAgents0_HTTP_Handler(srv))
 	r.POST("/api/va/voices", _VoiceAgentService_AddVoice0_HTTP_Handler(srv))
 	r.GET("/api/va/voices", _VoiceAgentService_ListVoices0_HTTP_Handler(srv))
+	r.POST("/api/va/voices/preview", _VoiceAgentService_PreviewVoice0_HTTP_Handler(srv))
 	r.GET("/api/va/scenes", _VoiceAgentService_ListScenes0_HTTP_Handler(srv))
 	r.GET("/api/va/topics", _VoiceAgentService_ListTopics0_HTTP_Handler(srv))
 	r.POST("/api/va/messages", _VoiceAgentService_SendMessage0_HTTP_Handler(srv))
@@ -320,6 +324,28 @@ func _VoiceAgentService_ListVoices0_HTTP_Handler(srv VoiceAgentServiceHTTPServer
 			return err
 		}
 		reply := out.(*VoiceList)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _VoiceAgentService_PreviewVoice0_HTTP_Handler(srv VoiceAgentServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PreviewVoiceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVoiceAgentServicePreviewVoice)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PreviewVoice(ctx, req.(*PreviewVoiceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PreviewVoiceResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -719,6 +745,8 @@ type VoiceAgentServiceHTTPClient interface {
 	ListTopics(ctx context.Context, req *ListTopicsRequest, opts ...http.CallOption) (rsp *TopicList, err error)
 	// ListVoices ListVoices: 获取可用声音列表。
 	ListVoices(ctx context.Context, req *ListVoicesRequest, opts ...http.CallOption) (rsp *VoiceList, err error)
+	// PreviewVoice PreviewVoice: 为特定声音生成试听音频。
+	PreviewVoice(ctx context.Context, req *PreviewVoiceRequest, opts ...http.CallOption) (rsp *PreviewVoiceResponse, err error)
 	// SendMessage SendMessage: 发送消息并获得 AI 的回复（非流式）。
 	SendMessage(ctx context.Context, req *SendMessageRequest, opts ...http.CallOption) (rsp *TranscriptEntry, err error)
 	// UpdateAgent UpdateAgent: 修改已有角色。
@@ -1039,6 +1067,20 @@ func (c *VoiceAgentServiceHTTPClientImpl) ListVoices(ctx context.Context, in *Li
 	opts = append(opts, http.Operation(OperationVoiceAgentServiceListVoices))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// PreviewVoice PreviewVoice: 为特定声音生成试听音频。
+func (c *VoiceAgentServiceHTTPClientImpl) PreviewVoice(ctx context.Context, in *PreviewVoiceRequest, opts ...http.CallOption) (*PreviewVoiceResponse, error) {
+	var out PreviewVoiceResponse
+	pattern := "/api/va/voices/preview"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVoiceAgentServicePreviewVoice))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -22,8 +22,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Voice (声音): 对应 ElevenLabs 的 TTS 声音资产。
-// [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview#architecture)
+// Voice (声音): 对应 TTS 声音资产。
+// [参考文档]: Architecture -> Low-latency TTS model (/docs/agents-platform/overview #architecture)
 type Voice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// _id: 内部存储 ID。
@@ -35,7 +35,7 @@ type Voice struct {
 	// type: 声音来源类型 (preset: 系统预设, cloned: 用户克隆)。
 	// [参考文档]: Voice Cloning (/docs/speech-synthesis/voice-cloning)
 	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	// voiceId: ElevenLabs 系统的唯一 Voice ID。
+	// voiceId: TTS 系统的唯一 Voice ID。
 	// [必要性]: 关键。所有语音合成请求必须指向该 ID。
 	VoiceId string `protobuf:"bytes,5,opt,name=voiceId,proto3" json:"voiceId,omitempty"`
 	// status: 处理状态 (processing: 克隆中, active: 可用)。
@@ -43,7 +43,7 @@ type Voice struct {
 	Status string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	// sampleUrl: 采样音频 URL。
 	// [含义]: 用户克隆声音时上传的 30s-1min 原始素材。
-	// [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning#instant-voice-cloning)
+	// [参考文档]: Instant Voice Cloning (/docs/speech-synthesis/voice-cloning #instant-voice-cloning)
 	SampleUrl     string `protobuf:"bytes,7,opt,name=sampleUrl,proto3" json:"sampleUrl,omitempty"`
 	CreatedAt     int64  `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields protoimpl.UnknownFields

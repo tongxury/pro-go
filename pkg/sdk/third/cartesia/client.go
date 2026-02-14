@@ -19,7 +19,7 @@ func NewClient(apiKey string) *Client {
 	client := resty.New()
 	client.SetTimeout(10 * time.Second)
 	client.SetHeader("X-API-Key", apiKey)
-	client.SetHeader("Cartesia-Version", "2025-04-16")
+	client.SetHeader("Cartesia-Version", "2024-11-13")
 
 	return &Client{
 		apiKey: apiKey,

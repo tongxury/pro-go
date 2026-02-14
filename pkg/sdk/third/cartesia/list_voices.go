@@ -3,16 +3,22 @@ package cartesia
 import (
 	"context"
 	"fmt"
+	"time"
 )
 
 type Voice struct {
-	Id          string `json:"id"`
-	IsOwner     bool   `json:"is_owner"`
-	IsPublic    bool   `json:"is_public"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Language    string `json:"language"`
-	CreatedAt   string `json:"created_at"`
+	Id            string    `json:"id"`
+	Mode          string    `json:"mode"`
+	IsPublic      bool      `json:"is_public"`
+	Name          string    `json:"name"`
+	Description   string    `json:"description"`
+	CreatedAt     time.Time `json:"created_at"`
+	Gender        string    `json:"gender"`
+	Embedding     []float64 `json:"embedding"`
+	Language      string    `json:"language"`
+	Popularity    int       `json:"popularity"`
+	PreviewFileId string    `json:"preview_file_id"`
+	OwnerId       string    `json:"owner_id,omitempty"`
 }
 
 type ListVoicesRequest struct {

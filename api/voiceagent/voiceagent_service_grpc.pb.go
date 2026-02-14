@@ -29,6 +29,7 @@ const (
 	VoiceAgentService_ListAgents_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListAgents"
 	VoiceAgentService_AddVoice_FullMethodName              = "/api.voiceagent.VoiceAgentService/AddVoice"
 	VoiceAgentService_ListVoices_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListVoices"
+	VoiceAgentService_PreviewVoice_FullMethodName          = "/api.voiceagent.VoiceAgentService/PreviewVoice"
 	VoiceAgentService_ListScenes_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListScenes"
 	VoiceAgentService_ListTopics_FullMethodName            = "/api.voiceagent.VoiceAgentService/ListTopics"
 	VoiceAgentService_SendMessage_FullMethodName           = "/api.voiceagent.VoiceAgentService/SendMessage"
@@ -74,6 +75,8 @@ type VoiceAgentServiceClient interface {
 	AddVoice(ctx context.Context, in *AddVoiceRequest, opts ...grpc.CallOption) (*Voice, error)
 	// ListVoices: 获取可用声音列表。
 	ListVoices(ctx context.Context, in *ListVoicesRequest, opts ...grpc.CallOption) (*VoiceList, error)
+	// PreviewVoice: 为特定声音生成试听音频。
+	PreviewVoice(ctx context.Context, in *PreviewVoiceRequest, opts ...grpc.CallOption) (*PreviewVoiceResponse, error)
 	// ListScenes: 获取系统预设的交互场景。
 	ListScenes(ctx context.Context, in *ListScenesRequest, opts ...grpc.CallOption) (*SceneList, error)
 	// ListTopics: 获取预设的对话主题。
@@ -202,6 +205,16 @@ func (c *voiceAgentServiceClient) ListVoices(ctx context.Context, in *ListVoices
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VoiceList)
 	err := c.cc.Invoke(ctx, VoiceAgentService_ListVoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *voiceAgentServiceClient) PreviewVoice(ctx context.Context, in *PreviewVoiceRequest, opts ...grpc.CallOption) (*PreviewVoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreviewVoiceResponse)
+	err := c.cc.Invoke(ctx, VoiceAgentService_PreviewVoice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -404,6 +417,8 @@ type VoiceAgentServiceServer interface {
 	AddVoice(context.Context, *AddVoiceRequest) (*Voice, error)
 	// ListVoices: 获取可用声音列表。
 	ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error)
+	// PreviewVoice: 为特定声音生成试听音频。
+	PreviewVoice(context.Context, *PreviewVoiceRequest) (*PreviewVoiceResponse, error)
 	// ListScenes: 获取系统预设的交互场景。
 	ListScenes(context.Context, *ListScenesRequest) (*SceneList, error)
 	// ListTopics: 获取预设的对话主题。
@@ -474,6 +489,9 @@ func (UnimplementedVoiceAgentServiceServer) AddVoice(context.Context, *AddVoiceR
 }
 func (UnimplementedVoiceAgentServiceServer) ListVoices(context.Context, *ListVoicesRequest) (*VoiceList, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListVoices not implemented")
+}
+func (UnimplementedVoiceAgentServiceServer) PreviewVoice(context.Context, *PreviewVoiceRequest) (*PreviewVoiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PreviewVoice not implemented")
 }
 func (UnimplementedVoiceAgentServiceServer) ListScenes(context.Context, *ListScenesRequest) (*SceneList, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListScenes not implemented")
@@ -705,6 +723,24 @@ func _VoiceAgentService_ListVoices_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VoiceAgentServiceServer).ListVoices(ctx, req.(*ListVoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VoiceAgentService_PreviewVoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreviewVoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VoiceAgentServiceServer).PreviewVoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VoiceAgentService_PreviewVoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VoiceAgentServiceServer).PreviewVoice(ctx, req.(*PreviewVoiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1057,6 +1093,10 @@ var VoiceAgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListVoices",
 			Handler:    _VoiceAgentService_ListVoices_Handler,
+		},
+		{
+			MethodName: "PreviewVoice",
+			Handler:    _VoiceAgentService_PreviewVoice_Handler,
 		},
 		{
 			MethodName: "ListScenes",

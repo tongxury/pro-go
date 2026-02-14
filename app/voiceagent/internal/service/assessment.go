@@ -51,9 +51,6 @@ func (s *AssessmentService) ListAssessments(ctx context.Context, req *pb.ListAss
 	filter := bson.M{
 		"$or": []bson.M{
 			{"user._id": userId},
-			{"user.id": userId},
-			{"user.xid": userId}, // Standard Go struct to BSON lowercasing
-			{"user.XId": userId},
 		},
 	}
 
@@ -67,7 +64,7 @@ func (s *AssessmentService) ListAssessments(ctx context.Context, req *pb.ListAss
 	}
 
 	opts := options.Find().
-		SetSort(bson.D{{"createdAt", -1}}).
+		SetSort(bson.D{{Key: "createdAt", Value: -1}}).
 		SetSkip((page - 1) * size).
 		SetLimit(size)
 
